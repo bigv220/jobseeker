@@ -1,6 +1,6 @@
         <div id="footer">
         <div id="credits">
-   		Powered by <a href="http://www.etonn.com">etonn</a>
+   		<!-- Powered by <a href="#">X</a> -->
         </div>
         <div id="styleswitcher">
             <ul>
