@@ -31,7 +31,7 @@ class block extends Admin_Controller {
 			$flag = $this->article_model->add($post);
 			if ($flag)
 			{
-				addSysLog('增加碎片：'.$post['title']);
+				//addSysLog('增加碎片：'.$post['title']);
 				showmsg(site_url().'admin/block/');
 			}
 			else 
@@ -56,7 +56,7 @@ class block extends Admin_Controller {
 			$flag = $this->article_model->edit($post, 'aid');
 			if ($flag)
 			{
-				addSysLog('编辑碎片：'.$post['title']);
+				//addSysLog('编辑碎片：'.$post['title']);
 				showmsg(site_url().'admin/block/');
 			}
 			else 
@@ -71,7 +71,7 @@ class block extends Admin_Controller {
 		$flag = $this->article_model->delete($id, 'aid');
 		if ($flag)
 		{
-			addSysLog('删除碎片：'.$id);
+			//addSysLog('删除碎片：'.$id);
 			showmsg(site_url().'admin/block/');
 		}
 		else 

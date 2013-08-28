@@ -30,7 +30,7 @@ class user extends Admin_Controller {
 			$flag = $this->user_model->add($post);
 			if ($flag)
 			{
-				addSysLog('增加用户：'.$post['username']);
+				//addSysLog('增加用户：'.$post['username']);
 				showmsg(site_url().'/admin/user/');
 			}
 			else 
@@ -61,7 +61,7 @@ class user extends Admin_Controller {
 			$flag = $this->user_model->edit($post, 'uid');
 			if ($flag)
 			{
-				addSysLog('编辑用户ID：'.$id);
+				//addSysLog('编辑用户ID：'.$id);
 				showmsg(site_url().'/admin/user/');
 			}
 			else 
@@ -76,7 +76,7 @@ class user extends Admin_Controller {
 		$flag = $this->user_model->delete($id, 'uid');
 		if ($flag)
 		{
-			addSysLog('删除用户：'.$id);
+			//addSysLog('删除用户：'.$id);
 			showmsg(site_url().'/admin/user/');
 		}
 		else 

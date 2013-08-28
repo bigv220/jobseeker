@@ -35,7 +35,7 @@ class template extends Admin_Controller {
 			$flag = $this->article_model->add($post);
 			if ($flag)
 			{
-				addSysLog('增加页面：'.$post['title']);
+				//addSysLog('增加页面：'.$post['title']);
 				showmsg(site_url().'admin/page/');
 			}
 			else 
@@ -61,7 +61,7 @@ class template extends Admin_Controller {
 			$file_path = $data['front_theme_path'].$post['filename'];
 			if (write_file($file_path, $post['code']))
 			{
-				addSysLog('编辑模板：'.$post['filename']);
+				//addSysLog('编辑模板：'.$post['filename']);
 				showmsg(site_url().'admin/template/');
 			}
 			else 
@@ -76,7 +76,7 @@ class template extends Admin_Controller {
 		$flag = $this->article_model->delete($id, 'aid');
 		if ($flag)
 		{
-			addSysLog('删除页面：'.$id);
+			//addSysLog('删除页面：'.$id);
 			showmsg(site_url().'admin/page/');
 		}
 		else 

@@ -56,7 +56,7 @@ class menu extends Admin_Controller {
 			$post = $_POST;
 			if($this->category_model->edit($post,'cid'))
 			{
-				addSysLog('修改分类：'.$post['name']);
+				//addSysLog('修改分类：'.$post['name']);
 				showmsg(site_url().'admin/category/');
 			}
 			else 
@@ -80,7 +80,7 @@ class menu extends Admin_Controller {
 			$flag = $this->category_model->add($post);
 			if ($flag)
 			{
-				addSysLog('增加分类：'.$post['name']);
+				//addSysLog('增加分类：'.$post['name']);
 				showmsg(site_url().'admin/category/');
 			}
 			else 
@@ -108,7 +108,7 @@ class menu extends Admin_Controller {
 		$flag = $this->category_model->delete($id, 'cid');
 		if ($flag)
 		{
-			addSysLog('修改了分类：'.$id);
+			//addSysLog('修改了分类：'.$id);
 			showmsg(site_url().'admin/category/');
 		}
 		else 

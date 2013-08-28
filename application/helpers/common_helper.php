@@ -115,11 +115,11 @@
 				<div id="man_zone">
 				  <table width="280px" align="center"  cellpadding="3" cellspacing="0" class="table" style="margin-top:100px;">
 				    <tr>
-				      <th align="center" class="title">提示信息</th>
+				      <th align="center" class="title">Message</th>
 				    </tr>
 				    <tr>
-				      <td align="center"><p><b>' .$show. '</b> &nbsp; 2秒钟后自动返回.<br /><br />
-				                如果您的浏览器没有响应,<br><a href="'.$url.'"> 请点击这里.</a></p></td>
+				      <td align="center"><p><b>' .$show. '</b> &nbsp; After 2 seconds back.<br /><br />
+				                If your browser doesn\'t respond,<br><a href="'.$url.'"> please click here.</a></p></td>
 				    </tr>
 				  </table>
 				</div>

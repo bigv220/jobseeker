@@ -31,7 +31,7 @@ class page extends Admin_Controller {
 			$flag = $this->article_model->add($post);
 			if ($flag)
 			{
-				addSysLog('增加页面：'.$post['title']);
+				//addSysLog('增加页面：'.$post['title']);
 				showmsg(site_url().'admin/page/');
 			}
 			else 
@@ -56,7 +56,7 @@ class page extends Admin_Controller {
 			$flag = $this->article_model->edit($post, 'aid');
 			if ($flag)
 			{
-				addSysLog('编辑页面：'.$post['title']);
+				//addSysLog('编辑页面：'.$post['title']);
 				showmsg(site_url().'admin/page/');
 			}
 			else 
@@ -71,7 +71,7 @@ class page extends Admin_Controller {
 		$flag = $this->article_model->delete($id, 'aid');
 		if ($flag)
 		{
-			addSysLog('删除页面：'.$id);
+			//addSysLog('删除页面：'.$id);
 			showmsg(site_url().'admin/page/');
 		}
 		else 

@@ -82,7 +82,7 @@ class news extends Admin_Controller {
 			$flag = $this->article_model->add($post);
 			if ($flag)
 			{
-				addSysLog('增加新闻：'.$post['title']);
+				//addSysLog('增加新闻：'.$post['title']);
 				showmsg(site_url().'admin/news/');
 			}
 			else 
@@ -109,7 +109,7 @@ class news extends Admin_Controller {
 			$flag = $this->article_model->edit($post, 'aid');
 			if ($flag)
 			{
-				addSysLog('编辑新闻：'.$post['title']);
+				//addSysLog('编辑新闻：'.$post['title']);
 				showmsg(site_url().'admin/news/');
 			}
 			else 
@@ -125,7 +125,7 @@ class news extends Admin_Controller {
 		$flag = $this->article_model->delete($id, 'aid');
 		if ($flag)
 		{
-			addSysLog('删除新闻：'.$id);
+			//addSysLog('删除新闻：'.$id);
 			showmsg(site_url().'admin/news/');
 		}
 		else 
