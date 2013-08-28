@@ -76,10 +76,10 @@ class category_model extends MY_Model
 	public function getCatList($cat_id = 0, $selected = 0, $re_type = FALSE, $level = 0)
 	{
 		$res = $this->db->query('SELECT c.*, COUNT(s.cid) AS has_children, a.url
-								FROM etonn_'.$this->table.' AS c
-								LEFT JOIN etonn_'.$this->table.' AS s 
+								FROM '.$this->table.' AS c
+								LEFT JOIN '.$this->table.' AS s 
 								ON s.pid=c.cid
-								LEFT JOIN etonn_article AS a 
+								LEFT JOIN article AS a 
 								ON a.cid=c.cid
 								GROUP BY c.cid 
 								ORDER BY pid, sort_order ASC, cid')

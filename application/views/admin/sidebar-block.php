@@ -1,11 +1,5 @@
             <div id="sidebar">
   				<ul>
-                	<li><h3><a href="#" class="house">语言(<?php echo langName($this->session->userdata('lang'));?>)</a></h3>
-                        <ul>
-                        	<li><a href="<?php echo $site_url?>admin/index/change_lang/?lang=en&redirect=<?php echo uri_string();?>" class="online">英文</a></li>
-                    		<li><a href="<?php echo $site_url?>admin/index/change_lang/?lang=cn&redirect=<?php echo uri_string();?>" class="online">中文</a></li>
-                        </ul>
-                    </li>
                     <li><h3><a href="#" class="folder_table">分类</a></h3>
           				<ul>
                         	<li><a href="<?php echo $site_url?>admin/category/add/" class="add">增加分类</a></li>

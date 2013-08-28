@@ -29,17 +29,17 @@
                     <li <?php if(strpos(current_url(),'page')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/page/">页面管理</a></li>
                 	<li <?php if(strpos(current_url(),'news')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/news/">新闻管理</a></li>
                     <!-- <li <?php if(strpos(current_url(),'profile')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/profile/">Profile</a></li> -->
-                    <li <?php if(strpos(current_url(),'product')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/product/">产品管理</a></li>
-					<li <?php if(strpos(current_url(),'block')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/block/">碎片管理</a></li>
+                    <!-- <li <?php if(strpos(current_url(),'product')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/product/">产品管理</a></li> -->
+					         <li <?php if(strpos(current_url(),'block')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/block/">碎片管理</a></li>
                     <!-- <li <?php if(strpos(current_url(),'message')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/message/">留言管理</a></li>
                     <li <?php if(strpos(current_url(),'photo')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/photo/">图片管理</a></li>
-					<li <?php if(strpos(current_url(),'form')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/form/">报名管理</a></li>
+					         <li <?php if(strpos(current_url(),'form')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/form/">报名管理</a></li>
                     <li <?php if(strpos(current_url(),'qa')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/qa/">问答管理</a></li> -->
                     <li <?php if(strpos(current_url(),'user')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/user/">用户管理</a></li>
                     <li <?php if(strpos(current_url(),'setting')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/setting/">网站设置</a></li>
                     <li <?php if(strpos(current_url(),'template')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/template/">模板编辑</a></li>
-					<li <?php if(strpos(current_url(),'database')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/database/">数据库管理</a></li>
-                    <li <?php if(strpos(current_url(),'syslog')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/syslog/">系统日志</a></li>
+					         <li <?php if(strpos(current_url(),'database')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/database/">数据库管理</a></li>
+                    <!-- <li <?php if(strpos(current_url(),'syslog')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/syslog/">系统日志</a></li> -->
                     <!-- <li <?php if(strpos(current_url(),'help')) echo 'class="current"'?>><a href="<?php echo $site_url?>admin/help/">系统帮助</a></li> -->
               </ul>
           </div>

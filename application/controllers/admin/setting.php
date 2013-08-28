@@ -20,7 +20,6 @@ class setting extends Admin_Controller {
 			$this->load->model('setting_model');
 			if ($this->setting_model->setconfig($post))
 			{
-				addSysLog('修改网站设置');
 				showmsg(site_url().'admin/setting/');
 			}
 			else 
