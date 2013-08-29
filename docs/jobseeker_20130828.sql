@@ -115,7 +115,7 @@ INSERT INTO `category` VALUES ('111', '2', 'Toddler Bed 常规儿童床', null, 
 -- ----------------------------
 DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
-  `company_id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `country` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
