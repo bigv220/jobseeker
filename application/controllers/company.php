@@ -17,7 +17,7 @@ class company extends Front_Controller {
 
 	public function register() {
 		$data = $this->data;
-		print_r($_POST);
+		
 		if ($_POST) {
 			//Load Model			
 			$this->load->model('company_model');
@@ -26,9 +26,7 @@ class company extends Front_Controller {
 				$this->company_model->addIndustry($_POST['industry_tag']);
 			}
 		}
-		// $this->template->set_partial('header', 'default/header-block')
-		// 			   ->set_layout('default')
-		// 			   ->build('company/register');;
+
 		$this->load->view($data['front_theme']."/company-register",$data);
 	}
 }
