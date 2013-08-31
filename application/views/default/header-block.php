@@ -14,6 +14,8 @@
 <link href="<?php echo $theme_path?>css/pub.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $theme_path?>css/home.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $theme_path?>css/kyo-form/kyo-form.css" rel="stylesheet" type="text/css" />
+<!--Import Select TAG CSS -->
+<link href="<?php echo $theme_path?>css/tag/tagit-simple-grey.css" rel="stylesheet" type="text/css" />
 
 <script>
 	var site_url = "<?php echo $site_url?>";

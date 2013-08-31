@@ -73,5 +73,23 @@ $(function(){
         $('.pop-welcome').fadeOut();
         popMark.fadeOut();
     })
-
+    $('#industry_box').tagit({select:true, sortable:true});
+    $('.tagit-input').attr('disabled','disabled');
+    $('#industry').change(function() {
+        addTag($('#industry').val());
+    });
+    
 })
+var addTag = function(tag) {
+    $('#industry_box').tagit("add", {label: tag, value: tag});
+
+}
+var doCompanySubmit = function() {
+    var tags = $("#industry_box").tagit("tags");
+
+    var string1 = "";
+    for (var i in tags)
+        string1 += "," + tags[i].value;
+    $('#industry_tag').val(string1);
+    $('#companyForm').submit();
+}
