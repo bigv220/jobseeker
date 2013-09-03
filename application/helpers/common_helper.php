@@ -70,35 +70,8 @@
 	 * @param String $url
 	 * @param String $show
 	 */
-	function showmsg($url, $show = '成功')
+	function showmsg($url, $show = 'Success')
 	{
-		/*$html = '<!DOCTYPE HTML>
-				<html><head>
-				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-				<meta http-equiv="refresh" content="2; url='.$url.'" />
-				<title>Message</title>
-				<style>
-				body{font-size: 12px;}
-				p{margin:20px;}
-				table{border:1px #999 solid;}
-				.title{background:#f0f0f0;height:25px;border-bottom:1px #999 solid;}
-				</style>
-				</head>
-				<body>
-				<div id="man_zone">
-				  <table width="280px" align="center"  cellpadding="3" cellspacing="0" class="table" style="margin-top:100px;">
-				    <tr>
-				      <th align="center" class="title">Message</th>
-				    </tr>
-				    <tr>
-				      <td align="center"><p><b>' .$show. '</b> &nbsp; After 2 seconds back.<br /><br />
-				      If your browser doesn\'t respond,<br><a href="'.$url.'"> please click here.</a></p></td>
-				    </tr>
-				  </table>
-				</div>
-				</body>
-				</html>';
-		*/
 		$html = '<!DOCTYPE HTML>
 				<html><head>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
