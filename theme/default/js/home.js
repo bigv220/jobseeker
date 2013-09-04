@@ -15,25 +15,6 @@ $(function(){
         speed:600       //滚动速度      
     });
 
-    //login 
-    $('.phd-login').hover(function(){
-        $('.phd-login-pop').stop().fadeIn();
-    },function(){
-        $('.phd-login-pop').stop().fadeOut();
-    })
-    $('.input-wrap input')
-    .focusin(function(event) {
-        var val = $(this).val();
-        if(!val){
-            $(this).addClass('has');
-        }
-    })
-    .focusout(function(event) {
-        var val = $(this).val();
-         if(!val){
-            $(this).removeClass('has');
-        }
-    });
 
     //Find
     $('.pbn-find-block').hover(function(){
@@ -45,10 +26,8 @@ $(function(){
     })
 
     //Pop mark
-    var height = $('body').height(),
-        popMark =$('.pop-mark'),
+    var popMark =$('.pop-mark'),
         popReg = $('.pop-reg');
-    popMark.height(height);
 
     //Pop Sing Up
     $('.pbn-singup-btn').click(function(){
@@ -73,23 +52,8 @@ $(function(){
         $('.pop-welcome').fadeOut();
         popMark.fadeOut();
     })
-    $('#industry_box').tagit({select:true, sortable:true});
-    $('.tagit-input').attr('disabled','disabled');
-    $('#industry').change(function() {
-        addTag($('#industry').val());
-    });
-    
+
+
+
+   
 })
-var addTag = function(tag) {
-    $('#industry_box').tagit("add", {label: tag, value: tag});
-
-}
-var doCompanySubmit = function() {
-    var tags = $("#industry_box").tagit("tags");
-
-    var string1 = "";
-    for (var i in tags)
-        string1 += "," + tags[i].value;
-    $('#industry_tag').val(string1);
-    $('#companyForm').submit();
-}
