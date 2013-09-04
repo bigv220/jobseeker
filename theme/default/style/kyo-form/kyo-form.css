@@ -1,0 +1,48 @@
+/*RADIO STYLE*/
+i.kyo-radio{font-style:normal; display:inline-block; font-size:10px; height:20px; line-height:20px; padding-right:18px; background:url(radio.png?1) no-repeat right; cursor:default;}
+i.kyo-radio-hover{background:url(radio-hover.png?1) no-repeat right;}
+i.kyo-radio-sel{background:url(radio-sel.png?1) no-repeat right;}
+i.kyo-radio-sel-hover{background:url(radio-sel-hover.png?1) no-repeat right;}
+
+/*CHECKBOX STYLE*/
+i.kyo-checkbox{font-style:normal; display:inline-block; height:20px;font-size:10px; line-height:20px; padding-right:18px; background:url(radio.png?1) no-repeat right; cursor:default;}
+i.kyo-checkbox-hover{background:url(radio-hover.png?1) no-repeat right;}
+i.kyo-checkbox-sel{background:url(radio-sel.png?1) no-repeat right;}
+i.kyo-checkbox-sel-hover{background:url(radio-sel-hover.png?1) no-repeat right;}
+
+/*SWITCH STYLE*/
+i.kyo-switch{display:inline-block; width:68px; height:20px; line-height:20px; overflow:hidden; position:relative;cursor:pointer;}
+b.kyo-switch-bg{ position:absolute; width:136px; height:42px; background-image:url(switch.gif); background-repeat:no-repeat;}
+b.kyo-switch-bar{position:absolute; width:35px; height:17px; overflow:hidden; top:2px;background:url(switch-bar.png) no-repeat;}
+i.kyo-switch-hover b.kyo-switch-bar{ background:url(switch-bar-hover.png) no-repeat;}
+
+/*INNPUT STYLE*/
+input.kyo-input{ height:24px; line-height:24px; border:1px solid #cecece; background:#fff; text-indent:3px; color:#6f6f6f;}
+
+/*SELECT STYLE*/
+.kyo-select{ color:#666; border:1px solid #d3d3d3; position:relative; background:#fff url(select-arr.gif) no-repeat right;
+ -moz-user-select: none;-webkit-user-select: none; float:left; *display:inline; margin-right:10px;}
+.kyo-select-list{ margin:0; padding:0; text-indent:10px; position:absolute; border:1px solid #D6D6D6; left:-1px; background:#fff;}
+.kyo-select-list dd{ overflow:hidden; margin:0; font-size:12px; height:22px; line-height:22px; color:#666; cursor:default;}
+.kyo-select-list-hover{ background:#efefef;}
+.kyo-select-val{ overflow:hidden; font-size:12px; text-indent:10px;-moz-user-select: none;-webkit-user-select: none; cursor:default;}
+.kyo-select-hover {border:1px solid #bbb;}
+.kyo-select-hover .fx-select-list{border:1px solid #bbb;}
+
+
+/*Multiple choice STYLE*/
+.fx-checkselect{ z-index: 10;}
+.fx-checkselect-arr{border:1px solid #ccc;font-size: 12px;text-indent: 10px;cursor: default;background: #fff url(select-arr.gif) no-repeat right;-moz-user-select: none;-webkit-user-select: none;}
+.fx-checkselect-list{background: #fff;border:1px solid #ccc;margin: 0;padding: 0;}
+.fx-checkselect-list dd{margin: 0;padding: 0 10px;height: 24px;line-height: 24px;cursor: default;}
+.fx-checkselect-list dd.hover{background: #efefef;}
+.show-selval{overflow: hidden;zoom:1;}
+.show-selval ul{margin: 0 -10px 0 0; overflow:hidden;padding: 0;}
+.show-selval li{margin: 0;list-style: none;float: left;height: 22px; font-weight:bold; color:#f27f4d; text-decoration:underline; font-family:Arial, Helvetica, sans-serif; line-height: 22px;vertical-align: top;padding:0 22px 0 0; margin-right:10px; position: relative;}
+.show-selval .del{background: url(del.gif) no-repeat center;width: 22px;height: 22px;display: inline-block;	font-size: 12px;cursor: pointer;position: absolute;	top: 0;	right: 0;}
+	
+	
+	
+	
+	
+	

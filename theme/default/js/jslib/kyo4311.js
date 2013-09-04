@@ -20,6 +20,17 @@ $.fn.extend({
         return this.each(function() {
         });
     },
+    fxBacktop:function(){
+    var t = $(this).show()
+        .click(function () {$('html,body').animate({scrollTop: 0},500);});
+
+	$(window).scroll(function () {
+			var Wtop = $(window).scrollTop();
+			t.stop().animate({top:Wtop+300},500);
+	  });
+		
+		
+    },
     roll:function(opt) {
         var opt = opt || {};
         var t = $(this);

@@ -29,4 +29,14 @@ class company extends Front_Controller {
 
 		$this->load->view($data['front_theme']."/company-register",$data);
 	}
+
+    public function companyInfo(){
+        $data = $this->data;
+        $this->load->view($data['front_theme']."/company-info",$data);
+    }
+
+    public function companyProfile(){
+        $data = $this->data;
+        $this->load->view($data['front_theme']."/company-profile",$data);
+    }
 }
