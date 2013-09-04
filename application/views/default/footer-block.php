@@ -35,7 +35,7 @@
 		</div>
 	</div>
 </div>
-<<<<<<< HEAD
+
 <!-- <script type="text/javascript" src=""></script> -->
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.jSelectDate.js" ></script>

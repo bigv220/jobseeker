@@ -5,41 +5,30 @@ $(function(){
         height:'25'
     });
     //sel-industry
-    $('#reg-rndustry').checkSelect({
-        text:'Plase select rndustry',
+    $('#reg-industry').checkSelect({
+        text:'Please select industry',
         data:[
-            {title:'value1',value:'1'},
-            {title:'value2',value:'2'},
-            {title:'value3',value:'3'},
-            {title:'value4',value:'4'},
-            {title:'value5',value:'5'},
-            {title:'value6',value:'6'},
-            {title:'value7',value:'7'},
-            {title:'value8',value:'8'},
-            {title:'value9',value:'9'},
-            {title:'value10',value:'10'},
-            {title:'value11',value:'11'},
-            {title:'value12',value:'12'},
-            {title:'value13',value:'13'}
+            {title:'Accounting',value:'Accounting'},
+            {title:'HR',value:'HR'},
+            {title:'Finance',value:'Finance'},
+            {title:'Design',value:'Design'},
+            {title:'Education',value:'Education'}
         ],
         showDiv:$('#reg-rndustry-val'),
         width:230,
         height:26,
-        max:3,
         ismax:function(){alert('max 3!!!')}
     });
 
 
 	//sel-industry
     $('#reg-Network').checkSelect({
-        text:'Plase select network',
+        text:'Please select network',
         data:[
-            {title:'value1',value:'1'},
-            {title:'value2',value:'2'},
-            {title:'value3',value:'3'},
-            {title:'value4',value:'4'},
-            {title:'value5',value:'5'},
-            {title:'value6',value:'6'}
+            {title:'Facebook',value:'Facebook'},
+            {title:'QQ',value:'QQ'},
+            {title:'Yelp',value:'Yelp'},
+            {title:'Foursquare',value:'Foursquare'}
         ],
         showDiv:$('#reg-network-val'),
         width:230,
