@@ -17,6 +17,7 @@
 <!--Import Select TAG CSS -->
 <link href="<?php echo $theme_path?>css/tag/tagit-simple-grey.css" rel="stylesheet" type="text/css" />
 
+<script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.1.7.2.min.js" ></script>
 <script>
 	var site_url = "<?php echo $site_url?>";
 	var theme_url = "<?php echo $theme_path?>";

@@ -1,6 +1,6 @@
 .ora{color:#ea6e3b;}
 .pur{color:#481052;}
-.p-bn{height:380px;background:url(home/main-bg.gif) no-repeat;z-index:5;}
+.p-bn{height:480px;background:url(home/main-bg.gif) repeat;z-index:5;}
 .pbn-find{padding:114px 0 20px 0;text-align:center;width:492px;margin:auto;}
 .pbn-job,.pbn-staff,.pbn-btn{display:block;width:231px;height:164px;float:left;}
 .pbn-job{margin:0 20px 0 0;}
