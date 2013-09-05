@@ -6,23 +6,42 @@ class company_model extends MY_Model
 		parent::__construct();
 		$this->table = 'company';
 	}
-    
-	public function getCompanyInfo($limit=200)
+
+    /**
+     * Get Company Basic info.
+     * @param  int $company_id Company ID
+     * @return Array             Company info in key-array
+     */
+	public function getCompanyInfo($company_id	)
 	{
-		$data = $this->db->select('syslog.*, user.username')
-						->from('syslog')
-						->join('user', 'syslog.uid = user.uid', 'left')
-						->order_by('date DESC')
-						->limit($limit)
+		$data = $this->db->select('company.*')
+						->from('company')
+						->where('company_id', $company_id)
 						->get()
 						->result_array();
 		return $data;
 	}
 
 	/**
+	 * Get Job list for a company.
+	 * @param  int $company_id Company Id
+	 * @return arrayList             Job list array
+	 */
+	public function getJobsByCompanyId($company_id)
+	{
+		$data = $this->db->select('*')
+						 ->from('job')
+						 ->where('company_id', $company_id)
+						 ->get()
+						 ->result_array();
+
+		return $data;						 
+	}
+
+	/**
 	 * Add new Company
-	 * 
-	 **/
+	 * @param int $data Last insert id
+	 */
 	public function addCompany($data)
 	{
 		$data = array('name'=>$data['name'],'country'=>$data['country'],'city'=>$data['city'],
@@ -35,6 +54,11 @@ class company_model extends MY_Model
 	}
 
 	public function addIndustry($data) 
+	{
+		
+	}
+
+	public function getSimilarCompanys($company_id, $industry)
 	{
 		
 	}

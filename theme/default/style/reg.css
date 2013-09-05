@@ -1,0 +1,28 @@
+.ora{color:#ea6e3b;}
+.pur{color:#481052;}
+html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
+body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
+.reg-left{width:235px;padding-bottom:10px;}
+.reg-right-wrap{float:right;*display:inline;width:505px;}
+.reg-right{padding:15px;width:485px;}
+.reg-left-tit{text-align:center;color:#5f2d77;font-size:25px;font-weight:bolder;height:68px;line-height:68px;}
+.reg-ul{width:210px;margin:auto;}.reg-ul li{border-top:1px solid #dddddd;height:34px;line-height:34px;background-image:url(reg/icon.png);background-repeat:no-repeat;background-position:0 -24px;padding-left:35px;}
+.reg-ul a{font-weight:bolder;color:#4e4e4e;}
+.reg-ul li.curr{background-position:0 10px;}.reg-ul li.curr a{color:#ea6e3b;}
+.reg-right-text{font-weight:bolder;color:#414042;padding-bottom:10px;}
+.reg-area{padding-bottom:20px;}
+.reg-area-tit{height:34px;line-height:34px;border-bottom:1px solid #e0e0e0;border-top:1px solid #e0e0e0;font-weight:bolder;color:#ea6e3b;font-size:15px;background-image:url(reg/icon.png);background-repeat:no-repeat;background-position:460px -24px;}
+.reg-area-tit-curr{background-position:460px 9px;}
+.reg-row{padding-bottom:10px;}.reg-row strong{height:30px;line-height:30px;}.reg-row strong span{font-weight:300;font-size:11px;}
+.reg-row b{font-size:13px;height:30px;line-height:30px;}
+.reg-input{border:1px solid #d3d3d3;width:228px;height:22px;line-height:22px;background:#fff;}
+.reg-textarea{border:1px solid #d3d3d3;width:450px;height:55px;padding:10px;}
+.reg-company-img{border:1px solid #d3d3d3;padding-left:2px;cursor:pointer;}
+.reg-row-tip{color:#ea6e3b;text-decoration:underline;}
+.reg-save{width:83px;height:25px;line-height:25px;display:inline-block;text-align:center;vertical-align:top;background:url(reg/save.gif) no-repeat;border:0;cursor:pointer;}
+.reg-btns{height:54px;}
+.reg-btns a{height:25px;cursor:pointer;display:inline-block;margin-right:10px;}
+.reg-btns-save{width:83px;background:url(reg/save-all.png) no-repeat;}
+.reg-btns-post{width:144px;background:url(reg/post-job.png) no-repeat;}
+.reg-btns-find{width:144px;background:url(reg/find.png) no-repeat;}
+#industry {width:230px;height:26px;font-family:arial;padding:3px 0 0 z5px;}
