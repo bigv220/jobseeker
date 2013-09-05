@@ -30,3 +30,7 @@ CREATE TABLE `user` (
   `availability` tinyint(4) default NULL COMMENT 'Availiability time',
   PRIMARY KEY  (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+#2013-9-5
+alter table user add password varchar(50) not null;
+alter table user add user_type varchar(20);
