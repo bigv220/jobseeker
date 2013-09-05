@@ -12,7 +12,8 @@ class company extends Front_Controller {
 	
 	public function index()
 	{
-		redirect('/');
+		$data = $this->data;
+        $this->load->view($data['front_theme']."/company-info",$data);
 	}
 
 	public function register() {

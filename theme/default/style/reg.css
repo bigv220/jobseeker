@@ -25,3 +25,4 @@ body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
 .reg-btns-save{width:83px;background:url(reg/save-all.png) no-repeat;}
 .reg-btns-post{width:144px;background:url(reg/post-job.png) no-repeat;}
 .reg-btns-find{width:144px;background:url(reg/find.png) no-repeat;}
+#industry {width:230px;height:26px;font-family:arial;padding:3px 0 0 z5px;}

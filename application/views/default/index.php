@@ -9,19 +9,19 @@
 					<strong>TODAY’S HOT JOBS</strong>
 					<ul class="pbn-job-ul">
 						<li class="odd">
-							<img src="<?php echo $theme_path?>style/home/temp/temp-h1.gif" width="71" height="44" alt="" />
+							<img src="<?php echo $theme_path?>style/home/temp/find-temp1.gif" width="71" height="44" alt="" />
 							<a href="#" class="png"><b>IKEA, Beijing</b> <i>Head of Marketing</i></a>
 						</li>
 						<li class="even">
-							<img src="<?php echo $theme_path?>style/home/temp/temp-h4.gif" width="71" height="44" alt="" />
+							<img src="<?php echo $theme_path?>style/home/temp/2.jpg" width="71" height="44" alt="" />
 							<a href="#" class="png"><b>IKEA, Beijing</b> <i>Head of Marketing</i></a>
 						</li>
 						<li class="odd">
-							<img src="<?php echo $theme_path?>style/home/temp/temp-h3.gif" width="71" height="44" alt="" />
+							<img src="<?php echo $theme_path?>style/home/temp/3.jpg" width="71" height="44" alt="" />
 							<a href="#" class="png"><b>IKEA, Beijing</b> <i>Head of Marketing</i></a>
 						</li>
 						<li class="even">
-							<img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif" width="71" height="44" alt="" />
+							<img src="<?php echo $theme_path?>style/home/temp/4.jpg" width="71" height="44" alt="" />
 							<a href="#" class="png"><b>IKEA, Beijing</b> <i>Head of Marketing</i></a>
 						</li>
 					</ul>
