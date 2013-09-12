@@ -44,10 +44,12 @@ $(function(){
     $('.reg-typec').click(function(){
         $('.pop-reg-company').show().prev().hide();
     });
+    /*
     $('.pop-reg-submit-btn').click(function(){
         popReg.fadeOut();
         $('.pop-welcome').fadeIn();
     })
+    */
     $('.pop-welcome-close').click(function(){
         $('.pop-welcome').fadeOut();
         popMark.fadeOut();

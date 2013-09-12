@@ -177,6 +177,7 @@
 	<!--pop reg-->
 	<div class="pop-reg png">
 		<div class="pop-reg-wrap rel">
+            <form name="signup_form" action="/user/signup">
 			<div class="pop-reg-close abs" title="close"></div>
 				<div class="pop-reg-tit">
 					<i>Already have an account? <a href="#">Login</a></i>
@@ -190,29 +191,29 @@
 				<div class="pop-reg-personal">
 					<label class="fl">
 						<b>First Name</b>
-						<input type="text" class="kyo-input" />
+						<input type="text" id="first_name" name="first_name" class="kyo-input" />
 					</label>
 					<label  class="fr">
 						<b>Last Name</b>
-						<input type="text" class="kyo-input" />
+						<input type="text" id="last_name" name="last_name" class="kyo-input" />
 					</label>
 				</div>
 				<div class="pop-reg-company"  style="display:none;">
 					<label>
 						<b>Company Name</b>
-						<input type="text" class="kyo-input" />
+						<input type="text" id="company_name" name="company_name" class="kyo-input" />
 					</label>
 				</div>
 				<div class="pop-reg-mail">
 					<label>
-						<b>Email</b>
-						<input type="text" class="kyo-input" />
+						<b>Email</b><span class="email_existing"></span>
+						<input type="text" id="email" name="email" class="kyo-input" />
 					</label>					
 				</div>
 				<div class="pop-reg-password">
 					<label>
 						<b>Password</b>
-						<input type="text" class="kyo-input" />
+						<input type="password" id="password" name="password" class="kyo-input" />
 					</label>
 				</div>
 				<div class="pop-reg-agree">
@@ -223,11 +224,56 @@
 					
 				</div>
 				<div class="pop-reg-submit">
-					<input type="text" class="pop-reg-submit-btn" />
+					<input type="text" id="signup_submit" class="pop-reg-submit-btn" />
 				</div>
+            </form>
 		</div>
 	</div>
+<script type="text/javascript">
+    $('#signup_submit').click(function(){
+        $('.email_existing').html('');
+        var regAgree = $('#RegAgree').val();
+        if(regAgree != 1){
+            alert("Please check Agree to terms.");
+        }
+        else{
+            var regType = $('#RegType').val();
+            var firstName = $('#first_name').val();
+            var lastName = $('#last_name').val();
+            var companyName = $('#company_name').val();
+            var email = $('#email').val();
+            var password = $('#password').val();
+            var newsletter = $('#RegNewsletter').val();
 
+            if(regType == 1){ //company signup
+                firstName = companyName;
+                lastName = "";
+            }
+            if(newsletter != 1) newsletter = 0;
+            //post data to server
+            $.post(
+                site_url + "/user/signup",
+                {'first_name':firstName,'last_name':lastName,'email':email, 'password':password, 'user_type':regType, 'newsletter':newsletter},
+                function(data){
+                    if(data.userId <1){
+                        $('.email_existing').html(data.message);
+                    }
+                    else{
+                        $('#first_name').attr('value','');
+                        $('#last_name').attr('value','');
+                        $('#company_name').attr('value','');
+                        $('#email').attr('value','');
+                        $('#password').attr('value','');
+                        $('.pop-reg').fadeOut();
+                        $('.pop-welcome').fadeIn();
+                    }
+
+                },
+                "json"
+            );
+        }
+    });
+</script>
 	<!--pop reg success-->
 	<div class="pop-welcome png">
 		<div class="pop-welcome-wrap rel">

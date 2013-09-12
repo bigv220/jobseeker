@@ -53,3 +53,7 @@ CREATE TABLE `country` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+#2013-9-12
+alter table user change user_type user_type tinyint(4) default 0;
+alter table user add newsletter tinyint(1);
