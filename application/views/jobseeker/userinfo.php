@@ -96,25 +96,30 @@
         <ul class="reg-ul">
             <li class="curr"><a href="#reg1">Basic Information</a></li>
             <li><a href="#reg2">Contact Details</a></li>
+            <li><a href="#reg3">Preferences</a></li>
+            <li><a href="#reg4">Education</a></li>
+            <li><a href="#reg5">Work History</a></li>
+            <li><a href="#reg6">Languages</a></li>
+            <li><a href="#reg7">Personal Skills</a></li>
+            <li><a href="#reg8">Profesional Skills</a></li>
         </ul>
     </div>
     <div class="reg-right-wrap">
         <div class="reg-right box mb20">
             <p class="reg-right-text">
-                Please fill out the mandatory fields to enhance your JingJobs experience,
-                and promote your company to jobseekers.
-            </p>
+                Please fill out the mandatory fields to apply for jobs, to streamline your job search and highlight your profile to employers fill out all optional fields. <br/>
+                <a href="#">Or start searching for jobs now </a></p>
 
             <div class="reg-area">
             <form action="<?php echo $site_url; ?>/jobseeker/userinfo" method="post" id="basicInfoForm">
                 <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                 <div class="reg-area-tit">Basic Information</div>
-                <div class="reg-row"> <strong>First name <i class="star">*</i></strong>
+                <div class="reg-row"> <strong>First Name <i class="star">*</i></strong>
                     <div>
                         <input type="text" name="first_name" class="reg-input" value="<?php echo $userinfo['first_name']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row clearfix"> <strong>Last name <i class="star">*</i></strong>
+                <div class="reg-row clearfix"> <strong>Last Name <i class="star">*</i></strong>
                     <div>
                         <input type="text" name="last_name" class="reg-input" value="<?php echo $userinfo['last_name']; ?>" />
                     </div>
@@ -142,7 +147,7 @@
                         <span class="" id="errorRemind"></span>
                     </div>
                 </div>
-                <div class="reg-row clearfix"> <strong>Birthday</strong>
+                <div class="reg-row clearfix"> <strong>Birthday<i class="star">*</i></strong>
                     <div>
                         <input type="text" name="birthday" id="txtName" class="date" value="<?php echo $userinfo['birthday']; ?>" />
                     </div>
@@ -167,51 +172,47 @@
                         <input type="text" name="email" class="reg-input" value="<?php echo $userinfo['email']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <strong>Phone Number</strong>
+                <div class="reg-row"> <strong>Phone Number<i class="star">*</i> <span>(including area code)</span></strong>
                     <div>
                         <input type="text" name="phone" class="reg-input" value="<?php echo $userinfo['phone']; ?>" />
                     </div>
                 </div>
                 <div class="reg-row">Allow employers to contatct you by phone
-                    <div>
                         Yes<input type="radio" name="is_allow_phone" value="1" checked="checked" />
                         No<input type="radio" name="is_allow_phone" value="0" />
-                    </div>
                 </div>
-                <div class="reg-row"> <strong>Username ofr jing chat</strong>
+                <div class="reg-row"> <strong>Username for Jing Chat<i class="star">*</i></strong>
                     <div>
                         <input type="text" name="jingchat_username" class="reg-input" value="<?php echo $userinfo['jingchat_username']; ?>" />
                     </div>
                 </div>
                 <div class="reg-row">Allow employers to contact you through online messager
-                    <div>
                         Yes<input type="radio" name="is_allow_online_msg" value="1" checked="checked" />
                         No<input type="radio" name="is_allow_online_msg" value="0" />
-                    </div>
                 </div>
-                <div class="reg-row"> <strong>Personal website</strong>
+                <div class="reg-row"> <b>Personal website</b>
                     <div>
                         <input type="text" name="website" class="reg-input" value="<?php echo $userinfo['personal_website']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <strong>twitter Username</strong>
+                <div class="reg-row"> <b>twitter Username</b>
                     <div>
                         <input type="text" name="twitter" class="reg-input" value="<?php echo $userinfo['twitter']; ?>" />
                     </div>
                 </div>
-               <div class="reg-row"> <strong>linkedin Username</strong>
+               <div class="reg-row"> <b>linkedin Username</b>
                     <div>
                         <input type="text" name="linkedin" class="reg-input" value="<?php echo $userinfo['linkedin']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <strong>wechat</strong>
+                <div class="reg-row"> <b>wechat</b>
                     <div>
                         <input type="text" name="wechat" class="reg-input" value="<?php echo $userinfo['wechat']; ?>" />
                     </div>
                 </div>
                 <div class="reg-row"> <b>Other Social Network</b>
                     <div>
-                        <input type="text" name="other_network" class="reg-input" />
+                        <input type="text" id="reg-Network" value="">
                         <div class="reg-row-tip">+ Add Another Soical Network</div>
                         <div id="reg-network-val" class="show-selval"></div>
                     </div>
@@ -228,14 +229,14 @@
                 <div class="reg-area-tit">Preferences</div>
                 <form action="<?php echo $site_url; ?>/jobseeker/userinfo" method="post" id="preferencesForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-                    <div class="reg-row"><b>Prefered length of employment?</b>
+                    <div class="reg-row"><strong>Prefered length of employment?<i class="star">*</i></strong>
                         <div>
                             Long term employment(1+years)<input type="radio" name='employment_length' value="1" checked="checked" /><br />
                             Short term employment(-1 years)<input type="radio" name='employment_length' value="2" /><br />
                             No preferences<input type="radio" name='employment_length' value="3" />
                         </div>
                     </div>
-                    <div class="reg-row"><b>Prefered type of employment?</b>
+                    <div class="reg-row"><strong>Prefered type of employment?<i class="star">*</i></strong>
                         <div>
                             Contract<input type="radio" name="employment_type" value="1" /><br />
                             Part Time<input type="radio" name="employment_type" value="2" /><br />
@@ -244,19 +245,15 @@
                             Any<input type="radio" name="employment_type" value="5" />
                         </div>
                     </div>
-                    <div class="reg-row"><b>Do you require Visa assistance from employers?</b>
-                        <div>
+                    <div class="reg-row"><strong>Do you require Visa assistance from employers?<i class="star">*</i></strong>
                             Yes<input type="radio" name="is_visa_assistance" value="1" checked="checked" />
                             No<input type="radio" name="is_visa_assistance" value="0" />
-                        </div>
                     </div>
-                    <div class="reg-row"><b>Do you require accomodation assistance from employer?</b>
-                        <div>
+                    <div class="reg-row"><strong>Do you require accomodation assistance from employer?<i class="star">*</i></strong>
                             Yes<input type="radio" name="is_accomodation_assistance" value="1" checked="checked" />
                             No<input type="radio" name="is_accomodation_assistance" value="0" />
-                        </div>
                     </div>
-                    <div class="reg-row"><b>What industry are you seeking employment in?</b>
+                    <div class="reg-row"><strong>What industry are you seeking employment in?<i class="star">*</i></strong>
                         <div>
                             <select name="industry[]" class="kyo-select">
                                 <option value="0">Industry</option>
@@ -269,6 +266,7 @@
                                 <option value="2">boss</option>
                             </select>
                         </div>
+                        <a class="reg-row-tip" href="#">+ Add Another Industry</a>
                     </div>
                     <div class="reg-row"><b>What is your availability?</b>
                         <div>
@@ -290,41 +288,53 @@
                 <div class="reg-area-tit">Educations</div>
                 <form action="<?php echo $site_url; ?>/jobseeker/userinfo" method="post" id="educationForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-                    <div class="reg-row"> <strong>School/Collage name</strong>
+                    <div class="reg-row"> <strong>School/Collage name<i class="star">*</i></strong>
                         <div>
                             <input type="text" class="reg-input" name="school_name" />
                         </div>
                     </div>
-                    <div class="reg-row"> <strong>Dates Attended</strong>
-                        <div>
-                            <select name="attended_from">
-                                <option value="2000">2000</option>
-                                <option value="2001">2001</option>
-                                <option value="2002">2002</option>
-                            </select><br />
-                            To<br />
-                            <select name="attended_to">
-                                <option value="2003">2003</option>
-                                <option value="2004">2004</option>
-                                <option value="2005">2005</option>
+                    <div class="reg-row"> <strong>Dates Attended<i class="star">*</i></strong>
+                        <div class="clearfix">
+                            <select class="kyo-select" name="attended_from">
+                                <option value="0">Year</option>
+                                <option value="1970">1970</option>
+                                <option value="1971">1971</option>
+                                <option value="1972">1972</option>
+                                <option value="1973">1973</option>
+                                <option value="1974">1974</option>
                             </select>
-                            <br />or expected graduation year
+                            <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px">
                         </div>
+                        <p class="p5">To</p>
+                        <div class="clearfix">
+                            <select class="kyo-select" name="attended_to">
+                                <option value="0">Year</option>
+                                <option value="1970">1970</option>
+                                <option value="1971">1971</option>
+                                <option value="1972">1972</option>
+                                <option value="1973">1973</option>
+                                <option value="1974">1974</option>
+                            </select>
+                            <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px">
+                        </div>
+
+                        <br />or expected graduation year
                     </div>
-                    <div class="reg-row"> <strong>Degree title</strong>
+                    <div class="reg-row"> <b>Degree title</b>
                         <div>
                             <input type="text" class="reg-input" name="degree" />
                         </div>
                     </div>
-                    <div class="reg-row"> <strong>Major</strong>
+                    <div class="reg-row"> <b>Major</b>
                         <div>
                             <input type="text" class="reg-input" name="major" />
                         </div>
                     </div>
-                    <div class="reg-row"> <strong>Achievements</strong>
+                    <div class="reg-row"> <b>Achievements</b>
                         <div>
-                            <textarea rows="4" cols="50" name="achievements"></textarea>
+                            <textarea class="reg-textarea" name="achievements"></textarea>
                         </div>
+                        <a class="reg-row-tip" href="#">+ Add Another Industry</a>
                     </div>
                     <div class="reg-area-bar">
                         <input type="hidden" name="register_step" value="4" />
@@ -338,57 +348,61 @@
                 <div class="reg-area-tit">Work History</div>
                 <form action="<?php echo $site_url; ?>/jobseeker/userinfo" method="post" id="workhistoryForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-                    <div class="reg-row"> <strong>Introduce yourself</strong>
+                    <div class="reg-row"> <b>Introduce yourself</b>
                         <div>
-                            <textarea rows="4" cols="50" name="introduce"></textarea>
+                            <textarea class="reg-textarea" name="introduce"></textarea>
                         </div>
                     </div>
-                    <div class="reg-row"> <strong>Company name</strong>
+                    <div class="reg-row"> <strong>Company name<i class="star">*</i></strong>
                         <div>
                             <input type="text" class="reg-input" name="company_name" />
                         </div>
                     </div>
-                    <div class="reg-row"> <strong>Time period</strong>
-                        <div>
-                            <select name="period_time_from">
+                    <div class="reg-row"> <strong>Time period<i class="star">*</i></strong>
+                        <div class="clearfix">
+                            <select name="period_time_from" class="kyo-select">
                                 <option value="2000">2000</option>
                                 <option value="2001">2001</option>
                                 <option value="2002">2002</option>
-                            </select><br />
-                            To<br />
-                            <select name="period_time_to">
+                            </select>
+                            <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px">
+                        </div>
+                        <p class="p5">To</p>
+                        <div class="clearfix">
+                            <select name="period_time_to" class="kyo-select">
                                 <option value="2003">2003</option>
                                 <option value="2004">2004</option>
                                 <option value="2005">2005</option>
                             </select>
+                            <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px">
                             I still work here<input type="checkbox" name="still_here" />
                         </div>
                     </div>
-                    <div class="reg-row clearfix"> <strong>Industry</strong>
-                        <div>
-                            <input type="text" id="reg-industry" value="" name="industry[]" />
-                            <div class="reg-row-tip">+ Add Another Industry</div>
-                            <div id="reg-rndustry-val" class="show-selval"></div>
+                    <div class="reg-row clearfix"> <strong>Industry<i class="star">*</i></strong>
+                        <div class="clearfix">
+                            <select class="kyo-select" name="industry[]">
+                                <option value="0">select</option>
+                                <option value="v1">v1</option>
+                                <option value="v2">v2</option>
+                            </select>
                         </div>
+                        <div>
+
                     </div>
-                    <div class="reg-row clearfix"> <strong>Position</strong>
+                    <div class="reg-row clearfix"> <strong>Position<i class="star">*</i></strong>
                         <div>
                             <input type="text" class="reg-input" name="position" />
                         </div>
                     </div>
-                    <div class="reg-row clearfix"> <strong>Location</strong>
-                        <div>
-                            <select class="kyo-select" name="location">
-                                <option value="1">All Counties</option>
-                                <option value="2">China</option>
-                                <option value="3">USA</option>
-                            </select>
-                        </div>
-                    </div>
+
                     <div class="reg-row clearfix"> <strong>Description</strong>
                         <div>
-                            <textarea rows="4" cols="50" name="description"></textarea>
+                            <textarea class="reg-textarea input-tip" name="description" data-tipval="350 Characters">350 Characters</textarea>
                         </div>
+                    </div>
+                    <div class="reg-row">
+                        <p><a class="reg-row-tip" href="#">Upload examples of work</a></p>
+                        <p><a class="reg-row-tip" href="#">+ Add Another Job</a></p>
                     </div>
                     <div class="reg-area-bar">
                         <input type="hidden" name="register_step" value="5" />
@@ -398,11 +412,11 @@
             </div>
 
             <!-- languages -->
-            <div class="reg-area"> <a id="reg2" name="reg2"></a>
+            <div class="reg-area">
                 <div class="reg-area-tit">Languages</div>
                 <form action="<?php echo $site_url; ?>/jobseeker/userinfo" method="post" id="languageForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-                    <div class="reg-row"> <strong>Language</strong>
+                    <div class="reg-row"> <strong>Language<i class="star">*</i></strong>
                         <div>
                             <select name="language" class="kyo-select">
                                 <option value="cn">China</option>
@@ -418,6 +432,9 @@
                             </select>
                         </div>
                     </div>
+                    <div class="reg-row">
+                        <p><a class="reg-row-tip" href="#">+ Add another language</a></p>
+                    </div>
                     <div class="reg-area-bar">
                         <input type="hidden" name="register_step" value="6" />
                         <input type="submit" class="reg-save" value=""  data-index="0"/>
@@ -430,13 +447,20 @@
                 <div class="reg-area-tit">Personal Skills</div>
                 <form action="<?php echo $site_url; ?>/jobseeker/userinfo" method="post" id="personalSkillsForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-                    <div class="reg-row">
-                        <b>Start typing to choose up to 5 personal skills that best suit you</b><br />
-                        If you can't find a personal skill from our database just hit the return button to add it
+                    <div class="reg-skills-text">
+                        <b>Start typing to choose up to 5 personal skills that best suit you</b><span>
+                        If you can't find a personal skill from our database just hit the return button to add it</span>
+                    </div>
+                    <div class="skills-vals clearfix">
+                        <ul>
+                            <li data-val="2">Customer Service<i class="del"></i></li>
+                            <li data-val="3">Resourcefulness<i class="del"></i></li>
+                            <li data-val="5">Time Management<i class="del"></i></li>
+                        </ul>
                     </div>
                     <div class="reg-row">
                         <div>
-                            <input type="text" name="keyword" size="24" maxlength="255" autocomplete="on" value="" id="keyword" class="text">
+                            <input type="text" name="keyword" size="24" maxlength="255" autocomplete="on" value="" id="keyword" class="text skills-input">
                         </div>
                     </div>
                     <div class="reg-area-bar">
@@ -451,13 +475,20 @@
                 <div class="reg-area-tit">Professional Skills</div>
                 <form action="<?php echo $site_url; ?>/jobseeker/userinfo" method="post" id="professionalSkillsForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-                    <div class="reg-row">
-                        <b>Start typing to choose up to 5 professional skills that best suit you</b><br />
-                        If you can't find a personal skill from our database just hit the return button to add it
+                    <div class="reg-skills-text">
+                        <b>Start typing to choose up to 5 professional skills that best suit you</b><span>
+                        If you can't find a personal skill from our database just hit the return button to add it</span>
+                    </div>
+                    <div class="skills-vals clearfix">
+                        <ul>
+                            <li data-val="2">Customer Service<i class="del"></i></li>
+                            <li data-val="3">Resourcefulness<i class="del"></i></li>
+                            <li data-val="5">Time Management<i class="del"></i></li>
+                        </ul>
                     </div>
                     <div class="reg-row">
                         <div>
-                            <input type="text" name="keyword" size="24" maxlength="255" autocomplete="on" value="" id="keyword" class="text">
+                            <input type="text" name="keyword" size="24" maxlength="255" autocomplete="on" value="" id="keyword" class="text skills-input">
                         </div>
                     </div>
                     <div class="reg-area-bar">
@@ -466,13 +497,15 @@
                     </div>
                 </form>
             </div>
-
         </div>
+    </div>
         <div class="reg-btns">
-            <a href="#"  class="reg-btns-save"></a>
-            <a href="#" class="reg-btns-post"></a>
+            <a href="#"  class="reg-btns-saveall png"></a>
+            <a href="#" class="reg-btns-job png"></a>
         </div>
+        <div class="backtop png" style="display: block; top: 564px; right:-80px"></div>
      </div>
+
 </div>
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>
