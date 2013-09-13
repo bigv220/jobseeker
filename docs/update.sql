@@ -34,3 +34,22 @@ CREATE TABLE `user` (
 #2013-9-5
 alter table user add password varchar(50) not null;
 alter table user add user_type varchar(20);
+
+-- ----------------------------
+-- Table structure for city
+-- ----------------------------
+CREATE TABLE `city` (
+  `id` tinyint(4) NOT NULL auto_increment,
+  `country_id` tinyint(4) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for country
+-- ----------------------------
+CREATE TABLE `country` (
+  `id` tinyint(4) NOT NULL auto_increment,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
