@@ -55,6 +55,7 @@
 .pop-reg-wrap{padding:15px 14px 0 14px;}
 .pop-reg-wrap label b{font-size:9px;height:18px;line-height:18px;}
 .pop-reg-wrap label span{font-size:9px;height:18px;line-height:18px;margin-left:20px;color:red;}
+input.error{border:1px solid red;}
 .pop-reg-wrap label .kyo-input{width:98%;}
 .pop-reg-wrap label.fl{width:48%;}
 .pop-reg-wrap label.fr{width:48%;margin-right:1%;}
