@@ -50,9 +50,12 @@
 .h-blog-ul a:hover{text-decoration:none;}
 .h-blog-ul li:hover img{-webkit-animation:rotateIn 1s .2s ease both;-moz-animation:rotateIn 1s .2s ease both;}
 @-webkit-keyframes rotateIn{0%{-webkit-transform-origin:center center;-webkit-transform:rotate(-360deg);opacity:1;} 100%{-webkit-transform-origin:center center;-webkit-transform:rotate(0);opacity:1;}}@-moz-keyframes rotateIn{0%{-moz-transform-origin:center center;-moz-transform:rotate(-360deg);opacity:1;} 100%{-moz-transform-origin:center center;-moz-transform:rotate(0);opacity:1;}}
-.pop-reg{display:none;z-index:111;width:254px;height:282px;position:absolute;top:50%;left:50%;margin:-141px 0 0 -127px;background:url(home/pop-reg.png) no-repeat;}
+.pop-reg{display:none;z-index:111;width:300px;height:282px;position:absolute;top:50%;left:50%;margin:-141px 0 0 -127px;background:url(home/pop-reg.png) no-repeat;}
 .pop-reg-close{width:18px;height:18px;top:3px;right:3px;cursor:pointer;}
-.pop-reg-wrap{padding:15px 14px 0 14px;}.pop-reg-wrap label b{display:block;font-size:9px;height:18px;line-height:18px;}
+.pop-reg-wrap{padding:15px 14px 0 14px;}
+.pop-reg-wrap label b{font-size:9px;height:18px;line-height:18px;}
+.pop-reg-wrap label span{font-size:9px;height:18px;line-height:18px;margin-left:20px;color:red;}
+input.error{border:1px solid red;}
 .pop-reg-wrap label .kyo-input{width:98%;}
 .pop-reg-wrap label.fl{width:48%;}
 .pop-reg-wrap label.fr{width:48%;margin-right:1%;}

@@ -177,6 +177,7 @@
 	<!--pop reg-->
 	<div class="pop-reg png">
 		<div class="pop-reg-wrap rel">
+            <form id="signup_form" method="post" action="/user/signup">
 			<div class="pop-reg-close abs" title="close"></div>
 				<div class="pop-reg-tit">
 					<i>Already have an account? <a href="#">Login</a></i>
@@ -190,29 +191,29 @@
 				<div class="pop-reg-personal">
 					<label class="fl">
 						<b>First Name</b>
-						<input type="text" class="kyo-input" />
+						<input type="text" id="first_name" name="first_name" class="kyo-input"/>
 					</label>
 					<label  class="fr">
 						<b>Last Name</b>
-						<input type="text" class="kyo-input" />
+						<input type="text" id="last_name" name="last_name" class="kyo-input" />
 					</label>
 				</div>
 				<div class="pop-reg-company"  style="display:none;">
 					<label>
 						<b>Company Name</b>
-						<input type="text" class="kyo-input" />
+						<input type="text" id="company_name" name="company_name" class="kyo-input" />
 					</label>
 				</div>
 				<div class="pop-reg-mail">
 					<label>
-						<b>Email</b>
-						<input type="text" class="kyo-input" />
+						<b>Email</b><span class="email_existing"></span>
+						<input type="text" id="email" name="email" class="kyo-input" />
 					</label>					
 				</div>
 				<div class="pop-reg-password">
 					<label>
 						<b>Password</b>
-						<input type="text" class="kyo-input" />
+						<input type="password" id="password" name="password" class="kyo-input" />
 					</label>
 				</div>
 				<div class="pop-reg-agree">
@@ -223,8 +224,9 @@
 					
 				</div>
 				<div class="pop-reg-submit">
-					<input type="text" class="pop-reg-submit-btn" />
+					<input type="text" id="signup_submit" class="pop-reg-submit-btn" />
 				</div>
+            </form>
 		</div>
 	</div>
 

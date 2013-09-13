@@ -7,6 +7,36 @@ class jobseeker_model extends MY_Model
         $this->table = 'user';
     }
 
+    /**
+     * insert a user to user table
+     * @param $data
+     * @return mixed
+     */
+    public function addUser($data){
+        $data = array('first_name'=>$data['first_name'],
+                        'last_name'=>$data['last_name'],
+                        'email'=>$data['email'],
+                        'password'=>md5($data['password']),
+                        'user_type'=>$data['user_type'],
+                        'newsletter'=>$data['newsletter']);
+        $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
+    }
+
+    /**
+     * check if the user with the pass-in email is exist
+     * @param $email
+     * @return bool if the user is exist return true, else return false
+     */
+    public function checkUserExisting($email){
+        $result = $this->db->select('uid')
+            ->from('user')
+            ->where('email', $email)
+            ->get()
+            ->result_array();
+        return count($result)>0;
+    }
+
     public function getCountry() {
         $result = $this->db->select('id,name')
             ->from('country')

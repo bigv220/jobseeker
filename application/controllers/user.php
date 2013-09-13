@@ -11,7 +11,27 @@ class user extends Front_Controller {
 	{
 		redirect('/');
 	}
-	
+
+    /**
+     * user signup action
+     * user_type: 1 is employer, 0 is job seeker
+     */
+    public function signup(){
+        $data = $this->data;
+        $this->load->model('jobseeker_model');
+        $userId = -1;
+        $status = "success";
+        $message = "success";
+        if(!$this->jobseeker_model->checkUserExisting($_POST['email'])){
+            $userId = $this->jobseeker_model->addUser($_POST);
+        }
+        else{
+            $status = "error";
+            $message = "The email is already exist.";
+        }
+        echo json_encode(array('status'=>$status, 'userId'=>$userId,'message'=>$message));
+    }
+
 	public function login()
 	{
 		if (empty($_POST))

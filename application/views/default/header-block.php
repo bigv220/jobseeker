@@ -25,6 +25,7 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/kyo4311.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/kyo4311-form.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery-ui.1.8.20.min.js" ></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery-validate.min.js" ></script>
 
 <script>
 	var site_url = "<?php echo $site_url?>";
