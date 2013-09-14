@@ -34,55 +34,38 @@ class user extends Front_Controller {
 
 	public function login()
 	{
-		if (empty($_POST))
-		{
-			$data = $this->data;
-			$this->load->view($data['front_theme'].'/user-login', $data);
-		}
-		else 
-		{
-			$post = $_POST;
-			if ('' == $post['username'])
-			{
-				alertmsg('Please input username.');
-			}
-			$this->load->model('admin_model');
-			$user = $this->admin_model->getUser($post['username'], md5($post['password']));
+        $post = $_POST;
 
-			if($user)
-			{
-				// set last login time
-				$this->admin_model->updateUserLogonTime($user['uid']);
-				if (1 == $user['isadmin']) // goto admin panel
-				{
-					$this->load->library('session');
-					$sess_arr = array(
-									//'lang' => 'cn', // set default language
-									'uid' => $user['uid'],
-									'username' => $user['username'],
-									'isadmin' => 1,
-									);
-					$this->session->set_userdata($sess_arr);
-					//addSysLog('登录系统');
-					redirect('admin/page');
-				}
-				else // goto member panel
-				{
-					alertmsg('Access deny.');
-					redirect('member/index');
-				}
-			}
-			else 
-			{
-				alertmsg('Username or Password error, Please try again.');
-			}
-		}
+        $result = array('uid'=>-1,'status'=>'error', 'message'=>'Username or Password error, Please try again.');
+        if ('' == $post['username'])
+        {
+            $result['message'] = 'Invalid email';
+        }
+        else{
+            $this->load->model('jobseeker_model');
+            $user = $this->jobseeker_model->getUser($post['username'], md5($post['password']));
+
+            if($user){
+                $this->load->library('session');
+
+                $result['status'] = 'success';
+                $result['message'] = '';
+                $result['uid'] = $user['uid'];
+                $result['first_name'] = $user['first_name'];
+                $result['last_name'] = $user['last_name'];
+
+                $this->session->set_userdata($result);
+
+            }
+        }
+        //return login status with user data
+        echo json_encode($result);
 	}
 	
 	public function logout()
 	{
 		$this->load->library('session');
 		$this->session->sess_destroy();
-		redirect('user/login');
+		redirect('/');
 	}
 }

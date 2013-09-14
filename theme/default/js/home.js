@@ -122,5 +122,22 @@ $(function(){
         }
     });
 
-   
+   //login form ajax submit
+    var loginform = $('#login_form');
+    loginform.submit(function(){
+        $.post(site_url + '/user/login',
+                loginform.serialize(),
+                function(result, status){
+
+                    if(result.status == 'success'){
+                        $('.phd-login-pop').remove();
+                        $('.phd-login-text').html(result.first_name + '<br/>' + result.last_name);
+                    }
+                    else{
+                        alert(result.message);
+                    }
+                },
+                'json');
+        return false;
+    });
 })

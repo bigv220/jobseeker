@@ -30,13 +30,20 @@ class jobseeker_model extends MY_Model
      */
     public function checkUserExisting($email){
         $result = $this->db->select('uid')
-            ->from('user')
+            ->from($this->table)
             ->where('email', $email)
             ->get()
             ->result_array();
         return count($result)>0;
     }
 
+    public function getUser($email, $password){
+        $where = array('email'=>$email, 'password'=>$password);
+        return $this->db->select('*')
+            ->from($this->table)
+            ->where($where)
+            ->get()->row_array();
+    }
     public function getCountry() {
         $result = $this->db->select('id,name')
             ->from('country')
