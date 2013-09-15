@@ -290,7 +290,7 @@
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <div class="reg-row"> <strong>School/Collage name<i class="star">*</i></strong>
                         <div>
-                            <input type="text" class="reg-input" name="school_name" />
+                            <input type="text" class="reg-input" name="school_name" value="<?php echo $education_info["school_name"]; ?>" />
                         </div>
                     </div>
                     <div class="reg-row"> <strong>Dates Attended<i class="star">*</i></strong>
@@ -322,17 +322,17 @@
                     </div>
                     <div class="reg-row"> <b>Degree title</b>
                         <div>
-                            <input type="text" class="reg-input" name="degree" />
+                            <input type="text" class="reg-input" name="degree" value="<?php echo $education_info["degree"]; ?>" />
                         </div>
                     </div>
                     <div class="reg-row"> <b>Major</b>
                         <div>
-                            <input type="text" class="reg-input" name="major" />
+                            <input type="text" class="reg-input" name="major" value="<?php echo $education_info["major"]; ?>" />
                         </div>
                     </div>
                     <div class="reg-row"> <b>Achievements</b>
                         <div>
-                            <textarea class="reg-textarea" name="achievements"></textarea>
+                            <textarea class="reg-textarea" name="achievements"><?php echo $education_info["achievements"]; ?></textarea>
                         </div>
                         <a class="reg-row-tip" href="#">+ Add Another Industry</a>
                     </div>
@@ -350,12 +350,12 @@
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <div class="reg-row"> <b>Introduce yourself</b>
                         <div>
-                            <textarea class="reg-textarea" name="introduce"></textarea>
+                            <textarea class="reg-textarea" name="introduce"><?php echo $work_history["introduce"]; ?></textarea>
                         </div>
                     </div>
                     <div class="reg-row"> <strong>Company name<i class="star">*</i></strong>
                         <div>
-                            <input type="text" class="reg-input" name="company_name" />
+                            <input type="text" class="reg-input" name="company_name" value="<?php echo $work_history["company_name"]; ?>" />
                         </div>
                     </div>
                     <div class="reg-row"> <strong>Time period<i class="star">*</i></strong>
@@ -391,13 +391,16 @@
                     </div>
                     <div class="reg-row clearfix"> <strong>Position<i class="star">*</i></strong>
                         <div>
-                            <input type="text" class="reg-input" name="position" />
+                            <input type="text" class="reg-input" name="position" value="<?php echo $work_history["position"]; ?>" />
                         </div>
                     </div>
 
                     <div class="reg-row clearfix"> <strong>Description</strong>
                         <div>
-                            <textarea class="reg-textarea input-tip" name="description" data-tipval="350 Characters">350 Characters</textarea>
+                            <?php $v = $work_history["description"];
+                            $v = $v ? $v : "350 Characters";
+                            ?>
+                            <textarea class="reg-textarea input-tip" name="description" data-tipval="350 Characters"><?php echo $v; ?></textarea>
                         </div>
                     </div>
                     <div class="reg-row">
