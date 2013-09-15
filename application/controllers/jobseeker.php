@@ -18,7 +18,7 @@ class jobseeker extends Front_Controller {
     /**
      * Jobseeker registration
      */
-    public function userinfo() {
+    public function register() {
         $data = $this->data;
 
         //Load Model
@@ -111,7 +111,7 @@ class jobseeker extends Front_Controller {
         $data["uid"] = $uid;
         $data["userinfo"] = $userinfo;
         $data["msg"] = $msg;
-        $this->load->view("/jobseeker/userinfo",$data);
+        $this->load->view("/jobseeker/register",$data);
     }
 
     /**
