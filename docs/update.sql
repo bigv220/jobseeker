@@ -57,3 +57,29 @@ CREATE TABLE `country` (
 #2013-9-12
 alter table user change user_type user_type tinyint(4) default 0;
 alter table user add newsletter tinyint(1);
+
+#2013-9-15
+drop table job;
+-- ----------------------------
+-- Table structure for job
+-- ----------------------------
+CREATE TABLE `job` (
+  `id` int(11) NOT NULL,
+  `job_name` varchar(100) NOT NULL COMMENT 'Job Name',
+  `job_desc` text,
+  `location` varchar(100) default NULL,
+  `employment_length` tinyint(4) default NULL COMMENT 'Length of employment (Short Term..)',
+  `employment_type` tinyint(4) default NULL COMMENT 'Type of employment (Full..)',
+  `industry` varchar(100) default NULL,
+  `position` varchar(100) default NULL,
+  `salary_range` varchar(30) default NULL,
+  `preferred_year_of_experience` varchar(20) default NULL COMMENT 'Year of experience (1 year, etc..)',
+  `language` varchar(50) default NULL COMMENT 'Required languages for this Job',
+  `preferred_personal_skills` text,
+  `preferred_technical_skills` text,
+  `is_visa_assistance` tinyint(4) default NULL,
+  `is_housing_assistance` tinyint(4) default NULL,
+  `company_id` int(11) default NULL,
+  `post_date` date default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

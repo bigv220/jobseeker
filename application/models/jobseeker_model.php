@@ -30,13 +30,20 @@ class jobseeker_model extends MY_Model
      */
     public function checkUserExisting($email){
         $result = $this->db->select('uid')
-            ->from('user')
+            ->from($this->table)
             ->where('email', $email)
             ->get()
             ->result_array();
         return count($result)>0;
     }
 
+    public function getUser($email, $password){
+        $where = array('email'=>$email, 'password'=>$password);
+        return $this->db->select('*')
+            ->from($this->table)
+            ->where($where)
+            ->get()->row_array();
+    }
     public function getCountry() {
         $result = $this->db->select('id,name')
             ->from('country')
@@ -103,6 +110,17 @@ class jobseeker_model extends MY_Model
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }
 
+    //get education
+    public function getEducationInfo($uid) {
+        $result = $this->db->select('*')
+            ->from('user_education')
+            ->where('uid',$uid)
+            ->get()
+            ->result_array();
+
+        return $result[0];
+    }
+
     //save education
     public function insertEducation($data) {
         $data = array('uid'=>$data['uid'],'school_name'=>$data['school_name'],
@@ -112,13 +130,24 @@ class jobseeker_model extends MY_Model
         return $this->db->insert('user_education', $data);
     }
 
+    //get work history
+    public function getWorkHistory($uid) {
+        $result = $this->db->select('*')
+            ->from('user_work_history')
+            ->where('uid', $uid)
+            ->get()
+            ->result_array();
+
+        return $result[0];
+    }
+
     //save work history
     public function insertWorkHistory($data) {
         $data = array('uid'=>$data['uid'],'introduce'=>$data['introduce'],
             'company_name'=>$data['company_name'],
             'period_time_from'=>$data['period_time_from'],'period_time_to'=>$data['period_time_to'],
             'industry'=>$data['industry'],'position'=>$data['position'],
-            'location'=>$data['location'],'description'=>$data['description']);
+            'location'=>null,'description'=>$data['description']);
         return $this->db->insert('user_work_history', $data);
     }
 

@@ -10,9 +10,16 @@ class index extends Front_Controller {
 	public function index()
 	{
 		$data = $this->data;
+        $this->load->library('session');
+
 		$this->load->model('article_model');
 		$data['news_list'] = $this->article_model->getListByCat('company-news', $limit=10);
-		$this->load->view($data['front_theme'].'/index', $data);
+
+        $data['uid'] = $this->session->userdata('uid')?$this->session->userdata('uid'):-1;
+        $data['first_name'] = $this->session->userdata('first_name');
+        $data['last_name'] = $this->session->userdata('last_name');
+        
+        $this->load->view($data['front_theme'].'/index', $data);
 	}
 }
 
