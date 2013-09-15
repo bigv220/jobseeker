@@ -48,11 +48,11 @@
 		<a class="phd-logo png" href="#"></a>
 		<div class="phd-login fr rel">
 			<div class="phd-login-text">
-                <?php if (-1 == $uid):?>
+                <?php if (-1 == (isset($uid)?$uid:-1)):?>
                 login
                 <?php else: ?>
-                    <?php echo $first_name;?><br>
-                    <?php echo $last_name;?>
+                    <?php echo isset($first_name)?$first_name:"";?><br>
+                    <?php echo isset($last_name)?$last_name:"";?>
                 <?php endif;?>
             </div>
 			<div class="phd-login-pop png">
