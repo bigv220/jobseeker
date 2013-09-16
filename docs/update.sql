@@ -57,3 +57,13 @@ CREATE TABLE `country` (
 #2013-9-12
 alter table user change user_type user_type tinyint(4) default 0;
 alter table user add newsletter tinyint(1);
+
+#2013-9-15
+-- ----------------------------
+-- Table structure for newsletter
+-- ----------------------------
+CREATE TABLE `newsletter` (
+  `id` tinyint(4) NOT NULL auto_increment,
+  `email` varchar(50) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

@@ -29,6 +29,7 @@
 
 <script>
 	var site_url = "<?php echo $site_url?>";
+    var base_url = "<?php echo $base_url?>";
 	var theme_url = "<?php echo $theme_path?>";
 </script>
 </head>
