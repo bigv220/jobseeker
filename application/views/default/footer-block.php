@@ -25,12 +25,14 @@
 				<a href="#" class="pficon pfi-q"></a>
 			</div>
 			<div class="span2 p-footer-contact">
-				<p><b>EMAIL:</b> info@jingjobs.com</p>
+				<p><b>EMAIL:</b> <a href="mailto:info@jingjobs.com">info@jingjobs.com</a></p>
 				<p><b>SKYPE:</b> JingjobsChina</p>
 			</div>
 			<div class="span3 p-footer-mail">
-				<input type="text" class="pf-input input-tip" data-tipval="Email address" value="Email address"/>
-				<input type="submit" class="pf-btn" value="" />
+                <form id="newsletter_form">
+                    <input type="text" id="newsletter_email" name="newsletter_email" class="pf-input input-tip required email" data-tipval="Email address" value="Email address"/>
+                    <input type="submit" id="newsletter_submit" class="pf-btn" value="" />
+                </form>
 			</div>
 		</div>
 	</div>

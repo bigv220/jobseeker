@@ -140,4 +140,28 @@ $(function(){
                 'json');
         return false;
     });
+
+    $("#orderform").validate({
+        submitHandler: function(form) {
+
+        }
+    });
+    var newsletterform = $('#newsletter_form');
+
+    newsletterform.submit(function(){
+        var email = $('#newsletter_email').val();
+
+        if(valid_email(email) == false){
+            alert('Wrong email address');
+        }
+        else{
+            $.post(site_url + '/index/newsletter',
+                    newsletterform.serialize(),
+                    function(result, status){
+                        $('#newsletter_email').attr('value', 'Email address');
+                        alert(result.message);
+                    },'json');
+        }
+        return false;
+    });
 })

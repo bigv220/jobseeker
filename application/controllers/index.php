@@ -21,6 +21,21 @@ class index extends Front_Controller {
         
         $this->load->view($data['front_theme'].'/index', $data);
 	}
+
+    public function newsletter(){
+        $this->load->model('newsletter_model');
+        $status = true;
+        $message = "The email address has been added to our newsletter successfully.";
+
+        if(!$this->newsletter_model->checkExisting($_POST['newsletter_email'])){//insert this email to newsletter list
+            $this->newsletter_model->addToNewsletter($_POST['newsletter_email']);
+        }
+        else{
+            $status = false;
+            $message = "The email is already in our newsletter.";
+        }
+        echo json_encode(array('status'=>$status, 'message'=>$message));
+    }
 }
 
 /* End of file index.php */
