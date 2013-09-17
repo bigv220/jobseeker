@@ -39,3 +39,8 @@ $(function(){
     
 
 })
+
+function valid_email(email) {
+    var patten = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);
+    return patten.test(email);
+}

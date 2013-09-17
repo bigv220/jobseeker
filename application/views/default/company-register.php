@@ -44,9 +44,9 @@
                 </div>
                 <div class="reg-row clearfix"> <strong>Industry <i class="star">*</i></strong>
                     <div>
-                        <input type="text" id="reg-industry" value="">
+                        <input type="text" id="reg-industry" name="reg-industry" value="">
                         <div class="reg-row-tip">+ Add Another Industry</div>
-                        <div id="reg-rndustry-val" class="show-selval"></div>
+                        <div id="reg-industry-val" class="show-selval"></div>
                     </div>
                 </div>
                 <div class="reg-row clearfix"> <strong>Company Description <i class="star">*</i></strong>

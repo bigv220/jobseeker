@@ -73,6 +73,7 @@ a:hover{text-decoration:underline;}
 .p-footer div{width:230px;height:50px;float:left;*display:inline;}
 .p-footer .span1,.p-footer .span2{margin:0 20px 0 0;}
 .p-footer-contact b{font-weight:bolder;color:#ea6e3b;}
+.p-footer-contact a{color:#7f7f7f;}
 .p-footer-weibo{padding:5px 0 0 0;}
 .pficon{background:url(pub/weibo.gif);background-repeat:no-repeat;display:block;float:left;*display:inline;cursor:pointer;width:26px;height:25px;margin-right:12px;}
 .pfi-i{background-position:0 0;}

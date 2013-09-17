@@ -131,6 +131,18 @@ $(function(){
 			//外框处理
 			l.css({'width':opt.width,'height':opt.height})
 			.click(function(e){
+				var status = "";
+				if(list.is(":visible")==false)
+					status = "none";
+				else
+					status = "block";
+
+            	$('.kyo-select-list').hide();
+            	$('.fx-checkselect-list').hide();
+            	list.css('display',status);
+                $('.fx-checkselect').css({'z-index':11});
+            	$('.kyo-select').css({'z-index':11});
+
 				if(list.css('display') == 'none') {
 					 	list.show();
 						$(this).css({'z-index':12});
@@ -205,9 +217,21 @@ $(function(){
 			.css({position:'absolute',top:height,left:0,'width':width-2});
 
 		arr.bind('click',function(e){
+			var status = "";
+			if(dl.is(":visible")==false)
+				status = "none";
+			else
+				status = "block";
+
+            $('.kyo-select-list').hide();
+            $('.fx-checkselect-list').hide();
+            dl.css('display',status);
+            $('.fx-checkselect').css({'z-index':11});
+            $('.kyo-select').css({'z-index':11});
 			var vv = dl.css('display');
 			
 			var ddLength = dl.find('dd').length;
+			
 			if(vv=='none' && ddLength > 0){
 				dl.show();	
 				pop.css({'z-index':12});

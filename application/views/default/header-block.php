@@ -25,9 +25,11 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/kyo4311.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/kyo4311-form.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery-ui.1.8.20.min.js" ></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery-validate.min.js" ></script>
 
 <script>
 	var site_url = "<?php echo $site_url?>";
+    var base_url = "<?php echo $base_url?>";
 	var theme_url = "<?php echo $theme_path?>";
 </script>
 </head>
@@ -46,12 +48,21 @@
 		</div>
 		<a class="phd-logo png" href="#"></a>
 		<div class="phd-login fr rel">
-			<div class="phd-login-text">login</div>
+			<div class="phd-login-text">
+                <?php if (-1 == (isset($uid)?$uid:-1)):?>
+                login
+                <?php else: ?>
+                    <?php echo isset($first_name)?$first_name:"";?><br>
+                    <?php echo isset($last_name)?$last_name:"";?>
+                <?php endif;?>
+            </div>
 			<div class="phd-login-pop png">
 				<div class="phd-login-pop-hd"><a href="#"></a></div>
-				<p class="input-wrap"><input type="text" value="" class="input input-user" /></p>
-				<p class="input-wrap"><input type="password" value="" class="input input-pass" /></p>
-				<p class="tac" ><input type="submit" value="" class="btn" /></p>
+                <form id="login_form" method="post" action="/user/login">
+                    <p class="input-wrap"><input type="text" id="username" name="username" value="" class="input input-user" /></p>
+                    <p class="input-wrap"><input type="password" id="password" name="password" value="" class="input input-pass" /></p>
+                    <p class="tac" ><input type="submit" value="" class="btn" /></p>
+                </form>
 			</div>
 		</div>
 	</div>
