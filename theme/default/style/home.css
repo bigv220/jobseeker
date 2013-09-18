@@ -1,6 +1,6 @@
 .ora{color:#ea6e3b;}
 .pur{color:#481052;}
-.p-bn{height:480px;background:url(home/main-bg.gif) repeat;z-index:5;}
+.p-bn{height:430px;z-index:5;}
 .pbn-find{padding:114px 0 20px 0;text-align:center;width:492px;margin:auto;}
 .pbn-job,.pbn-staff,.pbn-btn{display:block;width:231px;height:164px;float:left;}
 .pbn-job{margin:0 20px 0 0;}
@@ -21,7 +21,7 @@
 .pbn-singup{text-align:center;}
 .pbn-singup{clear:both;}
 .pbn-singup-btn{background:url(home/singup.png);display:inline-block;width:232px;height:41px;}
-.p-bd{background:#674092;height:156px;}
+.p-bd{height:156px;}
 .p-sponsors .scroll-item{float:left;display:inline-block;}
 .p-sponsors .scroll-bar{position:absolute;cursor:pointer;height:38px;width:23px;bottom:23px;top:50%;margin-top:-19px;background-image:url(home/roll-bar.gif);background-repeat:no-repeat;}
 .p-sponsors .scroll-left{left:82px;}
@@ -31,7 +31,7 @@
 .p-sponsors-item b{color:#fff;font-weight:700;font-size:12px;text-transform:uppercase;line-height:14px;vertical-align:top;display:block;}
 .p-sponsors-item span{color:#d6d54f;text-decoration:underline;text-transform:capitalize;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:14px;vertical-align:top;}
 .p-sponsors-item:hover span{text-decoration:none;}
-.p-blog{margin-bottom:30px;overflow:hidden;zoom:1;}
+.p-blog{height:324px;background:url(home/blog-bg.png) repeat-x;overflow:hidden;zoom:1;}
 .h-blog-hd{height:50px;padding:14px 0 0 0;font-weight:bolder;}.h-blog-hd strong{display:block;height:24px;line-height:24px;font-size:18px;color:#674092;}
 .h-blog-hd a{background:url(home/arr.gif) no-repeat right;padding:0 16px 0 0;color:#481052;}
 .h-blog-ul li{width:184px;float:left;*display:inline;display:inline;height:235px;position:relative;overflow:hidden;background-color:#f16f3a;}
@@ -119,7 +119,7 @@ input.error{border:1px solid red;}
 .about-btns .apply{background-position:0 -158px;}
 .about-btns .bkmked{background-position:0 -237px;}
 .about-btns .bkmk{background-position:0 0;}
-.required{display:inline-block;width:88px;height:88px;background:url(search/fluent.png) no-repeat;}.required b{display:block;color:#ea6e3b;font-weight:700;font-size:14px;padding:40px 0 0 0;}
+.required{display:inline-block;/*width:88px;height:88px;background:url(search/fluent.png) no-repeat;}*/.required b{display:block;color:#ea6e3b;font-weight:700;font-size:14px;padding:40px 0 0 0;}
 .sharejob{background:url(company/about-share.png);background-repeat:no-repeat;display:block;float:left;*display:inline;cursor:pointer;width:26px;height:25px;margin-right:12px;}
 .sharejob-f{background-position:0 0;}
 .sharejob-t{background-position:0 -25px;}

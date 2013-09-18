@@ -60,53 +60,55 @@
 	</div>
 
 	<!--blog-->
-	<div class="p-blog w70 rel">
-		<div class="h-blog-hd">
-			<strong>Jing News</strong>
-			<a href="#">View all articles</a>
-		</div>
-		<div class="h-blog-bd">
-			<ul class="h-blog-ul">
-				<li class="n1">
-					<img src="<?php echo $theme_path?>style/home/temp/temp-h1.gif" width="120" height="120" alt="" />
-					<i class="mark png"></i>
-					<a href="#" class="h-blog-item">
-						<strong>Colin Lew’s Expat Profile</strong>
-						<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
-						<b>Continue Reading</b>
-					</a>
-
-				</li>
-				<li class="n2">
-					<img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif" width="120" height="120" alt="" />
-					<i class="mark png"></i>
-					<a href="#" class="h-blog-item">
-						<strong>The Happiest Places to Work</strong>
-						<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
-						<b>Continue Reading</b>
-					</a>
-
-				</li>
-				<li class="n3">
-					<img src="<?php echo $theme_path?>style/home/temp/temp-h3.gif" width="120" height="120" alt="" />
-					<i class="mark png"></i>
-					<a href="#" class="h-blog-item">
-						<strong>Colin Lew’s Expat Profile</strong>
-						<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
-						<b>Continue Reading</b>
-					</a>
-
-				</li>
-				<li class="n4">
-					<img src="<?php echo $theme_path?>style/home/temp/temp-h4.gif" width="120" height="120" alt="" />
-					<i class="mark png"></i>
-					<a href="#" class="h-blog-item">
-						<strong>Mastering the Perfect CV</strong>
-						<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
-						<b>Continue Reading</b>
-					</a>
-				</li>
-			</ul>
+	<div class="p-blog rel">
+		<div class="w70">
+			<div class="h-blog-hd">
+				<strong>Jing News</strong>
+				<a href="#">View all articles</a>
+			</div>
+			<div class="h-blog-bd">
+				<ul class="h-blog-ul">
+					<li class="n1">
+						<img src="<?php echo $theme_path?>style/home/temp/temp-h1.gif" width="120" height="120" alt="" />
+						<i class="mark png"></i>
+						<a href="#" class="h-blog-item">
+							<strong>Colin Lew’s Expat Profile</strong>
+							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+							<b>Continue Reading</b>
+						</a>
+	
+					</li>
+					<li class="n2">
+						<img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif" width="120" height="120" alt="" />
+						<i class="mark png"></i>
+						<a href="#" class="h-blog-item">
+							<strong>The Happiest Places to Work</strong>
+							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+							<b>Continue Reading</b>
+						</a>
+	
+					</li>
+					<li class="n3">
+						<img src="<?php echo $theme_path?>style/home/temp/temp-h3.gif" width="120" height="120" alt="" />
+						<i class="mark png"></i>
+						<a href="#" class="h-blog-item">
+							<strong>Colin Lew’s Expat Profile</strong>
+							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+							<b>Continue Reading</b>
+						</a>
+	
+					</li>
+					<li class="n4">
+						<img src="<?php echo $theme_path?>style/home/temp/temp-h4.gif" width="120" height="120" alt="" />
+						<i class="mark png"></i>
+						<a href="#" class="h-blog-item">
+							<strong>Mastering the Perfect CV</strong>
+							<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+							<b>Continue Reading</b>
+						</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<!-- sponsors -->
