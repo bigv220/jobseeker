@@ -15,7 +15,7 @@ $(function(){
 	//sel-industry
 	if($('#reg-industry').length>0){
     $('#reg-industry').checkSelect({
-        text:'Plase select industry',
+        text:'Please select industry',
         data:[
           {title:'Accounting',value:'Accounting'},
           {title:'HR',value:'HR'},
@@ -35,7 +35,7 @@ $(function(){
 	//sel-industry
 	if($('#reg-Network').length>0){
 		$('#reg-Network').checkSelect({
-			text:'Plase select network',
+			text:'Please select network',
 			data:[
 				{title:'Twitter',value:'Twitter'},
 				{title:'Facebook',value:'Facebook'},
