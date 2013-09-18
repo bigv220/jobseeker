@@ -31,18 +31,16 @@ $(function(){
     });
 	
 	}
-	
+	 
 	//sel-industry
 	if($('#reg-Network').length>0){
 		$('#reg-Network').checkSelect({
 			text:'Plase select network',
 			data:[
-				{title:'value1',value:'1'},
-				{title:'value2',value:'2'},
-				{title:'value3',value:'3'},
-				{title:'value4',value:'4'},
-				{title:'value5',value:'5'},
-				{title:'value6',value:'6'}
+				{title:'Twitter',value:'Twitter'},
+				{title:'Facebook',value:'Facebook'},
+				{title:'Pinterest',value:'Pinterest'},
+				{title:'WeChat',value:'WeChat'}
 			],
 			showDiv:$('#reg-network-val'),
 			width:230,
