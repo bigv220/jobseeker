@@ -39,9 +39,9 @@
 	<div class="w100">
 		<div class="phd-menu fl">
 			<ul>
-				<li class="home"><a href="#">HOME</a></li>
-				<li class="about"><a href="#">ABOUT US</a></li>
-				<li class="events"><a href="#">EVENTS</a></li>
+				<li class="home"><a href="<?php echo $site_url?>">HOME</a></li>
+				<li class="about"><a href="<?php echo $site_url?>page/aboutus">ABOUT US</a></li>
+				<li class="news"><a href="#">NEWS</a></li>
 				<li class="jobs"><a href="#">JOBS</a></li>
 				<li class="post"><a href="#">POST A JOB</a></li>
 			</ul>

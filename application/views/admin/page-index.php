@@ -33,7 +33,7 @@
 						<?php foreach ($article as $row) :?>
 							<tr>
                             	<td class="a-center"><?php echo $row['aid']?></td>
-                            	<td><a href="<?php echo $site_url.$row['lang'].'/page/'.$row['url']?>" target="_blank"><?php echo mb_strlen($row['title'])>30 ? mb_substr($row['title'], 0, 26).'...' : $row['title']?></a></td>
+                            	<td><a href="<?php echo $site_url.'page/'.$row['url']?>" target="_blank"><?php echo mb_strlen($row['title'])>30 ? mb_substr($row['title'], 0, 26).'...' : $row['title']?></a></td>
                                 <td class="a-center"><?php echo date('Y-m-d H:i',$row['date'])?></td>
                                 <td class="a-center"><?php echo langName($row['lang'])?></td>
                                 <td class="a-center">

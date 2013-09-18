@@ -34,9 +34,9 @@ class MY_Model extends CI_Model
 		return $this->db->where($key, $data[$key])->update($this->table, $data);
 	}
 
-    public function getOne($id, $key, $lang = null)
+    public function getOne($id, $key)
     {
-    	$where = $lang ? array($key=>$id, 'lang'=>$lang) : array($key=>$id);
+    	$where = array($key=>$id);
         return $this->db->select('*')
 					->from($this->table)
 					->where($where)

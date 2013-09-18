@@ -68,4 +68,46 @@ class user extends Front_Controller {
 		$this->session->sess_destroy();
 		redirect('/');
 	}
+	
+	public function adminlogin() {
+		$this->load->model('admin_model');
+		
+		if (empty($_POST))
+		{
+			$data = $this->data;
+			$this->load->view($data['front_theme'].'/admin-login', $data);
+		}
+		else
+		{
+			$post = $_POST;
+			if ('' == $post['username'])
+				alertmsg('Please input username.');
+			$user = $this->admin_model->getUser($post['username'], md5($post['password']));
+		
+			if($user)
+			{
+				// set last login time
+				$this->admin_model->updateUserLogonTime($user['uid']);
+				if (1 == $user['isadmin']) // admin
+				{
+					$this->load->library('session');
+					$sess_arr = array(
+							'uid' => $user['uid'],
+							'username' => $user['username'],
+							'isadmin' => 1,
+					);
+					$this->session->set_userdata($sess_arr);
+					redirect('admin/category');
+				}
+				else // member
+				{
+					alertmsg('Access deny.');
+				}
+			}
+			else
+			{
+				alertmsg('Username or Password error, Please try again.');
+			}
+		}
+	}
 }
