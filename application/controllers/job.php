@@ -36,7 +36,7 @@ class job extends Front_Controller {
 
         $data['constants_arr'] = $constants;
         $data['jobinfo'] = $jobinfo;
-        $this->load->view($data['front_theme']."/job-details",$data);
+        $this->load->view($data['front_theme']."/job-details-demo",$data);
     }
 
 }

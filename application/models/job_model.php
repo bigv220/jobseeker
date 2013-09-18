@@ -13,8 +13,10 @@ class job_model extends MY_Model
             ->where('id',$id)
             ->get()
             ->result_array();
-
-        return $result[0];
+        if (isset($result[0]))    
+            return $result[0];
+        else
+            return array();
     }
 
 
