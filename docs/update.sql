@@ -81,6 +81,9 @@ CREATE TABLE `job` (
   `is_housing_assistance` tinyint(4) default NULL,
   `company_id` int(11) default NULL,
   `post_date` date default NULL,
+    PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 
 -- ----------------------------
 -- Table structure for newsletter
