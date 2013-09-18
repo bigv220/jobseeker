@@ -61,6 +61,7 @@ a:hover{text-decoration:underline;}
 .phd-menu .home{width:87px;}
 .phd-menu .about{width:106px;}
 .phd-menu .events{width:306px;}
+.phd-menu .news{width:306px;}
 .phd-menu .jobs{width:87px;}
 .phd-login{float:right;*display:inline;*behavior:url(js/jslib/PIE.htc);width:61px;height:75px;border-radius:0 0 2px 2px;background:#ef7641;margin:0 115px 0 0;}
 .phd-login-text{width:61px;padding:50px 0 0 0;height:25px;text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;}
