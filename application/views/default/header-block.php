@@ -60,7 +60,7 @@
 				<div class="phd-login-pop-hd"><a href="#"></a></div>
                 <form id="login_form" method="post" action="/user/login">
                     <p class="input-wrap"><input type="text" id="username" name="username" value="" class="input input-user" /></p>
-                    <p class="input-wrap"><input type="password" id="password" name="password" value="" class="input input-pass" /></p>
+                    <p class="input-wrap"><input type="password" id="login_password" name="login_password" value="" class="input input-pass" /></p>
                     <p class="tac" ><input type="submit" value="" class="btn" /></p>
                 </form>
 			</div>
