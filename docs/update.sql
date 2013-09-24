@@ -83,3 +83,16 @@ CREATE TABLE `job` (
   `post_date` date default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+alter table user_work_history modify location varchar(50) null;
+
+#2013-9-16
+alter table user add register_step varchar(20) null;
+
+#2013-9-20
+alter table user modify birthday char(10);
+
+#2013-9-24
+alter table user_work_history add is_stillhere tiny(4) null;
+alter table user_education modify attend_date_from char(10);
+alter table user_education modify attend_date_to char(10);
