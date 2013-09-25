@@ -76,7 +76,7 @@ $(function(){
 				bg.css({'left':'-68px'});
 			}else{		
 				bar.css({'left':'1px'});
-				bg.css({'lleft':'0px'});
+				bg.css({'left':'0px'});
 			}
 			switchobj.click(function(){
 				var _val =inputobj.val();
@@ -174,6 +174,7 @@ $(function(){
 				$(this).removeClass('kyo-select-list-hover');
 			})
 			.click(function(){
+				change_location(this); // trigger an event when the select changed. fun in reg.js
 				l.css({'z-index':12});
 				isselect = true;
 				show.text($(this).text());

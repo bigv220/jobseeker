@@ -110,3 +110,52 @@ $(function(){
 
 
 })
+
+
+
+// ajax localtion
+function change_location(o) {
+	var key = $(o).parent().parent().prev("select").attr("name");
+	var selected = $(o).html();
+	var html_option = "";
+
+	if("country" == key) {
+		var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected;
+		$.get(url, function(data){
+			var obj = eval('('+data+')');
+			for ( var i = 0; i < obj.length; i++) {
+				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
+			}
+			$("select[name='province']").html(html_option);
+			$("select[name='province']").next(".kyo-select").remove();
+			$("select[name='province']").kyoSelect({
+		        width:'145',
+		        height:'25'
+		    });
+		});
+	}
+	
+	if("province" == key) {
+		var country = $("select[name='country']").val();
+		var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected + "/" + country;
+		$.get(url, function(data){
+			var obj = eval('('+data+')');
+			for ( var i = 0; i < obj.length; i++) {
+				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
+			}
+			$("select[name='city']").html(html_option);
+			$("select[name='city']").next(".kyo-select").remove();
+			$("select[name='city']").kyoSelect({
+		        width:'145',
+		        height:'25'
+		    });
+		});
+	}
+	
+}
+
+
+
+
+
+
