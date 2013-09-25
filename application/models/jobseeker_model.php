@@ -118,15 +118,15 @@ class jobseeker_model extends MY_Model
             ->get()
             ->result_array();
 
-        return $result[0];
+        if(count($result)) {
+            return $result[0];
+        } else {
+            return array();
+        }
     }
 
     //save education
     public function insertEducation($data) {
-        $data = array('uid'=>$data['uid'],'school_name'=>$data['school_name'],
-            'attend_date_from'=>$data['attended_from'],
-            'attend_date_to'=>$data['attended_to'],'degree'=>$data['degree'],
-            'major'=>$data['major'],'achievements'=>$data['achievements']);
         return $this->db->insert('user_education', $data);
     }
 
@@ -138,23 +138,20 @@ class jobseeker_model extends MY_Model
             ->get()
             ->result_array();
 
-        return $result[0];
+        if(count($result)) {
+            return $result[0];
+        } else {
+            return array();
+        }
     }
 
     //save work history
     public function insertWorkHistory($data) {
-        $data = array('uid'=>$data['uid'],'introduce'=>$data['introduce'],
-            'company_name'=>$data['company_name'],
-            'period_time_from'=>$data['period_time_from'],'period_time_to'=>$data['period_time_to'],
-            'industry'=>$data['industry'],'position'=>$data['position'],
-            'location'=>null,'description'=>$data['description']);
         return $this->db->insert('user_work_history', $data);
     }
 
     //save language
     public function insertLanguage($data) {
-        $data = array('uid'=>$data['uid'],'language'=>$data['language'],
-            'level'=>$data['level']);
         return $this->db->insert('user_language', $data);
     }
 
@@ -171,6 +168,80 @@ class jobseeker_model extends MY_Model
             }
         }
         return true;
+    }
+
+    //get register step
+    public function getRegisterStep($uid) {
+        $result = $this->db->select('register_step')
+                ->from('user')
+                ->where('uid', $uid)
+                ->get()
+                ->result_array();
+        return $result[0]["register_step"];
+    }
+
+    //save register step
+    public function saveRegisterStep($uid, $reg_str) {
+        $data = array('register_step'=>$reg_str);
+        return $this->db->where('uid', $uid)->update($this->table, $data);
+    }
+
+    public function addSocialNetwork($uid, $social_name, $social_id=null) {
+        $sql = "REPLACE INTO user_social VALUE ($uid, '". $social_name."','".$social_id."')";
+
+        $this->db->query($sql);
+    }
+
+    public function deleteSocialNetwork($uid) {
+        $sql = "DELETE FROM user_social WHERE uid=$uid";
+        return $this->db->query($sql);
+    }
+
+    // save the settings of seeking industry in Preferences item
+    public function addSeekingIndustry($uid, $industry, $position) {
+        $sql = "REPLACE INTO user_seeking_industry VALUE ($uid, '". $industry."','".$position."')";
+
+        $this->db->query($sql);
+    }
+
+    // get personal skills
+    public function getPersonalSkills($uid) {
+        $sql = "SELECT personal_skill FROM user_personal_skills WHERE uid=$uid";
+
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
+
+    // delete personal skills
+    public function delPersonalSkills($uid, $skill) {
+        $sql = "DELETE FROM user_personal_skills WHERE uid=$uid AND personal_skill='".$skill."'";
+        $this->db->query($sql);
+    }
+
+    // add personal skills
+    public function addPersonalSkills($uid, $skill) {
+        $sql = "REPLACE INTO user_personal_skills VALUES ($uid,'". $skill."')";
+        $this->db->query($sql);
+    }
+
+    //get professional skills
+    public function getProfessionalSkills($uid) {
+        $sql = "SELECT professional_skill FROM user_professional_skills WHERE uid=$uid";
+
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
+
+    // delete professional skills
+    public function delProfessionalSkills($uid, $skill) {
+        $sql = "DELETE FROM user_professional_skills WHERE uid=$uid AND professional_skill='".$skill."'";
+        $this->db->query($sql);
+    }
+
+    // add professional skills
+    public function addProfessionalSkills($uid, $skill) {
+        $sql = "REPLACE INTO user_professional_skills VALUES ($uid,'". $skill."')";
+        $this->db->query($sql);
     }
 
 }

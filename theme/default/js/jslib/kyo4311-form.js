@@ -260,17 +260,17 @@ $(function(){
 			var div1 = $('<div><ul></ul></div>');
 			var div2 = $('<dl></dl>');
 			$.each(data,function(index,d){			
-				if(isVal(d.value)){
+				if(isVal(d.title)){
 					$('<li></li>')
 					.text(d.title)
 					.append('<i class="del"></i>')
-					.attr('data-val',d.value)
+					.attr('data-val',d.title)
 					.appendTo(div1.find('ul'));
 				}else{
 					$('<dd></dd>')
 					.text(d.title)
 					.addClass('add')
-					.attr('data-val',d.value)
+					.attr('data-val',d.title)
 					.appendTo(div2);
 				};	
 			})
@@ -336,8 +336,6 @@ $(function(){
 			input.val(arr);
 			showSelect();
 		}
-
-
 	}
 	
 	

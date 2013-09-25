@@ -181,13 +181,16 @@ jQuery.autocomplete = function(input, options) {
 			li.extra = [];
 			li.selectValue = "";
 		}
-		var v = $.trim(li.selectValue ? li.selectValue : li.innerHTML);
+		//var v = $.trim(li.selectValue ? li.selectValue : li.innerHTML);
+        var v = $.trim(li.innerHTML);
+        var str_len = v.length;
+        v = v.substring(3, str_len-5);
 		input.lastSelected = v;
 		prev = v;
 		$results.html("");
 		$input.val(v);
 		hideResultsNow();
-		if (options.onItemSelect) setTimeout(function() { options.onItemSelect(li) }, 1);
+		if (options.onItemSelect) setTimeout(function() { options.onItemSelect(v) }, 1);
 	};
 
 	// selects a portion of the input string

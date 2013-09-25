@@ -43,7 +43,7 @@ class user extends Front_Controller {
         }
         else{
             $this->load->model('jobseeker_model');
-            $user = $this->jobseeker_model->getUser($post['username'], md5($post['password']));
+            $user = $this->jobseeker_model->getUser($post['username'], md5($post['login_password']));
 
             if($user){
                 $this->load->library('session');
