@@ -53,6 +53,7 @@ class user extends Front_Controller {
                 $result['uid'] = $user['uid'];
                 $result['first_name'] = $user['first_name'];
                 $result['last_name'] = $user['last_name'];
+                $result['user_type'] = $user['user_type'];
 
                 $this->session->set_userdata($result);
 

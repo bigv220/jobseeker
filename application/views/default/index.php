@@ -238,19 +238,5 @@
 		</div>
 	</div>
 
-	<!--pop reg success-->
-	<div class="pop-welcome png">
-		<div class="pop-welcome-wrap rel">
-			<i class="pop-welcome-close abs" title="close"></i>
-			<b>WELCOME TO JINGJOBS It’s time to GetJinged</b>
-			<div class="pop-welcome-bd">
-				<div class="span1">Tell us more about<br/> your company <br/>
-					<a class="pop-welcome-here" href="#"></a></div>
-				<div class="span2">OR</div>
-				<div class="span3">Start looking at<br/> jobseekers <br/>
-					<a class="pop-welcome-here" href="#"></a>
-				</div>
-			</div>
-		</div>
-	</div>
+
 <?php $this->load->view($front_theme.'/footer-block');?>

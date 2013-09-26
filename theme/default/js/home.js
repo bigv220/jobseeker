@@ -112,7 +112,7 @@ $(function(){
                             $('#email').attr('value','').css("border-color", "#cecece");
                             $('#password').attr('value','').css("border-color", "#cecece");
                             $('.pop-reg').fadeOut();
-                            $('.pop-welcome').fadeIn();
+                            show_welcome_pop(regType);
                         }
 
                     },
@@ -132,6 +132,7 @@ $(function(){
                     if(result.status == 'success'){
                         $('.phd-login-pop').remove();
                         $('.phd-login-text').html(result.first_name + '<br/>' + result.last_name);
+                        show_welcome_pop(result.user_type);
                     }
                     else{
                         alert(result.message);
