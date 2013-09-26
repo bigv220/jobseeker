@@ -25,7 +25,7 @@
 							<a href="#" class="png"><b>IKEA, Beijing</b> <i>Head of Marketing</i></a>
 						</li>
 					</ul>
-					<p><a href="#">Login</a> or <a href="#">Register</a> to view all</p>
+					<p><a href="javascript:void(0);" class="show_login_btn">Login</a> or <a href="javascript:void(0);" class="show_register_btn">Register</a> to view all</p>
 				</div>
 			</div>
 			<div class="pbn-find-block pbn-staff rel">
@@ -41,7 +41,7 @@
                         <?php endforeach; ?>
 
 					</ul>
-					<p><a href="#">Login</a> or <a href="#">Register</a> to view all</p>
+					<p><a href="javascript:void(0);" class="show_login_btn">Login</a> or <a href="javascript:void(0);" class="show_register_btn">Register</a> to view all</p>
 				</div>
 			</div>
 		</div>

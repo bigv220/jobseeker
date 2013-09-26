@@ -52,7 +52,7 @@
                 <?php if (-1 == (isset($uid)?$uid:-1)):?>
                 login
                 <?php else: ?>
-                    <?php echo isset($first_name)?$first_name:"";?><br>
+                    <?php echo isset($first_name)?$first_name:"";?>&nbsp;
                     <?php echo isset($last_name)?$last_name:"";?>
                 <?php endif;?>
             </div>

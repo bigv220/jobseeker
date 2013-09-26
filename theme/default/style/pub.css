@@ -63,8 +63,8 @@ a:hover{text-decoration:none;}
 .phd-menu .events{width:306px;}
 .phd-menu .news{width:306px;}
 .phd-menu .jobs{width:87px;}
-.phd-login{float:right;*display:inline;*behavior:url(js/jslib/PIE.htc);width:61px;height:75px;border-radius:0 0 2px 2px;background:#ef7641;margin:0 115px 0 0;}
-.phd-login-text{width:61px;padding:50px 0 0 0;height:25px;text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;}
+.phd-login{float:right;*display:inline;*behavior:url(js/jslib/PIE.htc);height:75px;border-radius:0 0 2px 2px;background:#ef7641;margin:0 15px 0 0;}
+.phd-login-text{max-width:160px;padding:50px 10px 0 10px;height:25px;text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;}
 .phd-login-text-user{width:61px;padding:35px 0 0 0;height:40px;text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;font-size:12px;}
 .pft-wrap{overflow:hidden;zoom:1;padding:20px 0 0 0;background:#fafafa url(pub/footer-bg.gif) repeat-x;}
 .p-ft{font-family:Arial;color:#7f7f7f;}

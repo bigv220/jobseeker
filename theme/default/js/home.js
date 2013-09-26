@@ -55,6 +55,15 @@ $(function(){
         popMark.fadeOut();
     })
 
+    $('.show_login_btn').click(function(){
+        $('.phd-login-pop').fadeIn();
+    });
+
+    $('.show_register_btn').click(function(){
+        popMark.fadeIn();
+        popReg.fadeIn();
+    });
+
     //click event for user sign up
     $('#signup_submit').click(function(){
         $('.email_existing').html('');
@@ -131,7 +140,7 @@ $(function(){
 
                     if(result.status == 'success'){
                         $('.phd-login-pop').remove();
-                        $('.phd-login-text').html(result.first_name + '<br/>' + result.last_name);
+                        $('.phd-login-text').html(result.first_name + ' ' + result.last_name);
                         show_welcome_pop(result.user_type);
                     }
                     else{
