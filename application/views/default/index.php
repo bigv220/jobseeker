@@ -33,22 +33,13 @@
 				<div class="find-hover png abs">
 					<strong>NEWEST JOB SEEKERS</strong>
 					<ul class="pbn-staff-ul">
-						<li class="odd">
-							<img src="<?php echo $theme_path?>style/home/temp/temp-h1.gif" width="44" height="44" alt="" />
-							<a href="#" class="png"><b>IKEA, Beijing</b> <i>Head of Marketing</i></a>
-						</li>
-						<li class="even">
-							<img src="<?php echo $theme_path?>style/home/temp/temp-h4.gif" width="44" height="44" alt="" />
-							<a href="#" class="png"><b>TESCO, Tianjin</b> <i>Head of Marketing</i></a>
-						</li>
-						<li class="odd">
-							<img src="<?php echo $theme_path?>style/home/temp/temp-h3.gif" width="44" height="44" alt="" />
-							<a href="#" class="png"><b>REDCITY,  Guangzhou</b> <i>Head of Marketing</i></a>
-						</li>
-						<li class="even">
-							<img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif" width="44" height="44" alt="" />
-							<a href="#" class="png"><b>ROSEWOOD, Beijing</b> <i>Head of Marketing</i></a>
-						</li>
+                        <?php foreach($newest_jobseekers as $key => $jobseeker):?>
+                            <li class="<?php if($key % 2 == 0) echo 'odd'; else echo 'even';?>">
+                                <img src="<?php echo $theme_path?>style/home/temp/temp-h1.gif" width="44" height="44" alt="" />
+                                <a href="#" class="png"><b><?php echo $jobseeker['first_name'] .', '. $jobseeker['city'];?></b> <i>Head of Marketing</i></a>
+                            </li>
+                        <?php endforeach; ?>
+
 					</ul>
 					<p><a href="#">Login</a> or <a href="#">Register</a> to view all</p>
 				</div>
@@ -68,6 +59,20 @@
 			</div>
 			<div class="h-blog-bd">
 				<ul class="h-blog-ul">
+
+                    <?php foreach($news_list as $key => $news):?>
+                        <li class="n<?php echo $key+1;?>">
+                            <img src="<?php echo $theme_path?>style/home/temp/temp-h1.gif" width="120" height="120" alt="" />
+                            <i class="mark png"></i>
+                            <a href="#" class="h-blog-item">
+                                <strong><?php echo $news['title'];?></strong>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                                <b>Continue Reading</b>
+                            </a>
+
+                        </li>
+                    <?php endforeach;?>
+                    <!--
 					<li class="n1">
 						<img src="<?php echo $theme_path?>style/home/temp/temp-h1.gif" width="120" height="120" alt="" />
 						<i class="mark png"></i>
@@ -107,6 +112,7 @@
 							<b>Continue Reading</b>
 						</a>
 					</li>
+                    -->
 				</ul>
 			</div>
 		</div>
