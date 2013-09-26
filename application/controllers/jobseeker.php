@@ -33,6 +33,10 @@ class jobseeker extends Front_Controller {
             $step_arr = explode('&', $register_step);
         }
 
+        // get location
+        $this->load->helper('location');
+        $data['location'] = getLoction();
+        
         //get data from db
         $userinfo = $this->jobseeker_model->getUserInfo($uid);
         $education_info = $this->jobseeker_model->getEducationInfo($uid);
@@ -390,6 +394,19 @@ class jobseeker extends Front_Controller {
 //        $rtn_array = array(array('1'=>'Customer Service'),array('2'=>'Resourcefulness'),array('3'=>'Time Management'));
 //        echo json_encode($rtn_array);exit;
         exit('Cus|Good');
+    }
+    
+    public function ajaxlocation($key, $selected, $country=null) {
+    	$this->load->helper('location');
+    	$location = getLoction();
+    	if("country" == $key) {
+    		echo json_encode( array_keys( $location[$selected] ) );
+    		exit;
+    	}
+    	if("province" == $key) {
+    		echo json_encode( $location[$country][$selected] );
+    		exit;
+    	}
     }
 
 }

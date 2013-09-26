@@ -261,15 +261,26 @@
                         <input type="text" name="last_name" class="reg-input" value="<?php echo $userinfo['last_name']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row clearfix"> <strong>Location <i class="star">*</i></strong>
+                <style>
+				.location div.kyo-select, .location dl.kyo-select-list {width:145px !important;}
+                </style>
+                <div class="reg-row clearfix location"> <strong>Location <i class="star">*</i></strong>
                     <div>
                         <select class="kyo-select" name="country">
-                            <option value="1">All Counties</option>
-                            <option value="2">China</option>
-                            <option value="3">USA</option>
+                            <option value="0">All Counties</option>
+                            <?php foreach ($location as $k=>$v):?>
+                            <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                            <?php endforeach;?>
+                        </select>
+                        <select class="kyo-select" name="province">
+                            <option value="0">All Province</option>
+                            <option value="Beijing">Beijing</option>
+                            <!-- <?php foreach ($location['China'] as $k=>$v):?>
+                            <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                            <?php endforeach;?>-->
                         </select>
                         <select class="kyo-select" name="city">
-                            <option value="1">All City</option>
+                            <option value="0">All City</option>
                             <option value="2">Beijing</option>
                             <option value="3">Shanghai</option>
                         </select>
