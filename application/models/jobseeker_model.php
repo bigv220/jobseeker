@@ -244,4 +244,11 @@ class jobseeker_model extends MY_Model
         $this->db->query($sql);
     }
 
+    //get newest job seekers
+    public function getNewestJobSeekers($count){
+        $sql = "SELECT first_name,city FROM user ORDER BY uid DESC LIMIT 0, $count";
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
+
 }

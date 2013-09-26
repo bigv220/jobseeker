@@ -35,5 +35,11 @@ class article_model extends MY_Model
 		$result = $this->getOne($key, 'url', $lang);
 		return $result['content'];
 	}
+
+    public function getLatestArtical($limit=4){
+        $sql = "SELECT * FROM article ORDER BY date DESC LIMIT 0, $limit";
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
 	
 }
