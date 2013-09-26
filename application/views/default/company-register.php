@@ -1,5 +1,4 @@
 <?php $this->load->view($front_theme.'/header-block');?>
-<form action="" method="post" id="companyForm">
 <!--top search area-->
 <div class="top-search w70 rel">
     <input type="text" class="abs top-search-input input-tip" value="Search our job database" data-tipval="Search our job database"/>
@@ -16,48 +15,59 @@
         </ul>
     </div>
     <div class="reg-right-wrap">
-        <div class="reg-right box mb20"> <a id="reg1" name="reg1"></a>
+        <div class="reg-right box mb20"> 
             <p class="reg-right-text">Please fill out the mandatory fields to enhance your JingJobs experience,and promote your company to jobseekers.</p>
+            <form action="" id="basicForm" method="post">
             <div class="reg-area">
                 <div class="reg-area-tit">Basic Information</div>
                 <div class="reg-row"> <strong>Full Company Name <i class="star">*</i></strong>
                     <div>
-                        <input type="" class="reg-input" />
+                        <input type="text" class="reg-input" id="name" name="name" title="" required/>
                     </div>
                 </div>
                 <div class="reg-row clearfix"> <strong>Location <i class="star">*</i></strong>
                     <div>
-                        <select class="kyo-select">
-                            <option value="0">All Counties</option>
+                        <select id="country" name="country" title="" required>
+                            <option value="">All Counties</option>
                             <option value="30">China</option>
                             <option value="30">USA</option>
                         </select>
-                        <select class="kyo-select">
-                            <option value="0">All City</option>
+                        <select id="city" name="city" required title="">
+                            <option value="">All City</option>
                             <option value="30">Beijing</option>
                             <option value="30">Shanghai</option>
                         </select>
                     </div>
                 </div>
                 <div class="reg-row clearfix"> <b>Company Logo</b>
-                    <div> <img src="<?php echo $theme_path?>style/reg/com-img.gif" class="reg-company-img" /> </div>
+                    <div id="upload_button">
+                            <img id="image_profile" src="<?php echo $theme_path?>style/reg/com-img.gif" class="reg-company-img" />
+                    </div>
+                    <span class="" id="errorRemind"></span>
                 </div>
                 <div class="reg-row clearfix"> <strong>Industry <i class="star">*</i></strong>
-                    <div>
-                        <input type="text" id="reg-industry" name="reg-industry" value="">
-                        <div class="reg-row-tip">+ Add Another Industry</div>
-                        <div id="reg-industry-val" class="show-selval"></div>
-                    </div>
+                    
+                    <select name="industry" id="industry" title="" required>
+                    <option value="">All industry</option>
+                    <option>Accounting</option>
+                    <option>HR</option>
+                    <option>Finance</option>
+                    <option>Design</option>
+                    <option>Education</option>
+                </select>
+                <input type="hidden" name="industry_tag" id="industry_tag" value=""/>
+                 <ul id="industry_box" data-name="nameOfSelect"></ul>
                 </div>
                 <div class="reg-row clearfix"> <strong>Company Description <i class="star">*</i></strong>
                     <div>
-                        <textarea class="reg-textarea"></textarea>
+                        <textarea class="reg-textarea" name="description" required></textarea>
                     </div>
                 </div>
                 <div class="reg-area-bar">
                     <input type="submit" class="reg-save" value=""  data-index="0"/>
                 </div>
             </div>
+        </form>
             <div class="reg-area"> <a id="reg2" name="reg2"></a>
                 <div class="reg-area-tit">Contact Details</div>
                 <div class="reg-row"> <strong>Contact Name <i class="star">*</i></strong>
@@ -119,6 +129,81 @@
         <div class="reg-btns"> <a href="#"  class="reg-btns-save"></a><a href="#" class="reg-btns-post"></a><a href="#" class="reg-btns-find"></a> </div>
     </div>
 </div>
-</form>
-    <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
+
+<script type="text/javascript" src="<?php echo $theme_path?>js/jslib/ajaxupload.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    uploadImage();
+    }
+);
+function uploadImage(old_avatar) {
+        var oBtn = document.getElementById("image_profile");
+        var upload_button = document.getElementById("upload_button");
+        var oRemind = document.getElementById("errorRemind");
+        new AjaxUpload(oBtn,{
+            action:"<?php echo $site_url?>/../company/ajaxuploadimage",
+            name:"avatar",
+            data: {},
+            onSubmit:function(file,ext){
+                if(ext && /^(jpg|jpeg|png|gif)$/.test(ext)){
+                    oRemind.style.color = "orange";
+                    oRemind.innerHTML = "uploading...";
+                    oBtn.disabled = "disabled";
+                }else{
+                    oRemind.style.color = "red";
+                    oRemind.innerHTML = "Sorry, Do not support this image type.";
+                    return false;
+                }
+            },
+            onComplete:function(file,response){
+                oBtn.disabled = "";
+                if ( response == 'success') {
+                    oRemind.style.color = "green";
+                    oRemind.innerHTML = "Upload successful.";
+
+                    var reg = /\s/g;
+                    file = file.replace(reg, "");
+
+                    var img_path = "<?php echo $theme_path; ?>" + "company/" + file;
+                    $('#avatar').val(file);
+                    upload_button.innerHTML = "<img id='image_profile' src='" + img_path + "?" +  Math.floor(Math.random()*99999 + 1) + "' height='100' style='border:1px solid gray;' />";
+                } else {
+                    oRemind.style.color = "red";
+                    oRemind.innerHTML = response;
+                }
+
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $( "#basicForm" ).validate();
+
+    $('#industry_box').tagit({select:true, 
+        sortable:true,
+        tagsChanged:function () {
+            var tags = $('#industry_box').tagit('tags');
+            var tagString = [];
+                                    
+            //Pull out only value
+            for (var i in tags){
+              tagString.push(tags[i].value);
+            }
+            $('#industry_tag').val(tagString.join(','));
+        }
+    });
+    $('.tagit-input').attr('disabled','disabled');
+    $('#industry').change(function() {
+        addTag($('#industry').val());
+    });
+
+});
+var addTag = function(tag) {
+    $('#industry_box').tagit("add", {label: tag, value: tag});
+
+}
+</script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

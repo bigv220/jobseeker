@@ -110,3 +110,5 @@ html{*background:url(about:black) no-repeat fixed;}
 .partners{height:185px;}
 .puartners-tit{height:30px;line-height:30px;padding:20px 0 10px 0;font-size:13px;font-weight:bolder;color:#674092;}
 .puartners-ul{margin-right:-10px;}.puartners-ul li{float:left;width:176px;height:103px;margin-right:10px;}
+label.error {display: block;box-shadow:0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 2px red; font-style: italic;font-weight: normal;}
+input.error,select.error,textarea.error {border: 1px solid red;box-shadow:0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 2px #D59392; }
