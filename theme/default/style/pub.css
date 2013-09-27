@@ -112,3 +112,11 @@ html{*background:url(about:black) no-repeat fixed;}
 .puartners-ul{margin-right:-10px;}.puartners-ul li{float:left;width:176px;height:103px;margin-right:10px;}
 label.error {display: block;box-shadow:0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 2px red; font-style: italic;font-weight: normal;}
 input.error,select.error,textarea.error {border: 1px solid red;box-shadow:0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 2px #D59392; }
+.reset-password-wrapper{width: 261px; height: 191px;margin:0 auto;margin-top:95px;background: url(pub/reset_pw_bg.png);}
+#reset_password_form{padding-top:58px;}
+.reset-password-wrapper .input-wrap{padding:0 0 0 54px;}
+.reset-password-wrapper p{height:37px;}
+.reset-password-wrapper input{border:0;background:none;}
+.reset-password-wrapper .input{width:180px;height:18px;line-height:18px;}
+.reset-password-wrapper input.has{background:#fafafa;}
+.reset-password-wrapper .btn{width:214px;height:28px;display:inline-block;cursor:pointer;background:url(pub/reset_pw_btn.png) no-repeat;}

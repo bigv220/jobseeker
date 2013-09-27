@@ -69,7 +69,11 @@ class user extends Front_Controller {
 		$this->session->sess_destroy();
 		redirect('/');
 	}
-	
+
+    public function resetPassword(){
+        $data = $this->data;
+        $this->load->view($data['front_theme'].'/reset-password', $data);
+    }
 	public function adminlogin() {
 		$this->load->model('admin_model');
 		
