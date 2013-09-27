@@ -46,7 +46,7 @@
 			</div>
 		</div>
 		<div class="pbn-singup">
-			<a href="javascript:;" class="pbn-singup-btn"></a>
+			<a href="javascript:void(0);" class="pbn-singup-btn"></a>
 		</div>
 	</div>
 
