@@ -45,7 +45,7 @@
 			</div>
 			<div class="span3 p-footer-mail">
                 <form id="newsletter_form">
-                    <input type="text" id="newsletter_email" name="newsletter_email" class="pf-input input-tip required email" data-tipval="Email address" value="Email address"/>
+                    <input type="text" id="newsletter_email" name="newsletter_email" class="pf-input input-tip" data-tipval="Email address" value="Email address"/>
                     <input type="submit" id="newsletter_submit" class="pf-btn" value="" />
                 </form>
 			</div>
