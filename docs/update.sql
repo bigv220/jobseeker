@@ -110,3 +110,8 @@ alter table user modify birthday char(10);
 alter table user_work_history add is_stillhere tinyint(4) null;
 alter table user_education modify attend_date_from char(10);
 alter table user_education modify attend_date_to char(10);
+
+#2013-9-28 Modify User table, save company info in the user table
+alter table user add description text null;
+
+#2013-9-28 Please execute Industry&Skills.sql file to add industry, tech_skills, personal_skills table!!!

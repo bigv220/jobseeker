@@ -11,7 +11,42 @@ $(function(){
         height:'25'
     });
 	
-	
+	$('#basic_submit').click(function() {
+		$('#basicForm').validate();
+		if ($('#basicForm').valid()) {
+			$.post(
+				site_url + '/company/register',
+				$('#basicForm').serialize(),
+            	function(result,status){
+                if(status == 'success'){
+                    $('#basicForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    alert('Save successful!');
+                }
+                else{
+                    alert('Save failed!');
+                }
+            }
+			);
+		}
+	});
+	$('#contact_submit').click(function() {
+		$('#contactForm').validate();
+		if ($('#contactForm').valid()) {
+			$.post(
+				site_url + '/company/register',
+				$('#contactForm').serialize(),
+            	function(result,status){
+                if(status == 'success'){
+                    $('#contactForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    alert('Save successful!');
+                }
+                else{
+                    alert('Save failed!');
+                }
+            }
+			);
+		}
+	});
 	//sel-industry
 	if($('#reg-industry').length>0){
     $('#reg-industry').checkSelect({
@@ -84,31 +119,8 @@ $(function(){
 			var Wtop = $(window).scrollTop();
 			leftArea.stop().animate({top:Wtop},500);
   		});
-	
-	
-	
 	 //gotop
     $('.backtop').fxBacktop();
-
-
-
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 })
 
 
