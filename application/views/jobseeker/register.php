@@ -253,17 +253,17 @@
                 <div class="reg-area-tit <?php echo $cla; ?>">Basic Information</div>
                 <div class="reg-row"> <strong>First Name <i class="star">*</i></strong>
                     <div>
-                        <input type="text" name="first_name" class="reg-input" value="<?php echo $userinfo['first_name']; ?>" />
+                        <input type="text" name="first_name" class="reg-input" value="<?php echo $userinfo['first_name']; ?>" required />
                     </div>
                 </div>
                 <div class="reg-row clearfix"> <strong>Last Name <i class="star">*</i></strong>
                     <div>
-                        <input type="text" name="last_name" class="reg-input" value="<?php echo $userinfo['last_name']; ?>" />
+                        <input type="text" name="last_name" class="reg-input" value="<?php echo $userinfo['last_name']; ?>" required />
                     </div>
                 </div>
                 <div class="reg-row clearfix"> <strong>Location <i class="star">*</i></strong>
                     <div>
-                        <select class="kyo-select" name="country">
+                        <select class="kyo-select" name="country" required>
                             <option value="1">All Counties</option>
                             <option value="2">China</option>
                             <option value="3">USA</option>
@@ -321,12 +321,12 @@
                 <div class="reg-area-tit <?php echo $cla; ?>">Contact Details</div>
                 <div class="reg-row"> <strong>Emial Address<i class="star">*</i></strong>
                     <div>
-                        <input type="text" name="email" class="reg-input" value="<?php echo $userinfo['email']; ?>" />
+                        <input type="text" name="email" class="reg-input" value="<?php echo $userinfo['email']; ?>" required />
                     </div>
                 </div>
                 <div class="reg-row"> <strong>Phone Number<i class="star">*</i> <span>(including area code)</span></strong>
                     <div>
-                        <input type="text" name="phone" class="reg-input" value="<?php echo $userinfo['phone']; ?>" />
+                        <input type="text" name="phone" class="reg-input" value="<?php echo $userinfo['phone']; ?>" required />
                     </div>
                 </div>
                 <div class="reg-row">Allow employers to contatct you by phone
@@ -336,7 +336,7 @@
                 </div>
                 <div class="reg-row"> <strong>Username for Jing Chat<i class="star">*</i></strong>
                     <div>
-                        <input type="text" name="jingchat_username" class="reg-input" value="<?php echo $userinfo['jingchat_username']; ?>" />
+                        <input type="text" name="jingchat_username" class="reg-input" value="<?php echo $userinfo['jingchat_username']; ?>" required />
                     </div>
                 </div>
                 <div class="reg-row">Allow employers to contact you through online messager
@@ -468,12 +468,12 @@
                     <div id="every_school">
                     <div class="reg-row"> <strong>School/Collage name<i class="star">*</i></strong>
                         <div>
-                            <input type="text" class="reg-input" name="school_name[]" value="<?php if(count($education_info)) echo $education_info["school_name"]; ?>" />
+                            <input type="text" class="reg-input" name="school_name[]" value="<?php if(count($education_info)) echo $education_info["school_name"]; ?>" required />
                         </div>
                     </div>
                     <div class="reg-row"> <strong>Dates Attended<i class="star">*</i></strong>
                         <div class="clearfix">
-                            <select class="kyo-select" name="attended_from[]">
+                            <select class="kyo-select" name="attended_from[]" required>
                                 <option value="0">Year</option>
                                 <option value="1970">1970</option>
                                 <option value="1971">1971</option>
@@ -485,7 +485,7 @@
                         </div>
                         <p class="p5">To</p>
                         <div class="clearfix">
-                            <select class="kyo-select" name="attended_to[]">
+                            <select class="kyo-select" name="attended_to[]" required>
                                 <option value="0">Year</option>
                                 <option value="1970">1970</option>
                                 <option value="1971">1971</option>
@@ -546,12 +546,12 @@
                     </div>
                     <div class="reg-row"> <strong>Company name<i class="star">*</i></strong>
                         <div>
-                            <input type="text" class="reg-input" name="company_name[]" value="<?php if(count($work_history)) echo $work_history["company_name"]; ?>" />
+                            <input type="text" class="reg-input" name="company_name[]" value="<?php if(count($work_history)) echo $work_history["company_name"]; ?>" required />
                         </div>
                     </div>
                     <div class="reg-row"> <strong>Time period<i class="star">*</i></strong>
                         <div class="clearfix">
-                            <select name="period_time_from[]" class="kyo-select">
+                            <select name="period_time_from[]" class="kyo-select" required>
                                 <option value="2000">2000</option>
                                 <option value="2001">2001</option>
                                 <option value="2002">2002</option>
@@ -560,7 +560,7 @@
                         </div>
                         <p class="p5">To</p>
                         <div class="clearfix">
-                            <select name="period_time_to[]" class="kyo-select">
+                            <select name="period_time_to[]" class="kyo-select" required>
                                 <option value="2003">2003</option>
                                 <option value="2004">2004</option>
                                 <option value="2005">2005</option>
@@ -578,7 +578,7 @@
                     </div>
                     <div class="reg-row clearfix"> <strong>Industry<i class="star">*</i></strong>
                         <div class="clearfix">
-                            <select class="kyo-select" name="industry[]">
+                            <select class="kyo-select" name="industry[]" required>
                                 <option value="0">select</option>
                                 <option value="v1">v1</option>
                                 <option value="v2">v2</option>
@@ -587,7 +587,7 @@
                     </div>
                     <div class="reg-row clearfix"> <strong>Position<i class="star">*</i></strong>
                         <div>
-                            <input type="text" class="reg-input" name="position[]" value="<?php if(count($work_history)) echo $work_history["position"]; ?>" />
+                            <input type="text" class="reg-input" name="position[]" value="<?php if(count($work_history)) echo $work_history["position"]; ?>" required />
                         </div>
                     </div>
 
@@ -633,7 +633,7 @@
                     <div id="language_lists">
                     <div class="reg-row"> <strong>Language<i class="star">*</i></strong>
                         <div>
-                            <select name="language[]" class="kyo-select" id="language_1">
+                            <select name="language[]" class="kyo-select" id="language_1" required>
                                 <option value="cn">China</option>
                                 <option value="en">English</option>
                             </select>
@@ -641,7 +641,7 @@
                     </div>
                     <div class="reg-row clearfix" style="clear:both;"> <strong>Proficiency</strong>
                         <div>
-                            <select name="level[]" class="kyo-select" id="level_1">
+                            <select name="level[]" class="kyo-select" id="level_1" required>
                                 <option value="1">Level-1</option>
                                 <option value="2">Level-2</option>
                             </select>
@@ -741,6 +741,7 @@
      </div>
 
 </div>
+
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

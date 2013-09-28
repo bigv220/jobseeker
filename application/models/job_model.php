@@ -17,5 +17,10 @@ class job_model extends MY_Model
         return $result[0];
     }
 
+    public function getSimilarJobs($id, $industry) {
+        $sql = "SELECT * FROM job WHERE id!=$id AND industry='".$industry ."'";
 
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
 }

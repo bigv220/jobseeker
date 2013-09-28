@@ -91,9 +91,11 @@
                     <dt>Similar Jobs</dt>
                     <dd>
                         <ul class="similar">
+                            <?php foreach($similar_jobs as $v) { ?>
                             <li><img src="<?php echo $theme_path?>style/home/temp/sponsors2.gif" alt="" />
-                                <i class="png"></i><a href="#">Design Director</a>White Space Design
+                                <i class="png"></i><a href="#"><?php echo $v['job_name']; ?></a>White Space Design
                             </li>
+                            <?php } ?>
                         </ul>
                     </dd>
                 </dl>
