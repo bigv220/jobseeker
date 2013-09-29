@@ -119,8 +119,10 @@ $(function(){
 			var Wtop = $(window).scrollTop();
 			leftArea.stop().animate({top:Wtop},500);
   		});
+	
 	 //gotop
     $('.backtop').fxBacktop();
+
 })
 
 
@@ -139,11 +141,6 @@ function change_location(o) {
 				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
 			}
 			$("select[name='province']").html(html_option);
-			$("select[name='province']").next(".kyo-select").remove();
-			$("select[name='province']").kyoSelect({
-		        width:'145',
-		        height:'25'
-		    });
 		});
 	}
 	
@@ -156,11 +153,6 @@ function change_location(o) {
 				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
 			}
 			$("select[name='city']").html(html_option);
-			$("select[name='city']").next(".kyo-select").remove();
-			$("select[name='city']").kyoSelect({
-		        width:'145',
-		        height:'25'
-		    });
 		});
 	}
 	
