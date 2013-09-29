@@ -1,7 +1,8 @@
+//basic information form ajax submit
 function basicInfoSubmit() {
-    //basic information form ajax submit
     var basicInfoForm = $('#basicInfoForm');
     basicInfoForm.validate();
+    
     if (basicInfoForm.valid()) {
         $.post(site_url + '/jobseeker/basicInfo',
             basicInfoForm.serialize(),
@@ -17,8 +18,8 @@ function basicInfoSubmit() {
     }
 }
 
+//contact details form ajax submit
 function contactDetailsSubmit() {
-    //basic information form ajax submit
     var contactDetailsForm = $('#contactDetailsForm');
     contactDetailsForm.validate();
 
@@ -37,10 +38,9 @@ function contactDetailsSubmit() {
     }
 }
 
+//preferences form ajax submit
 function preferencesSubmit() {
-    //basic information form ajax submit
     var preferencesForm = $('#preferencesForm');
-
     preferencesForm.validate();
 
     if (preferencesForm.valid()) {
@@ -58,10 +58,9 @@ function preferencesSubmit() {
     }
 }
 
+//education form ajax submit
 function educationSubmit() {
-    //basic information form ajax submit
     var educationForm = $('#educationForm');
-
     educationForm.validate();
 
     if (educationForm.valid()) {
@@ -79,10 +78,9 @@ function educationSubmit() {
     }
 }
 
+//work history form ajax submit
 function workhistorySubmit() {
-    //basic information form ajax submit
     var workhistoryForm = $('#workhistoryForm');
-
     workhistoryForm.validate();
 
     if (workhistoryForm.valid()) {
@@ -100,10 +98,9 @@ function workhistorySubmit() {
     }
 }
 
+//language form ajax submit
 function languageSubmit() {
-    //basic information form ajax submit
     var languageForm = $('#languageForm');
-
     languageForm.validate();
 
     if (languageForm.valid()) {
@@ -123,21 +120,39 @@ function languageSubmit() {
 
 function personalSkillsSubmit() {
     $('#personalSkillsForm .reg-area-tit').addClass('reg-area-tit-curr');
-    alert('Save successful!');
 }
 
 function professionalSkillsSubmit() {
     $('#PersonalSkills_input .reg-area-tit').addClass('reg-area-tit-curr');
-    alert('Save successful!');
 }
 
 function saveAll() {
-    basicInfoSubmit();
-    contactDetailsSubmit();
-    preferencesSubmit();
-    educationSubmit();
-    workhistorySubmit();
-    languageSubmit();
-    personalSkillsSubmit();
-    professionalSkillsSubmit();
+    var basicInfoForm = $('#basicInfoForm');
+    basicInfoForm.validate();
+
+    var contactDetailsForm = $('#contactDetailsForm');
+    contactDetailsForm.validate();
+
+    var preferencesForm = $('#preferencesForm');
+    preferencesForm.validate();
+
+    var educationForm = $('#educationForm');
+    educationForm.validate();
+
+    var workhistoryForm = $('#workhistoryForm');
+    workhistoryForm.validate();
+
+    var languageForm = $('#languageForm');
+    languageForm.validate();
+
+    if(basicInfoForm.valid() && contactDetailsForm.valid() &&
+        preferencesForm.valid() && educationForm.valid() && workhistoryForm.valid() &&languageForm.valid()) {
+
+        basicInfoSubmit();
+        contactDetailsSubmit();
+        preferencesSubmit();
+        educationSubmit();
+        workhistorySubmit();
+        languageSubmit();
+    }
 }

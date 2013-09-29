@@ -24,7 +24,7 @@ class jobseeker extends Front_Controller {
 
         $data = $this->data;
 
-        $uid = "1";
+        $uid = "2";
 
         $register_step = $this->jobseeker_model->getRegisterStep($uid);
         if(empty($register_step)) {
@@ -206,14 +206,17 @@ class jobseeker extends Front_Controller {
 
         if ($post) {
             //save job to db
-            $school_len = count($post['company_name']);
-            for($i=0; $i<$school_len;$i++) {
+            $company_len = count($post['company_name']);
+            for($i=0; $i<$company_len;$i++) {
                 if($post['company_name'][$i]) {
+                    $desc = $post['description'][$i] == '350 Characters' ? '' : $post['description'][$i];
+
                     $data = array('uid'=>$post['uid'],'introduce'=>$post['introduce'][$i],
                         'company_name'=>$post['company_name'][$i],
                         'period_time_from'=>$post['period_time_from'][$i],'period_time_to'=>$post['period_time_to'][$i],
                         'industry'=>$post['industry'][$i],'position'=>$post['position'][$i],
-                        'location'=>null,'description'=>$post['description'][$i],'is_stillhere'=>$post['is_stillhere'][$i]);
+                        'location'=>null,'description'=>$desc,'is_stillhere'=>$post['is_stillhere'][$i],
+                        'work_examples_url'=>$post['work_example'][$i]);
 
                     $rtn = $this->jobseeker_model->insertWorkHistory($data);
                 }
@@ -264,52 +267,9 @@ class jobseeker extends Front_Controller {
         }
     }
 
-//    //save personal skills
-//    public function personalskills() {
-//        //Load Model
-//        $this->load->model('jobseeker_model');
-//
-//        $post = $_POST;
-//        $uid = "2";
-//
-//        if ($post) {
-//            $rtn = $this->jobseeker_model->insertPersonalSkills($post);
-//
-//            if($rtn) {
-//                $msg = "success";
-//                $this->_saveRegisterStep($uid, 7);
-//            } else {
-//                $msg = "failed";
-//            }
-//
-//            $result['status'] = $msg;
-//            echo json_encode($result);
-//        }
-//    }
-//
-//    //save professional skills
-//    public function professionalskills() {
-//        //Load Model
-//        $this->load->model('jobseeker_model');
-//
-//        $post = $_POST;
-//        $uid = "2";
-//
-//        if ($post) {
-//            $rtn = $this->jobseeker_model->insertProfessionalSkills($post);
-//
-//            if($rtn) {
-//                $msg = "success";
-//                $this->_saveRegisterStep($uid, 8);
-//            } else {
-//                $msg = "failed";
-//            }
-//
-//            $result['status'] = $msg;
-//            echo json_encode($result);
-//        }
-//    }
-
+    /**
+     * delete personal skills
+     */
     public function delPersonalSkills() {
         $post = $_POST;
         $uid = $post['uid'];
@@ -324,6 +284,9 @@ class jobseeker extends Front_Controller {
         echo json_encode($result);
     }
 
+    /**
+     * add personal skills
+     */
     public function addPersonalSkills() {
         $post = $_POST;
         $uid = $post['uid'];
@@ -338,6 +301,9 @@ class jobseeker extends Front_Controller {
         echo json_encode($result);
     }
 
+    /**
+     * add professional skills
+     */
     public function addProfessionalSkills() {
         $post = $_POST;
         $uid = $post['uid'];
@@ -352,6 +318,9 @@ class jobseeker extends Front_Controller {
         echo json_encode($result);
     }
 
+    /**
+     * delete professional skills
+     */
     public function delProfessionalSkills() {
         $post = $_POST;
         $uid = $post['uid'];
@@ -383,6 +352,28 @@ class jobseeker extends Front_Controller {
 
             // new image url
             $data ['avatar'] = '/users/' . $file_name;
+
+            exit ( 'success' );
+        } else {
+            exit ( 'error: can not upload avatar image.' );
+        }
+    }
+
+    //upload work examples
+    public function ajaxuploadfile() {
+        $data = $this->data;
+
+        // create folder
+        $this->load->model('jobseeker_model');
+        $user_path = realpath(dirname(__FILE__))."/../../theme/default/workExamples/";
+        $this->jobseeker_model->creatUserfolder ( $user_path ) or exit ( 'error: can not creat folder.' );
+        // upload
+        if (is_uploaded_file ( $_FILES ['workexample'] ['tmp_name'] )) {
+            $file_name = iconv('utf-8','gb2312',$_FILES['workexample']['name']);
+            move_uploaded_file ( $_FILES ['workexample'] ['tmp_name'], $user_path .$file_name);
+
+            // new image url
+            $data ['avatar'] = '/workExamples/' . $file_name;
 
             exit ( 'success' );
         } else {

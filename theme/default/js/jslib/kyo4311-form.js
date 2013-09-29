@@ -48,11 +48,11 @@ $(function(){
 		$(this).removeClass('kyo-checkbox-hover');
 		$(this).removeClass('kyo-checkbox-sel-hover');
 	}).click(function(){
-		if($(this).hasClass('kyo-checkbox-sel')){
-			$(this).removeClass('kyo-checkbox-sel');
-		}else{
-			$(this).addClass('kyo-checkbox-sel');
-		}
+//		if($(this).hasClass('kyo-checkbox-sel')){
+//			$(this).removeClass('kyo-checkbox-sel');
+//		}else{
+//			$(this).addClass('kyo-checkbox-sel');
+//		}
 		var id=$(this).data('id');
 		var arr=[];
 		$('i.kyo-checkbox[data-id='+id+']').each( function(){
