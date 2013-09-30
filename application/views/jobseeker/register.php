@@ -93,13 +93,13 @@
     function selectItem1(v){
         var uid = $('#uid').val();
 
-        addPersonalSkillAjax('PersonalSkills',uid, v);
+        addPersonalSkillAjax('PersonalSkills',uid, v, 'step7');
     }
 
     function selectItem2(v){
         var uid = $('#uid').val();
 
-        addPersonalSkillAjax('ProfessionalSkills',uid, v);
+        addPersonalSkillAjax('ProfessionalSkills',uid, v, 'step8');
     }
 
     function uploadImage(old_avatar) {
@@ -189,7 +189,7 @@
     }
 
     // ajax to adding personal skills
-    function addPersonalSkillAjax(id_str,uid, v) {
+    function addPersonalSkillAjax(id_str,uid, v, li_id) {
         $.post(site_url + '/jobseeker/add'+ id_str,
             { uid:uid, skill:v },
             function(result,status) {
@@ -198,6 +198,7 @@
                         '<i class="del" onclick="del'+ id_str + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
 
                     $('#'+ id_str).append(htm);
+                    $('#'+li_id).addClass('curr');
                     $('#'+ id_str + 'Form div.reg-area-tit').addClass('reg-area-tit-curr');
                     alert('Add successful!');
                 }
@@ -213,9 +214,8 @@
     function addPersonalSkills(id_str,thisO,li_id) {
         var v = $(thisO).val();
         var uid = $('#uid').val();
-        $('#'+li_id).addClass('curr');
 
-        addPersonalSkillAjax(id_str,uid, v);
+        addPersonalSkillAjax(id_str,uid, v, li_id);
 
         return false;
     }
