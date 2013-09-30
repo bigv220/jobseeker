@@ -167,6 +167,12 @@ class jobseeker_model extends MY_Model
         return $this->db->insert('user_language', $data);
     }
 
+    //get language
+    public function getLanguage($uid) {
+        $sql = "SELECT language,level FROM user_language WHERE uid=$uid";
+        return $this->db->query($sql)->result_array();
+    }
+
     /**
      * creat User folder
      *
@@ -216,6 +222,18 @@ class jobseeker_model extends MY_Model
         $this->db->query($sql);
     }
 
+    public function getSeekingIndustry($uid) {
+        $sql = "SELECT industry,position FROM user_seeking_industry WHERE uid=$uid";
+
+        $rtn = $this->db->query($sql)->result_array();
+
+        if(count($rtn)) {
+            return $rtn[0];
+        } else {
+            return array();
+        }
+    }
+
     // get personal skills
     public function getPersonalSkills($uid) {
         $sql = "SELECT personal_skill FROM user_personal_skills WHERE uid=$uid";
@@ -261,6 +279,22 @@ class jobseeker_model extends MY_Model
         $sql = "SELECT first_name,city FROM user ORDER BY uid DESC LIMIT 0, $count";
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
+    }
+
+    public function getIndustry() {
+        $sql = "SELECT id,name FROM industry WHERE parent='0' ORDER BY name ASC";
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
+
+    public function getSkills($skill_type, $query_str) {
+        $sql = "SELECT skill FROM " . $skill_type . " WHERE skill like '" . $query_str . "%'";
+        return $this->db->query($sql)->result_array();
+    }
+
+    public function getPosition($name) {
+        $sql = "SELECT name FROM industry WHERE parent='". $name ."'";
+        return $this->db->query($sql)->result_array();
     }
 
 }

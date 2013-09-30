@@ -17,8 +17,9 @@
         //upload work examples
         uploadFile("image_example",'example_upload_button','exampleerrorRemind','work_example');
 
-        $("#PersonalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/autocomplete",{
+        $("#PersonalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/personalskillsautocomplete",{
             delay:10,
+            width: '414px',
             matchSubset:1,
             matchContains:1,
             cacheLength:10,
@@ -27,7 +28,7 @@
             formatResult: formatResult
         });
 
-        $("#ProfessionalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/autocomplete",{
+        $("#ProfessionalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/professionalskillsautocomplete",{
             delay:10,
             matchSubset:1,
             matchContains:1,
@@ -187,6 +188,7 @@
         });
     }
 
+    // ajax to adding personal skills
     function addPersonalSkillAjax(id_str,uid, v) {
         $.post(site_url + '/jobseeker/add'+ id_str,
             { uid:uid, skill:v },
@@ -196,6 +198,7 @@
                         '<i class="del" onclick="del'+ id_str + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
 
                     $('#'+ id_str).append(htm);
+                    $('#'+ id_str + 'Form div.reg-area-tit').addClass('reg-area-tit-curr');
                     alert('Add successful!');
                 }
                 else{
@@ -206,15 +209,18 @@
         $('#'+ id_str + '_input').val('');
     }
 
-    function addPersonalSkills(id_str,thisO) {
+    //add personal skills or professional skills, using the same function
+    function addPersonalSkills(id_str,thisO,li_id) {
         var v = $(thisO).val();
         var uid = $('#uid').val();
+        $('#'+li_id).addClass('curr');
 
         addPersonalSkillAjax(id_str,uid, v);
 
         return false;
     }
 
+    // change the background image of the checkbox
     function isPrivate(thisO, id_str) {
         if($(thisO).hasClass('kyo-checkbox-sel')) {
             $(thisO).removeClass('kyo-checkbox-sel');
@@ -225,11 +231,13 @@
         }
     }
 
+    // select an item in droplists of Personal skills and Professional skills
     function selectItem(element_id, v) {
         var ele_id = "#" + element_id;
         $(ele_id).val(v);
     }
 
+    // check the character length of description in Work history area
     function checkLength(thisO, maxLen) {
         var taValue = $(thisO).val();
         var len = taValue.length;
@@ -237,6 +245,24 @@
             var val = taValue.substring(0, 347) + '...';
             $(thisO).val(val);
         }
+    }
+
+    // change industry
+    function changeIndustry(thisO) {
+        var name = $(thisO).val();
+        $.post(site_url + '/jobseeker/ajaxchangeindustry',
+            { ind_name: name },
+            function(result,status) {
+                var position_htm = '<option value="">Position</option>';
+
+                if(status == 'success'){
+                    var obj = eval('('+result+')');
+                    for ( var i = 0; i < obj.data.length; i++) {
+                        position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
+                    }
+                }
+                $(thisO).next().html(position_htm);
+            });
     }
 </script>
 
@@ -253,13 +279,55 @@
         <h2 class="reg-left-tit">NiHAO REDSTAR</h2>
         <ul class="reg-ul">
             <li class="curr"><a href="#reg1">Basic Information</a></li>
-            <li><a href="#reg2">Contact Details</a></li>
-            <li><a href="#reg3">Preferences</a></li>
-            <li><a href="#reg4">Education</a></li>
-            <li><a href="#reg5">Work History</a></li>
-            <li><a href="#reg6">Languages</a></li>
-            <li><a href="#reg7">Personal Skills</a></li>
-            <li><a href="#reg8">Profesional Skills</a></li>
+            <?php $step_arr = $step_arr;
+            $cla = '';
+            if(in_array('2', $step_arr)) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li<?php echo $cla; ?> id="step2"><a href="#reg2">Contact Details</a></li>
+            <?php $step_arr = $step_arr;
+            $cla = '';
+            if(in_array('3', $step_arr)) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li<?php echo $cla; ?> id="step3"><a href="#reg3">Preferences</a></li>
+            <?php $step_arr = $step_arr;
+            $cla = '';
+            if(in_array('4', $step_arr)) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li<?php echo $cla; ?> id="step4"><a href="#reg4">Education</a></li>
+            <?php $step_arr = $step_arr;
+            $cla = '';
+            if(in_array('5', $step_arr)) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li<?php echo $cla; ?> id="step5"><a href="#reg5">Work History</a></li>
+            <?php $step_arr = $step_arr;
+            $cla = '';
+            if(in_array('6', $step_arr)) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li<?php echo $cla; ?> id="step6"><a href="#reg6">Languages</a></li>
+            <?php $step_arr = $step_arr;
+            $cla = '';
+            if(in_array('7', $step_arr)) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li<?php echo $cla; ?> id="step7"><a href="#reg7">Personal Skills</a></li>
+            <?php $step_arr = $step_arr;
+            $cla = '';
+            if(in_array('8', $step_arr)) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li<?php echo $cla; ?> id="step8"><a href="#reg8">Profesional Skills</a></li>
         </ul>
     </div>
     <div class="reg-right-wrap">
@@ -295,20 +363,20 @@
                 <div class="reg-row clearfix location"> <strong>Location <i class="star">*</i></strong>
                     <div>
                         <select name="country" required>
-                            <option value="0">All Counties</option>
+                            <option value="">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
                             <option value="<?php echo $k ?>"><?php echo $k ?></option>
                             <?php endforeach;?>
                         </select>
                         <select name="province">
-                            <option value="0">All Province</option>
+                            <option value="">All Province</option>
                             <option value="Beijing">Beijing</option>
                             <!-- <?php foreach ($location['China'] as $k=>$v):?>
                             <option value="<?php echo $k ?>"><?php echo $k ?></option>
                             <?php endforeach;?>-->
                         </select>
                         <select name="city">
-                            <option value="0">All City</option>
+                            <option value="">All City</option>
                             <option value="2">Beijing</option>
                             <option value="3">Shanghai</option>
                         </select>
@@ -316,7 +384,7 @@
                 </div>
                 <div class="reg-row clearfix"> <b>Profile Picture</b>
                     <div>
-                        <input type="hidden" name="avatar" id="avatar" />
+                        <input type="hidden" name="avatar" id="avatar" value="<?php echo $userinfo['profile_pic']; ?>" />
                         <div id="upload_button">
                             <?php if($userinfo['profile_pic']) {
                                         $pic = 'users/'.$userinfo['profile_pic'];
@@ -467,15 +535,31 @@
                     </div>
                     <div class="reg-row"><strong>What industry are you seeking employment in?<i class="star">*</i></strong>
                         <div id="industry_lists">
-                            <select name="industry[]" id="industry_1" required>
+                            <select name="industry[]" id="industry_1" required="required" onchange="changeIndustry(this);">
                                 <option value="">Industry</option>
-                                <option value="1">Doctor</option>
-                                <option value="2">Teacher</option>
+                                <?php
+                                $user_industry = $seekingIndustry["industry"];
+                                foreach($industry as $key=>&$v) {
+                                    $str = '';
+                                    if($v['name'] == $user_industry) {
+                                        $str = ' selected="selected"';
+                                    }
+                                ?>
+                                <option value="<?php echo $v['name']; ?>"<?php echo $str;?>><?php echo $v['name']; ?></option>
+                                <?php } ?>
                             </select>
                             <select name="position[]" id="position_1" required>
                                 <option value="">Position</option>
-                                <option value="1">professor</option>
-                                <option value="2">boss</option>
+                                <?php
+                                $user_position = $seekingIndustry["position"];
+                                foreach($position as $key=>&$v) {
+                                    $str = '';
+                                    if($v["name"] == $user_position) {
+                                        $str = ' selected="selected"';
+                                    }
+                                ?>
+                                <option value="<?php echo $v['name']; ?>"<?php echo $str; ?>><?php echo $v['name']; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <a id="addIndustry" class="reg-row-tip" href="javascript:void(0);">
@@ -520,11 +604,21 @@
                         <div class="clearfix">
                             <select name="attended_from[]" required>
                                 <option value="">Year</option>
-                                <option value="1970">1970</option>
-                                <option value="1971">1971</option>
-                                <option value="1972">1972</option>
-                                <option value="1973">1973</option>
-                                <option value="1974">1974</option>
+                                <?php
+                                    $from_y = 0;
+
+                                    if(count($education_info)) {
+                                        $from_y = $education_info["attend_date_from"];
+                                    }
+                                    foreach($yearArray as $v) {
+                                        $sel = '';
+
+                                        if($v == $from_y) {
+                                            $sel = ' selected="selected"';
+                                        }
+                                ?>
+                                <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
+                                <?php } ?>
                             </select>
                             <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px" disabled="disabled" />
                         </div>
@@ -532,11 +626,21 @@
                         <div class="clearfix">
                             <select name="attended_to[]" required>
                                 <option value="">Year</option>
-                                <option value="1970">1970</option>
-                                <option value="1971">1971</option>
-                                <option value="1972">1972</option>
-                                <option value="1973">1973</option>
-                                <option value="1974">1974</option>
+                                <?php
+                                $from_y = 0;
+
+                                if(count($education_info)) {
+                                    $from_y = $education_info["attend_date_to"];
+                                }
+                                foreach($yearArray as $v) {
+                                    $sel = '';
+
+                                    if($v == $from_y) {
+                                        $sel = ' selected="selected"';
+                                    }
+                                ?>
+                                <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
+                                <?php } ?>
                             </select>
                             <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px" disabled="disabled" />
                         </div>
@@ -598,9 +702,21 @@
                         <div class="clearfix">
                             <select name="period_time_from[]" required>
                                 <option value="">Year</option>
-                                <option value="2000">2000</option>
-                                <option value="2001">2001</option>
-                                <option value="2002">2002</option>
+                                <?php
+                                $from_y = 0;
+
+                                if(count($work_history)) {
+                                    $from_y = $work_history["period_time_from"];
+                                }
+                                foreach($yearArray as $v) {
+                                    $sel = '';
+
+                                    if($v == $from_y) {
+                                        $sel = ' selected="selected"';
+                                    }
+                                ?>
+                                <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
+                                <?php } ?>
                             </select>
                             <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px" disabled="disabled" />
                         </div>
@@ -608,9 +724,21 @@
                         <div class="clearfix">
                             <select name="period_time_to[]" required>
                                 <option value="">Year</option>
-                                <option value="2003">2003</option>
-                                <option value="2004">2004</option>
-                                <option value="2005">2005</option>
+                                <?php
+                                $from_y = 0;
+
+                                if(count($work_history)) {
+                                    $from_y = $work_history["period_time_to"];
+                                }
+                                foreach($yearArray as $v) {
+                                    $sel = '';
+
+                                    if($v == $from_y) {
+                                        $sel = ' selected="selected"';
+                                    }
+                                ?>
+                                <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
+                                <?php } ?>
                             </select>
                             <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px" disabled="disabled" />
                         </div>
@@ -635,8 +763,15 @@
                         <div class="clearfix">
                             <select name="industry[]" required>
                                 <option value="">select</option>
-                                <option value="v1">v1</option>
-                                <option value="v2">v2</option>
+                                <?php foreach($industry as $key=>&$v) {
+                                    if(empty($v['name'])) continue;
+                                    $str = "";
+                                    if($v['name'] == $work_history["industry"]) {
+                                        $str = ' selected="selected"';
+                                    }
+                                ?>
+                                <option value="<?php echo $v['name']; ?>"<?php echo $str; ?>><?php echo $v['name']; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -696,8 +831,20 @@
                         <div>
                             <select name="language[]" id="language_1" required>
                                 <option value="">Language</option>
-                                <option value="China">China</option>
-                                <option value="English">English</option>
+                                <?php
+                                $lan = '';
+
+                                if(count($language)) {
+                                    $lan = $language[0]["language"];
+                                }
+                                foreach($language_arr as $v) {
+                                    $str = '';
+                                    if($v == $lan) {
+                                        $str = ' selected="selected"';
+                                    }
+                                ?>
+                                <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -705,8 +852,20 @@
                         <div>
                             <select name="level[]" id="level_1" required>
                                 <option value="">Level</option>
-                                <option value="Level-1">Level-1</option>
-                                <option value="Level-2">Level-2</option>
+                                <?php
+                                $lev = '';
+
+                                if(count($language)) {
+                                    $lev = $language[0]["level"];
+                                }
+                                foreach($level_arr as $v) {
+                                    $str = '';
+                                    if($v == $lev) {
+                                        $str = ' selected="selected"';
+                                    }
+                                    ?>
+                                    <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                                    <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -730,7 +889,7 @@
                 }
                 ?>
 
-                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="personalSkillsForm">
+                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="PersonalSkillsForm">
                     <input type="hidden" name="uid" id="uid" value="<?php echo $uid; ?>" />
                     <div class="reg-area-tit <?php echo $cla; ?>">Personal Skills</div>
                     <div class="reg-skills-text">
@@ -748,7 +907,7 @@
                     </div>
                     <div class="reg-row">
                         <div>
-                            <input type="text" size="24" maxlength="255" autocomplete="on" id="PersonalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('PersonalSkills',this); return false;}">
+                            <input type="text" size="24" maxlength="255" autocomplete="on" id="PersonalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('PersonalSkills',this,'step7'); return false;}">
                         </div>
                     </div>
                     <div class="reg-area-bar">
@@ -767,7 +926,7 @@
                 }
                 ?>
 
-                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="professionalSkillsForm">
+                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="ProfessionalSkillsForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <div class="reg-area-tit <?php echo $cla; ?>">Professional Skills</div>
                     <div class="reg-skills-text">
@@ -785,7 +944,7 @@
                     </div>
                     <div class="reg-row">
                         <div>
-                            <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this); return false;}">
+                            <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this,'step8'); return false;}">
                         </div>
                     </div>
                     <div class="reg-area-bar">

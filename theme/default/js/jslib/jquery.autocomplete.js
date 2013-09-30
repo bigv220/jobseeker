@@ -109,7 +109,7 @@ jQuery.autocomplete = function(input, options) {
 	})
 	.bind("input",function() {
 		// fix firefox chinese input
-		onChange();
+		//onChange();
 	});
 
 	hideResultsNow();
@@ -332,10 +332,7 @@ jQuery.autocomplete = function(input, options) {
 		if (!options.matchCase) q = q.toLowerCase();
 		var data = options.cacheLength ? loadFromCache(q) : null;
 		// recieve the cached data
-		if (data) {
-			receiveData(q, data);
-			// if an AJAX url has been supplied, try loading the data now
-		} else if( (typeof options.url == "string") && (options.url.length > 0) ){
+		if( (typeof options.url == "string") && (options.url.length > 0) ){
 			$.get(makeUrl(q), function(data) {
 				data = parseData(data);
 				addToCache(q, data);
