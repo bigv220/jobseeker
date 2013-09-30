@@ -52,15 +52,15 @@ $(function(){
 	}
 	
 	//click save
-	$('.reg-save').click(function(){
-		var index=$(this).data('index');
-		// go Verification
-		var ok = Verification(index);
-		if(ok){
-			$('.reg-ul li').eq(index).addClass('curr');
-			$('.reg-area-tit').eq(index).addClass('reg-area-tit-curr');
-		}
-	});
+//	$('.reg-save').click(function(){
+//		var index=$(this).data('index');
+//		// go Verification
+//		var ok = Verification(index);
+//		if(ok){
+//			$('.reg-ul li').eq(index).addClass('curr');
+//			$('.reg-area-tit').eq(index).addClass('reg-area-tit-curr');
+//		}
+//	});
 	
 	function Verification(index){
 		switch (index){
