@@ -19,14 +19,32 @@ class company extends Front_Controller {
 	public function register() {
 		$data = $this->data;
 		
+        $uid = 6;
+        //Load Model            
+        $this->load->model('company_model');
+
 		if ($_POST) {
-			//Load Model			
-			$this->load->model('company_model');
-			$this->company_model->addCompany($_POST);
-			if (isset($_POST['industry_tag'])) {
-				$this->company_model->addIndustry($_POST['industry_tag']);
-			}
+            if (isset($_POST['first_name']) && !isset($_POST['last_name'])) {
+                $this->company_model->updateBasicInfo($_POST);    
+            } elseif (!isset($_POST['first_name']) && isset($_POST['last_name'])) {
+                $this->company_model->updateContactDetail($_POST);
+            } else {
+                $this->company_model->updateBasicInfo($_POST);    
+                $this->company_model->updateContactDetail($_POST);
+            }
+			
+			
+            $msg = "success";
+            $result['status'] = $msg;
+            echo json_encode($result);
 		}
+
+        $data["uid"] = $uid;
+        $basic_info = $this->company_model->getUserInfo($uid);
+        //$contact_detail = $this->company_model->getContactDetail($uid);
+
+        $data["basic_info"] = $basic_info;
+        //$data["contact_detail"] = $contact_detail;
 
 		$this->load->view($data['front_theme']."/company-register",$data);
 	}

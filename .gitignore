@@ -6,3 +6,5 @@
 application/config/database.php
 
 .idea
+/theme/default/company
+/theme/default/users

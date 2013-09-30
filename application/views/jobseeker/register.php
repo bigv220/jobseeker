@@ -11,7 +11,11 @@
             disabled : false
         });
 
+        //upload user avatar
         uploadImage();
+
+        //upload work examples
+        uploadFile("image_example",'example_upload_button','exampleerrorRemind','work_example');
 
         $("#PersonalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/autocomplete",{
             delay:10,
@@ -34,24 +38,8 @@
         });
 
         $('#addIndustry').click(function() {
-            var len = $("#industry_lists select").length;
-            len = len/2 + 1;
-            var industry_htm = '<select name="industry[]" id="industry_' + len + '" class="kyo-select">';
-            var industry_lists = $('#industry_1').html();
-
-            var position_htm = '<select id="position_' + len + '" class="kyo-select" name="position[]">';
-            var position_lists = $('#position_1').html();
-            $("#industry_lists").append('<br /><br />'+ industry_htm+industry_lists+'</select>' + position_htm + position_lists + '</select>');
-
-            $('#industry_' + len).kyoSelect({
-                width:'230',
-                height:'25'
-            });
-
-            $('#position_' + len).kyoSelect({
-                width:'230',
-                height:'25'
-            });
+            var html = $('#industry_lists').html();
+            $("#industry_lists").after("<br />" + html);
         });
 
         $('#addAnotherSchool').click(function() {
@@ -61,33 +49,34 @@
         });
 
         $('#addAnotherJob').click(function() {
-            var html = $('#every_job').html();
+            var len = $("#workhistoryForm select").length;
+            len = len/3 + 1;
+
+            var html1 = $('#every_job_part1').html();
+
+            var html_middle = '<input type="hidden" name="is_stillhere[]" value="0" id="is_stillhere'+len+'" />' +
+                                '<i data-val="1" data-id="stillwork" class="kyo-checkbox" onclick="isPrivate(this,\'is_stillhere'+len+'\');">I still work here</i>';
+
+            var html2 = $('#every_job_part2').html();
+
+            var input_id = "work_example"+len;
+            var btn_id = 'image_example'+len;
+            var upload_id = 'example_upload_button'+len;
+            var error_id = 'exampleerrorRemind'+len;
+
+            html = html1+html_middle+html2 + '<div class="reg-row"><input type="hidden" name="work_example[]" id="'+input_id+'" />'+
+                '<div id="'+upload_id+'">'+
+                '<span id="'+btn_id+'" class="reg-row-tip">Upload examples of work</span></div>'+
+                '<span class="" id="'+error_id+'"></span></div>';
 
             $('#workhistoryForm #addJobBtn').before(html);
+
+            uploadFile(btn_id,upload_id,error_id,input_id);
         });
 
         $('#addLanguageBtn').click(function() {
-            var len = $("#language_lists select").length;
-            len = len/2 + 1;
-            var language_htm = '<div class="reg-row"><strong>Language<i class="star">*</i></strong><div>'+
-                '<select name="language[]" id="language_' + len + '" class="kyo-select">';
-            var language_lists = $('#language_1').html();
-
-            var level_htm = '<div class="reg-row clearfix" style="clear:both;"> <strong>Proficiency</strong><div>'+
-                '<select id="level_' + len + '" class="kyo-select" name="level[]">';
-            var level_lists = $('#level_1').html();
-            $("#language_lists").append(language_htm+language_lists+'</select></div></div>' +
-                level_htm + level_lists + '</select></div></div>');
-
-            $('#language_' + len).kyoSelect({
-                width:'230',
-                height:'25'
-            });
-
-            $('#level_' + len).kyoSelect({
-                width:'230',
-                height:'25'
-            });
+            var html = $('#language_lists').html();
+            $('#language_lists').after(html);
         });
 
     });
@@ -104,14 +93,12 @@
         var uid = $('#uid').val();
 
         addPersonalSkillAjax('PersonalSkills',uid, v);
-        //makeSearchUrl(document.searchform);
     }
 
     function selectItem2(v){
         var uid = $('#uid').val();
 
         addPersonalSkillAjax('ProfessionalSkills',uid, v);
-        //makeSearchUrl(document.searchform);
     }
 
     function uploadImage(old_avatar) {
@@ -154,6 +141,36 @@
         });
     }
 
+    function uploadFile(btn_id, upload_btn, error_id,input_id) {
+        var oBtn = document.getElementById(btn_id);
+        var upload_button = document.getElementById(upload_btn);
+        var oRemind = document.getElementById(error_id);
+        new AjaxUpload(oBtn,{
+            action:"<?php echo $site_url?>/../jobseeker/ajaxuploadfile",
+            name:"workexample",
+            data: {},
+            onSubmit:function(file,ext){
+            },
+            onComplete:function(file,response){
+                oBtn.disabled = "";
+                if ( response == 'success') {
+                    oRemind.style.color = "green";
+                    oRemind.innerHTML = "Upload successful.";
+
+                    var reg = /\s/g;
+                    file = file.replace(reg, "");
+
+                    var img_path = "workExamples/" + file;
+                    $('#'+input_id).val(img_path);
+                } else {
+                    oRemind.style.color = "red";
+                    oRemind.innerHTML = response;
+                }
+
+            }
+        });
+    }
+
     function delPersonalSkills(id_str,thisO,skill) {
         var uid = $('#uid').val();
 
@@ -162,10 +179,10 @@
             function(result,status){
                 if(status == 'success'){
                     $(thisO).parent().remove();
-                    alert('Save successful!');
+                    alert('Delete successful!');
                 }
                 else{
-                    alert('Save failed!');
+                    alert('Delete failed!');
                 }
         });
     }
@@ -179,10 +196,10 @@
                         '<i class="del" onclick="del'+ id_str + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
 
                     $('#'+ id_str).append(htm);
-                    alert('Save successful!');
+                    alert('Add successful!');
                 }
                 else{
-                    alert('Save failed!');
+                    alert('Add failed!');
                 }
         });
 
@@ -200,8 +217,10 @@
 
     function isPrivate(thisO, id_str) {
         if($(thisO).hasClass('kyo-checkbox-sel')) {
+            $(thisO).removeClass('kyo-checkbox-sel');
             $('#'+id_str).val(0);
         } else {
+            $(thisO).addClass('kyo-checkbox-sel');
             $('#'+id_str).val(1);
         }
     }
@@ -209,6 +228,15 @@
     function selectItem(element_id, v) {
         var ele_id = "#" + element_id;
         $(ele_id).val(v);
+    }
+
+    function checkLength(thisO, maxLen) {
+        var taValue = $(thisO).val();
+        var len = taValue.length;
+        if (len > maxLen) {
+            var val = taValue.substring(0, 347) + '...';
+            $(thisO).val(val);
+        }
     }
 </script>
 
@@ -253,12 +281,12 @@
                 <div class="reg-area-tit <?php echo $cla; ?>">Basic Information</div>
                 <div class="reg-row"> <strong>First Name <i class="star">*</i></strong>
                     <div>
-                        <input type="text" name="first_name" class="reg-input" value="<?php echo $userinfo['first_name']; ?>" />
+                        <input type="text" name="first_name" class="reg-input" value="<?php echo $userinfo['first_name']; ?>" required />
                     </div>
                 </div>
                 <div class="reg-row clearfix"> <strong>Last Name <i class="star">*</i></strong>
                     <div>
-                        <input type="text" name="last_name" class="reg-input" value="<?php echo $userinfo['last_name']; ?>" />
+                        <input type="text" name="last_name" class="reg-input" value="<?php echo $userinfo['last_name']; ?>" required />
                     </div>
                 </div>
                 <style>
@@ -266,20 +294,20 @@
                 </style>
                 <div class="reg-row clearfix location"> <strong>Location <i class="star">*</i></strong>
                     <div>
-                        <select class="kyo-select" name="country">
+                        <select name="country" required>
                             <option value="0">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
                             <option value="<?php echo $k ?>"><?php echo $k ?></option>
                             <?php endforeach;?>
                         </select>
-                        <select class="kyo-select" name="province">
+                        <select name="province">
                             <option value="0">All Province</option>
                             <option value="Beijing">Beijing</option>
                             <!-- <?php foreach ($location['China'] as $k=>$v):?>
                             <option value="<?php echo $k ?>"><?php echo $k ?></option>
                             <?php endforeach;?>-->
                         </select>
-                        <select class="kyo-select" name="city">
+                        <select name="city">
                             <option value="0">All City</option>
                             <option value="2">Beijing</option>
                             <option value="3">Shanghai</option>
@@ -290,7 +318,13 @@
                     <div>
                         <input type="hidden" name="avatar" id="avatar" />
                         <div id="upload_button">
-                            <img id="image_profile" src="<?php echo $theme_path?>style/reg/com-img.gif" class="reg-company-img" />
+                            <?php if($userinfo['profile_pic']) {
+                                        $pic = 'users/'.$userinfo['profile_pic'];
+                                   } else {
+                                        $pic = 'style/reg/com-img.gif';
+                                   }
+                            ?>
+                            <img id="image_profile" height='100px' src="<?php echo $theme_path?><?php echo $pic; ?>" class="reg-company-img" />
                         </div>
                         <span class="" id="errorRemind"></span>
                     </div>
@@ -332,12 +366,12 @@
                 <div class="reg-area-tit <?php echo $cla; ?>">Contact Details</div>
                 <div class="reg-row"> <strong>Emial Address<i class="star">*</i></strong>
                     <div>
-                        <input type="text" name="email" class="reg-input" value="<?php echo $userinfo['email']; ?>" />
+                        <input type="text" name="email" class="reg-input" value="<?php echo $userinfo['email']; ?>" required />
                     </div>
                 </div>
                 <div class="reg-row"> <strong>Phone Number<i class="star">*</i> <span>(including area code)</span></strong>
                     <div>
-                        <input type="text" name="phone" class="reg-input" value="<?php echo $userinfo['phone']; ?>" />
+                        <input type="text" name="phone" class="reg-input" value="<?php echo $userinfo['phone']; ?>" required />
                     </div>
                 </div>
                 <div class="reg-row">Allow employers to contatct you by phone
@@ -347,7 +381,7 @@
                 </div>
                 <div class="reg-row"> <strong>Username for Jing Chat<i class="star">*</i></strong>
                     <div>
-                        <input type="text" name="jingchat_username" class="reg-input" value="<?php echo $userinfo['jingchat_username']; ?>" />
+                        <input type="text" name="jingchat_username" class="reg-input" value="<?php echo $userinfo['jingchat_username']; ?>" required />
                     </div>
                 </div>
                 <div class="reg-row">Allow employers to contact you through online messager
@@ -360,17 +394,17 @@
                         <input type="text" name="website" class="reg-input" value="<?php echo $userinfo['personal_website']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <b>twitter Username</b>
+                <div class="reg-row"> <b>Twitter Username</b>
                     <div>
                         <input type="text" name="twitter" class="reg-input" value="<?php echo $userinfo['twitter']; ?>" />
                     </div>
                 </div>
-               <div class="reg-row"> <b>linkedin Username</b>
+               <div class="reg-row"> <b>Linkedin Username</b>
                     <div>
                         <input type="text" name="linkedin" class="reg-input" value="<?php echo $userinfo['linkedin']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <b>wechat</b>
+                <div class="reg-row"> <b>Wechat</b>
                     <div>
                         <input type="text" name="wechat" class="reg-input" value="<?php echo $userinfo['wechat']; ?>" />
                     </div>
@@ -433,13 +467,13 @@
                     </div>
                     <div class="reg-row"><strong>What industry are you seeking employment in?<i class="star">*</i></strong>
                         <div id="industry_lists">
-                            <select name="industry[]" class="kyo-select" id="industry_1">
-                                <option value="0">Industry</option>
+                            <select name="industry[]" id="industry_1" required>
+                                <option value="">Industry</option>
                                 <option value="1">Doctor</option>
                                 <option value="2">Teacher</option>
                             </select>
-                            <select name="position[]" class="kyo-select" id="position_1">
-                                <option value="0">Position</option>
+                            <select name="position[]" id="position_1" required>
+                                <option value="">Position</option>
                                 <option value="1">professor</option>
                                 <option value="2">boss</option>
                             </select>
@@ -479,13 +513,13 @@
                     <div id="every_school">
                     <div class="reg-row"> <strong>School/Collage name<i class="star">*</i></strong>
                         <div>
-                            <input type="text" class="reg-input" name="school_name[]" value="<?php if(count($education_info)) echo $education_info["school_name"]; ?>" />
+                            <input type="text" class="reg-input" name="school_name[]" value="<?php if(count($education_info)) echo $education_info["school_name"]; ?>" required />
                         </div>
                     </div>
                     <div class="reg-row"> <strong>Dates Attended<i class="star">*</i></strong>
                         <div class="clearfix">
-                            <select class="kyo-select" name="attended_from[]">
-                                <option value="0">Year</option>
+                            <select name="attended_from[]" required>
+                                <option value="">Year</option>
                                 <option value="1970">1970</option>
                                 <option value="1971">1971</option>
                                 <option value="1972">1972</option>
@@ -496,8 +530,8 @@
                         </div>
                         <p class="p5">To</p>
                         <div class="clearfix">
-                            <select class="kyo-select" name="attended_to[]">
-                                <option value="0">Year</option>
+                            <select name="attended_to[]" required>
+                                <option value="">Year</option>
                                 <option value="1970">1970</option>
                                 <option value="1971">1971</option>
                                 <option value="1972">1972</option>
@@ -547,9 +581,9 @@
                 }
                 ?>
                 <div class="reg-area-tit <?php echo $cla; ?>">Work History</div>
-                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="workhistoryForm">
+                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="workhistoryForm" enctype="multipart/form-data">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-                    <div id="every_job">
+                    <div id="every_job_part1">
                     <div class="reg-row"> <b>Introduce yourself</b>
                         <div>
                             <textarea class="reg-textarea" name="introduce[]"><?php if(count($work_history)) echo $work_history["introduce"]; ?></textarea>
@@ -557,12 +591,13 @@
                     </div>
                     <div class="reg-row"> <strong>Company name<i class="star">*</i></strong>
                         <div>
-                            <input type="text" class="reg-input" name="company_name[]" value="<?php if(count($work_history)) echo $work_history["company_name"]; ?>" />
+                            <input type="text" class="reg-input" name="company_name[]" value="<?php if(count($work_history)) echo $work_history["company_name"]; ?>" required />
                         </div>
                     </div>
                     <div class="reg-row"> <strong>Time period<i class="star">*</i></strong>
                         <div class="clearfix">
-                            <select name="period_time_from[]" class="kyo-select">
+                            <select name="period_time_from[]" required>
+                                <option value="">Year</option>
                                 <option value="2000">2000</option>
                                 <option value="2001">2001</option>
                                 <option value="2002">2002</option>
@@ -571,26 +606,35 @@
                         </div>
                         <p class="p5">To</p>
                         <div class="clearfix">
-                            <select name="period_time_to[]" class="kyo-select">
+                            <select name="period_time_to[]" required>
+                                <option value="">Year</option>
                                 <option value="2003">2003</option>
                                 <option value="2004">2004</option>
                                 <option value="2005">2005</option>
                             </select>
                             <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px" disabled="disabled" />
-                            <input type="hidden" name="is_stillhere" value="0" id="is_stillhere" />
-                            <?php $is_stillhere = $work_history["is_stillhere"];
+                        </div>
+                    </div>
+                    </div>
+                            <input type="hidden" name="is_stillhere[]" value="0" id="is_stillhere" />
+                            <?php
                             $check_sel = "";
+                            $is_stillhere = 0;
+                            if(count($work_history)) {
+                                $is_stillhere = $work_history["is_stillhere"];
+                            }
+
                             if($is_stillhere) {
                                 $check_sel = "kyo-checkbox-sel";
                             }
                             ?>
                             <i data-val="1" data-id="stillwork" class="kyo-checkbox <?php echo $check_sel; ?>" onclick="isPrivate(this,'is_stillhere');">I still work here</i>
-                        </div>
-                    </div>
+
+                    <div id="every_job_part2">
                     <div class="reg-row clearfix"> <strong>Industry<i class="star">*</i></strong>
                         <div class="clearfix">
-                            <select class="kyo-select" name="industry[]">
-                                <option value="0">select</option>
+                            <select name="industry[]" required>
+                                <option value="">select</option>
                                 <option value="v1">v1</option>
                                 <option value="v2">v2</option>
                             </select>
@@ -598,7 +642,7 @@
                     </div>
                     <div class="reg-row clearfix"> <strong>Position<i class="star">*</i></strong>
                         <div>
-                            <input type="text" class="reg-input" name="position[]" value="<?php if(count($work_history)) echo $work_history["position"]; ?>" />
+                            <input type="text" class="reg-input" name="position[]" value="<?php if(count($work_history)) echo $work_history["position"]; ?>" required />
                         </div>
                     </div>
 
@@ -612,13 +656,19 @@
 
                             $v = $v ? $v : "350 Characters";
                             ?>
-                            <textarea class="reg-textarea input-tip" name="description[]" data-tipval="350 Characters"><?php echo $v; ?></textarea>
+                            <textarea class="reg-textarea input-tip" name="description[]" data-tipval="350 Characters" onkeypress="checkLength(this, 350);"><?php echo $v; ?></textarea>
                         </div>
                     </div>
+                    </div>
+
                     <div class="reg-row">
-                        <p><a class="reg-row-tip" href="#">Upload examples of work</a></p>
+                        <input type="hidden" name="work_example" id="work_example" />
+                        <div id="example_upload_button">
+                            <span id="image_example" class="reg-row-tip">Upload examples of work</span>
+                        </div>
+                        <span class="" id="exampleerrorRemind"></span>
                     </div>
-                    </div>
+
 
                     <div id="addJobBtn">
                         <p><a class="reg-row-tip" href="javascript:void(0);" id="addAnotherJob">+ Add Another Job</a></p>
@@ -644,17 +694,19 @@
                     <div id="language_lists">
                     <div class="reg-row"> <strong>Language<i class="star">*</i></strong>
                         <div>
-                            <select name="language[]" class="kyo-select" id="language_1">
-                                <option value="cn">China</option>
-                                <option value="en">English</option>
+                            <select name="language[]" id="language_1" required>
+                                <option value="">Language</option>
+                                <option value="China">China</option>
+                                <option value="English">English</option>
                             </select>
                         </div>
                     </div>
                     <div class="reg-row clearfix" style="clear:both;"> <strong>Proficiency</strong>
                         <div>
-                            <select name="level[]" class="kyo-select" id="level_1">
-                                <option value="1">Level-1</option>
-                                <option value="2">Level-2</option>
+                            <select name="level[]" id="level_1" required>
+                                <option value="">Level</option>
+                                <option value="Level-1">Level-1</option>
+                                <option value="Level-2">Level-2</option>
                             </select>
                         </div>
                     </div>
@@ -752,6 +804,7 @@
      </div>
 
 </div>
+
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

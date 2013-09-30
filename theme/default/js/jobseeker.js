@@ -1,122 +1,158 @@
+//basic information form ajax submit
 function basicInfoSubmit() {
-    //basic information form ajax submit
     var basicInfoForm = $('#basicInfoForm');
-
-    $.post(site_url + '/jobseeker/basicInfo',
-        basicInfoForm.serialize(),
-        function(result,status){
-            if(status == 'success'){
-                $('#basicInfoForm .reg-area-tit').addClass('reg-area-tit-curr');
-                alert('Save successful!');
-            }
-            else{
-                alert('Save failed!');
-            }
+    basicInfoForm.validate();
+    
+    if (basicInfoForm.valid()) {
+        $.post(site_url + '/jobseeker/basicInfo',
+            basicInfoForm.serialize(),
+            function(result,status){
+                if(status == 'success'){
+                    $('#basicInfoForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    alert('Save successful!');
+                }
+                else{
+                    alert('Save failed!');
+                }
         });
+    }
 }
 
+//contact details form ajax submit
 function contactDetailsSubmit() {
-    //basic information form ajax submit
     var contactDetailsForm = $('#contactDetailsForm');
+    contactDetailsForm.validate();
 
-    $.post(site_url + '/jobseeker/contactdetails',
-        contactDetailsForm.serialize(),
-        function(result,status){
-            if(status == 'success'){
-                $('#contactDetailsForm .reg-area-tit').addClass('reg-area-tit-curr');
-                alert('Save successful!');
-            }
-            else{
-                alert('Save failed!');
-            }
+    if (contactDetailsForm.valid()) {
+        $.post(site_url + '/jobseeker/contactdetails',
+            contactDetailsForm.serialize(),
+            function(result,status){
+                if(status == 'success'){
+                    $('#contactDetailsForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    alert('Save successful!');
+                }
+                else{
+                    alert('Save failed!');
+                }
         });
+    }
 }
 
+//preferences form ajax submit
 function preferencesSubmit() {
-    //basic information form ajax submit
     var preferencesForm = $('#preferencesForm');
+    preferencesForm.validate();
 
-    $.post(site_url + '/jobseeker/preferences',
-        preferencesForm.serialize(),
-        function(result,status){
-            if(status == 'success'){
-                $('#preferencesForm .reg-area-tit').addClass('reg-area-tit-curr');
-                alert('Save successful!');
-            }
-            else{
-                alert('Save failed!');
-            }
+    if (preferencesForm.valid()) {
+        $.post(site_url + '/jobseeker/preferences',
+            preferencesForm.serialize(),
+            function(result,status){
+                if(status == 'success'){
+                    $('#preferencesForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    alert('Save successful!');
+                }
+                else{
+                    alert('Save failed!');
+                }
         });
+    }
 }
 
+//education form ajax submit
 function educationSubmit() {
-    //basic information form ajax submit
     var educationForm = $('#educationForm');
+    educationForm.validate();
 
-    $.post(site_url + '/jobseeker/education',
-        educationForm.serialize(),
-        function(result,status){
-            if(status == 'success'){
-                $('#educationForm .reg-area-tit').addClass('reg-area-tit-curr');
-                alert('Save successful!');
-            }
-            else{
-                alert('Save failed!');
-            }
+    if (educationForm.valid()) {
+        $.post(site_url + '/jobseeker/education',
+            educationForm.serialize(),
+            function(result,status){
+                if(status == 'success'){
+                    $('#educationForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    alert('Save successful!');
+                }
+                else{
+                    alert('Save failed!');
+                }
         });
+    }
 }
 
+//work history form ajax submit
 function workhistorySubmit() {
-    //basic information form ajax submit
     var workhistoryForm = $('#workhistoryForm');
+    workhistoryForm.validate();
 
-    $.post(site_url + '/jobseeker/workhistory',
-        workhistoryForm.serialize(),
-        function(result,status){
-            if(status == 'success'){
-                $('#workhistoryForm .reg-area-tit').addClass('reg-area-tit-curr');
-                alert('Save successful!');
-            }
-            else{
-                alert('Save failed!');
-            }
+    if (workhistoryForm.valid()) {
+        $.post(site_url + '/jobseeker/workhistory',
+            workhistoryForm.serialize(),
+            function(result,status){
+                if(status == 'success'){
+                    $('#workhistoryForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    alert('Save successful!');
+                }
+                else{
+                    alert('Save failed!');
+                }
         });
+    }
 }
 
+//language form ajax submit
 function languageSubmit() {
-    //basic information form ajax submit
     var languageForm = $('#languageForm');
+    languageForm.validate();
 
-    $.post(site_url + '/jobseeker/language',
-        languageForm.serialize(),
-        function(result,status){
-            if(status == 'success'){
-                $('#languageForm .reg-area-tit').addClass('reg-area-tit-curr');
-                alert('Save successful!');
-            }
-            else{
-                alert('Save failed!');
-            }
+    if (languageForm.valid()) {
+        $.post(site_url + '/jobseeker/language',
+            languageForm.serialize(),
+            function(result,status){
+                if(status == 'success'){
+                    $('#languageForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    alert('Save successful!');
+                }
+                else{
+                    alert('Save failed!');
+                }
         });
+    }
 }
 
 function personalSkillsSubmit() {
     $('#personalSkillsForm .reg-area-tit').addClass('reg-area-tit-curr');
-    alert('Save successful!');
 }
 
 function professionalSkillsSubmit() {
     $('#PersonalSkills_input .reg-area-tit').addClass('reg-area-tit-curr');
-    alert('Save successful!');
 }
 
 function saveAll() {
-    basicInfoSubmit();
-    contactDetailsSubmit();
-    preferencesSubmit();
-    educationSubmit();
-    workhistorySubmit();
-    languageSubmit();
-    personalSkillsSubmit();
-    professionalSkillsSubmit();
+    var basicInfoForm = $('#basicInfoForm');
+    basicInfoForm.validate();
+
+    var contactDetailsForm = $('#contactDetailsForm');
+    contactDetailsForm.validate();
+
+    var preferencesForm = $('#preferencesForm');
+    preferencesForm.validate();
+
+    var educationForm = $('#educationForm');
+    educationForm.validate();
+
+    var workhistoryForm = $('#workhistoryForm');
+    workhistoryForm.validate();
+
+    var languageForm = $('#languageForm');
+    languageForm.validate();
+
+    if(basicInfoForm.valid() && contactDetailsForm.valid() &&
+        preferencesForm.valid() && educationForm.valid() && workhistoryForm.valid() &&languageForm.valid()) {
+
+        basicInfoSubmit();
+        contactDetailsSubmit();
+        preferencesSubmit();
+        educationSubmit();
+        workhistorySubmit();
+        languageSubmit();
+    }
 }

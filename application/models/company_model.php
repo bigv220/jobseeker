@@ -4,7 +4,7 @@ class company_model extends MY_Model
 	public function __construct()
 	{
 		parent::__construct();
-		$this->table = 'company';
+		$this->table = 'user';
 	}
 
     /**
@@ -12,7 +12,7 @@ class company_model extends MY_Model
      * @param  int $company_id Company ID
      * @return Array             Company info in key-array
      */
-	public function getCompanyInfo($company_id	)
+	public function getCompanyInfo($company_id)
 	{
 		$data = $this->db->select('company.*')
 						->from('company')
@@ -38,19 +38,43 @@ class company_model extends MY_Model
 		return $data;						 
 	}
 
+    public function getUserInfo($uid) {
+        $result = $this->db->select('*')
+            ->from('user')
+            ->where('uid',$uid)
+            ->get()
+            ->result_array();
+
+        return $result[0];
+    }
+
 	/**
 	 * Add new Company
 	 * @param int $data Last insert id
 	 */
-	public function addCompany($data)
+	public function updateBasicInfo($data)
 	{
-		$data = array('name'=>$data['name'],'country'=>$data['country'],'city'=>$data['city'],
-				'logo'=>'', 'description'=>$data['description'], 'contact_name'=>$data['contact_name'],
-				'email'=>$data['email'],'phone'=>$data['country'],'is_phone_public'=>isset($data['is_phone_public']) && $data['is_phone_public'] =='on'?1:0,
-				'jingchat'=>$data['jingchat'],'is_allow_jingchat_contact'=>isset($data['is_allow_jingchat_contact']) && $data['is_allow_jingchat_contact'] =='on'?1:0,
-				'website'=>$data['website'], 'twitter'=>$data['twitter'], 'linkedin'=>$data['linkedin'], 'wechat'=>$data['wechat']);
-		$this->db->insert($this->table, $data);
-        return $this->db->insert_id();
+		$uid = $data['uid'];
+		$data = array('first_name'=>$data['name'],'country'=>$data['country'],'city'=>$data['city'],
+				'profile_pic'=>$data['avatar'], 'description'=>$data['description']);
+		$this->db->where('uid', $uid);
+		$this->db->update('user', $data); 
+		if (isset($_POST['industry_tag'])) {
+			$this->company_model->addIndustry($_POST['industry_tag']);
+		}
+        return true;
+	}
+
+	public function updateContactDetail($data) {
+		$uid = $data['uid'];
+		$data = array('last_name'=>$data['last_name'],
+				'email'=>$data['email'],'phone'=>$data['phone'],'is_allow_phone'=>$data['is_allow_phone'],
+				'jingchat_username'=>$data['jingchat_username'],'is_allow_online_msg'=>$data['is_allow_online_msg'],
+				'personal_website'=>isset($data['personal_website'])?$data['personal_website']:"",
+				 'twitter'=>isset($data['twitter'])?$data['twitter']:"", 'linkedin'=>isset($data['linkedin'])?$data['linkedin']:"",
+				  'wechat'=>isset($data['wechat'])?$data['wechat']:"");
+		$this->db->where('uid', $uid);
+		$this->db->update('user', $data); 
 	}
 
 	public function addIndustry($data) 

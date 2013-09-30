@@ -23,11 +23,15 @@ class job extends Front_Controller {
         $housing_assistance = array('1'=>'Accomodation will be provided','0'=>'Accomodation will not be provided');
 
         $data = $this->data;
+        $job_id = 1;
 
         //Load Model
         $this->load->model('job_model');
         //get data from db
         $jobinfo = $this->job_model->getJobInfo(1);
+
+        $industry = $jobinfo["industry"];
+        $similar_jobs = $this->job_model->getSimilarJobs($job_id, $industry);
 
         $constants = array('len_emp'=>$length_of_employment,
                     'type_emp'=>$type_of_employment,
@@ -36,7 +40,8 @@ class job extends Front_Controller {
 
         $data['constants_arr'] = $constants;
         $data['jobinfo'] = $jobinfo;
-        $this->load->view($data['front_theme']."/job-details-demo",$data);
+        $data["similar_jobs"] = $similar_jobs;
+        $this->load->view($data['front_theme']."/job-details",$data);
     }
 
 }
