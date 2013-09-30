@@ -88,14 +88,29 @@ a:hover{text-decoration:none;}
 .pf-input{top:7px;left:5px;width:183px;height:18px;line-height:18px;color:#777;}
 .pf-btn{width:31px;height:32px;cursor:pointer;top:0px;left:196px;}
 .pop-mark{width:100%;height:100%;background:#fff;position:absolute;top:0;left:0;filter:alpha(opacity=60);-moz-opacity:0.6;opacity:0.6;z-index:100;display:none;}
-.phd-login-pop{position:absolute;display:none;width:238px;height:149px;top:70px;left:-92px;background:url(pub/login.png);}
-.phd-login-pop-hd{padding:22px 8px 0 0;text-align:right;height:25px;}.phd-login-pop-hd a{display:inline-block;width:140px;height:20px;}
+.phd-login-pop{position:absolute;display:none;width:238px;min-height:149px;top:70px;left:-92px;padding-top:23px;background:url(pub/login_body_bg.png) no-repeat;}
+.phd-login-pop-header{padding:0 10px;background:url(pub/login_content_bg.png) repeat-y;}
+.phd-login-pop-header .phd-login-pop-header-txt{float:left;text-size:12px;font-weight:bold;}
+.phd-login-pop-header .forget-pw{float:right;font-size:10px;}
+.phd-login-pop-header a{display:inline-block;text-decoration: underline;color:#000000;}
+.phd-login-pop-content{background:url(pub/login_content_bg.png) repeat-y;padding:4px 10px;}
+.phd-login-pop-content .ok_btn{width:214px;height:28px;background:url(pub/ok_btn_bg.png);}
+.phd-login-pop-content .login-error-msg{display:none;}
+.phd-login-pop-footer{height:14px;background:url(pub/login_footer_bg.png);}
 .phd-login-pop .input-wrap{padding:0 0 0 42px;}
-.phd-login-pop p{height:30px;}
+.phd-login-pop .username-wrap{border:1px solid #CCCCCC;padding:0 0 0 25px;background:url(pub/username_input_bg.png) no-repeat 6px center;}
+.phd-login-pop .password-wrap{border:1px solid #CCCCCC;padding:0 0 0 25px;background:url(pub/password_input_bg.png) no-repeat 6px center;}
+.phd-login-pop p{height:26px;line-height:30px;margin-bottom: 4px;}
 .phd-login-pop input{border:0;background:none;}
-.phd-login-pop .input{width:180px;height:18px;line-height:18px;}
+.phd-login-pop .input{width:185px;height:18px;line-height:18px;}
 .phd-login-pop input.has{background:#fafafa;}
-.phd-login-pop .btn{width:214px;height:28px;display:inline-block;cursor:pointer;background:url(pub/login-btn.gif) no-repeat;}
+.phd-login-pop .login-btn{width:214px;height:28px;display:inline-block;cursor:pointer;background:url(pub/login-btn.gif) no-repeat;}
+.phd-login-pop .send-btn{width:214px;height:28px;display:inline-block;cursor:pointer;background:url(pub/send_btn_bg.png) no-repeat;}
+#resetpw_pop{display:none;}
+.reset-password-success{display:none;width:261px;height:150px;background:url(pub/reset_pw_success_bg.png);margin:0 auto;margin-top: 95px;}
+.reset-password-success-header{color:#ef7641;font-weight:bold;font-size:15px;padding:10px 23px;}
+.reset-password-success-content{padding:0 23px;font-size:12px;padding-bottom:20px;font-weight:bold;color:#4f4f4f;}
+.reset-password-success-btn{width:214px;height:28px;background:url(pub/login_now_btn.png);margin:0 auto;cursor:pointer;}
 .top-search{height:116px;}.top-search input{background-image:url(pub/top-search.gif);top:31px;}
 .top-search-input{border:0;height:30px;line-height:30px;background-position:0 -32px;background-repeat:repeat-x;width:234px;right:32px;text-indent:3px;color:#828282;}
 .top-search-btn{width:32px;height:32px;line-height:32px;display:inline-block;text-align:center;vertical-align:top;cursor:pointer;background-repeat:no-repeat;border:0;right:0;}

@@ -56,14 +56,43 @@
                     <?php echo isset($last_name)?$last_name:"";?>
                 <?php endif;?>
             </div>
-			<div class="phd-login-pop png">
-				<div class="phd-login-pop-hd"><a href="#"></a></div>
-                <form id="login_form" method="post" action="/user/login">
-                    <p class="input-wrap"><input type="text" id="username" name="username" value="" class="input input-user" /></p>
-                    <p class="input-wrap"><input type="password" id="login_password" name="login_password" value="" class="input input-pass" /></p>
-                    <p class="tac" ><input type="submit" value="" class="btn" /></p>
-                </form>
-			</div>
+
+            <div id="login_pop" class="phd-login-pop png">
+                <div class="phd-login-pop-header">
+                    <div class="phd-login-pop-header-txt">LOGIN</div>
+                    <div class="forget-pw">
+                        Forgot Password<img src="<?php echo $theme_path?>style/pub/question_mark.png"><a href="javascript:void(0);" id="forget_password_btn">Click Here</a>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+
+                <div class="phd-login-pop-content">
+                    <div class="login-error-msg">Either your email or password is incorrect, try again.</div>
+                    <form id="login_form" method="post" action="/user/login">
+                        <p class="username-wrap"><input type="text" id="username" name="username" value="" class="input input-user" /></p>
+                        <p class="password-wrap"><input type="password" id="login_password" name="login_password" value="" class="input input-pass" /></p>
+                        <p class="tac" ><input type="submit" value="" class="login-btn" /></p>
+                    </form>
+                </div>
+                <div class="phd-login-pop-footer"><a href="#"></a></div>
+            </div>
+
+            <div id="resetpw_pop" class="phd-login-pop png">
+                <div class="phd-login-pop-header">
+                    <div class="phd-login-pop-header-txt">Reset Password</div>
+                    <div style="clear:both;"></div>
+                </div>
+
+                <div class="phd-login-pop-content">
+                    <div>Enter the email address you used to create your JingJobs account and we'll email you a link so you can create a new password.</div>
+                    <form id="resetpw_form" method="post" action="/user/sendResetPwRequest">
+                        <p class="username-wrap"><input type="text" name="username" value="" class="input input-user" /></p>
+                        <p class="tac" ><input type="submit" value="" class="send-btn" /></p>
+                    </form>
+                </div>
+                <div class="phd-login-pop-footer"></div>
+            </div>
+
 		</div>
 	</div>
 </div>

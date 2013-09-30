@@ -110,3 +110,6 @@ alter table user modify birthday char(10);
 alter table user_work_history add is_stillhere tinyint(4) null;
 alter table user_education modify attend_date_from char(10);
 alter table user_education modify attend_date_to char(10);
+
+#2013-9-30
+alter table user add username varchar(50) null;

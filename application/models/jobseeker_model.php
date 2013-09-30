@@ -15,7 +15,7 @@ class jobseeker_model extends MY_Model
     public function addUser($data){
         $data = array('first_name'=>$data['first_name'],
                         'last_name'=>$data['last_name'],
-                        'email'=>$data['email'],
+                        'username'=>$data['email'],
                         'password'=>md5($data['password']),
                         'user_type'=>$data['user_type'],
                         'newsletter'=>$data['newsletter']);
@@ -28,17 +28,25 @@ class jobseeker_model extends MY_Model
      * @param $email
      * @return bool if the user is exist return true, else return false
      */
-    public function checkUserExisting($email){
+    public function checkUserExisting($username){
         $result = $this->db->select('uid')
             ->from($this->table)
-            ->where('email', $email)
+            ->where('username', $username)
             ->get()
             ->result_array();
         return count($result)>0;
     }
 
-    public function getUser($email, $password){
-        $where = array('email'=>$email, 'password'=>$password);
+    public function getUserIdByUsername($username){
+        return $this->db->select('uid')
+            ->from($this->table)
+            ->where('username', $username)
+            ->get()
+            ->result_array();
+    }
+
+    public function getUser($username, $password){
+        $where = array('username'=>$username, 'password'=>$password);
         return $this->db->select('*')
             ->from($this->table)
             ->where($where)
@@ -73,6 +81,10 @@ class jobseeker_model extends MY_Model
         return $result[0];
     }
 
+    public function updatePassword($uid, $pw){
+        $data = array('password'=>md5($pw));
+        return $this->db->where('uid', $uid)->update($this->table, $data);
+    }
     /**
      * update jobseeker infos
      *

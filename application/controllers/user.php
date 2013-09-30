@@ -70,10 +70,65 @@ class user extends Front_Controller {
 		redirect('/');
 	}
 
+    public function sendResetPwRequest(){
+        $data = $this->data;
+        $this->load->model('jobseeker_model');
+        $userId = $this->jobseeker_model->getUserIdByUsername($_POST['username']);
+        $status = "success";
+        $message = "success";
+
+        if(count($userId) < 1){
+            $status = "error";
+            $message = "No one with that email was found, please try again with an alternative email address.";
+        }
+        else{
+            $userId = $userId[0]['uid'];
+            $md5username = md5($_POST['username']);
+            $resetPwLink = $this->config->item('base_url') . 'user/resetPassword?juid='. $userId . '&token=' . $md5username;
+            //send email to this user's email address
+            $this->load->library('email');
+
+            $this->email->from('andrew@anzury.com', 'JingJobs Team');
+            $this->email->to($_POST['username']);
+
+            $this->email->subject('RESET PASSWORD EMIAL FROM JINGJOBS');
+            $this->email->message("<HTML><BODY><div>You requested that your password be reset. To reset your password please follow this link: <br/>[<a href='$resetPwLink'>Reset My Password</a>]<br/>Thanks,<br/>The JingJobs Team</div></BODY></HTML>");
+
+            $this->email->send();
+
+        }
+        echo json_encode(array('status'=>$status, 'message'=>$message));
+    }
+
     public function resetPassword(){
         $data = $this->data;
+        $data['juid'] = $_GET['juid'];
+        $data['token'] = $_GET['token'];
         $this->load->view($data['front_theme'].'/reset-password', $data);
     }
+
+    public function resetPasswordAction(){
+        $this->load->model('jobseeker_model');
+        $status = "success";
+        $message = "success";
+        $user = $this->jobseeker_model->getUserInfo($_POST["uid"]);
+        if($user != null){
+            if(md5($user['username']) != $_POST['token']){
+                $status = "error";
+                $message = "The link is bad, please contact us.";
+            }
+            else{
+                //set the new password for this user
+                $this->jobseeker_model->updatePassword($_POST['uid'], $_POST['password']);
+            }
+        }
+        else{
+            $status = "error";
+            $message = "Invalid user.";
+        }
+        echo json_encode(array('status'=>$status, 'message'=>$message));
+    }
+
 	public function adminlogin() {
 		$this->load->model('admin_model');
 		

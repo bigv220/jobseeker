@@ -56,7 +56,7 @@ $(function(){
     })
 
     $('.show_login_btn').click(function(){
-        $('.phd-login-pop').fadeIn();
+        $('#login_pop').fadeIn();
     });
 
     $('.show_register_btn').click(function(){
@@ -141,21 +141,40 @@ $(function(){
                     if(result.status == 'success'){
                         $('.phd-login-pop').remove();
                         $('.phd-login-text').html(result.first_name + ' ' + result.last_name);
+                        $('.phd-login-pop-content .login-error-msg').hide();
                         show_welcome_pop(result.user_type);
                     }
                     else{
-                        alert(result.message);
+                        $('.phd-login-pop-content .login-error-msg').show();
                     }
                 },
                 'json');
         return false;
     });
 
-    $("#orderform").validate({
-        submitHandler: function(form) {
-
-        }
+    var resetPasswordRequestForm = $('#resetpw_form');
+    resetPasswordRequestForm.submit(function(){
+        $.post(site_url + resetPasswordRequestForm.attr('action'),
+            resetPasswordRequestForm.serialize(),
+            function(result, status){
+                if(result.status == 'error'){
+                    $('#resetpw_pop .phd-login-pop-content div').html(result.message);
+                }
+                else{
+                    var oldcontent = $('#resetpw_pop').html();
+                    $('#resetpw_pop .phd-login-pop-header-txt').html("You've Got Mail");
+                    var htmlcontent = "<div>Please check your email, we've sent you instructions on how to reset your password.</div><div class='ok_btn'></div>";
+                    $('#resetpw_pop .phd-login-pop-content').html(htmlcontent);
+                    $('#resetpw_pop .phd-login-pop-content .ok_btn').click(function(){
+                        $('#resetpw_pop').hide();
+                        $('#resetpw_pop').html(oldcontent);
+                    });
+                }
+            },
+            'json');
+        return false;
     });
+
     var newsletterform = $('#newsletter_form');
 
     newsletterform.submit(function(){
@@ -173,5 +192,40 @@ $(function(){
                     },'json');
         }
         return false;
+    });
+
+    $('#forget_password_btn').click(function(){
+        $('#login_pop').hide();
+        $('#resetpw_pop').show();
+    })
+
+
+    var resetpwform = $('#reset_password_form');
+
+    resetpwform.submit(function(){
+        var newpw = $('#reset_password').val();
+        var confirmpw = $('#reset_password_confirm').val();
+        if(newpw == confirmpw){
+            $.post(site_url + resetpwform.attr('action'),
+                resetpwform.serialize(),
+                function(result, status){
+                    if(result.status == "success"){
+                        $('.reset-password-wrapper').hide();
+                        $('.reset-password-success').show();
+                    }
+                    else{
+                        alert(result.message);
+                    }
+                },'json');
+        }
+        else{
+            alert("Please check the confirm password");
+        }
+
+        return false;
+    });
+
+    $('.reset-password-success-btn').click(function(){
+        window.location.href=site_url;
     });
 })
