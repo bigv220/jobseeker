@@ -8,6 +8,7 @@ class jobseeker extends Front_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('session');
     }
 
     public function index()
@@ -24,7 +25,7 @@ class jobseeker extends Front_Controller {
 
         $data = $this->data;
 
-        $uid = "2";
+        $uid = $this->session->userdata('uid');
 
         $register_step = $this->jobseeker_model->getRegisterStep($uid);
         if(empty($register_step)) {
@@ -43,6 +44,30 @@ class jobseeker extends Front_Controller {
         $workhistory = $this->jobseeker_model->getWorkHistory($uid);
         $personal_skills = $this->jobseeker_model->getPersonalSkills($uid);
         $professional_skills = $this->jobseeker_model->getProfessionalSkills($uid);
+        //get language from db
+        $language = $this->jobseeker_model->getLanguage($uid);
+        $seekingIndustry = $this->jobseeker_model->getSeekingIndustry($uid);
+
+        //get industry and position setting of seeking industry
+        if(count($seekingIndustry)) {
+            $ind = $seekingIndustry['industry'];
+            $position = $this->jobseeker_model->getPosition($ind);
+        } else {
+            $position = $this->jobseeker_model->getPosition('General');
+        }
+
+        //industry lists
+        $industry = $this->jobseeker_model->getIndustry();
+
+        //generate year lists
+        $year_arr = array();
+        for($i = 1970; $i<=date('Y'); $i++) {
+            array_push($year_arr, $i);
+        }
+
+        //language and level array
+        $language_arr = array('China','English');
+        $level_arr = array('Grade-1','Grade-2','Grade-3','Grade-4');
 
         $data["uid"] = $uid;
         $data["userinfo"] = $userinfo;
@@ -51,6 +76,15 @@ class jobseeker extends Front_Controller {
         $data["step_arr"] = $step_arr;
         $data["personal_skills"] = $personal_skills;
         $data['professional_skills'] = $professional_skills;
+        $data['seekingIndustry'] = $seekingIndustry;
+        $data["industry"] = $industry;
+        $data['position'] = $position;
+        $data['yearArray'] = $year_arr;
+
+        //user language settings
+        $data['language'] = $language;
+        $data['language_arr'] = $language_arr;
+        $data['level_arr'] = $level_arr;
         $this->load->view("/jobseeker/register",$data);
     }
 
@@ -83,7 +117,7 @@ class jobseeker extends Front_Controller {
         $this->load->model('jobseeker_model');
 
         $post = $_POST;
-        $uid = "2";
+        $uid = $this->session->userdata('uid');
 
         if ($post) {
             $rtn = $this->jobseeker_model->updateBasicInfo($uid, $post);
@@ -106,7 +140,7 @@ class jobseeker extends Front_Controller {
         $this->load->model('jobseeker_model');
 
         $post = $_POST;
-        $uid = "2";
+        $uid = $this->session->userdata('uid');
 
         if ($post) {
             $rtn = $this->jobseeker_model->updateContactDetails($uid, $post);
@@ -137,7 +171,7 @@ class jobseeker extends Front_Controller {
         $this->load->model('jobseeker_model');
 
         $post = $_POST;
-        $uid = "2";
+        $uid = $this->session->userdata('uid');
 
         if ($post) {
             $rtn = $this->jobseeker_model->updatePreferences($uid, $post);
@@ -168,7 +202,7 @@ class jobseeker extends Front_Controller {
         $this->load->model('jobseeker_model');
 
         $post = $_POST;
-        $uid = "2";
+        $uid = $this->session->userdata('uid');
 
         if ($post) {
             //save school to db
@@ -202,7 +236,7 @@ class jobseeker extends Front_Controller {
         $this->load->model('jobseeker_model');
 
         $post = $_POST;
-        $uid = "2";
+        $uid = $this->session->userdata('uid');
 
         if ($post) {
             //save job to db
@@ -240,7 +274,7 @@ class jobseeker extends Front_Controller {
         $this->load->model('jobseeker_model');
 
         $post = $_POST;
-        $uid = "2";
+        $uid = $this->session->userdata('uid');
 
         if ($post) {
             //save language to db
@@ -296,6 +330,8 @@ class jobseeker extends Front_Controller {
         $this->load->model('jobseeker_model');
         $this->jobseeker_model->addPersonalSkills($uid, $skill);
 
+        $this->_saveRegisterStep($uid, 7);
+
         $msg = "success";
         $result['status'] = $msg;
         echo json_encode($result);
@@ -312,6 +348,8 @@ class jobseeker extends Front_Controller {
         // create folder
         $this->load->model('jobseeker_model');
         $this->jobseeker_model->addProfessionalSkills($uid, $skill);
+
+        $this->_saveRegisterStep($uid, 8);
 
         $msg = "success";
         $result['status'] = $msg;
@@ -363,7 +401,7 @@ class jobseeker extends Front_Controller {
     public function ajaxuploadfile() {
         $data = $this->data;
 
-        // create folder
+        // load model
         $this->load->model('jobseeker_model');
         $user_path = realpath(dirname(__FILE__))."/../../theme/default/workExamples/";
         $this->jobseeker_model->creatUserfolder ( $user_path ) or exit ( 'error: can not creat folder.' );
@@ -381,10 +419,32 @@ class jobseeker extends Front_Controller {
         }
     }
 
-    public function autocomplete() {
-//        $rtn_array = array(array('1'=>'Customer Service'),array('2'=>'Resourcefulness'),array('3'=>'Time Management'));
-//        echo json_encode($rtn_array);exit;
-        exit('Cus|Good');
+    public function personalskillsautocomplete() {
+        $q = $_GET["q"];
+        $rtn_str = '';
+
+        $this->load->model('jobseeker_model');
+        $arr = $this->jobseeker_model->getSkills('personal_skills', $q);
+
+        foreach($arr as $v) {
+            $rtn_str = $rtn_str == ''?$v["skill"]:($rtn_str."|".$v["skill"]);
+        }
+
+        exit($rtn_str);
+    }
+
+    public function professionalskillsautocomplete() {
+        $q = $_GET["q"];
+        $rtn_str = '';
+
+        $this->load->model('jobseeker_model');
+        $arr = $this->jobseeker_model->getSkills('tech_skills', $q);
+
+        foreach($arr as $v) {
+            $rtn_str = $rtn_str == ''?$v["skill"]:($rtn_str."|".$v["skill"]);
+        }
+
+        exit($rtn_str);
     }
     
     public function ajaxlocation($key, $selected, $country=null) {
@@ -398,6 +458,20 @@ class jobseeker extends Front_Controller {
     		echo json_encode( $location[$country][$selected] );
     		exit;
     	}
+    }
+
+    public function ajaxchangeindustry() {
+        $post = $_POST;
+        $name = $post['ind_name'];
+
+        // load model
+        $this->load->model('jobseeker_model');
+        $rtn = $this->jobseeker_model->getPosition($name);
+
+        $msg = "success";
+        $result['data'] = $rtn;
+        $result['status'] = $msg;
+        echo json_encode($result);
     }
 
 }

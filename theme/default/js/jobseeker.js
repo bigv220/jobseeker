@@ -28,6 +28,7 @@ function contactDetailsSubmit() {
             contactDetailsForm.serialize(),
             function(result,status){
                 if(status == 'success'){
+                    $('#step2').addClass('curr');
                     $('#contactDetailsForm .reg-area-tit').addClass('reg-area-tit-curr');
                     alert('Save successful!');
                 }
@@ -48,6 +49,7 @@ function preferencesSubmit() {
             preferencesForm.serialize(),
             function(result,status){
                 if(status == 'success'){
+                    $('#step3').addClass('curr');
                     $('#preferencesForm .reg-area-tit').addClass('reg-area-tit-curr');
                     alert('Save successful!');
                 }
@@ -68,6 +70,7 @@ function educationSubmit() {
             educationForm.serialize(),
             function(result,status){
                 if(status == 'success'){
+                    $('#step4').addClass('curr');
                     $('#educationForm .reg-area-tit').addClass('reg-area-tit-curr');
                     alert('Save successful!');
                 }
@@ -88,6 +91,7 @@ function workhistorySubmit() {
             workhistoryForm.serialize(),
             function(result,status){
                 if(status == 'success'){
+                    $('#step5').addClass('curr');
                     $('#workhistoryForm .reg-area-tit').addClass('reg-area-tit-curr');
                     alert('Save successful!');
                 }
@@ -108,6 +112,7 @@ function languageSubmit() {
             languageForm.serialize(),
             function(result,status){
                 if(status == 'success'){
+                    $('#step6').addClass('curr');
                     $('#languageForm .reg-area-tit').addClass('reg-area-tit-curr');
                     alert('Save successful!');
                 }
@@ -119,11 +124,13 @@ function languageSubmit() {
 }
 
 function personalSkillsSubmit() {
-    $('#personalSkillsForm .reg-area-tit').addClass('reg-area-tit-curr');
+    $('#step7').addClass('curr');
+    $('#PersonalSkillsForm .reg-area-tit').addClass('reg-area-tit-curr');
 }
 
 function professionalSkillsSubmit() {
-    $('#PersonalSkills_input .reg-area-tit').addClass('reg-area-tit-curr');
+    $('#step8').addClass('curr');
+    $('#ProfessionalSkillsForm .reg-area-tit').addClass('reg-area-tit-curr');
 }
 
 function saveAll() {
