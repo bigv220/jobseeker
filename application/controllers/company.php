@@ -41,6 +41,8 @@ class company extends Front_Controller {
 
         $data["uid"] = $uid;
         $basic_info = $this->company_model->getUserInfo($uid);
+        $industries = $this->company_model->getIndustry($uid);
+        $data['industries'] = $this->company_model->getIndustry($uid);
         //$contact_detail = $this->company_model->getContactDetail($uid);
 
         $data["basic_info"] = $basic_info;

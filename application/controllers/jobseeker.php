@@ -66,7 +66,7 @@ class jobseeker extends Front_Controller {
         }
 
         //language and level array
-        $language_arr = array('China','English');
+        $language_arr = array('Chinese','English');
         $level_arr = array('Grade-1','Grade-2','Grade-3','Grade-4');
 
         $data["uid"] = $uid;

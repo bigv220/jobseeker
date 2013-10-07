@@ -76,17 +76,17 @@
                 <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                 <div class="reg-row"> <strong>Contact Name <i class="star">*</i></strong>
                     <div>
-                        <input type="" class="reg-input" name="last_name" value="<?php echo $basic_info['last_name']; ?>" required/>
+                        <input type="text" class="reg-input" name="last_name" value="<?php echo $basic_info['last_name']; ?>" required/>
                     </div>
                 </div>
                 <div class="reg-row"> <strong>Email Address <i class="star">*</i></strong>
                     <div>
-                        <input type="" class="reg-input" name="email" value="<?php echo $basic_info['email']; ?>" required/>
+                        <input type="text" class="reg-input" name="email" value="<?php echo $basic_info['email']; ?>" required/>
                     </div>
                 </div>
                 <div class="reg-row"> <strong>Phone Number <i class="star">*</i> <span>(including area code)</span></strong>
                     <div>
-                        <input type="" class="reg-input" name="phone" value="<?php echo $basic_info['phone']; ?>" required/>
+                        <input type="text" class="reg-input" name="phone" value="<?php echo $basic_info['phone']; ?>" required/>
                     </div>
                     <input id="is_allow_phone" name="is_allow_phone" value="<?php echo $basic_info['is_allow_phone']; ?>" class="kyo-radio" style="display:none;"/>
                     <div><span style="padding-right:10px;">Allow jobseekers to see your phone number</span> <i class="kyo-radio" data-id="is_allow_phone" data-val="1">Yes</i> <i class="kyo-radio" data-id="is_allow_phone" data-val="0">No</i></div>
@@ -131,7 +131,7 @@
             </form>
             </div>
         </div>
-        <div class="reg-btns"> <a href="#"  class="reg-btns-save"></a><a href="#" class="reg-btns-post"></a><a href="#" class="reg-btns-find"></a> </div>
+        <div class="reg-btns"> <a href="javascript:void(0);" onclick="saveAll();" class="reg-btns-save"></a><a href="#" class="reg-btns-post"></a><a href="#" class="reg-btns-find"></a> </div>
     </div>
 </div>
 
@@ -186,7 +186,9 @@ $(document).ready(function() {
 
     $( "#basicForm" ).validate();
 
-    $('#industry_box').tagit({select:true, 
+    $('#industry_box').tagit({
+        initialTags:[<?php foreach ($industries as $industry) echo '"'.$industry['industry'].'",'; ?>],
+        select:true, 
         sortable:true,
         tagsChanged:function () {
             var tags = $('#industry_box').tagit('tags');

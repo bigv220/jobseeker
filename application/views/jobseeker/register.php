@@ -5,12 +5,18 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+        $("select[name='country']").change(function() {
+            change_location($(this),'country');
+        });
+        $("select[name='province']").change(function() {
+            change_location($(this), 'province');
+        });
         $("input.date").jSelectDate({
             css:"date",
-            yearBeign: 1995,
+            yearBeign: 1960,
             disabled : false
         });
-
+        $("select[name='country']").change();
         //upload user avatar
         uploadImage();
 
@@ -358,22 +364,29 @@
                     </div>
                 </div>
                 <style>
-				.location div.kyo-select, .location dl.kyo-select-list {width:145px !important;}
+				.location select, .location dl.kyo-select-list {width:145px !important;}
                 </style>
                 <div class="reg-row clearfix location"> <strong>Location <i class="star">*</i></strong>
                     <div>
                         <select name="country" required>
                             <option value="">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
-                            <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php if ($k == $userinfo['country']): ?>
+                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php else: ?>
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php endif; ?>
                             <?php endforeach;?>
                         </select>
                         <select name="province">
                             <option value="">All Province</option>
-                            <option value="Beijing">Beijing</option>
-                            <!-- <?php foreach ($location['China'] as $k=>$v):?>
-                            <option value="<?php echo $k ?>"><?php echo $k ?></option>
-                            <?php endforeach;?>-->
+                            <?php foreach ($location['China'] as $k=>$v):?>
+                                <?php if ($k == $userinfo['province']): ?>
+                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php else: ?>
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php endif; ?>
+                            <?php endforeach;?>
                         </select>
                         <select name="city">
                             <option value="">All City</option>
@@ -400,7 +413,7 @@
                 <div class="reg-row clearfix"> <strong>Birthday<i class="star">*</i></strong>
                     <div>
                         <?php $birthday = $userinfo["birthday"];
-                            $birthday = $birthday ? $birthday : '2013-1-1';
+                            $birthday = !empty($birthday) ? $birthday : '2013-1-1';
                         ?>
                         <input type="text" name="birthday" id="txtName" class="date" value="<?php echo $birthday; ?>" />
                     </div>
@@ -503,35 +516,35 @@
                     <div class="reg-area-tit <?php echo $cla; ?>">Preferences</div>
                     <div class="reg-row"><strong>Prefered length of employment?<i class="star">*</i></strong>
                         <div>
-                            <input type="hidden" name='employment_length' id="employment_length" value="1" />
+                            <input type="text" name='employment_length' id="employment_length" value="<?php echo $userinfo['employment_length']; ?>" style="display:none" class="kyo-radio"/>
                             <ul class="leng-radio">
-                                <li><i data-val="0" data-id="emp_length" class="kyo-radio kyo-radio-sel" onclick="selectItem('employment_length',1);">Long term employment (1+ years)</i></li>
-                                <li><i data-val="1" data-id="emp_length" class="kyo-radio" onclick="selectItem('employment_length',2);">Short term employment (-1 years)</i></li>
-                                <li><i data-val="2" data-id="emp_length" class="kyo-radio" onclick="selectItem('employment_length',3);">No preference</i></li>
+                                <li><i data-val="0" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',1);">Long term employment (1+ years)</i></li>
+                                <li><i data-val="1" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',2);">Short term employment (-1 years)</i></li>
+                                <li><i data-val="2" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',3);">No preference</i></li>
                             </ul>
                         </div>
                     </div>
                     <div class="reg-row"><strong>Prefered type of employment?<i class="star">*</i></strong>
                         <div>
-                            <input type="hidden" name="employment_type" id="employment_type" value="1" /><br />
+                            <input type="hidden" name="employment_type" id="employment_type" value="<?php echo $userinfo['employment_type'];?>" class="kyo-radio" /><br />
                             <ul class="leng-radio">
-                                <li><i data-val="1" data-id="type-employment" class="kyo-radio kyo-radio-sel" onclick="selectItem('employment_type',1);">Contract</i></li>
-                                <li><i data-val="2" data-id="type-employment" class="kyo-radio" onclick="selectItem('employment_type',2);">Part Time</i></li>
-                                <li><i data-val="3" data-id="type-employment" class="kyo-radio" onclick="selectItem('employment_type',3);">Full Time</i></li>
-                                <li><i data-val="4" data-id="type-employment" class="kyo-radio" onclick="selectItem('employment_type',4);">Internship</i></li>
-                                <li><i data-val="5" data-id="type-employment" class="kyo-radio" onclick="selectItem('employment_type',5);">Any</i></li>
+                                <li><i data-val="1" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',1);">Contract</i></li>
+                                <li><i data-val="2" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',2);">Part Time</i></li>
+                                <li><i data-val="3" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',3);">Full Time</i></li>
+                                <li><i data-val="4" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',4);">Internship</i></li>
+                                <li><i data-val="5" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',5);">Any</i></li>
                             </ul>
                         </div>
                     </div>
                     <div class="reg-row"><strong>Do you require Visa assistance from employers?<i class="star">*</i></strong>
-                            <input type="hidden" name="is_visa_assistance" id="is_visa_assistance" value="1" />
-                            <i class="kyo-radio kyo-radio-sel" data-id="visa" data-val="1" onclick="selectItem('is_visa_assistance',1);">Yes</i>
-                            <i class="kyo-radio" data-id="visa" data-val="2" onclick="selectItem('is_visa_assistance',0);">No</i>
+                            <input type="hidden" name="is_visa_assistance" id="is_visa_assistance" value="<?php echo $userinfo['is_visa_assistance']; ?>" class="kyo-radio"/>
+                            <i class="kyo-radio" data-id="is_visa_assistance" data-val="1" onclick="selectItem('is_visa_assistance',1);">Yes</i>
+                            <i class="kyo-radio" data-id="is_visa_assistance" data-val="2" onclick="selectItem('is_visa_assistance',0);">No</i>
                     </div>
                     <div class="reg-row"><strong>Do you require accomodation assistance from employer?<i class="star">*</i></strong>
-                            <input type="hidden" name="is_accomodation_assistance" name="is_accomodation_assistance" value="1" />
-                            <i class="kyo-radio kyo-radio-sel" data-id="assistance" data-val="1" onclick="selectItem('is_accomodation_assistance',1);">Yes</i>
-                            <i class="kyo-radio" data-id="assistance" data-val="2" onclick="selectItem('is_accomodation_assistance',0);">No</i>
+                            <input type="hidden" name="is_accomodation_assistance" id="is_accomodation_assistance" value="<?php echo $userinfo['is_accomodation_assistance'];?>" class="kyo-radio"/>
+                            <i class="kyo-radio" data-id="is_accomodation_assistance" data-val="1" onclick="selectItem('is_accomodation_assistance',1);">Yes</i>
+                            <i class="kyo-radio" data-id="is_accomodation_assistance" data-val="2" onclick="selectItem('is_accomodation_assistance',0);">No</i>
                     </div>
                     <div class="reg-row"><strong>What industry are you seeking employment in?<i class="star">*</i></strong>
                         <div id="industry_lists">
@@ -567,9 +580,9 @@
                     </div>
                     <div class="reg-row"><b>What is your availability?</b>
                         <div>
-                            <input type="hidden" name="availability" id="availability" value="1" />
+                            <input type="hidden" name="availability" id="availability" value="<?php echo $userinfo['availability'];?>" class="kyo-radio"/>
                             <ul class="leng-radio">
-                                <li><i class="kyo-radio kyo-radio-sel" data-id="availability" data-val="1" onclick="selectItem('availability',1);">Weekdays</i></li>
+                                <li><i class="kyo-radio" data-id="availability" data-val="1" onclick="selectItem('availability',1);">Weekdays</i></li>
                                 <li><i class="kyo-radio" data-id="availability" data-val="2" onclick="selectItem('availability',1);">Evenings</i></li>
                                 <li><i class="kyo-radio" data-id="availability" data-val="3" onclick="selectItem('availability',1);">Weekends</i></li>
                                 <li><i class="kyo-radio" data-id="availability" data-val="4" onclick="selectItem('availability',1);">Any</i></li>
