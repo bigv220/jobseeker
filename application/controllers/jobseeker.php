@@ -61,7 +61,7 @@ class jobseeker extends Front_Controller {
 
         //generate year lists
         $year_arr = array();
-        for($i = 1970; $i<=date('Y'); $i++) {
+        for($i = date('Y'); $i >= 1970; $i--) {
             array_push($year_arr, $i);
         }
 

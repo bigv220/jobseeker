@@ -26,17 +26,35 @@
                         <input type="text" class="reg-input" id="name" name="name" title="" value="<?php echo $basic_info['first_name']; ?>" required/>
                     </div>
                 </div>
-                <div class="reg-row clearfix"> <strong>Location <i class="star">*</i></strong>
+                <style>
+                .location select, .location dl.kyo-select-list {width:145px !important;}
+                </style>
+                <div class="reg-row clearfix location"> <strong>Location <i class="star">*</i></strong>
                     <div>
-                        <select id="country" name="country" title="" required>
+                        <select name="country" required>
                             <option value="">All Counties</option>
-                            <option value="China">China</option>
-                            <option value="USA">USA</option>
+                            <?php foreach ($location as $k=>$v):?>
+                                <?php if ($k == $basic_info['country']): ?>
+                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php else: ?>
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php endif; ?>
+                            <?php endforeach;?>
                         </select>
-                        <select id="city" name="city" required title="">
+                        <select name="province">
+                            <option value="">All Province</option>
+                            <?php foreach ($location['China'] as $k=>$v):?>
+                                <?php if ($k == $basic_info['province']): ?>
+                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php else: ?>
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php endif; ?>
+                            <?php endforeach;?>
+                        </select>
+                        <select name="city">
                             <option value="">All City</option>
-                            <option value="Beijing">Beijing</option>
-                            <option value="Shanghai">Shanghai</option>
+                            <option value="2">Beijing</option>
+                            <option value="3">Shanghai</option>
                         </select>
                     </div>
                 </div>
@@ -49,7 +67,7 @@
                 </div>
                 <div class="reg-row clearfix"> <strong>Industry <i class="star">*</i></strong>
                     
-                    <select name="industry" id="industry" title="" required>
+                    <select name="industry" id="industry" title="" <?php if (empty($industries)): ?>required<?php endif; ?>>
                     <option value="">All industry</option>
                     <option>Accounting</option>
                     <option>HR</option>
@@ -183,7 +201,13 @@ function uploadImage(old_avatar) {
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
-
+        $("select[name='country']").change(function() {
+            change_location($(this),'country');
+        });
+        $("select[name='province']").change(function() {
+            change_location($(this), 'province');
+        });
+        $("select[name='country']").change();
     $( "#basicForm" ).validate();
 
     $('#industry_box').tagit({

@@ -186,7 +186,6 @@
             function(result,status){
                 if(status == 'success'){
                     $(thisO).parent().remove();
-                    alert('Delete successful!');
                 }
                 else{
                     alert('Delete failed!');
@@ -201,12 +200,11 @@
             function(result,status) {
                 if(status == 'success'){
                     var htm = '<li data-val="2">'+ v +
-                        '<i class="del" onclick="del'+ id_str + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
+                        '<i class="del" onclick="delPersonalSkills' + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
 
                     $('#'+ id_str).append(htm);
                     $('#'+li_id).addClass('curr');
                     $('#'+ id_str + 'Form div.reg-area-tit').addClass('reg-area-tit-curr');
-                    alert('Add successful!');
                 }
                 else{
                     alert('Add failed!');

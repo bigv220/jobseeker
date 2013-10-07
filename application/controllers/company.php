@@ -40,6 +40,10 @@ class company extends Front_Controller {
 		}
 
         $data["uid"] = $uid;
+        // get location
+        $this->load->helper('location');
+        $data['location'] = getLoction();
+
         $basic_info = $this->company_model->getUserInfo($uid);
         $industries = $this->company_model->getIndustry($uid);
         $data['industries'] = $this->company_model->getIndustry($uid);
