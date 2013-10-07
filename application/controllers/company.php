@@ -45,7 +45,6 @@ class company extends Front_Controller {
         $data['location'] = getLoction();
 
         $basic_info = $this->company_model->getUserInfo($uid);
-        $industries = $this->company_model->getIndustry($uid);
         $data['industries'] = $this->company_model->getIndustry($uid);
         //$contact_detail = $this->company_model->getContactDetail($uid);
 
@@ -56,7 +55,12 @@ class company extends Front_Controller {
 	}
 
     public function companyInfo(){
+        $this->load->model('company_model');
+        $uid = 6;
+
         $data = $this->data;
+        $data["info"] = $this->company_model->getUserInfo($uid);
+        $data['industries'] = $this->company_model->getIndustry($uid);
         $this->load->view($data['front_theme']."/company-info",$data);
     }
 
