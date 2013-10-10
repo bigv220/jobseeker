@@ -24,7 +24,6 @@
 		salary: 		<input type="text" name="salary_range"><br>
 		experience: 	<input type="text" name="preferred_year_of_experience"><br>
 		descrip: 		<textarea name="job_desc"></textarea><br>
-		<input type="hidden" name="company_id" value="2">
 		<input type="submit">
 		</form>
     </div>

@@ -129,3 +129,4 @@ alter table user add province varchar(50) null;
 
 #2013-10-10
 ALTER TABLE  `job` ADD  `language_level` VARCHAR( 50 ) NULL AFTER  `language`;
+ALTER TABLE  `job` CHANGE  `id`  `id` INT( 11 ) NOT NULL AUTO_INCREMENT
