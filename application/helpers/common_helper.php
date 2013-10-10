@@ -100,3 +100,14 @@
 				</html>';
 		exit($html);
 	}
+
+function getFirstImgInArticle($article, $themePath){
+    $firstImage = '';
+    $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $article['content'], $matches);
+    if(count($matches[1]) > 0)
+        $firstImage = $matches[1][0];
+    if(empty($firstImage)){
+        $firstImage = $themePath . "style/home/temp/temp-h1.gif";
+    }
+    return $firstImage;
+}

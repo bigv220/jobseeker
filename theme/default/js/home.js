@@ -121,6 +121,7 @@ $(function(){
                             $('#email').attr('value','').css("border-color", "#cecece");
                             $('#password').attr('value','').css("border-color", "#cecece");
                             $('.pop-reg').fadeOut();
+                            $('.phd-login-text').html(firstName + ' ' + lastName);
                             show_welcome_pop(regType);
                         }
 

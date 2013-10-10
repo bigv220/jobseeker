@@ -62,11 +62,19 @@
 
                     <?php foreach($news_list as $key => $news):?>
                         <li class="n<?php echo $key+1;?>">
-                            <img src="<?php echo $theme_path?>style/home/temp/temp-h1.gif" width="120" height="120" alt="" />
+                            <!--
+                            <img src="<?php echo $news['imgsrc'];?>" width="120" height="120" alt="" />
+                            -->
+                            <img src="<?php echo ($theme_path . 'style/home/temp/temp-h' . ($key+1) . '.gif');?>" width="120" height="120" alt="" />
                             <i class="mark png"></i>
                             <a href="#" class="h-blog-item">
                                 <strong><?php echo $news['title'];?></strong>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                                <span>
+                                    <?php
+                                    echo $news['content'];
+
+                                    ?>
+                                </span>
                                 <b>Continue Reading</b>
                             </a>
 

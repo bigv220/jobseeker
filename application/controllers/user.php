@@ -24,6 +24,14 @@ class user extends Front_Controller {
         $message = "success";
         if(!$this->jobseeker_model->checkUserExisting($_POST['email'])){
             $userId = $this->jobseeker_model->addUser($_POST);
+            $this->load->library('session');
+
+            $result['uid'] = $userId;
+            $result['first_name'] = $_POST['first_name'];
+            $result['last_name'] = $_POST['last_name'];
+            $result['user_type'] = $_POST['user_type'];
+
+            $this->session->set_userdata($result);
         }
         else{
             $status = "error";
