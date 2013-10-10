@@ -43,5 +43,15 @@ class job extends Front_Controller {
         $data["similar_jobs"] = $similar_jobs;
         $this->load->view($data['front_theme']."/job-details",$data);
     }
+    
+    public function postjob() {
+    	$data = $this->data;
+    	if (empty($_POST)) {
+    		$this->load->view($data['front_theme']."/job-postjob",$data);
+    	} else {
+    		$post = $_POST;
+    		print_r($post);
+    	}
+    }
 
 }

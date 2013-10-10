@@ -19,7 +19,7 @@ class company extends Front_Controller {
 	public function register() {
 		$data = $this->data;
 		
-        $uid = 6;
+        $uid = 2;
         //Load Model            
         $this->load->model('company_model');
 
@@ -37,21 +37,22 @@ class company extends Front_Controller {
             $msg = "success";
             $result['status'] = $msg;
             echo json_encode($result);
+		} else {
+
+	        $data["uid"] = $uid;
+	        // get location
+	        $this->load->helper('location');
+	        $data['location'] = getLoction();
+	
+	        $basic_info = $this->company_model->getUserInfo($uid);
+	        $data['industries'] = $this->company_model->getIndustry($uid);
+	        //$contact_detail = $this->company_model->getContactDetail($uid);
+	
+	        $data["basic_info"] = $basic_info;
+	        //$data["contact_detail"] = $contact_detail;
+	
+			$this->load->view($data['front_theme']."/company-register",$data);
 		}
-
-        $data["uid"] = $uid;
-        // get location
-        $this->load->helper('location');
-        $data['location'] = getLoction();
-
-        $basic_info = $this->company_model->getUserInfo($uid);
-        $data['industries'] = $this->company_model->getIndustry($uid);
-        //$contact_detail = $this->company_model->getContactDetail($uid);
-
-        $data["basic_info"] = $basic_info;
-        //$data["contact_detail"] = $contact_detail;
-
-		$this->load->view($data['front_theme']."/company-register",$data);
 	}
 
     public function companyInfo(){
