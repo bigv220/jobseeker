@@ -21,17 +21,17 @@
       <dd class="search-row-nav">
         <select name="" class="after-select">
           <option value="0" selected="selected">All Cities</option>
-          <option value="1">Shaihai</option>
+          <option value="1">Shanghai</option>
           <option value="2">Beijing</option>
         </select>
       </dd>
-    </dl>
+    </dl>  
     <dl class="search-row ">
       <dt class="search-row-tit">Type of employment</dt>
       <dd class="search-row-nav">
         <select name="" class="after-select">
           <option value="0" selected="selected">Full Time</option>
-          <option value="1">Shaihai</option>
+          <option value="1">Shanghai</option>
           <option value="2">Beijing</option>
         </select>
       </dd>

@@ -48,12 +48,12 @@ function valid_email(email) {
 function show_welcome_pop(usertype){
     var lefttext = "Let us know your<br/>job preference";
     var righttext = "Start looking at<br/>jobs in China now";
-    var lefthref = "#";
+    var lefthref = site_url + "jobseeker/register";
     var righthref = "#";
     if(usertype == 1){//employer
         var lefttext = "Tell us more about<br/> your company";
         var righttext = "Start looking at<br/> jobseekers";
-        var lefthref = "#";
+        var lefthref = site_url + "company/register";
         var righthref = "#";
     }
 

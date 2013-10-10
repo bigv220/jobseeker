@@ -5,7 +5,7 @@
         <b>WELCOME TO JINGJOBS It’s time to GetJinged</b>
         <div class="pop-welcome-bd">
             <div class="span1"><span class="left-span-text">Tell us more about<br/> your company </span><br/>
-                <a class="pop-welcome-here left-btn-link" href="#"></a></div>
+                <a class="pop-welcome-here left-btn-link" href=""></a></div>
             <div class="span2">OR</div>
             <div class="span3"><span class="right-span-text">Start looking at<br/> jobseekers </span><br/>
                 <a class="pop-welcome-here right-btn-link" href="#"></a>
