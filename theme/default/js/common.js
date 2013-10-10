@@ -48,6 +48,7 @@ function valid_email(email) {
 function show_welcome_pop(usertype){
     var lefttext = "Let us know your<br/>job preference";
     var righttext = "Start looking at<br/>jobs in China now";
+
     var lefthref = base_url + "jobseeker/register";
     var righthref = base_url + "search/searchjob";
     if(usertype == 1){//employer
@@ -55,6 +56,7 @@ function show_welcome_pop(usertype){
         var righttext = "Start looking at<br/> jobseekers";
         var lefthref = base_url + "company/register";
         var righthref = base_url + "search/staff";
+
     }
 
     $('.pop-welcome .left-span-text').html(lefttext);

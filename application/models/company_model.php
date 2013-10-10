@@ -55,12 +55,12 @@ class company_model extends MY_Model
 	public function updateBasicInfo($data)
 	{
 		$uid = $data['uid'];
-		$data = array('first_name'=>$data['name'],'country'=>$data['country'],'city'=>$data['city'],
+		$data = array('first_name'=>$data['name'],'country'=>$data['country'],'province'=>$data['province'],'city'=>$data['city'],
 				'profile_pic'=>$data['avatar'], 'description'=>$data['description']);
 		$this->db->where('uid', $uid);
 		$this->db->update('user', $data); 
 		if (isset($_POST['industry_tag'])) {
-			$this->company_model->addIndustry($_POST['industry_tag']);
+			$this->addIndustry($uid, $_POST['industry_tag']);
 		}
         return true;
 	}
@@ -77,9 +77,24 @@ class company_model extends MY_Model
 		$this->db->update('user', $data); 
 	}
 
-	public function addIndustry($data) 
+	public function addIndustry($company_id, $data) 
 	{
-		
+		$arr = explode(',', $data);
+		$this->db->delete('company_industry', array('company_id'=>$company_id));
+
+		foreach($arr as $industry) {
+			$data = array("company_id" => $company_id, "industry" => $industry);
+			$this->db->insert('company_industry', $data);
+		}
+	}
+
+	public function getIndustry($company_id) {
+		$result = $this->db->select('*')
+            ->from('company_industry')
+            ->where('company_id',$company_id)
+            ->get()
+            ->result_array();
+        return $result;
 	}
 
 	public function getSimilarCompanys($company_id, $industry)

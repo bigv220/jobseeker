@@ -8,6 +8,7 @@ class job extends Front_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('session');
     }
 
     public function index()
@@ -42,6 +43,25 @@ class job extends Front_Controller {
         $data['jobinfo'] = $jobinfo;
         $data["similar_jobs"] = $similar_jobs;
         $this->load->view($data['front_theme']."/job-details",$data);
+    }
+    
+    public function postjob() {
+    	$data = $this->data;
+    	if (empty($_POST)) {
+    		$this->load->view($data['front_theme']."/job-postjob",$data);
+    	} else {
+    		$post = $_POST;
+    		$post['post_date'] = time();
+    		if (1 == $this->session->userdata('user_type')) {
+    			$post['company_id'] = $this->session->userdata('uid');
+    		}
+    		
+    		//Load Model
+    		$this->load->model('job_model');
+    		$result = $this->job_model->saveJob($post);
+    		$result = $result ? 'Success.' : 'failed.';
+    		echo json_encode($result);
+    	}
     }
 
 }

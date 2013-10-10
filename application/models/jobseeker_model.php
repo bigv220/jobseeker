@@ -92,7 +92,7 @@ class jobseeker_model extends MY_Model
     public function updateBasicInfo($uid,$data)
     {
         $data = array('first_name'=>$data['first_name'],'last_name'=>$data['last_name'],'city'=>$data['city'],
-            'country'=>$data['country'], 'profile_pic'=>$data['avatar'],
+            'province'=>$data['province'],'country'=>$data['country'], 'profile_pic'=>$data['avatar'],
             'birthday'=>$data['birthday'],'is_private'=>$data['is_private']);
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }

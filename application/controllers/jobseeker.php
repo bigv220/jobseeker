@@ -61,12 +61,12 @@ class jobseeker extends Front_Controller {
 
         //generate year lists
         $year_arr = array();
-        for($i = 1970; $i<=date('Y'); $i++) {
+        for($i = date('Y'); $i >= 1970; $i--) {
             array_push($year_arr, $i);
         }
 
         //language and level array
-        $language_arr = array('China','English');
+        $language_arr = array('Chinese','English');
         $level_arr = array('Grade-1','Grade-2','Grade-3','Grade-4');
 
         $data["uid"] = $uid;

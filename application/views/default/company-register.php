@@ -19,24 +19,41 @@
             <p class="reg-right-text">Please fill out the mandatory fields to enhance your JingJobs experience,and promote your company to jobseekers.</p>
             <form action="" id="basicForm" method="post">
             <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-            <div class="reg-area">
+            <div class="reg-area"> <a id="reg1" name="reg1"></a>
                 <div class="reg-area-tit">Basic Information</div>
                 <div class="reg-row"> <strong>Full Company Name <i class="star">*</i></strong>
                     <div>
                         <input type="text" class="reg-input" id="name" name="name" title="" value="<?php echo $basic_info['first_name']; ?>" required/>
                     </div>
                 </div>
-                <div class="reg-row clearfix"> <strong>Location <i class="star">*</i></strong>
+                <style>
+                .location select, .location dl.kyo-select-list {width:145px !important;}
+                </style>
+                <div class="reg-row clearfix location"> <strong>Location <i class="star">*</i></strong>
                     <div>
-                        <select id="country" name="country" title="" required>
+                        <select name="country" required>
                             <option value="">All Counties</option>
-                            <option value="China">China</option>
-                            <option value="USA">USA</option>
+                            <?php foreach ($location as $k=>$v):?>
+                                <?php if ($k == $basic_info['country']): ?>
+                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php else: ?>
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php endif; ?>
+                            <?php endforeach;?>
                         </select>
-                        <select id="city" name="city" required title="">
+                        <select name="province">
+                            <option value="">All Province</option>
+                            <?php foreach ($location['China'] as $k=>$v):?>
+                                <?php if ($k == $basic_info['province']): ?>
+                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php else: ?>
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php endif; ?>
+                            <?php endforeach;?>
+                        </select>
+                        <select name="city">
                             <option value="">All City</option>
-                            <option value="Beijing">Beijing</option>
-                            <option value="Shanghai">Shanghai</option>
+                            <option value="1">Beijing</option>
                         </select>
                     </div>
                 </div>
@@ -49,7 +66,7 @@
                 </div>
                 <div class="reg-row clearfix"> <strong>Industry <i class="star">*</i></strong>
                     
-                    <select name="industry" id="industry" title="" required>
+                    <select name="industry" id="industry" title="" <?php if (empty($industries)): ?>required<?php endif; ?>>
                     <option value="">All industry</option>
                     <option>Accounting</option>
                     <option>HR</option>
@@ -76,17 +93,17 @@
                 <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                 <div class="reg-row"> <strong>Contact Name <i class="star">*</i></strong>
                     <div>
-                        <input type="" class="reg-input" name="last_name" value="<?php echo $basic_info['last_name']; ?>" required/>
+                        <input type="text" class="reg-input" name="last_name" value="<?php echo $basic_info['last_name']; ?>" required/>
                     </div>
                 </div>
                 <div class="reg-row"> <strong>Email Address <i class="star">*</i></strong>
                     <div>
-                        <input type="" class="reg-input" name="email" value="<?php echo $basic_info['email']; ?>" required/>
+                        <input type="text" class="reg-input" name="email" value="<?php echo $basic_info['email']; ?>" required/>
                     </div>
                 </div>
                 <div class="reg-row"> <strong>Phone Number <i class="star">*</i> <span>(including area code)</span></strong>
                     <div>
-                        <input type="" class="reg-input" name="phone" value="<?php echo $basic_info['phone']; ?>" required/>
+                        <input type="text" class="reg-input" name="phone" value="<?php echo $basic_info['phone']; ?>" required/>
                     </div>
                     <input id="is_allow_phone" name="is_allow_phone" value="<?php echo $basic_info['is_allow_phone']; ?>" class="kyo-radio" style="display:none;"/>
                     <div><span style="padding-right:10px;">Allow jobseekers to see your phone number</span> <i class="kyo-radio" data-id="is_allow_phone" data-val="1">Yes</i> <i class="kyo-radio" data-id="is_allow_phone" data-val="0">No</i></div>
@@ -131,7 +148,7 @@
             </form>
             </div>
         </div>
-        <div class="reg-btns"> <a href="#"  class="reg-btns-save"></a><a href="#" class="reg-btns-post"></a><a href="#" class="reg-btns-find"></a> </div>
+        <div class="reg-btns"> <a href="javascript:void(0);" onclick="saveAll();" class="reg-btns-save"></a><a href="<?php echo $site_url?>job/postjob" class="reg-btns-post"></a><a href="#" class="reg-btns-find"></a> </div>
     </div>
 </div>
 
@@ -183,10 +200,18 @@ function uploadImage(old_avatar) {
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
-
+        $("select[name='country']").change(function() {
+            change_location($(this),'country');
+        });
+        $("select[name='province']").change(function() {
+            change_location($(this), 'province');
+        });
+        $("select[name='country']").change();
     $( "#basicForm" ).validate();
 
-    $('#industry_box').tagit({select:true, 
+    $('#industry_box').tagit({
+        initialTags:[<?php foreach ($industries as $industry) echo '"'.$industry['industry'].'",'; ?>],
+        select:true, 
         sortable:true,
         tagsChanged:function () {
             var tags = $('#industry_box').tagit('tags');

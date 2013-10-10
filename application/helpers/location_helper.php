@@ -17,6 +17,7 @@ function getLoction() {
 							'Xiamen',
 					),
 					'Gansu' => array(
+							'Lanzhou'
 							),
 					'Guangdong' => array(
 							'Guangzhou',

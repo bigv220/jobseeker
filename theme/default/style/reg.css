@@ -40,3 +40,4 @@ body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
 .reg-row #country {float:left;}
 .reg-row #city {float:left;margin-left:10px;}
 .reg-row #industry {display:block;}
+.location select, .location dl.kyo-select-list {width:145px !important;}

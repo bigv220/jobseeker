@@ -124,13 +124,17 @@ $(function(){
     $('.backtop').fxBacktop();
 
 })
+function saveAll() {
+	var basicInfoForm = $('#basic_submit');
+    basicInfoForm.validate();
+    if(basicInfoForm.valid())
+		$('#basic_submit').click();
 
-
-
+}
 // ajax localtion
-function change_location(o) {
-	var key = $(o).parent().parent().prev("select").attr("name");
-	var selected = $(o).html();
+function change_location(this1, key) {
+	
+	var selected = this1.val();
 	var html_option = "";
 
 	if("country" == key) {
@@ -141,6 +145,7 @@ function change_location(o) {
 				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
 			}
 			$("select[name='province']").html(html_option);
+			$("select[name='province']").change();
 		});
 	}
 	

@@ -11,8 +11,8 @@
   <div class="company-body box rel mb20">
     <div class="company-hd rel"> <i class="abs face png"></i>
       <div class="text">
-        <h2>REDSTAR WORKS</h2>
-        <h4>Beijing, China</h4>
+        <h2><?php echo $info['first_name'];?></h2>
+        <h4><?php echo $info['city'].', '.$info['country'];?></h4>
         <p>Online now</p>
       </div>
       <div class="btnarea"> <a href="#" class="png combtn website"></a> <a href="#" class="png combtn bookmark"></a> <a href="#" class="combtn bookmarded" style="display:none;"></a> </div>
@@ -20,17 +20,20 @@
     <div class="company-bd">
       <div class="company-bd-left">
         <dl class="mb30">
-          <dt>About Redstar Works</dt>
-          <dd><strong>Praesent vestibulum mollis lectus, sed porttitor dolor tristique sed. Aenean eleifend auctor nulla, nec feugiat velit scelerisque ornare. Ut purus lacus, molestie ut ultrices vel, tincidunt id nibh. Nulla facilisi. Praesent gravida arcu purus, non placerat tortor.
-            Duis vitae ligula id velit dictum lobortis. Proin mattis, risus quis egestas tincidunt, nunc nibh faucibus turpis, quis gravida nisi sem et sem. Morbi pretium tortor vitae tellus suscipit</strong></dd>
+          <dt>About <?php echo $info['first_name'];?></dt>
+          <dd><strong><?php echo $info['description'];?></strong></dd>
         </dl>
         <dl class="mb30">
-          <dt>Idustry</dt>
-          <dd class="idustry"><a href="#">graphic</a> <a href="#">Design</a> <a href="#">Media</a> <a href="#">Publishing</a> <a href="#">Marketing</a></dd>
+          <dt>Industry</dt>
+          <dd class="idustry">
+          <?php foreach ($industries as $industry):?>
+            <a href="#"><?php echo $industry['industry']; ?></a> 
+          <?php endforeach; ?>
+          </dd>
         </dl>
         <dl>
           <dt>Phone</dt>
-          <dd><strong>(+86) 138 0002 2406</strong></dd>
+          <dd><strong><?php if ($info['country'] =='China'): ?> (+86) <?php else: ?> (+1) <?php endif; ?> <?php echo $info['phone']; ?></strong></dd>
         </dl>
       </div>
       <div class="company-bd-right">
