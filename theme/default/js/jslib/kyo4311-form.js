@@ -174,7 +174,7 @@ $(function(){
 				$(this).removeClass('kyo-select-list-hover');
 			})
 			.click(function(){
-				change_location(this); // trigger an event when the select changed. fun in reg.js
+				//change_location(this); // trigger an event when the select changed. fun in reg.js
 				l.css({'z-index':12});
 				isselect = true;
 				show.text($(this).text());

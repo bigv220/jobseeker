@@ -1,0 +1,36 @@
+.ora{color:#ea6e3b;}
+.pur{color:#481052;}
+html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
+body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
+.advsearch-bd{padding:15px 20px;}
+.advsearch-tit{color:#ea6e3b;font-size:15px;font-weight:bolder;height:30px;}
+.advsearch-row{padding:0 0 5px 0;}.advsearch-row strong{color:#444;}
+.advsearch-row .span1,.advsearch-row .span2,.advsearch-row .span3{width:232px;}
+.advsearch-row .span1,.advsearch-row .span2{float:left;*display:inline;margin-right:15px;}
+.advsearch-row .span3{float:right;*display:inline;}
+.advsearch-row .kyo-input{width:228px;}
+.advsearch-row strong{height:26px;line-height:26px;}
+.search-row-tip{color:#e97148;text-decoration:underline;font-size:10px;height:22px;line-height:22px;}
+.advsearch-below{display:none;}
+.adv-search-bar{text-align:right;}.adv-search-bar .btn{display:inline-block;width:128px;height:25px;cursor:pointer;}
+.adv-search-bar .find{background:url(search/button.png) no-repeat;}
+.adv-search-bar .findnow{background:url(search/find-now.png) no-repeat;display:none;}
+.adv-search-bar .findstaff{background:url(search/find-staff.png) no-repeat;}
+.adv-search-bar .text{text-decoration:underline;color:#ee7340;padding-right:16px;margin-right:10px;display:inline-block;height:25px;line-height:34px;overflow:hidden;}
+.adv-search-bar .base{background:url(search/btn-arr1.png) no-repeat right 16px;display:none;}
+.adv-search-bar .adv{background:url(search/btn-arr2.png) no-repeat right 16px;}
+.com-roll-bd{background:#674092;height:97px;}
+.com-roll .scroll-item{float:left;display:inline-block;}
+.com-roll-bd .com-roll .scroll-bar{position:absolute;cursor:pointer;height:38px;width:23px;bottom:23px;top:50%;margin-top:-19px;background-image:url(home/roll-bar-search.gif);background-repeat:no-repeat;}
+.com-roll .scroll-left{left:82px;}
+.com-roll .scroll-right{right:82px;background-position:0 bottom;}
+.com-roll-item{position:relative;cursor:pointer;text-decoration:none;}.com-roll-item .mark{position:absolute;top:0;left:0;width:187px;height:69px;background:url(company/roll-mark.png) no-repeat;}
+.com-roll-item img{margin-top:3px;}
+.com-roll-item p{position:absolute;width:110px;left:73px;top:6px;}
+.com-roll-item b{color:#e7e751;font-size:12px;text-transform:uppercase;line-height:14px;vertical-align:top;display:block;}
+.com-roll-item span{color:#fff;text-decoration:underline;text-transform:capitalize;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:14px;vertical-align:top;}
+.com-roll-item:hover span{text-decoration:none;}
+.seekers-roll p{left:64px;width:120px;}
+.seekers-roll b{padding:8px 0 0 0;height:20px;line-height:20px;overflow:hidden;display:block;}
+.seekers-roll span{height:20px;line-height:20px;display:block;overflow:hidden;}
+.puartners-tit a{color:#684092;}
