@@ -24,7 +24,6 @@ class jobseeker extends Front_Controller {
         $this->load->model('jobseeker_model');
 
         $data = $this->data;
-
         $uid = $this->session->userdata('uid');
 
         $register_step = $this->jobseeker_model->getRegisterStep($uid);

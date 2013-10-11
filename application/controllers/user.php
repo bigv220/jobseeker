@@ -17,7 +17,7 @@ class user extends Front_Controller {
      * user_type: 1 is employer, 0 is job seeker
      */
     public function signup(){
-        $data = $this->data;
+
         $this->load->model('jobseeker_model');
         $userId = -1;
         $status = "success";
@@ -32,6 +32,8 @@ class user extends Front_Controller {
             $result['user_type'] = $_POST['user_type'];
 
             $this->session->set_userdata($result);
+
+            $data = $this->data;
         }
         else{
             $status = "error";
@@ -64,6 +66,7 @@ class user extends Front_Controller {
                 $result['user_type'] = $user['user_type'];
 
                 $this->session->set_userdata($result);
+
 
             }
         }

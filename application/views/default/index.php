@@ -67,7 +67,7 @@
                             -->
                             <img src="<?php echo ($theme_path . 'style/home/temp/temp-h' . ($key+1) . '.gif');?>" width="120" height="120" alt="" />
                             <i class="mark png"></i>
-                            <a href="#" class="h-blog-item">
+                            <a href="<?php echo $base_url . 'news/view/' . $news['aid'];?>" class="h-blog-item">
                                 <strong><?php echo $news['title'];?></strong>
                                 <span>
                                     <?php

@@ -18,6 +18,11 @@ abstract class Front_Controller extends MY_Controller {
 	{
 		parent::__construct();
 		$this->data['lang'] = 'cn';
+        $this->load->library('session');
+        $this->data['uid'] = $this->session->userdata('uid');
+        $this->data['first_name'] = $this->session->userdata('first_name');
+        $this->data['last_name'] = $this->session->userdata('last_name');
+        $this->data['user_type'] = $this->session->userdata('user_type');
 	}
 	
 }
@@ -42,6 +47,7 @@ abstract class Admin_Controller extends MY_Controller {
 			redirect('user/adminlogin/');
 		}
 		$this->data['username'] = $this->session->userdata('username');
+
 		$this->data['theme_path'] = $this->data['base_path'] . 'theme/'.$this->data['admin_theme'].'/';
 	}
 	
