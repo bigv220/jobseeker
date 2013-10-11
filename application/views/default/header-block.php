@@ -16,6 +16,7 @@
 <link href="<?php echo $theme_path?>style/company.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $theme_path?>style/reg.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $theme_path?>style/search.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $theme_path?>style/adv-search.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo $theme_path?>style/kyo-form/kyo-form.css" rel="stylesheet" type="text/css" />
 <!--Import Select TAG CSS -->
 <link href="<?php echo $theme_path?>css/tag/tagit-simple-grey.css" rel="stylesheet" type="text/css" />
