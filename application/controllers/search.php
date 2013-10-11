@@ -12,7 +12,8 @@ class search extends Front_Controller {
 
     public function index()
     {
-        redirect('/');
+        $data = $this->data;
+        $this->load->view($data['front_theme']."/search-job-result",$data);
     }
 
     public function searchJob() {

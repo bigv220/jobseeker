@@ -25,4 +25,8 @@ class job_model extends MY_Model
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
     }
+    
+    public function saveJob($data) {
+    	return $this->add($data);
+    }
 }

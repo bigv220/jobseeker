@@ -19,7 +19,7 @@
             <p class="reg-right-text">Please fill out the mandatory fields to enhance your JingJobs experience,and promote your company to jobseekers.</p>
             <form action="" id="basicForm" method="post">
             <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-            <div class="reg-area">
+            <div class="reg-area"> <a id="reg1" name="reg1"></a>
                 <div class="reg-area-tit">Basic Information</div>
                 <div class="reg-row"> <strong>Full Company Name <i class="star">*</i></strong>
                     <div>
@@ -53,8 +53,7 @@
                         </select>
                         <select name="city">
                             <option value="">All City</option>
-                            <option value="2">Beijing</option>
-                            <option value="3">Shanghai</option>
+                            <option value="1">Beijing</option>
                         </select>
                     </div>
                 </div>
@@ -149,7 +148,7 @@
             </form>
             </div>
         </div>
-        <div class="reg-btns"> <a href="javascript:void(0);" onclick="saveAll();" class="reg-btns-save"></a><a href="#" class="reg-btns-post"></a><a href="#" class="reg-btns-find"></a> </div>
+        <div class="reg-btns"> <a href="javascript:void(0);" onclick="saveAll();" class="reg-btns-save"></a><a href="<?php echo $site_url?>job/postjob" class="reg-btns-post"></a><a href="#" class="reg-btns-find"></a> </div>
     </div>
 </div>
 
