@@ -10,7 +10,9 @@ class news extends Front_Controller {
 
     public function index()
     {
-        redirect('/');
+        //redirect('/');
+        $data = $this->data;
+        $this->load->view($data['front_theme'].'/news-index', $data);
     }
 
     public function view($aid)

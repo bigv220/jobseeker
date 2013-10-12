@@ -34,3 +34,21 @@ body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
 .seekers-roll b{padding:8px 0 0 0;height:20px;line-height:20px;overflow:hidden;display:block;}
 .seekers-roll span{height:20px;line-height:20px;display:block;overflow:hidden;}
 .puartners-tit a{color:#684092;}
+
+.postjob-bd{padding:15px 20px;}
+.postjob-tit{color:#ea6e3b;font-size:15px;font-weight:bolder;height:30px;}
+.postjob-content input, .postjob-content select{color:#393939;}
+.postjob-content-left{float:left;width:485px;}
+.postjob-content-right{float:right;width:225px;}
+.postjob-content-left-row{padding:0 0 5px 0;}
+.postjob-content-left-row strong{color:#444;}
+.postjob-content-left-row .span1, .postjob-content-left-row .span2{width:232px;float:left;}
+.postjob-content-left-row .span2{margin-left:15px;}
+.postjob-content input{width:220px;}
+.postjob-content select{width:224px;}
+.postjob-content-right-row{padding:0 0 9px 0;}
+.postjob-content-right-row input.location-input{width:106px;}
+.postjob-content-right-row select.location-input{width:111px;}
+.postjob-content .adv-search-bar .find{background:url(home/post_job_btn.png) no-repeat;}
+.postjob-additional-information{}
+.postjob-additional-information textarea{width:100%;}

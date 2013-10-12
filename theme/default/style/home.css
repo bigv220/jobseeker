@@ -138,4 +138,5 @@
 .similar i{display:block;width:69px;height:55px;background:url(company/similar-mark.png) no-repeat;position:absolute;top:0;left:0;}
 .match{height:134px;background:url(company/match.png) no-repeat center;text-align:center;}.match b{font-size:56px;color:#684092;padding:10px 0 0 0;font-family:Myriad Pro;display:block;}
 		
+.news-index{}
 
