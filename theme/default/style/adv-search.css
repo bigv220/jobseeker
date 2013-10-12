@@ -47,7 +47,7 @@ body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
 .postjob-content input{width:220px;}
 .postjob-content select{width:224px;}
 .postjob-content-right-row{padding:0 0 9px 0;}
-.postjob-content-right-row input.location-input{width:106px;}
+.postjob-content-right-row input.location-input{width:105px;}
 .postjob-content-right-row select.location-input{width:111px;}
 .postjob-content .adv-search-bar .find{background:url(home/post_job_btn.png) no-repeat;}
 .postjob-additional-information{}
