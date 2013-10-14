@@ -43,7 +43,7 @@
 			<ul>
 				<li class="home"><a href="<?php echo $site_url?>">HOME</a></li>
 				<li class="about"><a href="<?php echo $site_url?>page/aboutus">ABOUT US</a></li>
-				<li class="news"><a href="#">NEWS</a></li>
+				<li class="news"><a href="<?php echo $site_url?>news">NEWS</a></li>
 				<li class="jobs"><a href="#">JOBS</a></li>
 				<li class="post"><a href="#">POST A JOB</a></li>
 			</ul>
@@ -51,7 +51,8 @@
 		<a class="phd-logo png" href="#"></a>
 		<div class="phd-login fr rel">
 			<div class="phd-login-text">
-                <?php if (-1 == (isset($uid)?$uid:-1)):?>
+                <?php $current_userId = isset($uid)?$uid:-1;
+                if (-1 == $current_userId || '' == $current_userId):?>
                 login
                 <?php else: ?>
                     <?php echo isset($first_name)?$first_name:"";?>&nbsp;

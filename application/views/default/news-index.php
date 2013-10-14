@@ -5,113 +5,155 @@
         <input type="submit" class="abs top-search-btn " value=""  title="search"   />
         <a href="#" class="abs top-search-a">More Options</a> </div>
 
-    <div class="advsearch w770 rel clearfix">
+    <div class="w770 rel clearfix">
 
-        <div class="advsearch-bd box rel mb10">
-            <div class="advsearch-tit">Find a Job</div>
-            <div class="advsearch-min">
-                <div class="advsearch-row clearfix">
-                    <div class="span1">
-                        <strong>Search our job database</strong>
-                        <div><input type="text" class="kyo-input input-tip" data-tipval="Enter Keywords" value="Enter Keywords"></div>
+        <div class="news-index box rel mb10">
+            <div class="news-index-left">
+                <div class="article">
+                    <div class="title">The Happiest Place to Work</div>
+                    <div class="content">
+                        <img src="<?php echo $theme_path?>style/home/article_img.jpg"/>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <a href="#">Continue reading</a>
+                        </p>
                     </div>
-                    <div class="span2">
-                        <strong>City</strong>
-                        <input type="text" id="sel-city" value="" style="display: none;">
-                        <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
-                        <div id="sel-city-val" class="show-selval"><ul></ul></div>
+                    <div class="share-sns">
+                        <a href="#" class="like_btn">Like</a>
+                        <a href="#" class="share_btn">Share</a>
                     </div>
-                    <div class="span3">
-                        <strong>Type of employment</strong>
-                        <div>
-                            <select class="kyo-select">
-                                <option value="0">--Select--</option>
-                                <option value="1">value1</option>
-                                <option value="2">value2</option>
-                                <option value="3">value3</option>
-                                <option value="4">value4</option>
-                                <option value="5">value5</option>
-                            </select>
+                </div>
+
+                <div class="profile">
+                    <div class="profile_header">
+                        <div class="titles">
+                            <div class="main_title">Expat Profile</div>
+                            <div class="subtitle">
+                                <div>Name: Alex Roberts Age: 25</div>
+                                <div>From: London, UK Intern at: Forex Science</div>
+                            </div>
+                            <div class="small_title">What has been the transition like between UK and China life?</div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="advsearch-row clearfix">
-                    <div class="span1">
-                        <strong>Industry</strong>
-                        <input type="text" id="sel-industry" value="" style="display: none;">
-                        <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
-                        <div id="sel-industry-val" class="show-selval"><ul></ul></div>
-                    </div>
-                    <div class="span2">
-                        <strong>Position</strong>
-                        <input type="text" id="sel-position" value="" style="display: none;">
-                        <div class="search-row-tip">Hold down 'Command' to select a max of 10</div>
-                        <div id="sel-position-val" class="show-selval"><ul></ul></div>
-                    </div>
-                    <div class="span3">
-                        <strong>Length of employment</strong>
-                        <div>
-                            <select class="kyo-select">
-                                <option value="0">Start Term</option>
-                                <option value="1">value1</option>
-                                <option value="2">value2</option>
-                                <option value="3">value3</option>
-                                <option value="4">value4</option>
-                                <option value="5">value5</option>
-                            </select>
+                        <div class="profile_img">
+                            <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif" width="120" height="120" alt="" />
+                            <i class="mask"></i>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
-                </div>
-            </div>
-            <div class="advsearch-below">
-                <div class="advsearch-row clearfix">
-                    <div class="span1">
-                        <strong>Salary </strong>
-                        <select class="kyo-select">
-                            <option value="0">All Salary</option>
-                            <option value="1">value1</option>
-                            <option value="2">value2</option>
-                            <option value="3">value3</option>
-                            <option value="4">value4</option>
-                            <option value="5">value5</option>
-                        </select>
-                    </div>
-                    <div class="span2">
-                        <strong>Language</strong>
-                        <input type="text" id="sel-language" value="" style="display: none;">
-                        <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
-                        <div id="sel-language-val" class="show-selval"></div>
-                    </div>
-                    <div class="span3">
-                        <strong>Personal Skills</strong>
-                        <input type="text" id="sel-personal" value="" style="display: none;">
-                        <div class="search-row-tip">Hold down 'Command' to select a max of 5</div>
-                        <div id="sel-personal-val" class="show-selval"></div>
 
+                    <div class="content">
+
+                        <p> The transition was surprisingly smooth. Having worked in London for 2 years after graduating in 2011 I was used to life in a big city. I understood the daily commute and the chaos of rush hour. However, unlike other places I have lived, the air quality is highly variable. On a good day Beijing is beautiful yet at it's worst it can be off-putting. In addition, the transition from western to Asian food has been an experience. If you're not so into spice, look out for the Sichuan chili's lurking in many of the dishes here.
+                            <a href="#">Continue reading</a>
+                        </p>
+                    </div>
+                    <div class="share-sns">
+                        <a href="#" class="like_btn">Like</a>
+                        <a href="#" class="share_btn">Share</a>
                     </div>
                 </div>
-                <div class="advsearch-row clearfix">
-                    <div class="span1">
-                        <strong>Technical Skills</strong>
-                        <input type="text" id="sel-technical" value="" style="display: none;">
-                        <div class="search-row-tip">Hold down 'Command' to select a max of 5</div>
-                        <div id="sel-technical-val" class="show-selval"></div>
+
+                <div class="useful_links">
+                    <div class="title">Useful Links and Things We Like</div>
+                    <ul>
+                        <li><a href="#"> 7 Signs It May Be Time To Get A New Gig</a></li>
+                        <li><a href="#">How can I get a better job with little experience?</a></li>
+                        <li><a href="#">Coca-Cola pushes gruit juices in Vietnam</a></li>
+                        <li><a href="#">Why do honesty and hard work have no place at work?</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="news-index-right">
+                <div class="upcoming_events">
+                    <div class="title">Upcoming Networking Events and Job Fairs</div>
+                    <div class="event_row">
+                        <a href="#">
+                            <div class="event_title">The 2013 Job Fair for Foreigners in Beijing</div>
+                            <div class="event_time">Saturday October 19th 2013 9:00 - 16:00</div>
+                            <div class="event_place">Beijing Marriot Hotel Northeast</div>
+                        </a>
                     </div>
+                    <div class="event_row">
+                        <a href="#">
+                            <div class="event_title">The 2013 Job Fair for Foreigners in Beijing</div>
+                            <div class="event_time">Saturday October 19th 2013 9:00 - 16:00</div>
+                            <div class="event_place">Beijing Marriot Hotel Northeast</div>
+                        </a>
+                    </div>
+                    <div class="event_row">
+                        <a href="#">
+                            <div class="event_title">The 2013 Job Fair for Foreigners in Beijing</div>
+                            <div class="event_time">Saturday October 19th 2013 9:00 - 16:00</div>
+                            <div class="event_place">Beijing Marriot Hotel Northeast</div>
+                        </a>
+                    </div>
+                    <div class="event_row">
+                        <a href="#">
+                            <div class="event_title">The 2013 Job Fair for Foreigners in Beijing</div>
+                            <div class="event_time">Saturday October 19th 2013 9:00 - 16:00</div>
+                            <div class="event_place">Beijing Marriot Hotel Northeast</div>
+                        </a>
+                    </div>
+                    <div class="more_link"><a href="#">See All Upcoming Events</a></div>
+                </div>
+                <div class="top_stories">
+                    <div class="title">Top Stories</div>
+                    <div class="story_row">
+                        <a href="#">
+                            <div class="story_icon">
+                                <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
+                                <i class="mask"></i>
+                            </div>
+                            <div class="story_title">Mastering the Perfect Chinese CV</div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </div>
+                    <div class="story_row">
+                        <a href="#">
+                            <div class="story_icon">
+                                <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
+                                <i class="mask"></i>
+                            </div>
+                            <div class="story_title">How to Dress for business success</div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </div>
+                    <div class="story_row">
+                        <a href="#">
+                            <div class="story_icon">
+                                <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
+                                <i class="mask"></i>
+                            </div>
+                            <div class="story_title">A round up of the best places to party in Beijing</div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </div>
+                    <div class="story_row">
+                        <a href="#">
+                            <div class="story_icon">
+                                <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
+                                <i class="mask"></i>
+                            </div>
+                            <div class="story_title">Mastering the Perfect Chinese CV</div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </div>
+                    <div class="story_row">
+                        <a href="#">
+                            <div class="story_icon">
+                                <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
+                                <i class="mask"></i>
+                            </div>
+                            <div class="story_title">How to Dress for business success</div>
+                            <div class="clearfix"></div>
+                        </a>
+                    </div>
+                    <div class="more_link"><a href="#">See All Articles</a></div>
                 </div>
             </div>
-            <div class="adv-search-bar">
-                <a href="#" class="text base">Basic Search</a>
-                <a href="#" class="text adv">Advanced Search</a>
-                <a href="#" class="btn find"></a>
-                <a href="#" class="btn findnow"></a>
-            </div>
+            <div class="clearfix"></div>
         </div>
 
     </div>
 
-
-
-
-    <script type="text/javascript" src="<?php echo $theme_path?>js/advsearch.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>
