@@ -154,7 +154,7 @@ function change_location(this1, key, location) {
 		$.get(url, function(data){
 			var obj = eval('('+data+')');
 			for ( var i = 0; i < obj.length; i++) {
-				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
+				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";		
 			}
 			$("select[name='city']").html(html_option);
 		});
@@ -164,6 +164,7 @@ function change_location(this1, key, location) {
 function select_location(key,location) {
 	if("country" == key) {
 		$("select[name='country']").val(location);
+
 	} else {
 		$("select[name='province']").val(location);
 		$("select[name='province']").change();

@@ -206,7 +206,7 @@ $(document).ready(function() {
     $("select[name='province']").change(function() {
         change_location($(this), 'province', '<?php echo $basic_info['province'];?>');
     });
-    $("select[name='country']").change();
+    //$("select[name='country']").change();
     select_location('country','<?php echo $basic_info['country'];?>');
     select_location('province','<?php echo $basic_info['province'];?>');
     $( "#basicForm" ).validate();
