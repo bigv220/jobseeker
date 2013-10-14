@@ -106,6 +106,11 @@ a:hover{text-decoration:none;}
 .phd-login-pop input.has{background:#fafafa;}
 .phd-login-pop .login-btn{width:214px;height:28px;display:inline-block;cursor:pointer;background:url(pub/login-btn.gif) no-repeat;}
 .phd-login-pop .send-btn{width:214px;height:28px;display:inline-block;cursor:pointer;background:url(pub/send_btn_bg.png) no-repeat;}
+.phd-login-pop ul{padding:0 10px;}
+.phd-login-pop ul li{line-height:22px;border-bottom:1px solid #CCCCCC;}
+.phd-login-pop ul li.last{border:none;}
+.phd-login-pop ul li a{font-size:13px;font-weight:bold;color:#424242;}
+.phd-login-pop ul li a:hover{color:#ef7641;}
 #resetpw_pop{display:none;}
 .reset-password-success{display:none;width:261px;height:150px;background:url(pub/reset_pw_success_bg.png);margin:0 auto;margin-top: 95px;}
 .reset-password-success-header{color:#ef7641;font-weight:bold;font-size:15px;padding:10px 23px;}

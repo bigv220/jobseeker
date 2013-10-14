@@ -57,7 +57,6 @@
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.jSelectDate.js" ></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/tagit.js" ></script>
-<script type="text/javascript" src="<?php echo $theme_path?>js/common.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/home.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/company.js"></script>
 
