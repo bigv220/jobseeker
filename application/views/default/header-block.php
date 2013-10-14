@@ -27,7 +27,7 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/kyo4311-form.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery-ui.1.8.20.min.js" ></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.validate.js" ></script>
-
+<script type="text/javascript" src="<?php echo $theme_path?>js/common.js"></script>
 
 <script>
 	var site_url = "<?php echo $site_url?>";
@@ -79,6 +79,36 @@
                 </div>
                 <div class="phd-login-pop-footer"><a href="#"></a></div>
             </div>
+
+            <div id="jobseeker_menu" class="phd-login-pop png">
+                <div class="phd-login-pop-content">
+                    <ul>
+                        <?php $current_user_type = isset($user_type)?$user_type:-1;
+                        if (0 == $current_user_type):?>
+                            <li><a href="#">View Profile</a></li>
+                            <li><a href="#">Edit Profile</a></li>
+                            <li><a href="#">Bookmarked Employers</a></li>
+                            <li><a href="#">Shortlisted Jobs</a></li>
+                            <li><a href="#">Applied Jobs</a></li>
+                        <?php elseif(1 == $current_user_type): ?>
+                            <li><a href="#">View Profile</a></li>
+                            <li><a href="#">Edit Company Profile</a></li>
+                            <li><a href="#">Manage Job listings</a></li>
+                            <li><a href="#">View Shortlisted Candidates</a></li>
+                            <li><a href="#">Inbox</a></li>
+                        <?php endif;?>
+                        <li class="last"><a href="<?php echo $site_url?>user/logout">Sign out</a></li>
+                    </ul>
+
+                </div>
+                <div class="phd-login-pop-footer"></div>
+            </div>
+
+            <?php $current_userId = isset($uid)?$uid:-1;
+            if (-1 != $current_userId && '' != $current_userId):?>
+                <script type="text/javascript">show_login_user_menu();</script>
+            <?php endif;?>
+
 
             <div id="resetpw_pop" class="phd-login-pop png">
                 <div class="phd-login-pop-header">

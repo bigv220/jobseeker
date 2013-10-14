@@ -36,8 +36,6 @@ $(function(){
     //pub pop mark
     $('.pop-mark').height($('body').height());
 
-    
-
 })
 
 function valid_email(email) {
@@ -45,7 +43,14 @@ function valid_email(email) {
     return patten.test(email);
 }
 
+function show_login_user_menu(){
+    var menu = $('#jobseeker_menu').html();
+    $('#login_pop').html(menu);
+}
+
 function show_welcome_pop(usertype){
+    //as we show welcome pop up after login, so we show the login user menu here
+    show_login_user_menu();
     var lefttext = "Let us know your<br/>job preference";
     var righttext = "Start looking at<br/>jobs in China now";
 

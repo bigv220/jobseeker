@@ -140,7 +140,7 @@ $(function(){
                 function(result, status){
 
                     if(result.status == 'success'){
-                        $('.phd-login-pop').remove();
+                        //$('.phd-login-pop').remove();
                         $('.phd-login-text').html(result.first_name + ' ' + result.last_name);
                         $('.phd-login-pop-content .login-error-msg').hide();
                         show_welcome_pop(result.user_type);
