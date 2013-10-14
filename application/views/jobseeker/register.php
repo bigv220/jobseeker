@@ -5,18 +5,21 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("select[name='country']").change(function() {
+         $("select[name='country']").change(function() {
             change_location($(this),'country');
         });
         $("select[name='province']").change(function() {
             change_location($(this), 'province');
         });
+        $("select[name='country']").change();
+        select_location('country','<?php echo $userinfo['country'];?>');
+        select_location('province','<?php echo $userinfo['province'];?>');
         $("input.date").jSelectDate({
             css:"date",
             yearBeign: 1960,
             disabled : false
         });
-        $("select[name='country']").change();
+
         //upload user avatar
         uploadImage();
 

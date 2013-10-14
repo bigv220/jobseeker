@@ -8,6 +8,11 @@ class company extends Front_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+        $this->load->library('session');
+        if (!$this->session->userdata('uid'))
+        {
+            redirect('/');
+        }
 	}
 	
 	public function index()
@@ -19,7 +24,7 @@ class company extends Front_Controller {
 	public function register() {
 		$data = $this->data;
 		
-        $uid = 2;
+        $uid = $this->session->userdata('uid');
         //Load Model            
         $this->load->model('company_model');
 
@@ -57,7 +62,7 @@ class company extends Front_Controller {
 
     public function companyInfo(){
         $this->load->model('company_model');
-        $uid = 6;
+        $uid = $this->session->userdata('uid');
 
         $data = $this->data;
         $data["info"] = $this->company_model->getUserInfo($uid);

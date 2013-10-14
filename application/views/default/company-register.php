@@ -8,7 +8,7 @@
 <!--company page body-->
 <div class="reg-page w770 clearfix rel">
     <div class="reg-left abs box mb20">
-        <h2 class="reg-left-tit">NiHAO REDSTAR</h2>
+        <h2 class="reg-left-tit">NiHAO <span title="<?php echo $basic_info['first_name'];?>"><?php echo substr($basic_info['first_name'],0,8);?></span></h2>
         <ul class="reg-ul">
             <li class="curr"><a href="#reg1">Basic Information</a></li>
             <li><a href="#reg2">Contact Details</a></li>
@@ -200,13 +200,15 @@ function uploadImage(old_avatar) {
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
-        $("select[name='country']").change(function() {
-            change_location($(this),'country');
-        });
-        $("select[name='province']").change(function() {
-            change_location($(this), 'province');
-        });
-        $("select[name='country']").change();
+    $("select[name='country']").change(function() {
+        change_location($(this),'country', '<?php echo $basic_info['country'];?>');
+    });
+    $("select[name='province']").change(function() {
+        change_location($(this), 'province', '<?php echo $basic_info['province'];?>');
+    });
+    $("select[name='country']").change();
+    select_location('country','<?php echo $basic_info['country'];?>');
+    select_location('province','<?php echo $basic_info['province'];?>');
     $( "#basicForm" ).validate();
 
     $('#industry_box').tagit({
