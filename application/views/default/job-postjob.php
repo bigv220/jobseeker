@@ -86,7 +86,7 @@
                     <div class="span2">
                         <strong>Language Level *</strong>
                         <div>
-                            <select name="languagelevel" required>
+                            <select name="" required>
                                 <option value="">--Select--</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
@@ -102,7 +102,7 @@
                     <div class="span1">
                         <strong>Type of Job *</strong>
                         <div>
-                            <select name="typeofjob" required>
+                            <select name="employment_type" required>
                                 <option value="">Full Time</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
@@ -164,7 +164,7 @@
                                 <option value="4">value4</option>
                                 <option value="5">value5</option>
                             </select>
-                            <input type="text" name="postalcode" class="location-input input-tip" value="Postal Code" data-tipval="Postal Code">
+                            <input type="text" name="" class="location-input input-tip" value="Postal Code" data-tipval="Postal Code">
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@
                     <div class="span1">
                         <span>Salary</span>
                         <div>
-                            <select>
+                            <select name="salary_range">
                                 <option value="">Under 10,000 RMB</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
@@ -189,7 +189,7 @@
                     <div class="span1">
                         <span>Years of Experience Required</span>
                         <div>
-                            <select>
+                            <select name="preferred_year_of_experience">
                                 <option value="">Less than 1 year</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
@@ -212,7 +212,7 @@
         <div class="adv-search-bar">
 
             <a href="javascript:void(0);" class="btn post" id="post"></a>
-            <a href="#" class="btn findnow"></a>
+            
         </div>
     </div>
     </form>
@@ -235,7 +235,14 @@ $(document).ready(function() {
     $('#post').click(function() {
         $('#postjobForm').validate();
         if ($('#postjobForm').valid()) {
-        	$('#postjobForm').submit();
+        	$.post(
+                	site_url+"job/postjob", 
+                	$('#postjobForm').serialize(),
+     			    function(result,status){
+     			    	if("success" == status) {
+							alert("success.");
+     			    	}
+     		});
         }
     });
 });
