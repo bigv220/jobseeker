@@ -8,7 +8,7 @@
 </div>
 <!-- post a job body -->
 <div class="postjob w770 rel clearfix">
-
+<form method="post" id="postjobForm">
     <div class="postjob-bd box rel mb10">
         <div class="postjob-tit">Post a Job</div>
         <div class="postjob-content">
@@ -16,13 +16,13 @@
                 <div class="postjob-content-left-row clearfix">
                     <div class="span1">
                         <strong>Position Title *</strong>
-                        <div><input type="text" name="job_name"></div>
+                        <div><input type="text" name="job_name" required></div>
                     </div>
                     <div class="span2">
                         <strong>Length of Job *</strong>
                         <div>
-                            <select>
-                                <option value="0">--Select--</option>
+                            <select required>
+                                <option value="">--Select--</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -37,8 +37,8 @@
                     <div class="span1">
                         <strong>Industry *</strong>
                         <div>
-                            <select>
-                                <option value="0">All Industries</option>
+                            <select name="industry" required>
+                                <option value="">All Industries</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -53,8 +53,8 @@
                     <div class="span2">
                         <strong>Language *</strong>
                         <div>
-                            <select>
-                                <option value="0">--Select--</option>
+                            <select name="language" required>
+                                <option value="">--Select--</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -70,8 +70,8 @@
                     <div class="span1">
                         <strong>Position *</strong>
                         <div>
-                            <select>
-                                <option value="0">All Positions</option>
+                            <select name="position" required>
+                                <option value="">All Positions</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -86,8 +86,8 @@
                     <div class="span2">
                         <strong>Language Level *</strong>
                         <div>
-                            <select>
-                                <option value="0">--Select--</option>
+                            <select name="languagelevel" required>
+                                <option value="">--Select--</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -102,8 +102,8 @@
                     <div class="span1">
                         <strong>Type of Job *</strong>
                         <div>
-                            <select>
-                                <option value="0">Full Time</option>
+                            <select name="typeofjob" required>
+                                <option value="">Full Time</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -115,7 +115,7 @@
                     <div class="span2">
                         <span>Personal Skills Required</span>
                         <div>
-                            <input type="text" name="preferred_personal_skills" class="input-tip" value="Start Typing" data-tipval="Start Typing">
+                            <input type="text" name="preferred_personal_skills" class="input-tip" value="Start Typing" data-tipval="Start Typing" required>
                         </div>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                     <div class="span1">
                         <strong>Location *</strong>
                         <div>
-                            <input type="text" name="location" class="input-tip" value="Street Address" data-tipval="Street Address">
+                            <input type="text" name="location" class="input-tip" value="Street Address" data-tipval="Street Address" required>
                         </div>
                     </div>
 
@@ -134,7 +134,7 @@
                     <div class="span1">
                         <div>
                             <select class="location-input">
-                                <option value="0">Provinces *</option>
+                                <option value="">Provinces *</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -142,7 +142,7 @@
                                 <option value="5">value5</option>
                             </select>
                             <select class="location-input">
-                                <option value="0">City *</option>
+                                <option value="">City *</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -156,8 +156,8 @@
                 <div class="postjob-content-right-row clearfix">
                     <div class="span1">
                         <div>
-                            <select class="location-input">
-                                <option value="0">Country *</option>
+                            <select class="location-input" required>
+                                <option value="">Country *</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -174,7 +174,7 @@
                         <span>Salary</span>
                         <div>
                             <select>
-                                <option value="0">Under 10,000 RMB</option>
+                                <option value="">Under 10,000 RMB</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -190,7 +190,7 @@
                         <span>Years of Experience Required</span>
                         <div>
                             <select>
-                                <option value="0">Less than 1 year</option>
+                                <option value="">Less than 1 year</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
                                 <option value="3">value3</option>
@@ -211,11 +211,11 @@
 
         <div class="adv-search-bar">
 
-            <a href="#" class="btn find"></a>
+            <a href="javascript:void(0);" class="btn find" id="find"></a>
             <a href="#" class="btn findnow"></a>
         </div>
     </div>
-
+    </form>
 </div>
 <!--company page body-->
 <div class="company-page w770 clearfix rel">
@@ -251,5 +251,15 @@
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#find').click(function() {
+        $('#postjobForm').validate();
+        if ($('#postjobForm').valid()) {
+            //post
+        }
+    });
+});
 
+</script>
 <?php $this->load->view($front_theme.'/footer-block');?>
