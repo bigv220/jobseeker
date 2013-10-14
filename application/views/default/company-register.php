@@ -148,7 +148,7 @@
             </form>
             </div>
         </div>
-        <div class="reg-btns"> <a href="javascript:void(0);" onclick="saveAll();" class="reg-btns-save"></a><a href="<?php echo $site_url?>job/postjob" class="reg-btns-post"></a><a href="#" class="reg-btns-find"></a> </div>
+        <div class="reg-btns"> <a href="javascript:void(0);" onclick="saveAll();" class="reg-btns-save"></a><a href="<?php echo $site_url?>job/postjob" class="reg-btns-post"></a><a href="<?php echo $site_url?>search/staff" class="reg-btns-find"></a> </div>
     </div>
 </div>
 

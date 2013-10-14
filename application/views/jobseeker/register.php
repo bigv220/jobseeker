@@ -341,7 +341,7 @@
                 <a href="#">Or start searching for jobs now </a></p>
 
             <!-- Basic information -->
-            <div class="reg-area">
+            <div class="reg-area"><a id="reg1" name="reg1"></a>
             <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="basicInfoForm">
                 <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                 <?php $step_arr = $step_arr;
@@ -433,7 +433,7 @@
             </div>
 
             <!-- Contact details -->
-            <div class="reg-area">
+            <div class="reg-area"><a id="reg2" name="reg2"></a>
             <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="contactDetailsForm">
                 <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                 <?php $step_arr = $step_arr;
@@ -502,7 +502,7 @@
             </div>
 
             <!-- Preferences -->
-            <div class="reg-area">
+            <div class="reg-area"><a id="reg3" name="reg3"></a>
                 <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="preferencesForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <?php $step_arr = $step_arr;
@@ -595,7 +595,7 @@
             </div>
 
             <!-- Education -->
-            <div class="reg-area">
+            <div class="reg-area"><a id="reg4" name="reg4"></a>
                 <?php $step_arr = $step_arr;
                 $cla = '';
                 if(in_array('4', $step_arr)) {
@@ -688,7 +688,7 @@
             </div>
 
             <!-- work history -->
-            <div class="reg-area">
+            <div class="reg-area"><a id="reg5" name="reg5"></a>
                 <?php $step_arr = $step_arr;
                 $cla = '';
                 if(in_array('5', $step_arr)) {
@@ -827,7 +827,7 @@
             </div>
 
             <!-- languages -->
-            <div class="reg-area">
+            <div class="reg-area"><a id="reg6" name="reg6"></a>
                 <?php $step_arr = $step_arr;
                 $cla = '';
                 if(in_array('6', $step_arr)) {
@@ -892,7 +892,7 @@
             </div>
 
             <!-- personal skills -->
-            <div class="reg-area">
+            <div class="reg-area"><a id="reg7" name="reg7"></a>
                 <?php $step_arr = $step_arr;
                 $cla = '';
                 if(in_array('7', $step_arr)) {
@@ -929,7 +929,7 @@
             </div>
 
             <!-- professional skills -->
-            <div class="reg-area">
+            <div class="reg-area"><a id="reg8" name="reg8"></a>
                 <?php $step_arr = $step_arr;
                 $cla = '';
                 if(in_array('8', $step_arr)) {
@@ -968,7 +968,7 @@
     </div>
         <div class="reg-btns">
             <a href="javascript: void(0);" class="reg-btns-saveall png" onclick="saveAll();"></a>
-            <a href="#" class="reg-btns-job png"></a>
+            <a href="<?php echo $site_url?>search/searchJob" class="reg-btns-job png"></a>
         </div>
         <div class="backtop png" style="display: block; top: 564px; right:-80px"></div>
      </div>

@@ -21,7 +21,7 @@
                     <div class="span2">
                         <strong>Length of Job *</strong>
                         <div>
-                            <select required>
+                            <select name="employment_length" required>
                                 <option value="">--Select--</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
@@ -211,32 +211,11 @@
 
         <div class="adv-search-bar">
 
-            <a href="javascript:void(0);" class="btn find" id="find"></a>
+            <a href="javascript:void(0);" class="btn post" id="post"></a>
             <a href="#" class="btn findnow"></a>
         </div>
     </div>
     </form>
-</div>
-<!--company page body-->
-<div class="company-page w770 clearfix rel">
-    <div class="company-body box rel mb20">
-		<form action="" method="post">
-		postion title: <input type="text" name="job_name"><br>
-		industry: 		<input type="text" name="industry"><br>
-		language: 		<input type="text" name="language"><br>
-		tech skills: 	<input type="text" name="preferred_technical_skills"><br>
-		pers skills: 	<input type="text" name="preferred_personal_skills"><br>
-		location:	 	<input type="text" name="location"><br>
-		postion: 		<input type="text" name="position"><br>
-		language level: <input type="text" name=""><br>
-		type of job: 	<input type="text" name="employment_type"><br>
-		length of job: 	<input type="text" name="employment_length"><br>
-		salary: 		<input type="text" name="salary_range"><br>
-		experience: 	<input type="text" name="preferred_year_of_experience"><br>
-		descrip: 		<textarea name="job_desc"></textarea><br>
-		<input type="submit">
-		</form>
-    </div>
 </div>
 
 <!-- Our Partners -->
@@ -253,10 +232,10 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#find').click(function() {
+    $('#post').click(function() {
         $('#postjobForm').validate();
         if ($('#postjobForm').valid()) {
-            //post
+        	$('#postjobForm').submit();
         }
     });
 });
