@@ -9,7 +9,7 @@ function basicInfoSubmit(is_all) {
             function(result,status){
                 if(status == 'success'){
                     $('#basicInfoForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    if(is_all.length==0)
+                    if(is_all==null)
                         alert('Save successful!');
                 }
                 else{
@@ -31,7 +31,7 @@ function contactDetailsSubmit(is_all) {
                 if(status == 'success'){
                     $('#step2').addClass('curr');
                     $('#contactDetailsForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    if(is_all.length==0)
+                    if(is_all==null)
                         alert('Save successful!');
                 }
                 else{
@@ -53,7 +53,7 @@ function preferencesSubmit(is_all) {
                 if(status == 'success'){
                     $('#step3').addClass('curr');
                     $('#preferencesForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    if(is_all.length==0)
+                    if(is_all==null)
                         alert('Save successful!');
                 }
                 else{
@@ -81,7 +81,7 @@ function educationSubmit(is_all) {
                 if(status == 'success'){
                     $('#step4').addClass('curr');
                     $('#educationForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    if(is_all.length==0)
+                    if(is_all==null)
                         alert('Save successful!');
                 }
                 else{
@@ -103,7 +103,7 @@ function workhistorySubmit(is_all) {
                 if(status == 'success'){
                     $('#step5').addClass('curr');
                     $('#workhistoryForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    if(is_all.length==0)
+                    if(is_all==null)
                         alert('Save successful!');
                 }
                 else{
