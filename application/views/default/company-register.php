@@ -10,8 +10,20 @@
     <div class="reg-left abs box mb20">
         <h2 class="reg-left-tit">NiHAO <span title="<?php echo $basic_info['first_name'];?>"><?php echo substr($basic_info['first_name'],0,8);?></span></h2>
         <ul class="reg-ul">
-            <li class="curr"><a href="#reg1">Basic Information</a></li>
-            <li><a href="#reg2">Contact Details</a></li>
+            <?php 
+            $cla = '';
+            if(!empty($basic_info['description'])) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li <?php echo $cla; ?> id="step1"><a href="#reg1">Basic Information</a></li>
+            <?php 
+            $cla = '';
+            if(!empty($basic_info['last_name'])) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li <?php echo $cla; ?> id="step2"><a href="#reg2">Contact Details</a></li>
         </ul>
     </div>
     <div class="reg-right-wrap">
@@ -58,9 +70,15 @@
                     </div>
                 </div>
                 <div class="reg-row clearfix"> <b>Company Logo</b>
-                    <input type="hidden" name="avatar" id="avatar" />
+                    <input type="hidden" name="avatar" id="avatar" value="<?php echo $basic_info['profile_pic']; ?>" />
                     <div id="upload_button">
-                            <img id="image_profile" src="<?php echo $theme_path?>style/reg/com-img.gif" class="reg-company-img" />
+                        <?php if($basic_info['profile_pic']) {
+                                        $pic = 'company/'.$basic_info['profile_pic'];
+                                   } else {
+                                        $pic = 'style/reg/com-img.gif';
+                                   }
+                            ?>
+                            <img id="image_profile" height='100px' src="<?php echo $theme_path?><?php echo $pic; ?>" class="reg-company-img" />
                     </div>
                     <span class="" id="errorRemind"></span>
                 </div>
@@ -68,11 +86,12 @@
                     
                     <select name="industry" id="industry" title="" <?php if (empty($industries)): ?>required<?php endif; ?>>
                     <option value="">All industry</option>
-                    <option>Accounting</option>
-                    <option>HR</option>
-                    <option>Finance</option>
-                    <option>Design</option>
-                    <option>Education</option>
+                    <?php foreach($industry_list as $key=>&$v) {
+                                    if(empty($v['name'])) continue;
+                                    
+                    ?>
+                    <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
+                    <?php } ?>
                 </select>
                 <input type="hidden" name="industry_tag" id="industry_tag"/>
                  <ul id="industry_box" data-name="nameOfSelect"></ul>
@@ -83,7 +102,7 @@
                     </div>
                 </div>
                 <div class="reg-area-bar">
-                    <input type="button" class="reg-save" value=""  data-index="0" id="basic_submit"/>
+                    <input type="button" class="reg-save" value=""  data-index="0" id="basic_submit" onclick="basicFormSubmit();"/>
                 </div>
             </div>
         </form>
@@ -143,7 +162,7 @@
                     </div>
                 </div>
                 <div class="reg-area-bar">
-                    <input type="button" class="reg-save" value="" id="contact_submit" data-index="1"/>
+                    <input type="button" class="reg-save" value="" id="contact_submit" data-index="1" onclick="contactFormSubmit();"/>
                 </div>
             </form>
             </div>
@@ -206,7 +225,7 @@ $(document).ready(function() {
     $("select[name='province']").change(function() {
         change_location($(this), 'province', '<?php echo $basic_info['province'];?>');
     });
-    $("select[name='country']").change();
+    
     select_location('country','<?php echo $basic_info['country'];?>');
     select_location('province','<?php echo $basic_info['province'];?>');
     $( "#basicForm" ).validate();

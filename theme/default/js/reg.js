@@ -1,3 +1,43 @@
+var basicFormSubmit = function(is_all=false) {
+		$('#basicForm').validate();
+		if ($('#basicForm').valid()) {
+			$.post(
+				site_url + '/company/register',
+				$('#basicForm').serialize(),
+            	function(result,status){
+                if(status == 'success'){
+                    $('#basicForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    $('#step1').addClass('curr');
+                    if(is_all==false)
+                    alert('Save successful!');
+                }
+                else{
+                    alert('Save failed!');
+                }
+            }
+			);
+		}
+	};
+	var contactFormSubmit = function(is_all=false) {
+		$('#contactForm').validate();
+		if ($('#contactForm').valid()) {
+			$.post(
+				site_url + '/company/register',
+				$('#contactForm').serialize(),
+            	function(result,status){
+                if(status == 'success'){
+                    $('#contactForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    $('#step2').addClass('curr');
+                    alert('Save successful!');
+                }
+                else{
+                    alert('Save failed!');
+                }
+            }
+			);
+		}
+	};
+
 $(function(){
 	//search-result sequence
     $('.kyo-select').kyoSelect({
@@ -11,42 +51,7 @@ $(function(){
         height:'25'
     });
 	
-	$('#basic_submit').click(function() {
-		$('#basicForm').validate();
-		if ($('#basicForm').valid()) {
-			$.post(
-				site_url + '/company/register',
-				$('#basicForm').serialize(),
-            	function(result,status){
-                if(status == 'success'){
-                    $('#basicForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    alert('Save successful!');
-                }
-                else{
-                    alert('Save failed!');
-                }
-            }
-			);
-		}
-	});
-	$('#contact_submit').click(function() {
-		$('#contactForm').validate();
-		if ($('#contactForm').valid()) {
-			$.post(
-				site_url + '/company/register',
-				$('#contactForm').serialize(),
-            	function(result,status){
-                if(status == 'success'){
-                    $('#contactForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    alert('Save successful!');
-                }
-                else{
-                    alert('Save failed!');
-                }
-            }
-			);
-		}
-	});
+
 	//sel-industry
 	if($('#reg-industry').length>0){
     $('#reg-industry').checkSelect({
@@ -125,10 +130,16 @@ $(function(){
 
 })
 function saveAll() {
-	var basicInfoForm = $('#basic_submit');
+	var basicInfoForm = $('#basicForm');
     basicInfoForm.validate();
-    if(basicInfoForm.valid())
-		$('#basic_submit').click();
+
+    var contactForm = $('#contactForm');
+    contactForm.validate();
+    if(basicInfoForm.valid() && contactForm.valid()) {
+    	basicFormSubmit(true);
+    	contactFormSubmit(true);
+    }
+		
 
 }
 // ajax localtion
@@ -154,7 +165,7 @@ function change_location(this1, key, location) {
 		$.get(url, function(data){
 			var obj = eval('('+data+')');
 			for ( var i = 0; i < obj.length; i++) {
-				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
+				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";		
 			}
 			$("select[name='city']").html(html_option);
 		});
@@ -164,6 +175,7 @@ function change_location(this1, key, location) {
 function select_location(key,location) {
 	if("country" == key) {
 		$("select[name='country']").val(location);
+
 	} else {
 		$("select[name='province']").val(location);
 		$("select[name='province']").change();

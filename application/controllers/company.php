@@ -29,7 +29,7 @@ class company extends Front_Controller {
         $this->load->model('company_model');
 
 		if ($_POST) {
-            if (isset($_POST['first_name']) && !isset($_POST['last_name'])) {
+            if (isset($_POST['name']) && !isset($_POST['last_name'])) {
                 $this->company_model->updateBasicInfo($_POST);    
             } elseif (!isset($_POST['first_name']) && isset($_POST['last_name'])) {
                 $this->company_model->updateContactDetail($_POST);
@@ -48,7 +48,11 @@ class company extends Front_Controller {
 	        // get location
 	        $this->load->helper('location');
 	        $data['location'] = getLoction();
-	
+
+            //industry lists
+            $this->load->model('jobseeker_model');
+            $industry = $this->jobseeker_model->getIndustry();
+	        $data["industry_list"] = $industry;
 	        $basic_info = $this->company_model->getUserInfo($uid);
 	        $data['industries'] = $this->company_model->getIndustry($uid);
 	        //$contact_detail = $this->company_model->getContactDetail($uid);
