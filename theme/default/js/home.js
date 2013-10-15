@@ -34,10 +34,11 @@ $(function(){
         popMark.fadeIn();
         popReg.fadeIn();
     });
+    
     // Pop login
     $('.phd-login-btn').click(function(){
-    	popReg.fadeOut();
-        $('.pop-login').fadeIn();
+    	//popReg.fadeOut();
+        //$('.pop-login').fadeIn();
     });
     
     $('.pop-reg-close').click(function(){
@@ -139,7 +140,7 @@ $(function(){
     });
 
    //login form ajax submit
-    var loginform = $('#login_form, #login_form2');
+    var loginform = $('#login_form');
     loginform.submit(function(){
         $.post(site_url + '/user/login',
                 loginform.serialize(),
