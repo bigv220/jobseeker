@@ -122,6 +122,11 @@ class jobseeker_model extends MY_Model
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }
 
+    //delete education of a user
+    public function deleteEducation($uid){
+        $sql = "DELETE FROM user_education WHERE uid=$uid";
+        return $this->db->query($sql);
+    }
     //get education
     public function getEducationInfo($uid) {
         $result = $this->db->select('*')
