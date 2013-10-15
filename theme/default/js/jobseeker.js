@@ -1,5 +1,5 @@
 //basic information form ajax submit
-function basicInfoSubmit() {
+function basicInfoSubmit(is_all=false) {
     var basicInfoForm = $('#basicInfoForm');
     basicInfoForm.validate();
     
@@ -9,7 +9,8 @@ function basicInfoSubmit() {
             function(result,status){
                 if(status == 'success'){
                     $('#basicInfoForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    alert('Save successful!');
+                    if(is_all==false)
+                        alert('Save successful!');
                 }
                 else{
                     alert('Save failed!');
@@ -19,7 +20,7 @@ function basicInfoSubmit() {
 }
 
 //contact details form ajax submit
-function contactDetailsSubmit() {
+function contactDetailsSubmit(is_all=false) {
     var contactDetailsForm = $('#contactDetailsForm');
     contactDetailsForm.validate();
 
@@ -30,7 +31,8 @@ function contactDetailsSubmit() {
                 if(status == 'success'){
                     $('#step2').addClass('curr');
                     $('#contactDetailsForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    alert('Save successful!');
+                    if(is_all==false)
+                        alert('Save successful!');
                 }
                 else{
                     alert('Save failed!');
@@ -40,7 +42,7 @@ function contactDetailsSubmit() {
 }
 
 //preferences form ajax submit
-function preferencesSubmit() {
+function preferencesSubmit(is_all=false) {
     var preferencesForm = $('#preferencesForm');
     preferencesForm.validate();
 
@@ -51,7 +53,8 @@ function preferencesSubmit() {
                 if(status == 'success'){
                     $('#step3').addClass('curr');
                     $('#preferencesForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    alert('Save successful!');
+                    if(is_all==false)
+                        alert('Save successful!');
                 }
                 else{
                     alert('Save failed!');
@@ -61,7 +64,7 @@ function preferencesSubmit() {
 }
 
 //education form ajax submit
-function educationSubmit() {
+function educationSubmit(is_all=false) {
     var educationForm = $('#educationForm');
     educationForm.validate();
 
@@ -72,7 +75,8 @@ function educationSubmit() {
                 if(status == 'success'){
                     $('#step4').addClass('curr');
                     $('#educationForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    alert('Save successful!');
+                    if(is_all==false)
+                        alert('Save successful!');
                 }
                 else{
                     alert('Save failed!');
@@ -82,7 +86,7 @@ function educationSubmit() {
 }
 
 //work history form ajax submit
-function workhistorySubmit() {
+function workhistorySubmit(is_all=false) {
     var workhistoryForm = $('#workhistoryForm');
     workhistoryForm.validate();
 
@@ -93,7 +97,8 @@ function workhistorySubmit() {
                 if(status == 'success'){
                     $('#step5').addClass('curr');
                     $('#workhistoryForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    alert('Save successful!');
+                    if(is_all==false)
+                        alert('Save successful!');
                 }
                 else{
                     alert('Save failed!');
@@ -103,7 +108,7 @@ function workhistorySubmit() {
 }
 
 //language form ajax submit
-function languageSubmit() {
+function languageSubmit(is_all=false) {
     var languageForm = $('#languageForm');
     languageForm.validate();
 
@@ -155,11 +160,11 @@ function saveAll() {
     if(basicInfoForm.valid() && contactDetailsForm.valid() &&
         preferencesForm.valid() && educationForm.valid() && workhistoryForm.valid() &&languageForm.valid()) {
 
-        basicInfoSubmit();
-        contactDetailsSubmit();
-        preferencesSubmit();
-        educationSubmit();
-        workhistorySubmit();
+        basicInfoSubmit(true);
+        contactDetailsSubmit(true);
+        preferencesSubmit(true);
+        educationSubmit(true);
+        workhistorySubmit(true);
         languageSubmit();
     }
 }
