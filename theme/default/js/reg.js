@@ -38,6 +38,7 @@ $(function(){
             	function(result,status){
                 if(status == 'success'){
                     $('#contactForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    $('#step2').addClass('curr');
                     alert('Save successful!');
                 }
                 else{

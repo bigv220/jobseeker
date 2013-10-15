@@ -283,7 +283,7 @@
 <!--Jobseeker registration page body-->
 <div class="reg-page w770 clearfix rel">
     <div class="reg-left abs box mb20">
-        <h2 class="reg-left-tit">NiHAO REDSTAR</h2>
+        <h2 class="reg-left-tit">NiHAO <span title="<?php echo $userinfo['first_name'];?>"><?php echo substr($userinfo['first_name'],0,8);?></span></h2>
         <ul class="reg-ul">
             <li class="curr"><a href="#reg1">Basic Information</a></li>
             <?php $step_arr = $step_arr;

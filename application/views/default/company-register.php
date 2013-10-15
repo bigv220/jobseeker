@@ -10,8 +10,20 @@
     <div class="reg-left abs box mb20">
         <h2 class="reg-left-tit">NiHAO <span title="<?php echo $basic_info['first_name'];?>"><?php echo substr($basic_info['first_name'],0,8);?></span></h2>
         <ul class="reg-ul">
-            <li class="curr"><a href="#reg1">Basic Information</a></li>
-            <li><a href="#reg2">Contact Details</a></li>
+            <?php 
+            $cla = '';
+            if(isset($basic_info['description'])) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li <?php echo $cla; ?>><a href="#reg1">Basic Information</a></li>
+            <?php 
+            $cla = '';
+            if(isset($basic_info['last_name'])) {
+                $cla = ' class = "curr"';
+            }
+            ?>
+            <li <?php echo $cla; ?> id="step2"><a href="#reg2">Contact Details</a></li>
         </ul>
     </div>
     <div class="reg-right-wrap">
@@ -58,9 +70,15 @@
                     </div>
                 </div>
                 <div class="reg-row clearfix"> <b>Company Logo</b>
-                    <input type="hidden" name="avatar" id="avatar" />
+                    <input type="hidden" name="avatar" id="avatar" value="<?php echo $basic_info['profile_pic']; ?>" />
                     <div id="upload_button">
-                            <img id="image_profile" src="<?php echo $theme_path?>style/reg/com-img.gif" class="reg-company-img" />
+                        <?php if($basic_info['profile_pic']) {
+                                        $pic = 'company/'.$basic_info['profile_pic'];
+                                   } else {
+                                        $pic = 'style/reg/com-img.gif';
+                                   }
+                            ?>
+                            <img id="image_profile" height='100px' src="<?php echo $theme_path?><?php echo $pic; ?>" class="reg-company-img" />
                     </div>
                     <span class="" id="errorRemind"></span>
                 </div>
