@@ -1,17 +1,4 @@
-$(function(){
-	//search-result sequence
-    $('.kyo-select').kyoSelect({
-        width:'230',
-        height:'25'
-    });
-	
-	//reg user
-	$('.birthday-select').kyoSelect({
-        width:'130',
-        height:'25'
-    });
-	
-	$('#basic_submit').click(function() {
+var basicFormSubmit = function(is_all=false) {
 		$('#basicForm').validate();
 		if ($('#basicForm').valid()) {
 			$.post(
@@ -21,6 +8,7 @@ $(function(){
                 if(status == 'success'){
                     $('#basicForm .reg-area-tit').addClass('reg-area-tit-curr');
                     $('#step1').addClass('curr');
+                    if(is_all==false)
                     alert('Save successful!');
                 }
                 else{
@@ -29,8 +17,8 @@ $(function(){
             }
 			);
 		}
-	});
-	$('#contact_submit').click(function() {
+	};
+	var contactFormSubmit = function(is_all=false) {
 		$('#contactForm').validate();
 		if ($('#contactForm').valid()) {
 			$.post(
@@ -48,7 +36,22 @@ $(function(){
             }
 			);
 		}
-	});
+	};
+
+$(function(){
+	//search-result sequence
+    $('.kyo-select').kyoSelect({
+        width:'230',
+        height:'25'
+    });
+	
+	//reg user
+	$('.birthday-select').kyoSelect({
+        width:'130',
+        height:'25'
+    });
+	
+
 	//sel-industry
 	if($('#reg-industry').length>0){
     $('#reg-industry').checkSelect({
@@ -133,8 +136,8 @@ function saveAll() {
     var contactForm = $('#contactForm');
     contactForm.validate();
     if(basicInfoForm.valid() && contactForm.valid()) {
-    	$('#basic_submit').click();
-    	$('#contact_submit').click();
+    	basicFormSubmit(true);
+    	contactFormSubmit(true);
     }
 		
 

@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="reg-area-bar">
-                    <input type="button" class="reg-save" value=""  data-index="0" id="basic_submit"/>
+                    <input type="button" class="reg-save" value=""  data-index="0" id="basic_submit" onclick="basicFormSubmit();"/>
                 </div>
             </div>
         </form>
@@ -162,7 +162,7 @@
                     </div>
                 </div>
                 <div class="reg-area-bar">
-                    <input type="button" class="reg-save" value="" id="contact_submit" data-index="1"/>
+                    <input type="button" class="reg-save" value="" id="contact_submit" data-index="1" onclick="contactFormSubmit();"/>
                 </div>
             </form>
             </div>

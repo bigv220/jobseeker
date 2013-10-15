@@ -29,7 +29,7 @@ class company extends Front_Controller {
         $this->load->model('company_model');
 
 		if ($_POST) {
-            if (isset($_POST['first_name']) && !isset($_POST['last_name'])) {
+            if (isset($_POST['name']) && !isset($_POST['last_name'])) {
                 $this->company_model->updateBasicInfo($_POST);    
             } elseif (!isset($_POST['first_name']) && isset($_POST['last_name'])) {
                 $this->company_model->updateContactDetail($_POST);
