@@ -60,6 +60,12 @@ function preferencesSubmit() {
     }
 }
 
+function setDefaultEducationFormValue(domId){
+    $('#' + domId + ' input:enabled').val('');
+    $('#' + domId + ' select').val('');
+    $('#' + domId + ' textarea').val('');
+}
+
 //education form ajax submit
 function educationSubmit() {
     var educationForm = $('#educationForm');

@@ -54,8 +54,11 @@
 
         $('#addAnotherSchool').click(function() {
             var html = $('#every_school').html();
-
-            $('#educationForm #addSchoolBtn').before(html);
+            var randnumstr = randNum().toString();
+            randnumstr = randnumstr.replace('.', '_');
+            var domId = 'school_info_' + randnumstr;
+            $('#educationForm #addSchoolBtn').before('<div id="' + domId + '">' + html + '</div>');
+            setDefaultEducationFormValue(domId);
         });
 
         $('#addAnotherJob').click(function() {

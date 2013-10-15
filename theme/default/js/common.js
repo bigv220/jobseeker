@@ -38,6 +38,14 @@ $(function(){
 
 })
 
+var randNum = function(){
+    var rnd = {};
+    rnd.today = new Date();
+    rnd.seed = rnd.today.getTime();
+    rnd.seed = (rnd.seed * 9301 + 49297) % 233280;
+    return rnd.seed / (233280.0);
+}
+
 function valid_email(email) {
     var patten = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);
     return patten.test(email);
