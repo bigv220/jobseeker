@@ -1,4 +1,4 @@
-var basicFormSubmit = function(is_all=false) {
+var basicFormSubmit = function(is_all) {
 		$('#basicForm').validate();
 		if ($('#basicForm').valid()) {
 			$.post(
@@ -8,7 +8,7 @@ var basicFormSubmit = function(is_all=false) {
                 if(status == 'success'){
                     $('#basicForm .reg-area-tit').addClass('reg-area-tit-curr');
                     $('#step1').addClass('curr');
-                    if(is_all==false)
+                    if(is_all.length == 0)
                     alert('Save successful!');
                 }
                 else{
@@ -18,7 +18,7 @@ var basicFormSubmit = function(is_all=false) {
 			);
 		}
 	};
-	var contactFormSubmit = function(is_all=false) {
+	var contactFormSubmit = function(is_all) {
 		$('#contactForm').validate();
 		if ($('#contactForm').valid()) {
 			$.post(

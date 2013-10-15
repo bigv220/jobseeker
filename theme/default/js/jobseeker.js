@@ -1,5 +1,5 @@
 //basic information form ajax submit
-function basicInfoSubmit(is_all=false) {
+function basicInfoSubmit(is_all) {
     var basicInfoForm = $('#basicInfoForm');
     basicInfoForm.validate();
     
@@ -9,7 +9,7 @@ function basicInfoSubmit(is_all=false) {
             function(result,status){
                 if(status == 'success'){
                     $('#basicInfoForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    if(is_all==false)
+                    if(is_all.length==0)
                         alert('Save successful!');
                 }
                 else{
@@ -20,7 +20,7 @@ function basicInfoSubmit(is_all=false) {
 }
 
 //contact details form ajax submit
-function contactDetailsSubmit(is_all=false) {
+function contactDetailsSubmit(is_all) {
     var contactDetailsForm = $('#contactDetailsForm');
     contactDetailsForm.validate();
 
@@ -31,7 +31,7 @@ function contactDetailsSubmit(is_all=false) {
                 if(status == 'success'){
                     $('#step2').addClass('curr');
                     $('#contactDetailsForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    if(is_all==false)
+                    if(is_all.length==0)
                         alert('Save successful!');
                 }
                 else{
@@ -42,7 +42,7 @@ function contactDetailsSubmit(is_all=false) {
 }
 
 //preferences form ajax submit
-function preferencesSubmit(is_all=false) {
+function preferencesSubmit(is_all) {
     var preferencesForm = $('#preferencesForm');
     preferencesForm.validate();
 
@@ -53,7 +53,7 @@ function preferencesSubmit(is_all=false) {
                 if(status == 'success'){
                     $('#step3').addClass('curr');
                     $('#preferencesForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    if(is_all==false)
+                    if(is_all.length==0)
                         alert('Save successful!');
                 }
                 else{
@@ -70,7 +70,7 @@ function setDefaultEducationFormValue(domId){
 }
 
 //education form ajax submit
-function educationSubmit(is_all=false) {
+function educationSubmit(is_all) {
     var educationForm = $('#educationForm');
     educationForm.validate();
 
@@ -81,7 +81,7 @@ function educationSubmit(is_all=false) {
                 if(status == 'success'){
                     $('#step4').addClass('curr');
                     $('#educationForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    if(is_all==false)
+                    if(is_all.length==0)
                         alert('Save successful!');
                 }
                 else{
@@ -92,7 +92,7 @@ function educationSubmit(is_all=false) {
 }
 
 //work history form ajax submit
-function workhistorySubmit(is_all=false) {
+function workhistorySubmit(is_all) {
     var workhistoryForm = $('#workhistoryForm');
     workhistoryForm.validate();
 
@@ -103,7 +103,7 @@ function workhistorySubmit(is_all=false) {
                 if(status == 'success'){
                     $('#step5').addClass('curr');
                     $('#workhistoryForm .reg-area-tit').addClass('reg-area-tit-curr');
-                    if(is_all==false)
+                    if(is_all.length==0)
                         alert('Save successful!');
                 }
                 else{
@@ -114,7 +114,7 @@ function workhistorySubmit(is_all=false) {
 }
 
 //language form ajax submit
-function languageSubmit(is_all=false) {
+function languageSubmit(is_all) {
     var languageForm = $('#languageForm');
     languageForm.validate();
 
