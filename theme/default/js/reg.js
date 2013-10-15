@@ -20,6 +20,7 @@ $(function(){
             	function(result,status){
                 if(status == 'success'){
                     $('#basicForm .reg-area-tit').addClass('reg-area-tit-curr');
+                    $('#step1').addClass('curr');
                     alert('Save successful!');
                 }
                 else{
@@ -126,10 +127,16 @@ $(function(){
 
 })
 function saveAll() {
-	var basicInfoForm = $('#basic_submit');
+	var basicInfoForm = $('#basicForm');
     basicInfoForm.validate();
-    if(basicInfoForm.valid())
-		$('#basic_submit').click();
+
+    var contactForm = $('#contactForm');
+    contactForm.validate();
+    if(basicInfoForm.valid() && contactForm.valid()) {
+    	$('#basic_submit').click();
+    	$('#contact_submit').click();
+    }
+		
 
 }
 // ajax localtion

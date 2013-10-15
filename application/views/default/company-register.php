@@ -12,14 +12,14 @@
         <ul class="reg-ul">
             <?php 
             $cla = '';
-            if(isset($basic_info['description'])) {
+            if(!empty($basic_info['description'])) {
                 $cla = ' class = "curr"';
             }
             ?>
-            <li <?php echo $cla; ?>><a href="#reg1">Basic Information</a></li>
+            <li <?php echo $cla; ?> id="step1"><a href="#reg1">Basic Information</a></li>
             <?php 
             $cla = '';
-            if(isset($basic_info['last_name'])) {
+            if(!empty($basic_info['last_name'])) {
                 $cla = ' class = "curr"';
             }
             ?>
@@ -86,11 +86,12 @@
                     
                     <select name="industry" id="industry" title="" <?php if (empty($industries)): ?>required<?php endif; ?>>
                     <option value="">All industry</option>
-                    <option>Accounting</option>
-                    <option>HR</option>
-                    <option>Finance</option>
-                    <option>Design</option>
-                    <option>Education</option>
+                    <?php foreach($industry_list as $key=>&$v) {
+                                    if(empty($v['name'])) continue;
+                                    
+                    ?>
+                    <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
+                    <?php } ?>
                 </select>
                 <input type="hidden" name="industry_tag" id="industry_tag"/>
                  <ul id="industry_box" data-name="nameOfSelect"></ul>
@@ -224,7 +225,7 @@ $(document).ready(function() {
     $("select[name='province']").change(function() {
         change_location($(this), 'province', '<?php echo $basic_info['province'];?>');
     });
-    //$("select[name='country']").change();
+    
     select_location('country','<?php echo $basic_info['country'];?>');
     select_location('province','<?php echo $basic_info['province'];?>');
     $( "#basicForm" ).validate();

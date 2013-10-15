@@ -11,7 +11,7 @@
         $("select[name='province']").change(function() {
             change_location($(this), 'province');
         });
-        //$("select[name='country']").change();
+        
         select_location('country','<?php echo $userinfo['country'];?>');
         select_location('province','<?php echo $userinfo['province'];?>');
         $("input.date").jSelectDate({

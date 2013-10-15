@@ -48,7 +48,11 @@ class company extends Front_Controller {
 	        // get location
 	        $this->load->helper('location');
 	        $data['location'] = getLoction();
-	
+
+            //industry lists
+            $this->load->model('jobseeker_model');
+            $industry = $this->jobseeker_model->getIndustry();
+	        $data["industry_list"] = $industry;
 	        $basic_info = $this->company_model->getUserInfo($uid);
 	        $data['industries'] = $this->company_model->getIndustry($uid);
 	        //$contact_detail = $this->company_model->getContactDetail($uid);
