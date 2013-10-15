@@ -208,7 +208,9 @@ class jobseeker extends Front_Controller {
         $uid = $this->session->userdata('uid');
 
         if ($post) {
-            //save school to db
+            //we should delete all schools related to this jobseeker
+            $this->jobseeker_model->deleteEducation($uid);
+            //save schools to db
             $school_len = count($post['school_name']);
             for($i=0; $i<$school_len;$i++) {
                 if($post['school_name'][$i]) {
