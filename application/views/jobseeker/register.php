@@ -5,18 +5,21 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("select[name='country']").change(function() {
+         $("select[name='country']").change(function() {
             change_location($(this),'country');
         });
         $("select[name='province']").change(function() {
             change_location($(this), 'province');
         });
+        $("select[name='country']").change();
+        select_location('country','<?php echo $userinfo['country'];?>');
+        select_location('province','<?php echo $userinfo['province'];?>');
         $("input.date").jSelectDate({
             css:"date",
             yearBeign: 1960,
             disabled : false
         });
-        $("select[name='country']").change();
+
         //upload user avatar
         uploadImage();
 
@@ -341,6 +344,7 @@
                 <a href="#">Or start searching for jobs now </a></p>
 
             <!-- Basic information -->
+
             <div class="reg-area" id="reg1">
             <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="basicInfoForm">
                 <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
@@ -433,7 +437,9 @@
             </div>
 
             <!-- Contact details -->
+
             <div class="reg-area" id="reg2">
+
             <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="contactDetailsForm">
                 <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                 <?php $step_arr = $step_arr;
@@ -502,7 +508,9 @@
             </div>
 
             <!-- Preferences -->
+
             <div class="reg-area" id="reg3">
+
                 <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="preferencesForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <?php $step_arr = $step_arr;
@@ -595,7 +603,9 @@
             </div>
 
             <!-- Education -->
+
             <div class="reg-area" id="reg4">
+
                 <?php $step_arr = $step_arr;
                 $cla = '';
                 if(in_array('4', $step_arr)) {
@@ -688,7 +698,9 @@
             </div>
 
             <!-- work history -->
+
             <div class="reg-area" id="reg5">
+
                 <?php $step_arr = $step_arr;
                 $cla = '';
                 if(in_array('5', $step_arr)) {
@@ -827,7 +839,9 @@
             </div>
 
             <!-- languages -->
+
             <div class="reg-area" id="reg6">
+
                 <?php $step_arr = $step_arr;
                 $cla = '';
                 if(in_array('6', $step_arr)) {
@@ -892,7 +906,9 @@
             </div>
 
             <!-- personal skills -->
+
             <div class="reg-area" id="reg7">
+
                 <?php $step_arr = $step_arr;
                 $cla = '';
                 if(in_array('7', $step_arr)) {
@@ -929,7 +945,9 @@
             </div>
 
             <!-- professional skills -->
+
             <div class="reg-area" id="reg8">
+
                 <?php $step_arr = $step_arr;
                 $cla = '';
                 if(in_array('8', $step_arr)) {
@@ -968,7 +986,7 @@
     </div>
         <div class="reg-btns">
             <a href="javascript: void(0);" class="reg-btns-saveall png" onclick="saveAll();"></a>
-            <a href="#" class="reg-btns-job png"></a>
+            <a href="<?php echo $site_url?>search/searchJob" class="reg-btns-job png"></a>
         </div>
         <div class="backtop png" style="display: block; top: 564px; right:-80px"></div>
      </div>

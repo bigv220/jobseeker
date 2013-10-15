@@ -17,7 +17,7 @@ abstract class Front_Controller extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->data['lang'] = 'cn';
+		$this->data['lang'] = 'en';
         $this->load->library('session');
         $this->data['uid'] = $this->session->userdata('uid');
         $this->data['first_name'] = $this->session->userdata('first_name');

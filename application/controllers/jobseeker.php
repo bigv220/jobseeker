@@ -9,6 +9,10 @@ class jobseeker extends Front_Controller {
     {
         parent::__construct();
         $this->load->library('session');
+        if (!$this->session->userdata('uid'))
+        {
+            redirect('/');
+        }
     }
 
     public function index()

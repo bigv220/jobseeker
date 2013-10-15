@@ -20,6 +20,6 @@ class news extends Front_Controller {
         $data = $this->data;
         //$url = $this->input->post($url, TRUE);
         $data['article'] = $this->article_model->getOne($aid, 'aid');
-        $this->load->view($data['front_theme'].'/page', $data);
+        $this->load->view($data['front_theme'].'/news-view', $data);
     }
 }

@@ -21,7 +21,7 @@
                     <div class="span2">
                         <strong>Length of Job *</strong>
                         <div>
-                            <select required>
+                            <select name="employment_length" required>
                                 <option value="">--Select--</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
@@ -86,7 +86,7 @@
                     <div class="span2">
                         <strong>Language Level *</strong>
                         <div>
-                            <select name="languagelevel" required>
+                            <select name="" required>
                                 <option value="">--Select--</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
@@ -102,7 +102,7 @@
                     <div class="span1">
                         <strong>Type of Job *</strong>
                         <div>
-                            <select name="typeofjob" required>
+                            <select name="employment_type" required>
                                 <option value="">Full Time</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
@@ -164,7 +164,7 @@
                                 <option value="4">value4</option>
                                 <option value="5">value5</option>
                             </select>
-                            <input type="text" name="postalcode" class="location-input input-tip" value="Postal Code" data-tipval="Postal Code">
+                            <input type="text" name="" class="location-input input-tip" value="Postal Code" data-tipval="Postal Code">
                         </div>
                     </div>
 
@@ -173,7 +173,7 @@
                     <div class="span1">
                         <span>Salary</span>
                         <div>
-                            <select>
+                            <select name="salary_range">
                                 <option value="">Under 10,000 RMB</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
@@ -189,7 +189,7 @@
                     <div class="span1">
                         <span>Years of Experience Required</span>
                         <div>
-                            <select>
+                            <select name="preferred_year_of_experience">
                                 <option value="">Less than 1 year</option>
                                 <option value="1">value1</option>
                                 <option value="2">value2</option>
@@ -211,32 +211,11 @@
 
         <div class="adv-search-bar">
 
-            <a href="javascript:void(0);" class="btn find" id="find"></a>
-            <a href="#" class="btn findnow"></a>
+            <a href="javascript:void(0);" class="btn post" id="post"></a>
+            
         </div>
     </div>
     </form>
-</div>
-<!--company page body-->
-<div class="company-page w770 clearfix rel">
-    <div class="company-body box rel mb20">
-		<form action="" method="post">
-		postion title: <input type="text" name="job_name"><br>
-		industry: 		<input type="text" name="industry"><br>
-		language: 		<input type="text" name="language"><br>
-		tech skills: 	<input type="text" name="preferred_technical_skills"><br>
-		pers skills: 	<input type="text" name="preferred_personal_skills"><br>
-		location:	 	<input type="text" name="location"><br>
-		postion: 		<input type="text" name="position"><br>
-		language level: <input type="text" name=""><br>
-		type of job: 	<input type="text" name="employment_type"><br>
-		length of job: 	<input type="text" name="employment_length"><br>
-		salary: 		<input type="text" name="salary_range"><br>
-		experience: 	<input type="text" name="preferred_year_of_experience"><br>
-		descrip: 		<textarea name="job_desc"></textarea><br>
-		<input type="submit">
-		</form>
-    </div>
 </div>
 
 <!-- Our Partners -->
@@ -253,10 +232,17 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#find').click(function() {
+    $('#post').click(function() {
         $('#postjobForm').validate();
         if ($('#postjobForm').valid()) {
-            //post
+        	$.post(
+                	site_url+"job/postjob", 
+                	$('#postjobForm').serialize(),
+     			    function(result,status){
+     			    	if("success" == status) {
+							alert("success.");
+     			    	}
+     		});
         }
     });
 });

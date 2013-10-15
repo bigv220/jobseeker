@@ -132,7 +132,7 @@ function saveAll() {
 
 }
 // ajax localtion
-function change_location(this1, key) {
+function change_location(this1, key, location) {
 	
 	var selected = this1.val();
 	var html_option = "";
@@ -145,7 +145,6 @@ function change_location(this1, key) {
 				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
 			}
 			$("select[name='province']").html(html_option);
-			$("select[name='province']").change();
 		});
 	}
 	
@@ -162,7 +161,14 @@ function change_location(this1, key) {
 	}
 	
 }
-
+function select_location(key,location) {
+	if("country" == key) {
+		$("select[name='country']").val(location);
+	} else {
+		$("select[name='province']").val(location);
+		$("select[name='province']").change();
+	}
+}
 
 
 

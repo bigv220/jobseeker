@@ -55,7 +55,7 @@
 		<div class="w70">
 			<div class="h-blog-hd">
 				<strong>Jing News</strong>
-				<a href="#">View all articles</a>
+				<a href="<?php echo $site_url?>news">View all articles</a>
 			</div>
 			<div class="h-blog-bd">
 				<ul class="h-blog-ul">
