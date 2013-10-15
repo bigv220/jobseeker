@@ -34,6 +34,12 @@ $(function(){
         popMark.fadeIn();
         popReg.fadeIn();
     });
+    // Pop login
+    $('.phd-login-btn').click(function(){
+    	popReg.fadeOut();
+        $('.pop-login').fadeIn();
+    });
+    
     $('.pop-reg-close').click(function(){
         popMark.fadeOut();
         popReg.fadeOut();
@@ -133,13 +139,14 @@ $(function(){
     });
 
    //login form ajax submit
-    var loginform = $('#login_form');
+    var loginform = $('#login_form, #login_form2');
     loginform.submit(function(){
         $.post(site_url + '/user/login',
                 loginform.serialize(),
                 function(result, status){
 
                     if(result.status == 'success'){
+                    	$('.pop-login').fadeOut();
                         //$('.phd-login-pop').remove();
                         $('.phd-login-text').html(result.first_name + ' ' + result.last_name);
                         $('.phd-login-pop-content .login-error-msg').hide();

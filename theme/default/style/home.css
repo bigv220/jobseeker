@@ -50,7 +50,7 @@
 .h-blog-ul a:hover{text-decoration:none;}
 /*.h-blog-ul li:hover img{-webkit-animation:rotateIn 1s .2s ease both;-moz-animation:rotateIn 1s .2s ease both;}*/
 @-webkit-keyframes rotateIn{0%{-webkit-transform-origin:center center;-webkit-transform:rotate(-360deg);opacity:1;} 100%{-webkit-transform-origin:center center;-webkit-transform:rotate(0);opacity:1;}}@-moz-keyframes rotateIn{0%{-moz-transform-origin:center center;-moz-transform:rotate(-360deg);opacity:1;} 100%{-moz-transform-origin:center center;-moz-transform:rotate(0);opacity:1;}}
-.pop-reg{display:none;z-index:111;width:300px;height:282px;position:absolute;top:50%;left:50%;margin:-141px 0 0 -127px;background:url(home/pop-reg.png) no-repeat;}
+.pop-reg{display:none;z-index:111;width:300px;height:282px;position:absolute;top:50%;left:50%;margin:-141px 0 0 -150px;background:url(home/pop-reg.png) no-repeat;}
 .pop-reg-close{width:18px;height:18px;top:3px;right:3px;cursor:pointer;}
 .pop-reg-wrap{padding:15px 14px 0 14px;}
 .pop-reg-wrap label b{font-size:9px;height:18px;line-height:18px;}
@@ -66,6 +66,8 @@
 .pop-reg-agree{height:28px;adding-right:8px;}.pop-reg-agree i.kyo-checkbox{font-size:9px;}
 .pop-reg-submit{text-align:center;}
 .pop-reg-submit-btn{width:221px;height:28px;margin:auto;cursor:pointer;border:0;background:url(home/reg-submit.gif) no-repeat;}
+.pop-login{display:none;z-index:111;width: 238px;min-height:149px;position:absolute;top:50%;left:50%;margin:-141px 0 0 -127px;}
+.pop-login .phd-login-pop {background: url(pub/login_body_bg2.png) no-repeat !important; display:block !important;top: 0px !important;left: 0px !important;}
 .pop-welcome{display:none;z-index:102;width:491px;height:232px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(home/pop-welcome.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
 .pop-welcome b{display:block;padding:32px 100px 20px 100px;}
 .pop-welcome-close{width:20px;height:20px;top:3px;right:3px;cursor:pointer;display:block;}

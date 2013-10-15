@@ -44,11 +44,11 @@
 				<li class="home"><a href="<?php echo $site_url?>">HOME</a></li>
 				<li class="about"><a href="<?php echo $site_url?>page/aboutus">ABOUT US</a></li>
 				<li class="news"><a href="<?php echo $site_url?>news">NEWS</a></li>
-				<li class="jobs"><a href="<?php echo $site_url?>">JOBS</a></li>
+				<li class="jobs"><a href="<?php echo $site_url?>search/searchJob">JOBS</a></li>
 				<li class="post"><a href="<?php echo $site_url?>job/postjob">POST A JOB</a></li>
 			</ul>
 		</div>
-		<a class="phd-logo png" href="#"></a>
+		<a class="phd-logo png" href="<?php echo $site_url?>"></a>
 		<div class="phd-login fr rel">
 			<div class="phd-login-text">
                 <?php $current_userId = isset($uid)?$uid:-1;
@@ -71,7 +71,7 @@
 
                 <div class="phd-login-pop-content">
                     <div class="login-error-msg">Either your email or password is incorrect, try again.</div>
-                    <form id="login_form" method="post" action="/user/login">
+                    <form id="login_form" method="post" action="<?php echo $site_url?>user/login">
                         <p class="username-wrap"><input type="text" id="username" name="username" value="" class="input input-user" /></p>
                         <p class="password-wrap"><input type="password" id="login_password" name="login_password" value="" class="input input-pass" /></p>
                         <p class="tac" ><input type="submit" value="" class="login-btn" /></p>
@@ -118,7 +118,7 @@
 
                 <div class="phd-login-pop-content">
                     <div>Enter the email address you used to create your JingJobs account and we'll email you a link so you can create a new password.</div>
-                    <form id="resetpw_form" method="post" action="/user/sendResetPwRequest">
+                    <form id="resetpw_form" method="post" action="<?php echo $site_url?>user/sendResetPwRequest">
                         <p class="username-wrap"><input type="text" name="username" value="" class="input input-user" /></p>
                         <p class="tac" ><input type="submit" value="" class="send-btn" /></p>
                     </form>
