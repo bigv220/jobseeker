@@ -31,8 +31,7 @@
       <dd class="search-row-nav">
         <select name="" class="after-select">
           <option value="0" selected="selected">Full Time</option>
-          <option value="1">Shanghai</option>
-          <option value="2">Beijing</option>
+          <option value="1">Part Time</option>
         </select>
       </dd>
     </dl>
