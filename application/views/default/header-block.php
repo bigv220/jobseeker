@@ -43,8 +43,9 @@
 			<ul>
 				<li class="home"><a href="<?php echo $site_url?>">HOME</a></li>
 				<li class="about"><a href="<?php echo $site_url?>page/aboutus">ABOUT US</a></li>
-				<li class="news"><a href="<?php echo $site_url?>news">NEWS</a></li>
+				<li class="news"><a href="<?php echo $site_url?>news">JING NEWS</a></li>
 				<li class="jobs"><a href="<?php echo $site_url?>search/searchJob">JOBS</a></li>
+				<li class="jobs"><a href="<?php echo $site_url?>search/staff">CVs</a></li>
 				<li class="post"><a href="<?php echo $site_url?>job/postjob">POST A JOB</a></li>
 			</ul>
 		</div>
