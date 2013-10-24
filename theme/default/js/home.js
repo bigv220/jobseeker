@@ -15,7 +15,7 @@ $(function(){
         speed:600       //滚动速度      
     });
 
-
+/*
     //Find
     $('.pbn-find-block').hover(function(){
         var obj= $(this).find('.find-hover');
@@ -24,7 +24,7 @@ $(function(){
         var obj= $(this).find('.find-hover');
         obj.stop().fadeOut();
     })
-
+*/
     //Pop mark
     var popMark =$('.pop-mark'),
         popReg = $('.pop-reg');
@@ -64,6 +64,11 @@ $(function(){
         popReg.fadeIn();
     });
 
+    $('.login_on_regpop').click(function(){
+        $('#login_pop').fadeIn();
+        popMark.fadeOut();
+        popReg.fadeOut();
+    })
     //click event for user sign up
     $('#signup_submit').click(function(){
         $('.email_existing').html('');

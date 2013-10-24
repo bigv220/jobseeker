@@ -196,7 +196,7 @@
             <form id="signup_form" method="post" action="/user/signup">
 			<div class="pop-reg-close abs" title="close"></div>
 				<div class="pop-reg-tit">
-					<i>Already have an account? <a href="#">Login</a></i>
+					<i>Already have an account? <a href="javascript:void(0);" class="login_on_regpop">Login</a></i>
 					<b>SIGN UP</b> 
 				</div>
 				<div class="pop-reg-type">
