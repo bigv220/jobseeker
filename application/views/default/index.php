@@ -68,10 +68,10 @@
                             <img src="<?php echo ($theme_path . 'style/home/temp/temp-h' . ($key+1) . '.gif');?>" width="120" height="120" alt="" />
                             <i class="mark png"></i>
                             <a href="<?php echo $base_url . 'news/view/' . $news['aid'];?>" class="h-blog-item">
-                                <strong><?php echo $news['title'];?></strong>
+                                <strong><?php echo mb_substr($news['title'], 0, 28).'...';?></strong>
                                 <span>
                                     <?php
-                                    echo $news['content'];
+                                    echo mb_substr($news['descrip'], 0, 120).'...';
 
                                     ?>
                                 </span>

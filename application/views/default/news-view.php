@@ -10,6 +10,7 @@
         <div class="news-index box rel mb10">
 			
 			<h1 class="title"><?php echo $article['title']?></h1>
+			<div class="hr"></div>
 			<div class="content">
 			<?php echo $article['content']?>
 			</div>

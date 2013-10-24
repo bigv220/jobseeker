@@ -140,3 +140,4 @@ input.error,select.error,textarea.error {border: 1px solid red;box-shadow:0 1px 
 .reset-password-wrapper .input{width:180px;height:18px;line-height:18px;}
 .reset-password-wrapper input.has{background:#fafafa;}
 .reset-password-wrapper .btn{width:214px;height:28px;display:inline-block;cursor:pointer;background:url(pub/reset_pw_btn.png) no-repeat;}
+.hr {height:0px; line-height:0px; margin: 10px 0 15px 0; border-bottom: 1px #ccc solid;}
