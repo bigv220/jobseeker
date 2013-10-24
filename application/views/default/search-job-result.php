@@ -31,8 +31,7 @@
       <dd class="search-row-nav">
         <select name="" class="after-select">
           <option value="0" selected="selected">Full Time</option>
-          <option value="1">Shanghai</option>
-          <option value="2">Beijing</option>
+          <option value="1">Part Time</option>
         </select>
       </dd>
     </dl>
@@ -103,11 +102,10 @@
     <div class="result-az-from fl"> <b>View jobs from</b>
       <select class="kyo-select">
         <option value="0">--Select--</option>
-        <option value="30">Last 30 Days</option>
-        <option value="15">Last 15 Days</option>
-        <option value="7">Last 7 Days</option>
-        <option value="3">Last 3 Days</option>
-        <option value="1">Last 1 Days</option>
+        <option value="60">Last 2 months</option>
+        <option value="30">Last month</option>
+        <option value="14">Last 2 weeks</option>
+        <option value="7">Last week</option>
       </select>
     </div>
     <div class="result-az-jobs fl"> <b>Sort jobs by</b>

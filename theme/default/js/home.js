@@ -34,6 +34,13 @@ $(function(){
         popMark.fadeIn();
         popReg.fadeIn();
     });
+    
+    // Pop login
+    $('.phd-login-btn').click(function(){
+    	//popReg.fadeOut();
+        //$('.pop-login').fadeIn();
+    });
+    
     $('.pop-reg-close').click(function(){
         popMark.fadeOut();
         popReg.fadeOut();
@@ -145,6 +152,7 @@ $(function(){
                 function(result, status){
 
                     if(result.status == 'success'){
+                    	$('.pop-login').fadeOut();
                         //$('.phd-login-pop').remove();
                         $('.phd-login-text').html(result.first_name + ' ' + result.last_name);
                         $('.phd-login-pop-content .login-error-msg').hide();

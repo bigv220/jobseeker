@@ -8,8 +8,8 @@ var basicFormSubmit = function(is_all) {
                 if(status == 'success'){
                     $('#basicForm .reg-area-tit').addClass('reg-area-tit-curr');
                     $('#step1').addClass('curr');
-                    if(is_all.length == 0)
-                    alert('Save successful!');
+                    if(is_all==null)
+                        alert('Save successful!');
                 }
                 else{
                     alert('Save failed!');

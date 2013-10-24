@@ -111,3 +111,12 @@ function getFirstImgInArticle($article, $themePath){
     }
     return $firstImage;
 }
+
+function language_level() {
+	return array('Beginner','Intermediate','Fluent','Native Tongue');
+}
+
+function language_arr() {
+	return array('Chinese','English','French','German','Spanish');
+}
+
