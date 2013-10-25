@@ -69,7 +69,7 @@ $(function(){
         max:100,
         ismax:function(){alert('max 100.')}
     });
-	
+
 	}
 	 
 	//sel-industry
@@ -88,7 +88,7 @@ $(function(){
 			max:10,
 			ismax:function(){alert('max 10!!!')}
 		});
-	
+
 	}
 	
 	//click save

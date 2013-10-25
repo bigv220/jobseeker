@@ -29,4 +29,11 @@ class job_model extends MY_Model
     public function saveJob($data) {
     	return $this->add($data);
     }
+
+    public function searchJob($where) {
+        $sql = "SELECT * FROM job LEFT JOIN company as c on job.company_id=c.company_id".$where;
+
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
 }

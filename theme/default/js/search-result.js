@@ -34,21 +34,12 @@ $(function(){
 
     //sel-position
     $('#sel-position').checkSelect({
-        text:'--position--',
+        text:'All Positions',
         data:[
-            {title:'value1',value:'1'},
-            {title:'value2',value:'2'},
-            {title:'value3',value:'3'},
-            {title:'value4',value:'4'},
-            {title:'value5',value:'5'},
-            {title:'value6',value:'6'},
-            {title:'value7',value:'7'},
-            {title:'value8',value:'8'},
-            {title:'value9',value:'9'},
-            {title:'value10',value:'10'},
-            {title:'value11',value:'11'},
-            {title:'value12',value:'12'},
-            {title:'value13',value:'13'}
+            {title:'Employee',value:'1'},
+            {title:'Manager',value:'2'},
+            {title:'Director',value:'3'},
+
         ],
         showDiv:$('#sel-position-val'),
         width:230,

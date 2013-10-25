@@ -17,6 +17,9 @@
                     		<label for="title">标题:</label> 
                     		<input name="title" id="title" type="text" value="<?php if(!empty($article)) echo $article['title']?>" />
                     		<br />
+                    		<label for="descrip">摘要:</label> 
+                    		<textarea name="descrip" id="descrip" style="height:50px;"><?php if(!empty($article)) echo $article['descrip']?></textarea>
+                    		<br />
                     		<label for="content1">内容:</label> 
                     		<script charset="utf-8" src="<?php echo $theme_path?>js/editor/kindeditor-min.js"></script>
                     		<script charset="utf-8" src="<?php echo $theme_path?>js/editor/lang/zh_CN.js"></script>

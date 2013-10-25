@@ -452,7 +452,7 @@
                 }
                 ?>
                 <div class="reg-area-tit <?php echo $cla; ?>">Contact Details</div>
-                <div class="reg-row"> <strong>Emial Address<i class="star">*</i></strong>
+                <div class="reg-row"> <strong>Email Address<i class="star">*</i></strong>
                     <div>
                         <input type="text" name="email" class="reg-input" value="<?php echo $userinfo['email']; ?>" required />
                     </div>
@@ -619,7 +619,7 @@
                 <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="educationForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <div id="every_school">
-                    <div class="reg-row"> <strong>School/Collage name<i class="star">*</i></strong>
+                    <div class="reg-row"> <strong>School/College name<i class="star">*</i></strong>
                         <div>
                             <input type="text" class="reg-input" name="school_name[]" value="<?php if(count($education_info)) echo $education_info["school_name"]; ?>" required />
                         </div>
