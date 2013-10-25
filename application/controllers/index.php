@@ -11,12 +11,14 @@ class index extends Front_Controller {
 	{
 		$data = $this->data;
         $this->load->library('session');
+        /* hide news temporarily
 		$this->load->model('article_model');
 		$data['news_list'] = $this->article_model->getLatestArtical();
 
         foreach($data['news_list'] as $key=>$article){
             $data['news_list'][$key]['imgsrc'] = getFirstImgInArticle($article, $data['theme_path']);
         }
+        */
         $data['uid'] = $this->session->userdata('uid')?$this->session->userdata('uid'):-1;
         $data['first_name'] = $this->session->userdata('first_name');
         $data['last_name'] = $this->session->userdata('last_name');
