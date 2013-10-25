@@ -73,16 +73,18 @@ $(function(){
     $('.job-viewmore,.sresult-par1').click(function(e){
 
         var abtn = $(this).parents('.sresult-row').find('.job-btn-submit');
+        var requestinterviewbtn = $(this).parents('.sresult-row').find('.jobseeker_request_interview');
         var oDom = $(this).parents('.sresult-row').find('.sresult-par2');
         var aMark = $(this).parents('.sresult-row').find('.job-mark');
         if(oDom.css('display')=='none'){
             aMark.addClass('job-mark2').removeClass('job-mark1');
             oDom.slideDown();
             abtn.css({display:'block'}).show();
-            
+            requestinterviewbtn.css({display:'block'}).show();
         }else{
             oDom.slideUp();
             abtn.hide();
+            requestinterviewbtn.hide();
             aMark.addClass('job-mark1').removeClass('job-mark2');
         }
 

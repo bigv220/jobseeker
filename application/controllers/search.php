@@ -136,6 +136,11 @@ class search extends Front_Controller {
         $this->load->view($data['front_theme']."/search-staff",$data);   
     }
 
+    public function searchJobseeker() {
+        $data = $this->data;
+        $this->load->view($data['front_theme']."/search-jobseeker-result",$data);
+    }
+
     public function findstaff() {
         $data = $this->data;
         $this->load->view($data['front_theme']."/search-advance-staff",$data);   
