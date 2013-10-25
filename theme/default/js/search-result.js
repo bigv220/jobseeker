@@ -34,7 +34,7 @@ $(function(){
 
     //sel-position
     $('#sel-position').checkSelect({
-        text:'--position--',
+        text:'All Positions',
         data:[
             {title:'Employee',value:'1'},
             {title:'Manager',value:'2'},
