@@ -176,9 +176,9 @@
             <dd class="search-row-nav">
                 <select name="salary" class="after-select">
                     <option value="0" selected="selected">Any Salary</option>
-                    <option value="1">select2</option>
-                    <option value="2">select3</option>
-                    <option value="3">select4</option>
+                    <option value="1">1500-2500</option>
+                    <option value="2">2500-3500</option>
+                    <option value="3">3500-5500</option>
                 </select>
             </dd>
         </dl>
@@ -187,9 +187,9 @@
             <dd class="search-row-nav">
                 <select name="experience_year" class="after-select">
                     <option value="1" selected="selected">Less than 1 year</option>
-                    <option value="2">select2</option>
-                    <option value="3">select3</option>
-                    <option value="4">select4</option>
+                    <option value="2">2 years</option>
+                    <option value="3">3 years</option>
+                    <option value="4">4 years and more</option>
                 </select>
             </dd>
         </dl>
