@@ -50,40 +50,39 @@
 		</div>
 	</div>
 
-	<!-- recently jobs -->
-	<div class="p-jobs rel">
+	<!--blog-->
+	<div class="p-blog rel">
 		<div class="w70">
-			<div class="title">Recently Added Jobs</div>
-		</div>
-		<div class="h-jobs-bd">
-			<div class="w70">
-				<a class="p-jobs-item rel" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
-		      	</a>
-		      	<a class="p-jobs-item rel" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
-		      	</a>
-		      	<a class="p-jobs-item rel" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
-		      	</a>
-		      	<a class="p-jobs-item rel last" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
-		      	</a>
+			<div class="h-blog-hd">
+				<strong>Jing News</strong>
+				<a href="<?php echo $site_url?>news">View all articles</a>
+			</div>
+			<div class="h-blog-bd">
+				<ul class="h-blog-ul">
+
+                    <?php foreach($news_list as $key => $news):?>
+                        <li class="n<?php echo $key+1;?>">
+                            <!--
+                            <img src="<?php echo $news['imgsrc'];?>" width="120" height="120" alt="" />
+                            -->
+                            <img src="<?php echo ($theme_path . 'style/home/temp/temp-h' . ($key+1) . '.gif');?>" width="120" height="120" alt="" />
+                            <i class="mark png"></i>
+                            <a href="<?php echo $base_url . 'news/view/' . $news['aid'];?>" class="h-blog-item">
+                                <strong><?php echo mb_substr($news['title'], 0, 28).'...';?></strong>
+                                <span>
+                                    <?php
+                                    echo mb_substr($news['descrip'], 0, 120).'...';
+
+                                    ?>
+                                </span>
+                                <b>Continue Reading</b>
+                            </a>
+
+                        </li>
+                    <?php endforeach;?>
+				</ul>
 			</div>
 		</div>
-		
 	</div>
 	
 	<!-- sponsors -->
