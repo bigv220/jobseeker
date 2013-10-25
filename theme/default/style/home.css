@@ -51,12 +51,16 @@
 /*.h-blog-ul li:hover img{-webkit-animation:rotateIn 1s .2s ease both;-moz-animation:rotateIn 1s .2s ease both;}*/
 .p-jobs .title {color:#674092;font-size:14px;font-weight: bold;margin-bottom:3px;}
 .p-jobs .h-jobs-bd {background: #674092; height: 94px;}
-.p-jobs .h-jobs-bd .p-jobs-item {width:183px; height:68px; overflow:hidden; margin-top:13px; display:block; float:left;border-right:1px #3a0837 solid;}
+.p-jobs .h-jobs-bd .p-jobs-item {width:190px; height:68px; overflow:hidden; margin-top:13px; display:block; float:left;border-right:1px #3a0837 solid;}
 .p-jobs .h-jobs-bd .p-jobs-item .mark{top:0px; z-index:301; background:url("home/recentlyjobs-bg.png") no-repeat; width:183px; height:68px;}
 .p-jobs .h-jobs-bd .p-jobs-item img {z-index:300; position:absolute; top:-6px; left:3px;}
 .p-jobs .last {border: 0px !important;}
 .p-jobs .h-jobs-bd .p-jobs-item .jobtitle {z-index:302; color: #fff; top:18px; left:70px; }
 .p-jobs .h-jobs-bd .p-jobs-item .compname {z-index:303; color: #EBF14A; top:35px; left:70px; text-decoration: underline;}
+.p-partners {margin:25px 0;}
+.p-partners .title {color:#674092;font-size:14px;font-weight: bold;margin-bottom:3px;}
+.p-partners .h-partners-bd {height:108px;}
+.p-partners .h-partners-bd .p-partners-item {float:left; width:190px; height:108px; overflow:hidden;}
 @-webkit-keyframes rotateIn{0%{-webkit-transform-origin:center center;-webkit-transform:rotate(-360deg);opacity:1;} 100%{-webkit-transform-origin:center center;-webkit-transform:rotate(0);opacity:1;}}@-moz-keyframes rotateIn{0%{-moz-transform-origin:center center;-moz-transform:rotate(-360deg);opacity:1;} 100%{-moz-transform-origin:center center;-moz-transform:rotate(0);opacity:1;}}
 .pop-reg{display:none;z-index:111;width:300px;height:282px;position:absolute;top:50%;left:50%;margin:-141px 0 0 -150px;background:url(home/pop-reg.png) no-repeat;}
 .pop-reg-close{width:18px;height:18px;top:3px;right:3px;cursor:pointer;}
