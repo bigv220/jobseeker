@@ -294,6 +294,7 @@ $(function(){
 
 		//判断这个值是否在input里面
 		function isVal(val){
+            if(input.val() == undefined) return false;
 			var inputVals = input.val().split(',');
 			var back = false;
 			for(var i = 0, iLeng = inputVals.length; i<iLeng; i++){
