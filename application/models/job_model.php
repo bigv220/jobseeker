@@ -36,4 +36,11 @@ class job_model extends MY_Model
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
     }
+
+    public function searchJobseeker($where) {
+        $sql = "SELECT * FROM user ".$where;
+
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
 }

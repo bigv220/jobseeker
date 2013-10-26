@@ -31,8 +31,7 @@
                         <div>
                             <select name="industry" onchange="changeIndustry(this);" required>
                                 <option value="">All Industries</option>
-                                 <option value="">select</option>
-                                <?php foreach($industry as $key=>&$v) {
+                                <?php foreach($industry as $key=>$v) {
                                     if(empty($v['name'])) continue;                    
                                 ?>
                                 <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
@@ -52,7 +51,7 @@
 
                                 foreach($language as $v) {
                                 ?>
-                                <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                                <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
                                 <?php } ?>
                             </select>
                             </select>
@@ -85,8 +84,12 @@
                         <div>
                             <select name="" required>
                                 <option value="">--Select--</option>
-                                <option value="1">Master</option>
-                                <option value="2">value2</option>
+                                <?php
+
+                                foreach($level as $v) {
+                                ?>
+                                <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -107,7 +110,7 @@
                         </div>
                     </div>
                     <div class="span2">
-                        <span>Personal Skills Required</span>
+                        <span>Personal Skills *</span>
                         <div>
                             <input type="text" name="preferred_personal_skills" class="input-tip" value="Start Typing" data-tipval="Start Typing" required>
                         </div>
@@ -127,26 +130,7 @@
                 <div class="postjob-content-right-row clearfix">
                     <div class="span1">
                         <div>
-                            <select class="location-input">
-                                <option value="">All Province</option>
-                            <?php foreach ($location['China'] as $k=>$v):?>
-                           
-                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
-                              
-                            <?php endforeach;?>
-                            </select>
-                            <select class="location-input">
-                                <option value="">City *</option>
-
-                            </select>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="postjob-content-right-row clearfix">
-                    <div class="span1">
-                        <div>
-			<select name="country" class="location-input" required>
+                            <select name="country" class="location-input" required>
                             <option value="">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
                          
@@ -155,6 +139,26 @@
                             <?php endforeach;?>
                         </select>                            
 
+                            <select name="province" class="location-input">
+                                <option value="">All Province</option>
+                            <?php foreach ($location['China'] as $k=>$v):?>
+                           
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                              
+                            <?php endforeach;?>
+                            </select>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                <div class="postjob-content-right-row clearfix">
+                    <div class="span1">
+                        <div>
+			              <select class="location-input" name="city" >
+                                <option value="">City</option>
+
+                            </select>
                             <input type="text" name="" class="location-input input-tip" value="Postal Code" data-tipval="Postal Code">
                         </div>
                     </div>
@@ -242,4 +246,6 @@ $(document).ready(function() {
 });
 
 </script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

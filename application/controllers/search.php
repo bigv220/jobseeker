@@ -32,7 +32,7 @@ class search extends Front_Controller {
             if(!empty($post["keywords"])) {
                 array_push($where_arr, "job_name like '%" . $post["keywords"] . "%'");
             }
-            if($post["top_search"]==1 && !empty($post["search_text"]) && $post["search_text"]!="Search our job database") {
+            if(isset($post["top_search"]) && $post["top_search"]==1 && !empty($post["search_text"]) && $post["search_text"]!="Search our job database") {
                 array_push($where_arr, "job_name like '%" . $post["search_text"] . "%' or job_desc like '%" . $post["search_text"]."%'");
             }
             if(!empty($post["location"])) {
@@ -42,10 +42,10 @@ class search extends Front_Controller {
                 array_push($where_arr, 'employment_type=' . $post["employment_type"]);
             }
             if(!empty($post["industry"])) {
-                array_push($where_arr, 'industry like %'.$post["industry"].'%');
+                array_push($where_arr, "industry like '%".$post["industry"]."%'");
             }
             if(!empty($post["position"])) {
-                array_push($where_arr, 'position like %'.$post["position"].'%');
+                array_push($where_arr, "position like %'".$post["position"]."%'");
             }
             if(!empty($post["employment_length"])) {
                 array_push($where_arr, 'employment_length='.$post["employment_length"]);
@@ -141,6 +141,48 @@ class search extends Front_Controller {
 
     public function searchJobseeker() {
         $data = $this->data;
+        $this->load->model('job_model');
+        $post = $_POST;
+        $where_arr = array();
+        if($post) {
+            if(!empty($post["keywords"])) {
+                array_push($where_arr, "first_name like '%" . $post["keywords"] . "%' or last_name like '%". $post['keywords'] ."'");
+            }
+            if(isset($post["top_search"]) && $post["top_search"]==1 && !empty($post["search_text"]) && $post["search_text"]!="Search our job database") {
+                array_push($where_arr, "job_name like '%" . $post["search_text"] . "%' or job_desc like '%" . $post["search_text"]."%'");
+            }
+            if(!empty($post["location"])) {
+                array_push($where_arr, 'location=' .$post["location"]);
+            }
+            if(!empty($post["employment_type"])) {
+                array_push($where_arr, 'employment_type=' . $post["employment_type"]);
+            }
+            if(!empty($post["industry"])) {
+                array_push($where_arr, "industry like '%".$post["industry"]."%'");
+            }
+            if(!empty($post["position"])) {
+                array_push($where_arr, "position like %'".$post["position"]."%'");
+            }
+            if(!empty($post["employment_length"])) {
+                array_push($where_arr, 'employment_length='.$post["employment_length"]);
+            }
+            if(!empty($post["salary"])) {
+                array_push($where_arr, 'salary_range='.$post["salary"]);
+            }
+          
+            if(!empty($post["language"])) {
+                array_push($where_arr, "language like '%".$post["language"]."%'");
+            }
+        }
+        $where = "";
+        if(count($where_arr)) {
+            $where_str = implode(' AND ', $where_arr);
+            $where .= ' WHERE ' . $where_str;
+        }
+
+        // get jobs according to the search
+        $data['jobseekers'] = $this->job_model->searchJobseeker($where);
+
         $this->load->view($data['front_theme']."/search-jobseeker-result",$data);
     }
 

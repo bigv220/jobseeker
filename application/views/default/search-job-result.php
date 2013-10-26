@@ -30,73 +30,6 @@
         });
     });
 
-    function formatItem(row){
-        return " <p>"+row +" </p>";
-    }
-
-    function formatResult(row){
-        return row[0].replace(/(<.+?>)/gi, '');
-    }
-
-    function selectItem1(v){
-        addSkillsAjax('PersonalSkills',v);
-    }
-
-    function selectItem2(v){
-        addSkillsAjax('ProfessionalSkills', v);
-    }
-
-    function searchJob() {
-        $('#search_form').submit();
-    }
-
-    function addSkills(id_str, thisO) {
-        var v = $(thisO).val();
-
-        addSkillsAjax(id_str, v);
-    }
-
-    function addSkillsAjax(id_str, v) {
-        var htm = '<li data-val="2">'+ v +
-            '<i class="del" onclick="delSkills' + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
-
-        var str_key = '#'+ id_str + '_str';
-        var str = $(str_key).val();
-
-        if(str == '') {
-            $(str_key).val(v);
-        } else if(str.indexOf(v)==-1) {
-            $(str_key).val(str+','+v);
-        }
-        $('#'+ id_str).append(htm);
-
-        $('#'+id_str+'_input').val('');
-    }
-
-    function delSkills(id_str, thisO, v) {
-        var str_key = '#'+ id_str + '_str';
-        var str = $(str_key).val();
-
-        var str_cop = str;
-        if(str != '' && str.indexOf(v)>-1) {
-            var new_str = str_cop.substring(0, str.indexOf(v)-1) + str.substr(str.indexOf(v)+v.length);
-            $(str_key).val(new_str);
-        }
-
-        $(thisO).parent().remove();
-    }
-
-    function clearHint(thisO) {
-        if($(thisO).val() == 'Enter Keywords') {
-            $(thisO).val('');
-        }
-    }
-
-    function showHint(thisO) {
-        if($(thisO).val() == '') {
-            $(thisO).val('Enter Keywords');
-        }
-    }
 </script>
 
 <!--search-result body-->
@@ -112,15 +45,46 @@
             </dd>
         </dl>
         <dl class="search-row">
-            <dt class="search-row-tit">Location</dt>
+            <dt class="search-row-tit">Country</dt>
             <dd class="search-row-nav">
-                <select name="location" class="after-select">
+                <select name="country" class="filter_key" required>
+                            <option value="">All Counties</option>
+                            <?php foreach ($location as $k=>$v):?>
+                            <?php if ($k == $userinfo['country']): ?>
+                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php else: ?>
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php endif; ?>
+                            <?php endforeach;?>
+                        </select>
+            </dd>
+        </dl>
+        <dl class="search-row">
+            <dt class="search-row-tit">Province</dt>
+            <dd class="search-row-nav">
+                <select name="country"  class="filter_key"  required>
+                            <option value="">All Counties</option>
+                            <?php foreach ($location as $k=>$v):?>
+                            <?php if ($k == $userinfo['country']): ?>
+                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php else: ?>
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php endif; ?>
+                            <?php endforeach;?>
+                        </select>
+            </dd>
+        </dl>
+        <dl class="search-row">
+            <dt class="search-row-tit">City</dt>
+            <dd class="search-row-nav">
+                <select name="city" class="filter_key">
                     <option value="0" selected="selected">All Cities</option>
                     <option value="1">Shanghai</option>
                     <option value="2">Beijing</option>
                 </select>
             </dd>
         </dl>
+        
         <dl class="search-row ">
             <dt class="search-row-tit">Type of employment</dt>
             <dd class="search-row-nav">
@@ -274,11 +238,7 @@
                 <div class="fxui-tab-nav sresult-nav-job">
                     <div class="sresult-nav-job-left">
                         <div class="text_r">
-                            <p>We have an exciting opportunity for a full time Graphic Designer to join our creative team.
-                                We are a leading creative, events and media agency with offices in Beijing, London and Qingdao.</p>
-                            <p>We create and distribute amazing work for a variety of retailers and clients. You will be working on great brands such as Baccarat, Arcosteel, Alex Liddy and Marie Claire.</p>
-                            <p>We offer the opportunity to work with a great team on exciting, creative and challenging designs.</p>
-                            <p>Reporting to the marketing manager, you will be assisting on projects ranging from packaging, catalogues, theme and design concepts, product development, decals and surface decorations applied to a range of home products, flyers, ads, signage, posters, for a variety of brands and various brand style applications.</p>
+                            <p><?php echo $job['job_desc'];?></p>
                         </div>
                         <dl class="sresult-nav-job-dl">
                             <dt>Preferred Years of Experience</dt>
@@ -348,45 +308,5 @@
 </div>
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<script type="text/javascript">
-    var map;
-    var geocoder = new google.maps.Geocoder();
-    function initialize() {
-        var myOptions = {
-            zoom : 13,
-            center : new google.maps.LatLng(-34.397, 150.644),
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.SMALL,
-            },
-            panControl: false,
-            scaleControl:false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            mapTypeControl: false
-        }
 
-        map = new google.maps.Map(document.getElementById("map"),
-            myOptions);
-    }
-
-    function codeAddress() {
-        var address = $('#address').val();
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-            }
-        });
-    }
-
-    $(document).ready(function(){
-        initialize();
-        codeAddress();
-    });
-
-</script>
 <?php $this->load->view($front_theme.'/footer-block');?>

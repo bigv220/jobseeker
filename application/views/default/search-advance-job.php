@@ -23,7 +23,7 @@
                         position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
                     }
                 }
-                $(thisO).next().html(position_htm);
+                $('#position_1').html(position_htm);
             });
     }
 
@@ -60,14 +60,14 @@
 </script>
 
 <div class="advsearch w770 rel clearfix"> 
-
+  <form method="post" action="<?php echo $site_url; ?>search/searchJob" id="searchForm">
   <div class="advsearch-bd box rel mb10">
 		<div class="advsearch-tit">Find a Job</div>
         <div class="advsearch-min">
         	<div class="advsearch-row clearfix">
             	<div class="span1">
                 	<strong>Search our job database</strong>
-                    <div><input type="text" class="kyo-input input-tip" data-tipval="Enter Keywords" value="Enter Keywords"></div>
+                    <div><input type="text" name="keywords" class="kyo-input input-tip" data-tipval="Enter Keywords" value="Enter Keywords"></div>
                 </div>
                 <div class="span2 location" style="width: 460px;">
                 	<strong>Location</strong>
@@ -98,7 +98,7 @@
                             <option value="3">Shanghai</option>
                         </select>
                     </div>
-                    <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
+                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
                     <div id="sel-city-val" class="show-selval"><ul></ul></div>
                 </div>
 
@@ -107,7 +107,7 @@
             <div class="advsearch-row clearfix">
             	<div class="span1 reg-row">
                 	<strong>Industry</strong>
-                    <select name="industry" class="industry_options">
+                    <select name="industry" class="industry_options" onchange="changeIndustry(this);">
                         <option value="">All Industries</option>
                         <?php foreach($industry as $key=>&$v) {
                         if(empty($v['name'])) continue;
@@ -115,24 +115,29 @@
                         <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
                         <?php } ?>
                     </select>
-                    <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
+                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
                     <div id="sel-industry-val" class="show-selval"><ul></ul></div>
                 </div>
-                <div class="span2">
+                <div class="span2  reg-row">
                 	<strong>Position</strong>
-                    <input type="text" id="sel-position" name="position">
-                    <div class="search-row-tip">Hold down 'Command' to select a max of 10</div>
-                    <div id="sel-position-val" class="show-selval"><ul></ul></div>
+                    <select name="position" id="position_1" required>
+                                <option value="">Position</option>
+                                <?php
+                                foreach($position as $key=>&$v) {
+                                ?>
+                                <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
+                                <?php } ?>
+                            </select>
                 </div>
                 <div class="span3">
                     <strong>Type of employment</strong>
                     <div class="reg-row">
                         <select name="employment_type" class="after-select" style="width: 230px;">
+                            <option value="">All Type</option>
                             <option value="1">Contract</option>
                             <option value="2">Part Time</option>
                             <option value="3">Full Time</option>
                             <option value="4">Internship</option>
-                            <option value="5">Any</option>
                         </select>
                     </div>
                 </div>
@@ -172,7 +177,7 @@
                         <option value="3">Japanese</option>
                     </select>
                     </div>
-                    <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
+                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
                     <div id="sel-language-val" class="show-selval"></div>
                 </div>
                 <div class="span3">
@@ -185,7 +190,7 @@
                         <option value="<?php echo $v['id']; ?>"><?php echo $v['skill']; ?></option>
                         <?php } ?>
                     </select>
-                    <div class="search-row-tip">Hold down 'Command' to select a max of 5</div>
+                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 5</div>-->
                     <div id="sel-personal-val" class="show-selval"></div>
 
                 </div>
@@ -201,7 +206,7 @@
                         <option value="<?php echo $v['id']; ?>"><?php echo $v['skill']; ?></option>
                         <?php } ?>
                     </select>
-                    <div class="search-row-tip">Hold down 'Command' to select a max of 5</div>
+                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 5</div>-->
                     <div id="sel-technical-val" class="show-selval"></div>
                 </div>
             </div>
@@ -209,11 +214,11 @@
         <div class="adv-search-bar">
         	<a href="#" class="text base">Basic Search</a>
         	<a href="#" class="text adv">Advanced Search</a>
-        	<a href="#" class="btn find"></a>
-            <a href="#" class="btn findnow"></a>
+        	<a href="javascript:void(0);" onclick="$('#searchForm').submit();" class="btn find"></a>
+            <a href="javascript:void(0);" onclick="$('#searchForm').submit();" class="btn findnow"></a>
         </div>
   </div>
-
+  </form>
 </div>
 
 <div class="w70">

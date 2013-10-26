@@ -133,3 +133,7 @@ ALTER TABLE  `job` CHANGE  `id`  `id` INT( 11 ) NOT NULL AUTO_INCREMENT
 
 #2013-10-15
 ALTER TABLE user_work_history  DROP PRIMARY KEY;
+
+ALTER TABLE  `job` ADD  `country` VARCHAR( 50 ) NULL;
+ALTER TABLE  `job` ADD  `province` VARCHAR( 50 ) NULL;
+ALTER TABLE  `job` ADD  `city` VARCHAR( 50 ) NULL;

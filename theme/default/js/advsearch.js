@@ -1,3 +1,71 @@
+
+    function formatItem(row){
+        return " <p>"+row +" </p>";
+    }
+
+    function formatResult(row){
+        return row[0].replace(/(<.+?>)/gi, '');
+    }
+
+    function selectItem1(v){
+        addSkillsAjax('PersonalSkills',v);
+    }
+
+    function selectItem2(v){
+        addSkillsAjax('ProfessionalSkills', v);
+    }
+
+    function searchJob() {
+        $('#search_form').submit();
+    }
+
+    function addSkills(id_str, thisO) {
+        var v = $(thisO).val();
+
+        addSkillsAjax(id_str, v);
+    }
+
+    function addSkillsAjax(id_str, v) {
+        var htm = '<li data-val="2">'+ v +
+            '<i class="del" onclick="delSkills' + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
+
+        var str_key = '#'+ id_str + '_str';
+        var str = $(str_key).val();
+
+        if(str == '') {
+            $(str_key).val(v);
+        } else if(str.indexOf(v)==-1) {
+            $(str_key).val(str+','+v);
+        }
+        $('#'+ id_str).append(htm);
+
+        $('#'+id_str+'_input').val('');
+    }
+
+    function delSkills(id_str, thisO, v) {
+        var str_key = '#'+ id_str + '_str';
+        var str = $(str_key).val();
+
+        var str_cop = str;
+        if(str != '' && str.indexOf(v)>-1) {
+            var new_str = str_cop.substring(0, str.indexOf(v)-1) + str.substr(str.indexOf(v)+v.length);
+            $(str_key).val(new_str);
+        }
+
+        $(thisO).parent().remove();
+    }
+
+    function clearHint(thisO) {
+        if($(thisO).val() == 'Enter Keywords') {
+            $(thisO).val('');
+        }
+    }
+
+    function showHint(thisO) {
+        if($(thisO).val() == '') {
+            $(thisO).val('Enter Keywords');
+        }
+    }
 $(function(){
 	 //adv search city
 	 
