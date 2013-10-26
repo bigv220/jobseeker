@@ -189,6 +189,6 @@ function saveAll() {
                         position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
                     }
                 }
-                $('#position_1').html(position_htm);
+                $(thisO).next().html(position_htm);
             });
     }

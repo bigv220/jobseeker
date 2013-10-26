@@ -185,11 +185,12 @@
                         <span>Years of Experience Required</span>
                         <div>
                             <select name="preferred_year_of_experience">
-                                <option value="1">Less than 1 year</option>
-                                <option value="1-2">1-2 year</option>
-                                <option value="2-3">2-3 year</option>
-                                <option value="3-4">3-4 year</option>
-                                <option value="4-5">4-5 year</option>
+                                <option value="">Less than 1 year</option>
+                                <option value="1">value1</option>
+                                <option value="2">value2</option>
+                                <option value="3">value3</option>
+                                <option value="4">value4</option>
+                                <option value="5">value5</option>
                             </select>
                         </div>
                     </div>

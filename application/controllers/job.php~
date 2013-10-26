@@ -52,7 +52,6 @@ class job extends Front_Controller {
         $this->data['industry'] = $this->jobseeker_model->getIndustry();
         $this->data['language'] = $this->jobseeker_model->getLanguage($uid);
 
-
     	if (empty($_POST)) {
     		$this->load->view($data['front_theme']."/job-postjob",$data);
     	} else {
