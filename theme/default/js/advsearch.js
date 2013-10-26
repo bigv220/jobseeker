@@ -41,10 +41,9 @@ $(function(){
 		$('#sel-position').checkSelect({
 			text:'All Position',
 			data:[
-				{title:'value1',value:'1'},
-				{title:'value2',value:'2'},
-				{title:'value3',value:'3'},
-				{title:'value4',value:'4'}
+				{title:'Employee',value:'1'},
+				{title:'Manager',value:'2'},
+				{title:'Director',value:'3'}
 			],
 			showDiv:$('#sel-position-val'),
 			width:230,

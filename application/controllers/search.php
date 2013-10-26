@@ -32,6 +32,9 @@ class search extends Front_Controller {
             if(!empty($post["keywords"])) {
                 array_push($where_arr, "job_name like '%" . $post["keywords"] . "%'");
             }
+            if($post["top_search"]==1 && !empty($post["search_text"]) && $post["search_text"]!="Search our job database") {
+                array_push($where_arr, "job_name like '%" . $post["search_text"] . "%' or job_desc like '%" . $post["search_text"]."%'");
+            }
             if(!empty($post["location"])) {
                 array_push($where_arr, 'location=' .$post["location"]);
             }
@@ -148,6 +151,22 @@ class search extends Front_Controller {
 
     public function findjob() {
         $data = $this->data;
+
+        // get location
+        $this->load->helper('location');
+        $data['location'] = getLoction();
+
+        //the left side, industry lists
+        $this->load->model('jobseeker_model');
+        $industry = $this->jobseeker_model->getIndustry();
+        $data["industry"] = $industry;
+
+        $tech_skills_arr = $this->jobseeker_model->getSkills('tech_skills','');
+        $pro_skills_arr = $this->jobseeker_model->getSkills('personal_skills','');
+
+        $data["tech_skills"] = $tech_skills_arr;
+        $data["pro_skills"] = $pro_skills_arr;
+
         $this->load->view($data['front_theme']."/search-advance-job",$data);   
     }
 

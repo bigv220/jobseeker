@@ -260,13 +260,6 @@
     
 </script>
 
-    <!--top search area-->
-    <div class="top-search w70 rel">
-        <input type="text" class="abs top-search-input input-tip" value="Search our job database" data-tipval="Search our job database"/>
-        <input type="submit" class="abs top-search-btn " value=""  title="search"   />
-        <a href="#" class="abs top-search-a">More Options</a>
-    </div>
-
 <!--Jobseeker registration page body-->
 <div class="reg-page w770 clearfix rel">
     <div class="reg-left abs box mb20">

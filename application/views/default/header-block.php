@@ -33,6 +33,10 @@
 	var site_url = "<?php echo $site_url?>";
     var base_url = "<?php echo $base_url?>";
 	var theme_url = "<?php echo $theme_path?>";
+
+    function topSearchSubmit() {
+        $('#topSearchForm').submit();
+    }
 </script>
 </head>
 <body>
@@ -44,8 +48,13 @@
 				<li class="home"><a href="<?php echo $site_url?>">HOME</a></li>
 				<li class="about"><a href="<?php echo $site_url?>page/aboutus">ABOUT US</a></li>
 				<li class="news"><a href="<?php echo $site_url?>news">JING NEWS</a></li>
-				<li class="jobs"><a href="<?php echo $site_url?>search/searchJob">JOBS</a></li>
-				<li class="cvs"><a href="<?php echo $site_url?>search/staff">CVs</a></li>
+                <?php $current_user_type = isset($user_type)?$user_type:-1;
+                if (0 == $current_user_type):?>
+				<li class="jobs"><a href="<?php echo $site_url?>search/findjob">JOBS</a></li>
+                <?php elseif(1 == $current_user_type): ?>
+                <li class="jobs"><a href="<?php echo $site_url?>search/findstaff">FIND STAFF</a></li>
+                <?php endif; ?>
+				<li class="cvs"><a href="<?php echo $site_url?>search/searchjobseeker">CVs</a></li>
 				<li class="post"><a href="<?php echo $site_url?>job/postjob">POST A JOB</a></li>
 			</ul>
 		</div>
@@ -129,4 +138,19 @@
 
 		</div>
 	</div>
+</div>
+
+<!--top search area-->
+<div class="top-search w70 rel">
+    <form action="<?php echo $site_url; ?>search/searchJob" method="post" id="topSearchForm">
+        <input type="hidden" name="top_search" value="1" />
+        <input type="text" name="search_text" class="abs top-search-input input-tip" value="Search our job database" data-tipval="Search our job database"/>
+        <input type="submit" class="abs top-search-btn " value=""  title="search" onclick="topSearchSubmit()"   />
+    </form>
+<?php $current_user_type = isset($user_type)?$user_type:-1;
+    if (0 == $current_user_type): ?>
+    <a href="<?php echo $site_url?>search/findjob" class="abs top-search-a">More Options</a>
+    <?php elseif(1 == $current_user_type): ?>
+    <a href="<?php echo $site_url?>search/findstaff" class="abs top-search-a">More Options</a>
+    <?php endif; ?>
 </div>

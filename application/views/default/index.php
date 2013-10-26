@@ -1,5 +1,7 @@
 <?php $this->load->view($front_theme.'/header-block');?>
-
+<style>
+.top-search {display:none;}
+</style>
 <!-- find & singup -->
 	<div class="p-bn rel">
 		<div class="pbn-find">

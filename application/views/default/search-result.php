@@ -1,11 +1,5 @@
 <?php $this->load->view($front_theme.'/header-block');?>
 
-<!--top search area-->
-<div class="top-search w70 rel">
-  <input type="text" class="abs top-search-input input-tip" value="Search our job database" data-tipval="Search our job database"/>
-  <input type="submit" class="abs top-search-btn " value=""  title="search"   />
-  <a href="#" class="abs top-search-a">More Options</a> </div>
-
 <!--search-result body-->
 <div class="result-page w770 rel clearfix"> 
   <!--search-result condition-->

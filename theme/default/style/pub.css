@@ -49,6 +49,7 @@ a:hover{text-decoration:none;}
 .mt10{margin-top:10px;}
 .p5{padding:5px;}
 .p10{padding:10px;}
+.p20{padding:20px;}
 .pie{*behavior:url(js/jslib/PIE.htc);}
 .hand{cursor:pointer;}
 .ora{color:#ea6e3b;}
@@ -142,3 +143,5 @@ input.error,select.error,textarea.error {border: 1px solid red;box-shadow:0 1px 
 .reset-password-wrapper input.has{background:#fafafa;}
 .reset-password-wrapper .btn{width:214px;height:28px;display:inline-block;cursor:pointer;background:url(pub/reset_pw_btn.png) no-repeat;}
 .hr {height:0px; line-height:0px; margin: 10px 0 15px 0; border-bottom: 1px #ccc solid;}
+.page {width:730px;margin: auto;margin-bottom: 30px;color:#35302D;}
+.page .title {color:#674092;margin-bottom:15px;}
