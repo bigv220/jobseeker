@@ -1,6 +1,4 @@
 <?php $this->load->view($front_theme.'/header-block');?>
-<div class="top-search w70 rel">
-</div>
 
 <!--company page body-->
 <div class="reg-page w770 clearfix rel box mb30 p10">

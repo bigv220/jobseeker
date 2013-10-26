@@ -32,6 +32,9 @@ class search extends Front_Controller {
             if(!empty($post["keywords"])) {
                 array_push($where_arr, "job_name like '%" . $post["keywords"] . "%'");
             }
+            if($post["top_search"]==1 && !empty($post["search_text"]) && $post["search_text"]!="Search our job database") {
+                array_push($where_arr, "job_name like '%" . $post["search_text"] . "%' or job_desc like '%" . $post["search_text"]."%'");
+            }
             if(!empty($post["location"])) {
                 array_push($where_arr, 'location=' .$post["location"]);
             }

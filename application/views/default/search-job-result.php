@@ -99,16 +99,11 @@
     }
 </script>
 
-<!--top search area-->
-<div class="top-search w70 rel">
-    <input type="text" class="abs top-search-input input-tip" value="Search our job database" data-tipval="Search our job database"/>
-    <input type="submit" class="abs top-search-btn " value=""  title="search"   />
-    <a href="#" class="abs top-search-a">More Options</a> </div>
-
 <!--search-result body-->
 <div class="result-page w770 rel clearfix">
 <!--search-result condition-->
 <form action="<?php echo $site_url; ?>search/searchJob" method="post">
+    <input type="hidden" name="top_search" value="0" />
     <div class="result-condition rel box"> <b>Alert Search</b>
         <dl class="search-row">
             <dt class="search-row-tit">Key Words</dt>
@@ -141,7 +136,7 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Industry</dt>
             <dd class="search-row-nav reg-row">
-                <select name="industry">
+                <select name="industry" class="industry_options">
                     <option value="">All Industries</option>
                     <?php foreach($industry as $key=>&$v) {
                     if(empty($v['name'])) continue;
@@ -149,7 +144,7 @@
                     <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
                     <?php } ?>
                 </select>
-                <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
+                <div class="search-row-tip" style="display:none;">Hold down 'Command' to select a max of 3</div>
 
             </dd>
         </dl>
@@ -157,7 +152,7 @@
             <dt class="search-row-tit">Position</dt>
             <dd class="search-row-nav">
                 <input type="text" id="sel-position" name="position">
-                <div class="search-row-tip">Hold down 'Command' to select a max of 10</div>
+                <div class="search-row-tip" style="display: none;">Hold down 'Command' to select a max of 10</div>
                 <div id="sel-position-val" class="show-selval"></div>
             </dd>
         </dl>
@@ -202,7 +197,7 @@
                     <option value="2">Chinese</option>
                     <option value="3">Japanese</option>
                 </select>
-                <div class="search-row-tip">Hold down 'Command' to select multiple</div>
+                <div class="search-row-tip" style="display: none;">Hold down 'Command' to select multiple</div>
                 <div id="sel-language-val" class="show-selval"></div>
             </dd>
         </dl>
@@ -211,7 +206,7 @@
             <dd class="search-row-nav">
                 <input type="hidden" id="PersonalSkills_str" name="PersonalSkills_str" />
                 <input type="text" size="24" maxlength="255" autocomplete="on" id="PersonalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addSkills('PersonalSkills',this); return false;}">
-                <div class="search-row-tip">Hold down 'Command' to select multiple</div>
+                <div class="search-row-tip" style="display: none;">Hold down 'Command' to select multiple</div>
             </dd>
             <div class="skills-vals clearfix">
                 <ul id="PersonalSkills"></ul>
@@ -222,7 +217,7 @@
             <dd class="search-row-nav">
                 <input type="hidden" id="ProfessionalSkills_str" name="PersonalSkills_str" />
                 <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addSkills('ProfessionalSkills',this); return false;}">
-                <div class="search-row-tip">Hold down 'Command' to select multiple</div>
+                <div class="search-row-tip" style="display: none;">Hold down 'Command' to select multiple</div>
             </dd>
             <div class="skills-vals clearfix">
                 <ul id="ProfessionalSkills"></ul>

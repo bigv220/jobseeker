@@ -33,6 +33,10 @@
 	var site_url = "<?php echo $site_url?>";
     var base_url = "<?php echo $base_url?>";
 	var theme_url = "<?php echo $theme_path?>";
+
+    function topSearchSubmit() {
+        $('#topSearchForm').submit();
+    }
 </script>
 </head>
 <body>
@@ -129,4 +133,14 @@
 
 		</div>
 	</div>
+</div>
+
+<!--top search area-->
+<div class="top-search w70 rel">
+    <form action="<?php echo $site_url; ?>search/searchJob" method="post" id="topSearchForm">
+        <input type="hidden" name="top_search" value="1" />
+        <input type="text" name="search_text" class="abs top-search-input input-tip" value="Search our job database" data-tipval="Search our job database"/>
+        <input type="submit" class="abs top-search-btn " value=""  title="search" onclick="topSearchSubmit()"   />
+    </form>
+    <a href="#" class="abs top-search-a">More Options</a>
 </div>
