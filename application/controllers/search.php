@@ -161,6 +161,12 @@ class search extends Front_Controller {
         $industry = $this->jobseeker_model->getIndustry();
         $data["industry"] = $industry;
 
+        $tech_skills_arr = $this->jobseeker_model->getSkills('tech_skills','');
+        $pro_skills_arr = $this->jobseeker_model->getSkills('personal_skills','');
+
+        $data["tech_skills"] = $tech_skills_arr;
+        $data["pro_skills"] = $pro_skills_arr;
+
         $this->load->view($data['front_theme']."/search-advance-job",$data);   
     }
 

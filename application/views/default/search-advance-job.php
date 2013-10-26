@@ -177,7 +177,14 @@
                 </div>
                 <div class="span3">
                 	<strong>Personal Skills</strong>
-                    <input type="text" id="sel-personal" value="" style="display: none;">
+                    <select name="personal_skills" class="industry_options">
+                        <option value="">All Skills</option>
+                        <?php foreach($tech_skills as $key=>&$v) {
+                        if(empty($v['id'])) continue;
+                        ?>
+                        <option value="<?php echo $v['id']; ?>"><?php echo $v['skill']; ?></option>
+                        <?php } ?>
+                    </select>
                     <div class="search-row-tip">Hold down 'Command' to select a max of 5</div>
                     <div id="sel-personal-val" class="show-selval"></div>
 
@@ -186,7 +193,14 @@
         	<div class="advsearch-row clearfix">
             	<div class="span1">
                 	<strong>Technical Skills</strong>
-                    <input type="text" id="sel-technical" value="" style="display: none;">
+                    <select name="technical_skills" class="industry_options">
+                        <option value="">All Skills</option>
+                        <?php foreach($pro_skills as $key=>&$v) {
+                        if(empty($v['id'])) continue;
+                        ?>
+                        <option value="<?php echo $v['id']; ?>"><?php echo $v['skill']; ?></option>
+                        <?php } ?>
+                    </select>
                     <div class="search-row-tip">Hold down 'Command' to select a max of 5</div>
                     <div id="sel-technical-val" class="show-selval"></div>
                 </div>
