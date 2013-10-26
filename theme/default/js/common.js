@@ -63,12 +63,12 @@ function show_welcome_pop(usertype){
     var righttext = "Start looking at<br/>jobs in China now";
 
     var lefthref = base_url + "jobseeker/register";
-    var righthref = base_url + "search/searchjob";
+    var righthref = base_url + "search/findjob";
     if(usertype == 1){//employer
         var lefttext = "Tell us more about<br/> your company";
         var righttext = "Start looking at<br/> jobseekers";
         var lefthref = base_url + "company/register";
-        var righthref = base_url + "search/staff";
+        var righthref = base_url + "search/findstaff";
 
     }
 

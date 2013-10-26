@@ -1,4 +1,63 @@
 <?php $this->load->view($front_theme.'/header-block');?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("select[name='country']").change(function() {
+            change_location($(this),'country');
+        });
+        $("select[name='province']").change(function() {
+            change_location($(this), 'province');
+        });
+    });
+
+    // change industry
+    function changeIndustry(thisO) {
+        var name = $(thisO).val();
+        $.post(site_url + '/jobseeker/ajaxchangeindustry',
+            { ind_name: name },
+            function(result,status) {
+                var position_htm = '<option value="">Position</option>';
+
+                if(status == 'success'){
+                    var obj = eval('('+result+')');
+                    for ( var i = 0; i < obj.data.length; i++) {
+                        position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
+                    }
+                }
+                $(thisO).next().html(position_htm);
+            });
+    }
+
+    // ajax localtion
+    function change_location(this1, key, location) {
+
+        var selected = this1.val();
+        var html_option = "";
+
+        if("country" == key) {
+            var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected;
+            $.get(url, function(data){
+                var obj = eval('('+data+')');
+                for ( var i = 0; i < obj.length; i++) {
+                    html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
+                }
+                $("select[name='province']").html(html_option);
+            });
+        }
+
+        if("province" == key) {
+            var country = $("select[name='country']").val();
+            var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected + "/" + country;
+            $.get(url, function(data){
+                var obj = eval('('+data+')');
+                for ( var i = 0; i < obj.length; i++) {
+                    html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
+                }
+                $("select[name='city']").html(html_option);
+            });
+        }
+
+    }
+</script>
 
 <div class="advsearch w770 rel clearfix"> 
 
@@ -10,51 +69,84 @@
                 	<strong>Search our job database</strong>
                     <div><input type="text" class="kyo-input input-tip" data-tipval="Enter Keywords" value="Enter Keywords"></div>
                 </div>
-                <div class="span2">
-                	<strong>City</strong>
-                    <input type="text" id="sel-city" value="" style="display: none;">
+                <div class="span2 location" style="width: 460px;">
+                	<strong>Location</strong>
+                    <div class="reg-row">
+                        <select name="country" required>
+                            <option value="">All Counties</option>
+                            <?php foreach ($location as $k=>$v):?>
+                            <?php if ($k == $userinfo['country']): ?>
+                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php else: ?>
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php endif; ?>
+                            <?php endforeach;?>
+                        </select>
+                        <select name="province">
+                            <option value="">All Province</option>
+                            <?php foreach ($location['China'] as $k=>$v):?>
+                            <?php if ($k == $userinfo['province']): ?>
+                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php else: ?>
+                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                <?php endif; ?>
+                            <?php endforeach;?>
+                        </select>
+                        <select name="city">
+                            <option value="">All City</option>
+                            <option value="2">Beijing</option>
+                            <option value="3">Shanghai</option>
+                        </select>
+                    </div>
                     <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
                     <div id="sel-city-val" class="show-selval"><ul></ul></div>
                 </div>
-                <div class="span3">
-                	<strong>Type of employment</strong>
-                    <div>
-                    	<select class="kyo-select">
-                            <option value="0">--Select--</option>
-                            <option value="1">value1</option>
-                            <option value="2">value2</option>
-                            <option value="3">value3</option>
-                            <option value="4">value4</option>
-                            <option value="5">value5</option>
-                          </select>
-                    </div>
-                </div>
+
             </div>
             
             <div class="advsearch-row clearfix">
-            	<div class="span1">
+            	<div class="span1 reg-row">
                 	<strong>Industry</strong>
-                    <input type="text" id="sel-industry" value="" style="display: none;">
+                    <select name="industry" class="industry_options">
+                        <option value="">All Industries</option>
+                        <?php foreach($industry as $key=>&$v) {
+                        if(empty($v['name'])) continue;
+                        ?>
+                        <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
+                        <?php } ?>
+                    </select>
                     <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
                     <div id="sel-industry-val" class="show-selval"><ul></ul></div>
                 </div>
                 <div class="span2">
                 	<strong>Position</strong>
-                    <input type="text" id="sel-position" value="" style="display: none;">
+                    <input type="text" id="sel-position" name="position">
                     <div class="search-row-tip">Hold down 'Command' to select a max of 10</div>
                     <div id="sel-position-val" class="show-selval"><ul></ul></div>
                 </div>
                 <div class="span3">
-                	<strong>Length of employment</strong>
+                    <strong>Type of employment</strong>
+                    <div class="reg-row">
+                        <select name="employment_type" class="after-select" style="width: 230px;">
+                            <option value="1">Contract</option>
+                            <option value="2">Part Time</option>
+                            <option value="3">Full Time</option>
+                            <option value="4">Internship</option>
+                            <option value="5">Any</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advsearch-row clearfix">
+                <div class="span1">
+                    <strong>Length of employment</strong>
                     <div>
-                    	<select class="kyo-select">
-                            <option value="0">Start Term</option>
-                            <option value="1">value1</option>
-                            <option value="2">value2</option>
-                            <option value="3">value3</option>
-                            <option value="4">value4</option>
-                            <option value="5">value5</option>
-                          </select>
+                        <select class="kyo-select">
+                            <option value="1">Long term employment (1+ years)</option>
+                            <option value="2">Short term employment (-1 years)</option>
+                            <option value="3">No preference</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -64,17 +156,22 @@
             	<div class="span1">
                 	<strong>Salary </strong>
                     <select class="kyo-select">
-                            <option value="0">All Salary</option>
-                            <option value="1">value1</option>
-                            <option value="2">value2</option>
-                            <option value="3">value3</option>
-                            <option value="4">value4</option>
-                            <option value="5">value5</option>
+                        <option value="0" selected="selected">Any Salary</option>
+                        <option value="1">1500-2500</option>
+                        <option value="2">2500-3500</option>
+                        <option value="3">3500-5500</option>
                           </select>
                 </div>
                 <div class="span2">
                 	<strong>Language</strong>
-                    <input type="text" id="sel-language" value="" style="display: none;">
+                    <div class="reg-row">
+                    <select name="language" class="after-select">
+                        <option value="0" selected="selected">All Languages</option>
+                        <option value="1">English</option>
+                        <option value="2">Chinese</option>
+                        <option value="3">Japanese</option>
+                    </select>
+                    </div>
                     <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
                     <div id="sel-language-val" class="show-selval"></div>
                 </div>

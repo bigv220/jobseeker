@@ -8,7 +8,7 @@
                 <a class="pop-welcome-here left-btn-link" href="<?php echo $base_url?>company/register"></a></div>
             <div class="span2">OR</div>
             <div class="span3"><span class="right-span-text">Start looking at<br/> jobseekers </span><br/>
-                <a class="pop-welcome-here right-btn-link" href="<?php echo $base_url?>search/staff"></a>
+                <a class="pop-welcome-here right-btn-link" href="<?php echo $base_url?>search/findstaff"></a>
             </div>
         </div>
     </div>

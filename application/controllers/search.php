@@ -151,6 +151,16 @@ class search extends Front_Controller {
 
     public function findjob() {
         $data = $this->data;
+
+        // get location
+        $this->load->helper('location');
+        $data['location'] = getLoction();
+
+        //the left side, industry lists
+        $this->load->model('jobseeker_model');
+        $industry = $this->jobseeker_model->getIndustry();
+        $data["industry"] = $industry;
+
         $this->load->view($data['front_theme']."/search-advance-job",$data);   
     }
 
