@@ -47,11 +47,9 @@
                         <div>
                             <select name="language" required>
                                 <option value="">--Select--</option>
-                                <?php
-
-                                foreach($language as $v) {
-                                ?>
-                                <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                <?php $language = language_arr();
+                                foreach($language as $v) { ?>
+                                <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
                                 <?php } ?>
                             </select>
                             </select>
@@ -85,7 +83,7 @@
                             <select name="" required>
                                 <option value="">--Select--</option>
                                 <?php
-
+                                $level = language_level();
                                 foreach($level as $v) {
                                 ?>
                                 <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
@@ -101,8 +99,10 @@
                         <div>
                             <select name="employment_type" required>
                                 <option value="">--Select--</option>
-                                <option value="1">Full Time</option>
-                                <option value="2">Part Time</option>
+                                <?php $jobtype = jobtype();
+                                foreach ($jobtype as $k => $v) {?>
+                                <option value="<?php echo $k+1?>"><?php echo $v?></option>
+                                <?php }?>
                             </select>
                         </div>
                     </div>

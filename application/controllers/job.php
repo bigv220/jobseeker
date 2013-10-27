@@ -52,8 +52,6 @@ class job extends Front_Controller {
         $uid = $this->session->userdata('uid');
         $data["industry"] = $this->jobseeker_model->getIndustry();
 
-        $data['language'] = language_arr();
-        $data['level'] = language_level();
         // get location
         $this->load->helper('location');
         $data['location'] = getLoction();

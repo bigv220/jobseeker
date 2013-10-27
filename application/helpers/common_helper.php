@@ -126,3 +126,7 @@ function language_arr() {
 				'Tamil','Thai','Tongan','Turkish','Ukrainian','Urdu','Uzbek','Vietnamese');
 }
 
+function jobtype() {
+	return array('Full Time','Part Time','Contract','Internship');
+}
+

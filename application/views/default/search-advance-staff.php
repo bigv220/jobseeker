@@ -37,8 +37,7 @@
                         </select>
                         <select name="city">
                             <option value="">All City</option>
-                            <option value="2">Beijing</option>
-                            <option value="3">Shanghai</option>
+                            <option value="1">Beijing</option>
                         </select>
                     </div>
                     <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
@@ -77,10 +76,10 @@
                     <div class="reg-row">
                         <select name="employment_type" class="after-select" style="width: 230px;">
                             <option value="">All Type</option>
-                            <option value="1">Contract</option>
-                            <option value="2">Part Time</option>
-                            <option value="3">Full Time</option>
-                            <option value="4">Internship</option>
+                            <?php $jobtype = jobtype();
+                                foreach ($jobtype as $k => $v) {?>
+                                <option value="<?php echo $k+1?>"><?php echo $v?></option>
+                            <?php }?>
                         </select>
                     </div>
                 </div>
