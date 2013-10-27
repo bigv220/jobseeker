@@ -47,7 +47,7 @@
         <dl class="search-row">
             <dt class="search-row-tit">Country</dt>
             <dd class="search-row-nav">
-                <select name="country" class="filter_key" required>
+                <select name="country" class="filter_key">
                             <option value="">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
                             <?php if ($k == $userinfo['country']): ?>
@@ -62,7 +62,7 @@
         <dl class="search-row">
             <dt class="search-row-tit">Province</dt>
             <dd class="search-row-nav">
-                <select name="country"  class="filter_key"  required>
+                <select name="country"  class="filter_key">
                             <option value="">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
                             <?php if ($k == $userinfo['country']): ?>
