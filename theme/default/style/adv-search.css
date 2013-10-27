@@ -53,5 +53,5 @@ body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
 .postjob-content .adv-search-bar .find{background:url(home/post_job_btn.png) no-repeat;}
 .postjob-additional-information{}
 .postjob-additional-information textarea{width:100%;}
-.filter_key {width: 230px; height: 25px; }
+.filter_key {width: 230px; height: 25px; padding:3px;}
 .search-row-nav .skills-input {width:215px;}

@@ -99,7 +99,8 @@
                 <div class="span1">
                     <strong>Length of employment</strong>
                     <div>
-                        <select class="kyo-select">
+                        <select class="filter_key">
+                            <option value="">--Select--</option>
                             <option value="1">Long term employment (1+ years)</option>
                             <option value="2">Short term employment (-1 years)</option>
                             <option value="3">No preference</option>
