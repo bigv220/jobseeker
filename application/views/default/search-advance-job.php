@@ -133,14 +133,14 @@
                     <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
                     <div id="sel-language-val" class="show-selval"></div>
                 </div>
-                <div class="span3">
+                <div class="span3 reg-row">
                 	<strong>Personal Skills</strong>
                     <select name="personal_skills" class="industry_options">
                         <option value="">All Skills</option>
                         <?php foreach($tech_skills as $key=>&$v) {
-                        if(empty($v['id'])) continue;
+                        if(empty($v['skill'])) continue;
                         ?>
-                        <option value="<?php echo $v['id']; ?>"><?php echo $v['skill']; ?></option>
+                        <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>
                         <?php } ?>
                     </select>
                     <!--<div class="search-row-tip">Hold down 'Command' to select a max of 5</div>-->
@@ -149,14 +149,14 @@
                 </div>
             </div>
         	<div class="advsearch-row clearfix">
-            	<div class="span1">
+            	<div class="span1 reg-row">
                 	<strong>Technical Skills</strong>
                     <select name="technical_skills" class="industry_options">
                         <option value="">All Skills</option>
                         <?php foreach($pro_skills as $key=>&$v) {
-                        if(empty($v['id'])) continue;
+                        if(empty($v['skill'])) continue;
                         ?>
-                        <option value="<?php echo $v['id']; ?>"><?php echo $v['skill']; ?></option>
+                        <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>
                         <?php } ?>
                     </select>
                     <!--<div class="search-row-tip">Hold down 'Command' to select a max of 5</div>-->

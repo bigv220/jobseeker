@@ -31,7 +31,7 @@ class job_model extends MY_Model
     }
 
     public function searchJob($where) {
-        $sql = "SELECT * FROM job LEFT JOIN company as c on job.company_id=c.company_id".$where;
+        $sql = "SELECT * FROM job LEFT JOIN user as u on job.company_id=u.uid".$where;
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
