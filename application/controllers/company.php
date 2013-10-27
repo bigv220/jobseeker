@@ -28,14 +28,22 @@ class company extends Front_Controller {
         //Load Model            
         $this->load->model('company_model');
 
-		if ($_POST) {
-            if (isset($_POST['name']) && !isset($_POST['last_name'])) {
-                $this->company_model->updateBasicInfo($_POST);    
-            } elseif (!isset($_POST['first_name']) && isset($_POST['last_name'])) {
-                $this->company_model->updateContactDetail($_POST);
+        $post = $_POST; // will do security filter here
+        
+		if ($post) {
+			
+			// set up default avatar
+			if (empty($post['avatar'])) {
+				$post['avatar'] = $data['site_url'] . 'attached/image/no-image.png';
+			}
+			
+            if (isset($post['name']) && !isset($post['last_name'])) {
+                $this->company_model->updateBasicInfo($post);    
+            } elseif (!isset($post['first_name']) && isset($post['last_name'])) {
+                $this->company_model->updateContactDetail($post);
             } else {
-                $this->company_model->updateBasicInfo($_POST);    
-                $this->company_model->updateContactDetail($_POST);
+                $this->company_model->updateBasicInfo($post);    
+                $this->company_model->updateContactDetail($post);
             }
 			
 			

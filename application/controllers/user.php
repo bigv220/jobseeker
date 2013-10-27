@@ -37,7 +37,7 @@ class user extends Front_Controller {
         }
         else{
             $status = "error";
-            $message = "The email is already exist.";
+            $message = "This email already exists.";
         }
         echo json_encode(array('status'=>$status, 'userId'=>$userId,'message'=>$message));
     }

@@ -68,12 +68,12 @@
                     <input type="hidden" name="avatar" id="avatar" value="<?php echo $basic_info['profile_pic']; ?>" />
                     <div id="upload_button">
                         <?php if($basic_info['profile_pic']) {
-                                        $pic = 'company/'.$basic_info['profile_pic'];
+                                        $pic = $basic_info['profile_pic'];
                                    } else {
-                                        $pic = 'style/reg/com-img.gif';
+                                        $pic = $theme_path . 'style/reg/com-img.gif';
                                    }
                             ?>
-                            <img id="image_profile" height='100px' src="<?php echo $theme_path?><?php echo $pic; ?>" class="reg-company-img" />
+                            <img id="image_profile" height='100px' src="<?php echo $pic; ?>" class="reg-company-img" />
                     </div>
                     <span class="" id="errorRemind"></span>
                 </div>

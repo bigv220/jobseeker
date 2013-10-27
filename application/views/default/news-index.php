@@ -12,10 +12,10 @@
                         <a href="#">Continue reading</a>
                         </p>
                     </div>
-                    <div class="share-sns">
+                    <!-- <div class="share-sns">
                         <a href="#" class="like_btn">Like</a>
                         <a href="#" class="share_btn">Share</a>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="profile">
@@ -41,10 +41,10 @@
                             <a href="#">Continue reading</a>
                         </p>
                     </div>
-                    <div class="share-sns">
+                    <!-- <div class="share-sns">
                         <a href="#" class="like_btn">Like</a>
                         <a href="#" class="share_btn">Share</a>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="useful_links">
