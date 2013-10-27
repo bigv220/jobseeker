@@ -161,7 +161,7 @@
             <dd class="search-row-nav">
                 <select name="experience_year" class="filter_key">
                     <option value="">--Select--</option>
-                    <option value="1" selected="selected">Less than 1 year</option>
+                    <option value="1">Less than 1 year</option>
                     <option value="2">2 years</option>
                     <option value="3">3 years</option>
                     <option value="4">4 years and more</option>
@@ -195,7 +195,7 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Professional Skills</dt>
             <dd class="search-row-nav">
-                <input type="hidden" id="ProfessionalSkills_str" name="PersonalSkills_str" />
+                <input type="hidden" id="ProfessionalSkills_str" name="ProfessionalSkills_str" />
                 <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addSkills('ProfessionalSkills',this); return false;}">
                 <div class="search-row-tip" style="display: none;">Hold down 'Command' to select multiple</div>
             </dd>
@@ -240,7 +240,7 @@
             <div class="span1 rel"> <img src="<?php echo $theme_path?>style/search/job-img1.gif" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
             <div class="span2">
                 <h2><?php echo $job["job_name"]; ?></h2>
-                <h3><?php echo $job["name"]; ?></h3>
+                <h3><?php echo $job["username"]; ?></h3>
                 <p><?php echo $job["city"]; ?></p>
                 <a href="javascript:void(0);" class="job-viewmore">View More</a> </div>
             <div class="span3">
@@ -281,10 +281,15 @@
                             <dd class="industry">
                                 <div><?php echo $job["industry"]; ?></div>
                                 <ul class="industry-ul">
-                                    <li class="n1"><b>Type of Employment</b><span><?php echo $job["employment_type"]; ?></span></li>
-                                    <li class="n2"><b>Length of Employment</b><span><?php echo $job["employment_length"]; ?></span></li>
-                                    <li class="n3"><b>Visa Assistance</b><span><?php echo $job["is_visa_assistance"]; ?></span></li>
-                                    <li class="n4"><b>Housing Assistance</b><span>Accomodation will be provided</span></li>
+                                    <li class="n1"><b>Type of Employment</b><span><?php $v = $job['employment_type'];
+                                        if($v) echo $constants_arr["type_emp"][$v]; ?></span></li>
+                                    <li class="n2"><b>Length of Employment</b><span><?php $v = $job["employment_length"];
+                                        if($v) echo $constants_arr["len_emp"][$v]; ?></span></li>
+                                    <li class="n3"><b>Visa Assistance</b><span><?php $v = $job["is_visa_assistance"]?$job["is_visa_assistance"]:0;
+                                        if($v) echo $constants_arr["visa_assist"][$v]; ?></span></li>
+                                    <li class="n4"><b>Housing Assistance</b><span>
+                                        <?php $v = $job["is_housing_assistance"]?$job["is_housing_assistance"]:0;
+                                        if($v) echo $constants_arr["housing_assist"][$v]; ?></span></li>
                                 </ul>
                             </dd>
                             <dt>Share This Job</dt>

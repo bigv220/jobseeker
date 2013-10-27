@@ -18,6 +18,12 @@ class search extends Front_Controller {
     public function searchJob() {
         $data = $this->data;
 
+        $length_of_employment = array('1'=>'Long term (1+years)','2'=>'Short term (-1 years)','3'=>'No preferences');
+        $type_of_employment = array('1'=>'Contract','2'=>'Part Time','3'=>'Full Time',
+            '4'=>'Internship','5'=>'Any');
+        $visa_assistance = array('1'=>'Visa will be provided','0'=>'Visa will not be provided');
+        $housing_assistance = array('1'=>'Accomodation will be provided','0'=>'Accomodation will not be provided');
+
         //Load Model
         $this->load->model('job_model');
 
@@ -74,6 +80,12 @@ class search extends Front_Controller {
             if(!empty($post["language"])) {
                 array_push($where_arr, "language like '%".$post["language"]."%'");
             }
+            if(!empty($post["PersonalSkills_str"])) {
+                array_push($where_arr, "preferred_personal_skills like '%".$post["PersonalSkills_str"]."%'");
+            }
+            if(!empty($post["ProfessionalSkills_str"])) {
+                array_push($where_arr, "preferred_technical_skills like '%".$post["ProfessionalSkills_str"]."%'");
+            }
         }
 
         // get where string
@@ -102,6 +114,13 @@ class search extends Front_Controller {
         $data["industry"] = $industry;
 
         $data["job_id_str"] = $job_id_str;
+
+        $constants = array('len_emp'=>$length_of_employment,
+            'type_emp'=>$type_of_employment,
+            'visa_assist'=>$visa_assistance,
+            'housing_assist'=>$housing_assistance);
+
+        $data['constants_arr'] = $constants;
         $this->load->view($data['front_theme']."/search-job-result",$data);
     }
 
