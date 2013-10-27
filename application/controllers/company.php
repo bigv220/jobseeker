@@ -66,11 +66,12 @@ class company extends Front_Controller {
 
     public function companyInfo(){
         $this->load->model('company_model');
-        $uid = $this->session->userdata('uid');
+        
+        $company_id = $_GET['id'];
 
         $data = $this->data;
-        $data["info"] = $this->company_model->getUserInfo($uid);
-        $data['industries'] = $this->company_model->getIndustry($uid);
+        $data["info"] = $this->company_model->getUserInfo($company_id);
+        $data['industries'] = $this->company_model->getIndustry($company_id);
         $this->load->view($data['front_theme']."/company-info",$data);
     }
 
