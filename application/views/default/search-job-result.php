@@ -97,6 +97,24 @@
             $(thisO).val('Enter Keywords');
         }
     }
+
+    // change industry
+    function changeIndustry(thisO) {
+        var name = $(thisO).val();
+        $.post(site_url + '/jobseeker/ajaxchangeindustry',
+            { ind_name: name },
+            function(result,status) {
+                var position_htm = '<option value="">Position</option>';
+
+                if(status == 'success'){
+                    var obj = eval('('+result+')');
+                    for ( var i = 0; i < obj.data.length; i++) {
+                        position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
+                    }
+                }
+                $('#position').html(position_htm);
+            });
+    }
 </script>
 
 <!--search-result body-->
@@ -136,7 +154,7 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Industry</dt>
             <dd class="search-row-nav reg-row">
-                <select name="industry" class="industry_options">
+                <select name="industry" class="industry_options" onchange="changeIndustry(this);">
                     <option value="">All Industries</option>
                     <?php foreach($industry as $key=>&$v) {
                     if(empty($v['name'])) continue;
@@ -151,7 +169,14 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Position</dt>
             <dd class="search-row-nav">
-                <input type="text" id="sel-position" name="position">
+                <select name="position" id="position" class="industry_options">
+                    <option value="">All Positions</option>
+                    <?php
+                    foreach($position as $key=>&$v) {
+                        ?>
+                        <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
+                        <?php } ?>
+                </select>
                 <div class="search-row-tip" style="display: none;">Hold down 'Command' to select a max of 10</div>
                 <div id="sel-position-val" class="show-selval"></div>
             </dd>
@@ -348,7 +373,7 @@
 </div>
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript">
     var map;
     var geocoder = new google.maps.Geocoder();
@@ -388,5 +413,5 @@
         codeAddress();
     });
 
-</script>
+</script>-->
 <?php $this->load->view($front_theme.'/footer-block');?>

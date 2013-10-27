@@ -287,7 +287,7 @@ class jobseeker_model extends MY_Model
     }
 
     public function getIndustry() {
-        $sql = "SELECT id,name FROM industry WHERE parent='0' ORDER BY name ASC";
+        $sql = "SELECT id,name FROM industry WHERE parent='0' ORDER BY id ASC";
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
     }

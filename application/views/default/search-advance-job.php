@@ -23,7 +23,7 @@
                         position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
                     }
                 }
-                $(thisO).next().html(position_htm);
+                $('#position').html(position_htm);
             });
     }
 
@@ -107,7 +107,7 @@
             <div class="advsearch-row clearfix">
             	<div class="span1 reg-row">
                 	<strong>Industry</strong>
-                    <select name="industry" class="industry_options">
+                    <select name="industry" class="industry_options" onchange="changeIndustry(this)">
                         <option value="">All Industries</option>
                         <?php foreach($industry as $key=>&$v) {
                         if(empty($v['name'])) continue;
@@ -118,9 +118,16 @@
                     <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
                     <div id="sel-industry-val" class="show-selval"><ul></ul></div>
                 </div>
-                <div class="span2">
+                <div class="span2 reg-row">
                 	<strong>Position</strong>
-                    <input type="text" id="sel-position" name="position">
+                    <select name="position" id="position" class="industry_options">
+                        <option value="">All Positions</option>
+                        <?php
+                        foreach($position as $key=>&$v) {
+                            ?>
+                            <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
+                            <?php } ?>
+                    </select>
                     <div class="search-row-tip">Hold down 'Command' to select a max of 10</div>
                     <div id="sel-position-val" class="show-selval"><ul></ul></div>
                 </div>
@@ -175,7 +182,7 @@
                     <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
                     <div id="sel-language-val" class="show-selval"></div>
                 </div>
-                <div class="span3">
+                <div class="span3 reg-row">
                 	<strong>Personal Skills</strong>
                     <select name="personal_skills" class="industry_options">
                         <option value="">All Skills</option>
@@ -191,7 +198,7 @@
                 </div>
             </div>
         	<div class="advsearch-row clearfix">
-            	<div class="span1">
+            	<div class="span1 reg-row">
                 	<strong>Technical Skills</strong>
                     <select name="technical_skills" class="industry_options">
                         <option value="">All Skills</option>
