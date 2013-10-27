@@ -150,9 +150,13 @@
             <dd class="search-row-nav">
                 <select name="salary" class="filter_key">
                     <option value="0" selected="selected">Any Salary</option>
-                    <option value="1">1500-2500</option>
-                    <option value="2">2500-3500</option>
-                    <option value="3">3500-5500</option>
+                    <option value="1">Unpaid</option>
+                    <option value="2"><10,000</option>
+                    <option value="3">10,000-15,000</option>
+                    <option value="4">15,000-20,000</option>
+                    <option value="5">20,000-30,000</option>
+                    <option value="6">30,000-40,000</option>
+                    <option value="7">40,000+</option>
                 </select>
             </dd>
         </dl>

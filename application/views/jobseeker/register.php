@@ -820,7 +820,7 @@
 
             <!-- languages -->
 
-            <div class="reg-area" id="reg6">
+            <div class="reg-area reg-row" id="reg6">
 
                 <?php $step_arr = $step_arr;
                 $cla = '';
@@ -828,54 +828,53 @@
                     $cla = 'reg-area-tit-curr';
                 }
                 ?>
-                <div class="reg-area-tit <?php echo $cla; ?>">Languages</div>
+
                 <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="languageForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
+                    <div class="reg-area-tit <?php echo $cla; ?>">Languages</div>
                     <div id="language_lists">
-                    <div class="reg-row"> <strong>Language<i class="star">*</i></strong>
-                        <div>
-                            <select name="language[]" id="language_1" required>
-                                <option value="">Language</option>
-                                <?php
-                                $lan = '';
+                    <div class="reg-row" style="float:left;width:240px;">
+                        <strong>Language<i class="star">*</i></strong><br />
+                        <select name="language[]" id="language_1" required>
+                            <option value="">Language</option>
+                            <?php
+                            $lan = '';
 
-                                if(count($language)) {
-                                    $lan = $language[0]["language"];
+                            if(count($language)) {
+                                $lan = $language[0]["language"];
+                            }
+                            foreach($language_arr as $v) {
+                                $str = '';
+                                if($v == $lan) {
+                                    $str = ' selected="selected"';
                                 }
-                                foreach($language_arr as $v) {
-                                    $str = '';
-                                    if($v == $lan) {
-                                        $str = ' selected="selected"';
-                                    }
+                            ?>
+                            <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                            <?php } ?>
+                        </select>
+                     </div>
+                     <div style="float:left;width:220px;">
+                        <strong>Proficiency</strong><br />
+                        <select name="level[]" id="level_1" required>
+                            <option value="">Level</option>
+                            <?php
+                            $lev = '';
+
+                            if(count($language)) {
+                                $lev = $language[0]["level"];
+                            }
+                            foreach($level_arr as $v) {
+                                $str = '';
+                                if($v == $lev) {
+                                    $str = ' selected="selected"';
+                                }
                                 ?>
                                 <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
                                 <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="reg-row clearfix" style="clear:both;"> <strong>Proficiency</strong>
-                        <div>
-                            <select name="level[]" id="level_1" required>
-                                <option value="">Level</option>
-                                <?php
-                                $lev = '';
-
-                                if(count($language)) {
-                                    $lev = $language[0]["level"];
-                                }
-                                foreach($level_arr as $v) {
-                                    $str = '';
-                                    if($v == $lev) {
-                                        $str = ' selected="selected"';
-                                    }
-                                    ?>
-                                    <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
-                                    <?php } ?>
-                            </select>
-                        </div>
+                        </select>
                     </div>
                     </div>
-                    <div class="reg-row">
+                    <div class="reg-row" style="clear: both;">
                         <p><a class="reg-row-tip" href="javascript:void(0);" id="addLanguageBtn">+ Add another language</a></p>
                     </div>
                     <div class="reg-area-bar">

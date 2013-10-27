@@ -123,7 +123,7 @@ function languageSubmit(is_all) {
             languageForm.serialize(),
             function(result,status){
                 if(status == 'success'){
-                    $('#step8').addClass('curr');
+                    $('#step6').addClass('curr');
                     $('#languageForm .reg-area-tit').addClass('reg-area-tit-curr');
                     alert('Save successful!');
                 }

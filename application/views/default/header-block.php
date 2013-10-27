@@ -54,7 +54,7 @@
                 <?php elseif(1 == $current_user_type): ?>
                 <li class="jobs"><a href="<?php echo $site_url?>search/findstaff">FIND STAFF</a></li>
                 <?php endif; ?>
-				<li class="cvs"><a href="<?php echo $site_url?>search/searchjobseeker">CVs</a></li>
+				<li class="cvs"><a href="<?php echo $site_url?>search/findstaff">CVs</a></li>
 				<li class="post"><a href="<?php echo $site_url?>job/postjob">POST A JOB</a></li>
 			</ul>
 		</div>
