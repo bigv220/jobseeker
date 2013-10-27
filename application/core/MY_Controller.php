@@ -7,7 +7,6 @@ abstract class MY_Controller extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		date_default_timezone_set('PRC');
 		$this->data = $this->common_model->getConfig();
 	}
 
