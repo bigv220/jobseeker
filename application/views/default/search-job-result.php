@@ -43,7 +43,7 @@
 <!--search-result condition-->
 <form action="<?php echo $site_url; ?>search/searchJob" method="post">
     <input type="hidden" name="top_search" value="0" />
-    <div class="result-condition rel box"> <b>Alert Search</b>
+    <div class="result-condition rel box"> <b>Search</b>
         <dl class="search-row">
             <dt class="search-row-tit">Key Words</dt>
             <dd class="search-row-nav">
