@@ -6,7 +6,7 @@
 	<div class="p-bn rel">
 		<div class="pbn-find">
 			<div class="pbn-find-block pbn-job rel">
-				<a href="#" class="pbn-btn png pbn-btn-job"></a>
+				<a href="<?php echo $site_url?>search/findjob" class="pbn-btn png pbn-btn-job"></a>
 				<div class="find-hover png abs">
 					<strong>TODAY’S HOT JOBS</strong>
 					<ul class="pbn-job-ul">
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="pbn-find-block pbn-staff rel">
-				<a href="#" class="pbn-btn png pbn-btn-staff"></a>
+				<a href="<?php echo $site_url?>search/findstaff" class="pbn-btn png pbn-btn-staff"></a>
 				<div class="find-hover png abs">
 					<strong>NEWEST JOB SEEKERS</strong>
 					<ul class="pbn-staff-ul">
@@ -53,54 +53,10 @@
 	</div>
 
 	<!-- recently jobs -->
-	<div class="p-jobs rel">
-		<div class="w770">
-			<div class="title">Recently Added Jobs</div>
-		</div>
-		<div class="h-jobs-bd">
-			<div class="w770">
-				<a class="p-jobs-item rel" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
-		      	</a>
-		      	<a class="p-jobs-item rel" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
-		      	</a>
-		      	<a class="p-jobs-item rel" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
-		      	</a>
-		      	<a class="p-jobs-item rel last" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
-		      	</a>
-			</div>
-		</div>
-		
-	</div>
+	<?php $this->load->view($front_theme.'/recentjobs-block');?>
 	
 	<!-- Partners -->
-	<div class="p-partners rel">
-		<div class="w770">
-			<div class="title">Our Partners</div>
-			<div class="h-partners-bd">
-				<div class="p-partners-item"><img src="<?php echo $theme_path?>style/home/temp/pertner-rs.png"  alt="" /></div>
-				<div class="p-partners-item"><img src="<?php echo $theme_path?>style/home/temp/pertner-ca.png"  alt="" /></div>
-				<div class="p-partners-item"><img src="<?php echo $theme_path?>style/home/temp/pertner-hds.png"  alt="" /></div>
-				<div class="p-partners-item"><img src="<?php echo $theme_path?>style/home/temp/pertner-bc.png"  alt="" /></div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
+	<?php $this->load->view($front_theme.'/partners-block');?>
 	
 	<!-- sponsors -->
 	<!-- 

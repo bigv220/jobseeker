@@ -157,18 +157,8 @@
     <div class="scroll-bar scroll-right"></div>
   </div>
 </div>
-<!-- Our Partners -->
-<div class="partners w70">
-  <div class="puartners-tit">Our Partners</div>
-  <div class="puartners-nav">
-    <ul class="puartners-ul zoom">
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-    </ul>
-  </div>
-</div>
+<!-- Partners -->
+<?php $this->load->view($front_theme.'/partners-block');?>
 
 
 
