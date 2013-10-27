@@ -96,13 +96,13 @@
                         <?php $current_user_type = isset($user_type)?$user_type:-1;
                         if (0 == $current_user_type):?>
                             <li><a href="#">View Profile</a></li>
-                            <li><a href="#">Edit Profile</a></li>
+                            <li><a href="<?php echo $site_url?>jobseeker/register">Edit Profile</a></li>
                             <li><a href="#">Bookmarked Employers</a></li>
                             <li><a href="#">Shortlisted Jobs</a></li>
                             <li><a href="#">Applied Jobs</a></li>
                         <?php elseif(1 == $current_user_type): ?>
                             <li><a href="#">View Profile</a></li>
-                            <li><a href="#">Edit Company Profile</a></li>
+                            <li><a href="<?php echo $site_url?>company/register">Edit Company Profile</a></li>
                             <li><a href="#">Manage Job listings</a></li>
                             <li><a href="#">View Shortlisted Candidates</a></li>
                             <li><a href="#">Inbox</a></li>

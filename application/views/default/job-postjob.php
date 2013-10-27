@@ -100,12 +100,9 @@
                         <strong>Type of Job *</strong>
                         <div>
                             <select name="employment_type" required>
-                                <option value="">Full Time</option>
-                                <option value="1">value1</option>
-                                <option value="2">value2</option>
-                                <option value="3">value3</option>
-                                <option value="4">value4</option>
-                                <option value="5">value5</option>
+                                <option value="">--Select--</option>
+                                <option value="1">Full Time</option>
+                                <option value="2">Part Time</option>
                             </select>
                         </div>
                     </div>
