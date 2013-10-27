@@ -49,7 +49,7 @@
 				<li class="about"><a href="<?php echo $site_url?>page/aboutus">ABOUT US</a></li>
 				<li class="news"><a href="<?php echo $site_url?>news">JING NEWS</a></li>
                 <?php $current_user_type = isset($user_type)?$user_type:-1;
-                if (0 == $current_user_type):?>
+                if (true || 0 == $current_user_type):?>
 				<li class="jobs"><a href="<?php echo $site_url?>search/findjob">JOBS</a></li>
                 <?php elseif(1 == $current_user_type): ?>
                 <li class="jobs"><a href="<?php echo $site_url?>search/findstaff">FIND STAFF</a></li>
