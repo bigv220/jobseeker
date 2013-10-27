@@ -174,10 +174,15 @@
   </form>
 </div>
 
+<br />
+<!-- recently jobs -->
+<?php $this->load->view($front_theme.'/recentjobs-block');?>
+
+<!-- p-com-roll -->
+<!-- 
 <div class="w70">
   <div class="puartners-tit"><a href="#">Recently Viewed Jobs</a></div>
 </div>
-<!-- p-com-roll -->
 <div class="com-roll-bd">
   <div class="com-roll w100">
     <div class="scroll-out">
@@ -199,6 +204,8 @@
     <div class="scroll-bar scroll-right"></div>
   </div>
 </div>
+-->
+ 
 <!-- Partners -->
 <?php $this->load->view($front_theme.'/partners-block');?>
 

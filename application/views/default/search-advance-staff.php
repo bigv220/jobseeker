@@ -132,31 +132,9 @@
 
 </div>
 
-<div class="w70">
-  <div class="puartners-tit"><a href="#">Recently Viewed Jobseekers</a></div>
-</div>
-<!-- p-com-roll -->
-<div class="com-roll-bd">
-  <div class="com-roll w100">
-    <div class="scroll-out">
-      <div class="scroll-box"> <a class="scroll-item com-roll-item seekers-roll" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>Michelle Anderson</b> <span>Marketing</span> </p>
-        </a> <a class="scroll-item com-roll-item seekers-roll" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors2.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>Clare Roberts</b> <span>Teaching</span> </p>
-        </a> <a class="scroll-item com-roll-item seekers-roll" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors3.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>microsoft, Beijing</b> <span>Technical Engineer</span> </p>
-        </a> <a class="scroll-item com-roll-item seekers-roll" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>microsoft, Beijing</b> <span>User Interface Midweight Designer</span> </p>
-        </a> <a class="scroll-item com-roll-item seekers-roll" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors2.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>microsoft, Beijing</b> <span>Technical Engineer</span> </p>
-        </a> <a class="scroll-item com-roll-item seekers-roll" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors3.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>microsoft, Beijing</b> <span>Technical Engineer</span> </p>
-        </a> </div>
-    </div>
-    <div class="scroll-bar scroll-left"></div>
-    <div class="scroll-bar scroll-right"></div>
-  </div>
-</div>
+<br />
+<!-- recently jobs -->
+<?php $this->load->view($front_theme.'/recentjobs-block');?>
 <!-- Partners -->
 <?php $this->load->view($front_theme.'/partners-block');?>
 

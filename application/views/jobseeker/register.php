@@ -320,8 +320,9 @@
     <div class="reg-right-wrap">
         <div class="reg-right box mb20">
             <p class="reg-right-text">
-                Please fill out the mandatory fields to apply for jobs, to streamline your job search and highlight your profile to employers fill out all optional fields. <br/>
-                <a href="#">Or start searching for jobs now </a></p>
+                Please fill out the mandatory fields (*) to apply for jobs.<br>
+				To streamline your job search and highlight your profile to employers, please fill out all optional fields as well.<br>
+				Feel free to come back and fill out your preferences later, you can search through our current job listings <a href="<?php echo $site_url?>search/findjob">HERE</a></p>
 
             <!-- Basic information -->
 
