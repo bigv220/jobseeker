@@ -117,6 +117,12 @@ function language_level() {
 }
 
 function language_arr() {
-	return array('Chinese','English','French','German','Spanish');
+	return array('Albanian','Amharic','Arabic','Armenian','Belarusan','Bengali','Bulgarian','Burmese',
+				'Chinese (Dialect)','Chinese (Mandarin)','Danish','Dutch','English (UK)','English (US)',
+				'Estonian','Farsi','Filipino','Finnish','Flemish','French','Georgian','German','Greek',
+				'Hausa','Hebrew','Hindi','Hungarian','Icelandic','Indonesian','Italian','Japanese',
+				'Khmer','Korean','Lao','Latvian','Malay','Maori','Nepali','Norwegian','Panjabi','Polish',
+				'Portuguese','Romanian','Russian','Samoan','Serbian','Sindhi','Spanish','Swedish','Taiwanese',
+				'Tamil','Thai','Tongan','Turkish','Ukrainian','Urdu','Uzbek','Vietnamese');
 }
 
