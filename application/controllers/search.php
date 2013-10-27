@@ -21,6 +21,9 @@ class search extends Front_Controller {
         //Load Model
         $this->load->model('job_model');
 
+        $this->load->helper('location');
+        $data['location'] = getLoction();
+
         $data['selected_date'] = "";
         $data['salary_sort'] = "";
 
