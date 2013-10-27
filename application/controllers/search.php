@@ -237,6 +237,19 @@ class search extends Front_Controller {
 
     public function findstaff() {
         $data = $this->data;
+
+         // get location
+        $this->load->helper('location');
+        $data['location'] = getLoction();
+
+        //the left side, industry lists
+        $this->load->model('jobseeker_model');
+        $industry = $this->jobseeker_model->getIndustry();
+        $data["industry"] = $industry;
+
+        $position = $this->jobseeker_model->getPosition('General');
+        $data["position"] = $position;
+        
         $this->load->view($data['front_theme']."/search-advance-staff",$data);   
     }
 

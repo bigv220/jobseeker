@@ -231,3 +231,11 @@ $(function(){
 	
 
 })
+    $(document).ready(function(){
+         $("select[name='country']").change(function() {
+            change_location($(this),'country');
+        });
+        $("select[name='province']").change(function() {
+            change_location($(this), 'province');
+        });
+   });
