@@ -210,17 +210,18 @@
     </form>
 </div>
 
-<!-- Our Partners -->
-<div class="partners w70">
-    <div class="puartners-tit">Our Partners</div>
-    <div class="puartners-nav">
-        <ul class="puartners-ul zoom">
-            <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-            <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-            <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-            <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-        </ul>
-    </div>
+<!-- Partners -->
+<div class="p-partners rel">
+	<div class="w770">
+		<div class="title">Our Partners</div>
+		<div class="h-partners-bd">
+			<div class="p-partners-item"><img src="<?php echo $theme_path?>style/home/temp/pertner-rs.png"  alt="" /></div>
+			<div class="p-partners-item"><img src="<?php echo $theme_path?>style/home/temp/pertner-ca.png"  alt="" /></div>
+			<div class="p-partners-item"><img src="<?php echo $theme_path?>style/home/temp/pertner-hds.png"  alt="" /></div>
+			<div class="p-partners-item"><img src="<?php echo $theme_path?>style/home/temp/pertner-bc.png"  alt="" /></div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {

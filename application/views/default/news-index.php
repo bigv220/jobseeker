@@ -23,21 +23,21 @@
                         <div class="titles">
                             <div class="main_title">Expat Profile</div>
                             <div class="subtitle">
-                                <div>Name: Alex Roberts Age: 25</div>
-                                <div>From: London, UK Intern at: Forex Science</div>
+                                <div>Name: Michaela Williams</div>
+                                <div>Location: Shanghai</div>
+                                <div>Works as a Marketing Manager</div>
                             </div>
-                            <div class="small_title">What has been the transition like between UK and China life?</div>
+                            <div class="small_title">There are many places around the world, but what was it about China that attracted you?</div>
                         </div>
                         <div class="profile_img">
-                            <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif" width="120" height="120" alt="" />
-                            <i class="mask"></i>
+                            <img src="<?php echo $theme_path?>style/home/temp/newsletter-expat.png" width="120" height="120" alt="" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
 
                     <div class="content">
 
-                        <p> The transition was surprisingly smooth. Having worked in London for 2 years after graduating in 2011 I was used to life in a big city. I understood the daily commute and the chaos of rush hour. However, unlike other places I have lived, the air quality is highly variable. On a good day Beijing is beautiful yet at it's worst it can be off-putting. In addition, the transition from western to Asian food has been an experience. If you're not so into spice, look out for the Sichuan chili's lurking in many of the dishes here.
+                        <p> I decided to go to China for a few different reasons, firstly because China has such a vibrant and booming economy. Companies across the globe are vying to do business with China and having first-hand knowledge of Chinese business culture would be a real asset to my professional development. Another reason I chose China is because the culture is so different and it would be a completely new and interesting experience. As soon as I arrived in China, I knew that I had made the right choice. China is so vibrant and diverse that no 2 days are the same and there is never an opportunity to be bored.
                             <a href="#">Continue reading</a>
                         </p>
                     </div>
@@ -63,30 +63,30 @@
                     <div class="title">Upcoming Networking Events and Job Fairs</div>
                     <div class="event_row">
                         <a href="#">
-                            <div class="event_title">The 2013 Job Fair for Foreigners in Beijing</div>
-                            <div class="event_time">Saturday October 19th 2013 9:00 - 16:00</div>
-                            <div class="event_place">Beijing Marriot Hotel Northeast</div>
+                            <div class="event_title">THE 2013 JOB FAIR FOR FOREIGNERS IN BEIJING</div>
+                            <div class="event_time">Time: Saturday November 16th 2013 9:00 – 16:00</div>
+                            <div class="event_place">LOCATION: 2nd Floor, Swissotel Beijing (five star)</div>
                         </a>
                     </div>
                     <div class="event_row">
                         <a href="#">
-                            <div class="event_title">The 2013 Job Fair for Foreigners in Beijing</div>
-                            <div class="event_time">Saturday October 19th 2013 9:00 - 16:00</div>
-                            <div class="event_place">Beijing Marriot Hotel Northeast</div>
+                            <div class="event_title">THE SINO-GERMAN JOB FAIR BEIJING</div>
+                            <div class="event_time">Time: Saturday October 19th 2013 9:00 – 16:00</div>
+                            <div class="event_place">LOCATION: Beijing Marriot Hotel Northeast</div>
                         </a>
                     </div>
                     <div class="event_row">
                         <a href="#">
-                            <div class="event_title">The 2013 Job Fair for Foreigners in Beijing</div>
-                            <div class="event_time">Saturday October 19th 2013 9:00 - 16:00</div>
-                            <div class="event_place">Beijing Marriot Hotel Northeast</div>
+                            <div class="event_title">Kooka Networking Events</div>
+                            <div class="event_time">TIME: 6.30pm to 9.30pm, on the last Friday of every month.</div>
+                            <div class="event_place">LOCATION: Various bars and nightspots around Beijing.</div>
                         </a>
                     </div>
                     <div class="event_row">
                         <a href="#">
-                            <div class="event_title">The 2013 Job Fair for Foreigners in Beijing</div>
-                            <div class="event_time">Saturday October 19th 2013 9:00 - 16:00</div>
-                            <div class="event_place">Beijing Marriot Hotel Northeast</div>
+                            <div class="event_title">The FC Group “Anything Goes” Networking Social</div>
+                            <div class="event_time">TIME: November 5th 2013, 7.30pm to 10.30pm</div>
+                            <div class="event_place">LOCATION: Suzie Wong, Chaoyang Park West Gate, Beijing</div>
                         </a>
                     </div>
                     <div class="more_link"><a href="#">See All Upcoming Events</a></div>
