@@ -36,6 +36,24 @@
         });
     });
 
+
+    // change industry
+    function changeIndustry(thisO) {
+        var name = $(thisO).val();
+        $.post(site_url + '/jobseeker/ajaxchangeindustry',
+            { ind_name: name },
+            function(result,status) {
+                var position_htm = '<option value="">Position</option>';
+
+                if(status == 'success'){
+                    var obj = eval('('+result+')');
+                    for ( var i = 0; i < obj.data.length; i++) {
+                        position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
+                    }
+                }
+                $('#position').html(position_htm);
+            });
+    }
 </script>
 
 <!--search-result body-->
@@ -107,7 +125,7 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Industry</dt>
             <dd class="search-row-nav reg-row">
-                <select name="industry" class="industry_options"  onchange="changeIndustry(this);">
+                <select name="industry" class="industry_options" onchange="changeIndustry(this);">
                     <option value="">All Industries</option>
                     <?php foreach($industry as $key=>&$v) {
                     if(empty($v['name'])) continue;
@@ -122,12 +140,12 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Position</dt>
             <dd class="search-row-nav">
-                <select name="position" id="position_1" class="filter_key">
-                        <option value="">Position</option>
-                         <?php
-                         foreach($position as $key=>&$v) {
+                <select name="position" id="position" class="industry_options">
+                    <option value="">All Positions</option>
+                    <?php
+                    foreach($position as $key=>&$v) {
                         ?>
-                         <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
+                        <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
                         <?php } ?>
                 </select>
                 <div class="search-row-tip" style="display: none;">Hold down 'Command' to select a max of 10</div>
@@ -333,5 +351,45 @@
 </div>
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script type="text/javascript">
+    var map;
+    var geocoder = new google.maps.Geocoder();
+    function initialize() {
+        var myOptions = {
+            zoom : 13,
+            center : new google.maps.LatLng(-34.397, 150.644),
+            zoomControl: true,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.SMALL,
+            },
+            panControl: false,
+            scaleControl:false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: false
+        }
 
+        map = new google.maps.Map(document.getElementById("map"),
+            myOptions);
+    }
+
+    function codeAddress() {
+        var address = $('#address').val();
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        initialize();
+        codeAddress();
+    });
+
+</script>
 <?php $this->load->view($front_theme.'/footer-block');?>
