@@ -45,7 +45,7 @@ class search extends Front_Controller {
                 array_push($where_arr, "industry like '%".$post["industry"]."%'");
             }
             if(!empty($post["position"])) {
-                array_push($where_arr, "position like %'".$post["position"]."%'");
+                array_push($where_arr, "position like '%".$post["position"]."%'");
             }
             if(!empty($post["employment_length"])) {
                 array_push($where_arr, 'employment_length='.$post["employment_length"]);
@@ -161,7 +161,7 @@ class search extends Front_Controller {
                 array_push($where_arr, "industry like '%".$post["industry"]."%'");
             }
             if(!empty($post["position"])) {
-                array_push($where_arr, "position like %'".$post["position"]."%'");
+                array_push($where_arr, "position like '%".$post["position"]."%'");
             }
             if(!empty($post["employment_length"])) {
                 array_push($where_arr, 'employment_length='.$post["employment_length"]);
