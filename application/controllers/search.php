@@ -113,6 +113,9 @@ class search extends Front_Controller {
         $industry = $this->jobseeker_model->getIndustry();
         $data["industry"] = $industry;
 
+        $position = $this->jobseeker_model->getPosition('General');
+        $data["position"] = $position;
+
         $data["job_id_str"] = $job_id_str;
 
         $constants = array('len_emp'=>$length_of_employment,
@@ -164,6 +167,9 @@ class search extends Front_Controller {
         $this->load->model('jobseeker_model');
         $industry = $this->jobseeker_model->getIndustry();
         $data["industry"] = $industry;
+
+        $position = $this->jobseeker_model->getPosition('General');
+        $data["position"] = $position;
 
         $this->load->view($data['front_theme']."/search-job-result",$data);
     }
@@ -245,6 +251,9 @@ class search extends Front_Controller {
         $this->load->model('jobseeker_model');
         $industry = $this->jobseeker_model->getIndustry();
         $data["industry"] = $industry;
+
+        $position = $this->jobseeker_model->getPosition('General');
+        $data["position"] = $position;
 
         $tech_skills_arr = $this->jobseeker_model->getSkills('tech_skills','');
         $pro_skills_arr = $this->jobseeker_model->getSkills('personal_skills','');
