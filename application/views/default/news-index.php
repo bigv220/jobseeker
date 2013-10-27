@@ -65,28 +65,28 @@
                         <a href="#">
                             <div class="event_title">THE 2013 JOB FAIR FOR FOREIGNERS IN BEIJING</div>
                             <div class="event_time">Time: Saturday November 16th 2013 9:00 – 16:00</div>
-                            <div class="event_place">LOCATION: 2nd Floor, Swissotel Beijing (five star)</div>
+                            <div class="event_place">Location: 2nd Floor, Swissotel Beijing (five star)</div>
                         </a>
                     </div>
                     <div class="event_row">
                         <a href="#">
                             <div class="event_title">THE SINO-GERMAN JOB FAIR BEIJING</div>
                             <div class="event_time">Time: Saturday October 19th 2013 9:00 – 16:00</div>
-                            <div class="event_place">LOCATION: Beijing Marriot Hotel Northeast</div>
+                            <div class="event_place">Location: Beijing Marriot Hotel Northeast</div>
                         </a>
                     </div>
                     <div class="event_row">
                         <a href="#">
                             <div class="event_title">Kooka Networking Events</div>
-                            <div class="event_time">TIME: 6.30pm to 9.30pm, on the last Friday of every month.</div>
-                            <div class="event_place">LOCATION: Various bars and nightspots around Beijing.</div>
+                            <div class="event_time">Time: 6.30pm to 9.30pm, on the last Friday of every month.</div>
+                            <div class="event_place">Location: Various bars and nightspots around Beijing.</div>
                         </a>
                     </div>
                     <div class="event_row">
                         <a href="#">
                             <div class="event_title">The FC Group “Anything Goes” Networking Social</div>
-                            <div class="event_time">TIME: November 5th 2013, 7.30pm to 10.30pm</div>
-                            <div class="event_place">LOCATION: Suzie Wong, Chaoyang Park West Gate, Beijing</div>
+                            <div class="event_time">Time: November 5th 2013, 7.30pm to 10.30pm</div>
+                            <div class="event_place">Location: Suzie Wong, Chaoyang Park West Gate, Beijing</div>
                         </a>
                     </div>
                     <div class="more_link"><a href="#">See All Upcoming Events</a></div>
