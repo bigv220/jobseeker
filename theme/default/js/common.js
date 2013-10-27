@@ -78,3 +78,51 @@ function show_welcome_pop(usertype){
     $('.pop-welcome .right-btn-link').attr('href', righthref);
     $('.pop-welcome').fadeIn();
 }
+// change industry
+    function changeIndustry(thisO) {
+        var name = $(thisO).val();
+        $.post(site_url + '/jobseeker/ajaxchangeindustry',
+            { ind_name: name },
+            function(result,status) {
+                var position_htm = '<option value="">Position</option>';
+
+                if(status == 'success'){
+                    var obj = eval('('+result+')');
+                    for ( var i = 0; i < obj.data.length; i++) {
+                        position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
+                    }
+                }
+                $('#position_1').html(position_htm);
+            });
+    }
+
+    // ajax localtion
+    function change_location(this1, key, location) {
+
+        var selected = this1.val();
+        var html_option = "";
+
+        if("country" == key) {
+            var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected;
+            $.get(url, function(data){
+                var obj = eval('('+data+')');
+                for ( var i = 0; i < obj.length; i++) {
+                    html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
+                }
+                $("select[name='province']").html(html_option);
+            });
+        }
+
+        if("province" == key) {
+            var country = $("select[name='country']").val();
+            var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected + "/" + country;
+            $.get(url, function(data){
+                var obj = eval('('+data+')');
+                for ( var i = 0; i < obj.length; i++) {
+                    html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
+                }
+                $("select[name='city']").html(html_option);
+            });
+        }
+
+    }

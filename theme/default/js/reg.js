@@ -118,7 +118,8 @@ $(function(){
 
 
 	//left area float
-	var leftArea = $('.reg-left'),
+	var leftArea = $('.reg-left');
+	if (leftArea.offset()!=null)
 		leftAreaTop = leftArea.offset().top;
 		$(window).scroll(function () {
 			var Wtop = $(window).scrollTop();

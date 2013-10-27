@@ -3,8 +3,9 @@
 <!--search-result body-->
 <div class="result-page w770 rel clearfix"> 
   <!--search-result condition-->
-  <form action="<?php echo $site_url; ?>search/searchJobseeker" id="searchForm" method="post">
-  <div class="result-condition rel box"> <b>Alert Search</b>
+  <form action="<?php echo $site_url; ?>search/searchJobseeker" method="post">
+    <input type="hidden" name="top_search" value="0" />
+    <div class="result-condition rel box"> <b>Alert Search</b>
         <dl class="search-row">
             <dt class="search-row-tit">Key Words</dt>
             <dd class="search-row-nav">
@@ -29,10 +30,10 @@
         <dl class="search-row">
             <dt class="search-row-tit">Province</dt>
             <dd class="search-row-nav">
-                <select name="country"  class="filter_key" >
-                            <option value="">All Counties</option>
-                            <?php foreach ($location as $k=>$v):?>
-                            <?php if ($k == $userinfo['country']): ?>
+                <select name="province" class="filter_key">
+                            <option value="">All Province</option>
+                            <?php foreach ($location['China'] as $k=>$v):?>
+                                <?php if ($k == $userinfo['province']): ?>
                                 <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
                                 <?php else: ?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
@@ -45,9 +46,9 @@
             <dt class="search-row-tit">City</dt>
             <dd class="search-row-nav">
                 <select name="city" class="filter_key">
-                    <option value="0" selected="selected">All Cities</option>
-                    <option value="1">Shanghai</option>
-                    <option value="2">Beijing</option>
+                           <option value="">All City</option>
+                           <option value="2">Beijing</option>
+                           <option value="3">Shanghai</option>
                 </select>
             </dd>
         </dl>
@@ -55,7 +56,8 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Type of employment</dt>
             <dd class="search-row-nav">
-                <select name="employment_type" class="after-select">
+                <select name="employment_type" class=" filter_key">
+                    <option value="">All Type</option>
                     <option value="1">Contract</option>
                     <option value="2">Part Time</option>
                     <option value="3">Full Time</option>
@@ -67,7 +69,7 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Industry</dt>
             <dd class="search-row-nav reg-row">
-                <select name="industry" class="industry_options">
+                <select name="industry" class="industry_options"  onchange="changeIndustry(this);">
                     <option value="">All Industries</option>
                     <?php foreach($industry as $key=>&$v) {
                     if(empty($v['name'])) continue;
@@ -82,7 +84,14 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Position</dt>
             <dd class="search-row-nav">
-                <input type="text" id="sel-position" name="position">
+                <select name="position" id="position_1" class="filter_key">
+                        <option value="">Position</option>
+                         <?php
+                         foreach($position as $key=>&$v) {
+                        ?>
+                         <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
+                        <?php } ?>
+                </select>
                 <div class="search-row-tip" style="display: none;">Hold down 'Command' to select a max of 10</div>
                 <div id="sel-position-val" class="show-selval"></div>
             </dd>
@@ -90,7 +99,8 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Length of employment</dt>
             <dd class="search-row-nav">
-                <select name="employment_length" class="after-select">
+                <select name="employment_length" class=" filter_key">
+                    <option value="">--Select--</option>
                     <option value="1">Long term employment (1+ years)</option>
                     <option value="2">Short term employment (-1 years)</option>
                     <option value="3">No preference</option>
@@ -100,7 +110,7 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Salary</dt>
             <dd class="search-row-nav">
-                <select name="salary" class="after-select">
+                <select name="salary" class=" filter_key">
                     <option value="0" selected="selected">Any Salary</option>
                     <option value="1">1500-2500</option>
                     <option value="2">2500-3500</option>
@@ -111,7 +121,8 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Year of experience</dt>
             <dd class="search-row-nav">
-                <select name="experience_year" class="after-select">
+                <select name="experience_year" class=" filter_key">
+                    <option value="">--Select--</option>
                     <option value="1" selected="selected">Less than 1 year</option>
                     <option value="2">2 years</option>
                     <option value="3">3 years</option>
@@ -122,7 +133,7 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Language</dt>
             <dd class="search-row-nav">
-                <select name="language" class="after-select">
+                <select name="language" class=" filter_key">
                     <option value="0" selected="selected">All Languages</option>
                     <option value="1">English</option>
                     <option value="2">Chinese</option>
@@ -158,7 +169,7 @@
             <input type="submit" class="condition-btn" value=""/>
         </div>
     </div>
-  </form>
+</form>
   
   <!--search-result sequence-->
   <div class="result-az">
