@@ -38,6 +38,15 @@ class search extends Front_Controller {
             if(isset($post["top_search"]) && $post["top_search"]==1 && !empty($post["search_text"]) && $post["search_text"]!="Search our job database") {
                 array_push($where_arr, "job_name like '%" . $post["search_text"] . "%' or job_desc like '%" . $post["search_text"]."%'");
             }
+            if(!empty($post["country"])) {
+                array_push($where_arr, "job.country='" .$post["country"]."'");
+            }
+            if(!empty($post["province"])) {
+                array_push($where_arr, "job.province='" .$post["province"]."'");
+            }
+            if(!empty($post["city"])) {
+                array_push($where_arr, "job.city='" .$post["city"]."'");
+            }
             if(!empty($post["location"])) {
                 array_push($where_arr, 'location=' .$post["location"]);
             }
@@ -153,6 +162,15 @@ class search extends Front_Controller {
             }
             if(isset($post["top_search"]) && $post["top_search"]==1 && !empty($post["search_text"]) && $post["search_text"]!="Search our job database") {
                 array_push($where_arr, "job_name like '%" . $post["search_text"] . "%' or job_desc like '%" . $post["search_text"]."%'");
+            }
+            if(!empty($post["country"])) {
+                array_push($where_arr, 'country=' .$post["country"]);
+            }
+            if(!empty($post["province"])) {
+                array_push($where_arr, 'province=' .$post["province"]);
+            }
+            if(!empty($post["city"])) {
+                array_push($where_arr, 'city=' .$post["city"]);
             }
             if(!empty($post["location"])) {
                 array_push($where_arr, 'location=' .$post["location"]);
