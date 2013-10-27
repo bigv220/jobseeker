@@ -32,6 +32,9 @@ class search extends Front_Controller {
         $where = '';
         $where_arr = array();
         if($post) {
+            if ($post["keywords"] == 'Enter Keywords') {
+                $post['keywords'] = '';
+            }
             if(!empty($post["keywords"])) {
                 array_push($where_arr, "job_name like '%" . $post["keywords"] . "%'");
             }
