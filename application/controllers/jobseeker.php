@@ -8,11 +8,7 @@ class jobseeker extends Front_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('session');
-        if (!$this->session->userdata('uid'))
-        {
-            redirect('/');
-        }
+       
     }
 
     public function index()
@@ -24,6 +20,11 @@ class jobseeker extends Front_Controller {
      * Jobseeker registration
      */
     public function register() {
+        $this->load->library('session');
+        if (!$this->session->userdata('uid'))
+        {
+            redirect('/');
+        }
         //Load Model
         $this->load->model('jobseeker_model');
 

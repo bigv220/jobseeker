@@ -81,7 +81,7 @@ function show_welcome_pop(usertype){
 // change industry
     function changeIndustry(thisO) {
         var name = $(thisO).val();
-        $.post(site_url + '/jobseeker/ajaxchangeindustry',
+        $.post(site_url + 'jobseeker/ajaxchangeindustry',
             { ind_name: name },
             function(result,status) {
                 var position_htm = '<option value="">Position</option>';
