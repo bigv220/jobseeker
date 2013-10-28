@@ -184,6 +184,13 @@ class search extends Front_Controller {
         $this->load->model('job_model');
         $post = $_POST;
         $where_arr = array();
+        // get location
+        $this->load->helper('location');
+        $data['location'] = getLoction();
+        
+        $this->load->model('jobseeker_model');
+        $data["industry"] = $this->jobseeker_model->getIndustry();
+        
         if($post) {
             if ($post["keywords"] == 'Enter Keywords') {
                 $post['keywords'] = '';
