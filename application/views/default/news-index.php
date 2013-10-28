@@ -55,8 +55,8 @@
                 <div class="useful_links">
                     <div class="title">Useful Links and Things We Like</div>
                     <ul>
-                        <li><a href="<?php echo $site_url?>news/view/167">UK transport official wants stronger links with China.</a></li>
-                        <li><a href="<?php echo $site_url?>news/view/168">Beijing has a new plan to fight city smog</a></li>
+                        <li><a href="http://gradrecruiter.wordpress.com/2013/08/29/is-your-mind-set-to-global/">7 ways to improve your global mindset</a></li>
+                        <li><a href="http://www.theatlantic.com/infocus/2013/09/scenes-from-21st-century-china/100586/">Scenes from 21st Century China</a></li>
                         <li><a href="<?php echo $site_url?>news/view/169">Shanghai Free Trade Zone to welcome hotel boom</a></li>
                     </ul>
                 </div>

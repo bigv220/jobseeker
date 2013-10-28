@@ -89,7 +89,7 @@ class jobseeker extends Front_Controller {
         $data['language'] = $language;
         $data['language_arr'] = $language_arr;
         $data['level_arr'] = $level_arr;
-        $this->load->view("/jobseeker/register",$data);
+        $this->load->view($data['front_theme']."/jobseeker-register",$data);
     }
 
     private function _saveRegisterStep($uid, $step) {
@@ -377,30 +377,6 @@ class jobseeker extends Front_Controller {
         $msg = "success";
         $result['status'] = $msg;
         echo json_encode($result);
-    }
-
-    /**
-     *  update user's photo
-     */
-    public function ajaxuploadimage() {
-        $data = $this->data;
-
-        // create folder
-        $this->load->model('jobseeker_model');
-        $user_path = realpath(dirname(__FILE__))."/../../theme/default/users/";
-        $this->jobseeker_model->creatUserfolder ( $user_path ) or exit ( 'error: can not creat folder.' );
-        // upload
-        if (is_uploaded_file ( $_FILES ['avatar'] ['tmp_name'] )) {
-            $file_name = iconv('utf-8','gb2312',$_FILES['avatar']['name']);
-            move_uploaded_file ( $_FILES ['avatar'] ['tmp_name'], $user_path .$file_name);
-
-            // new image url
-            $data ['avatar'] = '/users/' . $file_name;
-
-            exit ( 'success' );
-        } else {
-            exit ( 'error: can not upload avatar image.' );
-        }
     }
 
     //upload work examples

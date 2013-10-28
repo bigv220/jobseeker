@@ -5,7 +5,7 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-         $("select[name='country']").change(function() {
+        $("select[name='country']").change(function() {
             change_location($(this),'country');
         });
         $("select[name='province']").change(function() {
@@ -119,7 +119,7 @@
         var upload_button = document.getElementById("upload_button");
         var oRemind = document.getElementById("errorRemind");
         new AjaxUpload(oBtn,{
-            action:"<?php echo $site_url?>/../jobseeker/ajaxuploadimage",
+            action:"<?php echo $site_url?>user/ajaxuploadimage",
             name:"avatar",
             data: {},
             onSubmit:function(file,ext){
@@ -135,21 +135,21 @@
             },
             onComplete:function(file,response){
                 oBtn.disabled = "";
-                if ( response == 'success') {
+                var response = response.split("|");
+                if ( response[0] == 'success') {
                     oRemind.style.color = "green";
                     oRemind.innerHTML = "Upload successful.";
 
-                    var reg = /\s/g;
-                    file = file.replace(reg, "");
+                    //var reg = /\s/g;
+                    var filename = response[1];
 
-                    var img_path = "<?php echo $theme_path; ?>" + "users/" + file;
-                    $('#avatar').val(file);
+                    var img_path = "<?php echo $site_url; ?>attached/users/<?php echo $this->session->userdata('uid'); ?>/" + filename;
+                    $('#avatar').val(filename);
                     upload_button.innerHTML = "<img id='image_profile' src='" + img_path + "?" +  Math.floor(Math.random()*99999 + 1) + "' height='100' style='border:1px solid gray;' />";
                 } else {
                     oRemind.style.color = "red";
-                    oRemind.innerHTML = response;
+                    oRemind.innerHTML = response[1];
                 }
-
             }
         });
     }
@@ -159,7 +159,7 @@
         var upload_button = document.getElementById(upload_btn);
         var oRemind = document.getElementById(error_id);
         new AjaxUpload(oBtn,{
-            action:"<?php echo $site_url?>/../jobseeker/ajaxuploadfile",
+            action:"<?php echo $site_url?>user/ajaxuploadfile",
             name:"workexample",
             data: {},
             onSubmit:function(file,ext){
@@ -257,31 +257,8 @@
         }
     }
 
-    // change industry
-    function changeIndustry(thisO) {
-        var name = $(thisO).val();
-        $.post(site_url + '/jobseeker/ajaxchangeindustry',
-            { ind_name: name },
-            function(result,status) {
-                var position_htm = '<option value="">Position</option>';
-
-                if(status == 'success'){
-                    var obj = eval('('+result+')');
-                    for ( var i = 0; i < obj.data.length; i++) {
-                        position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
-                    }
-                }
-                $(thisO).next().html(position_htm);
-            });
-    }
+    
 </script>
-
-    <!--top search area-->
-    <div class="top-search w70 rel">
-        <input type="text" class="abs top-search-input input-tip" value="Search our job database" data-tipval="Search our job database"/>
-        <input type="submit" class="abs top-search-btn " value=""  title="search"   />
-        <a href="#" class="abs top-search-a">More Options</a>
-    </div>
 
 <!--Jobseeker registration page body-->
 <div class="reg-page w770 clearfix rel">
@@ -343,8 +320,9 @@
     <div class="reg-right-wrap">
         <div class="reg-right box mb20">
             <p class="reg-right-text">
-                Please fill out the mandatory fields to apply for jobs, to streamline your job search and highlight your profile to employers fill out all optional fields. <br/>
-                <a href="#">Or start searching for jobs now </a></p>
+                Please fill out the mandatory fields (*) to apply for jobs.<br>
+				To streamline your job search and highlight your profile to employers, please fill out all optional fields as well.<br>
+				Feel free to come back and fill out your preferences later, you can search through our current job listings <a href="<?php echo $site_url?>search/findjob">HERE</a></p>
 
             <!-- Basic information -->
 
@@ -405,12 +383,12 @@
                         <input type="hidden" name="avatar" id="avatar" value="<?php echo $userinfo['profile_pic']; ?>" />
                         <div id="upload_button">
                             <?php if($userinfo['profile_pic']) {
-                                        $pic = 'users/'.$userinfo['profile_pic'];
+                                        $pic = $site_url.'attached/users/'.$this->session->userdata('uid').'/'.$userinfo['profile_pic'];
                                    } else {
-                                        $pic = 'style/reg/com-img.gif';
+                                        $pic = $theme_path.'style/reg/com-img.gif';
                                    }
                             ?>
-                            <img id="image_profile" height='100px' src="<?php echo $theme_path?><?php echo $pic; ?>" class="reg-company-img" />
+                            <img id="image_profile" height='100px' src="<?php echo $pic; ?>" class="reg-company-img" />
                         </div>
                         <span class="" id="errorRemind"></span>
                     </div>
@@ -843,7 +821,7 @@
 
             <!-- languages -->
 
-            <div class="reg-area" id="reg6">
+            <div class="reg-area reg-row" id="reg6">
 
                 <?php $step_arr = $step_arr;
                 $cla = '';
@@ -851,54 +829,53 @@
                     $cla = 'reg-area-tit-curr';
                 }
                 ?>
-                <div class="reg-area-tit <?php echo $cla; ?>">Languages</div>
+
                 <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="languageForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
+                    <div class="reg-area-tit <?php echo $cla; ?>">Languages</div>
                     <div id="language_lists">
-                    <div class="reg-row"> <strong>Language<i class="star">*</i></strong>
-                        <div>
-                            <select name="language[]" id="language_1" required>
-                                <option value="">Language</option>
-                                <?php
-                                $lan = '';
+                    <div class="reg-row" style="float:left;width:240px;">
+                        <strong>Language<i class="star">*</i></strong><br />
+                        <select name="language[]" id="language_1" required>
+                            <option value="">Language</option>
+                            <?php
+                            $lan = '';
 
-                                if(count($language)) {
-                                    $lan = $language[0]["language"];
+                            if(count($language)) {
+                                $lan = $language[0]["language"];
+                            }
+                            foreach($language_arr as $v) {
+                                $str = '';
+                                if($v == $lan) {
+                                    $str = ' selected="selected"';
                                 }
-                                foreach($language_arr as $v) {
-                                    $str = '';
-                                    if($v == $lan) {
-                                        $str = ' selected="selected"';
-                                    }
+                            ?>
+                            <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                            <?php } ?>
+                        </select>
+                     </div>
+                     <div style="float:left;width:220px;">
+                        <strong>Proficiency</strong><br />
+                        <select name="level[]" id="level_1" required>
+                            <option value="">Level</option>
+                            <?php
+                            $lev = '';
+
+                            if(count($language)) {
+                                $lev = $language[0]["level"];
+                            }
+                            foreach($level_arr as $v) {
+                                $str = '';
+                                if($v == $lev) {
+                                    $str = ' selected="selected"';
+                                }
                                 ?>
                                 <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
                                 <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="reg-row clearfix" style="clear:both;"> <strong>Proficiency</strong>
-                        <div>
-                            <select name="level[]" id="level_1" required>
-                                <option value="">Level</option>
-                                <?php
-                                $lev = '';
-
-                                if(count($language)) {
-                                    $lev = $language[0]["level"];
-                                }
-                                foreach($level_arr as $v) {
-                                    $str = '';
-                                    if($v == $lev) {
-                                        $str = ' selected="selected"';
-                                    }
-                                    ?>
-                                    <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
-                                    <?php } ?>
-                            </select>
-                        </div>
+                        </select>
                     </div>
                     </div>
-                    <div class="reg-row">
+                    <div class="reg-row" style="clear: both;">
                         <p><a class="reg-row-tip" href="javascript:void(0);" id="addLanguageBtn">+ Add another language</a></p>
                     </div>
                     <div class="reg-area-bar">

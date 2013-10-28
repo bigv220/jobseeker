@@ -57,6 +57,7 @@
 .p-jobs .last {border: 0px !important;}
 .p-jobs .h-jobs-bd .p-jobs-item .jobtitle {z-index:99; color: #fff; top:18px; left:70px; }
 .p-jobs .h-jobs-bd .p-jobs-item .compname {z-index:100; color: #EBF14A; top:35px; left:70px; text-decoration: underline;}
+.p-jobs .h-jobs-bd .p-jobs-item .city {z-index:100; color: #EBF14A; top:35px; left:70px; }
 .p-partners {margin:25px 0;}
 .p-partners .title {color:#674092;font-size:14px;font-weight: bold;margin-bottom:3px;}
 .p-partners .h-partners-bd {height:108px;}
