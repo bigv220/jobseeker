@@ -5,39 +5,51 @@
   <div class="company-body box rel mb5">
     <div class="company-hd rel"> <i class="abs face png"></i>
       <div class="text">
-        <h2>REDSTAR WORKS</h2>
-        <h4>Beijing, China</h4>
-        <p>465 Profile Views</p>
+        <h2><?php echo $info['first_name'];?></h2>
+        <h4><?php echo $info['city'].', '.$info['country'];?></h4>
+        <p></p>
       </div>
       <div class="btnarea"> <a href="#" class="png combtn cand"></a> <a href="#" class="png combtn views "></a> <a href="#" class="png combtn inbox"></a> <a href="#" class="png combtn edit"></a> </div>
     </div>
     <div class="company-bd">
       <div class="company-bd-left">
         <dl class="mb30">
-          <dt>About Redstar Works <a href="#">edit</a></dt>
-          <dd><strong>Praesent vestibulum mollis lectus, sed porttitor dolor tristique sed. Aenean eleifend auctor nulla, nec feugiat velit scelerisque ornare. Ut purus lacus, molestie ut ultrices vel, tincidunt id nibh. Nulla facilisi. Praesent gravida arcu purus, non placerat tortor.
-            Duis vitae ligula id velit dictum lobortis. Proin mattis, risus quis egestas tincidunt, nunc nibh faucibus turpis, quis gravida nisi sem et sem. Morbi pretium tortor vitae tellus suscipit</strong></dd>
+          <dt>About <?php echo $info['first_name'];?></dt>
+          <dd><strong><?php echo $info['description'];?></strong></dd>
         </dl>
         <dl class="mb30">
-          <dt>Idustry <a href="#">edit</a></dt>
-          <dd class="idustry"><a href="#">graphic</a> <a href="#">Design</a> <a href="#">Media</a> <a href="#">Publishing</a> <a href="#">Marketing</a></dd>
+          <dt>Industry </dt>
+          <dd class="idustry">
+          <?php foreach ($industries as $industry):?>
+            <a href="#"><?php echo $industry['industry']; ?></a> 
+          <?php endforeach; ?>
+          </dd>
         </dl>
         <dl>
-          <dt>Phone <a href="#">edit</a></dt>
-          <dd><strong>(+86) 138 0002 2406</strong></dd>
+          <dt>Phone </dt>
+          <dd><strong><?php if ($info['country'] =='China'): ?> (+86) <?php else: ?> (+1) <?php endif; ?> <?php echo $info['phone']; ?></strong></dd>
         </dl>
       </div>
       <div class="company-bd-right">
         <dl class="mb20">
-          <dt>Current listed jobs <a href="#">edit</a></dt>
+          <dt>Current listed jobs </dt>
           <dd class="mb40">
-            <div class="listed">
-              <p>You are not currently advertising any job positions.</p>
-              <a href="#"><img src="<?php echo $theme_path?>style/company/post.png" alt="" border="0" /></a> </div>
+           
+              <?php if(empty($jobinfo)):?>
+               <div class="listed">
+                <p>You are not currently advertising any job positions.</p>
+                <a href="<?php echo $site_url?>job/postjob"><img src="<?php echo $theme_path?>style/company/post.png" alt="" border="0" /></a> </div>
+              <?php else: ?>
+              <ul class="redstar-works">
+                <?php foreach ($jobinfo as $job):?>
+                  <li><a href="#"><?php echo $job['job_name'];?></a></li>                
+                <?php endforeach; ?>
+              </ul>
+             <?php endif; ?>
           </dd>
         </dl>
         <dl>
-          <dt>Redstar Works on the web <a href="#">edit</a></dt>
+          <dt>Redstar Works on the web </dt>
           <dd>
             <ul class="redstar-web">
               <li><a href="#">Twitter</a></li>
