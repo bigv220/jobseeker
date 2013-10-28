@@ -97,6 +97,8 @@
 .company-hd .text h2{font-size:22px;text-transform:uppercase;}
 .company-hd .text h4{font-size:20px;}
 .company-hd .text p{color:#5c5c5c;font-size:15px;}
+.jobseeker-hd .text{width:220px;}
+.jobseeker-bd a{color: #ea6e3b;margin-right: 5px;text-decoration: underline;}
 .company-hd .btnarea{float:right;*display:inline;width:375px;padding:0 15px 0 0;text-align:right;position:absolute;top:-6px;right:0;}
 .company-hd .combtn{width:79px;height:79px;line-height:79px;display:inline-block;text-align:center;vertical-align:top;background-image:url(company/btns.png);background-repeat:no-repeat;}
 .company-hd .bookmark{background-position:0 0;}
@@ -106,11 +108,23 @@
 .company-hd .inbox{background-position:0 -316px;}
 .company-hd .views{background-position:0 -395px;}
 .company-hd .cand{background-position:0 -474px;}
+.company-hd .combo_btns {width: 79px;height: 79px;line-height: 79px;display: inline-block;text-align: center;vertical-align: top;background-image: url(jobseeker/combo_btns.png);background-repeat: no-repeat;}
+.company-hd .view_profile{background-position:0 -553px;}
+.company-hd .start_jingchat{background-position:0 -632px;}
+.company-hd .shorlist_candidate{background-position:0 -711px;}
+.company-hd .request_interview{background-position:0 -790px;}
 .company-bd{overflow:hidden;zoom:1;font-family:Arial;font-size:13px;padding:0 15px 15px 15px;}.company-bd dt{font-weight:bolder;padding-bottom:5px;}.company-bd dt a{color:#674092;font-size:12px;text-transform:capitalize;}.company-bd dt a:hover{text-decoration:none;}
 .company-bd .idustry a{color:#ea6e3b;text-transform:capitalize;margin-right:5px;}
 .company-bd dd{font-size:12px;}
-.company-bd-left{width:470px;border-right:1px solid #e6e74f;float:left;*display:inline;padding:0 10px 0 0;}
-.company-bd-right{width:240px;float:right;*display:inline;}
+.company-bd-left, .jobseeker-bd-left{width:470px;border-right:1px solid #e6e74f;float:left;*display:inline;padding:0 10px 0 0;}
+.company-bd-right, .jobseeker-bd-right{width:240px;float:right;*display:inline;}
+.jobseeker-bd-left{border:none;padding:0;}
+.jobseeker-bd-right{border-left:1px solid #e6e74f;padding:0 0 0 10px;}
+.similar_people .people_icon{float:left;position: relative;}
+.similar_people .people_icon img{width:50px;height:50px;}
+.similar_people .people_icon .mask{position:absolute;top:0;left:0;width:50px;height:50px;background: url(home/story_img_mark.png) no-repeat;}
+.similar_people .people_description{float:left;width:180px;margin-left:6px;color:#000000;}
+.similar_people .people_description div{font-weight:bold;color:#674092;}
 .redstar-works{margin-top:10px;border-top:1px solid #dcdcdc;}.redstar-works li{border-bottom:1px solid #dcdcdc;height:34px;line-height:34px;background:url(company/arr.png) no-repeat right;}
 .redstar-works a{font-weight:bolder;color:#674092;}
 .redstar-web{line-height:1.8;}.redstar-web a{color:#ea6e3b;font-weight:bolder;}

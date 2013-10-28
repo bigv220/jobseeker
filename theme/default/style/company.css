@@ -2,25 +2,6 @@
 .pur{color:#481052;}
 html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
-.company-hd{height:115px;}.company-hd .face{display:block;width:128px;height:128px;background:url(company/face.png) no-repeat;top:-38px;left:15px;}
-.company-hd .text{float:left;*display:inline;width:210px;padding:10px 0 0 156px;}.company-hd .text h2,.company-hd .text h4{color:#48225b;font-weight:bolder;}
-.company-hd .text h2{font-size:22px;text-transform:uppercase;}
-.company-hd .text h4{font-size:20px;}
-.company-hd .text p{color:#5c5c5c;font-size:15px;}
-.company-hd .btnarea{float:right;*display:inline;width:375px;padding:0 15px 0 0;text-align:right;position:absolute;top:-6px;right:0;}
-.company-hd .combtn{width:79px;height:79px;line-height:79px;display:inline-block;text-align:center;vertical-align:top;background-image:url(company/btns.png);background-repeat:no-repeat;}
-.company-hd .bookmark{background-position:0 0;}
-.company-hd .bookmarded{background-position:0 -79px;}
-.company-hd .website{background-position:0 -158px;}
-.company-hd .edit{background-position:0 -237px;}
-.company-hd .inbox{background-position:0 -316px;}
-.company-hd .views{background-position:0 -395px;}
-.company-hd .cand{background-position:0 -474px;}
-.company-bd{overflow:hidden;zoom:1;font-family:Arial;font-size:13px;padding:0 15px 15px 15px;}.company-bd dt{font-weight:bolder;padding-bottom:5px;}.company-bd dt a{color:#674092;font-size:12px;text-transform:capitalize;}.company-bd dt a:hover{text-decoration:none;}
-.company-bd .idustry a{color:#ea6e3b;text-transform:capitalize;margin-right:5px;}
-.company-bd dd{font-size:12px;}
-.company-bd-left{width:470px;border-right:1px solid #e6e74f;float:left;*display:inline;padding:0 10px 0 0;}
-.company-bd-right{width:240px;float:right;*display:inline;}
 .redstar-works{margin-top:10px;border-top:1px solid #dcdcdc;}.redstar-works li{border-bottom:1px solid #dcdcdc;height:34px;line-height:34px;background:url(company/arr.png) no-repeat right;}
 .redstar-works a{font-weight:bolder;color:#674092;}
 .redstar-web{line-height:1.8;}.redstar-web a{color:#ea6e3b;font-weight:bolder;}
