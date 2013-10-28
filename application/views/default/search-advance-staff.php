@@ -62,7 +62,7 @@
                 </div>
                 <div class="span2  reg-row">
                     <strong>Position</strong>
-                    <select name="position" id="position_1" required>
+                    <select name="position" id="position_1">
                                 <option value="">Position</option>
                                 <?php
                                 foreach($position as $key=>&$v) {
