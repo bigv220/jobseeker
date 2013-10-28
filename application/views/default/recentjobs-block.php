@@ -6,27 +6,27 @@
 			<div class="w770">
 				<a class="p-jobs-item rel" href="#">
 					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
+			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
+			      	<div class="jobtitle abs">Marketing and Fr...</div>
+			      	<div class="compname abs">Beijing</div>
 		      	</a>
 		      	<a class="p-jobs-item rel" href="#">
 					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
+			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
+			      	<div class="jobtitle abs">Bartender</div>
+			      	<div class="compname abs">Beijing</div>
 		      	</a>
 		      	<a class="p-jobs-item rel" href="#">
 					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
+			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
+			      	<div class="jobtitle abs">Admin Manager</div>
+			      	<div class="compname abs">Beijing</div>
 		      	</a>
 		      	<a class="p-jobs-item rel last" href="#">
 					<i class="mark abs"></i>
-			      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif"  alt="" />
-			      	<div class="jobtitle abs">Job Title</div>
-			      	<div class="compname abs">Company Name</div>
+			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
+			      	<div class="jobtitle abs">Designer</div>
+			      	<div class="compname abs">Beijing</div>
 		      	</a>
 			</div>
 		</div>		
