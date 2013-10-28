@@ -152,11 +152,17 @@ $(function(){
                 function(result, status){
 
                     if(result.status == 'success'){
+                    	// if not new account will goto findpage directly
+                    	if(result.user_type == "1") {
+                        	window.location.href = site_url + "search/findstaff";
+                        } else {
+                        	window.location.href = site_url + "search/findjob";
+                        } 
                     	$('.pop-login').fadeOut();
                         //$('.phd-login-pop').remove();
                         $('.phd-login-text').html(result.first_name + ' ' + result.last_name);
                         $('.phd-login-pop-content .login-error-msg').hide();
-                        show_welcome_pop(result.user_type);
+                        //show_welcome_pop(result.user_type); 
                     }
                     else{
                         $('.phd-login-pop-content .login-error-msg').show();

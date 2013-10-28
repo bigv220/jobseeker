@@ -513,7 +513,7 @@
                     </div>
                     <div class="reg-row"><strong>Prefered type of employment?<i class="star">*</i></strong>
                         <div>
-                            <input type="hidden" name="employment_type" id="employment_type" value="<?php echo $userinfo['employment_type'];?>" class="kyo-radio" /><br />
+                            <input type="hidden" name="employment_type" id="employment_type" value="<?php echo $userinfo['employment_type'];?>" class="kyo-radio" />
                             <ul class="leng-radio">
                                 <li><i data-val="1" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',1);">Contract</i></li>
                                 <li><i data-val="2" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',2);">Part Time</i></li>
@@ -593,7 +593,7 @@
                     $cla = 'reg-area-tit-curr';
                 }
                 ?>
-                <div class="reg-area-tit <?php echo $cla; ?>">Educations</div>
+                <div class="reg-area-tit <?php echo $cla; ?>">Education</div>
                 <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="educationForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <div id="every_school">
@@ -647,7 +647,6 @@
                             <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px" disabled="disabled" />
                         </div>
 
-                        <br />or expected graduation year
                     </div>
                     <div class="reg-row"> <b>Degree title</b>
                         <div>
