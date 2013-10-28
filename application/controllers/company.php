@@ -75,7 +75,11 @@ class company extends Front_Controller {
     public function companyInfo(){
         $this->load->model('company_model');
         
-        $company_id = $_GET['id'];
+        if (isset($_GET['id'])) {
+            $company_id = $_GET['id'];
+        } else {
+            $company_id = $this->session->userdata('uid');
+        }
 
         $data = $this->data;
         $data["info"] = $this->company_model->getUserInfo($company_id);
@@ -85,36 +89,17 @@ class company extends Front_Controller {
 
     public function companyProfile(){
         $data = $this->data;
+        $this->load->model('company_model');
+        
+        $company_id = $this->session->userdata('uid');
+        $this->load->model('job_model');
+        //get data from db
+     
+        $data = $this->data;
+        $data["jobinfo"] = $this->job_model->getCompanyJobList($company_id);
+        $data["info"] = $this->company_model->getUserInfo($company_id);
+        $data['industries'] = $this->company_model->getIndustry($company_id);
         $this->load->view($data['front_theme']."/company-profile",$data);
     }
 
-    /**
-     *  update user's photo
-     */
-    public function ajaxuploadimage() {
-        $data = $this->data;
-
-        // create folder
-        $this->load->model('jobseeker_model');
-        $user_path = realpath(dirname(__FILE__))."/../../theme/default/company/";
-        $this->jobseeker_model->creatUserfolder ( $user_path ) or exit ( 'error: can not create folder.' );
-        // upload
-        if (is_uploaded_file ( $_FILES ['avatar'] ['tmp_name'] )) {
-            $file_name = iconv('utf-8','gb2312',$_FILES['avatar']['name']);
-
-            $i = 1;
-            while (file_exists($user_path .$file_name)) {
-            	$file_name = $i++."_".$file_name;
-            }
-            
-            move_uploaded_file ( $_FILES ['avatar'] ['tmp_name'], $user_path .$file_name);
-
-            // new image url
-            $data ['avatar'] = '/company/' . $file_name;
-
-            exit ( 'success' );
-        } else {
-            exit ( 'error: can not upload avatar image.' );
-        }
-    }
 }

@@ -3,10 +3,10 @@
 <!--company page body-->
 <div class="company-page w770 clearfix rel">
     <div class="company-body box rel mb20">
-        <div class="company-hd rel"> <i class="abs face png"></i>
+        <div class="company-hd rel"> <i class="abs face png" style="background:url(<?php echo $site_url.'attached/users/'.$jobinfo['company_id'].'/'.$company_avatar?>) no-repeat;"></i>
             <div class="text" style="width:320px;">
                 <h2><?php echo $jobinfo["job_name"]; ?></h2>
-                <h4><?php echo $jobinfo["location"]; ?></h4>
+                <h4><?php echo $jobinfo["location"].' '.$jobinfo["city"]; ?></h4>
                 <p>Posted on <?php echo $jobinfo["post_date"]; ?></p>
             </div>
             <div class="about-btns"> <a href="#" class="png abtn apply"></a> <a href="#" class="png abtn view"></a> <a href="#" class="png abtn bkmk"></a> <a href="#" class="png abtn bkmked" style="display:none;"></a> </div>
@@ -81,12 +81,13 @@
                     </dd>
                 </dl>
                 <dl>
-                    <dt>Similar Jobs</dt>
+                    <dt>Featured jobs</dt>
                     <dd>
                         <ul class="similar">
                             <?php foreach($similar_jobs as $v) { ?>
-                            <li><img src="<?php echo $theme_path?>style/home/temp/sponsors2.gif" alt="" />
-                                <i class="png"></i><a href="#"><?php echo $v['job_name']; ?></a>White Space Design
+                            <li><!-- <img src="<?php echo $theme_path?>style/home/temp/sponsors2.gif" alt="" />
+                                <i class="png"></i> -->
+                                <a href="<?php echo $site_url.'job/jobDetails/'.$v['id']; ?>"><?php echo $v['job_name']; ?></a>White Space Design
                             </li>
                             <?php } ?>
                         </ul>
@@ -97,18 +98,8 @@
     </div>
 </div>
 
-<!-- Our Partners -->
-<div class="partners w70">
-    <div class="puartners-tit">Our Partners</div>
-    <div class="puartners-nav">
-        <ul class="puartners-ul zoom">
-            <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-            <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-            <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-            <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-        </ul>
-    </div>
-</div>
+<!-- Partners -->
+<?php $this->load->view($front_theme.'/partners-block');?>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript">

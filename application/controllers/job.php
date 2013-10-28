@@ -16,31 +16,35 @@ class job extends Front_Controller {
         redirect('/');
     }
 
-    public function jobDetails() {
+    public function jobDetails($job_id) {
+    	$data = $this->data;
+    	
         $length_of_employment = array('1'=>'Long term (1+years)','2'=>'Short term (-1 years)','3'=>'No preferences');
-        $type_of_employment = array('1'=>'Contract','2'=>'Part Time','3'=>'Full Time',
-                                '4'=>'Internship','5'=>'Any');
+        $type_of_employment = array('1'=>'Contract','2'=>'Part Time','3'=>'Full Time','4'=>'Internship','5'=>'Any');
         $visa_assistance = array('1'=>'Visa will be provided','0'=>'Visa will not be provided');
         $housing_assistance = array('1'=>'Accomodation will be provided','0'=>'Accomodation will not be provided');
-
-        $data = $this->data;
-        $job_id = 1;
-
-        //Load Model
+    	$constants = array('len_emp'=>$length_of_employment,
+    			'type_emp'=>$type_of_employment,
+    			'visa_assist'=>$visa_assistance,
+    			'housing_assist'=>$housing_assistance);
+    	$data['constants_arr'] = $constants;
+    	
+    	
+    	//Load Model
         $this->load->model('job_model');
         //get data from db
-        $jobinfo = $this->job_model->getJobInfo(1);
+        $jobinfo = $this->job_model->getJobInfo($job_id);
 
-        $industry = $jobinfo["industry"];
-        $similar_jobs = $this->job_model->getSimilarJobs($job_id, $industry);
+        // get company avatar
+        $this->load->model('company_model');
+        $compinfo = $this->company_model->getOne($jobinfo['company_id'], 'uid');
+        $data["company_avatar"] = $compinfo['profile_pic'];
+        
+        // get similar jobs
+        $similar_jobs = $this->job_model->getSimilarJobs($job_id, $jobinfo["industry"]);
 
-        $constants = array('len_emp'=>$length_of_employment,
-                    'type_emp'=>$type_of_employment,
-                    'visa_assist'=>$visa_assistance,
-                    'housing_assist'=>$housing_assistance);
-
-        $data['constants_arr'] = $constants;
-        $data['jobinfo'] = $jobinfo;
+        
+		$data['jobinfo'] = $jobinfo;
         $data["similar_jobs"] = $similar_jobs;
         $this->load->view($data['front_theme']."/job-details",$data);
     }
@@ -61,7 +65,7 @@ class job extends Front_Controller {
     		$this->load->view($data['front_theme']."/job-postjob",$data);
     	} else {
     		$post = $_POST;
-    		$post['post_date'] = time();
+    		$post['post_date'] = date('Y-m-d', time());
     		if (1 == $this->session->userdata('user_type')) {
     			$post['company_id'] = $this->session->userdata('uid');
     		}

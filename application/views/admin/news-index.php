@@ -35,7 +35,7 @@
 							<tr>
                             	<td class="a-center"><?php echo $row['aid']?></td>
                             	<td class="a-center"><a href="<?php echo $site_url.'admin/news/?cid='.$row['cid']?>"><?php echo $row['cat']?></a></td>
-                            	<td><a href="<?php echo $site_url.$row['lang'].'/news/view/'.$row['aid']?>" target="_blank"><?php echo mb_strlen($row['title'])>30 ? mb_substr($row['title'], 0, 26).'...' : $row['title']?></a></td>
+                            	<td><a href="<?php echo $site_url.'news/view/'.$row['aid']?>" target="_blank"><?php echo mb_strlen($row['title'])>30 ? mb_substr($row['title'], 0, 26).'...' : $row['title']?></a></td>
                                 <td class="a-center"><?php echo date('Y-m-d H:i',$row['date'])?></td>
                                 <td class="a-center"><?php echo langName($row['lang'])?></td>
                                 <td class="a-center">

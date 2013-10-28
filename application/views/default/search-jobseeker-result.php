@@ -48,7 +48,6 @@
                 <select name="city" class="filter_key">
                            <option value="">All City</option>
                            <option value="2">Beijing</option>
-                           <option value="3">Shanghai</option>
                 </select>
             </dd>
         </dl>
@@ -58,11 +57,10 @@
             <dd class="search-row-nav">
                 <select name="employment_type" class=" filter_key">
                     <option value="">All Type</option>
-                    <option value="1">Contract</option>
-                    <option value="2">Part Time</option>
-                    <option value="3">Full Time</option>
-                    <option value="4">Internship</option>
-                    <option value="5">Any</option>
+                    <?php $jobtype = jobtype();
+                    foreach ($jobtype as $k => $v) {?>
+                    <option value="<?php echo $k+1?>"><?php echo $v?></option>
+                    <?php }?>
                 </select>
             </dd>
         </dl>
@@ -112,9 +110,10 @@
             <dd class="search-row-nav">
                 <select name="salary" class=" filter_key">
                     <option value="0" selected="selected">Any Salary</option>
-                    <option value="1">1500-2500</option>
-                    <option value="2">2500-3500</option>
-                    <option value="3">3500-5500</option>
+                    <?php $salary = getSalary();
+                    foreach($salary as $v) { ?>
+                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                    <?php } ?>
                 </select>
             </dd>
         </dl>
@@ -135,9 +134,10 @@
             <dd class="search-row-nav">
                 <select name="language" class=" filter_key">
                     <option value="0" selected="selected">All Languages</option>
-                    <option value="1">English</option>
-                    <option value="2">Chinese</option>
-                    <option value="3">Japanese</option>
+					<?php $language = language_arr();
+                    foreach($language as $v) { ?>
+                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                    <?php } ?>
                 </select>
                 <div class="search-row-tip" style="display: none;">Hold down 'Command' to select multiple</div>
                 <div id="sel-language-val" class="show-selval"></div>
@@ -196,7 +196,7 @@
     ?>
     <div class="box rel sresult-row">
       <div class="sresult-par1">
-        <div class="span1 rel"> <img src="<?php echo $theme_path?>style/search/job-img1.gif" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
+        <div class="span1 rel"> <img src="<?php echo $site_url?>attached/users/<?php echo $user['profile_pic']?>" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
         <div class="span2">
           <h2><?php echo $user['first_name']; ?></h2>
           <h3>

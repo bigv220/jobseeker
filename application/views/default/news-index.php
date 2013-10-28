@@ -5,11 +5,16 @@
         <div class="news-index box rel mb10">
             <div class="news-index-left">
                 <div class="article">
-                    <div class="title">The Happiest Place to Work</div>
+                    <div class="title">Russia & China To Start Youth Exchange Program</div>
                     <div class="content">
                         <img src="<?php echo $theme_path?>style/home/article_img.jpg"/>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        <a href="#">Continue reading</a>
+                        <p>
+                        As the world looks to China in awe, the middle kingdom itself is strengthening ties with its immediate neighbours. <br />
+						In fact, Russia and China will send 10,000 students to each other’s countries, to strengthen international relations as part of the Youth Friendly Exchanges Year. <br />
+						Chinese Vice Premier Liu Yandong said:<br />
+						"We will launch a youth exchange program that involves 100 schools and 10,000 students from each country.<br />
+						"We will earnestly plan and prepare for the opening ceremony of the youth year to be held in Russia next spring...<br />                 
+                        <a href="<?php echo $site_url?>news/view/166">Continue reading</a>
                         </p>
                     </div>
                     <!-- <div class="share-sns">
@@ -50,10 +55,9 @@
                 <div class="useful_links">
                     <div class="title">Useful Links and Things We Like</div>
                     <ul>
-                        <li><a href="#"> 7 Signs It May Be Time To Get A New Gig</a></li>
-                        <li><a href="#">How can I get a better job with little experience?</a></li>
-                        <li><a href="#">Coca-Cola pushes gruit juices in Vietnam</a></li>
-                        <li><a href="#">Why do honesty and hard work have no place at work?</a></li>
+                        <li><a href="http://gradrecruiter.wordpress.com/2013/08/29/is-your-mind-set-to-global/">7 ways to improve your global mindset</a></li>
+                        <li><a href="http://www.theatlantic.com/infocus/2013/09/scenes-from-21st-century-china/100586/">Scenes from 21st Century China</a></li>
+                        <li><a href="<?php echo $site_url?>news/view/169">Shanghai Free Trade Zone to welcome hotel boom</a></li>
                     </ul>
                 </div>
 
@@ -94,52 +98,30 @@
                 <div class="top_stories">
                     <div class="title">Top Stories</div>
                     <div class="story_row">
-                        <a href="#">
-                            <div class="story_icon">
+                        <a href="<?php echo $site_url?>news/view/169">
+                            <!-- <div class="story_icon">
                                 <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
                                 <i class="mask"></i>
-                            </div>
-                            <div class="story_title">Mastering the Perfect Chinese CV</div>
+                            </div> -->
+                            <div class="story_title">Shanghai Free Trade Zone to welcome hotel boom.</div>
                             <div class="clearfix"></div>
                         </a>
                     </div>
                     <div class="story_row">
-                        <a href="#">
-                            <div class="story_icon">
-                                <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
-                                <i class="mask"></i>
-                            </div>
-                            <div class="story_title">How to Dress for business success</div>
+                        <a href="<?php echo $site_url?>news/view/168">
+                            <div class="story_title">Beijing has a new plan to fight city smog.</div>
                             <div class="clearfix"></div>
                         </a>
                     </div>
                     <div class="story_row">
-                        <a href="#">
-                            <div class="story_icon">
-                                <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
-                                <i class="mask"></i>
-                            </div>
-                            <div class="story_title">A round up of the best places to party in Beijing</div>
+                        <a href="<?php echo $site_url?>news/view/167">
+                            <div class="story_title">UK transport official wants stronger links with China. </div>
                             <div class="clearfix"></div>
                         </a>
                     </div>
                     <div class="story_row">
-                        <a href="#">
-                            <div class="story_icon">
-                                <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
-                                <i class="mask"></i>
-                            </div>
-                            <div class="story_title">Mastering the Perfect Chinese CV</div>
-                            <div class="clearfix"></div>
-                        </a>
-                    </div>
-                    <div class="story_row">
-                        <a href="#">
-                            <div class="story_icon">
-                                <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
-                                <i class="mask"></i>
-                            </div>
-                            <div class="story_title">How to Dress for business success</div>
+                        <a href="<?php echo $site_url?>news/view/166">
+                            <div class="story_title">Russia & China To Start Youth Exchange Program.</div>
                             <div class="clearfix"></div>
                         </a>
                     </div>

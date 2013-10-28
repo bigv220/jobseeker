@@ -8,25 +8,25 @@
 					<i class="mark abs"></i>
 			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
 			      	<div class="jobtitle abs">Marketing and Fr...</div>
-			      	<div class="compname abs">Beijing</div>
+			      	<div class="city abs">Beijing</div>
 		      	</a>
 		      	<a class="p-jobs-item rel" href="#">
 					<i class="mark abs"></i>
 			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
 			      	<div class="jobtitle abs">Bartender</div>
-			      	<div class="compname abs">Beijing</div>
+			      	<div class="city abs">Beijing</div>
 		      	</a>
 		      	<a class="p-jobs-item rel" href="#">
 					<i class="mark abs"></i>
 			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
 			      	<div class="jobtitle abs">Admin Manager</div>
-			      	<div class="compname abs">Beijing</div>
+			      	<div class="city abs">Beijing</div>
 		      	</a>
 		      	<a class="p-jobs-item rel last" href="#">
 					<i class="mark abs"></i>
 			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
 			      	<div class="jobtitle abs">Designer</div>
-			      	<div class="compname abs">Beijing</div>
+			      	<div class="city abs">Beijing</div>
 		      	</a>
 			</div>
 		</div>		
