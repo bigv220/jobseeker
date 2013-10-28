@@ -166,10 +166,10 @@
                         <span>Salary</span>
                         <div>
                             <select name="salary_range">
-                                <option value="Under 10000">Under 10,000 RMB</option>
-                                <option value="10000-30000">10000 RMB - 30000 RMB</option>
-                                <option value="30000-60000">30000 RMB - 60000 RMB</option>
-                                <option value="60000-100000">60000 RMB - 100000 RMB</option>
+                                <?php $salary = getSalary();
+			                    foreach($salary as $v) { ?>
+			                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+			                    <?php } ?>
                             </select>
                         </div>
                     </div>

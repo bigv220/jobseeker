@@ -104,7 +104,6 @@
                 <select name="city" class="filter_key">
                            <option value="">All City</option>
                            <option value="2">Beijing</option>
-                           <option value="3">Shanghai</option>
                 </select>
             </dd>
         </dl>
@@ -114,11 +113,10 @@
             <dd class="search-row-nav">
                 <select name="employment_type" class="filter_key">
                     <option value="">All Type</option>
-                    <option value="1">Contract</option>
-                    <option value="2">Part Time</option>
-                    <option value="3">Full Time</option>
-                    <option value="4">Internship</option>
-                    <option value="5">Any</option>
+                    <?php $jobtype = jobtype();
+                    foreach ($jobtype as $k => $v) {?>
+                    <option value="<?php echo $k+1?>"><?php echo $v?></option>
+                    <?php }?>
                 </select>
             </dd>
         </dl>
@@ -168,13 +166,10 @@
             <dd class="search-row-nav">
                 <select name="salary" class="filter_key">
                     <option value="0" selected="selected">Any Salary</option>
-                    <option value="1">Unpaid</option>
-                    <option value="2"><10,000</option>
-                    <option value="3">10,000-15,000</option>
-                    <option value="4">15,000-20,000</option>
-                    <option value="5">20,000-30,000</option>
-                    <option value="6">30,000-40,000</option>
-                    <option value="7">40,000+</option>
+                    <?php $salary = getSalary();
+                    foreach($salary as $v) { ?>
+                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                    <?php } ?>
                 </select>
             </dd>
         </dl>
@@ -195,9 +190,10 @@
             <dd class="search-row-nav">
                 <select name="language" class="filter_key">
                     <option value="0" selected="selected">All Languages</option>
-                    <option value="1">English</option>
-                    <option value="2">Chinese</option>
-                    <option value="3">Japanese</option>
+                    <?php $language = language_arr();
+                    foreach($language as $v) { ?>
+                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                    <?php } ?>
                 </select>
                 <div class="search-row-tip" style="display: none;">Hold down 'Command' to select multiple</div>
                 <div id="sel-language-val" class="show-selval"></div>

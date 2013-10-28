@@ -95,7 +95,6 @@
                         <select name="city">
                             <option value="">All City</option>
                             <option value="2">Beijing</option>
-                            <option value="3">Shanghai</option>
                         </select>
                     </div>
                     <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
@@ -165,9 +164,10 @@
                 	<strong>Salary </strong>
                     <select class="kyo-select">
                         <option value="0" selected="selected">Any Salary</option>
-                        <option value="1">1500-2500</option>
-                        <option value="2">2500-3500</option>
-                        <option value="3">3500-5500</option>
+                        <?php $salary = getSalary();
+	                    foreach($salary as $v) { ?>
+	                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+	                    <?php } ?>
                           </select>
                 </div>
                 <div class="span2">

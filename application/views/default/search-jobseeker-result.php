@@ -110,9 +110,10 @@
             <dd class="search-row-nav">
                 <select name="salary" class=" filter_key">
                     <option value="0" selected="selected">Any Salary</option>
-                    <option value="1">1500-2500</option>
-                    <option value="2">2500-3500</option>
-                    <option value="3">3500-5500</option>
+                    <?php $salary = getSalary();
+                    foreach($salary as $v) { ?>
+                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                    <?php } ?>
                 </select>
             </dd>
         </dl>
