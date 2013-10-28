@@ -81,6 +81,18 @@ class jobseeker_model extends MY_Model
         return $result[0];
     }
 
+    public function getSimilarUsers($uid) {
+       $result = $this->db->select('*')
+            ->from('user')
+            ->where_not_in('uid',$uid)
+            ->limit(3)
+            ->order_by('','random')
+            ->get()
+            ->result_array();
+
+        return $result;   
+    }
+
     public function updatePassword($uid, $pw){
         $data = array('password'=>md5($pw));
         return $this->db->where('uid', $uid)->update($this->table, $data);
@@ -142,6 +154,20 @@ class jobseeker_model extends MY_Model
         }
     }
 
+    public function getAllEducationInfo($uid) {
+        $result = $this->db->select('*')
+            ->from('user_education')
+            ->where('uid',$uid)
+            ->get()
+            ->result_array();
+
+        if(count($result)) {
+            return $result;
+        } else {
+            return array();
+        }
+    }
+
     //save education
     public function insertEducation($data) {
         return $this->db->insert('user_education', $data);
@@ -157,6 +183,21 @@ class jobseeker_model extends MY_Model
 
         if(count($result)) {
             return $result[0];
+        } else {
+            return array();
+        }
+    }
+
+    //get work history
+    public function getAllWorkHistory($uid) {
+        $result = $this->db->select('*')
+            ->from('user_work_history')
+            ->where('uid', $uid)
+            ->get()
+            ->result_array();
+
+        if(count($result)) {
+            return $result;
         } else {
             return array();
         }
@@ -234,6 +275,18 @@ class jobseeker_model extends MY_Model
 
         if(count($rtn)) {
             return $rtn[0];
+        } else {
+            return array();
+        }
+    }
+
+    public function getAllSeekingIndustry($uid) {
+        $sql = "SELECT industry,position FROM user_seeking_industry WHERE uid=$uid";
+
+        $rtn = $this->db->query($sql)->result_array();
+
+        if(count($rtn)) {
+            return $rtn;
         } else {
             return array();
         }

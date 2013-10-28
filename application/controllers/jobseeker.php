@@ -115,8 +115,30 @@ class jobseeker extends Front_Controller {
 
     }
 
+    /**
+     * View personal profile.
+     * 
+     * 
+     * */
     public function profile(){
+        $this->load->model('jobseeker_model');
+
         $data = $this->data;
+        if (isset($_GET['uid'])) {
+            $uid = $_GET['uid'];
+        } else {
+            $uid = $this->session->userdata('uid');
+        }
+
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+        $data['education_info'] = $this->jobseeker_model->getAllEducationInfo($uid);
+        $data['workhistory'] = $this->jobseeker_model->getAllWorkHistory($uid);
+        $data['personal_skills'] = $this->jobseeker_model->getPersonalSkills($uid);
+        $data['professional_skills'] = $this->jobseeker_model->getProfessionalSkills($uid);
+        //get language from db
+        $data['language'] = $this->jobseeker_model->getLanguage($uid);
+        $data['seekingIndustry'] = $this->jobseeker_model->getAllSeekingIndustry($uid);
+        $data['similar_peoples'] = $this->jobseeker_model->getSimilarUsers($uid);
         $this->load->view($data['front_theme']."/jobseeker-profile",$data);
     }
 
