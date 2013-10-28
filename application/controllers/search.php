@@ -232,6 +232,9 @@ class search extends Front_Controller {
             if(!empty($post["language"])) {
                 array_push($where_arr, "language like '%".$post["language"]."%'");
             }
+            
+            // set up user_type=0
+            array_push($where_arr, "user_type = 0");
         }
         $where = "";
         if(count($where_arr)) {
