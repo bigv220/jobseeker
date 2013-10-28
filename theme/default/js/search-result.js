@@ -158,13 +158,13 @@ $(function(){
 
         e.stopPropagation();
         e.preventDefault();
-    })
+    });
 
     //result-bd tab
     $('.sresult-par2').fxuiTab({
         evt:'click',
         eq:0
-    })
+    });
 
 
      //Pop mark
@@ -193,7 +193,7 @@ $(function(){
     $('.pop-apply-close').click(function(){
         popMark.fadeOut();
         popApply.fadeOut();
-    })
+    });
 
     //click Yes
     $('.pop-btn-yes').click(function(){
@@ -204,12 +204,12 @@ $(function(){
         appBtn.addClass('job-btn-submitted');
         appBtn.unbind('click',apply);
         appBtn.bind('click',submitted);
-    })
+    });
 
     //click No
     $('.pop-btn-no').click(function(){
         popApply.fadeOut();
         popMark.fadeOut();
-    })
+    });
 
 })
