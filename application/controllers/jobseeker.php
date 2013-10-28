@@ -115,6 +115,11 @@ class jobseeker extends Front_Controller {
 
     }
 
+    public function profile(){
+        $data = $this->data;
+        $this->load->view($data['front_theme']."/jobseeker-profile",$data);
+    }
+
     //save basic info
     public function basicInfo() {
         //Load Model
