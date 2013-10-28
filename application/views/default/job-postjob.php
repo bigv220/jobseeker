@@ -194,7 +194,18 @@
             <div class="clearfix"></div>
             <div class="postjob-additional-information">
                 <span>Position Description or Addtional Information</span>
-                <div><textarea name="job_desc" rows="5" cols=""></textarea></div>
+                <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/xheditor/xheditor-1.1.14-en.min.js"></script>
+                <script>
+                $(document).ready(function() {
+                $('#job_desc').xheditor({
+                    tools:'Bold,Italic,Underline,|,Align,List,|,Link,Img,Table,|,Source,Fullscreen',
+                    skin:'nostyle',
+                    hoverExecDelay:-1,
+                    forcePtag:false,
+                    submitID:'post'});
+                });
+                </script>
+                <div><textarea name="job_desc" id="job_desc" rows="7" cols=""></textarea></div>
             </div>
         </div>
 

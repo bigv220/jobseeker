@@ -23,10 +23,13 @@ class index extends Front_Controller {
         $data['first_name'] = $this->session->userdata('first_name');
         $data['last_name'] = $this->session->userdata('last_name');
 
-        $this->load->model('jobseeker_model');
-        //get today's hot jobs
+        
+        //get recently jobs
+        $this->load->model('job_model');
+        $data['recently_jobs'] = $this->job_model->getRecentJobs();
 
         //get newest job seekers
+        $this->load->model('jobseeker_model');
         $data['newest_jobseekers'] = $this->jobseeker_model->getNewestJobSeekers(4);
         $this->load->view($data['front_theme'].'/index', $data);
 	}

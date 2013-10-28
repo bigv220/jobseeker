@@ -55,4 +55,9 @@ class job_model extends MY_Model
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
     }
+    
+    public function getRecentJobs($limit = 4) {
+    	$sql = 'SELECT * FROM job LEFT JOIN user as u on job.company_id=u.uid ORDER BY job.post_date DESC LIMIT 0,'.$limit;
+    	return $this->db->query($sql)->result_array();
+    }
 }

@@ -4,30 +4,14 @@
 		</div>
 		<div class="h-jobs-bd">
 			<div class="w770">
-				<a class="p-jobs-item rel" href="#">
+			<?php foreach ($recently_jobs as $arr):?>
+				<a class="p-jobs-item rel" href="<?php echo $site_url.'job/jobDetails/'.$arr['id']?>">
 					<i class="mark abs"></i>
-			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
-			      	<div class="jobtitle abs">Marketing and Fr...</div>
-			      	<div class="city abs">Beijing</div>
+			      	<img src="<?php echo $site_url.'attached/users/'.$arr['uid'].'/'.$arr['profile_pic']?>" width="75px;" />
+			      	<div class="jobtitle abs"><?php echo $arr['job_name']?></div>
+			      	<div class="city abs"><?php echo $arr['city']?></div>
 		      	</a>
-		      	<a class="p-jobs-item rel" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
-			      	<div class="jobtitle abs">Bartender</div>
-			      	<div class="city abs">Beijing</div>
-		      	</a>
-		      	<a class="p-jobs-item rel" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
-			      	<div class="jobtitle abs">Admin Manager</div>
-			      	<div class="city abs">Beijing</div>
-		      	</a>
-		      	<a class="p-jobs-item rel last" href="#">
-					<i class="mark abs"></i>
-			      	<img src="<?php echo $site_url?>attached/image/no-image.png" width="75px;" />
-			      	<div class="jobtitle abs">Designer</div>
-			      	<div class="city abs">Beijing</div>
-		      	</a>
+		    <?php endforeach;?>
 			</div>
 		</div>		
 	</div>
