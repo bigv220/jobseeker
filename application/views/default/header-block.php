@@ -101,7 +101,7 @@
                             <li><a href="#">Shortlisted Jobs</a></li>
                             <li><a href="#">Applied Jobs</a></li>
                         <?php elseif(1 == $current_user_type): ?>
-                            <li><a href="#">View Profile</a></li>
+                            <li><a href="<?php echo $site_url?>company/companyprofile">View Profile</a></li>
                             <li><a href="<?php echo $site_url?>company/register">Edit Company Profile</a></li>
                             <li><a href="#">Manage Job listings</a></li>
                             <li><a href="#">View Shortlisted Candidates</a></li>

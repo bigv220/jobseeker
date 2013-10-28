@@ -75,7 +75,11 @@ class company extends Front_Controller {
     public function companyInfo(){
         $this->load->model('company_model');
         
-        $company_id = $_GET['id'];
+        if (isset($_GET['id'])) {
+            $company_id = $_GET['id'];
+        } else {
+            $company_id = $this->session->userdata('uid');
+        }
 
         $data = $this->data;
         $data["info"] = $this->company_model->getUserInfo($company_id);
@@ -85,6 +89,16 @@ class company extends Front_Controller {
 
     public function companyProfile(){
         $data = $this->data;
+        $this->load->model('company_model');
+        
+        $company_id = $this->session->userdata('uid');
+        $this->load->model('job_model');
+        //get data from db
+     
+        $data = $this->data;
+        $data["jobinfo"] = $this->job_model->getCompanyJobList($company_id);
+        $data["info"] = $this->company_model->getUserInfo($company_id);
+        $data['industries'] = $this->company_model->getIndustry($company_id);
         $this->load->view($data['front_theme']."/company-profile",$data);
     }
 

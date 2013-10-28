@@ -19,6 +19,18 @@ class job_model extends MY_Model
             return array();
     }
 
+    public function getCompanyJobList($company_id) {
+        $result = $this->db->select('*')
+            ->from('job')
+            ->where('company_id',$company_id)
+            ->get()
+            ->result_array();
+        if (isset($result))    
+            return $result;
+        else
+            return array();
+    }
+
     public function getSimilarJobs($id, $industry) {
         $sql = "SELECT * FROM job WHERE id!=$id AND industry='".$industry ."'";
 
