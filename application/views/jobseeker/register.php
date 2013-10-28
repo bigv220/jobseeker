@@ -5,7 +5,7 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-         $("select[name='country']").change(function() {
+        $("select[name='country']").change(function() {
             change_location($(this),'country');
         });
         $("select[name='province']").change(function() {

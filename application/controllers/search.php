@@ -192,13 +192,13 @@ class search extends Front_Controller {
                 array_push($where_arr, "job_name like '%" . $post["search_text"] . "%' or job_desc like '%" . $post["search_text"]."%'");
             }
             if(!empty($post["country"])) {
-                array_push($where_arr, 'country=' .$post["country"]);
+                array_push($where_arr, "country='" .$post["country"]."'");
             }
             if(!empty($post["province"])) {
-                array_push($where_arr, 'province=' .$post["province"]);
+                array_push($where_arr, "province='" .$post["province"]."'");
             }
             if(!empty($post["city"])) {
-                array_push($where_arr, 'city=' .$post["city"]);
+                array_push($where_arr, "city='" .$post["city"]."'");
             }
             if(!empty($post["location"])) {
                 array_push($where_arr, 'location=' .$post["location"]);
