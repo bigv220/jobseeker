@@ -185,6 +185,9 @@ class search extends Front_Controller {
         $post = $_POST;
         $where_arr = array();
         if($post) {
+            if ($post["keywords"] == 'Enter Keywords') {
+                $post['keywords'] = '';
+            }
             if(!empty($post["keywords"])) {
                 array_push($where_arr, "first_name like '%" . $post["keywords"] . "%' or last_name like '%". $post['keywords'] ."'");
             }
