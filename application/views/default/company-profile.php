@@ -3,7 +3,7 @@
 <!--company login page body-->
 <div class="company-page w770 clearfix rel">
   <div class="company-body box rel mb5">
-    <div class="company-hd rel"> <i class="abs face png"></i>
+    <div class="company-hd rel"> <i class="abs face png" style="background:url(<?php echo $site_url.'attached/users/'.$info['profile_pic']?>) no-repeat;"></i>
       <div class="text">
         <h2><?php echo $info['first_name'];?></h2>
         <h4><?php echo $info['city'].', '.$info['country'];?></h4>
@@ -42,7 +42,7 @@
               <?php else: ?>
               <ul class="redstar-works">
                 <?php foreach ($jobinfo as $job):?>
-                  <li><a href="#"><?php echo $job['job_name'];?></a></li>                
+                  <li><a href="<?php echo $site_url.'job/jobDetails/'.$job['id']?>"><?php echo $job['job_name'];?></a></li>                
                 <?php endforeach; ?>
               </ul>
              <?php endif; ?>
@@ -64,18 +64,8 @@
   </div>
 </div>
 
-<!-- Our Partners -->
-<div class="partners w70">
-  <div class="puartners-tit">Our Partners</div>
-  <div class="puartners-nav">
-    <ul class="puartners-ul zoom">
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-    </ul>
-  </div>
-</div>
+<!-- Partners -->
+<?php $this->load->view($front_theme.'/partners-block');?>
 
 <!--backtop-->
 <div class="backtop png"></div>

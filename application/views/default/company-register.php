@@ -68,7 +68,7 @@
                     <input type="hidden" name="avatar" id="avatar" value="<?php echo $basic_info['profile_pic']; ?>" />
                     <div id="upload_button">
                         <?php if($basic_info['profile_pic']) {
-                                        $pic = $site_url.'attached/users/'.$this->session->userdata('uid').'/'.$basic_info['profile_pic'];
+                                        $pic = $site_url.'attached/users/'.$basic_info['profile_pic'];
                                    } else {
                                         $pic = $theme_path.'style/reg/com-img.gif';
                                    }
@@ -201,7 +201,7 @@ function uploadImage(old_avatar) {
                     //var reg = /\s/g;
                     var filename = response[1];
 
-                    var img_path = "<?php echo $site_url; ?>attached/users/<?php echo $this->session->userdata('uid'); ?>/" + filename;
+                    var img_path = "<?php echo $site_url; ?>attached/users/" + filename;
                     $('#avatar').val(filename);
                     upload_button.innerHTML = "<img id='image_profile' src='" + img_path + "?" +  Math.floor(Math.random()*99999 + 1) + "' height='100' style='border:1px solid gray;' />";
                 } else {

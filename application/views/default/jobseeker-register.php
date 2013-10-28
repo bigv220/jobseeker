@@ -143,7 +143,7 @@
                     //var reg = /\s/g;
                     var filename = response[1];
 
-                    var img_path = "<?php echo $site_url; ?>attached/users/<?php echo $this->session->userdata('uid'); ?>/" + filename;
+                    var img_path = "<?php echo $site_url; ?>attached/users/" + filename;
                     $('#avatar').val(filename);
                     upload_button.innerHTML = "<img id='image_profile' src='" + img_path + "?" +  Math.floor(Math.random()*99999 + 1) + "' height='100' style='border:1px solid gray;' />";
                 } else {

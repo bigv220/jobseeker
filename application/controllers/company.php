@@ -34,7 +34,7 @@ class company extends Front_Controller {
 			
 			// set up default avatar
 			if (empty($post['avatar'])) {
-				$post['avatar'] = $data['site_url'] . 'attached/image/no-image.png';
+				$post['avatar'] = $data['site_url'] . 'attached/users/no-image.png';
 			}
 			
             if (isset($post['name']) && !isset($post['last_name'])) {

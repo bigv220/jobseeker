@@ -3,7 +3,7 @@
 <!--company page body-->
 <div class="company-page w770 clearfix rel">
     <div class="company-body box rel mb20">
-        <div class="company-hd rel"> <i class="abs face png" style="background:url(<?php echo $site_url.'attached/users/'.$jobinfo['company_id'].'/'.$company_avatar?>) no-repeat;"></i>
+        <div class="company-hd rel"> <i class="abs face png" style="background:url(<?php echo $site_url.'attached/users/'.$company_avatar?>) no-repeat;"></i>
             <div class="text" style="width:320px;">
                 <h2><?php echo $jobinfo["job_name"]; ?></h2>
                 <h4><?php echo $jobinfo["location"].' '.$jobinfo["city"]; ?></h4>
@@ -11,6 +11,7 @@
             </div>
             <div class="about-btns"> <a href="#" class="png abtn apply"></a> <a href="#" class="png abtn view"></a> <a href="#" class="png abtn bkmk"></a> <a href="#" class="png abtn bkmked" style="display:none;"></a> </div>
         </div>
+        <div class="clear"></div>
         <div class="company-bd">
             <div class="company-bd-left">
                 <dl class="mb30">

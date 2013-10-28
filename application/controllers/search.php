@@ -251,6 +251,10 @@ class search extends Front_Controller {
          // get location
         $this->load->helper('location');
         $data['location'] = getLoction();
+        
+        //get recently jobs
+        $this->load->model('job_model');
+        $data['recently_jobs'] = $this->job_model->getRecentJobs();
 
         //the left side, industry lists
         $this->load->model('jobseeker_model');
@@ -269,6 +273,10 @@ class search extends Front_Controller {
         // get location
         $this->load->helper('location');
         $data['location'] = getLoction();
+        
+        //get recently jobs
+        $this->load->model('job_model');
+        $data['recently_jobs'] = $this->job_model->getRecentJobs();
 
         //the left side, industry lists
         $this->load->model('jobseeker_model');

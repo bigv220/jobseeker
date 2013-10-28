@@ -190,11 +190,11 @@ class user extends Front_Controller {
 		$this->load->model('jobseeker_model');
 		$uid = $this->session->userdata('uid');
 		//$user_path = realpath(dirname(__FILE__))."/../../theme/default/users/";
-		$user_path = FCPATH . 'attached/users/' . $uid . '/';
+		$user_path = FCPATH . 'attached/users/';
 		$this->jobseeker_model->creatUserfolder ( $user_path ) or exit ( 'error: can not creat folder.' );
 		// upload
 		if (is_uploaded_file ( $_FILES ['avatar'] ['tmp_name'] )) {
-			$file_name = uniqid().'-'.iconv('utf-8','gb2312',$_FILES['avatar']['name']);
+			$file_name = $uid.'/'.uniqid().'-'.iconv('utf-8','gb2312',$_FILES['avatar']['name']);
 			move_uploaded_file ( $_FILES ['avatar'] ['tmp_name'], $user_path .$file_name);
 	
 			exit('success|'.$file_name);
