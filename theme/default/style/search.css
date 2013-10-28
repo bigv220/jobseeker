@@ -47,6 +47,16 @@ body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
 .school_name{color:#ea6e3b;}
 .school_period{margin-bottom:10px;color:#6d6e71;}
 .phone_number{color:#ea6e3b;text-decoration: underline;}
+.jingchat_wrapper{width:471px;margin:0 auto;background-color:white;height:500px;margin-top:10px;*behavior:url(js/jslib/PIE.htc);border:1px solid #ccc;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+.jingchat_messages, .jingchat_offline_message{height:422px;}
+.jingchat_messages{padding:0 10px;}
+.load_older_message{color:#b0b7b9;font-weight: bold;}
+.jingchat_offline_message{text-align: center;font-weight: bold;}
+.jingchat_message_icon{float:left;}
+.jingchat_message_icon img{width:30px;height:30px;}
+.jingchat_message_content{float:left;width:391px;}
+.jingchat_message_input{background: url(search/jingchat_message_inputbg.png) no-repeat;height:78px;padding:10px;}
+.jingchat_message_input textarea{width:446px;margin-top:5px;}
 .sresult-par2{clear:both;padding:10px;display:none;}
 .sresult-tab-hd{background:url(search/job-tob2.gif) repeat-x bottom;height:36px;}.sresult-tab-hd .fxui-tab-tit{font-weight:bolder;padding:0 14px;float:left;cursor:pointer;color:#807f7f;height:36px;line-height:36px;}
 .sresult-tab-hd .curr{color:#ea6e3b;background:url(search/job-tob.gif) no-repeat bottom;}

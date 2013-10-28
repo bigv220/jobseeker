@@ -299,8 +299,32 @@
             <div class="portfolio_row"></div>
           </div>
             <div class="fxui-tab-nav sresult-jingchat">
-                <div>Founded in 2003, REDSTAR Media is a fully integrated creative agency with offices in Beijing, Qingdao and London specialising in graphic design, publishing and events management. Creativity is the heart and soul of our organisation, with over 50% of the team involved in the creative process. We believe that new ideas and their thoughtful implementation moves the world forward. The REDSTAR team offers a wealth of client experience and creative direction via a culture of personable, involved services and out-of-the-box thinking.</div>
-                <p><a href="#">View Company Profile</a></p>
+                <div class="jingchat_wrapper">
+                    <div class="jingchat_messages" style="display:none;">
+                        <div class="load_older_message">
+                            Load older messages
+                        </div>
+                        <div class="jingchat_messages_bd">
+                            <div class="jingchat_message_row_other">
+                                <div class="jingchat_message_icon"><img src="<?php echo $theme_path?>style/search/job-img1.gif" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i></div>
+                                <div class="jingchat_message_content">this is a message other person said</div>
+                            </div>
+                            <div class="jingchat_message_row_me">
+                                <div class="jingchat_message_icon"></div>
+                                <div class="jingchat_message_content">this is a message other sent by myself</div>
+                                <div style="clear:both;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="jingchat_offline_message">
+                        <p style="height:200px;"></p>
+                        <p>Jobseeker is currently offline,</p>
+                        <p>your message be sent to their Jingchat inbox</p>
+                    </div>
+                    <div class="jingchat_message_input">
+                        <textarea rows="3" cols=""></textarea>
+                    </div>
+                </div>
             </div>
         </div>
       </div>
