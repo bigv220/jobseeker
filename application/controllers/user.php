@@ -191,7 +191,7 @@ class user extends Front_Controller {
 		$uid = $this->session->userdata('uid');
 		//$user_path = realpath(dirname(__FILE__))."/../../theme/default/users/";
 		$user_path = FCPATH . 'attached/users/';
-		$this->jobseeker_model->creatUserfolder ( $user_path ) or exit ( 'error: can not creat folder.' );
+		$this->jobseeker_model->creatUserfolder ( $user_path.$uid.'/' ) or exit ( 'error: can not creat folder.' );
 		// upload
 		if (is_uploaded_file ( $_FILES ['avatar'] ['tmp_name'] )) {
 			$file_name = $uid.'/'.uniqid().'-'.iconv('utf-8','gb2312',$_FILES['avatar']['name']);
