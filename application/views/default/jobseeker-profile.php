@@ -4,10 +4,14 @@
 <div class="company-page w770 clearfix rel">
   <div class="company-body box rel mb5">
     <div class="company-hd jobseeker-hd rel">
-        <?php if (false &&!empty($userinfo['profile_pic'])): 
+        <?php if (!empty($userinfo['profile_pic'])): 
         $pic = $site_url.'attached/users/'.$this->session->userdata('uid').'/'.$userinfo['profile_pic'];
         ?>
-        <i class="abs face png"><img src="<?php echo $pic; ?>" alt="" width="128px" height="128px"/></i>
+        <div class="people_icon">
+          <img src="<?php echo $pic; ?>" alt="" width="128px" height="128px"/>
+          <i class="abs face png"></i>
+        </div>
+
         <?php else: ?>
         <i class="abs face png"></i>
         <?php endif; ?>

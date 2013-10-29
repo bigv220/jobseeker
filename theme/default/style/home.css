@@ -97,6 +97,8 @@
 .company-hd .text h2{font-size:22px;text-transform:uppercase;}
 .company-hd .text h4{font-size:20px;}
 .company-hd .text p{color:#5c5c5c;font-size:15px;}
+.jobseeker-hd .face{background: url("jobseeker/profile_img_masker.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);height: 128px;left: 10px;position: absolute;top: -37px;width: 128px;}
+.jobseeker-hd img { left: 10px;position: absolute;top: -37px;}
 .jobseeker-hd .text{width:220px;}
 .jobseeker-bd a{color: #ea6e3b;margin-right: 5px;text-decoration: underline;}
 .company-hd .btnarea{float:right;*display:inline;width:375px;padding:0 15px 0 0;text-align:right;position:absolute;top:-6px;right:0;}
