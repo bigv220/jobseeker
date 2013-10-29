@@ -16,6 +16,9 @@
 <!--footer-->
 <div class="pft-wrap">
 	<div class="p-ft w70">
+		<div class="pft-cn-text">
+		中国人使用JINGJOBS的热情并不能被非英文母语的现状而打消。事实上，我们提供的翻译服务获得了雇主与应聘方的青睐。您只需为我们提供职位需求清单或个人履历，我们将竭诚为您翻译为专业标准的英文。不仅如此，我们还可以为您设计相关细节-是您不论招聘或应征，都可以脱颖而出。
+		</div>
 		<div class="pft-text">
 			<dl class="mr">
 				<dt>FOLLOW US</dt>

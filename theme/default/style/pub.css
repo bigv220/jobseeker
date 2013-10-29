@@ -74,6 +74,7 @@ a:hover{text-decoration:none;}
 .pft-text dl{width:230px;height:72px;float:left;*display:inline;font-weight:bolder;}
 .pft-text dl.mr{margin:0 20px 0 0;}
 .pft-text dt{font-size:14px;color:#ea6e3b;}
+.pft-cn-text {font-size: 12px; font-family: 宋体;margin-bottom:20px; }
 .p-footer div{width:230px;height:50px;float:left;*display:inline;}
 .p-footer .span1,.p-footer .span2{margin:0 20px 0 0;}
 .p-footer-contact b{font-weight:bolder;color:#ea6e3b;}
@@ -94,7 +95,7 @@ a:hover{text-decoration:none;}
 .phd-login-pop{position:absolute;display:none;width:238px;min-height:149px;top:70px;left:-92px;padding-top:23px;background:url(pub/login_body_bg.png) no-repeat;}
 .phd-login-pop-header{padding:0 10px;background:url(pub/login_content_bg.png) repeat-y;}
 .phd-login-pop-header .phd-login-pop-header-txt{float:left;text-size:12px;font-weight:bold;}
-.phd-login-pop-header .forget-pw{float:right;font-size:10px;}
+.phd-login-pop-header .forget-pw{float:right;font-size:10px;text-align: right;}
 .phd-login-pop-header a{display:inline-block;text-decoration: underline;color:#000000;}
 .phd-login-pop-content{background:url(pub/login_content_bg.png) repeat-y;padding:4px 10px;}
 .phd-login-pop-content .ok_btn{width:214px;height:28px;background:url(pub/ok_btn_bg.png);}

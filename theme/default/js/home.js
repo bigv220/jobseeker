@@ -30,7 +30,7 @@ $(function(){
         popReg = $('.pop-reg');
 
     //Pop Sing Up
-    $('.pbn-singup-btn').click(function(){
+    $('.pbn-singup-btn, #sign_up_btn_header').click(function(){
         popMark.fadeIn();
         popReg.fadeIn();
     });

@@ -75,6 +75,7 @@
                     <div class="phd-login-pop-header-txt">LOGIN</div>
                     <div class="forget-pw">
                         Forgot Password<img src="<?php echo $theme_path?>style/pub/question_mark.png"><a href="javascript:void(0);" id="forget_password_btn">Click Here</a>
+                    	<br />Sign up <a href="javascript:void(0);" id="sign_up_btn_header">Click Here</a> 
                     </div>
                     <div style="clear:both;"></div>
                 </div>

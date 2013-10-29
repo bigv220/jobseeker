@@ -7,6 +7,7 @@
 .pbn-btn{background-image:url(home/find.png);}
 .pbn-btn-job{background-position:0 0;}.pbn-btn-job:hover{background-position:0 -328px;}
 .pbn-btn-staff{background-position:0 -164px;}.pbn-btn-staff:hover{background-position:0 -492px;}
+.p-bn .beta-msg {width:187px; height:186px; background: url(home/beta-msg.png) no-repeat; top:20px; left:-209px;}
 .find-hover{display:none;width:238px;height:256px;background:url(home/find-hover.png) no-repeat;left:-4px;top:150px;}.find-hover strong{display:block;text-align:left;padding:15px 0 0 15px;height:33px;line-height:33px;color:#626262;}
 .find-hover p a{color:#ea6e3b;}
 .find-hover ul{width:224px;height:180px;margin:auto;background:url(home/find-li.gif) no-repeat;}

@@ -4,7 +4,7 @@
 </style>
 <!-- find & singup -->
 	<div class="p-bn rel">
-		<div class="pbn-find">
+		<div class="pbn-find rel">
 			<div class="pbn-find-block pbn-job rel">
 				<a href="<?php echo $site_url?>search/findjob" class="pbn-btn png pbn-btn-job"></a>
 				<div class="find-hover png abs">
@@ -46,6 +46,7 @@
 					<p><a href="javascript:void(0);" class="show_login_btn">Login</a> or <a href="javascript:void(0);" class="show_register_btn">Register</a> to view all</p>
 				</div>
 			</div>
+			<div class="beta-msg abs"></div>
 		</div>
 		<div class="pbn-singup">
 			<a href="javascript:void(0);" class="pbn-singup-btn"></a>
