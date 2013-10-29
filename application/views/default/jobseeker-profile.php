@@ -5,7 +5,7 @@
   <div class="company-body box rel mb5">
     <div class="company-hd jobseeker-hd rel">
         <?php if (!empty($userinfo['profile_pic'])): 
-        $pic = $site_url.'attached/users/'.$this->session->userdata('uid').'/'.$userinfo['profile_pic'];
+        $pic = $site_url.'attached/users/'.$userinfo['profile_pic'];
         ?>
         <div class="people_icon">
           <img src="<?php echo $pic; ?>" alt="" width="128px" height="128px"/>
