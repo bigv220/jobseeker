@@ -81,9 +81,11 @@
                    echo $str;?><dd>
               <dt>Language(s)</dt>
               <dd>
-                  <?php foreach ($language as $la): ?>
+                  <!-- <?php foreach ($language as $la): ?>
                   <span class="required"> <b><?php echo $la['language'];?></b> <i><?php echo $la['level'];?></i> </span>
-                  <?php endforeach;?>
+                  <?php endforeach;?> -->
+                  <span class="required"> <b>English</b> <i>Fluent</i> </span>
+                  <span class="required"> <b>Chinese</b> <i>Fluent</i> </span>
               </dd>
           </dl>
       </div>
@@ -165,7 +167,7 @@
                          }; ?></span></li>
                   </ul>
               </dd>
-              <dt>Similar to people <?php echo $userinfo['first_name']; ?></dt>
+              <!-- <dt>Similar to people <?php echo $userinfo['first_name']; ?></dt>
               <dd>
                   <div class="similar_people">
                       <?php foreach ($similar_peoples as $sp): ?>
@@ -187,25 +189,15 @@
                     <?php endforeach; ?>                      
                   </div>
 
-              </dd>
+              </dd> -->
           </dl>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Our Partners -->
-<div class="partners w70">
-  <div class="puartners-tit">Our Partners</div>
-  <div class="puartners-nav">
-    <ul class="puartners-ul zoom">
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-    </ul>
-  </div>
-</div>
+<!-- Partners -->
+<?php $this->load->view($front_theme.'/partners-block');?>
 
 <!--backtop-->
 <div class="backtop png"></div>
