@@ -44,3 +44,4 @@ select {font-family: arial;}
 .industry_options option{width:202px;}
 .location select, .location dl.kyo-select-list {width:145px !important;}
 #selYear1, #selMonth1, #selDay1 {width:140px;}
+ul.tagit li.tagit-new {height:1px;overflow: hidden}

@@ -72,6 +72,7 @@ class job extends Front_Controller {
     		
     		//Load Model
     		$this->load->model('job_model');
+            unset($post['nameOfSelect']);
     		$result['status'] = $this->job_model->saveJob($post);
     		$result['status'] = $result['status'] ? 'success' : 'failed.';
     		echo json_encode($result);

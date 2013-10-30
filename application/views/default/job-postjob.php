@@ -97,13 +97,15 @@
                     <div class="span1">
                         <strong>Type of Job *</strong>
                         <div>
-                            <select name="employment_type" required>
+                            <select id="employment_type" required>
                                 <option value="">--Select--</option>
                                 <?php $jobtype = jobtype();
                                 foreach ($jobtype as $k => $v) {?>
-                                <option value="<?php echo $k+1?>"><?php echo $v?></option>
+                                <option value="<?php echo $v?>"><?php echo $v?></option>
                                 <?php }?>
                             </select>
+                            <input type="hidden" name="employment_type" id="jobtype_tag"/>
+                            <ul id="jobtype_box" data-name="nameOfSelect"></ul>
                         </div>
                     </div>
                     <div class="span2">

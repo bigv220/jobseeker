@@ -134,6 +134,10 @@ ALTER TABLE  `job` CHANGE  `id`  `id` INT( 11 ) NOT NULL AUTO_INCREMENT
 #2013-10-15
 ALTER TABLE user_work_history  DROP PRIMARY KEY;
 
+#2013-10-20 Add Country,Province,City info for JOB
 ALTER TABLE  `job` ADD  `country` VARCHAR( 50 ) NULL;
 ALTER TABLE  `job` ADD  `province` VARCHAR( 50 ) NULL;
 ALTER TABLE  `job` ADD  `city` VARCHAR( 50 ) NULL;
+
+#2013-10-30 Change Type of Employment from Tinyint to Varchar
+ALTER TABLE `job` modify column employment_type varchar(100);
