@@ -314,7 +314,7 @@
                 $cla = ' class = "curr"';
             }
             ?>
-            <li<?php echo $cla; ?> id="step8"><a href="#reg8">Profesional Skills</a></li>
+            <li<?php echo $cla; ?> id="step8"><a href="#reg8">Technical Skills</a></li>
         </ul>
     </div>
     <div class="reg-right-wrap">
@@ -936,9 +936,9 @@
 
                 <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="ProfessionalSkillsForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-                    <div class="reg-area-tit <?php echo $cla; ?>">Professional Skills</div>
+                    <div class="reg-area-tit <?php echo $cla; ?>">Technical Skills</div>
                     <div class="reg-skills-text">
-                        <b>Start typing to choose up to 5 professional skills that best suit you</b><span>
+                        <b>Start typing to choose up to 5 technical skills that best suit you</b><span>
                         If you can't find a personal skill from our database just hit the return button to add it</span>
                     </div>
                     <div class="skills-vals clearfix">
