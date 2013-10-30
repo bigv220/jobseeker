@@ -180,11 +180,10 @@
                         <span>Years of Experience Required</span>
                         <div>
                             <select name="preferred_year_of_experience">
-                                <option value="1">Less than 1 year</option>
-                                <option value="1-2">1-2 year</option>
-                                <option value="2-3">2-3 year</option>
-                                <option value="3-4">3-4 year</option>
-                                <option value="4-5">4-5 year</option>
+                                <?php $expe = getExperience();
+                                foreach($expe as $v) { ?>
+                                <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>

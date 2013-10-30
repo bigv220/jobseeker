@@ -134,3 +134,7 @@ function getSalary() {
 	return array('Unpaid','<10,000','10,000-15,000','15,000-20,000','20,000-30,000','30,000-40,000','40,000+');
 }
 
+function getExperience() {
+	return array('No preference','1+','2+','3+','4>');
+}
+
