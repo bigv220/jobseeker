@@ -40,6 +40,9 @@ function getLoction() {
 					'Henan' => array(
 							'Zhengzhou',
 							),
+					'Hong Kong' => array(
+							'Hong Kong',
+							),
 					'Hubei' => array(
 							'Wuhan',
 							),
@@ -63,14 +66,17 @@ function getLoction() {
 							'Shenyang',
 							'Dalian',
 							),
+					'Macau' => array(
+							'Macau',
+					),
 					'Ningxia' => array(
 							'Ningxia',
 							),
-					'Shandong' => array(
-							'Qingdao',
-							),
 					'Qinghai' => array(
 							'Qinghai',
+							),
+					'Shandong' => array(
+							'Qingdao',
 							),
 					'Shanxi' => array(
 							'Xian',
@@ -90,19 +96,13 @@ function getLoction() {
 					'Xinjiang' => array(
 							'Xinjiang',
 							),
+					'Yunnan' => array(
+							'Kunming',
+							),
 					'Zhejiang' => array(
 							'Hangzhou',
 							'Ningbo',
 							'Wenzhou',
-							),
-					'Hong Kong' => array(
-							'Hong Kong',
-							),
-					'Macau' => array(
-							'Macau',
-							),
-					'Yunnan' => array(
-							'Kunming',
 							),
 					),
 			
