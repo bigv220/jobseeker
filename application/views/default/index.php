@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="pbn-find-block pbn-staff rel">
-				<a href="<?php echo $site_url?>search/findstaff" class="pbn-btn png pbn-btn-staff"></a>
+				<a href="<?php echo $site_url?>job/postjob" class="pbn-btn png pbn-btn-staff"></a>
 				<div class="find-hover png abs">
 					<strong>NEWEST JOB SEEKERS</strong>
 					<ul class="pbn-staff-ul">
