@@ -873,6 +873,7 @@
                                 <?php } ?>
                         </select>
                     </div>
+                    <div class="clear"></div>
                     </div>
                     <div class="reg-row" style="clear: both;">
                         <p><a class="reg-row-tip" href="javascript:void(0);" id="addLanguageBtn">+ Add another language</a></p>
