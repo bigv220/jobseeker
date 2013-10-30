@@ -51,10 +51,9 @@
                 <?php $current_user_type = isset($user_type)?$user_type:-1;
                 if (true || 0 == $current_user_type):?>
 				<li class="jobs"><a href="<?php echo $site_url?>search/findjob">JOBS</a></li>
-                <?php elseif(1 == $current_user_type): ?>
-                <li class="jobs"><a href="<?php echo $site_url?>search/findstaff">FIND STAFF</a></li>
+
                 <?php endif; ?>
-				<li class="cvs"><a href="<?php echo $site_url?>search/findstaff">CVs</a></li>
+				<li class="findstaff"><a href="<?php echo $site_url?>search/findstaff">FIND STAFF</a></li>
 				<li class="post"><a href="<?php echo $site_url?>job/postjob">POST A JOB</a></li>
 			</ul>
 		</div>
