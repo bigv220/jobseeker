@@ -27,6 +27,7 @@ select {font-family: arial;}
 .reg-btns-post{width:144px;background:url(reg/post-job.png) no-repeat;}
 .reg-btns-find{width:144px;background:url(reg/find.png) no-repeat;}
 .reg-btns-saveall{width:83px;background:url(reg/save-all.png) no-repeat;}
+.view_my_profile{width:144px;background:url(reg/view_my_profile_btn.png) no-repeat;}
 .reg-btns-job{width:144px;background:url(reg/findjob.png) no-repeat;}
 .birthday{height:35px;}
 .leng-radio li i{font-size:12px;width:290px;}

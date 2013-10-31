@@ -1,3 +1,4 @@
+var userType = -1;//not login
 $(function(){
      //pub input tips
     $('.input-tip')
