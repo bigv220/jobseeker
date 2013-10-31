@@ -54,7 +54,7 @@
 
                 <?php endif; ?>
 				<li class="findstaff"><a href="<?php echo $site_url?>search/findstaff">FIND STAFF</a></li>
-				<li class="post"><a href="<?php echo $site_url?>job/postjob">POST A JOB</a></li>
+				<li class="post"><a href="<?php echo $site_url?>job/postjob" class="check_login_user_type_for_postjob">POST A JOB</a></li>
 			</ul>
 		</div>
 		<a class="phd-logo png" href="<?php echo $site_url?>"></a>
@@ -93,14 +93,16 @@
             <div id="jobseeker_menu" class="phd-login-pop png">
                 <div class="phd-login-pop-content">
                     <ul>
-                        <?php $current_user_type = isset($user_type)?$user_type:-1;
-                        if (0 == $current_user_type):?>
+                        <?php $current_user_type = isset($user_type)?$user_type:-1;?>
+                        <?php if (0 == $current_user_type):?>
+                            <script>userType = 0;</script>
                             <li><a href="<?php echo $site_url?>jobseeker/profile">View Profile</a></li>
                             <li><a href="<?php echo $site_url?>jobseeker/register">Edit Profile</a></li>
                             <li><a href="#">Bookmarked Employers</a></li>
                             <li><a href="#">Shortlisted Jobs</a></li>
                             <li><a href="#">Applied Jobs</a></li>
                         <?php elseif(1 == $current_user_type): ?>
+                            <script>userType = 1;</script>
                             <li><a href="<?php echo $site_url?>company/companyprofile">View Profile</a></li>
                             <li><a href="<?php echo $site_url?>company/register">Edit Company Profile</a></li>
                             <li><a href="#">Manage Job listings</a></li>

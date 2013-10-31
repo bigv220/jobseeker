@@ -1001,6 +1001,7 @@
         <div class="reg-btns">
             <a href="javascript: void(0);" class="reg-btns-saveall png" onclick="saveAll();"></a>
             <a href="<?php echo $site_url?>search/searchJob" class="reg-btns-job png"></a>
+            <a href="<?php echo $site_url?>jobseeker/profile" class="view_my_profile png"></a>
         </div>
         <div class="backtop png" style="display: block; top: 564px; right:-80px"></div>
      </div>
