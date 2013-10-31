@@ -274,7 +274,7 @@ class jobseeker_model extends MY_Model
         $rtn = $this->db->query($sql)->result_array();
 
         if(count($rtn)) {
-            return $rtn[0];
+            return $rtn;
         } else {
             return array();
         }
@@ -358,6 +358,16 @@ class jobseeker_model extends MY_Model
     public function getPosition($name) {
         $sql = "SELECT name FROM industry WHERE parent='". $name ."'";
         return $this->db->query($sql)->result_array();
+    }
+
+    public function delSeekingIndusry($uid, $ind, $pos) {
+        $sql = "DELETE FROM user_seeking_industry WHERE uid=$uid AND industry ='" . $ind . "' AND position='".$pos."'";
+        $this->db->query($sql);
+    }
+
+    public function delLanguage($uid, $lan) {
+        $sql = "DELETE FROM user_language WHERE uid=$uid AND language ='" . $lan . "'";
+        $this->db->query($sql);
     }
 
 }
