@@ -135,13 +135,15 @@ function languageSubmit(is_all) {
 }
 
 function personalSkillsSubmit() {
-    $('#step7').addClass('curr');
+    $('#step7').addClass('curr'); ';'
     $('#PersonalSkillsForm .reg-area-tit').addClass('reg-area-tit-curr');
+    alert('Save successful!');
 }
 
 function professionalSkillsSubmit() {
     $('#step8').addClass('curr');
     $('#ProfessionalSkillsForm .reg-area-tit').addClass('reg-area-tit-curr');
+    alert('Save successful!');
 }
 
 function saveAll() {
@@ -189,7 +191,7 @@ function saveAll() {
                         position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
                     }
                 }
-                $('#position_1').html(position_htm);
+                $(thisO).next().html(position_htm);
             });
     }
 $(document).ready(function() {

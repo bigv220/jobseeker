@@ -52,14 +52,6 @@ class jobseeker extends Front_Controller {
         $language = $this->jobseeker_model->getLanguage($uid);
         $seekingIndustry = $this->jobseeker_model->getSeekingIndustry($uid);
 
-        //get industry and position setting of seeking industry
-        if(count($seekingIndustry)) {
-            $ind = $seekingIndustry['industry'];
-            $position = $this->jobseeker_model->getPosition($ind);
-        } else {
-            $position = $this->jobseeker_model->getPosition('General');
-        }
-
         //industry lists
         $industry = $this->jobseeker_model->getIndustry();
 
@@ -73,6 +65,8 @@ class jobseeker extends Front_Controller {
         $language_arr = language_arr();
         $level_arr = language_level();
 
+        $userinfo['country'] = 'China';
+
         $data["uid"] = $uid;
         $data["userinfo"] = $userinfo;
         $data["education_info"] = $education_info;
@@ -82,7 +76,6 @@ class jobseeker extends Front_Controller {
         $data['professional_skills'] = $professional_skills;
         $data['seekingIndustry'] = $seekingIndustry;
         $data["industry"] = $industry;
-        $data['position'] = $position;
         $data['yearArray'] = $year_arr;
 
         //user language settings
@@ -483,4 +476,32 @@ class jobseeker extends Front_Controller {
         echo json_encode($result);
     }
 
+    public function delSeekingIndustry() {
+        $post = $_POST;
+        $uid = $post['uid'];
+        $ind = $post['industry'];
+        $pos = $post['position'];
+
+        // load model
+        $this->load->model('jobseeker_model');
+        $this->jobseeker_model->delSeekingIndusry($uid, $ind, $pos);
+
+        $msg = "success";;
+        $result['status'] = $msg;
+        echo json_encode($result);
+    }
+
+    public function delLanguage() {
+        $post = $_POST;
+        $uid = $post['uid'];
+        $language = $post['language'];
+
+        // load model
+        $this->load->model('jobseeker_model');
+        $this->jobseeker_model->delLanguage($uid, $language);
+
+        $msg = "success";;
+        $result['status'] = $msg;
+        echo json_encode($result);
+    }
 }
