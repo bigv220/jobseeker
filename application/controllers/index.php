@@ -10,7 +10,7 @@ class index extends Front_Controller {
 	public function index()
 	{
 		$data = $this->data;
-        $this->load->library('session');
+        //$this->load->library('session');
         /* hide news temporarily
 		$this->load->model('article_model');
 		$data['news_list'] = $this->article_model->getLatestArtical();

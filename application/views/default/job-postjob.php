@@ -62,15 +62,8 @@
                     <div class="span1">
                         <strong>Position *</strong>
                         <div>
-                            <select name="position" id="position_1" required>
+                            <select name="position" id="position_1">
                                 <option value="">Position</option>
-                                <?php
-                                $user_position = $seekingIndustry["position"];
-                                foreach($position as $key=>&$v) {
-   
-                                ?>
-                                <option value="<?php echo $v['name']; ?>"<?php echo $str; ?>><?php echo $v['name']; ?></option>
-                                <?php } ?>
                             </select>
                             <!--
                             <div class="search-row-tip">Hold down 'Command' to select a max of 10</div>

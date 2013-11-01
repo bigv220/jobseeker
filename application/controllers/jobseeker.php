@@ -20,8 +20,9 @@ class jobseeker extends Front_Controller {
      * Jobseeker registration
      */
     public function register() {
-        $this->load->library('session');
-        if (!$this->session->userdata('uid'))
+        //$this->load->library('session');
+    	$uid = $this->session->userdata('uid');
+        if (!$uid)
         {
             redirect('/');
         }
@@ -29,7 +30,7 @@ class jobseeker extends Front_Controller {
         $this->load->model('jobseeker_model');
 
         $data = $this->data;
-        $uid = $this->session->userdata('uid');
+        
 
         $register_step = $this->jobseeker_model->getRegisterStep($uid);
         if(empty($register_step)) {

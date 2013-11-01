@@ -875,9 +875,11 @@
                     <div class="reg-area-tit <?php echo $cla; ?>">Languages</div>
                     <?php
                     $i = 0;
+                    if (empty($language)) {
+						$language = array(array('language'=>'none','level'=>'none'));
+					}
                     foreach($language as $lan):
-                    ?>
-                    <?php $i++;
+                    $i++;
                         if($i == 1) echo '<div id="language_lists">';
                     ?>
 
@@ -899,15 +901,28 @@
                      <div style="float:left;width:220px;">
                         <strong>Proficiency</strong><br />
                         <select name="level[]" id="level_1" required>
-                            <option value="<?php echo $lan['level']; ?>"><?php echo $lan['level']; ?></option>
+                        <option value="">Proficiency</option>
+                        <?php $level = language_level();
+                        foreach($level as $v) {
+                        	$str = '';
+                        	if($v == $lan['level']) {
+                        		$str = ' selected="selected"';
+                        	}
+                        ?>
+                        <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                        <?php } ?>
                         </select>
                     </div>
                          <?php if($i==1) echo "</div>"; ?>
+                         <?php if($i>1) {?>
                         <span class="delSeekingIndustry">
                             <i class="del" onclick="delLanguage(this, '<?php echo $lan['language']; ?>');" style="top:30px;left:5px;"></i>
                         </span>
-
-                    <?php endforeach; ?>
+						<?php }?>
+                    <?php 
+                    
+                    endforeach; 
+                    ?>
 
                     <div class="reg-row" style="clear: both;">
                         <p><a class="reg-row-tip" href="javascript:void(0);" id="addLanguageBtn">+ Add another language</a></p>
