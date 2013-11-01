@@ -132,12 +132,12 @@
 			<div class="pop-reg-close abs" title="close"></div>
 				<div class="pop-reg-tit">
 					<i>Already have an account? <a href="javascript:void(0);" class="login_on_regpop">Login</a></i>
-					<b>SIGN UP</b>
+					<b>Sign Up</b>
 				</div>
 				<div class="pop-reg-type">
 					<input id="RegType" value="0" class="kyo-radio" style="display:none;"/>
-					<i class="kyo-radio reg-typep" data-id="RegType" data-val="0">Jobseeker</i>
-					<i class="kyo-radio reg-typec" data-id="RegType" data-val="1">Employer</i>
+					<i class="kyo-radio reg-typep font_bold" data-id="RegType" data-val="0">Jobseeker</i>
+					<i class="kyo-radio reg-typec font_bold" data-id="RegType" data-val="1">Employer</i>
 				</div>
 				<div class="pop-reg-personal">
 					<label class="fl">
@@ -170,8 +170,9 @@
 				<div class="pop-reg-agree">
 					<input id="RegNewsletter" value="1" class="kyo-checkbox" style="display:none;"/>
 					<input id="RegAgree" value="1" class="kyo-checkbox" style="display:none;"/>
-					<i class="kyo-checkbox fr" data-id="RegAgree" data-val="1">Agree to terms</i>
-					<i class="kyo-checkbox" data-id="RegNewsletter" data-val="1">Subscribe to Newsletter</i>
+                    <i class="kyo-checkbox" data-id="RegNewsletter" data-val="1">Subscribe to Newsletter</i>
+					<i class="kyo-checkbox margin_left15" data-id="RegAgree" data-val="1">Agree to terms</i>
+
 					
 				</div>
 				<div class="pop-reg-submit">
