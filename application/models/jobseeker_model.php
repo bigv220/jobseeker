@@ -365,8 +365,12 @@ class jobseeker_model extends MY_Model
         $this->db->query($sql);
     }
 
-    public function delLanguage($uid, $lan) {
-        $sql = "DELETE FROM user_language WHERE uid=$uid AND language ='" . $lan . "'";
+    public function delLanguage($uid, $lan=null) {
+    	if (empty($lan)) {
+    		$sql = 'DELETE FROM user_language WHERE uid='.$uid;
+    	} else {
+        	$sql = "DELETE FROM user_language WHERE uid=$uid AND language ='" . $lan . "'";
+    	}
         $this->db->query($sql);
     }
 

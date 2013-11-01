@@ -304,6 +304,8 @@ class jobseeker extends Front_Controller {
         $uid = $this->session->userdata('uid');
 
         if ($post) {
+        	// delete old language data
+        	$this->jobseeker_model->delLanguage($uid);
             //save language to db
             $lan_len = count($post['language']);
             for($i=0; $i<$lan_len;$i++) {
