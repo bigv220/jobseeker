@@ -81,11 +81,9 @@
                    echo $str;?><dd>
               <dt>Language(s)</dt>
               <dd>
-                  <!-- <?php foreach ($language as $la): ?>
+                  <?php foreach ($language as $la): ?>
                   <span class="required"> <b><?php echo $la['language'];?></b> <i><?php echo $la['level'];?></i> </span>
-                  <?php endforeach;?> -->
-                  <span class="required"> <b>English</b> <i>Fluent</i> </span>
-                  <span class="required"> <b>Chinese</b> <i>Fluent</i> </span>
+                  <?php endforeach;?>
               </dd>
           </dl>
       </div>
