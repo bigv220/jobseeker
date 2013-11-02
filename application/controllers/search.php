@@ -59,9 +59,9 @@ class search extends Front_Controller {
             if(!empty($post["location"])) {
                 array_push($where_arr, 'location=' .$post["location"]);
             }
-            if(!empty($post["employment_type"])) {
-                array_push($where_arr, 'employment_type=' . $post["employment_type"]);
-            }
+            // if(!empty($post["employment_type"])) {
+            //     array_push($where_arr, 'employment_type=' . $post["employment_type"]);
+            // }
             if(!empty($post["industry"])) {
                 array_push($where_arr, "industry like '%".$post["industry"]."%'");
             }
@@ -96,6 +96,21 @@ class search extends Front_Controller {
 
         // get jobs according to the search
         $jobs = $this->job_model->searchJob($where);
+        // Filter employment_type
+        $filter_employment_type = explode(",", $post['employment_type']);
+
+        foreach ($jobs as $key => $one_job) {
+            $employment_type_arr = explode(",", $one_job['employment_type']);
+            
+            foreach ($employment_type_arr as $one_type) {
+                if (in_array($one_type , $filter_employment_type) === FALSE) {
+                    unset($jobs[$key]);
+                } else {
+                    break;
+                }
+            }
+            
+        }
         $data['jobs'] = $jobs;
 
         // generate job id string, this will be used in the filter function at the right side
