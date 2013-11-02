@@ -9,7 +9,12 @@
                 <h4><?php echo $jobinfo["location"].' '.$jobinfo["city"]; ?></h4>
                 <p>Posted on <?php echo $jobinfo["post_date"]; ?></p>
             </div>
-            <div class="about-btns"> <a href="#" class="png abtn apply"></a> <a href="#" class="png abtn view"></a> <a href="#" class="png abtn bkmk"></a> <a href="#" class="png abtn bkmked" style="display:none;"></a> </div>
+            <div class="about-btns"> 
+	            <a href="#" class="png abtn apply"></a> 
+	            <a href="<?php echo $site_url.'company/companyInfo/'.$company_id?>" class="png abtn view"></a> 
+	            <a href="#" class="png abtn bkmk"></a> 
+	            <a href="#" class="png abtn bkmked" style="display:none;"></a> 
+            </div>
         </div>
         <div class="clear"></div>
         <div class="company-bd">
@@ -20,7 +25,7 @@
                 </dl>
                 <dl class="mb30">
                     <dt>Preferred Years of Experience</dt>
-                    <dd class="idustry"><?php echo $jobinfo["preferred_year_of_experience"]; ?></dd>
+                    <dd class="idustry"><?php echo getExperienceByID($jobinfo["preferred_year_of_experience"]); ?></dd>
                 </dl>
                 <dl class="mb30">
                     <dt>Preferred Personal Skills</dt>
@@ -33,12 +38,14 @@
                 <dl class="mb30">
                     <dt>Language(s) Required</dt>
                     <dd>
-                    <dd> <span class="required"> <b>English</b> <i>Fluent</i> </span> <span class="required"> <b>French</b> <i>Fluent</i> </span> <span class="required"> <b>German</b> <i>Fluent</i> </span> </dd>
+                    <dd> 
+                    	<span class="required"><b><?php echo getLanguageByID($jobinfo["language"]); ?></b> <i><?php echo getLanguageLevelByID($jobinfo["language_level"]); ?></i> </span>                    	
+                    </dd>
                     </dd>
                 </dl>
                 <dl class="mb30">
                     <dt>Salary</dt>
-                    <dd><strong><?php echo $jobinfo["salary_range"]; ?></strong></dd>
+                    <dd><strong><?php echo getSalaryByID($jobinfo["salary_range"]); ?></strong></dd>
                 </dl>
                 <dl class="mb30">
                     <dt>Idustry</dt>
@@ -63,12 +70,15 @@
                     <dd>
                         <ul class="industry-ul">
                             <li class="n1"><b>Type of Employment</b><span>
-                                <?php $v = $jobinfo['employment_type'];
-                                echo $constants_arr["type_emp"][$v]; ?></span>
+                                <?php 
+                                $arr = explode(',', $jobinfo['employment_type']);
+                                foreach ($arr as $str) {
+								 echo getJobtypeByID($str).', ';
+								}
+                                ?></span>
                             </li>
                             <li class="n2"><b>Length of Employment</b><span>
-                                <?php $v = $jobinfo["employment_length"];
-                                echo $constants_arr["len_emp"][$v]; ?></span>
+                                <?php echo getEmploymentLengthByID($jobinfo["employment_length"]);?></span>
                             </li>
                             <li class="n3"><b>Visa Assistance</b><span>
                                 <?php $v = $jobinfo["is_visa_assistance"]?$jobinfo["is_visa_assistance"]:0;

@@ -32,7 +32,7 @@
       </div>
       <div class="company-bd-right">
         <dl class="mb20">
-          <dt>Jobs at Redstar Works</dt>
+          <dt>Jobs at <?php echo $info['first_name']?></dt>
           <dd>
             <ul class="redstar-works">
               <li><a href="#">Admin Assistant</a></li>
