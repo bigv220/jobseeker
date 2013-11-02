@@ -276,7 +276,7 @@
                         </div>
                         <dl class="sresult-nav-job-dl">
                             <dt>Preferred Years of Experience</dt>
-                            <dd><?php echo $job["preferred_year_of_experience"]; ?></dd>
+                            <dd><?php echo getExperienceByID($job["preferred_year_of_experience"]); ?></dd>
                             <dt>Preferred Personal Skills</dt>
                             <dd><?php echo $job["preferred_personal_skills"]; ?></dd>
                             <dt>Preferred Technical Skills</dt>
@@ -294,15 +294,13 @@
                                 <strong><?php echo $job['location']; ?></strong>
                             </dd>
                             <dt>Salary</dt>
-                            <dd><?php echo $job["salary_range"]; ?></dd>
+                            <dd><?php echo getSalaryByID($job["salary_range"]); ?></dd>
                             <dt>Industry</dt>
                             <dd class="industry">
                                 <div><?php echo $job["industry"]; ?></div>
                                 <ul class="industry-ul">
-                                    <li class="n1"><b>Type of Employment</b><span><?php $v = $job['employment_type'];
-                                        if($v) echo $constants_arr["type_emp"][$v]; ?></span></li>
-                                    <li class="n2"><b>Length of Employment</b><span><?php $v = $job["employment_length"];
-                                        if($v) echo $constants_arr["len_emp"][$v]; ?></span></li>
+                                    <li class="n1"><b>Type of Employment</b><span><?php if($job['employment_type']) echo getJobtypeByID($job['employment_type']);?></span></li>
+                                    <li class="n2"><b>Length of Employment</b><span><?php if($job['employment_length']) echo getEmploymentLength($job['employment_length']);?></span></li>
                                     <li class="n3"><b>Visa Assistance</b><span><?php $v = $job["is_visa_assistance"]?$job["is_visa_assistance"]:0;
                                         if($v) echo $constants_arr["visa_assist"][$v]; ?></span></li>
                                     <li class="n4"><b>Housing Assistance</b><span>

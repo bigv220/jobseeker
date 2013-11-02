@@ -266,6 +266,8 @@ class jobseeker extends Front_Controller {
         $uid = $this->session->userdata('uid');
 
         if ($post) {
+        	// delete old jobs
+        	$this->jobseeker_model->delWorkHistory($uid);
             //save job to db
             $company_len = count($post['company_name']);
             for($i=0; $i<$company_len;$i++) {
