@@ -72,15 +72,11 @@ class company extends Front_Controller {
 		}
 	}
 
-    public function companyInfo(){
+    public function companyInfo($company_id){
+    	if (empty($company_id)) {
+    		redirect('/');
+    	}
         $this->load->model('company_model');
-        
-        if (isset($_GET['id'])) {
-            $company_id = $_GET['id'];
-        } else {
-            $company_id = $this->session->userdata('uid');
-        }
-
         $data = $this->data;
         $data["info"] = $this->company_model->getUserInfo($company_id);
         $data['industries'] = $this->company_model->getIndustry($company_id);

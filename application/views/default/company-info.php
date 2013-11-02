@@ -42,7 +42,7 @@
           </dd>
         </dl>
         <dl>
-          <dt>Redstar Works elsewhere on the web</dt>
+          <dt><?php echo $info['first_name'];?> elsewhere on the web</dt>
           <dd>
             <ul class="redstar-web">
               <li><a href="#">Twitter</a></li>
@@ -55,43 +55,11 @@
       </div>
     </div>
   </div>
-  <div class="company-similar"> <a href="#">Similar Employers to Redstar Works</a> </div>
 </div>
-
-<!-- p-com-roll -->
-<div class="com-roll-bd">
-  <div class="com-roll w100">
-    <div class="scroll-out">
-      <div class="scroll-box"> <a class="scroll-item com-roll-item" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>Beige Tomato Studio</b> <span>Technical Engineer</span> </p>
-        </a> <a class="scroll-item com-roll-item" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors2.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>microsoft, Beijing</b> <span>Technical Engineer</span> </p>
-        </a> <a class="scroll-item com-roll-item" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors3.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>microsoft, Beijing</b> <span>Technical Engineer</span> </p>
-        </a> <a class="scroll-item com-roll-item" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>microsoft, Beijing</b> <span>User Interface Midweight Designer</span> </p>
-        </a> <a class="scroll-item com-roll-item" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors2.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>microsoft, Beijing</b> <span>Technical Engineer</span> </p>
-        </a> <a class="scroll-item com-roll-item" href="#"> <img src="<?php echo $theme_path?>style/home/temp/sponsors3.gif" width="60" height="60" alt="" /> <i class="mark"></i>
-        <p> <b>microsoft, Beijing</b> <span>Technical Engineer</span> </p>
-        </a> </div>
-    </div>
-    <div class="scroll-bar scroll-left"></div>
-    <div class="scroll-bar scroll-right"></div>
-  </div>
-</div>
-<!-- Our Partners -->
-<div class="partners w70">
-  <div class="puartners-tit">Our Partners</div>
-  <div class="puartners-nav">
-    <ul class="puartners-ul zoom">
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-      <li><a href="#"><img src="<?php echo $theme_path?>style/company/partners.png" alt="" width="176" height="103" /></a></li>
-    </ul>
-  </div>
-</div>
+	
+<!-- Partners -->
+<?php $this->load->view($front_theme.'/partners-block');?>
+	
 <!--backtop-->
 <div class="backtop png"></div>
 <?php $this->load->view($front_theme.'/footer-block');?>
