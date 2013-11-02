@@ -135,13 +135,15 @@ function languageSubmit(is_all) {
 }
 
 function personalSkillsSubmit() {
-    $('#step7').addClass('curr');
+    $('#step7').addClass('curr'); ';'
     $('#PersonalSkillsForm .reg-area-tit').addClass('reg-area-tit-curr');
+    alert('Save successful!');
 }
 
 function professionalSkillsSubmit() {
     $('#step8').addClass('curr');
     $('#ProfessionalSkillsForm .reg-area-tit').addClass('reg-area-tit-curr');
+    alert('Save successful!');
 }
 
 function saveAll() {
@@ -175,6 +177,7 @@ function saveAll() {
     }
 }
 
+
 // change industry
     function changeIndustry(thisO) {
         var name = $(thisO).val();
@@ -192,3 +195,33 @@ function saveAll() {
                 $('#position_1').html(position_htm);
             });
     }
+
+$(document).ready(function() {
+/**
+ * POST JOB / TYPE OF JOB 
+ */
+$('#jobtype_box').tagit({
+        select:true, 
+        sortable:true,
+        tagsChanged:function () {
+            var tags = $('#jobtype_box').tagit('tags');
+            var tagString = [];
+                                    
+            //Pull out only value
+            for (var i in tags){
+              tagString.push(tags[i].value);
+            }
+            $('#jobtype_tag').val(tagString.join(','));
+        }
+    });
+    $('.tagit-input').attr('disabled','disabled');
+    $('#employment_type').change(function() {
+    	var slabel = $('#employment_type').find("option:selected").text();
+    	var sval = $('#employment_type').val();
+        addTypeTag(slabel, sval);
+    });
+});
+var addTypeTag = function(label, tag) {
+    $('#jobtype_box').tagit("add", {label: label, value: tag});
+
+}

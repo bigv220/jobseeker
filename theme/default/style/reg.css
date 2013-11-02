@@ -27,6 +27,7 @@ select {font-family: arial;}
 .reg-btns-post{width:144px;background:url(reg/post-job.png) no-repeat;}
 .reg-btns-find{width:144px;background:url(reg/find.png) no-repeat;}
 .reg-btns-saveall{width:83px;background:url(reg/save-all.png) no-repeat;}
+.view_my_profile{width:144px;background:url(reg/view_my_profile_btn.png) no-repeat;}
 .reg-btns-job{width:144px;background:url(reg/findjob.png) no-repeat;}
 .birthday{height:35px;}
 .leng-radio li i{font-size:12px;width:290px;}
@@ -37,6 +38,7 @@ select {font-family: arial;}
 .skills-dl a:hover{text-decoration:none;background:#efefef;}
 .skills-vals li{margin:0;list-style:none;float:left;height:22px;font-weight:bold;color:#f27f4d;font-family:Arial,Helvetica,sans-serif;line-height:22px;vertical-align:top;padding:0 22px 0 0;margin-right:10px;position:relative;}
 .skills-vals .del{background:url(reg/del.gif) no-repeat center;width:22px;height:22px;display:inline-block;font-size:12px;cursor:pointer;position:absolute;top:0;right:0;}
+.delSeekingIndustry .del{background:url(reg/del.gif) no-repeat center;width:22px;height:22px;display:inline-block;font-size:12px;cursor:pointer;float:right;position: relative;top: -20px;}
 .reg-row select {width:230px;height: 25px; line-height: 25px;padding:4px;font-family: arial;}
 .reg-row #country {float:left;}
 .reg-row #city {float:left;margin-left:10px;}

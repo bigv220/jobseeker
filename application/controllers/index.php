@@ -10,7 +10,7 @@ class index extends Front_Controller {
 	public function index()
 	{
 		$data = $this->data;
-        $this->load->library('session');
+        //$this->load->library('session');
         /* hide news temporarily
 		$this->load->model('article_model');
 		$data['news_list'] = $this->article_model->getLatestArtical();
@@ -22,8 +22,14 @@ class index extends Front_Controller {
         $data['uid'] = $this->session->userdata('uid')?$this->session->userdata('uid'):-1;
         $data['first_name'] = $this->session->userdata('first_name');
         $data['last_name'] = $this->session->userdata('last_name');
+        $sess_usertype = $this->session->userdata('user_type');
+        if($sess_usertype === false)
+            $data['user_type'] = -1;
+        else if(isset($sess_usertype))
+            $data['user_type'] = $sess_usertype;
+        else
+            $data['user_type'] = -1;
 
-        
         //get recently jobs
         $this->load->model('job_model');
         $data['recently_jobs'] = $this->job_model->getRecentJobs();

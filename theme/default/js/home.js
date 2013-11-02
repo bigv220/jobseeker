@@ -135,6 +135,7 @@ $(function(){
                             $('.pop-reg').fadeOut();
                             $('.phd-login-text').html(firstName + ' ' + lastName);
                             show_welcome_pop(regType);
+                            userType = regType;
                         }
 
                     },
@@ -247,5 +248,12 @@ $(function(){
 
     $('.reset-password-success-btn').click(function(){
         window.location.href=site_url;
+    });
+
+    $('.check_login_user_type_for_postjob').click(function(e){
+        if(userType < 1){//is not company user or not login
+            alert('Please login as a company to be able to post a job');
+            e.preventDefault();
+        }
     });
 })

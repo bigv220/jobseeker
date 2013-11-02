@@ -17,9 +17,10 @@
                         <div>
                             <select name="employment_length" required>
                                 <option value="">--Select--</option>
-                                <option value="1">Long term employment (1+ years)</option>
-                                <option value="2">Short term employment (-1 years)</option>
-                                <option value="3">No preference</option>
+                                <?php $empl = getEmploymentLength();
+                                foreach($empl as $k => $v) { ?>
+                                <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -48,8 +49,8 @@
                             <select name="language" required>
                                 <option value="">--Select--</option>
                                 <?php $language = language_arr();
-                                foreach($language as $v) { ?>
-                                <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                                foreach($language as $k => $v) { ?>
+                                <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
                                 <?php } ?>
                             </select>
                             </select>
@@ -62,15 +63,8 @@
                     <div class="span1">
                         <strong>Position *</strong>
                         <div>
-                            <select name="position" id="position_1" required>
+                            <select name="position" id="position_1">
                                 <option value="">Position</option>
-                                <?php
-                                $user_position = $seekingIndustry["position"];
-                                foreach($position as $key=>&$v) {
-   
-                                ?>
-                                <option value="<?php echo $v['name']; ?>"<?php echo $str; ?>><?php echo $v['name']; ?></option>
-                                <?php } ?>
                             </select>
                             <!--
                             <div class="search-row-tip">Hold down 'Command' to select a max of 10</div>
@@ -80,13 +74,13 @@
                     <div class="span2">
                         <strong>Language Level *</strong>
                         <div>
-                            <select name="" required>
+                            <select name="language_level" required>
                                 <option value="">--Select--</option>
                                 <?php
                                 $level = language_level();
-                                foreach($level as $v) {
+                                foreach($level as $k => $v) {
                                 ?>
-                                <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -101,7 +95,7 @@
                                 <option value="">--Select--</option>
                                 <?php $jobtype = jobtype();
                                 foreach ($jobtype as $k => $v) {?>
-                                <option value="<?php echo $v?>"><?php echo $v?></option>
+                                <option value="<?php echo $k+1?>"><?php echo $v?></option>
                                 <?php }?>
                             </select>
                             <input type="hidden" name="employment_type" id="jobtype_tag"/>
@@ -169,8 +163,8 @@
                         <div>
                             <select name="salary_range">
                                 <?php $salary = getSalary();
-			                    foreach($salary as $v) { ?>
-			                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+			                    foreach($salary as $k => $v) { ?>
+			                    <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
 			                    <?php } ?>
                             </select>
                         </div>
@@ -183,8 +177,8 @@
                         <div>
                             <select name="preferred_year_of_experience">
                                 <?php $expe = getExperience();
-                                foreach($expe as $v) { ?>
-                                <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                                foreach($expe as $k => $v) { ?>
+                                <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
                                 <?php } ?>
                             </select>
                         </div>

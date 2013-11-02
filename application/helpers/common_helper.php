@@ -112,10 +112,6 @@ function getFirstImgInArticle($article, $themePath){
     return $firstImage;
 }
 
-function language_level() {
-	return array('Beginner','Intermediate','Fluent','Native Tongue');
-}
-
 function language_arr() {
 	return array('Albanian','Amharic','Arabic','Armenian','Belarusan','Bengali','Bulgarian','Burmese',
 				'Chinese (Dialect)','Chinese (Mandarin)','Danish','Dutch','English (UK)','English (US)',
@@ -125,16 +121,49 @@ function language_arr() {
 				'Portuguese','Romanian','Russian','Samoan','Serbian','Sindhi','Spanish','Swedish','Taiwanese',
 				'Tamil','Thai','Tongan','Turkish','Ukrainian','Urdu','Uzbek','Vietnamese');
 }
+function getLanguageByID($id) {
+	$arr = language_arr();
+	return $arr[$id-1];
+}
+
+function language_level() {
+	return array('Beginner','Intermediate','Fluent','Native Tongue');
+}
+function getLanguageLevelByID($id) {
+	$arr = language_level();
+	return $arr[$id-1];
+}
 
 function jobtype() {
 	return array('Full Time','Part Time','Contract','Internship');
 }
+function getJobtypeByID($id) {
+	$arr = jobtype();
+	return $arr[$id-1];
+}
 
 function getSalary() {
-	return array('Unpaid','<10,000','10,000-15,000','15,000-20,000','20,000-30,000','30,000-40,000','40,000+');
+	return array('Unpaid','<10,000','10,000-15,000','15,000-20,000','20,000-30,000','30,000-40,000','40,000+','Negotiable');
+}
+function getSalaryByID($id) {
+	$arr = getSalary();
+	return $arr[$id-1];
 }
 
 function getExperience() {
 	return array('No preference','1+','2+','3+','4>');
 }
+function getExperienceByID($id) {
+	$arr = getExperience();
+	return $arr[$id-1];
+}
+
+function getEmploymentLength() {
+	return array('Long term employment (1+ years)','Short term employment (-1 years)','No preference');
+}
+function getEmploymentLengthByID($id) {
+	$arr = getEmploymentLength();
+	return $arr[$id-1];
+}
+
 

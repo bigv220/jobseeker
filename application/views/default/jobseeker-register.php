@@ -49,7 +49,8 @@
 
         $('#addIndustry').click(function() {
             var html = $('#industry_lists').html();
-            $("#industry_lists").after("<br />" + html);
+            html += '<span class="delSeekingIndustry"><i class="del" onclick="delNewSeekingIndustry(this);"></i></span>';
+            $("#addIndustry").before(html);
         });
 
         $('#addAnotherSchool').click(function() {
@@ -89,7 +90,8 @@
 
         $('#addLanguageBtn').click(function() {
             var html = $('#language_lists').html();
-            $('#language_lists').after(html);
+            html += '<span class="delSeekingIndustry"><i class="del" onclick="delNewLanguage(this);" style="top:30px;left:5px;"></i></span>';
+            $('#addLanguageBtn').parent().parent().before(html);
         });
 
     });
@@ -257,7 +259,47 @@
         }
     }
 
-    
+    function delSeekingIndustry(thisO,industry,position) {
+        var uid = $('#uid').val();
+
+        $.post(site_url + '/jobseeker/delSeekingIndustry',
+            {uid:uid, industry:industry, position:position},
+            function(result,status){
+                if(status == 'success'){
+                    delNewSeekingIndustry(thisO);
+                }
+                else{
+                    alert('Delete failed!');
+                }
+            });
+    }
+
+    function delNewSeekingIndustry(thisO) {
+        $(thisO).parent().prev().remove();
+        $(thisO).parent().prev().remove();
+        $(thisO).parent().remove();
+    }
+
+    function delLanguage(thisO, language) {
+        var uid = $('#uid').val();
+
+        $.post(site_url + '/jobseeker/delLanguage',
+            {uid:uid, language:language},
+            function(result,status){
+                if(status == 'success'){
+                    delNewLanguage(thisO);
+                }
+                else{
+                    alert('Delete failed!');
+                }
+            });
+    }
+
+    function delNewLanguage(thisO) {
+        $(thisO).parent().prev().remove();
+        $(thisO).parent().prev().remove();
+        $(thisO).parent().remove();
+    }
 </script>
 
 <!--Jobseeker registration page body-->
@@ -534,34 +576,33 @@
                             <i class="kyo-radio" data-id="is_accomodation_assistance" data-val="2" onclick="selectItem('is_accomodation_assistance',0);">No</i>
                     </div>
                     <div class="reg-row"><strong>What industry are you seeking employment in?<i class="star">*</i></strong>
-                        <div id="industry_lists">
+                        <?php
+                         $i = 0;
+                        foreach($seekingIndustry as $v): ?>
+                            <?php
+                            $i++;
+                            if($i == 1) {echo '<div id="industry_lists">';} ?>
+
                             <select name="industry[]" id="industry_1" required="required" onchange="changeIndustry(this);">
                                 <option value="">Industry</option>
                                 <?php
-                                $user_industry = $seekingIndustry["industry"];
-                                foreach($industry as $key=>&$v) {
+                                $user_industry = $v["industry"];
+                                foreach($industry as $key=>&$val) {
                                     $str = '';
-                                    if($v['name'] == $user_industry) {
+                                    if($val['name'] == $user_industry) {
                                         $str = ' selected="selected"';
                                     }
                                 ?>
-                                <option value="<?php echo $v['name']; ?>"<?php echo $str;?>><?php echo $v['name']; ?></option>
+                                <option value="<?php echo $val['name']; ?>"<?php echo $str;?>><?php echo $val['name']; ?></option>
                                 <?php } ?>
                             </select>
                             <select name="position[]" id="position_1" required>
-                                <option value="">Position</option>
-                                <?php
-                                $user_position = $seekingIndustry["position"];
-                                foreach($position as $key=>&$v) {
-                                    $str = '';
-                                    if($v["name"] == $user_position) {
-                                        $str = ' selected="selected"';
-                                    }
-                                ?>
-                                <option value="<?php echo $v['name']; ?>"<?php echo $str; ?>><?php echo $v['name']; ?></option>
-                                <?php } ?>
+                                <option value="<?php echo $v['position']; ?>"><?php echo $v['position']; ?></option>
                             </select>
-                        </div>
+                            <?php if($i==1) {echo "</div>";} ?>
+                            <span class="delSeekingIndustry"><i onclick="delSeekingIndustry(this,'<?php echo $v['industry']; ?>','<?php echo $v['position']; ?>');" class="del"></i></span>
+
+                            <?php endforeach; ?>
                         <a id="addIndustry" class="reg-row-tip" href="javascript:void(0);">
                         + Add Another Industry</a>
                     </div>
@@ -832,20 +873,24 @@
                 <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="languageForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <div class="reg-area-tit <?php echo $cla; ?>">Languages</div>
-                    <div id="language_lists">
-                    <div class="reg-row" style="float:left;width:240px;">
+                    <?php
+                    $i = 0;
+                    if (empty($language)) {
+						$language = array(array('language'=>'none','level'=>'none'));
+					}
+                    foreach($language as $lan):
+                    $i++;
+                        if($i == 1) echo '<div id="language_lists">';
+                    ?>
+
+                    <div class="reg-row" style="clear:both;float:left;width:240px;">
                         <strong>Language<i class="star">*</i></strong><br />
                         <select name="language[]" id="language_1" required>
                             <option value="">Language</option>
                             <?php
-                            $lan = '';
-
-                            if(count($language)) {
-                                $lan = $language[0]["language"];
-                            }
                             foreach($language_arr as $v) {
                                 $str = '';
-                                if($v == $lan) {
+                                if($v == $lan['language']) {
                                     $str = ' selected="selected"';
                                 }
                             ?>
@@ -856,25 +901,29 @@
                      <div style="float:left;width:220px;">
                         <strong>Proficiency</strong><br />
                         <select name="level[]" id="level_1" required>
-                            <option value="">Level</option>
-                            <?php
-                            $lev = '';
-
-                            if(count($language)) {
-                                $lev = $language[0]["level"];
-                            }
-                            foreach($level_arr as $v) {
-                                $str = '';
-                                if($v == $lev) {
-                                    $str = ' selected="selected"';
-                                }
-                                ?>
-                                <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
-                                <?php } ?>
+                        <option value="">Proficiency</option>
+                        <?php $level = language_level();
+                        foreach($level as $v) {
+                        	$str = '';
+                        	if($v == $lan['level']) {
+                        		$str = ' selected="selected"';
+                        	}
+                        ?>
+                        <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                        <?php } ?>
                         </select>
                     </div>
-                    <div class="clear"></div>
-                    </div>
+                         <?php if($i==1) echo "</div>"; ?>
+                         <?php if($i>1) {?>
+                        <span class="delSeekingIndustry">
+                            <i class="del" onclick="delLanguage(this, '<?php echo $lan['language']; ?>');" style="top:30px;left:5px;"></i>
+                        </span>
+						<?php }?>
+                    <?php 
+                    
+                    endforeach; 
+                    ?>
+
                     <div class="reg-row" style="clear: both;">
                         <p><a class="reg-row-tip" href="javascript:void(0);" id="addLanguageBtn">+ Add another language</a></p>
                     </div>
@@ -967,6 +1016,7 @@
         <div class="reg-btns">
             <a href="javascript: void(0);" class="reg-btns-saveall png" onclick="saveAll();"></a>
             <a href="<?php echo $site_url?>search/searchJob" class="reg-btns-job png"></a>
+            <a href="<?php echo $site_url?>jobseeker/profile" class="view_my_profile png"></a>
         </div>
         <div class="backtop png" style="display: block; top: 564px; right:-80px"></div>
      </div>

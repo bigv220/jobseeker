@@ -20,8 +20,9 @@ class jobseeker extends Front_Controller {
      * Jobseeker registration
      */
     public function register() {
-        $this->load->library('session');
-        if (!$this->session->userdata('uid'))
+        //$this->load->library('session');
+    	$uid = $this->session->userdata('uid');
+        if (!$uid)
         {
             redirect('/');
         }
@@ -29,7 +30,7 @@ class jobseeker extends Front_Controller {
         $this->load->model('jobseeker_model');
 
         $data = $this->data;
-        $uid = $this->session->userdata('uid');
+        
 
         $register_step = $this->jobseeker_model->getRegisterStep($uid);
         if(empty($register_step)) {
@@ -52,14 +53,6 @@ class jobseeker extends Front_Controller {
         $language = $this->jobseeker_model->getLanguage($uid);
         $seekingIndustry = $this->jobseeker_model->getSeekingIndustry($uid);
 
-        //get industry and position setting of seeking industry
-        if(count($seekingIndustry)) {
-            $ind = $seekingIndustry['industry'];
-            $position = $this->jobseeker_model->getPosition($ind);
-        } else {
-            $position = $this->jobseeker_model->getPosition('General');
-        }
-
         //industry lists
         $industry = $this->jobseeker_model->getIndustry();
 
@@ -73,6 +66,8 @@ class jobseeker extends Front_Controller {
         $language_arr = language_arr();
         $level_arr = language_level();
 
+        $userinfo['country'] = 'China';
+
         $data["uid"] = $uid;
         $data["userinfo"] = $userinfo;
         $data["education_info"] = $education_info;
@@ -82,7 +77,6 @@ class jobseeker extends Front_Controller {
         $data['professional_skills'] = $professional_skills;
         $data['seekingIndustry'] = $seekingIndustry;
         $data["industry"] = $industry;
-        $data['position'] = $position;
         $data['yearArray'] = $year_arr;
 
         //user language settings
@@ -272,6 +266,8 @@ class jobseeker extends Front_Controller {
         $uid = $this->session->userdata('uid');
 
         if ($post) {
+        	// delete old jobs
+        	$this->jobseeker_model->delWorkHistory($uid);
             //save job to db
             $company_len = count($post['company_name']);
             for($i=0; $i<$company_len;$i++) {
@@ -310,6 +306,8 @@ class jobseeker extends Front_Controller {
         $uid = $this->session->userdata('uid');
 
         if ($post) {
+        	// delete old language data
+        	$this->jobseeker_model->delLanguage($uid);
             //save language to db
             $lan_len = count($post['language']);
             for($i=0; $i<$lan_len;$i++) {
@@ -483,4 +481,32 @@ class jobseeker extends Front_Controller {
         echo json_encode($result);
     }
 
+    public function delSeekingIndustry() {
+        $post = $_POST;
+        $uid = $post['uid'];
+        $ind = $post['industry'];
+        $pos = $post['position'];
+
+        // load model
+        $this->load->model('jobseeker_model');
+        $this->jobseeker_model->delSeekingIndusry($uid, $ind, $pos);
+
+        $msg = "success";;
+        $result['status'] = $msg;
+        echo json_encode($result);
+    }
+
+    public function delLanguage() {
+        $post = $_POST;
+        $uid = $post['uid'];
+        $language = $post['language'];
+
+        // load model
+        $this->load->model('jobseeker_model');
+        $this->jobseeker_model->delLanguage($uid, $language);
+
+        $msg = "success";;
+        $result['status'] = $msg;
+        echo json_encode($result);
+    }
 }
