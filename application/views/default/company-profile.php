@@ -49,7 +49,7 @@
           </dd>
         </dl>
         <dl>
-          <dt>Redstar Works on the web </dt>
+          <dt><?php echo $info['first_name']?> on the web </dt>
           <dd>
             <ul class="redstar-web">
               <li><a href="#">Twitter</a></li>

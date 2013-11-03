@@ -207,6 +207,11 @@ class jobseeker_model extends MY_Model
     public function insertWorkHistory($data) {
         return $this->db->insert('user_work_history', $data);
     }
+    
+    public function delWorkHistory($uid) {
+    	$sql = 'DELETE FROM user_work_history WHERE uid='.$uid;
+    	return $this->db->query($sql);
+    }
 
     //save language
     public function insertLanguage($data) {
@@ -365,8 +370,12 @@ class jobseeker_model extends MY_Model
         $this->db->query($sql);
     }
 
-    public function delLanguage($uid, $lan) {
-        $sql = "DELETE FROM user_language WHERE uid=$uid AND language ='" . $lan . "'";
+    public function delLanguage($uid, $lan=null) {
+    	if (empty($lan)) {
+    		$sql = 'DELETE FROM user_language WHERE uid='.$uid;
+    	} else {
+        	$sql = "DELETE FROM user_language WHERE uid=$uid AND language ='" . $lan . "'";
+    	}
         $this->db->query($sql);
     }
 

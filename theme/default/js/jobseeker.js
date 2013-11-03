@@ -177,30 +177,22 @@ function saveAll() {
     }
 }
 
-$(document).ready(function() {
-/**
- * POST JOB / TYPE OF JOB 
- */
-$('#jobtype_box').tagit({
-        select:true, 
-        sortable:true,
-        tagsChanged:function () {
-            var tags = $('#jobtype_box').tagit('tags');
-            var tagString = [];
-                                    
-            //Pull out only value
-            for (var i in tags){
-              tagString.push(tags[i].value);
-            }
-            $('#jobtype_tag').val(tagString.join(','));
-        }
-    });
-    $('.tagit-input').attr('disabled','disabled');
-    $('#employment_type').change(function() {
-        addTypeTag($('#employment_type').val());
-    });
-});
-var addTypeTag = function(tag) {
-    $('#jobtype_box').tagit("add", {label: tag, value: tag});
 
-}
+// change industry
+    function changeIndustry(thisO) {
+        var name = $(thisO).val();
+        $.post(site_url + '/jobseeker/ajaxchangeindustry',
+            { ind_name: name },
+            function(result,status) {
+                var position_htm = '<option value="">Position</option>';
+
+                if(status == 'success'){
+                    var obj = eval('('+result+')');
+                    for ( var i = 0; i < obj.data.length; i++) {
+                        position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
+                    }
+                }
+                $('#position_1').html(position_htm);
+            });
+    }
+

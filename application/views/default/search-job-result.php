@@ -154,10 +154,11 @@
             <dt class="search-row-tit">Length of employment</dt>
             <dd class="search-row-nav">
                 <select name="employment_length" class="filter_key">
-                    <option value="">--Select--</option>
-                    <option value="1">Long term employment (1+ years)</option>
-                    <option value="2">Short term employment (-1 years)</option>
-                    <option value="3">No preference</option>
+                    <option value="">All Length</option>
+                    <?php $empl = getEmploymentLength();
+                    foreach($empl as $k => $v) { ?>
+                    <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
+                    <?php } ?>
                 </select>
             </dd>
         </dl>
@@ -276,7 +277,7 @@
                         </div>
                         <dl class="sresult-nav-job-dl">
                             <dt>Preferred Years of Experience</dt>
-                            <dd><?php echo $job["preferred_year_of_experience"]; ?></dd>
+                            <dd><?php echo getExperienceByID($job["preferred_year_of_experience"]); ?></dd>
                             <dt>Preferred Personal Skills</dt>
                             <dd><?php echo $job["preferred_personal_skills"]; ?></dd>
                             <dt>Preferred Technical Skills</dt>
@@ -294,15 +295,13 @@
                                 <strong><?php echo $job['location']; ?></strong>
                             </dd>
                             <dt>Salary</dt>
-                            <dd><?php echo $job["salary_range"]; ?></dd>
+                            <dd><?php echo getSalaryByID($job["salary_range"]); ?></dd>
                             <dt>Industry</dt>
                             <dd class="industry">
                                 <div><?php echo $job["industry"]; ?></div>
                                 <ul class="industry-ul">
-                                    <li class="n1"><b>Type of Employment</b><span><?php $v = $job['employment_type'];
-                                        if($v) echo $constants_arr["type_emp"][$v]; ?></span></li>
-                                    <li class="n2"><b>Length of Employment</b><span><?php $v = $job["employment_length"];
-                                        if($v) echo $constants_arr["len_emp"][$v]; ?></span></li>
+                                    <li class="n1"><b>Type of Employment</b><span><?php if($job['employment_type']) {if(is_numeric($job['employment_type'])) echo getJobtypeByID($job['employment_type']); else echo $job['employment_type']; }?></span></li>
+                                    <li class="n2"><b>Length of Employment</b><span><?php if($job['employment_length']) echo getEmploymentLengthByID($job['employment_length']);?></span></li>
                                     <li class="n3"><b>Visa Assistance</b><span><?php $v = $job["is_visa_assistance"]?$job["is_visa_assistance"]:0;
                                         if($v) echo $constants_arr["visa_assist"][$v]; ?></span></li>
                                     <li class="n4"><b>Housing Assistance</b><span>
@@ -317,7 +316,7 @@
                 </div>
                 <div class="fxui-tab-nav sresult-about">
                     <div><?php echo $job["description"]; ?></div>
-                    <p><a href="<?php echo $site_url?>/company/companyinfo?id=<?php echo $job['company_id'];?>">View Company Profile</a></p>
+                    <p><a href="<?php echo $site_url?>company/companyinfo/<?php echo $job['company_id'];?>">View Company Profile</a></p>
                 </div>
             </div>
         </div>

@@ -75,21 +75,13 @@
                         <select name="country">
                             <option value="">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
-                            <?php if ($k == $userinfo['country']): ?>
-                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
-                                <?php else: ?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
-                                <?php endif; ?>
                             <?php endforeach;?>
                         </select>
                         <select name="province">
                             <option value="">All Province</option>
                             <?php foreach ($location['China'] as $k=>$v):?>
-                            <?php if ($k == $userinfo['province']): ?>
-                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
-                                <?php else: ?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
-                                <?php endif; ?>
                             <?php endforeach;?>
                         </select>
                         <select name="city">
@@ -133,13 +125,15 @@
                 <div class="span3">
                     <strong>Type of employment</strong>
                     <div class="reg-row">
-                        <select name="employment_type" class="after-select" style="width: 230px;">
+                        <select id="employment_type" class="after-select" style="width: 230px;">
                             <option value="">All Type</option>
                             <?php $jobtype = jobtype();
                                 foreach ($jobtype as $k => $v) {?>
                                 <option value="<?php echo $k+1?>"><?php echo $v?></option>
                             <?php }?>
                         </select>
+                        <input type="hidden" name="employment_type" id="jobtype_tag"/>
+                        <ul id="jobtype_box" data-name="nameOfSelect"></ul>
                     </div>
                 </div>
             </div>
@@ -149,10 +143,11 @@
                     <strong>Length of employment</strong>
                     <div>
                         <select class="filter_key">
-                            <option value="">--Select--</option>
-                            <option value="1">Long term employment (1+ years)</option>
-                            <option value="2">Short term employment (-1 years)</option>
-                            <option value="3">No preference</option>
+                            <option value="">All Length</option>
+                            <?php $empl = getEmploymentLength();
+		                    foreach($empl as $k => $v) { ?>
+		                    <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
+		                    <?php } ?>
                         </select>
                     </div>
                 </div>

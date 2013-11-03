@@ -18,9 +18,6 @@ class search extends Front_Controller {
     public function searchJob() {
         $data = $this->data;
 
-        $length_of_employment = array('1'=>'Long term (1+years)','2'=>'Short term (-1 years)','3'=>'No preferences');
-        $type_of_employment = array('1'=>'Contract','2'=>'Part Time','3'=>'Full Time',
-            '4'=>'Internship','5'=>'Any');
         $visa_assistance = array('1'=>'Visa will be provided','0'=>'Visa will not be provided');
         $housing_assistance = array('1'=>'Accomodation will be provided','0'=>'Accomodation will not be provided');
 
@@ -59,9 +56,9 @@ class search extends Front_Controller {
             if(!empty($post["location"])) {
                 array_push($where_arr, 'location=' .$post["location"]);
             }
-            if(!empty($post["employment_type"])) {
-                array_push($where_arr, 'employment_type=' . $post["employment_type"]);
-            }
+            // if(!empty($post["employment_type"])) {
+            //     array_push($where_arr, 'employment_type=' . $post["employment_type"]);
+            // }
             if(!empty($post["industry"])) {
                 array_push($where_arr, "industry like '%".$post["industry"]."%'");
             }
@@ -96,6 +93,21 @@ class search extends Front_Controller {
 
         // get jobs according to the search
         $jobs = $this->job_model->searchJob($where);
+        // Filter employment_type
+        $filter_employment_type = explode(",", $post['employment_type']);
+
+        foreach ($jobs as $key => $one_job) {
+            $employment_type_arr = explode(",", $one_job['employment_type']);
+            
+            foreach ($employment_type_arr as $one_type) {
+                if (in_array($one_type , $filter_employment_type) === FALSE) {
+                    unset($jobs[$key]);
+                } else {
+                    break;
+                }
+            }
+            
+        }
         $data['jobs'] = $jobs;
 
         // generate job id string, this will be used in the filter function at the right side
@@ -118,8 +130,8 @@ class search extends Front_Controller {
 
         $data["job_id_str"] = $job_id_str;
 
-        $constants = array('len_emp'=>$length_of_employment,
-            'type_emp'=>$type_of_employment,
+        $constants = array(//'len_emp'=>$length_of_employment,
+            //'type_emp'=>$type_of_employment,
             'visa_assist'=>$visa_assistance,
             'housing_assist'=>$housing_assistance);
 

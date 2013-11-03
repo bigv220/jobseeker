@@ -19,16 +19,12 @@ class job extends Front_Controller {
     public function jobDetails($job_id) {
     	$data = $this->data;
     	
-        $length_of_employment = array('1'=>'Long term (1+years)','2'=>'Short term (-1 years)','3'=>'No preferences');
-        $type_of_employment = array('1'=>'Contract','2'=>'Part Time','3'=>'Full Time','4'=>'Internship','5'=>'Any');
         $visa_assistance = array('1'=>'Visa will be provided','0'=>'Visa will not be provided');
         $housing_assistance = array('1'=>'Accomodation will be provided','0'=>'Accomodation will not be provided');
-    	$constants = array('len_emp'=>$length_of_employment,
-    			'type_emp'=>$type_of_employment,
-    			'visa_assist'=>$visa_assistance,
-    			'housing_assist'=>$housing_assistance);
-    	$data['constants_arr'] = $constants;
-    	
+    	$data['constants_arr'] = array(
+    								'visa_assist'=>$visa_assistance,
+    								'housing_assist'=>$housing_assistance
+    								);
     	
     	//Load Model
         $this->load->model('job_model');
@@ -38,6 +34,7 @@ class job extends Front_Controller {
         // get company avatar
         $this->load->model('company_model');
         $compinfo = $this->company_model->getOne($jobinfo['company_id'], 'uid');
+        $data['company_id'] = $jobinfo['company_id'];
         $data["company_avatar"] = $compinfo['profile_pic'];
         
         // get similar jobs
@@ -69,7 +66,7 @@ class job extends Front_Controller {
     		if (1 == $this->session->userdata('user_type')) {
     			$post['company_id'] = $this->session->userdata('uid');
     		}
-    		
+
     		//Load Model
     		$this->load->model('job_model');
             unset($post['nameOfSelect']);
