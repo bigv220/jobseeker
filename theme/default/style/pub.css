@@ -57,16 +57,23 @@ a:hover{text-decoration:none;}
 .pur{color:#481052;}
 .p-hd{background:#522162 url(pub/header.gif) center no-repeat;height:104px;position:relative;z-index:11;}
 .phd-logo{position:absolute;width:162px;height:173px;background:url(pub/logo.png) no-repeat;top:0;left:50%;margin:0 0 0 -81px;}
-.phd-menu ul{padding:49px 0 0 112px;}
+.phd-menu ul{padding:53px 0 0 112px;}
 .phd-menu li{float:left;*display:inline;}
-.phd-menu a{color:#e6e74f;font-size:13px;font-weight:bolder;}
+.phd-menu a{color:#e6e74f;font-size:13px;font-weight:bolder;float:left;}
 .phd-menu .home{width:87px;}
+.phd-menu .home a{width:37px;height:10px;background:url(home/menu_home.png) no-repeat;}
 .phd-menu .about{width:106px;}
+.phd-menu .about a{width:80px;height:10px;background:url(home/menu_aboutus.png) no-repeat;}
 .phd-menu .events{width:306px;}
+.phd-menu .events a{width:80px;height:10px;background:url(home/menu_jingnews.png) no-repeat;}
 .phd-menu .news{width:295px;}
+.phd-menu .news a{width:80px;height:10px;background:url(home/menu_jingnews.png) no-repeat;}
 .phd-menu .jobs{width:50px;}
+.phd-menu .jobs a{width:35px;height:10px;background:url(home/menu_jobs.png) no-repeat;}
 .phd-menu .cvs{width:70px;}
 .phd-menu .findstaff{width:90px;}
+.phd-menu .findstaff a{width:70px;height:10px;background:url(home/menu_findstaff.png) no-repeat;}
+.phd-menu .post a{width:70px;height:10px;background:url(home/menu_postajob.png) no-repeat;}
 .phd-login{float:right;*display:inline;*behavior:url(js/jslib/PIE.htc);height:75px;border-radius:0 0 2px 2px;background:#ef7641;margin:0 15px 0 0;}
 .phd-login-text{max-width:160px;padding:50px 10px 0 10px;height:25px;text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;}
 .phd-login-text-user{width:61px;padding:35px 0 0 0;height:40px;text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;font-size:12px;}

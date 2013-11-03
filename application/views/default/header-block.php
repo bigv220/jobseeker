@@ -45,16 +45,16 @@
 	<div class="w100">
 		<div class="phd-menu fl">
 			<ul>
-				<li class="home"><a href="<?php echo $site_url?>">HOME</a></li>
-				<li class="about"><a href="<?php echo $site_url?>page/aboutus">ABOUT US</a></li>
-				<li class="news"><a href="<?php echo $site_url?>news">JING NEWS</a></li>
+				<li class="home"><a href="<?php echo $site_url?>"></a></li>
+				<li class="about"><a href="<?php echo $site_url?>page/aboutus"></a></li>
+				<li class="news"><a href="<?php echo $site_url?>news"></a></li>
                 <?php $current_user_type = isset($user_type)?$user_type:-1;
                 if (true || 0 == $current_user_type):?>
-				<li class="jobs"><a href="<?php echo $site_url?>search/findjob">JOBS</a></li>
+				<li class="jobs"><a href="<?php echo $site_url?>search/findjob"></a></li>
 
                 <?php endif; ?>
-				<li class="findstaff"><a href="<?php echo $site_url?>search/findstaff">FIND STAFF</a></li>
-				<li class="post"><a href="<?php echo $site_url?>job/postjob" class="check_login_user_type_for_postjob">POST A JOB</a></li>
+				<li class="findstaff"><a href="<?php echo $site_url?>search/findstaff"></a></li>
+				<li class="post"><a href="<?php echo $site_url?>job/postjob" class="check_login_user_type_for_postjob"></a></li>
 			</ul>
 		</div>
 		<a class="phd-logo png" href="<?php echo $site_url?>"></a>
