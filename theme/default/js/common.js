@@ -147,10 +147,13 @@ $('#jobtype_box').tagit({
     });
     $('.tagit-input').attr('disabled','disabled');
     $('#employment_type').change(function() {
-        addTypeTag($('#employment_type').val());
+    	var slabel = $('#employment_type').find("option:selected").text();
+    	var sval = $('#employment_type').val();
+        addTypeTag(slabel, sval);
     });
 });
-var addTypeTag = function(tag) {
-    $('#jobtype_box').tagit("add", {label: tag, value: tag});
-
+var addTypeTag = function(label, tag) {
+    $('#jobtype_box').tagit("add", {label: label, value: tag});
 }
+
+
