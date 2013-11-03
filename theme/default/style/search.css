@@ -1,7 +1,6 @@
 .ora{color:#ea6e3b;}
 .pur{color:#481052;}
 html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
-body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
 .result-page{min-height:780px;}
 .result-az{width:500px;height:60px;float:right;*display:inline;}.result-az b{display:block;color:#481052;font-weight:700;font-size:12px;height:24px;line-height:24px;}
 .result-az .result-az-jobs,.result-az .result-az-from{width:165px;}

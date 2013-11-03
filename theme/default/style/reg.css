@@ -1,7 +1,6 @@
 .ora{color:#ea6e3b;}
 .pur{color:#481052;}
 html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
-body{background:url(pub/inner-bg.gif) no-repeat top fixed;}
 select {font-family: arial;}
 .reg-left{width:235px;padding-bottom:10px;}
 .reg-right-wrap{float:right;*display:inline;width:505px;}
