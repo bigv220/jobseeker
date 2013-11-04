@@ -547,9 +547,10 @@
                         <div>
                             <input type="text" name='employment_length' id="employment_length" value="<?php echo $userinfo['employment_length']; ?>" style="display:none" class="kyo-radio"/>
                             <ul class="leng-radio">
-                                <li><i data-val="0" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',1);">Long term employment (1+ years)</i></li>
-                                <li><i data-val="1" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',2);">Short term employment (-1 years)</i></li>
-                                <li><i data-val="2" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',3);">No preference</i></li>
+                            	<?php $empl = getEmploymentLength();
+                            	foreach ($empl as $k => $v) { ?>
+                            	<li><i data-val="<?php echo $k+1?>" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',<?php echo $k+1?>);"><?php echo $v?></i></li>
+								<?php } ?>
                             </ul>
                         </div>
                     </div>
@@ -557,11 +558,10 @@
                         <div>
                             <input type="hidden" name="employment_type" id="employment_type" value="<?php echo $userinfo['employment_type'];?>" class="kyo-radio" />
                             <ul class="leng-radio">
-                                <li><i data-val="1" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',1);">Contract</i></li>
-                                <li><i data-val="2" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',2);">Part Time</i></li>
-                                <li><i data-val="3" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',3);">Full Time</i></li>
-                                <li><i data-val="4" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',4);">Internship</i></li>
-                                <li><i data-val="5" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',5);">Any</i></li>
+                            <?php $jobtype = jobtype();
+                            	foreach ($jobtype as $k => $v) { ?>
+                            <li><i data-val="<?php echo $k+1?>" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',<?php echo $k+1?>);"><?php echo $v?></i></li>
+                            <?php } ?>
                             </ul>
                         </div>
                     </div>
