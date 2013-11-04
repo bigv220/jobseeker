@@ -202,10 +202,10 @@ class jobseeker extends Front_Controller {
             $rtn = $this->jobseeker_model->updatePreferences($uid, $post);
 
             //save seeking industry to db
-            $industry_len = count($post['industry']);
+            $industry_len = count($post['industry_1']);
             for($i=0; $i<$industry_len;$i++) {
-                if($post['industry'][$i] && $post['position'][$i]) {
-                    $this->jobseeker_model->addSeekingIndustry($uid, $post['industry'][$i], $post['position'][$i]);
+                if($post['industry'][$i] && $post['position_1'][$i]) {
+                    $this->jobseeker_model->addSeekingIndustry($uid, $post['industry_1'][$i], $post['position_1'][$i]);
                 }
             }
 
@@ -266,31 +266,40 @@ class jobseeker extends Front_Controller {
         $uid = $this->session->userdata('uid');
 
         if ($post) {
-        	// delete old jobs
-        	$this->jobseeker_model->delWorkHistory($uid);
             //save job to db
             $company_len = count($post['company_name']);
             for($i=0; $i<$company_len;$i++) {
+                $id = $post["id"][$i];
+                if($id) {
+                    // delete old jobs
+                    $this->jobseeker_model->delWorkHistory($id);
+                }
+
                 if($post['company_name'][$i]) {
+                    $work_example = $post['work_example'][$i]?$post['work_example'][$i]:'';
+
                     $desc = $post['description'][$i] == '350 Characters' ? '' : $post['description'][$i];
 
                     $data = array('uid'=>$post['uid'],'introduce'=>$post['introduce'][$i],
                         'company_name'=>$post['company_name'][$i],
                         'period_time_from'=>$post['period_time_from'][$i],'period_time_to'=>$post['period_time_to'][$i],
-                        'industry'=>$post['industry'][$i],'position'=>$post['position'][$i],
                         'location'=>null,'description'=>$desc,'is_stillhere'=>$post['is_stillhere'][$i],
-                        'work_examples_url'=>$post['work_example'][$i]);
+                        'work_examples_url'=>$work_example);
 
-                    $rtn = $this->jobseeker_model->insertWorkHistory($data);
-                }
+                    $id = $this->jobseeker_model->insertWorkHistory($data);
+
+                    $industry_total = count($post["industry"]);
+                    $user_industry_num = $post["grop_num"][$i];
+                    $num = $i*$post["grop_num"][0] + $user_industry_num;
+                    for($j=$i*$post["grop_num"][0];$j<$num;$j++) {
+                        $data_arr = array('parent_id'=>$id,'uid'=>$post["uid"],'industry'=>$post['industry'][$j],'position'=>$post['position'][$j]);
+                        $this->jobseeker_model->insertUserIndustry($data_arr);
+                    }//end for
+                }//end if
             }
 
-            if($rtn) {
-                $msg = "success";
-                $this->_saveRegisterStep($uid, 5);
-            } else {
-                $msg = "failed";
-            }
+            $msg = "success";
+            $this->_saveRegisterStep($uid, 5);
 
             $result['status'] = $msg;
             echo json_encode($result);
@@ -408,19 +417,16 @@ class jobseeker extends Front_Controller {
     public function ajaxuploadfile() {
         $data = $this->data;
 
+        $uid = $this->session->userdata('uid');
         // load model
         $this->load->model('jobseeker_model');
-        $user_path = realpath(dirname(__FILE__))."/../../theme/default/workExamples/";
-        $this->jobseeker_model->creatUserfolder ( $user_path ) or exit ( 'error: can not creat folder.' );
+        $user_path = FCPATH . 'attached/workExamples/';
+        $this->jobseeker_model->creatUserfolder ( $user_path.$uid.'/' ) or exit ( 'error: can not creat folder.' );
         // upload
         if (is_uploaded_file ( $_FILES ['workexample'] ['tmp_name'] )) {
-            $file_name = iconv('utf-8','gb2312',$_FILES['workexample']['name']);
+            $file_name = $uid.'/'.uniqid().'-'.iconv('utf-8','gb2312',$_FILES['workexample']['name']);
             move_uploaded_file ( $_FILES ['workexample'] ['tmp_name'], $user_path .$file_name);
-
-            // new image url
-            $data ['avatar'] = '/workExamples/' . $file_name;
-
-            exit ( 'success' );
+            exit ( 'success|'.$file_name );
         } else {
             exit ( 'error: can not upload avatar image.' );
         }
@@ -490,6 +496,19 @@ class jobseeker extends Front_Controller {
         // load model
         $this->load->model('jobseeker_model');
         $this->jobseeker_model->delSeekingIndusry($uid, $ind, $pos);
+
+        $msg = "success";;
+        $result['status'] = $msg;
+        echo json_encode($result);
+    }
+
+    public function delUserIndustry() {
+        $post = $_POST;
+        $id = $post['id'];
+
+        // load model
+        $this->load->model('jobseeker_model');
+        $this->jobseeker_model->delUserIndusry($id);
 
         $msg = "success";;
         $result['status'] = $msg;

@@ -9,24 +9,6 @@
         });
     });
 
-    // change industry
-    function changeIndustry(thisO) {
-        var name = $(thisO).val();
-        $.post(site_url + 'jobseeker/ajaxchangeindustry',
-            { ind_name: name },
-            function(result,status) {
-                var position_htm = '<option value="">Position</option>';
-
-                if(status == 'success'){
-                    var obj = eval('('+result+')');
-                    for ( var i = 0; i < obj.data.length; i++) {
-                        position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
-                    }
-                }
-                $('#position').html(position_htm);
-            });
-    }
-
     // ajax localtion
     function change_location(this1, key, location) {
 
@@ -95,51 +77,46 @@
 
             </div>
             
+            <div class="advsearch-row clearfix" style="width: 500px;">
+                <?php
+                //Load Model
+                $this->load->model('jobseeker_model');
+
+                if (empty($work_history['id'])) {
+                    $userIndustry = array(array('industry'=>'none','position'=>'none'));
+                } else {
+                    $userIndustry = $this->jobseeker_model->getUserIndustry($this->session->userdata('uid'), $work_history['id']);
+                }
+
+                $data['userIndustry'] = $userIndustry;
+                $data['industry'] = $industry;
+                $this->load->view($front_theme.'/industry_multi-select', $data);
+                ?>
+
+                <div class="reg-row" style="clear: both;">
+                    <input type="hidden" name="grop_num[]" value="<?php echo count($userIndustry); ?>"/>
+                    <p><a class="reg-row-tip" href="javascript:void(0);" id="addIndustryBtn" onclick="addIndustryBtnClick(this);">+ Add another Industry</a></p>
+                </div>
+
+            </div>
+
             <div class="advsearch-row clearfix">
-            	<div class="span1 reg-row">
-                	<strong>Industry</strong>
-                    <select name="industry" class="industry_options" onchange="changeIndustry(this)">
-                        <option value="">All Industries</option>
-                        <?php foreach($industry as $key=>&$v) {
-                        if(empty($v['name'])) continue;
-                        ?>
-                        <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
-                        <?php } ?>
-                    </select>
-                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
-                    <div id="sel-industry-val" class="show-selval"><ul></ul></div>
-                </div>
-                <div class="span2 reg-row">
-                	<strong>Position</strong>
-                    <select name="position" id="position" class="industry_options">
-                        <option value="">All Positions</option>
-                        <?php
-                        foreach($position as $key=>&$v) {
-                            ?>
-                            <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
-                            <?php } ?>
-                    </select>
-                    <div class="search-row-tip">Hold down 'Command' to select a max of 10</div>
-                    <div id="sel-position-val" class="show-selval"><ul></ul></div>
-                </div>
-                <div class="span3">
+                <div class="span1">
                     <strong>Type of employment</strong>
                     <div class="reg-row">
                         <select id="employment_type" class="after-select" style="width: 230px;">
                             <option value="">All Type</option>
                             <?php $jobtype = jobtype();
-                                foreach ($jobtype as $k => $v) {?>
+                            foreach ($jobtype as $k => $v) {?>
                                 <option value="<?php echo $k+1?>"><?php echo $v?></option>
-                            <?php }?>
+                                <?php }?>
                         </select>
                         <input type="hidden" name="employment_type" id="jobtype_tag"/>
                         <ul id="jobtype_box" data-name="nameOfSelect"></ul>
                     </div>
                 </div>
-            </div>
 
-            <div class="advsearch-row clearfix">
-                <div class="span1">
+                <div class="span2">
                     <strong>Length of employment</strong>
                     <div>
                         <select class="filter_key">

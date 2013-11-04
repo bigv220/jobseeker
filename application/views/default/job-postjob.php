@@ -30,7 +30,7 @@
                     <div class="span1">
                         <strong>Industry *</strong>
                         <div>
-                            <select name="industry" onchange="changeIndustry(this);" required>
+                            <select name="industry" onchange="changeIndustry(this, true);" required>
                                 <option value="">All Industries</option>
                                 <?php foreach($industry as $key=>$v) {
                                     if(empty($v['name'])) continue;                    
