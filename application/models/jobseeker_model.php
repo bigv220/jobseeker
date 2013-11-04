@@ -272,6 +272,11 @@ class jobseeker_model extends MY_Model
 
         $this->db->query($sql);
     }
+    
+    public function delSeekingIndustry($uid) {
+    	$sql = 'DELETE FROM user_seeking_industry WHERE uid= '.$uid;
+    	return $this->db->query($sql);
+    }
 
     public function getSeekingIndustry($uid) {
         $sql = "SELECT industry,position FROM user_seeking_industry WHERE uid=$uid";

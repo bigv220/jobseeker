@@ -143,10 +143,11 @@
                     <strong>Length of employment</strong>
                     <div>
                         <select class="filter_key">
-                            <option value="">--Select--</option>
-                            <option value="1">Long term employment (1+ years)</option>
-                            <option value="2">Short term employment (-1 years)</option>
-                            <option value="3">No preference</option>
+                            <option value="">All Length</option>
+                            <?php $empl = getEmploymentLength();
+		                    foreach($empl as $k => $v) { ?>
+		                    <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
+		                    <?php } ?>
                         </select>
                     </div>
                 </div>

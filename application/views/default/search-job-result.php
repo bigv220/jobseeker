@@ -74,7 +74,7 @@
                 <select name="country" class="filter_key">
                             <option value="">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
-                            <?php if ($k == $userinfo['country']): ?>
+                            <?php if ($k == $_POST['country']): ?>
                                 <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
                                 <?php else: ?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
@@ -89,7 +89,7 @@
                 <select name="province" class="filter_key">
                             <option value="">All Province</option>
                             <?php foreach ($location['China'] as $k=>$v):?>
-                                <?php if ($k == $userinfo['province']): ?>
+                                <?php if ($k == $_POST['province']): ?>
                                 <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
                                 <?php else: ?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
@@ -102,8 +102,13 @@
             <dt class="search-row-tit">City</dt>
             <dd class="search-row-nav">
                 <select name="city" class="filter_key">
+                           <?php if (empty($_POST['city'])): ?>
                            <option value="">All City</option>
-                           <option value="2">Beijing</option>
+                           <option value="Beijing">Beijing</option>
+                            <?php else: ?>
+                            <option value="<?php echo $_POST['city']; ?>"><?php echo $_POST['city']; ?></option>
+                            <option value="">All City</option>
+                            <?php endif; ?>
                 </select>
             </dd>
         </dl>
@@ -111,13 +116,15 @@
         <dl class="search-row ">
             <dt class="search-row-tit">Type of employment</dt>
             <dd class="search-row-nav">
-                <select name="employment_type" class="filter_key">
+                <select id="employment_type" class="filter_key">
                     <option value="">All Type</option>
                     <?php $jobtype = jobtype();
                     foreach ($jobtype as $k => $v) {?>
-                    <option value="<?php echo $k+1?>"><?php echo $v?></option>
+                    <option value="<?php echo $v?>"><?php echo $v?></option>
                     <?php }?>
                 </select>
+                <input type="hidden" name="employment_type" id="jobtype_tag"/>
+                <ul id="jobtype_box" data-name="nameOfSelect"></ul>
             </dd>
         </dl>
         <dl class="search-row ">
@@ -154,10 +161,11 @@
             <dt class="search-row-tit">Length of employment</dt>
             <dd class="search-row-nav">
                 <select name="employment_length" class="filter_key">
-                    <option value="">--Select--</option>
-                    <option value="1">Long term employment (1+ years)</option>
-                    <option value="2">Short term employment (-1 years)</option>
-                    <option value="3">No preference</option>
+                    <option value="">All Length</option>
+                    <?php $empl = getEmploymentLength();
+                    foreach($empl as $k => $v) { ?>
+                    <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
+                    <?php } ?>
                 </select>
             </dd>
         </dl>
@@ -255,7 +263,7 @@
     <?php foreach($jobs as $job): ?>
     <div class="box rel sresult-row">
         <div class="sresult-par1">
-            <div class="span1 rel"> <img src="<?php echo $site_url?>attached/image/no-image.png" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
+            <div class="span1 rel"> <img src="<?php echo $site_url?>attached/users/<?php echo $job['profile_pic']?>" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
             <div class="span2">
                 <h2><?php echo $job["job_name"]; ?></h2>
                 <h3><?php echo $job["username"]; ?></h3>
@@ -301,11 +309,12 @@
                                 <ul class="industry-ul">
                                     <li class="n1"><b>Type of Employment</b><span><?php if($job['employment_type']) {if(is_numeric($job['employment_type'])) echo getJobtypeByID($job['employment_type']); else echo $job['employment_type']; }?></span></li>
                                     <li class="n2"><b>Length of Employment</b><span><?php if($job['employment_length']) echo getEmploymentLengthByID($job['employment_length']);?></span></li>
-                                    <li class="n3"><b>Visa Assistance</b><span><?php $v = $job["is_visa_assistance"]?$job["is_visa_assistance"]:0;
+                                    <!-- <li class="n3"><b>Visa Assistance</b><span><?php $v = $job["is_visa_assistance"]?$job["is_visa_assistance"]:0;
                                         if($v) echo $constants_arr["visa_assist"][$v]; ?></span></li>
                                     <li class="n4"><b>Housing Assistance</b><span>
                                         <?php $v = $job["is_housing_assistance"]?$job["is_housing_assistance"]:0;
-                                        if($v) echo $constants_arr["housing_assist"][$v]; ?></span></li>
+                                        if($v) echo $constants_arr["housing_assist"][$v]; ?></span>
+                                    </li> -->
                                 </ul>
                             </dd>
                             <dt>Share This Job</dt>

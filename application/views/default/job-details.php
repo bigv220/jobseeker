@@ -80,14 +80,14 @@
                             <li class="n2"><b>Length of Employment</b><span>
                                 <?php echo getEmploymentLengthByID($jobinfo["employment_length"]);?></span>
                             </li>
-                            <li class="n3"><b>Visa Assistance</b><span>
+                            <!-- <li class="n3"><b>Visa Assistance</b><span>
                                 <?php $v = $jobinfo["is_visa_assistance"]?$jobinfo["is_visa_assistance"]:0;
                                 echo $constants_arr["visa_assist"][$v]; ?></span>
                             </li>
                             <li class="n4"><b>Housing Assistance</b><span>
                                 <?php $v = $jobinfo["is_housing_assistance"]?$jobinfo["is_housing_assistance"]:0;
                                 echo $constants_arr["housing_assist"][$v]; ?></span>
-                            </li>
+                            </li> -->
                         </ul>
                     </dd>
                 </dl>

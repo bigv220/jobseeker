@@ -547,9 +547,10 @@
                         <div>
                             <input type="text" name='employment_length' id="employment_length" value="<?php echo $userinfo['employment_length']; ?>" style="display:none" class="kyo-radio"/>
                             <ul class="leng-radio">
-                                <li><i data-val="0" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',1);">Long term employment (1+ years)</i></li>
-                                <li><i data-val="1" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',2);">Short term employment (-1 years)</i></li>
-                                <li><i data-val="2" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',3);">No preference</i></li>
+                            	<?php $empl = getEmploymentLength();
+                            	foreach ($empl as $k => $v) { ?>
+                            	<li><i data-val="<?php echo $k+1?>" data-id="employment_length" class="kyo-radio" onclick="selectItem('employment_length',<?php echo $k+1?>);"><?php echo $v?></i></li>
+								<?php } ?>
                             </ul>
                         </div>
                     </div>
@@ -557,10 +558,14 @@
                         <div>
                             <input type="hidden" name="employment_type" id="employment_type" value="<?php echo $userinfo['employment_type'];?>" class="kyo-checkout" />
                             <ul class="leng-radio">
-                                <li><i data-val="Contract" data-id="employment_type" class="kyo-checkbox">Contract</i></li>
-                                <li><i data-val="Part Time" data-id="employment_type" class="kyo-checkbox">Part Time</i></li>
-                                <li><i data-val="Full Time" data-id="employment_type" class="kyo-checkbox">Full Time</i></li>
-                                <li><i data-val="Internship" data-id="employment_type" class="kyo-checkbox">Internship</i></li>
+                            <?php $jobtype = jobtype();
+                            	foreach ($jobtype as $k => $v) { ?>
+                                <?php if (strpos($userinfo['employment_type'],$v) !== FALSE): ?>
+                                    <li><i data-val="<?php echo $v?>" data-id="employment_type" class="kyo-checkbox kyo-checkbox-sel"><?php echo $v?></i></li>
+                                <?php else: ?>
+                                    <li><i data-val="<?php echo $v?>" data-id="employment_type" class="kyo-checkbox"><?php echo $v?></i></li>
+                                <?php endif; ?>
+                            <?php } ?>
                             </ul>
                         </div>
                     </div>

@@ -199,8 +199,11 @@ class jobseeker extends Front_Controller {
         $uid = $this->session->userdata('uid');
 
         if ($post) {
+
             $rtn = $this->jobseeker_model->updatePreferences($uid, $post);
 
+            // delete old industry data
+            $this->jobseeker_model->delSeekingIndustry($uid);
             //save seeking industry to db
             $industry_len = count($post['industry']);
             for($i=0; $i<$industry_len;$i++) {
