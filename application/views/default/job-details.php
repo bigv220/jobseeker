@@ -38,7 +38,7 @@
                 <dl class="mb30">
                     <dt>Language(s) Required</dt>
                     <dd>
-                    <dd> 
+                    <dd>
                     	<span class="required"><b><?php echo getLanguageByID($jobinfo["language"]); ?></b> <i><?php echo getLanguageLevelByID($jobinfo["language_level"]); ?></i> </span>                    	
                     </dd>
                     </dd>

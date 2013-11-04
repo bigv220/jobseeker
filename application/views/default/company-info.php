@@ -33,12 +33,18 @@
       <div class="company-bd-right">
         <dl class="mb20">
           <dt>Jobs at <?php echo $info['first_name']?></dt>
-          <dd>
-            <ul class="redstar-works">
-              <li><a href="#">Admin Assistant</a></li>
-              <li><a href="#">UI Designer</a></li>
-              <li><a href="#">Project Manager</a></li>
-            </ul>
+          <dd class="mb40">
+              <?php if(empty($jobinfo)):?>
+              <div class="listed">
+                <p>You are not currently advertising any job positions.</p>
+                <a href="<?php echo $site_url?>job/postjob"><img src="<?php echo $theme_path?>style/company/post.png" alt="" border="0" /></a> </div>
+              <?php else: ?>
+              <ul class="redstar-works">
+                <?php foreach ($jobinfo as $job):?>
+                  <li><a href="<?php echo $site_url.'job/jobDetails/'.$job['id']?>"><?php echo $job['job_name'];?></a></li>                
+                <?php endforeach; ?>
+              </ul>
+              <?php endif; ?>
           </dd>
         </dl>
         <dl>

@@ -43,7 +43,9 @@ class job_model extends MY_Model
     }
 
     public function searchJob($where) {
-        $sql = "SELECT *,job.employment_length as employment_length, job.employment_type employment_type FROM job LEFT JOIN user as u on job.company_id=u.uid".$where;
+        $sql = "SELECT *,job.employment_length as employment_length, job.employment_type employment_type 
+        		FROM job 
+        		LEFT JOIN user as u on job.company_id=u.uid".$where;
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
@@ -60,4 +62,5 @@ class job_model extends MY_Model
     	$sql = 'SELECT * FROM job LEFT JOIN user as u on job.company_id=u.uid ORDER BY job.post_date DESC LIMIT 0,'.$limit;
     	return $this->db->query($sql)->result_array();
     }
+    
 }

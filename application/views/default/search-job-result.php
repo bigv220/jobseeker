@@ -290,7 +290,9 @@
                             <dt>Preferred Technical Skills</dt>
                             <dd><?php echo $job["preferred_technical_skills"]; ?></dd>
                             <dt>Language(s) Required</dt>
-                            <dd> <span class="required"> <b>English</b> <i>Fluent</i> </span> <span class="required"> <b>French</b> <i>Fluent</i> </span> <span class="required"> <b>German</b> <i>Fluent</i> </span> </dd>
+                            <dd>
+                            	<span class="required"><b><?php echo getLanguageByID($job["language"]); ?></b> <i><?php echo getLanguageLevelByID($job["language_level"]); ?></i> </span>
+                            </dd>
                         </dl>
                     </div>
                     <div class="sresult-nav-job-right">

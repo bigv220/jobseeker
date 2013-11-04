@@ -110,6 +110,7 @@ class search extends Front_Controller {
 	            
 	        }
         }
+        
         $data['jobs'] = $jobs;
 
         // generate job id string, this will be used in the filter function at the right side
