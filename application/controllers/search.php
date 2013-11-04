@@ -228,10 +228,10 @@ class search extends Front_Controller {
             if(!empty($post["location"])) {
                 array_push($where_arr, 'location=' .$post["location"]);
             }
-            if(!empty($post["employment_type"])) {
+            /*if(!empty($post["employment_type"])) {
                 array_push($where_arr, 'employment_type=' . $post["employment_type"]);
             }
-            /*if(!empty($post["industry"])) {
+            if(!empty($post["industry"])) {
                 array_push($where_arr, "industry like '%".$post["industry"]."%'");
             }
             if(!empty($post["position"])) {
@@ -257,8 +257,26 @@ class search extends Front_Controller {
             $where .= ' WHERE ' . $where_str;
         }
 
-        // get jobs according to the search
-        $data['jobseekers'] = $this->job_model->searchJobseeker($where);
+        // get jobseekers according to the search
+        $jobseekers = $this->job_model->searchJobseeker($where);
+        // Filter employment_type
+        if (!empty($post['employment_type'])) {
+        $filter_employment_type = explode(",", $post['employment_type']);
+
+            foreach ($jobseekers as $key => $one_job) {
+                $employment_type_arr = explode(",", $one_job['employment_type']);
+                
+                foreach ($employment_type_arr as $one_type) {
+                    if (in_array($one_type , $filter_employment_type) === FALSE) {
+                        unset($jobseekers[$key]);
+                    } else {
+                        break;
+                    }
+                }
+                
+            }
+        }
+        $data['jobseekers'] = $jobseekers;
 
         $this->load->view($data['front_theme']."/search-jobseeker-result",$data);
     }

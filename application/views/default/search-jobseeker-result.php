@@ -1,5 +1,15 @@
 <?php $this->load->view($front_theme.'/header-block');?>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("select[name='country']").change(function() {
+            change_location($(this),'country');
+        });
+        $("select[name='province']").change(function() {
+            change_location($(this), 'province');
+        });
+    });
+</script>
 <!--search-result body-->
 <div class="result-page w770 rel clearfix"> 
   <!--search-result condition-->
@@ -18,7 +28,7 @@
                 <select name="country" class="filter_key">
                             <option value="">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
-                            <?php if ($k == $userinfo['country']): ?>
+                            <?php if ($k == $_POST['country']): ?>
                                 <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
                                 <?php else: ?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
@@ -33,7 +43,7 @@
                 <select name="province" class="filter_key">
                             <option value="">All Province</option>
                             <?php foreach ($location['China'] as $k=>$v):?>
-                                <?php if ($k == $userinfo['province']): ?>
+                                <?php if ($k == $_POST['province']): ?>
                                 <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
                                 <?php else: ?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
@@ -46,22 +56,29 @@
             <dt class="search-row-tit">City</dt>
             <dd class="search-row-nav">
                 <select name="city" class="filter_key">
+                          <?php if (empty($_POST['city'])): ?>
                            <option value="">All City</option>
                            <option value="1">Beijing</option>
-                </select>
+                           <?php else: ?>
+                            <option value="<?php echo $_POST['city']; ?>"><?php echo $_POST['city']; ?></option>
+                            <option value="">All City</option>
+                           <?php endif; ?>
+				</select>
             </dd>
         </dl>
         
         <dl class="search-row ">
             <dt class="search-row-tit">Type of employment</dt>
             <dd class="search-row-nav">
-                <select name="employment_type" class=" filter_key">
+                <select id="employment_type" class="filter_key">
                     <option value="">All Type</option>
                     <?php $jobtype = jobtype();
                     foreach ($jobtype as $k => $v) {?>
                     <option value="<?php echo $k+1?>"><?php echo $v?></option>
                     <?php }?>
                 </select>
+                <input type="hidden" name="employment_type" id="jobtype_tag"/>
+                <ul id="jobtype_box" data-name="nameOfSelect"></ul>
             </dd>
         </dl>
         <dl class="search-row ">

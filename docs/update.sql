@@ -141,6 +141,8 @@ ALTER TABLE  `job` ADD  `city` VARCHAR( 50 ) NULL;
 
 #2013-10-30 Change Type of Employment from Tinyint to Varchar
 ALTER TABLE `job` modify column employment_type varchar(100);
+ALTER TABLE `job` modify column employment_type varchar(100);
+ALTER TABLE `user` modify column employment_type varchar(100);
 
 #2013-11-14
 ALTER TABLE  `user` CHANGE  `wechat`  `weibo` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT  'weibo.com'

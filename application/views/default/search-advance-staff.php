@@ -74,13 +74,15 @@
                 <div class="span3">
                     <strong>Type of employment</strong>
                     <div class="reg-row">
-                        <select name="employment_type" class="after-select" style="width: 230px;">
+                        <select id="employment_type" class="after-select" style="width: 230px;">
                             <option value="">All Type</option>
                             <?php $jobtype = jobtype();
                                 foreach ($jobtype as $k => $v) {?>
-                                <option value="<?php echo $k+1?>"><?php echo $v?></option>
+                                <option value="<?php echo $v?>"><?php echo $v?></option>
                             <?php }?>
                         </select>
+                        <input type="hidden" name="employment_type" id="jobtype_tag"/>
+                        <ul id="jobtype_box" data-name="nameOfSelect"></ul>
                     </div>
                 </div>
             </div>

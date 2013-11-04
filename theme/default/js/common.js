@@ -149,7 +149,11 @@ $('#jobtype_box').tagit({
     $('#employment_type').change(function() {
     	var slabel = $('#employment_type').find("option:selected").text();
     	var sval = $('#employment_type').val();
-        addTypeTag(slabel, sval);
+        if (sval != '')
+            addTypeTag(slabel, sval);
+        else if (sval == '') {
+            $('#jobtype_box').tagit('reset');
+        }
     });
 });
 var addTypeTag = function(label, tag) {

@@ -560,11 +560,15 @@
                     </div>
                     <div class="reg-row"><strong>Prefered type of employment?<i class="star">*</i></strong>
                         <div>
-                            <input type="hidden" name="employment_type" id="employment_type" value="<?php echo $userinfo['employment_type'];?>" class="kyo-radio" />
+                            <input type="hidden" name="employment_type" id="employment_type" value="<?php echo $userinfo['employment_type'];?>" class="kyo-checkout" />
                             <ul class="leng-radio">
                             <?php $jobtype = jobtype();
                             	foreach ($jobtype as $k => $v) { ?>
-                            <li><i data-val="<?php echo $k+1?>" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',<?php echo $k+1?>);"><?php echo $v?></i></li>
+                                <?php if (strpos($userinfo['employment_type'],$v) !== FALSE): ?>
+                                    <li><i data-val="<?php echo $v?>" data-id="employment_type" class="kyo-checkbox kyo-checkbox-sel"><?php echo $v?></i></li>
+                                <?php else: ?>
+                                    <li><i data-val="<?php echo $v?>" data-id="employment_type" class="kyo-checkbox"><?php echo $v?></i></li>
+                                <?php endif; ?>
                             <?php } ?>
                             </ul>
                         </div>
