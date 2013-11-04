@@ -3,7 +3,7 @@
 <!--company page body-->
 <div class="company-page w770 clearfix rel">
   <div class="company-body box rel mb20">
-    <div class="company-hd rel"> <i class="abs face png"></i>
+    <div class="company-hd rel"> <i class="abs face png" style="background:url(<?php echo $site_url.'attached/users/'.$info['profile_pic']?>) no-repeat;"></i>
       <div class="text">
         <h2><?php echo $info['first_name'];?></h2>
         <h4><?php echo $info['city'].', '.$info['country'];?></h4>
