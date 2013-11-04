@@ -34,9 +34,8 @@
         <dl class="mb20">
           <dt>Current listed jobs </dt>
           <dd class="mb40">
-           
               <?php if(empty($jobinfo)):?>
-               <div class="listed">
+              <div class="listed">
                 <p>You are not currently advertising any job positions.</p>
                 <a href="<?php echo $site_url?>job/postjob"><img src="<?php echo $theme_path?>style/company/post.png" alt="" border="0" /></a> </div>
               <?php else: ?>
@@ -45,7 +44,7 @@
                   <li><a href="<?php echo $site_url.'job/jobDetails/'.$job['id']?>"><?php echo $job['job_name'];?></a></li>                
                 <?php endforeach; ?>
               </ul>
-             <?php endif; ?>
+              <?php endif; ?>
           </dd>
         </dl>
         <dl>

@@ -77,7 +77,9 @@ class company extends Front_Controller {
     		redirect('/');
     	}
         $this->load->model('company_model');
+        $this->load->model('job_model');
         $data = $this->data;
+        $data["jobinfo"] = $this->job_model->getCompanyJobList($company_id);
         $data["info"] = $this->company_model->getUserInfo($company_id);
         $data['industries'] = $this->company_model->getIndustry($company_id);
         $this->load->view($data['front_theme']."/company-info",$data);
