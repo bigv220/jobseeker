@@ -225,7 +225,7 @@
         <div class="span3">
           <div class="zoom">
               <a href="#" class="job-btn jobseeker-btn-shortlisted"></a>
-              <a href="#" class="job-btn job-btn-match">95%</a>
+              <a href="#" class="job-btn job-btn-match">99%</a>
           </div>
           <div><a href="#" class="jobseeker_request_interview"></a></div>
         </div>
@@ -240,8 +240,7 @@
           <div class="fxui-tab-nav sresult-nav-job sresult_about_me">
             <div class="sresult-nav-job-left">
               <div class="text">
-                <p>We have an exciting opportunity for a full time Graphic Designer to join our creative team.
-                  We are a leading creative, events and media agency with offices in Beijing, London and Qingdao.</p>
+                <p>about me here...</p>
                </div>
               <dl class="sresult-nav-job-dl">
                 <dt>Industry</dt>

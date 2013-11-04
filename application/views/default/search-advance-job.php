@@ -86,7 +86,7 @@
                         </select>
                         <select name="city">
                             <option value="">All City</option>
-                            <option value="2">Beijing</option>
+                            <option value="1">Beijing</option>
                         </select>
                     </div>
                     <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
@@ -129,7 +129,7 @@
                             <option value="">All Type</option>
                             <?php $jobtype = jobtype();
                                 foreach ($jobtype as $k => $v) {?>
-                                <option value="<?php echo $v?>"><?php echo $v?></option>
+                                <option value="<?php echo $k+1?>"><?php echo $v?></option>
                             <?php }?>
                         </select>
                         <input type="hidden" name="employment_type" id="jobtype_tag"/>
@@ -158,10 +158,10 @@
             	<div class="span1">
                 	<strong>Salary </strong>
                     <select class="kyo-select">
-                        <option value="0" selected="selected">Any Salary</option>
+                        <option value="" selected="selected">Any Salary</option>
                         <?php $salary = getSalary();
 	                    foreach($salary as $v) { ?>
-	                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+	                    <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
 	                    <?php } ?>
                           </select>
                 </div>
@@ -169,10 +169,10 @@
                 	<strong>Language</strong>
                     <div class="reg-row">
                     <select name="language" class="after-select">
-                        <option value="0" selected="selected">All Languages</option>
+                        <option value="" selected="selected">All Languages</option>
                         <?php $language = language_arr();
                         foreach($language as $v) { ?>
-                        <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                        <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
                         <?php } ?>
                     </select>
                     </div>
