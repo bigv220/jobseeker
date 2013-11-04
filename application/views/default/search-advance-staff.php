@@ -49,7 +49,7 @@
             <div class="advsearch-row clearfix">
                 <div class="span1 reg-row">
                     <strong>Industry</strong>
-                    <select name="industry" class="industry_options" onchange="changeIndustry(this);">
+                    <select name="industry" class="industry_options" onchange="changeIndustry(this, false);">
                         <option value="">All Industries</option>
                         <?php foreach($industry as $key=>&$v) {
                         if(empty($v['name'])) continue;

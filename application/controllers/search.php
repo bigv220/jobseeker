@@ -34,6 +34,7 @@ class search extends Front_Controller {
         $post = $_POST;
         $where = '';
         $where_arr = array();
+        $where_or = array();
         if($post) {
             if ($post["keywords"] == 'Enter Keywords') {
                 $post['keywords'] = '';
@@ -56,15 +57,6 @@ class search extends Front_Controller {
             if(!empty($post["location"])) {
                 array_push($where_arr, 'location=' .$post["location"]);
             }
-            // if(!empty($post["employment_type"])) {
-            //     array_push($where_arr, 'employment_type=' . $post["employment_type"]);
-            // }
-            if(!empty($post["industry"])) {
-                array_push($where_arr, "industry like '%".$post["industry"]."%'");
-            }
-            if(!empty($post["position"])) {
-                array_push($where_arr, "position like '%".$post["position"]."%'");
-            }
             if(!empty($post["employment_length"])) {
                 array_push($where_arr, 'employment_length='.$post["employment_length"]);
             }
@@ -83,31 +75,51 @@ class search extends Front_Controller {
             if(!empty($post["ProfessionalSkills_str"])) {
                 array_push($where_arr, "preferred_technical_skills like '%".$post["ProfessionalSkills_str"]."%'");
             }
+
+            for($i=0;$i<count($post['industry']);$i++) {
+                if(!empty($post["industry"][$i])) {
+                    array_push($where_or, "industry like '%".$post["industry"][$i]."%'");
+                }
+            }
+
+            for($i=0;$i<count($post['position']);$i++) {
+                if(!empty($post["position"][$i]) && $post["position"][$i]!='none') {
+                    array_push($where_or, "position like '%".$post["position"][$i]."%'");
+                }
+            }
         }
 
         // get where string
-        if(count($where_arr)) {
+        if(count($where_arr) || count($where_or)) {
             $where_str = implode(' AND ', $where_arr);
-            $where .= ' WHERE ' . $where_str;
+            $where_or_str = implode(' OR ', $where_or);
+
+            if(count($where_arr) && count($where_or)) {
+                $where .= ' WHERE ' . $where_str . " AND (" . $where_or_str . ")";
+            } else {
+                $where .= ' WHERE ' . $where_str . $where_or_str;
+            }
+
         }
 
         // get jobs according to the search
         $jobs = $this->job_model->searchJob($where);
         // Filter employment_type
-        if (!empty($post['employment_type'])) {
-	        $filter_employment_type = explode(",", $post['employment_type']);
-	
-	        foreach ($jobs as $key => $one_job) {
-	            $employment_type_arr = explode(",", $one_job['employment_type']);
-	            
-	            foreach ($employment_type_arr as $one_type) {
-	                if (in_array($one_type , $filter_employment_type) === FALSE) {
-	                    unset($jobs[$key]);
-	                } else {
-	                    break;
-	                }
-	            }
-	        }
+        if($post) {
+            $filter_employment_type = explode(",", $post['employment_type']);
+
+            foreach ($jobs as $key => $one_job) {
+                $employment_type_arr = explode(",", $one_job['employment_type']);
+
+                foreach ($employment_type_arr as $one_type) {
+                    if (in_array($one_type , $filter_employment_type) === FALSE) {
+                        unset($jobs[$key]);
+                    } else {
+                        break;
+                    }
+                }
+
+            }
         }
         
         $data['jobs'] = $jobs;

@@ -80,7 +80,7 @@ function show_welcome_pop(usertype){
     $('.pop-welcome').fadeIn();
 }
 // change industry
-    function changeIndustry(thisO) {
+    function changeIndustry(thisO, next_element) {
         var name = $(thisO).val();
         $.post(site_url + 'jobseeker/ajaxchangeindustry',
             { ind_name: name },
@@ -93,7 +93,11 @@ function show_welcome_pop(usertype){
                         position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
                     }
                 }
-                $('#position_1').html(position_htm);
+                if(next_element) {
+                    $(thisO).next('select').html(position_htm);
+                } else {
+                    $(thisO).parent().next().find('select').html(position_htm);
+                }
             });
     }
 

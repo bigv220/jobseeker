@@ -51,8 +51,26 @@
                         position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
                     }
                 }
-                $('#position').html(position_htm);
+                $(thisO).parent().parent().next().find('select').html(position_htm);
             });
+    }
+
+    function addIndustryBtnClick(thisO) {
+        var num = $('select[name="industry[]"]').length;
+
+        if(num >= 3) {
+            alert("The can only add 3 industries.");
+            return;
+        }
+        var html = $('#industry_list').html();
+        html += '<span class="delSeekingIndustry"><i class="del" onclick="delNewUserIndustry(this);" style="top:-28px;left:6px;"></i></span>';
+        $(thisO).parent().parent().before(html);
+    }
+
+    function delNewUserIndustry(thisO) {
+        $(thisO).parent().prev().remove();
+        $(thisO).parent().prev().remove();
+        $(thisO).parent().remove();
     }
 </script>
 
@@ -127,10 +145,11 @@
                 <ul id="jobtype_box" data-name="nameOfSelect"></ul>
             </dd>
         </dl>
-        <dl class="search-row ">
+        <div id="industry_list">
+        <dl class="search-row">
             <dt class="search-row-tit">Industry</dt>
             <dd class="search-row-nav reg-row">
-                <select name="industry" class="industry_options" onchange="changeIndustry(this);">
+                <select name="industry[]" class="industry_options" onchange="changeIndustry(this);">
                     <option value="">All Industries</option>
                     <?php foreach($industry as $key=>&$v) {
                     if(empty($v['name'])) continue;
@@ -144,8 +163,8 @@
         </dl>
         <dl class="search-row ">
             <dt class="search-row-tit">Position</dt>
-            <dd class="search-row-nav">
-                <select name="position" id="position" class="industry_options">
+            <dd class="search-row-nav reg-row">
+                <select name="position[]" id="position" class="industry_options">
                     <option value="">All Positions</option>
                     <?php
                     foreach($position as $key=>&$v) {
@@ -156,6 +175,10 @@
                 <div class="search-row-tip" style="display: none;">Hold down 'Command' to select a max of 10</div>
                 <div id="sel-position-val" class="show-selval"></div>
             </dd>
+        </dl>
+        </div>
+        <dl class="search-row ">
+            <p><a class="reg-row-tip" href="javascript:void(0);" id="addIndustryBtn" onclick="addIndustryBtnClick(this);">+ Add another Industry</a></p>
         </dl>
         <dl class="search-row ">
             <dt class="search-row-tit">Length of employment</dt>

@@ -177,22 +177,3 @@ function saveAll() {
     }
 }
 
-
-// change industry
-    function changeIndustry(thisO) {
-        var name = $(thisO).val();
-        $.post(site_url + '/jobseeker/ajaxchangeindustry',
-            { ind_name: name },
-            function(result,status) {
-                var position_htm = '<option value="">Position</option>';
-
-                if(status == 'success'){
-                    var obj = eval('('+result+')');
-                    for ( var i = 0; i < obj.data.length; i++) {
-                        position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
-                    }
-                }
-                $('#position_1').html(position_htm);
-            });
-    }
-
