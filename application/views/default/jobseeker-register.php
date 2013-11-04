@@ -415,8 +415,7 @@
                         </select>
                         <select name="city">
                             <option value="">All City</option>
-                            <option value="2">Beijing</option>
-                            <option value="3">Shanghai</option>
+                            <option value="1">Beijing</option>
                         </select>
                     </div>
                 </div>
@@ -502,27 +501,32 @@
                         <input type="text" name="website" class="reg-input" value="<?php echo $userinfo['personal_website']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <b>Twitter Username</b>
+                <div class="reg-row"> <b>Twitter</b>
                     <div>
                         <input type="text" name="twitter" class="reg-input" value="<?php echo $userinfo['twitter']; ?>" />
                     </div>
                 </div>
-               <div class="reg-row"> <b>Linkedin Username</b>
+               <div class="reg-row"> <b>Linkedin</b>
                     <div>
                         <input type="text" name="linkedin" class="reg-input" value="<?php echo $userinfo['linkedin']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <b>Wechat</b>
+                <div class="reg-row"> <b>Weibo</b>
                     <div>
-                        <input type="text" name="wechat" class="reg-input" value="<?php echo $userinfo['wechat']; ?>" />
+                        <input type="text" name="weibo" class="reg-input" value="<?php echo $userinfo['weibo']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <b>Other Social Network</b>
+                <div class="reg-row"> <b>Facebook</b>
+                    <div>
+                        <input type="text" name="facebook" class="reg-input" value="<?php echo $userinfo['facebook']; ?>" />
+                    </div>
+                </div>
+                <!-- <div class="reg-row"> <b>Other Social Network</b>
                     <div>
                         <input type="text" name="socialNetwork" id="reg-Network" value="">
                         <div id="reg-network-val" class="show-selval"></div>
                     </div>
-                </div>
+                </div> -->
                 <div class="reg-area-bar">
                     <input type="hidden" name="register_step" value="2" />
                     <input type="button" class="reg-save" data-index="1" onclick="contactDetailsSubmit();" />

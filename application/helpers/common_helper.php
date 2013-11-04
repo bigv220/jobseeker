@@ -134,14 +134,6 @@ function getLanguageLevelByID($id) {
 	return $arr[$id-1];
 }
 
-function jobtype() {
-	return array('Full Time','Part Time','Contract','Internship');
-}
-function getJobtypeByID($id) {
-	$arr = jobtype();
-	return $arr[$id-1];
-}
-
 function getSalary() {
 	return array('Unpaid','<10,000','10,000-15,000','15,000-20,000','20,000-30,000','30,000-40,000','40,000+','Negotiable');
 }
@@ -155,6 +147,14 @@ function getExperience() {
 }
 function getExperienceByID($id) {
 	$arr = getExperience();
+	return $arr[$id-1];
+}
+
+function jobtype() {
+	return array('Full Time','Part Time','Contract','Internship');
+}
+function getJobtypeByID($id) {
+	$arr = jobtype();
 	return $arr[$id-1];
 }
 

@@ -118,7 +118,7 @@ class jobseeker_model extends MY_Model
         $data = array('email'=>$data['email'],'phone'=>$data['phone'],'is_allow_online_msg'=>$data['is_allow_online_msg'],
             'is_allow_phone'=>$data['is_allow_phone'], 'jingchat_username'=>$data['jingchat_username'],
             'personal_website'=>$data['website'],'twitter'=>$data['twitter'],
-            'linkedin'=>$data['linkedin'],'wechat'=>$data['wechat']);
+            'linkedin'=>$data['linkedin'],'facebook'=>$data['facebook'],'weibo'=>$data['weibo']);
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }
 

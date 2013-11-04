@@ -51,10 +51,18 @@
           <dt><?php echo $info['first_name'];?> elsewhere on the web</dt>
           <dd>
             <ul class="redstar-web">
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
-              <li><a href="#">Pinterest</a></li>
-              <li><a href="#">WeChat</a></li>
+              <?php if (!empty($info['twitter'])):?>
+              <li><a href="<?php echo $info['twitter']?>">Twitter</a></li>
+              <?php endif;?>
+              <?php if (!empty($info['facebook'])):?>
+              <li><a href="<?php echo $info['facebook']?>">Facebook</a></li>
+              <?php endif;?>
+              <?php if (!empty($info['linkedin'])):?>
+              <li><a href="<?php echo $info['linkedin']?>">Linkedin</a></li>
+              <?php endif;?>
+              <?php if (!empty($info['weibo'])):?>
+              <li><a href="<?php echo $info['weibo']?>">Weibo</a></li>
+              <?php endif;?>
             </ul>
           </dd>
         </dl>
