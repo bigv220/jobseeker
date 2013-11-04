@@ -555,13 +555,12 @@
                     </div>
                     <div class="reg-row"><strong>Prefered type of employment?<i class="star">*</i></strong>
                         <div>
-                            <input type="hidden" name="employment_type" id="employment_type" value="<?php echo $userinfo['employment_type'];?>" class="kyo-radio" />
+                            <input type="hidden" name="employment_type" id="employment_type" value="<?php echo $userinfo['employment_type'];?>" class="kyo-checkout" />
                             <ul class="leng-radio">
-                                <li><i data-val="1" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',1);">Contract</i></li>
-                                <li><i data-val="2" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',2);">Part Time</i></li>
-                                <li><i data-val="3" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',3);">Full Time</i></li>
-                                <li><i data-val="4" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',4);">Internship</i></li>
-                                <li><i data-val="5" data-id="employment_type" class="kyo-radio" onclick="selectItem('employment_type',5);">Any</i></li>
+                                <li><i data-val="Contract" data-id="employment_type" class="kyo-checkbox">Contract</i></li>
+                                <li><i data-val="Part Time" data-id="employment_type" class="kyo-checkbox">Part Time</i></li>
+                                <li><i data-val="Full Time" data-id="employment_type" class="kyo-checkbox">Full Time</i></li>
+                                <li><i data-val="Internship" data-id="employment_type" class="kyo-checkbox">Internship</i></li>
                             </ul>
                         </div>
                     </div>

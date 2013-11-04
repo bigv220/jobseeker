@@ -18,7 +18,7 @@
                 <select name="country" class="filter_key">
                             <option value="">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
-                            <?php if ($k == $userinfo['country']): ?>
+                            <?php if (false): ?>
                                 <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
                                 <?php else: ?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
@@ -33,7 +33,7 @@
                 <select name="province" class="filter_key">
                             <option value="">All Province</option>
                             <?php foreach ($location['China'] as $k=>$v):?>
-                                <?php if ($k == $userinfo['province']): ?>
+                                <?php if (false): ?>
                                 <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
                                 <?php else: ?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>

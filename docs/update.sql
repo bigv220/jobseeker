@@ -141,3 +141,4 @@ ALTER TABLE  `job` ADD  `city` VARCHAR( 50 ) NULL;
 
 #2013-10-30 Change Type of Employment from Tinyint to Varchar
 ALTER TABLE `job` modify column employment_type varchar(100);
+ALTER TABLE `user` modify column employment_type varchar(100);
