@@ -47,6 +47,11 @@ class job extends Front_Controller {
     }
     
     public function postjob() {
+    	
+    	if (!isCompany($this->session->userdata('user_type'))) {
+    		securelychk();
+    	}
+    	
     	$data = $this->data;
         $this->load->model('jobseeker_model');
         //industry lists
@@ -65,6 +70,10 @@ class job extends Front_Controller {
     		$post['post_date'] = date('Y-m-d', time());
     		if (1 == $this->session->userdata('user_type')) {
     			$post['company_id'] = $this->session->userdata('uid');
+    		}
+    		
+    		if (empty($post['company_id'])) {
+    			securelychk();
     		}
 
     		//Load Model

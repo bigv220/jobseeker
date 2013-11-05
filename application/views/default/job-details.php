@@ -3,7 +3,11 @@
 <!--company page body-->
 <div class="company-page w770 clearfix rel">
     <div class="company-body box rel mb20">
-        <div class="company-hd rel"> <i class="abs face png" style="background:url(<?php echo $site_url.'attached/users/'.$company_avatar?>) no-repeat;"></i>
+        <div class="company-hd rel"> 
+        <div class="people_icon">
+	        <img src="<?php echo $site_url.'attached/users/'.$company_avatar?>" alt="" width="128px" height="128px"/>
+	        <i class="abs face png"></i>
+        </div>
             <div class="text" style="width:320px;">
                 <h2><?php echo $jobinfo["job_name"]; ?></h2>
                 <h4><?php echo $jobinfo["location"].' '.$jobinfo["city"]; ?></h4>

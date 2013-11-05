@@ -166,4 +166,15 @@ function getEmploymentLengthByID($id) {
 	return $arr[$id-1];
 }
 
+function securelychk($msg = 'unknown error.') {
+	alertmsg($msg);
+}
+
+function isCompany($utype) {
+	if (1 == $utype) {
+		return true;
+	} else {
+		return false;
+	}
+}
 
