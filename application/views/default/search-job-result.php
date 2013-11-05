@@ -222,8 +222,10 @@
                 <select name="language" class="filter_key">
                     <option value="0" selected="selected">All Languages</option>
                     <?php $language = language_arr();
-                    foreach($language as $v) { ?>
-                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                    $i = 0;
+                    foreach($language as $v) {
+                        ?>
+                    <option value="<?php echo ++$i; ?>"><?php echo $v; ?></option>
                     <?php } ?>
                 </select>
                 <div class="search-row-tip" style="display: none;">Hold down 'Command' to select multiple</div>

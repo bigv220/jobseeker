@@ -43,7 +43,14 @@
                     <dt>Language(s) Required</dt>
                     <dd>
                     <dd>
-                    	<span class="required"><b><?php echo getLanguageByID($jobinfo["language"]); ?></b> <i><?php echo getLanguageLevelByID($jobinfo["language_level"]); ?></i> </span>                    	
+                        <?php if(count($job_languages)>0) {
+                            foreach($job_languages as $v):
+                        ?>
+                    	<span class="required">
+                            <b><?php echo getLanguageByID($v["language"]); ?></b>
+                            <i><?php echo getLanguageLevelByID($v["level"]); ?></i>
+                        </span>
+                        <?php endforeach; } ?>
                     </dd>
                     </dd>
                 </dl>
@@ -74,12 +81,7 @@
                     <dd>
                         <ul class="industry-ul">
                             <li class="n1"><b>Type of Employment</b><span>
-                                <?php 
-                                $arr = explode(',', $jobinfo['employment_type']);
-                                foreach ($arr as $str) {
-								 echo getJobtypeByID($str).', ';
-								}
-                                ?></span>
+                                <?php echo $jobinfo["employment_type"];?></span>
                             </li>
                             <li class="n2"><b>Length of Employment</b><span>
                                 <?php echo getEmploymentLengthByID($jobinfo["employment_length"]);?></span>
