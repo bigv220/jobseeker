@@ -105,7 +105,7 @@ class search extends Front_Controller {
         // get jobs according to the search
         $jobs = $this->job_model->searchJob($where);
         // Filter employment_type
-        if($post) {
+        if(!empty($post['employment_type'])) {
             $filter_employment_type = explode(",", $post['employment_type']);
 
             foreach ($jobs as $key => $one_job) {
