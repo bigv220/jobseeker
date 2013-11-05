@@ -123,6 +123,9 @@ function language_arr() {
 }
 function getLanguageByID($id) {
 	$arr = language_arr();
+    if(empty($id)) {
+        return $arr[0];
+    }
 	return $arr[$id-1];
 }
 
@@ -131,6 +134,9 @@ function language_level() {
 }
 function getLanguageLevelByID($id) {
 	$arr = language_level();
+    if(empty($id)) {
+        return $arr[0];
+    }
 	return $arr[$id-1];
 }
 
@@ -139,6 +145,9 @@ function getSalary() {
 }
 function getSalaryByID($id) {
 	$arr = getSalary();
+    if(empty($id)) {
+        return $arr[0];
+    }
 	return $arr[$id-1];
 }
 
@@ -147,6 +156,9 @@ function getExperience() {
 }
 function getExperienceByID($id) {
 	$arr = getExperience();
+    if(empty($id)) {
+        return $arr[0];
+    }
 	return $arr[$id-1];
 }
 
