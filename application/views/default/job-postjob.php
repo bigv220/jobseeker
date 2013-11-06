@@ -221,6 +221,7 @@
 
 <!-- Partners -->
 <?php $this->load->view($front_theme.'/partners-block');?>
+<script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
 	
 <script type="text/javascript">
 $(document).ready(function() {
@@ -253,8 +254,8 @@ function addLanguageBtnClick(thisO) {
         return;
     }
     var html = '<div class="postjob-content-left-row clearfix">'+$('#language_item').html();
-    html += '<span class="delSeekingIndustry"><i class="del" onclick="delNewUserLanguage(this);"'+
-        ' style="top:-20px;left:6px;height:12px;"></i></span></div>';
+    html += '<div class="postjob_del"><i class="del" onclick="delNewUserLanguage(this);">'+
+        '</i></div></div>';
     $(thisO).parent().before(html);
 }
 
@@ -284,5 +285,4 @@ function delNewUserLanguage(thisO) {
 }
 </script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
-<script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

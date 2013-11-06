@@ -8,6 +8,12 @@
     $(document).ready(function(){
         select_location('country','<?php echo $userinfo['country'];?>');
         select_location('province','<?php echo $userinfo['province'];?>');
+
+        //upload user avatar
+        uploadImage();
+
+        //upload work examples
+        uploadFile("image_example",'example_upload_button','exampleerrorRemind','work_example');
     });
 </script>
 
