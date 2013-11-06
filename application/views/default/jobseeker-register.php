@@ -840,8 +840,10 @@
                         ?>
 
                         <div class="reg-row" style="clear: both;">
+                            <div>
                             <input type="hidden" name="grop_num[]" value="<?php echo count($userIndustry); ?>"/>
-                            <p><a class="reg-row-tip" href="javascript:void(0);" id="addIndustryBtn" onclick="addIndustryBtnClick(this);">+ Add another Industry</a></p>
+                            <a class="reg-row-tip" href="javascript:void(0);" onclick="addIndustryBtnClick(this);">+ Add another Industry</a>
+                            </div>
                         </div>
 
                     <div class="reg-row clearfix"> <strong>Description</strong>
@@ -903,8 +905,7 @@
 						$language = array(array('language'=>'none','level'=>'none'));
 					}
                     foreach($language as $lan):
-                    $i++;
-                        if($i == 1) echo '<div id="language_lists">';
+                        if(++$i == 1) echo '<div class="advsearch-row clearfix" id="language_lists">';
                     ?>
 
                     <div class="reg-row" style="clear:both;float:left;width:240px;">
@@ -1050,4 +1051,5 @@
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/findJobPage.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

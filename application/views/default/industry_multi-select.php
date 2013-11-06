@@ -1,78 +1,45 @@
-<script type="text/javascript">
-    function addIndustryBtnClick(thisO) {
-        var industry_num = $(thisO).parent().prev().val();
-
-        if(industry_num >= 3) {
-            alert("The can only add 3 industries.");
-            return;
-        }
-
-        $(thisO).parent().prev().val(parseInt(industry_num)+1);
-
-        var html = $('#industry_list').html();
-        html += '<span class="delSeekingIndustry"><i class="del" onclick="delNewUserIndustry(this);" style="top:30px;left:5px;"></i></span>';
-        $(thisO).parent().parent().before(html);
-    }
-
-    function delUserIndustry(thisO,id) {
-        var uid = $('#uid').val();
-
-        $.post(site_url + '/jobseeker/delUserIndustry',
-            {id:id},
-            function(result,status){
-                if(status == 'success'){
-                    delNewUserIndustry(thisO);
-                }
-                else{
-                    alert('Delete failed!');
-                }
-            });
-    }
-
-    function delNewUserIndustry(thisO) {
-        var v = $(thisO).parent().parent().find('input[name="grop_num[]"]').val();
-        $(thisO).parent().parent().find('input[name="grop_num[]"]').val(parseInt(v)-1);
-
-        $(thisO).parent().prev().remove();
-        $(thisO).parent().prev().remove();
-        $(thisO).parent().remove();
-    }
-</script>
-
 <?php
     $i = 0;
-    foreach($userIndustry as $ind):
-    $i++;
-    if($i == 1) echo '<div id="industry_list">';
+    foreach($userIndustry as $ind) {
+    if(++$i == 1) {
+        echo '<div class="advsearch-row clearfix" id="one_list">';
+    } else {
+        echo '<div class="advsearch-row clearfix">';
+    }
 ?>
 
-<div class="reg-row" style="clear:both;float:left;width:240px;">
-    <strong>Industry<i class="star">*</i></strong><br />
-    <select name="industry[]" id="industry_11" onchange="changeIndustry(this, false);"  required>
-        <option value="">All industries</option>
-        <?php
-        foreach($industry as $v) {
-            $str = '';
-            if($v['name'] == $ind['industry']) {
-                $str = ' selected="selected"';
-            }
-            ?>
-            <option value="<?php echo $v['name']; ?>"<?php echo $str; ?>><?php echo $v['name']; ?></option>
+<div class="span1">
+    <strong>Industry<i class="star">*</i></strong>
+    <div class="reg-row">
+        <select name="industry[]" onchange="changeIndustry(this, false);"  required>
+            <option value="">All industries</option>
+            <?php
+            foreach($industry as $v) {
+                $str = '';
+                if($v['name'] == $ind['industry']) {
+                    $str = ' selected="selected"';
+                }
+                ?>
+                <option value="<?php echo $v['name']; ?>"<?php echo $str; ?>><?php echo $v['name']; ?></option>
             <?php } ?>
-    </select>
+        </select>
+    </div>
 </div>
-<div class="reg-row" style="float:left;width:220px;">
-    <strong>Position</strong><br />
-    <select name="position[]" id="position_11" required>
-        <option value="<?php echo $ind['position']; ?>"><?php echo $ind['position']; ?></option>
-    </select>
+<div class="span2">
+    <strong>Position</strong>
+    <div class="reg-row">
+        <select name="position[]" required>
+            <option value="<?php echo $ind['position']; ?>"><?php echo $ind['position']; ?></option>
+        </select>
+    </div>
 </div>
 
-<?php if($i==1) echo "</div>"; ?>
+</div>
+
 <?php if($i>1) { ?>
-    <span class="delSeekingIndustry">
-        <i class="del" onclick="delUserIndustry(this, '<?php echo $ind['id']; ?>');" style="top:30px;left:5px;"></i>
-    </span>
+<div class="span3">
+    <i class="del" onclick="delUserIndustry(this, '<?php echo $ind['id']; ?>');"></i>
+</div>
 <?php }?>
 
-<?php endforeach;?>
+<?php } ?>
