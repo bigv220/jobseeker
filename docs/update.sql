@@ -159,7 +159,7 @@ CREATE TABLE `user_industry_position` (
 ALTER TABLE `job` modify column employment_type varchar(100);
 ALTER TABLE `user` modify column employment_type varchar(100);
 
-#2013-11-14
+#2013-11-4
 ALTER TABLE  `user` CHANGE  `wechat`  `weibo` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT  'weibo.com'
 ALTER TABLE  `user` ADD  `facebook` VARCHAR( 100 ) NULL AFTER  `weibo`
 
