@@ -101,7 +101,7 @@
                                 <option value="">--Select--</option>
                                 <?php $jobtype = jobtype();
                                 foreach ($jobtype as $k => $v) {?>
-                                <option value="<?php echo $k+1?>"><?php echo $v?></option>
+                                <option value="<?php echo $v?>"><?php echo $v?></option>
                                 <?php }?>
                             </select>
                             <input type="hidden" name="employment_type" id="jobtype_tag"/>

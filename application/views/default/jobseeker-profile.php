@@ -107,18 +107,20 @@
               </dd>
               <dt>Elsewhere on Web</dt>
               <dd>
-                  <?php if (!empty($userinfo['twitter'])):?>
-	              <p><a href="<?php echo $userinfo['twitter']?>">Twitter</a></p>
-	              <?php endif;?>
-	              <?php if (!empty($userinfo['facebook'])):?>
-	              <p><a href="<?php echo $userinfo['facebook']?>">Facebook</a></p>
-	              <?php endif;?>
-	              <?php if (!empty($userinfo['linkedin'])):?>
-	              <p><a href="<?php echo $userinfo['linkedin']?>">Linkedin</a></p>
-	              <?php endif;?>
-	              <?php if (!empty($userinfo['weibo'])):?>
-	              <p><a href="<?php echo $userinfo['weibo']?>">Weibo</a></p>
-	              <?php endif;?>
+
+                  <?php if (isset($userinfo['twitter'])): ?>
+                    <p><a href="http://twitter.com/$userinfo['twitter']" target="_blank">Twitter</a></p>
+                  <?php endif; ?>
+                  <?php if (isset($userinfo['linkedin'])): ?>
+                  <p><a href="#">Linkedin</a></p>
+                  <?php endif; ?>
+                  <?php if (isset($userinfo['wechat'])): ?>
+                  <p><a href="#">Wechat</a></p>
+                  <?php endif; ?>
+                  <?php if (isset($userinfo['personal_website'])): ?>
+                  <p><a href="http://<?php echo $userinfo['personal_website']; ?>" target="_blank">Personal Website</a></p>
+                <?php endif; ?>
+
               </dd>
 
               <dt>Phone</dt>
@@ -139,7 +141,7 @@
                       </li>
                       -->
                       <li class="n1"><b>Type of Employment</b><span>
-                        <?php echo getJobtypeByID($userinfo['employment_type'])?></span></li>
+                        <?php echo str_replace(",", ", ", $userinfo['employment_type']); ?></span></li>
                       <li class="n2"><b>Length of Employment</b><span>
                       <?php echo getEmploymentLengthByID($userinfo['employment_length']) ?></span></li>
                   </ul>
