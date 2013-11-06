@@ -47,12 +47,16 @@
 		<div class="advsearch-tit">Find a Job</div>
         <div class="advsearch-min">
         	<div class="advsearch-row clearfix">
-            	<div class="span1">
+            	<div class="span1 long_input">
                 	<strong>Search our job database</strong>
                     <div><input type="text" name="keywords" class="kyo-input input-tip" data-tipval="Enter Keywords" value="Enter Keywords"></div>
                 </div>
-                <div class="span2 location" style="width: 460px;">
-                	<strong>Location</strong>
+
+            </div>
+
+            <div class="advsearch-row clearfix">
+                <div class="span1">
+                    <strong>Country</strong>
                     <div class="reg-row">
                         <select name="country">
                             <option value="">All Counties</option>
@@ -60,23 +64,33 @@
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
                             <?php endforeach;?>
                         </select>
+                    </div>
+                </div>
+                <div class="span1">
+                    <strong>Province</strong>
+                    <div class="reg-row">
                         <select name="province">
                             <option value="">All Province</option>
                             <?php foreach ($location['China'] as $k=>$v):?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
                             <?php endforeach;?>
                         </select>
+                    </div>
+                </div>
+                <div class="span1" style="margin-right:0;">
+                    <strong>City</strong>
+                    <div class="reg-row">
                         <select name="city">
                             <option value="">All City</option>
                             <option value="1">Beijing</option>
                         </select>
                     </div>
-                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
-                    <div id="sel-city-val" class="show-selval"><ul></ul></div>
                 </div>
+                <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
+                <div id="sel-city-val" class="show-selval"><ul></ul></div>
 
             </div>
-            
+
             <div class="advsearch-row clearfix" style="width: 500px;">
                 <?php
                 //Load Model
