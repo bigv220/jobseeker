@@ -43,7 +43,7 @@
 
 <div class="advsearch w770 rel clearfix"> 
   <form method="post" action="<?php echo $site_url; ?>search/searchJob" id="searchForm">
-  <div class="advsearch-bd box rel mb10">
+  <div class="advsearch-bd box rel mb10" id="find_a_job_wrapper">
 		<div class="advsearch-tit">Find a Job</div>
         <div class="advsearch-min">
         	<div class="advsearch-row clearfix">
@@ -170,20 +170,7 @@
                     <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
                     <div id="sel-language-val" class="show-selval"></div>
                 </div>
-                <div class="span3 reg-row">
-                	<strong>Personal Skills</strong>
-                    <select name="personal_skills" class="industry_options">
-                        <option value="">All Skills</option>
-                        <?php foreach($tech_skills as $key=>&$v) {
-                        if(empty($v['skill'])) continue;
-                        ?>
-                        <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>
-                        <?php } ?>
-                    </select>
-                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 5</div>-->
-                    <div id="sel-personal-val" class="show-selval"></div>
 
-                </div>
             </div>
         	<div class="advsearch-row clearfix">
             	<div class="span1 reg-row">
@@ -198,6 +185,20 @@
                     </select>
                     <!--<div class="search-row-tip">Hold down 'Command' to select a max of 5</div>-->
                     <div id="sel-technical-val" class="show-selval"></div>
+                </div>
+                <div class="span2 reg-row">
+                    <strong>Personal Skills</strong>
+                    <select name="personal_skills" class="industry_options">
+                        <option value="">All Skills</option>
+                        <?php foreach($tech_skills as $key=>&$v) {
+                            if(empty($v['skill'])) continue;
+                            ?>
+                            <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 5</div>-->
+                    <div id="sel-personal-val" class="show-selval"></div>
+
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@
     }
 ?>
 
-<div class="span1">
+<div class="span1 long_input">
     <strong>Industry<i class="star">*</i></strong>
     <div class="reg-row">
         <select name="industry[]" onchange="changeIndustry(this, false);"  required>
