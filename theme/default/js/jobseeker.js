@@ -389,6 +389,13 @@ function uploadFile(btn_id, upload_btn, error_id,input_id) {
 function delPersonalSkills(id_str,thisO,skill) {
     var uid = $('#uid').val();
 
+    if (uid == undefined && id_str != '') {
+        $('input[name=preferred_technical_skills]').val($('input[name=preferred_technical_skills]').val().replace(skill+',',''));
+        if ($('input[name=preferred_technical_skills]').val() == '') {
+            $('#ProfessionalSkills_input').attr('required','');
+        }
+    }
+
     $.post(site_url + 'jobseeker/del' + id_str,
         {uid:uid, skill:skill},
         function(result,status){
@@ -403,6 +410,11 @@ function delPersonalSkills(id_str,thisO,skill) {
 
 // ajax to adding personal skills
 function addPersonalSkillAjax(id_str,uid, v, li_id) {
+    if (uid == undefined && id_str != '') {
+        $('input[name=preferred_technical_skills]').val(v+','+$('input[name=preferred_technical_skills]').val());
+        $('#ProfessionalSkills_input').removeAttr('required');
+    }
+
     $.post(site_url + 'jobseeker/add'+ id_str,
         { uid:uid, skill:v },
         function(result,status) {

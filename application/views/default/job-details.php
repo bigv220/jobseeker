@@ -37,7 +37,7 @@
                 </dl>
                 <dl class="mb30">
                     <dt>Preferred Technical Skills</dt>
-                    <dd><strong><?php echo $jobinfo["preferred_technical_skills"]; ?></strong></dd>
+                    <dd><strong><?php if (!empty($jobinfo["preferred_technical_skills"])) echo str_replace(',',', ',substr($jobinfo["preferred_technical_skills"], 0, -1)); ?></strong></dd>
                 </dl>
                 <dl class="mb30">
                     <dt>Language(s) Required</dt>

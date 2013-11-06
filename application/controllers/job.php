@@ -60,7 +60,7 @@ class job extends Front_Controller {
         //industry lists
         $uid = $this->session->userdata('uid');
         $data["industry"] = $this->jobseeker_model->getIndustry();
-
+        $data["professional_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
         // get location
         $this->load->helper('location');
         $data['location'] = getLoction();
@@ -86,7 +86,8 @@ class job extends Front_Controller {
             $data = array('job_name'=>$post['job_name'],'job_desc'=>$post['job_desc'],
                 'employment_length'=>$post['employment_length'],
                 'employment_type'=>$post['employment_type'],'industry'=>$post['industry'],
-                'position'=>$post['position'],'preferred_personal_skills'=>$post['preferred_personal_skills'],
+                'position'=>$post['position'],
+                'preferred_technical_skills'=>$post['preferred_technical_skills'],
                 'location'=>$post['location'],'country'=>$post['country'],'province'=>$post['province'],
                 'city'=>$post['city'],'salary_range'=>$post['salary_range'],
                 'preferred_year_of_experience'=>$post['preferred_year_of_experience'],

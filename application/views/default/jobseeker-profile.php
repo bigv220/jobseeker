@@ -108,16 +108,22 @@
               <dt>Elsewhere on Web</dt>
               <dd>
 
-                  <?php if (isset($userinfo['twitter'])): ?>
+                  <?php if (!empty($userinfo['twitter'])): ?>
                     <p><a href="http://twitter.com/$userinfo['twitter']" target="_blank">Twitter</a></p>
                   <?php endif; ?>
-                  <?php if (isset($userinfo['linkedin'])): ?>
+                  <?php if (!empty($userinfo['linkedin'])): ?>
                   <p><a href="#">Linkedin</a></p>
                   <?php endif; ?>
-                  <?php if (isset($userinfo['wechat'])): ?>
-                  <p><a href="#">Wechat</a></p>
-                  <?php endif; ?>
-                  <?php if (isset($userinfo['personal_website'])): ?>
+                  <?php if (!empty($userinfo['facebook'])):?>
+                  <p><a href="<?php echo $userinfo['facebook']?>">Facebook</a></p>
+                  <?php endif;?>
+                  <?php if (!empty($userinfo['linkedin'])):?>
+                  <p><a href="<?php echo $userinfo['linkedin']?>">Linkedin</a></p>
+                  <?php endif;?>
+                  <?php if (!empty($userinfo['weibo'])):?>
+                  <p><a href="<?php echo $userinfo['weibo']?>">Weibo</a></p>
+                  <?php endif;?>
+                  <?php if (!empty($userinfo['personal_website'])): ?>
                   <p><a href="http://<?php echo $userinfo['personal_website']; ?>" target="_blank">Personal Website</a></p>
                 <?php endif; ?>
 
