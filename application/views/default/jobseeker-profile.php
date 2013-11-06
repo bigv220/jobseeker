@@ -107,6 +107,7 @@
               </dd>
               <dt>Elsewhere on Web</dt>
               <dd>
+
                   <?php if (isset($userinfo['twitter'])): ?>
                     <p><a href="http://twitter.com/$userinfo['twitter']" target="_blank">Twitter</a></p>
                   <?php endif; ?>
@@ -119,12 +120,14 @@
                   <?php if (isset($userinfo['personal_website'])): ?>
                   <p><a href="http://<?php echo $userinfo['personal_website']; ?>" target="_blank">Personal Website</a></p>
                 <?php endif; ?>
+
               </dd>
 
               <dt>Phone</dt>
               <dd><p class="phone_number"><?php echo $userinfo['phone']; ?></p></dd>
               <dd class="industry">
                   <ul class="industry-ul">
+                  	<!-- 
                       <li class="n3"><b>Visa Assistance</b><span>
                         <?php if(empty($userinfo['is_visa_assistance'])): ?>Visa will be provided
                         <?php else: ?>
@@ -134,43 +137,13 @@
                         <?php if(empty($userinfo['is_visa_assistance'])): ?>Accomodation will be provided
                         <?php else: ?>
                         No Accomodation
-                        <?php endif; ?></span></li>
+                        <?php endif; ?></span>
+                      </li>
+                      -->
                       <li class="n1"><b>Type of Employment</b><span>
-                        <?php switch($userinfo['employment_type']){
-                              case 1:
-                                echo "Contract";
-                                break;
-                              case 2:
-                                echo "Part Time";
-                                break;
-                              case 3:
-                                echo "Full Time";
-                                break;
-                              case 4:
-                                echo "Internship";
-                                break;
-                              case 5:
-                                echo "Any";
-                                break;
-                              default:
-                                echo "Any";
-                                break;  
-                         }; ?></span></li>
+                        <?php echo str_replace(",", ", ", $userinfo['employment_type']); ?></span></li>
                       <li class="n2"><b>Length of Employment</b><span>
-                      <?php switch($userinfo['employment_length']){
-                              case 1:
-                                echo "Long term employment (1+ years)";
-                                break;
-                              case 2:
-                                echo "Short term employment (-1 years)";
-                                break;
-                              case 3:
-                                echo "No preference";
-                                break;
-                              default:
-                                echo "No preference";
-                                break;  
-                         }; ?></span></li>
+                      <?php echo getEmploymentLengthByID($userinfo['employment_length']) ?></span></li>
                   </ul>
               </dd>
               <!-- <dt>Similar to people <?php echo $userinfo['first_name']; ?></dt>

@@ -58,12 +58,12 @@
                 <select name="city" class="filter_key">
                           <?php if (empty($_POST['city'])): ?>
                            <option value="">All City</option>
-                           <option value="Beijing">Beijing</option>
-                            <?php else: ?>
+                           <option value="1">Beijing</option>
+                           <?php else: ?>
                             <option value="<?php echo $_POST['city']; ?>"><?php echo $_POST['city']; ?></option>
                             <option value="">All City</option>
-                            <?php endif; ?>
-                </select>
+                           <?php endif; ?>
+				</select>
             </dd>
         </dl>
         
@@ -116,9 +116,10 @@
             <dd class="search-row-nav">
                 <select name="employment_length" class=" filter_key">
                     <option value="">--Select--</option>
-                    <option value="1">Long term employment (1+ years)</option>
-                    <option value="2">Short term employment (-1 years)</option>
-                    <option value="3">No preference</option>
+                    <?php $expl = getEmploymentLength();
+                    foreach ($expl as $k => $v) {?>
+                    <option value="<?php echo $k+1?>"><?php echo $v?></option>
+                    <?php }?>
                 </select>
             </dd>
         </dl>
@@ -138,11 +139,11 @@
             <dt class="search-row-tit">Year of experience</dt>
             <dd class="search-row-nav">
                 <select name="experience_year" class=" filter_key">
-                    <option value="">--Select--</option>
-                    <option value="1" selected="selected">Less than 1 year</option>
-                    <option value="2">2 years</option>
-                    <option value="3">3 years</option>
-                    <option value="4">4 years and more</option>
+                    <option value="" selected="selected">--Select--</option>
+                    <?php $exp = getExperience();
+                    foreach($exp as $v) { ?>
+                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                    <?php } ?>
                 </select>
             </dd>
         </dl>
@@ -224,7 +225,7 @@
         <div class="span3">
           <div class="zoom">
               <a href="#" class="job-btn jobseeker-btn-shortlisted"></a>
-              <a href="#" class="job-btn job-btn-match">95%</a>
+              <a href="#" class="job-btn job-btn-match">99%</a>
           </div>
           <div><a href="#" class="jobseeker_request_interview"></a></div>
         </div>
@@ -239,8 +240,7 @@
           <div class="fxui-tab-nav sresult-nav-job sresult_about_me">
             <div class="sresult-nav-job-left">
               <div class="text">
-                <p>We have an exciting opportunity for a full time Graphic Designer to join our creative team.
-                  We are a leading creative, events and media agency with offices in Beijing, London and Qingdao.</p>
+                <p>about me here...</p>
                </div>
               <dl class="sresult-nav-job-dl">
                 <dt>Industry</dt>
@@ -293,10 +293,18 @@
                 </dd>
                   <dt>Elsewhere on Web</dt>
                   <dd>
-                      <p><a href="#">Twitter</a></p>
-                      <p><a href="#">Facebook</a></p>
-                      <p><a href="#">Pinterest</a></p>
-                      <p><a href="#">Personal Website</a></p>
+                      <?php if (!empty($user['twitter'])):?>
+		              <p><a href="<?php echo $user['twitter']?>">Twitter</a></p>
+		              <?php endif;?>
+		              <?php if (!empty($user['facebook'])):?>
+		              <p><a href="<?php echo $user['facebook']?>">Facebook</a></p>
+		              <?php endif;?>
+		              <?php if (!empty($user['linkedin'])):?>
+		              <p><a href="<?php echo $user['linkedin']?>">Linkedin</a></p>
+		              <?php endif;?>
+		              <?php if (!empty($user['weibo'])):?>
+		              <p><a href="<?php echo $user['weibo']?>">Weibo</a></p>
+		              <?php endif;?>
                   </dd>
 
                 <dt>Phone</dt>

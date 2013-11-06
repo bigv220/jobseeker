@@ -123,6 +123,9 @@ function language_arr() {
 }
 function getLanguageByID($id) {
 	$arr = language_arr();
+    if(empty($id)) {
+        return $arr[0];
+    }
 	return $arr[$id-1];
 }
 
@@ -131,6 +134,31 @@ function language_level() {
 }
 function getLanguageLevelByID($id) {
 	$arr = language_level();
+    if(empty($id)) {
+        return $arr[0];
+    }
+	return $arr[$id-1];
+}
+
+function getSalary() {
+	return array('Unpaid','<10,000','10,000-15,000','15,000-20,000','20,000-30,000','30,000-40,000','40,000+','Negotiable');
+}
+function getSalaryByID($id) {
+	$arr = getSalary();
+    if(empty($id)) {
+        return $arr[0];
+    }
+	return $arr[$id-1];
+}
+
+function getExperience() {
+	return array('No preference','1+','2+','3+','4>');
+}
+function getExperienceByID($id) {
+	$arr = getExperience();
+    if(empty($id)) {
+        return $arr[0];
+    }
 	return $arr[$id-1];
 }
 
@@ -142,22 +170,6 @@ function getJobtypeByID($id) {
 	return $arr[$id-1];
 }
 
-function getSalary() {
-	return array('Unpaid','<10,000','10,000-15,000','15,000-20,000','20,000-30,000','30,000-40,000','40,000+','Negotiable');
-}
-function getSalaryByID($id) {
-	$arr = getSalary();
-	return $arr[$id-1];
-}
-
-function getExperience() {
-	return array('No preference','1+','2+','3+','4>');
-}
-function getExperienceByID($id) {
-	$arr = getExperience();
-	return $arr[$id-1];
-}
-
 function getEmploymentLength() {
 	return array('Long term employment (1+ years)','Short term employment (-1 years)','No preference');
 }
@@ -166,4 +178,15 @@ function getEmploymentLengthByID($id) {
 	return $arr[$id-1];
 }
 
+function securelychk($msg = 'unknown error.') {
+	alertmsg($msg);
+}
+
+function isCompany($utype) {
+	if (1 == $utype) {
+		return true;
+	} else {
+		return false;
+	}
+}
 

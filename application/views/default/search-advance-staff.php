@@ -49,7 +49,7 @@
             <div class="advsearch-row clearfix">
                 <div class="span1 reg-row">
                     <strong>Industry</strong>
-                    <select name="industry" class="industry_options" onchange="changeIndustry(this);">
+                    <select name="industry" class="industry_options" onchange="changeIndustry(this, false);">
                         <option value="">All Industries</option>
                         <?php foreach($industry as $key=>&$v) {
                         if(empty($v['name'])) continue;
@@ -78,7 +78,7 @@
                             <option value="">All Type</option>
                             <?php $jobtype = jobtype();
                                 foreach ($jobtype as $k => $v) {?>
-                                <option value="<?php echo $v?>"><?php echo $v?></option>
+                                <option value="<?php echo $k+1?>"><?php echo $v?></option>
                             <?php }?>
                         </select>
                         <input type="hidden" name="employment_type" id="jobtype_tag"/>
@@ -92,9 +92,11 @@
                     <strong>Length of employment</strong>
                     <div>
                         <select class="kyo-select">
-                            <option value="1">Long term employment (1+ years)</option>
-                            <option value="2">Short term employment (-1 years)</option>
-                            <option value="3">No preference</option>
+                        	<option value="">All Length</option>
+                        	<?php $expl = getEmploymentLength();
+                        	foreach ($expl as $k => $v) {?>
+                        	<option value="<?php echo $k+1?>"><?php echo $v?></option>
+                        	<?php }?>
                         </select>
                     </div>
                 </div>

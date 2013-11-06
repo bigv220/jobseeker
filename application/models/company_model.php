@@ -72,7 +72,7 @@ class company_model extends MY_Model
 				'jingchat_username'=>$data['jingchat_username'],'is_allow_online_msg'=>$data['is_allow_online_msg'],
 				'personal_website'=>isset($data['personal_website'])?$data['personal_website']:"",
 				 'twitter'=>isset($data['twitter'])?$data['twitter']:"", 'linkedin'=>isset($data['linkedin'])?$data['linkedin']:"",
-				  'wechat'=>isset($data['wechat'])?$data['wechat']:"");
+				  'facebook'=>isset($data['facebook'])?$data['facebook']:"",'weibo'=>isset($data['weibo'])?$data['weibo']:"");
 		$this->db->where('uid', $uid);
 		$this->db->update('user', $data); 
 	}

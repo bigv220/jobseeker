@@ -44,23 +44,6 @@
                         </div>
                     </div>
                     <div class="span2">
-                        <strong>Language *</strong>
-                        <div>
-                            <select name="language" required>
-                                <option value="">--Select--</option>
-                                <?php $language = language_arr();
-                                foreach($language as $k => $v) { ?>
-                                <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
-                                <?php } ?>
-                            </select>
-                            </select>
-                            <div class="search-row-tip">+ Add another language</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="postjob-content-left-row clearfix">
-                    <div class="span1">
                         <strong>Position *</strong>
                         <div>
                             <select name="position" id="position_1">
@@ -71,10 +54,27 @@
                             -->
                         </div>
                     </div>
+
+                </div>
+
+                <div class="postjob-content-left-row clearfix" id="language_item">
+                    <div class="span1">
+                        <strong>Language *</strong>
+                        <div>
+                            <select name="language[]" required>
+                                <option value="">--Select--</option>
+                                <?php $language = language_arr();
+                                foreach($language as $k => $v) { ?>
+                                    <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
+                                    <?php } ?>
+                            </select>
+
+                        </div>
+                    </div>
                     <div class="span2">
                         <strong>Language Level *</strong>
                         <div>
-                            <select name="language_level" required>
+                            <select name="language_level[]" required>
                                 <option value="">--Select--</option>
                                 <?php
                                 $level = language_level();
@@ -85,6 +85,12 @@
                             </select>
                         </div>
                     </div>
+                </div>
+
+                <div id="addLanguageBtn">
+                    <a onclick="addLanguageBtnClick(this);" href="javascript:void(0);" class="reg-row-tip">
+                        + Add another language
+                    </a>
                 </div>
 
                 <div class="postjob-content-left-row clearfix">
@@ -239,6 +245,43 @@ $(document).ready(function() {
     });
 });
 
+function addLanguageBtnClick(thisO) {
+    var num = $('select[name="language[]"]').length;
+
+    if(num >= 3) {
+        alert("The can only add 3 languages.");
+        return;
+    }
+    var html = '<div class="postjob-content-left-row clearfix">'+$('#language_item').html();
+    html += '<span class="delSeekingIndustry"><i class="del" onclick="delNewUserLanguage(this);"'+
+        ' style="top:-20px;left:6px;height:12px;"></i></span></div>';
+    $(thisO).parent().before(html);
+}
+
+// change industry
+function changeIndustry(thisO) {
+    var name = $(thisO).val();
+    $.post(site_url + 'jobseeker/ajaxchangeindustry',
+        { ind_name: name },
+        function(result,status) {
+            var position_htm = '<option value="">Position</option>';
+
+            if(status == 'success'){
+                var obj = eval('('+result+')');
+                for ( var i = 0; i < obj.data.length; i++) {
+                    position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
+                }
+            }
+
+            $(thisO).parent().parent().next().find('select').html(position_htm);
+        });
+}
+
+function delNewUserLanguage(thisO) {
+    $(thisO).parent().prev().remove();
+    $(thisO).parent().prev().remove();
+    $(thisO).parent().parent().remove();
+}
 </script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>

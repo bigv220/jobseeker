@@ -3,7 +3,11 @@
 <!--company page body-->
 <div class="company-page w770 clearfix rel">
   <div class="company-body box rel mb20">
-    <div class="company-hd rel"> <i class="abs face png" style="background:url(<?php echo $site_url.'attached/users/'.$info['profile_pic']?>) no-repeat;"></i>
+    <div class="company-hd rel"> 
+    	<div class="people_icon">
+	    	<img src="<?php echo $site_url.'attached/users/'.$info['profile_pic']?>" alt="" width="128px" height="128px"/>
+	    	<i class="abs face png"></i>
+    	</div>
       <div class="text">
         <h2><?php echo $info['first_name'];?></h2>
         <h4><?php echo $info['city'].', '.$info['country'];?></h4>
@@ -51,10 +55,18 @@
           <dt><?php echo $info['first_name'];?> elsewhere on the web</dt>
           <dd>
             <ul class="redstar-web">
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
-              <li><a href="#">Pinterest</a></li>
-              <li><a href="#">WeChat</a></li>
+              <?php if (!empty($info['twitter'])):?>
+              <li><a href="<?php echo $info['twitter']?>">Twitter</a></li>
+              <?php endif;?>
+              <?php if (!empty($info['facebook'])):?>
+              <li><a href="<?php echo $info['facebook']?>">Facebook</a></li>
+              <?php endif;?>
+              <?php if (!empty($info['linkedin'])):?>
+              <li><a href="<?php echo $info['linkedin']?>">Linkedin</a></li>
+              <?php endif;?>
+              <?php if (!empty($info['weibo'])):?>
+              <li><a href="<?php echo $info['weibo']?>">Weibo</a></li>
+              <?php endif;?>
             </ul>
           </dd>
         </dl>

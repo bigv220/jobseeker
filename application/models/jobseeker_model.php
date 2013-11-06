@@ -118,7 +118,7 @@ class jobseeker_model extends MY_Model
         $data = array('email'=>$data['email'],'phone'=>$data['phone'],'is_allow_online_msg'=>$data['is_allow_online_msg'],
             'is_allow_phone'=>$data['is_allow_phone'], 'jingchat_username'=>$data['jingchat_username'],
             'personal_website'=>$data['website'],'twitter'=>$data['twitter'],
-            'linkedin'=>$data['linkedin'],'wechat'=>$data['wechat']);
+            'linkedin'=>$data['linkedin'],'facebook'=>$data['facebook'],'weibo'=>$data['weibo']);
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }
 
@@ -205,11 +205,13 @@ class jobseeker_model extends MY_Model
 
     //save work history
     public function insertWorkHistory($data) {
-        return $this->db->insert('user_work_history', $data);
+        $this->db->insert('user_work_history', $data);
+
+        return $this->db->insert_id();
     }
     
-    public function delWorkHistory($uid) {
-    	$sql = 'DELETE FROM user_work_history WHERE uid='.$uid;
+    public function delWorkHistory($id) {
+    	$sql = 'DELETE FROM user_work_history WHERE id='.$id;
     	return $this->db->query($sql);
     }
 
@@ -382,6 +384,21 @@ class jobseeker_model extends MY_Model
         	$sql = "DELETE FROM user_language WHERE uid=$uid AND language ='" . $lan . "'";
     	}
         $this->db->query($sql);
+    }
+
+    public function insertUserIndustry($data) {
+        return $this->db->insert('user_industry_position', $data);
+    }
+
+    public function delUserIndusry($id) {
+        $sql = 'DELETE FROM user_industry_position WHERE id='.$id;
+        $this->db->query($sql);
+    }
+
+    public function getUserIndustry($uid, $id) {
+        $sql = "SELECT * from user_industry_position WHERE uid=$uid AND parent_id=$id";
+
+        return $this->db->query($sql)->result_array();
     }
 
 }

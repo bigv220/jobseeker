@@ -134,28 +134,33 @@
                         <input type="" class="reg-input" name="personal_website" value="<?php echo $basic_info['personal_website']; ?>"/>
                     </div>
                 </div>
-                <div class="reg-row"> <b>Twitter Username</b>
+                <div class="reg-row"> <b>Twitter</b>
                     <div>
                         <input type="" class="reg-input" name="twitter" value="<?php echo $basic_info['twitter']; ?>"/>
                     </div>
                 </div>
-                <div class="reg-row"> <b>Linkedin Username</b>
+                <div class="reg-row"> <b>Linkedin</b>
                     <div>
                         <input type="" class="reg-input" name="linkedin" value="<?php echo $basic_info['linkedin']; ?>"/>
                     </div>
                 </div>
-                <div class="reg-row"> <b>WeChat ID</b>
+                <div class="reg-row"> <b>Weibo</b>
                     <div>
-                        <input type="" class="reg-input" name="wechat" value="<?php echo $basic_info['wechat']; ?>"/>
+                        <input type="" class="reg-input" name="weibo" value="<?php echo $basic_info['weibo']; ?>"/>
                     </div>
                 </div>
-                <div class="reg-row"> <b>Other Social Network</b>
+                <div class="reg-row"> <b>Facebook</b>
+                    <div>
+                        <input type="" class="reg-input" name="facebook" value="<?php echo $basic_info['facebook']; ?>"/>
+                    </div>
+                </div>
+                <!-- <div class="reg-row"> <b>Other Social Network</b>
                     <div>
                         <input type="text" id="reg-Network" value="">
                         <div class="reg-row-tip">+ Add Another Soical Network</div>
                         <div id="reg-network-val" class="show-selval"></div>
                     </div>
-                </div>
+                </div> -->
                 <div class="reg-area-bar">
                     <input type="button" class="reg-save" value="" id="contact_submit" data-index="1" onclick="contactFormSubmit();"/>
                 </div>

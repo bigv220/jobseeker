@@ -3,7 +3,11 @@
 <!--company page body-->
 <div class="company-page w770 clearfix rel">
     <div class="company-body box rel mb20">
-        <div class="company-hd rel"> <i class="abs face png" style="background:url(<?php echo $site_url.'attached/users/'.$company_avatar?>) no-repeat;"></i>
+        <div class="company-hd rel"> 
+        <div class="people_icon">
+	        <img src="<?php echo $site_url.'attached/users/'.$company_avatar?>" alt="" width="128px" height="128px"/>
+	        <i class="abs face png"></i>
+        </div>
             <div class="text" style="width:320px;">
                 <h2><?php echo $jobinfo["job_name"]; ?></h2>
                 <h4><?php echo $jobinfo["location"].' '.$jobinfo["city"]; ?></h4>
@@ -39,7 +43,14 @@
                     <dt>Language(s) Required</dt>
                     <dd>
                     <dd>
-                    	<span class="required"><b><?php echo getLanguageByID($jobinfo["language"]); ?></b> <i><?php echo getLanguageLevelByID($jobinfo["language_level"]); ?></i> </span>                    	
+                        <?php if(count($job_languages)>0) {
+                            foreach($job_languages as $v):
+                        ?>
+                    	<span class="required">
+                            <b><?php echo getLanguageByID($v["language"]); ?></b>
+                            <i><?php echo getLanguageLevelByID($v["level"]); ?></i>
+                        </span>
+                        <?php endforeach; } ?>
                     </dd>
                     </dd>
                 </dl>
@@ -70,12 +81,7 @@
                     <dd>
                         <ul class="industry-ul">
                             <li class="n1"><b>Type of Employment</b><span>
-                                <?php 
-                                $arr = explode(',', $jobinfo['employment_type']);
-                                foreach ($arr as $str) {
-								 echo getJobtypeByID($str).', ';
-								}
-                                ?></span>
+                                <?php echo $jobinfo["employment_type"];?></span>
                             </li>
                             <li class="n2"><b>Length of Employment</b><span>
                                 <?php echo getEmploymentLengthByID($jobinfo["employment_length"]);?></span>

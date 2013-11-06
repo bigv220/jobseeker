@@ -48,6 +48,12 @@
         });
 
         $('#addIndustry').click(function() {
+            var num = $('select[name="industry_1[]"]').length;
+            if(num >= 3) {
+                alert("The can only add 3 industries.");
+                return;
+            }
+
             var html = $('#industry_lists').html();
             html += '<span class="delSeekingIndustry"><i class="del" onclick="delNewSeekingIndustry(this);"></i></span>';
             $("#addIndustry").before(html);
@@ -78,10 +84,11 @@
             var upload_id = 'example_upload_button'+len;
             var error_id = 'exampleerrorRemind'+len;
 
-            html = html1+html_middle+html2 + '<div class="reg-row"><input type="hidden" name="work_example[]" id="'+input_id+'" />'+
+            html = '<div class="new_added">'+html1+html_middle+html2 + '<div class="reg-row">'+
+                '<input type="hidden" name="work_example[]" id="'+input_id+'" />'+
                 '<div id="'+upload_id+'">'+
                 '<span id="'+btn_id+'" class="reg-row-tip">Upload examples of work</span></div>'+
-                '<span class="" id="'+error_id+'"></span></div>';
+                '<span class="" id="'+error_id+'"></span></div></div>';
 
             $('#workhistoryForm #addJobBtn').before(html);
 
@@ -161,22 +168,20 @@
         var upload_button = document.getElementById(upload_btn);
         var oRemind = document.getElementById(error_id);
         new AjaxUpload(oBtn,{
-            action:"<?php echo $site_url?>user/ajaxuploadfile",
+            action:"<?php echo $site_url?>jobseeker/ajaxuploadfile",
             name:"workexample",
             data: {},
             onSubmit:function(file,ext){
             },
             onComplete:function(file,response){
                 oBtn.disabled = "";
-                if ( response == 'success') {
+                var response = response.split("|");
+                if ( response[0] == 'success') {
                     oRemind.style.color = "green";
                     oRemind.innerHTML = "Upload successful.";
 
-                    var reg = /\s/g;
-                    file = file.replace(reg, "");
-
-                    var img_path = "workExamples/" + file;
-                    $('#'+input_id).val(img_path);
+                    var filename = response[1];
+                    $('#'+input_id).val(filename);
                 } else {
                     oRemind.style.color = "red";
                     oRemind.innerHTML = response;
@@ -369,7 +374,7 @@
             <!-- Basic information -->
 
             <div class="reg-area" id="reg1">
-            <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="basicInfoForm">
+            <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="basicInfoForm">
                 <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                 <?php $step_arr = $step_arr;
                 $cla = '';
@@ -415,8 +420,7 @@
                         </select>
                         <select name="city">
                             <option value="">All City</option>
-                            <option value="2">Beijing</option>
-                            <option value="3">Shanghai</option>
+                            <option value="1">Beijing</option>
                         </select>
                     </div>
                 </div>
@@ -463,7 +467,7 @@
 
             <div class="reg-area" id="reg2">
 
-            <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="contactDetailsForm">
+            <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="contactDetailsForm">
                 <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                 <?php $step_arr = $step_arr;
                 $cla = '';
@@ -502,27 +506,32 @@
                         <input type="text" name="website" class="reg-input" value="<?php echo $userinfo['personal_website']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <b>Twitter Username</b>
+                <div class="reg-row"> <b>Twitter</b>
                     <div>
                         <input type="text" name="twitter" class="reg-input" value="<?php echo $userinfo['twitter']; ?>" />
                     </div>
                 </div>
-               <div class="reg-row"> <b>Linkedin Username</b>
+               <div class="reg-row"> <b>Linkedin</b>
                     <div>
                         <input type="text" name="linkedin" class="reg-input" value="<?php echo $userinfo['linkedin']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <b>Wechat</b>
+                <div class="reg-row"> <b>Weibo</b>
                     <div>
-                        <input type="text" name="wechat" class="reg-input" value="<?php echo $userinfo['wechat']; ?>" />
+                        <input type="text" name="weibo" class="reg-input" value="<?php echo $userinfo['weibo']; ?>" />
                     </div>
                 </div>
-                <div class="reg-row"> <b>Other Social Network</b>
+                <div class="reg-row"> <b>Facebook</b>
+                    <div>
+                        <input type="text" name="facebook" class="reg-input" value="<?php echo $userinfo['facebook']; ?>" />
+                    </div>
+                </div>
+                <!-- <div class="reg-row"> <b>Other Social Network</b>
                     <div>
                         <input type="text" name="socialNetwork" id="reg-Network" value="">
                         <div id="reg-network-val" class="show-selval"></div>
                     </div>
-                </div>
+                </div> -->
                 <div class="reg-area-bar">
                     <input type="hidden" name="register_step" value="2" />
                     <input type="button" class="reg-save" data-index="1" onclick="contactDetailsSubmit();" />
@@ -534,7 +543,7 @@
 
             <div class="reg-area" id="reg3">
 
-                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="preferencesForm">
+                <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="preferencesForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <?php $step_arr = $step_arr;
                     $cla = '';
@@ -582,12 +591,15 @@
                     <div class="reg-row"><strong>What industry are you seeking employment in?<i class="star">*</i></strong>
                         <?php
                          $i = 0;
+                        if (!count($seekingIndustry)) {
+                            $seekingIndustry = array(array('industry'=>'none','position'=>'none'));
+                        }
                         foreach($seekingIndustry as $v): ?>
                             <?php
                             $i++;
                             if($i == 1) {echo '<div id="industry_lists">';} ?>
 
-                            <select name="industry[]" id="industry_1" required="required" onchange="changeIndustry(this);">
+                            <select name="industry_1[]" id="industry_1" required="required" onchange="changeIndustry(this, true);">
                                 <option value="">Industry</option>
                                 <?php
                                 $user_industry = $v["industry"];
@@ -600,11 +612,14 @@
                                 <option value="<?php echo $val['name']; ?>"<?php echo $str;?>><?php echo $val['name']; ?></option>
                                 <?php } ?>
                             </select>
-                            <select name="position[]" id="position_1" required>
+                            <select name="position_1[]" id="position_1" required>
                                 <option value="<?php echo $v['position']; ?>"><?php echo $v['position']; ?></option>
                             </select>
                             <?php if($i==1) {echo "</div>";} ?>
+
+                            <?php if($i>1): ?>
                             <span class="delSeekingIndustry"><i onclick="delSeekingIndustry(this,'<?php echo $v['industry']; ?>','<?php echo $v['position']; ?>');" class="del"></i></span>
+                            <?php endif; ?>
 
                             <?php endforeach; ?>
                         <a id="addIndustry" class="reg-row-tip" href="javascript:void(0);">
@@ -639,7 +654,7 @@
                 }
                 ?>
                 <div class="reg-area-tit <?php echo $cla; ?>">Education</div>
-                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="educationForm">
+                <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="educationForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <div id="every_school">
                     <div class="reg-row"> <strong>School/College name<i class="star">*</i></strong>
@@ -733,9 +748,11 @@
                 }
                 ?>
                 <div class="reg-area-tit <?php echo $cla; ?>">Work History</div>
-                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="workhistoryForm" enctype="multipart/form-data">
+                <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="workhistoryForm" enctype="multipart/form-data">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
+
                     <div id="every_job_part1">
+                        <input type="hidden" name="id[]" value="<?php if(count($work_history)) echo $work_history["id"]; ?>" />
                     <div class="reg-row"> <b>Introduce yourself</b>
                         <div>
                             <textarea class="reg-textarea" name="introduce[]"><?php if(count($work_history)) echo $work_history["introduce"]; ?></textarea>
@@ -807,27 +824,27 @@
                             <i data-val="1" data-id="stillwork" class="kyo-checkbox <?php echo $check_sel; ?>" onclick="isPrivate(this,'is_stillhere');">I still work here</i>
 
                     <div id="every_job_part2">
-                    <div class="reg-row clearfix"> <strong>Industry<i class="star">*</i></strong>
-                        <div class="clearfix">
-                            <select name="industry[]" required>
-                                <option value="">select</option>
-                                <?php foreach($industry as $key=>&$v) {
-                                    if(empty($v['name'])) continue;
-                                    $str = "";
-                                    if($v['name'] == $work_history["industry"]) {
-                                        $str = ' selected="selected"';
-                                    }
-                                ?>
-                                <option value="<?php echo $v['name']; ?>"<?php echo $str; ?>><?php echo $v['name']; ?></option>
-                                <?php } ?>
-                            </select>
+                        <?php
+                        //Load Model
+                        $this->load->model('jobseeker_model');
+
+                        if (empty($work_history['id'])) {
+                            $userIndustry = array(array('industry'=>'none','position'=>'none'));
+                        } else {
+                            $userIndustry = $this->jobseeker_model->getUserIndustry($this->session->userdata('uid'), $work_history['id']);
+                        }
+
+                        $data['userIndustry'] = $userIndustry;
+                        $data['industry'] = $industry;
+                        $this->load->view($front_theme.'/industry_multi-select', $data);
+                        ?>
+
+                        <div class="reg-row" style="clear: both;">
+                            <div>
+                            <input type="hidden" name="grop_num[]" value="<?php echo count($userIndustry); ?>"/>
+                            <a class="reg-row-tip" href="javascript:void(0);" onclick="addIndustryBtnClick(this);">+ Add another Industry</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="reg-row clearfix"> <strong>Position<i class="star">*</i></strong>
-                        <div>
-                            <input type="text" class="reg-input" name="position[]" value="<?php if(count($work_history)) echo $work_history["position"]; ?>" required />
-                        </div>
-                    </div>
 
                     <div class="reg-row clearfix"> <strong>Description</strong>
                         <div>
@@ -845,9 +862,14 @@
                     </div>
 
                     <div class="reg-row">
-                        <input type="hidden" name="work_example" id="work_example" />
+                        <input type="hidden" name="work_example[]" id="work_example" value='<?php if(!empty($work_history["work_examples_url"])) echo $work_history["work_examples_url"]; ?>' />
                         <div id="example_upload_button">
-                            <span id="image_example" class="reg-row-tip">Upload examples of work</span>
+                            <?php if(empty($work_history["work_examples_url"])): ?>
+                                <span id="image_example" class="reg-row-tip">Upload examples of work</span>
+                            <?php else: ?>
+                                <span id="image_example" class="reg-row-tip" style="display: none;">Upload examples of work</span>
+                                <span>Work Examples: <?php echo $work_history["work_examples_url"]; ?></span>
+                            <?php endif; ?>
                         </div>
                         <span class="" id="exampleerrorRemind"></span>
                     </div>
@@ -874,7 +896,7 @@
                 }
                 ?>
 
-                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="languageForm">
+                <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="languageForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <div class="reg-area-tit <?php echo $cla; ?>">Languages</div>
                     <?php
@@ -883,8 +905,7 @@
 						$language = array(array('language'=>'none','level'=>'none'));
 					}
                     foreach($language as $lan):
-                    $i++;
-                        if($i == 1) echo '<div id="language_lists">';
+                        if(++$i == 1) echo '<div class="advsearch-row clearfix" id="language_lists">';
                     ?>
 
                     <div class="reg-row" style="clear:both;float:left;width:240px;">
@@ -929,6 +950,7 @@
                     ?>
 
                     <div class="reg-row" style="clear: both;">
+                        <input type="hidden" name="grop_num[]" />
                         <p><a class="reg-row-tip" href="javascript:void(0);" id="addLanguageBtn">+ Add another language</a></p>
                     </div>
                     <div class="reg-area-bar">
@@ -949,7 +971,7 @@
                 }
                 ?>
 
-                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="PersonalSkillsForm">
+                <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="PersonalSkillsForm">
                     <input type="hidden" name="uid" id="uid" value="<?php echo $uid; ?>" />
                     <div class="reg-area-tit <?php echo $cla; ?>">Personal Skills</div>
                     <div class="reg-skills-text">
@@ -988,7 +1010,7 @@
                 }
                 ?>
 
-                <form action="<?php echo $site_url; ?>/jobseeker/register" method="post" id="ProfessionalSkillsForm">
+                <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="ProfessionalSkillsForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
                     <div class="reg-area-tit <?php echo $cla; ?>">Technical Skills</div>
                     <div class="reg-skills-text">
@@ -1029,4 +1051,5 @@
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/findJobPage.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>
