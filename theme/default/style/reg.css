@@ -57,4 +57,6 @@ ul.tagit li.tagit-new {height:1px;overflow: hidden}
 .reg-page .advsearch-row .span1, .reg-page .advsearch-row .span2 { width: 220px;}
 .reg-page .advsearch-row .span3 { width: 13px;}
 .delSeekingIndustry i{ float:right;position:relative;top:5px; }
-.postjob_del i { float: right; left: 0px; top: -15px;}
+.delSearchIndustry i { float: right; top: -25px; left:2px;}
+.postjob_del { margin-top:-15px;float:right;width:13px;}
+.postjob_del i { left:0px; top:0px;}
