@@ -3,51 +3,65 @@
 <!--adv search job body-->
 <div class="advsearch w770 rel clearfix"> 
 
-  <div class="advsearch-bd box rel mb10">
+  <div class="advsearch-bd box rel mb10" id="find_staff_wrapper">
 		<div class="advsearch-tit">Find Staff</div>
           <form action="<?php echo $site_url; ?>search/searchJobseeker" id="searchForm" method="post">
         <div class="advsearch-min">
             <div class="advsearch-row clearfix">
-                <div class="span1">
+                <div class="span1 long_input">
                     <strong>Search our job database</strong>
                     <div><input type="text" name="keywords" class="kyo-input input-tip" data-tipval="Enter Keywords" value="Enter Keywords"></div>
                 </div>
-                <div class="span2 location" style="width: 460px;">
-                    <strong>Location</strong>
+
+            </div>
+
+            <div class="advsearch-row clearfix">
+                <div class="span1">
+                    <strong>Country</strong>
                     <div class="reg-row">
                         <select name="country" required>
                             <option value="">All Counties</option>
                             <?php foreach ($location as $k=>$v):?>
-                            <?php if ($k == $userinfo['country']): ?>
-                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php if ($k == $userinfo['country']): ?>
+                                    <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
                                 <?php else: ?>
-                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                    <option value="<?php echo $k ?>"><?php echo $k ?></option>
                                 <?php endif; ?>
                             <?php endforeach;?>
                         </select>
+                    </div>
+                </div>
+                <div class="span1">
+                    <strong>Province</strong>
+                    <div class="reg-row">
                         <select name="province">
                             <option value="">All Province</option>
                             <?php foreach ($location['China'] as $k=>$v):?>
-                            <?php if ($k == $userinfo['province']): ?>
-                                <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                                <?php if ($k == $userinfo['province']): ?>
+                                    <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
                                 <?php else: ?>
-                                <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                                    <option value="<?php echo $k ?>"><?php echo $k ?></option>
                                 <?php endif; ?>
                             <?php endforeach;?>
                         </select>
+                    </div>
+                </div>
+                <div class="span1" style="margin-right:0;">
+                    <strong>City</strong>
+                    <div class="reg-row">
                         <select name="city">
                             <option value="">All City</option>
                             <option value="1">Beijing</option>
                         </select>
                     </div>
-                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
-                    <div id="sel-city-val" class="show-selval"><ul></ul></div>
                 </div>
+                <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
+                <div id="sel-city-val" class="show-selval"><ul></ul></div>
 
             </div>
             
             <div class="advsearch-row clearfix">
-                <div class="span1 reg-row">
+                <div class="span1 reg-row long_input">
                     <strong>Industry</strong>
                     <select name="industry" class="industry_options" onchange="changeIndustry(this, false);">
                         <option value="">All Industries</option>
@@ -71,13 +85,17 @@
                                 <?php } ?>
                             </select>
                 </div>
-                <div class="span3">
+
+            </div>
+
+            <div class="advsearch-row clearfix">
+                <div class="span1">
                     <strong>Type of employment</strong>
                     <div class="reg-row">
                         <select id="employment_type" class="after-select" style="width: 230px;">
                             <option value="">All Type</option>
                             <?php $jobtype = jobtype();
-                                foreach ($jobtype as $k => $v) {?>
+                            foreach ($jobtype as $k => $v) {?>
                                 <option value="<?php echo $k+1?>"><?php echo $v?></option>
                             <?php }?>
                         </select>
@@ -85,9 +103,6 @@
                         <ul id="jobtype_box" data-name="nameOfSelect"></ul>
                     </div>
                 </div>
-            </div>
-
-            <div class="advsearch-row clearfix">
                 <div class="span1">
                     <strong>Length of employment</strong>
                     <div>
@@ -104,24 +119,37 @@
         </div>
         <div class="advsearch-below">
         	<div class="advsearch-row clearfix">
+                <div class="span1">
+                    <strong>Salary</strong>
+                    <div class="reg-row">
+                        <select name="salary">
+                            <option value="">All Salary</option>
+                            <option value="1">0~5000</option>
+                        </select>
+                    </div>
+                </div>
             	<div class="span1">
                 	<strong>Language(s)</strong>
                     <input type="text" id="sel-language" value="" style="display: none;">
                     <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
                     <div id="sel-language-val" class="show-selval"></div>
                 </div>
-                <div class="span2">
-                	<strong>Personal Skills</strong>
-                    <input type="text" id="sel-personal" value="" style="display: none;">
-                    <div class="search-row-tip">Select a max of 5</div>
-                    <div id="sel-personal-val" class="show-selval"></div>
-                </div>
-                <div class="span3">
-                	<strong>Technical Skills</strong>
+
+            </div>
+            <div class="advsearch-row clearfix">
+                <div class="span1">
+                    <strong>Technical Skills</strong>
                     <input type="text" id="sel-technical" value="" style="display: none;">
                     <div class="search-row-tip">Select a max of 5</div>
                     <div id="sel-technical-val" class="show-selval"></div>
                 </div>
+                <div class="span2">
+                    <strong>Personal Skills</strong>
+                    <input type="text" id="sel-personal" value="" style="display: none;">
+                    <div class="search-row-tip">Select a max of 5</div>
+                    <div id="sel-personal-val" class="show-selval"></div>
+                </div>
+
             </div>
 
         </div>

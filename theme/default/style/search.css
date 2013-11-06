@@ -82,3 +82,4 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .pop-apply{width:230px;height:116px;position:absolute;top:50%;left:50%;margin:-58px 0 0 -115px;position:fixed;_position:absolute;zoom:1;}
 .pop-apply-nav p{text-align:center;font-weight:700;font-size:14px;padding:0 30px;}
 #find_a_job_wrapper .advsearch-row .long_input, #find_a_job_wrapper .advsearch-row .long_input input, #find_a_job_wrapper .advsearch-row .long_input select{width:350px;}
+#find_staff_wrapper  .advsearch-row .long_input, #find_staff_wrapper .advsearch-row .long_input input, #find_staff_wrapper .advsearch-row .long_input select{width:350px;}
