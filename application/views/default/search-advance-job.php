@@ -162,8 +162,9 @@
                     <select name="language" class="after-select">
                         <option value="" selected="selected">All Languages</option>
                         <?php $language = language_arr();
+                        $i = 0;
                         foreach($language as $v) { ?>
-                        <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
+                        <option value="<?php echo ++$i; ?>"><?php echo $v; ?></option>
                         <?php } ?>
                     </select>
                     </div>

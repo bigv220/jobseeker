@@ -67,7 +67,7 @@ class search extends Front_Controller {
                 array_push($where_arr, 'preferred_year_of_experience='.$post["experience_year"]);
             }
             if(!empty($post["language"])) {
-                array_push($where_arr, "language like '%".$post["language"]."%'");
+                array_push($where_arr, "jl.language=".$post["language"]);
             }
             if(!empty($post["PersonalSkills_str"])) {
                 array_push($where_arr, "preferred_personal_skills like '%".$post["PersonalSkills_str"]."%'");

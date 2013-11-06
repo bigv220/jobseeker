@@ -291,7 +291,6 @@ class jobseeker extends Front_Controller {
 
                     $id = $this->jobseeker_model->insertWorkHistory($data);
 
-                    $industry_total = count($post["industry"]);
                     $user_industry_num = $post["grop_num"][$i];
                     $num = $i*$post["grop_num"][0] + $user_industry_num;
                     for($j=$i*$post["grop_num"][0];$j<$num;$j++) {
