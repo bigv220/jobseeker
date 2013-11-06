@@ -160,8 +160,8 @@ ALTER TABLE `job` modify column employment_type varchar(100);
 ALTER TABLE `user` modify column employment_type varchar(100);
 
 #2013-11-14
-ALTER TABLE  `user` CHANGE  `wechat`  `weibo` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT  'weibo.com'
-ALTER TABLE  `user` ADD  `facebook` VARCHAR( 100 ) NULL AFTER  `weibo`
+ALTER TABLE  user CHANGE  wechat  weibo VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT  'weibo.com';
+ALTER TABLE  user ADD  `facebook` VARCHAR( 100 ) NULL AFTER  weibo;
 
 #2013-11-5
 alter table job drop column language;

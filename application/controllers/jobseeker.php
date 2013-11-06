@@ -387,13 +387,19 @@ class jobseeker extends Front_Controller {
         $uid = $post['uid'];
         $skill = $post['skill'];
 
-        // create folder
-        $this->load->model('jobseeker_model');
-        $this->jobseeker_model->addProfessionalSkills($uid, $skill);
+        if (isset($uid)) {
+            // create folder
+            $this->load->model('jobseeker_model');
+            $this->jobseeker_model->addProfessionalSkills($uid, $skill);
 
-        $this->_saveRegisterStep($uid, 8);
-
-        $msg = "success";
+            $this->_saveRegisterStep($uid, 8);
+            $msg = "success";
+        } else if ($this->session->userdata('user_type') == 0) {
+            $msg = "success";
+        } else {
+            $msg = "failed";
+        }
+        
         $result['status'] = $msg;
         echo json_encode($result);
     }
@@ -405,12 +411,17 @@ class jobseeker extends Front_Controller {
         $post = $_POST;
         $uid = $post['uid'];
         $skill = $post['skill'];
+        if (isset($uid)) {
+            // create folder
+            $this->load->model('jobseeker_model');
+            $this->jobseeker_model->delProfessionalSkills($uid, $skill);
 
-        // create folder
-        $this->load->model('jobseeker_model');
-        $this->jobseeker_model->delProfessionalSkills($uid, $skill);
-
-        $msg = "success";
+            $msg = "success";
+        } else if ($this->session->userdata('user_type') == 0) {
+            $msg = "success";
+        } else {
+            $msg = "failed";
+        }
         $result['status'] = $msg;
         echo json_encode($result);
     }

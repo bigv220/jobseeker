@@ -1,4 +1,6 @@
 <?php $this->load->view($front_theme.'/header-block');?>
+<link href="<?php echo $theme_path?>style/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 
 <!-- post a job body -->
 <div class="postjob w770 rel clearfix">
@@ -97,7 +99,7 @@
                     <div class="span1">
                         <strong>Type of Job *</strong>
                         <div>
-                            <select id="employment_type" required>
+                            <select id="employment_type" >
                                 <option value="">--Select--</option>
                                 <?php $jobtype = jobtype();
                                 foreach ($jobtype as $k => $v) {?>
@@ -109,10 +111,23 @@
                         </div>
                     </div>
                     <div class="span2">
-                        <span>Personal Skills *</span>
+                        <span>Teachnical Skills *</span>
+                        <div class="reg-row">
                         <div>
-                            <input type="text" name="preferred_personal_skills" class="input-tip" value="Start Typing" data-tipval="Start Typing" required>
+                            <input type="hidden" name="preferred_technical_skills" class="input-tip" value="" data-tipval="">
+                            <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this,'step8'); return false;}" required>
                         </div>
+                    </div>
+                        <div class="skills-vals clearfix">
+                        <ul id="ProfessionalSkills">
+                            <?php foreach($professional_skills as $v) { ?>
+                            <li data-val="2">
+                                <i class="del" onclick="delPersonalSkills('ProfessionalSkills',this,'<?php echo $v['professional_skill']; ?>');"></i>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                    
                     </div>
                 </div>
             </div>
@@ -282,6 +297,8 @@ function delNewUserLanguage(thisO) {
     $(thisO).parent().prev().remove();
     $(thisO).parent().parent().remove();
 }
+
+
 </script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
