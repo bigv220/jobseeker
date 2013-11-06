@@ -101,6 +101,7 @@ class job extends Front_Controller {
             }//end for
 
     		$result['status'] = $result['status'] ? 'success' : 'failed.';
+            $result['id'] = $job_id;
     		echo json_encode($result);
     	}
     }
