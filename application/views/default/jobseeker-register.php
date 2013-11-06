@@ -3,308 +3,12 @@
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/ajaxupload.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("select[name='country']").change(function() {
-            change_location($(this),'country');
-        });
-        $("select[name='province']").change(function() {
-            change_location($(this), 'province');
-        });
-        
         select_location('country','<?php echo $userinfo['country'];?>');
         select_location('province','<?php echo $userinfo['province'];?>');
-        $("input.date").jSelectDate({
-            css:"date",
-            yearBeign: 1960,
-            disabled : false
-        });
-
-        //upload user avatar
-        uploadImage();
-
-        //upload work examples
-        uploadFile("image_example",'example_upload_button','exampleerrorRemind','work_example');
-
-        $("#PersonalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/personalskillsautocomplete",{
-            delay:10,
-            width: '414px',
-            matchSubset:1,
-            matchContains:1,
-            cacheLength:10,
-            onItemSelect:selectItem1,
-            formatItem: formatItem,
-            formatResult: formatResult
-        });
-
-        $("#ProfessionalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/professionalskillsautocomplete",{
-            delay:10,
-            matchSubset:1,
-            matchContains:1,
-            cacheLength:10,
-            onItemSelect:selectItem2,
-            formatItem: formatItem,
-            formatResult: formatResult
-        });
-
-        $('#addIndustry').click(function() {
-            var num = $('select[name="industry_1[]"]').length;
-            if(num >= 3) {
-                alert("The can only add 3 industries.");
-                return;
-            }
-
-            var html = $('#industry_lists').html();
-            html += '<span class="delSeekingIndustry"><i class="del" onclick="delNewSeekingIndustry(this);"></i></span>';
-            $("#addIndustry").before(html);
-        });
-
-        $('#addAnotherSchool').click(function() {
-            var html = $('#every_school').html();
-            var randnumstr = randNum().toString();
-            randnumstr = randnumstr.replace('.', '_');
-            var domId = 'school_info_' + randnumstr;
-            $('#educationForm #addSchoolBtn').before('<div id="' + domId + '">' + html + '</div>');
-            setDefaultEducationFormValue(domId);
-        });
-
-        $('#addAnotherJob').click(function() {
-            var len = $("#workhistoryForm select").length;
-            len = len/3 + 1;
-
-            var html1 = $('#every_job_part1').html();
-
-            var html_middle = '<input type="hidden" name="is_stillhere[]" value="0" id="is_stillhere'+len+'" />' +
-                                '<i data-val="1" data-id="stillwork" class="kyo-checkbox" onclick="isPrivate(this,\'is_stillhere'+len+'\');">I still work here</i>';
-
-            var html2 = $('#every_job_part2').html();
-
-            var input_id = "work_example"+len;
-            var btn_id = 'image_example'+len;
-            var upload_id = 'example_upload_button'+len;
-            var error_id = 'exampleerrorRemind'+len;
-
-            html = '<div class="new_added">'+html1+html_middle+html2 + '<div class="reg-row">'+
-                '<input type="hidden" name="work_example[]" id="'+input_id+'" />'+
-                '<div id="'+upload_id+'">'+
-                '<span id="'+btn_id+'" class="reg-row-tip">Upload examples of work</span></div>'+
-                '<span class="" id="'+error_id+'"></span></div></div>';
-
-            $('#workhistoryForm #addJobBtn').before(html);
-
-            uploadFile(btn_id,upload_id,error_id,input_id);
-        });
-
-        $('#addLanguageBtn').click(function() {
-            var html = $('#language_lists').html();
-            html += '<span class="delSeekingIndustry"><i class="del" onclick="delNewLanguage(this);" style="top:30px;left:5px;"></i></span>';
-            $('#addLanguageBtn').parent().parent().before(html);
-        });
-
     });
-
-    function formatItem(row){
-        return " <p>"+row +" </p>";
-    }
-
-    function formatResult(row){
-        return row[0].replace(/(<.+?>)/gi, '');
-    }
-
-    function selectItem1(v){
-        var uid = $('#uid').val();
-
-        addPersonalSkillAjax('PersonalSkills',uid, v, 'step7');
-    }
-
-    function selectItem2(v){
-        var uid = $('#uid').val();
-
-        addPersonalSkillAjax('ProfessionalSkills',uid, v, 'step8');
-    }
-
-    function uploadImage(old_avatar) {
-        var oBtn = document.getElementById("image_profile");
-        var upload_button = document.getElementById("upload_button");
-        var oRemind = document.getElementById("errorRemind");
-        new AjaxUpload(oBtn,{
-            action:"<?php echo $site_url?>user/ajaxuploadimage",
-            name:"avatar",
-            data: {},
-            onSubmit:function(file,ext){
-                if(ext && /^(jpg|jpeg|png|gif)$/.test(ext)){
-                    oRemind.style.color = "orange";
-                    oRemind.innerHTML = "uploading...";
-                    oBtn.disabled = "disabled";
-                }else{
-                    oRemind.style.color = "red";
-                    oRemind.innerHTML = "Sorry, Do not support this image type.";
-                    return false;
-                }
-            },
-            onComplete:function(file,response){
-                oBtn.disabled = "";
-                var response = response.split("|");
-                if ( response[0] == 'success') {
-                    oRemind.style.color = "green";
-                    oRemind.innerHTML = "Upload successful.";
-
-                    //var reg = /\s/g;
-                    var filename = response[1];
-
-                    var img_path = "<?php echo $site_url; ?>attached/users/" + filename;
-                    $('#avatar').val(filename);
-                    upload_button.innerHTML = "<img id='image_profile' src='" + img_path + "?" +  Math.floor(Math.random()*99999 + 1) + "' height='100' style='border:1px solid gray;' />";
-                } else {
-                    oRemind.style.color = "red";
-                    oRemind.innerHTML = response[1];
-                }
-            }
-        });
-    }
-
-    function uploadFile(btn_id, upload_btn, error_id,input_id) {
-        var oBtn = document.getElementById(btn_id);
-        var upload_button = document.getElementById(upload_btn);
-        var oRemind = document.getElementById(error_id);
-        new AjaxUpload(oBtn,{
-            action:"<?php echo $site_url?>jobseeker/ajaxuploadfile",
-            name:"workexample",
-            data: {},
-            onSubmit:function(file,ext){
-            },
-            onComplete:function(file,response){
-                oBtn.disabled = "";
-                var response = response.split("|");
-                if ( response[0] == 'success') {
-                    oRemind.style.color = "green";
-                    oRemind.innerHTML = "Upload successful.";
-
-                    var filename = response[1];
-                    $('#'+input_id).val(filename);
-                } else {
-                    oRemind.style.color = "red";
-                    oRemind.innerHTML = response;
-                }
-
-            }
-        });
-    }
-
-    function delPersonalSkills(id_str,thisO,skill) {
-        var uid = $('#uid').val();
-
-        $.post(site_url + '/jobseeker/del' + id_str,
-            {uid:uid, skill:skill},
-            function(result,status){
-                if(status == 'success'){
-                    $(thisO).parent().remove();
-                }
-                else{
-                    alert('Delete failed!');
-                }
-        });
-    }
-
-    // ajax to adding personal skills
-    function addPersonalSkillAjax(id_str,uid, v, li_id) {
-        $.post(site_url + '/jobseeker/add'+ id_str,
-            { uid:uid, skill:v },
-            function(result,status) {
-                if(status == 'success'){
-                    var htm = '<li data-val="2">'+ v +
-                        '<i class="del" onclick="delPersonalSkills' + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
-
-                    $('#'+ id_str).append(htm);
-                    $('#'+li_id).addClass('curr');
-                    $('#'+ id_str + 'Form div.reg-area-tit').addClass('reg-area-tit-curr');
-                }
-                else{
-                    alert('Add failed!');
-                }
-        });
-
-        $('#'+ id_str + '_input').val('');
-    }
-
-    //add personal skills or professional skills, using the same function
-    function addPersonalSkills(id_str,thisO,li_id) {
-        var v = $(thisO).val();
-        var uid = $('#uid').val();
-
-        addPersonalSkillAjax(id_str,uid, v, li_id);
-
-        return false;
-    }
-
-    // change the background image of the checkbox
-    function isPrivate(thisO, id_str) {
-        if($(thisO).hasClass('kyo-checkbox-sel')) {
-            $(thisO).removeClass('kyo-checkbox-sel');
-            $('#'+id_str).val(0);
-        } else {
-            $(thisO).addClass('kyo-checkbox-sel');
-            $('#'+id_str).val(1);
-        }
-    }
-
-    // select an item in droplists of Personal skills and Professional skills
-    function selectItem(element_id, v) {
-        var ele_id = "#" + element_id;
-        $(ele_id).val(v);
-    }
-
-    // check the character length of description in Work history area
-    function checkLength(thisO, maxLen) {
-        var taValue = $(thisO).val();
-        var len = taValue.length;
-        if (len > maxLen) {
-            var val = taValue.substring(0, 347) + '...';
-            $(thisO).val(val);
-        }
-    }
-
-    function delSeekingIndustry(thisO,industry,position) {
-        var uid = $('#uid').val();
-
-        $.post(site_url + '/jobseeker/delSeekingIndustry',
-            {uid:uid, industry:industry, position:position},
-            function(result,status){
-                if(status == 'success'){
-                    delNewSeekingIndustry(thisO);
-                }
-                else{
-                    alert('Delete failed!');
-                }
-            });
-    }
-
-    function delNewSeekingIndustry(thisO) {
-        $(thisO).parent().prev().remove();
-        $(thisO).parent().prev().remove();
-        $(thisO).parent().remove();
-    }
-
-    function delLanguage(thisO, language) {
-        var uid = $('#uid').val();
-
-        $.post(site_url + '/jobseeker/delLanguage',
-            {uid:uid, language:language},
-            function(result,status){
-                if(status == 'success'){
-                    delNewLanguage(thisO);
-                }
-                else{
-                    alert('Delete failed!');
-                }
-            });
-    }
-
-    function delNewLanguage(thisO) {
-        $(thisO).parent().prev().remove();
-        $(thisO).parent().prev().remove();
-        $(thisO).parent().remove();
-    }
 </script>
 
 <!--Jobseeker registration page body-->
@@ -905,53 +609,58 @@
 						$language = array(array('language'=>'none','level'=>'none'));
 					}
                     foreach($language as $lan):
-                        if(++$i == 1) echo '<div class="advsearch-row clearfix" id="language_lists">';
+                        if(++$i == 1) {echo '<div class="advsearch-row clearfix" id="language_lists">';}
+                        else { echo '<div class="advsearch-row clearfix">';}
                     ?>
 
-                    <div class="reg-row" style="clear:both;float:left;width:240px;">
-                        <strong>Language<i class="star">*</i></strong><br />
-                        <select name="language[]" id="language_1" required>
-                            <option value="">Language</option>
-                            <?php
-                            foreach($language_arr as $v) {
+                    <div class="span1">
+                        <strong>Language<i class="star">*</i></strong>
+                        <div class="reg-row">
+                            <select name="language[]" id="language_1" required>
+                                <option value="">Language</option>
+                                <?php
+                                foreach($language_arr as $v) {
+                                    $str = '';
+                                    if($v == $lan['language']) {
+                                        $str = ' selected="selected"';
+                                    }
+                                ?>
+                                <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                     </div>
+                     <div class="span2">
+                        <strong>Proficiency</strong>
+                        <div class="reg-row">
+                            <select name="level[]" id="level_1" required>
+                            <option value="">Proficiency</option>
+                            <?php $level = language_level();
+                            foreach($level as $v) {
                                 $str = '';
-                                if($v == $lan['language']) {
+                                if($v == $lan['level']) {
                                     $str = ' selected="selected"';
                                 }
                             ?>
                             <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
                             <?php } ?>
-                        </select>
-                     </div>
-                     <div style="float:left;width:220px;">
-                        <strong>Proficiency</strong><br />
-                        <select name="level[]" id="level_1" required>
-                        <option value="">Proficiency</option>
-                        <?php $level = language_level();
-                        foreach($level as $v) {
-                        	$str = '';
-                        	if($v == $lan['level']) {
-                        		$str = ' selected="selected"';
-                        	}
-                        ?>
-                        <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
-                        <?php } ?>
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                         <?php if($i==1) echo "</div>"; ?>
-                         <?php if($i>1) {?>
-                        <span class="delSeekingIndustry">
-                            <i class="del" onclick="delLanguage(this, '<?php echo $lan['language']; ?>');" style="top:30px;left:5px;"></i>
-                        </span>
-						<?php }?>
-                    <?php 
-                    
-                    endforeach; 
-                    ?>
+                    <?php if($i>1) {?>
+                    <div class="span3">
+                        <i class="del" onclick="delLanguage(this, '<?php echo $lan['language']; ?>');"></i>
+                    </div>
+                    <?php }?>
 
-                    <div class="reg-row" style="clear: both;">
-                        <input type="hidden" name="grop_num[]" />
-                        <p><a class="reg-row-tip" href="javascript:void(0);" id="addLanguageBtn">+ Add another language</a></p>
+                    </div>
+                    <?php endforeach; ?>
+
+                    <div class="advsearch-row clearfix">
+                        <div class="span1">
+                            <input type="hidden" name="grop_num[]" value="<?php echo count($language); ?>" />
+                            <a class="reg-row-tip" href="javascript:void(0);" onclick="addLanguageBtnClick(this);">+ Add another language</a>
+                        </div>
                     </div>
                     <div class="reg-area-bar">
                         <input type="hidden" name="register_step" value="6" />
@@ -1050,6 +759,5 @@
 </div>
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
-<script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/findJobPage.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>
