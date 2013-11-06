@@ -1,5 +1,8 @@
 <?php $this->load->view($front_theme.'/header-block');?>
 <link href="<?php echo $theme_path?>style/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+   .advsearch-row .delete {width: 13px;float:right;margin-right: 0px;}
+</style>
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/ajaxupload.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
@@ -8,6 +11,12 @@
     $(document).ready(function(){
         select_location('country','<?php echo $userinfo['country'];?>');
         select_location('province','<?php echo $userinfo['province'];?>');
+
+        //upload user avatar
+        uploadImage();
+
+        //upload work examples
+        uploadFile("image_example",'example_upload_button','exampleerrorRemind','work_example');
     });
 </script>
 

@@ -228,12 +228,6 @@ $(document).ready(function(){
         disabled : false
     });
 
-    //upload user avatar
-    //uploadImage();
-
-    //upload work examples
-    //uploadFile("image_example",'example_upload_button','exampleerrorRemind','work_example');
-
     $("#PersonalSkills_input").autocomplete(site_url+"jobseeker/personalskillsautocomplete",{
         delay:10,
         width: '414px',
