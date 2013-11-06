@@ -240,7 +240,7 @@
           <div class="fxui-tab-nav sresult-nav-job sresult_about_me">
             <div class="sresult-nav-job-left">
               <div class="text">
-                <p>about me here...</p>
+                <p><?php echo $user['description']; ?></p>
                </div>
               <dl class="sresult-nav-job-dl">
                 <dt>Industry</dt>

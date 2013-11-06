@@ -253,8 +253,9 @@ $(document).ready(function() {
                 	site_url+"job/postjob", 
                 	$('#postjobForm').serialize(),
      			    function(result,status){
-     			    	if("success" == status) {
-							alert("success.");
+                        var data = $.parseJSON(result);
+     			    	if("success" == status) {alert(data.id);
+							window.location.href=site_url+'job/jobdetails/'+ data.id;
      			    	}
      		});
         }
