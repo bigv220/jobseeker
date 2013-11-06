@@ -34,12 +34,12 @@
     </div>
 </div>
 
-</div>
-
 <?php if($i>1) { ?>
-<div class="span3">
-    <i class="del" onclick="delUserIndustry(this, '<?php echo $ind['id']; ?>');"></i>
-</div>
+    <div class="span3">
+        <i class="del" onclick="delUserIndustry(this, '<?php echo $ind['id']; ?>');"></i>
+    </div>
 <?php }?>
+
+</div>
 
 <?php } ?>
