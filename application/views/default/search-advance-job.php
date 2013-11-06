@@ -91,27 +91,26 @@
 
             </div>
 
-            <div class="advsearch-row clearfix" style="width: 500px;">
-                <?php
-                //Load Model
-                $this->load->model('jobseeker_model');
+            <?php
+            //Load Model
+            $this->load->model('jobseeker_model');
 
-                if (empty($work_history['id'])) {
-                    $userIndustry = array(array('industry'=>'none','position'=>'none'));
-                } else {
-                    $userIndustry = $this->jobseeker_model->getUserIndustry($this->session->userdata('uid'), $work_history['id']);
-                }
+            if (empty($work_history['id'])) {
+                $userIndustry = array(array('industry'=>'none','position'=>'none'));
+            } else {
+                $userIndustry = $this->jobseeker_model->getUserIndustry($this->session->userdata('uid'), $work_history['id']);
+            }
 
-                $data['userIndustry'] = $userIndustry;
-                $data['industry'] = $industry;
-                $this->load->view($front_theme.'/industry_multi-select', $data);
-                ?>
+            $data['userIndustry'] = $userIndustry;
+            $data['industry'] = $industry;
+            $this->load->view($front_theme.'/industry_multi-select', $data);
+            ?>
 
-                <div class="reg-row" style="clear: both;">
+            <div class="advsearch-row clearfix">
+                <div class="span1">
                     <input type="hidden" name="grop_num[]" value="<?php echo count($userIndustry); ?>"/>
-                    <p><a class="reg-row-tip" href="javascript:void(0);" id="addIndustryBtn" onclick="addIndustryBtnClick(this);">+ Add another Industry</a></p>
+                    <a class="reg-row-tip" href="javascript:void(0);" onclick="addIndustryBtnClick(this);">+ Add another Industry</a>
                 </div>
-
             </div>
 
             <div class="advsearch-row clearfix">
@@ -247,5 +246,6 @@
 <!-- Partners -->
 <?php $this->load->view($front_theme.'/partners-block');?>
 
-<script type="text/javascript" src="<?php echo $theme_path?>js/advsearch.js"></script> 
+<script type="text/javascript" src="<?php echo $theme_path?>js/advsearch.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/findJobPage.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

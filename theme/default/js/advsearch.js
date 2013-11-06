@@ -1,4 +1,3 @@
-
     function formatItem(row){
         return " <p>"+row +" </p>";
     }

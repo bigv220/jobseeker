@@ -96,7 +96,7 @@ function show_welcome_pop(usertype){
                 if(next_element) {
                     $(thisO).next('select').html(position_htm);
                 } else {
-                    $(thisO).parent().next().find('select').html(position_htm);
+                    $(thisO).parent().parent().next().find('select').html(position_htm);
                 }
             });
     }

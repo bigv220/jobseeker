@@ -5,75 +5,6 @@
 </style>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("select[name='country']").change(function() {
-            change_location($(this),'country');
-        });
-        $("select[name='province']").change(function() {
-            change_location($(this), 'province');
-        });
-        $("#PersonalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/personalskillsautocomplete",{
-            delay:10,
-            width: '230px',
-            matchSubset:1,
-            matchContains:1,
-            cacheLength:10,
-            onItemSelect:selectItem1,
-            formatItem: formatItem,
-            formatResult: formatResult
-        });
-
-        $("#ProfessionalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/professionalskillsautocomplete",{
-            delay:10,
-            width: '230px',
-            matchSubset:1,
-            matchContains:1,
-            cacheLength:10,
-            onItemSelect:selectItem2,
-            formatItem: formatItem,
-            formatResult: formatResult
-        });
-    });
-
-
-    // change industry
-    function changeIndustry(thisO) {
-        var name = $(thisO).val();
-        $.post(site_url + '/jobseeker/ajaxchangeindustry',
-            { ind_name: name },
-            function(result,status) {
-                var position_htm = '<option value="">Position</option>';
-
-                if(status == 'success'){
-                    var obj = eval('('+result+')');
-                    for ( var i = 0; i < obj.data.length; i++) {
-                        position_htm += "<option value=\""+obj.data[i].name+"\">"+obj.data[i].name+"</option>";
-                    }
-                }
-                $(thisO).parent().parent().next().find('select').html(position_htm);
-            });
-    }
-
-    function addIndustryBtnClick(thisO) {
-        var num = $('select[name="industry[]"]').length;
-
-        if(num >= 3) {
-            alert("The can only add 3 industries.");
-            return;
-        }
-        var html = $('#industry_list').html();
-        html += '<span class="delSeekingIndustry"><i class="del" onclick="delNewUserIndustry(this);" style="top:-28px;left:6px;"></i></span>';
-        $(thisO).parent().parent().before(html);
-    }
-
-    function delNewUserIndustry(thisO) {
-        $(thisO).parent().prev().remove();
-        $(thisO).parent().prev().remove();
-        $(thisO).parent().remove();
-    }
-</script>
-
 <!--search-result body-->
 <div class="result-page w770 rel clearfix">
 <!--search-result condition-->
@@ -178,7 +109,7 @@
         </dl>
         </div>
         <dl class="search-row ">
-            <p><a class="reg-row-tip" href="javascript:void(0);" id="addIndustryBtn" onclick="addIndustryBtnClick(this);">+ Add another Industry</a></p>
+            <p><a class="reg-row-tip" href="javascript:void(0);" onclick="addIndustryBtnClick(this);">+ Add another Industry</a></p>
         </dl>
         <dl class="search-row ">
             <dt class="search-row-tit">Length of employment</dt>
@@ -382,44 +313,5 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<script type="text/javascript">
-    var map;
-    var geocoder = new google.maps.Geocoder();
-    function initialize() {
-        var myOptions = {
-            zoom : 13,
-            center : new google.maps.LatLng(-34.397, 150.644),
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.SMALL,
-            },
-            panControl: false,
-            scaleControl:false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            mapTypeControl: false
-        }
-
-        map = new google.maps.Map(document.getElementById("map"),
-            myOptions);
-    }
-
-    function codeAddress() {
-        var address = $('#address').val();
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-            }
-        });
-    }
-
-    $(document).ready(function(){
-        initialize();
-        codeAddress();
-    });
-
-</script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/searchJobPage.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>
