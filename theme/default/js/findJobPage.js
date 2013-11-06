@@ -17,7 +17,7 @@ function addIndustryBtnClick(thisO) {
 
     var html = '<div class="advsearch-row clearfix">';
     html += $('#one_list').html();
-    html += '<div class="span3"><i class="del" onclick="delNewUserIndustry(this);">'+
+    html += '<div class="delete"><i class="del" onclick="delNewUserIndustry(this);">'+
             '</i></div>';
     html += '</div>';
     $(thisO).parent().parent().before(html);
