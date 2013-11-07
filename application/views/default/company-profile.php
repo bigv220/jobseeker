@@ -45,7 +45,7 @@
               <?php else: ?>
               <ul class="redstar-works">
                 <?php foreach ($jobinfo as $job):?>
-                  <li><a href="<?php echo $site_url.'job/jobDetails/'.$job['id']?>"><?php echo $job['job_name'];?></a></li>                
+                  <li><a href="<?php echo $site_url.'job/jobDetails/'.$job['id']?>"><?php echo $job['job_name'];?></a></li>
                 <?php endforeach; ?>
               </ul>
               <?php endif; ?>
