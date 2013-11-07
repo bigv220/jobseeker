@@ -127,7 +127,10 @@ $(function(){
                             $('.email_existing').html(data.message);
                         }
                         else{
-                            $('#first_name').attr('value','').css("border-color", "#cecece");
+                        	$('.pop-reg').fadeOut();
+                        	popMark.fadeOut();
+                        	alert(data.message);
+                        	/*$('#first_name').attr('value','').css("border-color", "#cecece");
                             $('#last_name').attr('value','').css("border-color", "#cecece");
                             $('#company_name').attr('value','').css("border-color", "#cecece");
                             $('#email').attr('value','').css("border-color", "#cecece");
@@ -135,7 +138,7 @@ $(function(){
                             $('.pop-reg').fadeOut();
                             $('.phd-login-text').html(firstName + ' ' + lastName);
                             show_welcome_pop(regType);
-                            userType = regType;
+                            userType = regType;*/
                         }
 
                     },

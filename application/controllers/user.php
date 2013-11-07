@@ -18,22 +18,48 @@ class user extends Front_Controller {
      */
     public function signup(){
 
+    	$post = $this->input->post();
+    	if (empty($post)) {
+    		securelychk();
+    	}
+    	
         $this->load->model('jobseeker_model');
         $userId = -1;
         $status = "success";
         $message = "success";
-        if(!$this->jobseeker_model->checkUserExisting($_POST['email'])){
-            $userId = $this->jobseeker_model->addUser($_POST);
-            $this->load->library('session');
-
-            $result['uid'] = $userId;
-            $result['first_name'] = $_POST['first_name'];
-            $result['last_name'] = $_POST['last_name'];
-            $result['user_type'] = $_POST['user_type'];
-
-            $this->session->set_userdata($result);
-
-            $data = $this->data;
+        if(!$this->jobseeker_model->checkUserExisting($post['email'])){
+        	$uType = $post['user_type'];
+        	$post['user_type'] = 4; // no confirmation
+            $userId = $this->jobseeker_model->addUser($post);
+            
+            // send email
+            $uEmail = $post['email'];
+            $code = md5($uEmail.$userId.$uType);
+            $code = $code[3].$code[1].$code[10].$code[5].$code[12].$code[9];
+            $url = $this->data['site_url'].'user/confirm/?q='.$uEmail.'-'.$userId.'-'.$uType.'-'.$code;
+            
+            $this->load->library('email');
+            $config['mailtype'] = 'html';
+            $this->email->initialize($config);
+            
+            $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
+            $this->email->to($uEmail);
+            $this->email->subject('Email confirmation');
+            $this->email->message('<html>
+            						<head><title>Email confirmation</title></head>
+            						<body>Hi, <br><br>
+            						Please click <a href="'.$url.'">HERE</a> to complete email confirmation.<br><br>
+            						JingJobs.com');
+            $this->email->send();
+            
+            $message = 'Please check your email and complete email confirmation.';
+            //$this->load->library('session');
+            //$result['uid'] = $userId;
+            //$result['first_name'] = $_POST['first_name'];
+            //$result['last_name'] = $_POST['last_name'];
+            //$result['user_type'] = $_POST['user_type'];
+            //$this->session->set_userdata($result);
+            //$data = $this->data;
         }
         else{
             $status = "error";
@@ -54,6 +80,10 @@ class user extends Front_Controller {
         else{
             $this->load->model('jobseeker_model');
             $user = $this->jobseeker_model->getUser($post['username'], md5($post['login_password']));
+            
+            if ( 4 == $user['user_type'] ) {
+            	alertmsg('Please check your email and complete email confirmation.');
+            }
 
             if($user){
                 $this->load->library('session');
@@ -200,6 +230,39 @@ class user extends Front_Controller {
 			exit('success|'.$file_name);
 		} else {
 			exit('error|can not upload avatar image.');
+		}
+	}
+	
+	public function confirm() {
+		if (!isset($_GET['q'])) {
+			securelychk();
+		}
+		$str = $_GET['q'];
+		$arr = explode('-', $str);
+		$uEmail = $arr[0];
+		$userId = $arr[1];
+		$uType = $arr[2];
+		$code1 = $arr[3];
+		$code2 = md5($uEmail.$userId.$uType);
+		$code2 = $code2[3].$code2[1].$code2[10].$code2[5].$code2[12].$code2[9];
+		if ($code1 == $code2) {
+			
+			$this->load->model('jobseeker_model');
+			$flag = $this->jobseeker_model->edit(array('uid'=>$userId, 'user_type'=> $uType), 'uid');
+			if ($flag) {
+				$user = $this->jobseeker_model->getUserInfo($userId);
+				$sess['uid'] = $userId;
+				$sess['first_name'] = $user['first_name'];
+				$sess['last_name'] = $user['last_name'];
+				$sess['user_type'] = $user['user_type'];
+				$this->load->library('session');
+				$this->session->set_userdata($sess);
+				redirect('/?welcome');
+			} else {
+				alertmsg('error:u1');
+			}
+		} else {
+			securelychk();
 		}
 	}
 	

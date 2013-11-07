@@ -2,6 +2,14 @@
 <style>
 .top-search {display:none;}
 </style>
+<?php if (isset($_GET['welcome'])):?>
+<script>
+$(function(){
+	$('.pop-mark').fadeIn();
+	show_welcome_pop($('#RegType').val());
+});
+</script>
+<?php endif;?>
 <!-- find & singup -->
 	<div class="p-bn rel">
 		<div class="pbn-find rel">
