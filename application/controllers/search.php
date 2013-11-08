@@ -117,7 +117,7 @@ class search extends Front_Controller {
         foreach ($appyied_job as $a_job) {
             array_push($apply, $a_job['job_id']);
         }
-        $jobs['apply'] = $apply;
+        $data['apply'] = $apply;
         
         // Filter employment_type
         if(!empty($post['employment_type'])) {

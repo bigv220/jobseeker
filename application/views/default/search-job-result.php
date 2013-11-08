@@ -218,7 +218,7 @@
 <!--search-result body-->
 <div class="result-bd">
     <?php foreach($jobs as $job): ?>
-    <div class="box rel sresult-row">
+    <div class="box rel sresult-row id-<?php echo $job['id']?>">
         <div class="sresult-par1">
             <div class="span1 rel"> <img src="<?php echo $site_url?>attached/users/<?php echo $job['profile_pic']?>" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
             <div class="span2">
@@ -228,7 +228,7 @@
                 <a href="javascript:void(0);" class="job-viewmore">View More</a> </div>
             <div class="span3">
                 <div class="zoom"> <a href="#" class="job-btn job-btn-mark" style="display:none"></a> <a href="#" class="job-btn job-btn-marked"></a> <a href="#" class="job-btn job-btn-featured"  style="display:none"></a> <a href="#" class="job-btn job-btn-match">99%</a> </div>
-                <div><a href="javascript:void(0);" class="<?php if (isset($job['id']) && in_array($job['id'], $jobs['apply'])) echo "job-btn-submitted"; else echo "job-btn-submit"; ?>" data-job-id="<?php echo $job['id']; ?>"></a></div>
+                <div><a href="javascript:void(0);" class="<?php if (isset($job['id']) && in_array($job['id'], $apply)) echo "job-btn-submitted"; else echo "job-btn-submit"; ?>" data-job-id="<?php echo $job['id']; ?>"></a></div>
             </div>
         </div>
         <div class="sresult-par2">
