@@ -173,3 +173,11 @@ CREATE TABLE `job_language_level` (
   `level` varchar(50) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+#2013-11-08 
+CREATE TABLE `job_apply` (
+  `job_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  PRIMARY KEY  (`job_id`,`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
