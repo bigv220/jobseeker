@@ -45,8 +45,8 @@ select{
 margin-top:20px;
 }
 #content{
-	width:740px;
-	float:left;
+	width:940px;
+	/* float:left; */
 	margin:10px 0 10px 0;
 	padding:10px;
 }
@@ -118,7 +118,7 @@ margin-top:20px;
 	background:#FFF;
 	padding:5px;
 	height:20px;
-	float:left;
+	/* float:left; */
 	width:950px;
 }
 #top-panel ul{

@@ -9,8 +9,7 @@ class Index extends Admin_Controller {
 	
 	public function index()
 	{
-		$data = $this->data;
-		$this->load->view('admin/index',$data);
+		redirect('admin/news');
 	}
 	
 	public function change_lang()

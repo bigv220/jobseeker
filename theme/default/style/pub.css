@@ -74,8 +74,8 @@ a:hover{text-decoration:none;}
 .phd-menu .findstaff{width:90px;}
 .phd-menu .findstaff a{width:70px;height:10px;background:url(home/menu_findstaff.png) no-repeat;}
 .phd-menu .post a{width:70px;height:10px;background:url(home/menu_postajob.png) no-repeat;}
-.phd-login{float:right;*display:inline;*behavior:url(js/jslib/PIE.htc);height:75px;border-radius:0 0 2px 2px;background:#ef7641;margin:0 15px 0 0;}
-.phd-login-text{max-width:160px;padding:50px 10px 0 10px;height:25px;text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;}
+.phd-login{float:right;*display:inline;*behavior:url(js/jslib/PIE.htc);min-height:75px;border-radius:0 0 2px 2px;background:#ef7641;margin:0 15px 0 0;}
+.phd-login-text{max-width:135px;padding:50px 10px 0 10px;/*height:25px;*/text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;word-wrap: break-word;}
 .phd-login-text-user{width:61px;padding:35px 0 0 0;height:40px;text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;font-size:12px;}
 .pft-wrap{overflow:hidden;zoom:1;padding:20px 0 0 0;background:#fafafa url(pub/footer-bg.gif) repeat-x;}
 .p-ft{font-family:Arial;color:#7f7f7f;}

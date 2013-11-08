@@ -12,7 +12,20 @@ class user extends Admin_Controller {
 	public function index()
 	{
 		$data = $this->data;
-		$data['user'] = $this->user_model->getTable();
+		if (empty($_GET['type'])) {
+			$where = null;
+		} else {
+			if ('company' == $_GET['type']) {
+				$where = array('user_type' => '1');
+			} 
+			if ('jobseeker' == $_GET['type']) {
+				$where = array('user_type' => '0');
+			}
+			if ('unauthenticated' == $_GET['type']) {
+				$where = array('user_type' => '4');
+			}
+		}
+		$data['user'] = $this->user_model->getTable($where);
 		$this->load->view($data['admin_theme'].'/user-index', $data);
 	}
 	

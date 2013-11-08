@@ -190,3 +190,7 @@ function isCompany($utype) {
 	}
 }
 
+function userType($typeId) {
+	$arr = array(0 => 'Jobseeker', 1 => 'Company', 4 => 'Unauthenticated' );
+	return $arr[$typeId];
+}

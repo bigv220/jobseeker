@@ -2,8 +2,8 @@
       <div id="top-panel">
             <div id="panel">
                 <ul>
-                    <li><a href="<?php echo $site_url?>admin/page/add/" class="add">Add</a></li>
-                    <!-- <li><a href="<?php echo $site_url?>admin/page/" class="invoices">查看页面</a></li> -->
+                    <!-- <li><a href="<?php echo $site_url?>admin/user/add/" class="useradd">增加用户</a></li>
+                    <li><a href="<?php echo $site_url?>admin/user/" class="group">查看用户</a></li> -->
                 </ul>
             </div>
       </div>
@@ -11,7 +11,7 @@
             <div id="content">
                 
                 <div id="box">
-                	<h3>Page list</h3>
+                	<h3>Job list</h3>
                 	<script type="text/javascript">
                 		$(document).ready(function() 
                 		    { 
@@ -23,22 +23,24 @@
 						<thead>
 							<tr>
                             	<th width="40px"><a href="#">ID</a></th>
-                            	<th>Title</th>
-                                <th width="120px">Date</th>
-                                <!-- <th width="60px">语言</th> -->
+                            	<th>Job Title</th>
+                                <th width="300px">Company</th>
+                                <th width="100px">Posted Date</th>
+                                <!-- <th width="120px">登录时间</th> -->
                                 <th width="60px">Action</th>
                             </tr>
 						</thead>
 						<tbody>
-						<?php foreach ($article as $row) :?>
+						<?php foreach ($jobs as $row) :?>
 							<tr>
-                            	<td class="a-center"><?php echo $row['aid']?></td>
-                            	<td><a href="<?php echo $site_url.'page/'.$row['url']?>" target="_blank"><?php echo mb_strlen($row['title'])>30 ? mb_substr($row['title'], 0, 26).'...' : $row['title']?></a></td>
-                                <td class="a-center"><?php echo date('Y-m-d H:i',$row['date'])?></td>
-                                <!-- <td class="a-center"><?php echo langName($row['lang'])?></td> -->
+                            	<td class="a-center"><?php echo $row['id']?></td>
+                            	<td><?php echo $row['job_name']?></td>
+                                <td><?php echo $row['first_name']?></td>
+                                <td class="a-center"><?php echo $row['post_date']?></td>
+                                <!-- <td class="a-center"><?php //echo $row['lastlogon']==0 ? '从未登录' : date('Y-m-d H:i',$row['lastlogon'])?></td> -->
                                 <td class="a-center">
-                                	<a href="<?php echo $site_url.'admin/page/edit/'.$row['aid']?>"><img src="<?php echo $theme_path?>img/icons/page_white_edit.png" title="Edit" width="16" height="16" /></a> &nbsp; 
-                                	<a href="<?php echo $site_url.'admin/page/delete/'.$row['aid']?>" onclick="javascript:return confirm('Delete ?');"><img src="<?php echo $theme_path?>img/icons/page_white_delete.png" title="Delete" width="16" height="16" /></a>
+                                	<!-- <a href="<?php echo $site_url.'admin/job/edit/'.$row['id']?>"><img src="<?php echo $theme_path?>img/icons/user_edit.png" title="Edit" width="16" height="16" /></a> &nbsp;  -->
+                                	<a href="<?php echo $site_url.'admin/job/delete/'.$row['id']?>" onclick="javascript:return confirm('Delete ?');"><img src="<?php echo $theme_path?>img/icons/user_delete.png" title="Delete" width="16" height="16" /></a>
                                 </td>
                             </tr>
                         <?php endforeach;?>

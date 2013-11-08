@@ -2,8 +2,8 @@
       <div id="top-panel">
             <div id="panel">
                 <ul>
-                    <li><a href="<?php echo $site_url?>admin/category/add/" class="add">添加分类</a></li>
-                    <li><a href="<?php echo $site_url?>admin/category/" class="invoices">查看分类</a></li>
+                    <li><a href="<?php echo $site_url?>admin/category/add/" class="add">Add</a></li>
+                    <!-- <li><a href="<?php echo $site_url?>admin/category/" class="invoices">查看分类</a></li> -->
                </ul>
             </div>
       </div>
@@ -11,17 +11,17 @@
             <div id="content">
                 
                 <div id="box">
-                	<h3>分类列表</h3>
+                	<h3>Category list</h3>
                 	<form id="form_cat" action="<?php echo $site_url?>admin/category/order/" method="post">
                 	<table width="100%">
 						<thead>
 							<tr>
-								<th width="40px"><a href="#">排序</a></th>
+								<th width="40px"><a href="#">Order</a></th>
                             	<th width="40px">ID</th>
-                            	<th>名称</th>
-                            	<th>地址</th>
+                            	<th>Name</th>
+                            	<th>URL</th>
                                 <!--<th>描述</th>-->
-                                <th width="60px">操作</th>
+                                <th width="60px">Action</th>
                             </tr>
 						</thead>
 						<tbody>
@@ -40,7 +40,7 @@
                         <?php endforeach;?>
 						</tbody>
 					</table>
-                    <div><button type="submit" style="padding:2px 5px;margin-left:4px;">排序</button></div>
+                    <div><button type="submit" style="padding:2px 5px;margin-left:4px;">Sort</button></div>
                     </form>
                 </div>
                 	

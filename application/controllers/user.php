@@ -124,12 +124,12 @@ class user extends Front_Controller {
         }
         else{
             $userId = $userId[0]['uid'];
-            $md5username = md5($_POST['username']);
+            $md5username = md5(substr(md5($_POST['username']), 3, 9)); // just make it complicated
             $resetPwLink = $this->config->item('base_url') . 'user/resetPassword?juid='. $userId . '&token=' . $md5username;
             //send email to this user's email address
             $this->load->library('email');
 
-            $this->email->from('andrew@anzury.com', 'JingJobs Team');
+            $this->email->from('do-not-reply@jingjobs.com', 'JingJobs Team');
             $this->email->to($_POST['username']);
 
             $this->email->subject('RESET PASSWORD EMIAL FROM JINGJOBS');
@@ -154,7 +154,7 @@ class user extends Front_Controller {
         $message = "success";
         $user = $this->jobseeker_model->getUserInfo($_POST["uid"]);
         if($user != null){
-            if(md5($user['username']) != $_POST['token']){
+            if( md5(substr(md5($user['username']), 3, 9)) != $_POST['token'] ){
                 $status = "error";
                 $message = "The link is bad, please contact us.";
             }
@@ -265,5 +265,5 @@ class user extends Front_Controller {
 			securelychk();
 		}
 	}
-	
+
 }

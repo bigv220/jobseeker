@@ -1,4 +1,4 @@
-            <div id="sidebar">
+<!--             <div id="sidebar">
   				<ul>
                     <li><h3><a href="#" class="folder_table">分类</a></h3>
           				<ul>
@@ -11,7 +11,7 @@
                         	<li><a href="<?php echo $site_url?>admin/page/" class="manage_page">页面管理</a></li>
                             <li><a href="<?php echo $site_url?>admin/news/" class="addorder">新闻管理</a></li>
                             <li><a href="<?php echo $site_url?>admin/product/" class="folder_table">产品管理</a></li>
-                            <!-- <li><a href="<?php echo $site_url?>admin/form/" class="group">报名管理</a></li> -->
+                            <li><a href="<?php echo $site_url?>admin/form/" class="group">报名管理</a></li>
                         </ul>
                     </li>
                      
@@ -28,3 +28,4 @@
                     </li>
 				</ul>       
           </div>
+ -->

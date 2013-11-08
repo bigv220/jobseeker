@@ -88,4 +88,9 @@ class job_model extends MY_Model
         return $this->db->query($sql)->result_array();
     }
     
+    public function delJobLang($job_id) {
+    	$this->table = 'job_language_level';
+    	return $this->delete($job_id, 'job_id');
+    }
+    
 }
