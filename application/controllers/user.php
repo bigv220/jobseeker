@@ -81,7 +81,7 @@ class user extends Front_Controller {
             $this->load->model('jobseeker_model');
             $user = $this->jobseeker_model->getUser($post['username'], md5($post['login_password']));
             
-            if ( 4 == $user['user_type'] ) {
+            if ( isset($user['user_type']) && 4 == $user['user_type'] ) {
             	alertmsg('Please check your email and complete email confirmation.');
             }
 
