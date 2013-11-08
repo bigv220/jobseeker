@@ -178,7 +178,7 @@ $(function(){
 
     var resetPasswordRequestForm = $('#resetpw_form');
     resetPasswordRequestForm.submit(function(){
-        $.post(site_url + resetPasswordRequestForm.attr('action'),
+        $.post(resetPasswordRequestForm.attr('action'),
             resetPasswordRequestForm.serialize(),
             function(result, status){
                 if(result.status == 'error'){
