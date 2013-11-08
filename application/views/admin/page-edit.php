@@ -2,8 +2,8 @@
       <div id="top-panel">
             <div id="panel">
                 <ul>
-                    <li><a href="<?php echo $site_url?>admin/page/add/" class="add">增加页面</a></li>
-                    <li><a href="<?php echo $site_url?>admin/page/" class="invoices">查看页面</a></li>
+                    <li><a href="<?php echo $site_url?>admin/page/add/" class="add">Add</a></li>
+                    <!-- <li><a href="<?php echo $site_url?>admin/page/" class="invoices">查看页面</a></li> -->
                 </ul>
             </div>
       </div>
@@ -11,16 +11,16 @@
             <div id="content">
               
                 <div id="box">
-                	<h3 id="adduser"><?php echo empty($article)?'增加':'编辑' ?> 页面</h3>
+                	<h3 id="adduser"><?php echo empty($article)?'Add':'Edit' ?> Page</h3>
                     <form id="form" action="<?php echo $site_url?>admin/page/<?php echo empty($article)?'add':'edit/'.$article['aid'] ?>/" method="post">
                     	<fieldset id="page">
-                    		<label for="title">标题:</label> 
+                    		<label for="title">Title:</label> 
                     		<input name="title" id="title" type="text" value="<?php if(!empty($article)) echo $article['title']?>" />
                     		<br />
-                    		<label for="url">地址:</label> 
+                    		<label for="url">URL:</label> 
                     		<input name="url" id="url" type="text" value="<?php if(!empty($article)) echo $article['url']?>" />
                     		<br />
-                    		<label for="content1">内容:</label> 
+                    		<label for="content1">Content:</label> 
                     		<script charset="utf-8" src="<?php echo $theme_path?>js/editor/kindeditor-min.js"></script>
                     		<script charset="utf-8" src="<?php echo $theme_path?>js/editor/lang/zh_CN.js"></script>
                     		<script>
@@ -29,7 +29,7 @@
 							                editor = K.create('#content1', {
 							                        resizeType : 2,
 							                        newlineTag : 'br',
-							                        minWidth : 580,
+							                        minWidth : 760,
 							                        width : '580px',
 							                        allowFileManager : true,
 							                        uploadJson : '<?php echo $site_url?>admin/ajax/upload_json/',
@@ -52,12 +52,12 @@
                     		</textarea>
                     		<br />
                     		
-                    		<label for="lang">语言:</label> 
+                    		<!-- <label for="lang">语言:</label> 
                     		<select name="lang">
 	                    		<option value="en" <?php if($lang=='en') echo 'selected="selected"'?>><?php echo langName('en')?></option>
 	                    		<option value="cn" <?php if($lang=='cn') echo 'selected="selected"'?>><?php echo langName('cn')?></option>
                     		</select>
-                    		<br />
+                    		<br /> -->
                     		
                     	</fieldset>
                       <div align="center">
@@ -66,8 +66,8 @@
                       <?php endif;?>
                       
                       <input type="hidden" name="type" value="page" />
-                      <input id="button1" type="submit" value="提交" /> 
-                      <input id="button2" type="reset" value="重置" />
+                      <input id="button1" type="submit" value="Submit" /> 
+                      <input id="button2" type="reset" value="Reset" />
                       </div>
                     </form>
 

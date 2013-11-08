@@ -2,8 +2,8 @@
       <div id="top-panel">
             <div id="panel">
                 <ul>
-                    <li><a href="<?php echo $site_url?>admin/news/add/" class="add">增加新闻</a></li>
-                    <li><a href="<?php echo $site_url?>admin/news/" class="invoices">查看新闻</a></li>
+                    <li><a href="<?php echo $site_url?>admin/news/add/" class="add">Add</a></li>
+                    <!-- <li><a href="<?php echo $site_url?>admin/news/" class="invoices">查看新闻</a></li> -->
                 </ul>
             </div>
       </div>
@@ -11,16 +11,16 @@
             <div id="content">
               
                 <div id="box">
-                	<h3 id="adduser"><?php echo empty($article)?'增加':'编辑' ?> 新闻</h3>
+                	<h3 id="adduser"><?php echo empty($article)?'Add':'Edit' ?> News</h3>
                     <form id="form" action="<?php echo $site_url?>admin/news/<?php echo empty($article)?'add':'edit/'.$article['aid'] ?>/" method="post">
                     	<fieldset id="news">
-                    		<label for="title">标题:</label> 
+                    		<label for="title">Title:</label> 
                     		<input name="title" id="title" type="text" value="<?php if(!empty($article)) echo $article['title']?>" />
                     		<br />
-                    		<label for="descrip">摘要:</label> 
+                    		<label for="descrip">Description:</label> 
                     		<textarea name="descrip" id="descrip" style="height:50px;"><?php if(!empty($article)) echo $article['descrip']?></textarea>
                     		<br />
-                    		<label for="content1">内容:</label> 
+                    		<label for="content1">Content:</label> 
                     		<script charset="utf-8" src="<?php echo $theme_path?>js/editor/kindeditor-min.js"></script>
                     		<script charset="utf-8" src="<?php echo $theme_path?>js/editor/lang/zh_CN.js"></script>
                     		<script>
@@ -30,7 +30,7 @@
 							                        resizeType : 2,
 							                        newlineTag : 'br',
 							                        minWidth : 580,
-							                        width : '580px',
+							                        width : '760px',
 							                        allowFileManager : true,
 							                        uploadJson : '<?php echo $site_url?>admin/ajax/upload_json/',
 							                        fileManagerJson : '<?php echo $site_url?>admin/ajax/file_manager_json/',
@@ -60,42 +60,42 @@
 									$("#datepicker").datepicker();
 								});
 							</script> 
-                    		<label for="date">日期:</label> 
+                    		<label for="date">Date:</label> 
                     		<input name="date" id="datepicker" type="text" value="<?php echo empty($article) ? date('Y-m-d', time()) : date('Y-m-d',$article['date'])?>" />
                     		<br />
                     		
-                    		<label for="cid">父分类:</label>
+                    		<label for="cid">Parent:</label>
                     		<select id="cid" name="cid">
                     		<?php foreach ($cat_tree as $row):?>
                     			<option <?php if(!empty($article)&&$article['cid']==$row['cid']) echo 'selected="selected"';?> value="<?php echo $row['cid']?>"><?php echo str_repeat('&nbsp;', $row['level']*3).$row['name']?></option>
             				<?php endforeach;?>
             				</select>
                     		<br />
-                    		<label for="lang">语言:</label> 
+                    		<!-- <label for="lang">语言:</label> 
                     		<select name="lang">
 	                    		<option value="en" <?php if($lang=='en') echo 'selected="selected"'?>><?php echo langName('en')?></option>
 	                    		<option value="cn" <?php if($lang=='cn') echo 'selected="selected"'?>><?php echo langName('cn')?></option>
                     		</select>
-                    		<br />
+                    		<br /> -->
                     	</fieldset>
                       <div align="center">
                       <?php if(!empty($article)):?>
                       <input type="hidden" name="aid" value="<?php echo $article['aid']?>" />
                       <?php endif;?>
                       <input type="hidden" name="type" value="news" />
-                      <input id="button1" type="submit" value="提交" /> 
-                      <input id="button2" type="reset" value="重置" />
+                      <input id="button1" type="submit" value="Submit" /> 
+                      <input id="button2" type="reset" value="Reset" />
                       </div>
                     </form>
 					<script type="text/javascript">
 					$("#form").submit(function(){
 						if($("#title").val() == "") {
-							alert("请填写标题。");
+							alert("Please fill in title.");
 							$("#title").focus();
 							return false;
 						}
 						if($("#cid option:selected").html().substr(0,2) == "--") {
-							alert("请选择父分类。");
+							alert("Please select a perant category.");
 							$("#cid").focus();
 							return false;
 						}

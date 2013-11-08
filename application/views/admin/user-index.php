@@ -2,8 +2,11 @@
       <div id="top-panel">
             <div id="panel">
                 <ul>
-                    <li><a href="<?php echo $site_url?>admin/user/add/" class="useradd">增加用户</a></li>
-                    <li><a href="<?php echo $site_url?>admin/user/" class="group">查看用户</a></li>
+                    <!-- <li><a href="<?php echo $site_url?>admin/user/add/" class="useradd">增加用户</a></li>
+                    <li><a href="<?php echo $site_url?>admin/user/" class="group">查看用户</a></li> -->
+                    <li><a href="<?php echo $site_url?>admin/user/?type=company" class="group">Company</a></li>
+                    <li><a href="<?php echo $site_url?>admin/user/?type=jobseeker" class="group">Jobseeker</a></li>
+                    <li><a href="<?php echo $site_url?>admin/user/?type=unauthenticated" class="group">unauthenticated</a></li>
                 </ul>
             </div>
       </div>
@@ -11,7 +14,7 @@
             <div id="content">
                 
                 <div id="box">
-                	<h3>用户列表</h3>
+                	<h3>User list</h3>
                 	<script type="text/javascript">
                 		$(document).ready(function() 
                 		    { 
@@ -23,10 +26,11 @@
 						<thead>
 							<tr>
                             	<th width="40px"><a href="#">ID</a></th>
-                            	<th>用户名</th>
-                                <th width="240px">电子邮箱</th>
-                                <th width="120px">登录时间</th>
-                                <th width="60px">操作</th>
+                            	<th>Username</th>
+                                <th width="400px">Realname</th>
+                                <th width="100px">User Type</th>
+                                <!-- <th width="120px">登录时间</th> -->
+                                <th width="60px">Action</th>
                             </tr>
 						</thead>
 						<tbody>
@@ -34,8 +38,9 @@
 							<tr>
                             	<td class="a-center"><?php echo $row['uid']?></td>
                             	<td><?php echo $row['username']?></td>
-                                <td class="a-center"><?php echo $row['email']?></td>
-                                <td class="a-center"><?php echo $row['lastlogon']==0 ? '从未登录' : date('Y-m-d H:i',$row['lastlogon'])?></td>
+                                <td><?php echo $row['first_name'].' '.$row['last_name']?></td>
+                                <td class="a-center"><?php echo userType($row['user_type'])?></td>
+                                <!-- <td class="a-center"><?php //echo $row['lastlogon']==0 ? '从未登录' : date('Y-m-d H:i',$row['lastlogon'])?></td> -->
                                 <td class="a-center">
                                 	<a href="<?php echo $site_url.'admin/user/edit/'.$row['uid']?>"><img src="<?php echo $theme_path?>img/icons/user_edit.png" title="Edit" width="16" height="16" /></a> &nbsp; 
                                 	<a href="<?php echo $site_url.'admin/user/delete/'.$row['uid']?>" onclick="javascript:return confirm('Delete ?');"><img src="<?php echo $theme_path?>img/icons/user_delete.png" title="Delete" width="16" height="16" /></a>

@@ -9,7 +9,7 @@
             <div id="content">
               
                 <div id="box">
-                	<h3 id="adduser">网站设置</h3>
+                	<h3 id="adduser">Setting</h3>
                     <form id="form" action="" method="post">
                     	<fieldset id="Category">
                     	<?php foreach ($setting as $row):?>
@@ -20,8 +20,8 @@
                     	<?php endforeach;?>
                     	</fieldset>
                       <div align="center">
-                      <input id="button1" type="submit" value="提交" /> 
-                      <input id="button2" type="reset" value="重置" />
+                      <input id="button1" type="submit" value="Submit" /> 
+                      <input id="button2" type="reset" value="Reset" />
                       </div>
                     </form>
 
