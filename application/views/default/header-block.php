@@ -146,7 +146,7 @@
 <div class="top-search w70 rel">
     <form action="<?php echo $site_url; ?>search/searchJob" method="post" id="topSearchForm">
         <input type="hidden" name="top_search" value="1" />
-        <input type="text" name="search_text" class="abs top-search-input input-tip" value="Search our job database" data-tipval="Search our job database"/>
+        <input type="text" name="keywords" class="abs top-search-input input-tip" value="Enter Keywords" data-tipval="Enter Keywords"/>
         <input type="submit" class="abs top-search-btn " value=""  title="search" onclick="topSearchSubmit()"   />
     </form>
 <?php $current_user_type = isset($user_type)?$user_type:-1;
