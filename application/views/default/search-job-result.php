@@ -5,6 +5,7 @@
 </style>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 
+
 <!--search-result body-->
 <div class="result-page w770 rel clearfix">
 <!--search-result condition-->
@@ -227,7 +228,7 @@
                 <a href="javascript:void(0);" class="job-viewmore">View More</a> </div>
             <div class="span3">
                 <div class="zoom"> <a href="#" class="job-btn job-btn-mark" style="display:none"></a> <a href="#" class="job-btn job-btn-marked"></a> <a href="#" class="job-btn job-btn-featured"  style="display:none"></a> <a href="#" class="job-btn job-btn-match">99%</a> </div>
-                <div><a href="#" class="job-btn-submit"></a></div>
+                <div><a href="javascript:void(0);" class="<?php if (isset($job['id']) && in_array($job['id'], $jobs['apply'])) echo "job-btn-submitted"; else echo "job-btn-submit"; ?>" data-job-id="<?php echo $job['id']; ?>"></a></div>
             </div>
         </div>
         <div class="sresult-par2">
@@ -306,12 +307,12 @@
             <p>Are you sure you want to apply for this job?</p>
         </div>
         <div class="pop-bar">
-            <a href="#yes" class="pop-bar-btn pop-btn-yes">Yes</a> <a href="#no" class="pop-bar-btn pop-btn-no">No</a>
+            <a href="javascript:void(0);" class="pop-bar-btn pop-btn-yes">Yes</a> <a href="javascript:void(0);" class="pop-bar-btn pop-btn-no">No</a>
         </div>
     </div>
 </div>
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/searchJobPage.js"></script>
+
 <?php $this->load->view($front_theme.'/footer-block');?>
