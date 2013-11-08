@@ -141,6 +141,7 @@ $(function(){
     $('.job-viewmore,.sresult-par1').click(function(e){
 
         var abtn = $(this).parents('.sresult-row').find('.job-btn-submit');
+        var abtn_submitted = $(this).parents('.sresult-row').find('.job-btn-submitted');
         var requestinterviewbtn = $(this).parents('.sresult-row').find('.jobseeker_request_interview');
         var oDom = $(this).parents('.sresult-row').find('.sresult-par2');
         var aMark = $(this).parents('.sresult-row').find('.job-mark');
@@ -148,10 +149,12 @@ $(function(){
             aMark.addClass('job-mark2').removeClass('job-mark1');
             oDom.slideDown();
             abtn.css({display:'block'}).show();
+            abtn_submitted.css({display:'block'}).show();
             requestinterviewbtn.css({display:'block'}).show();
         }else{
             oDom.slideUp();
             abtn.hide();
+            abtn_submitted.hide();
             requestinterviewbtn.hide();
             aMark.addClass('job-mark1').removeClass('job-mark2');
         }
@@ -173,21 +176,16 @@ $(function(){
 
     //Pop apply
     var rowObj;
-    $('.job-btn-submit').bind('click',apply);
-    function apply(e){
+    $('.job-btn-submit').bind('click',function apply(e) {
             rowObj = $(this).parents('.sresult-row');
             $('.pop-mark').height($('body').height());
             popMark.fadeIn();
             popApply.fadeIn();
             e.stopPropagation();
             e.preventDefault();
-    }
-    function submitted(e){
-        alert('Submitted!!!')
-        return false;
-        e.stopPropagation();
-        e.preventDefault();
-    }
+    });
+    $('.job-btn-submitted').bind('click',submitted);
+
 
     //Pop apply close
     $('.pop-apply-close').click(function(){
@@ -201,9 +199,21 @@ $(function(){
         popMark.fadeOut();
 
         var appBtn = rowObj.find('.job-btn-submit');
-        appBtn.addClass('job-btn-submitted');
-        appBtn.unbind('click',apply);
-        appBtn.bind('click',submitted);
+        // APPLY JOB
+        $.post(site_url + 'job/apply', {job_id: appBtn.attr('data-job-id')},
+            function(result,status) {
+                if (status=='success') {
+                    appBtn.unbind('click');
+                    appBtn.bind('click',submitted);
+                    appBtn.removeClass('job-btn-submit').addClass('job-btn-submitted');
+
+                } else if (status =='login') {
+                    alert('Please Login to apply a job.');
+                } else {
+                    alert(status);
+                }
+            });
+        
     });
 
     //click No
@@ -212,4 +222,18 @@ $(function(){
         popMark.fadeOut();
     });
 
-})
+});    function apply(e){
+            rowObj = $(this).parents('.sresult-row');
+            $('.pop-mark').height($('body').height());
+            popMark.fadeIn();
+            popApply.fadeIn();
+            e.stopPropagation();
+            e.preventDefault();
+    }
+    function submitted(e){
+            $('.job-btn-submit').unbind('click',apply);
+            alert('You have already applied this job.')
+            return false;
+            e.stopPropagation();
+            e.preventDefault();
+    }

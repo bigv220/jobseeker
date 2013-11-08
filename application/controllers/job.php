@@ -106,4 +106,26 @@ class job extends Front_Controller {
     	}
     }
 
+    /**
+     * Jobseeker apply job AJAX request.
+     * 
+     **/
+    public function apply() {
+        $uid = $this->session->userdata('uid');
+        if (!$uid) {
+            $result['status'] = 'login';
+            echo json_encode($result);
+            exit;
+        }
+        if (isset($_POST['job_id']) && isset($uid)) {
+            // do apply
+            $this->load->model('job_model');
+            $result['status'] = $this->job_model->applyJob($_POST['job_id'], $uid, 1);
+
+            $result['status'] = $result['status'] ? 'success' : 'failed.';
+            echo json_encode($result);
+        }
+
+    }
+
 }

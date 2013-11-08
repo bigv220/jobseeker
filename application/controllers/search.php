@@ -108,6 +108,17 @@ class search extends Front_Controller {
 
         // get jobs according to the search
         $jobs = $this->job_model->searchJob($where);
+        if ($this->session->userdata('uid')) {
+            $appyied_job = $this->job_model->getAppliedJobByUser($this->session->userdata('uid'));
+        } else {
+            $appyied_job = array();
+        }
+        $apply = array();
+        foreach ($appyied_job as $a_job) {
+            array_push($apply, $a_job['job_id']);
+        }
+        $jobs['apply'] = $apply;
+        
         // Filter employment_type
         if(!empty($post['employment_type'])) {
             $filter_employment_type = explode(",", $post['employment_type']);
@@ -132,7 +143,8 @@ class search extends Front_Controller {
         $job_id_str = '';
         if(count($jobs)) {
             foreach($jobs as $job) {
-                $job_id_str .= "," . $job['id'];
+                if (isset($job['id'])) 
+                    $job_id_str .= "," . $job['id'];
             }
 
             $job_id_str = substr($job_id_str, 1);
