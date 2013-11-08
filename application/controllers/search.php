@@ -76,16 +76,20 @@ class search extends Front_Controller {
                 array_push($where_arr, "preferred_technical_skills like '%".$post["ProfessionalSkills_str"]."%'");
             }
 
-            for($i=0;$i<count($post['industry']);$i++) {
-                if(!empty($post["industry"][$i])) {
-                    array_push($where_or, "industry like '%".$post["industry"][$i]."%'");
-                }
+            if (!empty($post['industry'])) {
+	            for($i=0;$i<count($post['industry']);$i++) {
+	                if(!empty($post["industry"][$i])) {
+	                    array_push($where_or, "industry like '%".$post["industry"][$i]."%'");
+	                }
+	            }
             }
 
-            for($i=0;$i<count($post['position']);$i++) {
-                if(!empty($post["position"][$i]) && $post["position"][$i]!='none') {
-                    array_push($where_or, "position like '%".$post["position"][$i]."%'");
-                }
+            if (!empty($post['position'])) {
+	            for($i=0;$i<count($post['position']);$i++) {
+	                if(!empty($post["position"][$i]) && $post["position"][$i]!='none') {
+	                    array_push($where_or, "position like '%".$post["position"][$i]."%'");
+	                }
+	            }
             }
         }
 
