@@ -122,7 +122,7 @@ function language_arr() {
 				'Tamil','Thai','Tongan','Turkish','Ukrainian','Urdu','Uzbek','Vietnamese');
 }
 function getLanguageByID($id) {
-	$arr = language_arr();echo $id;
+	$arr = language_arr();
     if(empty($id)) {
         return $arr[0];
     }
@@ -206,3 +206,7 @@ function isCompany($utype) {
 	}
 }
 
+function userType($typeId) {
+	$arr = array(0 => 'Jobseeker', 1 => 'Company', 4 => 'Unauthenticated' );
+	return $arr[$typeId];
+}

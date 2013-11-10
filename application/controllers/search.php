@@ -76,16 +76,20 @@ class search extends Front_Controller {
                 array_push($where_arr, "preferred_technical_skills like '%".$post["ProfessionalSkills_str"]."%'");
             }
 
-            for($i=0;$i<count($post['industry']);$i++) {
-                if(!empty($post["industry"][$i])) {
-                    array_push($where_or, "industry like '%".$post["industry"][$i]."%'");
-                }
+            if (!empty($post['industry'])) {
+	            for($i=0;$i<count($post['industry']);$i++) {
+	                if(!empty($post["industry"][$i])) {
+	                    array_push($where_or, "industry like '%".$post["industry"][$i]."%'");
+	                }
+	            }
             }
 
-            for($i=0;$i<count($post['position']);$i++) {
-                if(!empty($post["position"][$i]) && $post["position"][$i]!='none') {
-                    array_push($where_or, "position like '%".$post["position"][$i]."%'");
-                }
+            if (!empty($post['position'])) {
+	            for($i=0;$i<count($post['position']);$i++) {
+	                if(!empty($post["position"][$i]) && $post["position"][$i]!='none') {
+	                    array_push($where_or, "position like '%".$post["position"][$i]."%'");
+	                }
+	            }
             }
         }
 
@@ -104,6 +108,17 @@ class search extends Front_Controller {
 
         // get jobs according to the search
         $jobs = $this->job_model->searchJob($where);
+        if ($this->session->userdata('uid')) {
+            $appyied_job = $this->job_model->getAppliedJobByUser($this->session->userdata('uid'));
+        } else {
+            $appyied_job = array();
+        }
+        $apply = array();
+        foreach ($appyied_job as $a_job) {
+            array_push($apply, $a_job['job_id']);
+        }
+        $data['apply'] = $apply;
+        
         // Filter employment_type
         if(!empty($post['employment_type'])) {
             $filter_employment_type = explode(",", $post['employment_type']);
@@ -128,7 +143,8 @@ class search extends Front_Controller {
         $job_id_str = '';
         if(count($jobs)) {
             foreach($jobs as $job) {
-                $job_id_str .= "," . $job['id'];
+                if (isset($job['id'])) 
+                    $job_id_str .= "," . $job['id'];
             }
 
             $job_id_str = substr($job_id_str, 1);
