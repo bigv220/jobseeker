@@ -486,6 +486,18 @@ class search extends Front_Controller {
                 
             }
         }
+
+        //Load Model
+        $this->load->model('jobseeker_model');
+
+        for($i=0; $i<count($jobseekers); $i++) {
+            $jobseekers[$i]['educations'] = $this->jobseeker_model->getAllEducationInfo($jobseekers[$i]['uid']);
+            $jobseekers[$i]['work_history'] = $this->jobseeker_model->getAllWorkHistory($jobseekers[$i]['uid']);
+            $jobseekers[$i]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($jobseekers[$i]['uid']);
+            $jobseekers[$i]['personal_skills'] = $this->jobseeker_model->getPersonalSkills($jobseekers[$i]['uid']);
+            $jobseekers[$i]['professional_skills'] = $this->jobseeker_model->getProfessionalSkills($jobseekers[$i]['uid']);
+            $jobseekers[$i]['languages'] = $this->jobseeker_model->getLanguage($jobseekers[$i]['uid']);
+        }
         $data['jobseekers'] = $jobseekers;
 
         $this->load->view($data['front_theme']."/search-jobseeker-result",$data);

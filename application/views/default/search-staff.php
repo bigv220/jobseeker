@@ -201,11 +201,7 @@
           <h3>
               <?php
               for($i=0; $i<count($staff['industry_arr']); $i++) {
-                  if($i==0) {
-                      echo $staff['industry_arr'][$i]['industry'];
-                  } else {
-                      echo ", " . $staff['industry_arr'][$i]['industry'];
-                  }
+                  echo '<a href="#">'.$staff['industry_arr'][$i]['industry']."</a> ";
               }
               ?>
           </h3>
@@ -224,7 +220,7 @@
             <span class="fxui-tab-tit">JingChat</span></div>
         <div class="sresult-tab-bd zoom">
           <div class="fxui-tab-nav sresult-nav-job">
-            <div class="sresult-nav-job-left">
+            <div class="sresult-nav-job-left sresult_about_me">
               <div class="text_r">
                   <p><?php echo $staff['description']; ?></p>
               </div>
@@ -233,11 +229,7 @@
                 <dd><?php
                     $industry_arr = $staff['industry_arr'];
                     for($i=0; $i<count($industry_arr); $i++) {
-                        if($i==0) {
-                            echo $industry_arr[$i]['industry'];
-                        } else {
-                            echo ", " . $industry_arr[$i]['industry'];
-                        }
+                        echo '<a href="#">'.$industry_arr[$i]['industry']."</a> ";
                     }
                     ?>
                 </dd>
@@ -245,18 +237,19 @@
                 <?php foreach($staff['work_history'] as $v) {
                   if($v['period_time_to'] == date('Y') || $v['is_stillhere'] == 1) {
                 ?>
-                    <dt>Current Employment</dt>
-                    <dd><?php echo $v['location']; ?></dd>
-                    <dd><?php echo $v['period_time_from'] . ' - ' . $v['period_time_to']; ?></dd>
-                    <dd><?php echo $v['introduce']; ?></dd>
-                <?php } else { ?>
-                     <dt>Previous Employment</dt>
-                    <dd><?php echo $v['location']; ?></dd>
-                    <dd><?php echo $v['period_time_from'] . ' - ' . $v['period_time_to']; ?></dd>
-                    <dd><?php echo $v['introduce']; ?></dd>
-               <?php }} ?>
+                      <dt>Current Employment</dt>
+                  <?php } else { ?>
+                      <dt>Previous Employment</dt>
+                  <?php } ?>
 
-                <dt>Preferred Personal Skills</dt>
+                    <dd><p class="employment_title"><?php echo $v['introduce']; ?></p>
+                    <p class="emploeyment_period">
+                        <?php echo $v['period_time_from'] . ' - ' . $v['period_time_to']; ?>
+                    </p>
+                    <p class="employment_description"><?php echo $v['description']; ?></p></dd>
+                  <?php } ?>
+
+                <dt>Personal Skills</dt>
                 <dd>
                     <?php
                     $arr = $staff['personal_skills'];
@@ -270,7 +263,7 @@
                     ?>
                 </dd>
 
-                <dt>Preferred Technical Skills</dt>
+                <dt>Technical Skills</dt>
                 <dd><?php
                     $arr = $staff['professional_skills'];
                     for($i=0; $i<count($arr); $i++) {
@@ -282,7 +275,7 @@
                     }
                     ?></dd>
 
-                <dt>Language(s) Required</dt>
+                <dt>Language(s)</dt>
                 <dd>
                     <?php $languages = $staff['languages'];
                     for($i=0; $i<count($languages); $i++) { ?>
@@ -295,24 +288,38 @@
               </dl>
             </div>
             <div class="sresult-nav-job-right">
-              <dl class="sresult-nav-job-dl">
+              <dl class="sresult-nav-job-dl sresult_about_me">
                 <dt>Birthday</dt>
                 <dd>
-                    <?php echo $staff['birthday']; ?>
+                    <p class="jobseeker_birthday"><?php echo date('M j Y',strtotime($staff['birthday'])); ?></p>
                 </dd>
                 <dt>Education</dt>
+                  <dd>
                 <?php $educations = $staff['educations'];
                 for($i=0; $i<count($educations); $i++) { ?>
-                    <dd><?php echo $educations[$i]['school_name']; ?></dd>
-                    <dd><?php echo $educations[$i]['attend_date_from'] . ' - ' . $educations[$i]['attend_date_to']; ?></dd>
+                    <p class="school_name"><?php echo $educations[$i]['school_name']; ?></p>
+                    <p class="school_major"><?php echo $educations[$i]['major']; ?></p>
+                    <p class="school_period"><?php echo $educations[$i]['attend_date_from'] . ' - ' . $educations[$i]['attend_date_to']; ?></p>
                 <?php }?>
+                  </dd>
+
                 <dt>Elsewhere on the Web</dt>
-                  <dd>Twitter</dd>
-                  <dd>Facebook</dd>
-                  <dd>Priterest</dd>
-                  <dd>Personal Website</dd>
+                  <dd>
+                  <?php if (!empty($staff['twitter'])):?>
+                  <p><a href="<?php echo $staff['twitter']?>">Twitter</a></p>
+                  <?php endif;?>
+                  <?php if (!empty($staff['facebook'])):?>
+                  <p><a href="<?php echo $staff['facebook']?>">Facebook</a></p>
+                  <?php endif;?>
+                  <?php if (!empty($staff['linkedin'])):?>
+                  <p><a href="<?php echo $staff['linkedin']?>">Linkedin</a></p>
+                  <?php endif;?>
+                  <?php if (!empty($staff['weibo'])):?>
+                  <p><a href="<?php echo $staff['weibo']?>">Weibo</a></p>
+                  <?php endif;?>
+                  </dd>
                 <dt>Phone</dt>
-                <dd><?php echo $staff['phone']; ?></dd>
+                <dd><p class="phone_number"><?php echo $staff['phone']; ?></p></dd>
                   <dd>
                       <ul class="industry-ul">
                           <li class="n1"><b>Type of Employment</b><span><?php if($staff['employment_type']) {if(is_numeric($staff['employment_type'])) echo getJobtypeByID($staff['employment_type']); else echo $staff['employment_type']; }?></span></li>
