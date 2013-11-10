@@ -12,7 +12,7 @@ $(document).ready(function() {
     $("select[name='province']").change(function() {
         change_location($(this), 'province');
     });
-    $("#PersonalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/personalskillsautocomplete",{
+    $("#PersonalSkills_input").autocomplete(site_url+"jobseeker/personalskillsautocomplete",{
         delay:10,
         width: '230px',
         matchSubset:1,
@@ -23,7 +23,7 @@ $(document).ready(function() {
         formatResult: formatResult
     });
 
-    $("#ProfessionalSkills_input").autocomplete("<?PHP echo $site_url; ?>/jobseeker/professionalskillsautocomplete",{
+    $("#ProfessionalSkills_input").autocomplete(site_url+"jobseeker/professionalskillsautocomplete",{
         delay:10,
         width: '230px',
         matchSubset:1,

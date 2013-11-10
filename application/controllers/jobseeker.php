@@ -207,7 +207,7 @@ class jobseeker extends Front_Controller {
             //save seeking industry to db
             $industry_len = count($post['industry_1']);
             for($i=0; $i<$industry_len;$i++) {
-                if($post['industry'][$i] && $post['position_1'][$i]) {
+                if($post['industry_1'][$i] && $post['position_1'][$i]) {
                     $this->jobseeker_model->addSeekingIndustry($uid, $post['industry_1'][$i], $post['position_1'][$i]);
                 }
             }

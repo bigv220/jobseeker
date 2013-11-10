@@ -76,20 +76,16 @@ class search extends Front_Controller {
                 array_push($where_arr, "preferred_technical_skills like '%".$post["ProfessionalSkills_str"]."%'");
             }
 
-            if (!empty($post['industry'])) {
-	            for($i=0;$i<count($post['industry']);$i++) {
-	                if(!empty($post["industry"][$i])) {
-	                    array_push($where_or, "industry like '%".$post["industry"][$i]."%'");
-	                }
-	            }
+            for($i=0;$i<count($post['industry']);$i++) {
+                if(!empty($post["industry"][$i])) {
+                    array_push($where_or, "industry like '%".$post["industry"][$i]."%'");
+                }
             }
 
-            if (!empty($post['position'])) {
-	            for($i=0;$i<count($post['position']);$i++) {
-	                if(!empty($post["position"][$i]) && $post["position"][$i]!='none') {
-	                    array_push($where_or, "position like '%".$post["position"][$i]."%'");
-	                }
-	            }
+            for($i=0;$i<count($post['position']);$i++) {
+                if(!empty($post["position"][$i]) && $post["position"][$i]!='none') {
+                    array_push($where_or, "position like '%".$post["position"][$i]."%'");
+                }
             }
         }
 
@@ -108,17 +104,6 @@ class search extends Front_Controller {
 
         // get jobs according to the search
         $jobs = $this->job_model->searchJob($where);
-        if ($this->session->userdata('uid')) {
-            $appyied_job = $this->job_model->getAppliedJobByUser($this->session->userdata('uid'));
-        } else {
-            $appyied_job = array();
-        }
-        $apply = array();
-        foreach ($appyied_job as $a_job) {
-            array_push($apply, $a_job['job_id']);
-        }
-        $data['apply'] = $apply;
-        
         // Filter employment_type
         if(!empty($post['employment_type'])) {
             $filter_employment_type = explode(",", $post['employment_type']);
@@ -143,8 +128,7 @@ class search extends Front_Controller {
         $job_id_str = '';
         if(count($jobs)) {
             foreach($jobs as $job) {
-                if (isset($job['id'])) 
-                    $job_id_str .= "," . $job['id'];
+                $job_id_str .= "," . $job['id'];
             }
 
             $job_id_str = substr($job_id_str, 1);
@@ -218,7 +202,190 @@ class search extends Front_Controller {
 
     public function staff() {
         $data = $this->data;
+
+        //Load Model
+        $this->load->model('job_model');
+
+        $this->load->helper('location');
+        $data['location'] = getLoction();
+
+        $data['selected_date'] = "";
+        $data['salary_sort'] = "";
+
+        //get all search conditions at the left side
+        $post = $_POST;
+        $where = '';
+        $where_arr = array();
+        $where_or = array();
+        if($post) {
+            if ($post["keywords"] == 'Enter Keywords') {
+                $post['keywords'] = '';
+            }
+            if(!empty($post["keywords"])) {
+                array_push($where_arr, "username like '%" . $post["keywords"] . "%'");
+            }
+
+            if(!empty($post["country"])) {
+                array_push($where_arr, "country='" .$post["country"]."'");
+            }
+            if(!empty($post["province"])) {
+                array_push($where_arr, "province='" .$post["province"]."'");
+            }
+            if(!empty($post["city"])) {
+                array_push($where_arr, "city='" .$post["city"]."'");
+            }
+
+            if(!empty($post["employment_length"])) {
+                array_push($where_arr, 'employment_length='.$post["employment_length"]);
+            }
+
+            if(!empty($post["language"])) {
+                array_push($where_arr, "ul.language='".$post["language"]."'");
+            }
+            if(!empty($post["PersonalSkills_str"])) {
+                array_push($where_arr, "personal_skill like '%".$post["PersonalSkills_str"]."%'");
+            }
+            if(!empty($post["ProfessionalSkills_str"])) {
+                array_push($where_arr, "professional_skill like '%".$post["ProfessionalSkills_str"]."%'");
+            }
+
+            for($i=0;$i<count($post['industry']);$i++) {
+                if(!empty($post["industry"][$i])) {
+                    array_push($where_or, "industry like '%".$post["industry"][$i]."%'");
+                }
+            }
+
+            for($i=0;$i<count($post['position']);$i++) {
+                if(!empty($post["position"][$i]) && $post["position"][$i]!='none') {
+                    array_push($where_or, "position like '%".$post["position"][$i]."%'");
+                }
+            }
+        }
+
+        // get where string
+        if(count($where_arr) || count($where_or)) {
+            $where_str = implode(' AND ', $where_arr);
+            $where_or_str = implode(' OR ', $where_or);
+
+            if(count($where_arr) && count($where_or)) {
+                $where .= ' WHERE ' . $where_str . " AND (" . $where_or_str . ")";
+            } else {
+                $where .= ' WHERE ' . $where_str . $where_or_str;
+            }
+
+        }
+
+        // get jobs according to the search
+        $staffs = $this->job_model->searchStaff($where);
+        // Filter employment_type
+        if(!empty($post['employment_type'])) {
+            $filter_employment_type = explode(",", $post['employment_type']);
+
+            foreach ($staffs as $key => $one_staff) {
+                $employment_type_arr = explode(",", $one_staff['employment_type']);
+
+                foreach ($employment_type_arr as $one_type) {
+                    if (in_array($one_type , $filter_employment_type) === FALSE) {
+                        unset($staffs[$key]);
+                    } else {
+                        break;
+                    }
+                }
+
+            }
+        }
+
+        //Load Model
+        $this->load->model('jobseeker_model');
+
+        for($i=0; $i<count($staffs); $i++) {
+            $staffs[$i]['educations'] = $this->jobseeker_model->getAllEducationInfo($staffs[$i]['uid']);
+            $staffs[$i]['work_history'] = $this->jobseeker_model->getAllWorkHistory($staffs[$i]['uid']);
+            $staffs[$i]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($staffs[$i]['uid']);
+            $staffs[$i]['personal_skills'] = $this->jobseeker_model->getPersonalSkills($staffs[$i]['uid']);
+            $staffs[$i]['professional_skills'] = $this->jobseeker_model->getProfessionalSkills($staffs[$i]['uid']);
+            $staffs[$i]['languages'] = $this->jobseeker_model->getLanguage($staffs[$i]['uid']);
+        }
+
+        $data['staff_arr'] = $staffs;
+
+        // generate job id string, this will be used in the filter function at the right side
+        $staff_id_str = '';
+        if(count($staffs)) {
+            foreach($staffs as $staff) {
+                $staff_id_str .= "," . $staff['uid'];
+            }
+
+            $staff_id_str = substr($staff_id_str, 1);
+        }
+
+        //the left side, industry lists
+        $this->load->model('jobseeker_model');
+        $industry = $this->jobseeker_model->getIndustry();
+        $data["industry"] = $industry;
+
+        $position = $this->jobseeker_model->getPosition('General');
+        $data["position"] = $position;
+
+        $data["staff_id_str"] = $staff_id_str;
         $this->load->view($data['front_theme']."/search-staff",$data);   
+    }
+
+    public function filterStaff() {
+        $data = $this->data;
+
+        //Load Model
+        $this->load->model('job_model');
+
+        $data['selected_date'] = "";
+        //$data['salary_sort'] = "";
+        $data["staff_id_str"] = "";
+
+        $post = $_POST;
+        $where = '';
+        if($post) {
+//            if(!empty($post["post_date"])) {
+//                $post_date_timestamp = mktime(0, 0, 0, date("m"), date("d")-$post["post_date"], date("Y"));
+//                $post_date = date('Y-m-d', $post_date_timestamp);
+//                $where .= " WHERE post_date>='$post_date'";
+//            }
+
+            if(!empty($post["staffIdStr"])) {
+                $where .= " AND uid in(" . $post["staffIdStr"] . ")";
+            }
+
+//            if(!empty($post["salary_sort"])) {
+//                $salary_sort = $post["salary_sort"];
+//                $where .= " ORDER BY salary_range $salary_sort";
+//            }
+
+//            $data['selected_date'] = $post["post_date"];
+//            $data['salary_sort'] = $post["salary_sort"];
+            $data["staff_id_str"] = $post["staffIdStr"];
+        }
+
+        $staffs = $this->job_model->searchStaff($where);
+
+        //the left side, industry lists
+        $this->load->model('jobseeker_model');
+        
+        for($i=0; $i<count($staffs); $i++) {
+            $staffs[$i]['educations'] = $this->jobseeker_model->getAllEducationInfo($staffs[$i]['uid']);
+            $staffs[$i]['work_history'] = $this->jobseeker_model->getAllWorkHistory($staffs[$i]['uid']);
+            $staffs[$i]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($staffs[$i]['uid']);
+            $staffs[$i]['personal_skills'] = $this->jobseeker_model->getPersonalSkills($staffs[$i]['uid']);
+            $staffs[$i]['professional_skills'] = $this->jobseeker_model->getProfessionalSkills($staffs[$i]['uid']);
+            $staffs[$i]['languages'] = $this->jobseeker_model->getLanguage($staffs[$i]['uid']);
+        }
+        $data['staff_arr'] = $staffs;
+
+        $industry = $this->jobseeker_model->getIndustry();
+        $data["industry"] = $industry;
+
+        $position = $this->jobseeker_model->getPosition('General');
+        $data["position"] = $position;
+
+        $this->load->view($data['front_theme']."/search-staff",$data);
     }
 
     public function searchJobseeker() {

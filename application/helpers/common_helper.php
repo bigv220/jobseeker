@@ -122,7 +122,7 @@ function language_arr() {
 				'Tamil','Thai','Tongan','Turkish','Ukrainian','Urdu','Uzbek','Vietnamese');
 }
 function getLanguageByID($id) {
-	$arr = language_arr();
+	$arr = language_arr();echo $id;
     if(empty($id)) {
         return $arr[0];
     }
@@ -178,6 +178,22 @@ function getEmploymentLengthByID($id) {
 	return $arr[$id-1];
 }
 
+function getVisaAssistance() {
+    return array('Visa will not be provided','Visa will be provided');
+}
+function getVisaAssistanceByID($id) {
+    $arr = getVisaAssistance();
+    return $arr[$id];
+}
+
+function getHousingAssistance() {
+    return array('Accomodation will not be provided','Accomodation will be provided');
+}
+function getHousingAssistanceByID($id) {
+    $arr = getHousingAssistance();
+    return $arr[$id];
+}
+
 function securelychk($msg = 'unknown error.') {
 	alertmsg($msg);
 }
@@ -190,7 +206,3 @@ function isCompany($utype) {
 	}
 }
 
-function userType($typeId) {
-	$arr = array(0 => 'Jobseeker', 1 => 'Company', 4 => 'Unauthenticated' );
-	return $arr[$typeId];
-}
