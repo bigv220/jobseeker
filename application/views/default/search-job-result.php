@@ -232,7 +232,7 @@
             </div>
         </div>
         <div class="sresult-par2">
-            <div class="sresult-tab-hd"> <span class="fxui-tab-tit">The Job</span> <span class="fxui-tab-tit">The Compnay</span> </div>
+            <div class="sresult-tab-hd"> <span class="fxui-tab-tit">The Job</span> <span class="fxui-tab-tit">The Company</span> </div>
             <div class="sresult-tab-bd zoom">
                 <div class="fxui-tab-nav sresult-nav-job">
                     <div class="sresult-nav-job-left">
