@@ -112,12 +112,12 @@ class job extends Front_Controller {
      **/
     public function apply() {
         $uid = $this->session->userdata('uid');
-        if (!$uid) {
+        if (empty($uid)) {
             $result['status'] = 'login';
             echo json_encode($result);
             exit;
         }
-        if (isset($_POST['job_id']) && isset($uid)) {
+        if (!empty($_POST['job_id']) && !empty($uid)) {
             // do apply
             $this->load->model('job_model');
             $result['status'] = $this->job_model->applyJob($_POST['job_id'], $uid, 1);
