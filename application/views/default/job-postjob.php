@@ -40,9 +40,7 @@
                                 <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
                                 <?php } ?>
                             </select>
-                            <!--
-                            <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
-                            -->
+                            <div class="search-row-tip">+Add another Industry</div>
                         </div>
                     </div>
                     <div class="span2">
@@ -74,7 +72,7 @@
                         </div>
                     </div>
                     <div class="span2">
-                        <strong>Language Level *</strong>
+                        <span>Language Level</span>
                         <div>
                             <select name="language_level[]" required>
                                 <option value="">--Select--</option>
@@ -95,6 +93,7 @@
                     </a>
                 </div>
 
+
                 <div class="postjob-content-left-row clearfix">
                     <div class="span1">
                         <strong>Type of Job *</strong>
@@ -110,24 +109,59 @@
                             <ul id="jobtype_box" data-name="nameOfSelect"></ul>
                         </div>
                     </div>
-                    <div class="span2">
-                        <span>Teachnical Skills *</span>
-                        <div class="reg-row">
-                        <div>
-                            <input type="hidden" name="preferred_technical_skills" class="input-tip" value="" data-tipval="">
-                            <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this,'step8'); return false;}" required>
+                        <div class="span2">
+                            <span>Years of Experience Required</span>
+                            <div>
+                                <select name="preferred_year_of_experience">
+                                    <?php $expe = getExperience();
+                                    foreach($expe as $k => $v) { ?>
+                                        <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+
+
+                </div>
+
+                <div class="postjob-content-left-row clearfix">
+                    <div class="span1">
+                        <span>Teachnical Skills</span>
+                        <div class="reg-row">
+                            <div>
+                                <input type="hidden" name="preferred_technical_skills" class="input-tip" value="" data-tipval="">
+                                <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="skills-input input-tip" data-tipval="Start Typing" value="Start Typing" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this,'step8'); return false;}" required>
+                            </div>
+                        </div>
                         <div class="skills-vals clearfix">
-                        <ul id="ProfessionalSkills">
-                            <?php foreach($professional_skills as $v) { ?>
-                            <li data-val="2">
-                                <i class="del" onclick="delPersonalSkills('ProfessionalSkills',this,'<?php echo $v['professional_skill']; ?>');"></i>
-                            </li>
-                            <?php } ?>
-                        </ul>
+                            <ul id="ProfessionalSkills">
+                                <?php foreach($professional_skills as $v) { ?>
+                                    <li data-val="2">
+                                        <i class="del" onclick="delPersonalSkills('ProfessionalSkills',this,'<?php echo $v['professional_skill']; ?>');"></i>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+
                     </div>
-                    
+                    <div class="span2">
+                        <span>Personal Skills Required</span>
+                        <div class="reg-row">
+                            <div>
+                                <input type="hidden" name="preferred_technical_skills" class="input-tip" value="" data-tipval="">
+                                <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="skills-input input-tip" data-tipval="Start Typing" value="Start Typing" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this,'step8'); return false;}" required>
+                            </div>
+                        </div>
+                        <div class="skills-vals clearfix">
+                            <ul id="ProfessionalSkills">
+                                <?php foreach($professional_skills as $v) { ?>
+                                    <li data-val="2">
+                                        <i class="del" onclick="delPersonalSkills('ProfessionalSkills',this,'<?php echo $v['professional_skill']; ?>');"></i>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -145,7 +179,7 @@
                     <div class="span1">
                         <div>
                             <select name="country" class="location-input" required>
-                            <option value="">All Counties</option>
+                            <option value="">All Countries</option>
                             <?php foreach ($location as $k=>$v):?>
                          
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
@@ -180,7 +214,7 @@
                 </div>
                 <div class="postjob-content-right-row clearfix">
                     <div class="span1">
-                        <span>Salary</span>
+                        <strong>Salary *</strong>
                         <div>
                             <select name="salary_range">
                                 <?php $salary = getSalary();
@@ -192,24 +226,11 @@
                     </div>
 
                 </div>
-                <div class="postjob-content-right-row clearfix">
-                    <div class="span1">
-                        <span>Years of Experience Required</span>
-                        <div>
-                            <select name="preferred_year_of_experience">
-                                <?php $expe = getExperience();
-                                foreach($expe as $k => $v) { ?>
-                                <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
 
-                </div>
             </div>
             <div class="clearfix"></div>
             <div class="postjob-additional-information">
-                <span>Position Description or Addtional Information</span>
+                <strong>Position Description or Addtional Information *</strong>
                 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/xheditor/xheditor-1.1.14-en.min.js"></script>
                 <script>
                 $(document).ready(function() {

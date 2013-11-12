@@ -20,7 +20,7 @@
                     <strong>Country</strong>
                     <div class="reg-row">
                         <select name="country" required>
-                            <option value="">All Counties</option>
+                            <option value="">All Countries</option>
                             <?php foreach ($location as $k=>$v):?>
                                 <?php if ($k == $userinfo['country']): ?>
                                     <option value="<?php echo $k ?>" selected><?php echo $k ?></option>

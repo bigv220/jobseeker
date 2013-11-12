@@ -21,7 +21,7 @@
           <dt class="search-row-tit">Country</dt>
           <dd class="search-row-nav">
               <select name="country" class="filter_key">
-                  <option value="">All Counties</option>
+                  <option value="">All Countries</option>
                   <?php foreach ($location as $k=>$v):?>
                   <?php if ($k == $_POST['country']): ?>
                       <option value="<?php echo $k ?>" selected><?php echo $k ?></option>

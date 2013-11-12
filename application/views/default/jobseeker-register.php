@@ -112,7 +112,7 @@
                 <div class="reg-row clearfix location"> <strong>Location <i class="star">*</i></strong>
                     <div>
                         <select name="country" required>
-                            <option value="">All Counties</option>
+                            <option value="">All Countries</option>
                             <?php foreach ($location as $k=>$v):?>
                                 <?php if ($k == $userinfo['country']): ?>
                                 <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
