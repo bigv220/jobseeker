@@ -50,9 +50,11 @@ class user extends Front_Controller {
             						<body>Hi, <br><br>
             						Please click <a href="'.$url.'">HERE</a> to complete email confirmation.<br><br>
             						JingJobs.com');
-            $this->email->send();
-            
-            $message = 'Please check your email and complete email confirmation.';
+            if($this->email->send()) {
+            	$message = 'Please check your email and complete email confirmation.';
+            } else {
+            	$message = 'Send email failed';
+            }
             //$this->load->library('session');
             //$result['uid'] = $userId;
             //$result['first_name'] = $_POST['first_name'];
@@ -135,7 +137,9 @@ class user extends Front_Controller {
             $this->email->subject('RESET PASSWORD EMIAL FROM JINGJOBS');
             $this->email->message("<HTML><BODY><div>You requested that your password be reset. To reset your password please follow this link: <br/>[<a href='$resetPwLink'>Reset My Password</a>]<br/>Thanks,<br/>The JingJobs Team</div></BODY></HTML>");
 
-            $this->email->send();
+            if (!$this->email->send()) {
+            	$message = 'Send email failed';
+            }
 
         }
         echo json_encode(array('status'=>$status, 'message'=>$message));

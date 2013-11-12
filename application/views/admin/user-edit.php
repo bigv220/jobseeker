@@ -45,8 +45,6 @@
                       <?php if(!empty($user)):?>
                       <input type="hidden" name="uid" value="<?php echo $user['uid']?>" />
                       <?php endif;?>
-                      <input type="hidden" name="isadmin" value="1" />
-                      <input type="hidden" name="status" value="active" />
 					  <input id="button1" type="submit" value="Submit" /> 
                       <input id="button2" type="reset" value="Reset" />
                       </div>
