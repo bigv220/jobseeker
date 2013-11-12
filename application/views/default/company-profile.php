@@ -13,7 +13,7 @@
         <h4><?php echo $info['city'].', '.$info['country'];?></h4>
         <p></p>
       </div>
-      <div class="btnarea"> <a href="#" class="png combtn cand"></a> <a href="#" class="png combtn views "></a> <a href="#" class="png combtn inbox"></a> <a href="#" class="png combtn edit"></a> </div>
+      <div class="btnarea"> <a href="#" class="png combtn cand"></a> <a href="#" class="png combtn views "></a> <a href="#" class="png combtn inbox"></a> <a href="<?php echo $site_url;?>company/register" class="png combtn edit"></a> </div>
     </div>
     <div class="company-bd">
       <div class="company-bd-left">
