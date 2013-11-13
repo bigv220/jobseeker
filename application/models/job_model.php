@@ -54,10 +54,21 @@ class job_model extends MY_Model
         return $this->db->query($sql)->result_array();
     }
 
+    public function insertJobIndustry($data) {
+        return $this->db->insert('job_industry_position', $data);
+    }
+
+    public function getJobIndustry($id) {
+        $sql = "SELECT industry,position from job_industry_position WHERE job_id=$id";
+
+        return $this->db->query($sql)->result_array();
+    }
+
     public function searchJob($where) {
         $sql = "SELECT *,job.id as id, job.city as city,jl.language as language,job.employment_length as employment_length, job.employment_type employment_type
         		FROM job 
-        		LEFT JOIN user as u on job.company_id=u.uid LEFT JOIN job_language_level as jl on job.id=jl.job_id".$where;
+        		LEFT JOIN user as u on job.company_id=u.uid LEFT JOIN job_language_level as jl on job.id=jl.job_id
+        		LEFT JOIN job_industry_position as jip on job.id=jip.job_id".$where;
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;

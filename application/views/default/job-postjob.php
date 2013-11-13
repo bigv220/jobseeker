@@ -28,33 +28,22 @@
                     </div>
                 </div>
 
-                <div class="postjob-content-left-row clearfix">
-                    <div class="span1">
-                        <strong>Industry *</strong>
-                        <div>
-                            <select name="industry" onchange="changeIndustry(this);" required>
-                                <option value="">All Industries</option>
-                                <?php foreach($industry as $key=>$v) {
-                                    if(empty($v['name'])) continue;                    
-                                ?>
-                                <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
-                                <?php } ?>
-                            </select>
-                            <div class="search-row-tip">+Add another Industry</div>
-                        </div>
-                    </div>
-                    <div class="span2">
-                        <strong>Position *</strong>
-                        <div>
-                            <select name="position" id="position_1">
-                                <option value="">Position</option>
-                            </select>
-                            <!--
-                            <div class="search-row-tip">Hold down 'Command' to select a max of 10</div>
-                            -->
-                        </div>
-                    </div>
+                <?php
+                //Load Model
+                $this->load->model('jobseeker_model');
 
+                $userIndustry = array(array('industry'=>'none','position'=>'none'));
+
+                $data['userIndustry'] = $userIndustry;
+                $data['industry'] = $industry;
+                $this->load->view($front_theme.'/industry_multi-select', $data);
+                ?>
+
+                <div class="advsearch-row clearfix">
+                    <div class="span1">
+                        <input type="hidden" name="grop_num[]" value="<?php echo count($userIndustry); ?>"/>
+                        <a class="reg-row-tip" href="javascript:void(0);" onclick="addIndustryBtnClick(this);">+ Add another Industry</a>
+                    </div>
                 </div>
 
                 <div class="postjob-content-left-row clearfix" id="language_item">
@@ -324,4 +313,5 @@ function delNewUserLanguage(thisO) {
 
 </script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/findJobPage.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

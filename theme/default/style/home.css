@@ -162,7 +162,7 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .sharejob-g{background-position:0 -75px;}
 .sharejob-m{background-position:0 -100px;}
 .location img{margin-bottom:10px;}
-.industry-ul{margin:0;}.industry-ul li{height:62px;padding:0px 0 0 54px;}.industry-ul li b{font-weight:700;display:block;font-size:12px;padding:10px 0 0 0;}
+.industry-ul{margin:0;}.industry-ul li{min-height:62px;padding:0px 0 0 54px;}.industry-ul li b{font-weight:700;display:block;font-size:12px;padding:10px 0 0 0;}
 .industry-ul li span{font-size:11px;}
 .industry-ul li.n1{background:url(company/about1.png) no-repeat 0 10px;}
 .industry-ul li.n2{background:url(company/about2.png) no-repeat 0 10px;}
