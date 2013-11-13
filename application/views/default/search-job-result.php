@@ -257,8 +257,10 @@
                             <dt>Location</dt>
                             <dd>
                                 <input type="hidden" id="address" value="<?php echo $job['location']; ?>" />
+                                <!--
                                 <div id="map" style="width:149px;height:83px;border: 1px solid #DDDDDD"></div>
-                                <strong><?php echo $job['location']; ?></strong>
+                                -->
+                                <strong><a href="<?php echo $site_url?>job/jobDetails/<?php echo $job['id'];?>"><?php echo $job['location']; ?></a></strong>
                             </dd>
                             <dt>Salary</dt>
                             <dd><?php echo getSalaryByID($job["salary_range"]); ?></dd>
