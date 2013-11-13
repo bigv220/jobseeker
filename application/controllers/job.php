@@ -131,7 +131,7 @@ class job extends Front_Controller {
             						<body>Hi, <br><br>
                                 The job you post is being reviewed.
                                 Please click <a href="'.$url.'">HERE</a> to see it.<br><br>
-                                JingJobs.com');
+                                <a href="http://www.jingjobs.com">Jingjobs Team</a>');
                     $this->email->send();
                 }
             }
@@ -179,7 +179,7 @@ class job extends Front_Controller {
                 $this->email->message('<HTML><BODY><div>Hi '.$user_name . ',<br/>Your company has received a new job appliation, Please login 
                     <a href="http://www.jingjobs.com">Jingjobs</a> to view.</div>
                     <br />
-                    <div>Thank you!</div><br />
+                    <div>Thank you!</div><br /><br />
                     <a href="http://www.jingjobs.com">Jingjobs Team</a></BODY></HTML>');
                 $this->email->send();
             }
