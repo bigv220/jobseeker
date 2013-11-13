@@ -105,8 +105,8 @@
                 </div>
                 <div class="span1">
                     <strong>Length of employment</strong>
-                    <div>
-                        <select class="kyo-select">
+                    <div class="reg-row">
+                        <select class="after-select">
                         	<option value="">All Length</option>
                         	<?php $expl = getEmploymentLength();
                         	foreach ($expl as $k => $v) {?>
@@ -124,30 +124,57 @@
                     <div class="reg-row">
                         <select name="salary">
                             <option value="">All Salary</option>
-                            <option value="1">0~5000</option>
+                            <?php $salary = getSalary();
+                            foreach($salary as $v) { ?>
+                                <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>
             	<div class="span1">
                 	<strong>Language(s)</strong>
-                    <input type="text" id="sel-language" value="" style="display: none;">
+                    <div class="reg-row">
+                        <select name="language" class="after-select">
+                            <option value="" selected="selected">All Languages</option>
+                            <?php $language = language_arr();
+                            $i = 0;
+                            foreach($language as $v) { ?>
+                                <option value="<?php echo ++$i; ?>"><?php echo $v; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
                     <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
                     <div id="sel-language-val" class="show-selval"></div>
                 </div>
 
             </div>
             <div class="advsearch-row clearfix">
-                <div class="span1">
+                <div class="span1 reg-row">
                     <strong>Technical Skills</strong>
-                    <input type="text" id="sel-technical" value="" style="display: none;">
-                    <div class="search-row-tip">Select a max of 5</div>
+                    <select name="technical_skills" class="industry_options">
+                        <option value="">All Skills</option>
+                        <?php foreach($pro_skills as $key=>&$v) {
+                            if(empty($v['skill'])) continue;
+                            ?>
+                            <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <div class="search-row-tip">Hold down 'Command' to select a max of 5</div>
                     <div id="sel-technical-val" class="show-selval"></div>
                 </div>
-                <div class="span2">
+                <div class="span2 reg-row">
                     <strong>Personal Skills</strong>
-                    <input type="text" id="sel-personal" value="" style="display: none;">
-                    <div class="search-row-tip">Select a max of 5</div>
+                    <select name="personal_skills" class="industry_options">
+                        <option value="">All Skills</option>
+                        <?php foreach($tech_skills as $key=>&$v) {
+                            if(empty($v['skill'])) continue;
+                            ?>
+                            <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <div class="search-row-tip">Hold down 'Command' to select a max of 5</div>
                     <div id="sel-personal-val" class="show-selval"></div>
+
                 </div>
 
             </div>

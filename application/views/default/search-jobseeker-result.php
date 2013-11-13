@@ -191,8 +191,8 @@
 
 <!--search-result sequence-->
 <div class="result-az">
-    <div class="result-az-from fl"> <b>View jobseekers from</b>
-        <select class="kyo-select">
+    <div class="result-az-from fl reg-row"> <b>View jobseekers from</b>
+        <select style="width: 150px;">
             <option value="0">--Select--</option>
             <option value="60">Last 2 months</option>
             <option value="30">Last month</option>
@@ -200,9 +200,10 @@
             <option value="7">Last week</option>
         </select>
     </div>
-    <div class="result-az-jobs fl"> <b>Sort jobseekers by</b>
-        <select class="kyo-select">
-            <option value="a" selected="selected">Salary High - Low</option>
+    <div class="result-az-jobs fl reg-row"> <b>Sort jobseekers by</b>
+        <select style="width: 150px;">
+            <option value="0">--Select--</option>
+            <option value="a">Salary High - Low</option>
             <option value="b">Salary Low -High</option>
         </select>
     </div>

@@ -147,13 +147,15 @@
         	<div class="advsearch-row clearfix">
             	<div class="span1">
                 	<strong>Salary </strong>
-                    <select class="kyo-select">
+                    <div class="reg-row">
+                    <select class="after-select">
                         <option value="" selected="selected">Any Salary</option>
                         <?php $salary = getSalary();
 	                    foreach($salary as $v) { ?>
 	                    <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
 	                    <?php } ?>
                           </select>
+                    </div>
                 </div>
                 <div class="span2">
                 	<strong>Language</strong>
