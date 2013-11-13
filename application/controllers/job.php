@@ -95,9 +95,29 @@ class job extends Front_Controller {
                 'company_id'=>$post['company_id']);
     		$result['status'] = $job_id = $this->job_model->saveJob($data);
 
+            if($result['status']) {
+                $user_name = $this->session->userdata('first_name').' '.$this->session->userdata('last_name');
+
+                $this->load->library('email');
+                $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
+                $this->email->to('info@jingjobs.com');
+                $this->email->subject('A new job is posted.');
+                $this->email->message('<HTML><BODY><div>'.$user_name . 'post a new job.</div></BODY></HTML>');
+                if($this->email->send()) {
+                    //$message = 'Post job successful!';
+                } else {
+                    //$message = 'Post job failed.';
+                }
+            }
+
             for($i=0; $i<count($post["language"]);$i++) {
                 $data_arr = array('job_id'=>$job_id,'language'=>$post['language'][$i],'level'=>$post['language_level'][$i]);
                 $this->job_model->insertJobLanguage($data_arr);
+            }//end for
+
+            for($i=0; $i<count($post["industry"]);$i++) {
+                $data_arr = array('job_id'=>$job_id,'industry'=>$post['industry'][$i],'position'=>$post['position'][$i]);
+                $this->job_model->insertJobIndustry($data_arr);
             }//end for
 
     		$result['status'] = $result['status'] ? 'success' : 'failed.';
@@ -112,12 +132,12 @@ class job extends Front_Controller {
      **/
     public function apply() {
         $uid = $this->session->userdata('uid');
-        if (!$uid) {
+        if (empty($uid)) {
             $result['status'] = 'login';
             echo json_encode($result);
             exit;
         }
-        if (isset($_POST['job_id']) && isset($uid)) {
+        if (!empty($_POST['job_id']) && !empty($uid)) {
             // do apply
             $this->load->model('job_model');
             $result['status'] = $this->job_model->applyJob($_POST['job_id'], $uid, 1);

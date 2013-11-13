@@ -550,3 +550,12 @@ INSERT INTO `tech_skills` VALUES ('148', 'POS system (retail)');
 INSERT INTO `tech_skills` VALUES ('149', 'Transaction Processing Systems');
 INSERT INTO `tech_skills` VALUES ('150', 'Process Control Systems');
 INSERT INTO `tech_skills` VALUES ('151', 'Cold Calling');
+
+#2013-11-12
+INSERT INTO  `industry` (`id` ,`name` ,`parent`)
+VALUES (NULL ,  'Brand Management',  'Marketing and Communications'), 
+(NULL ,  'Digital and Search Marketing',  'Marketing and Communications'),
+(NULL ,  'Direct Marketing and CRM',  'Marketing and Communications'),
+(NULL ,  'Market Resarch and Analysis',  'Marketing and Communications'),
+(NULL ,  'Marketing Assistants/Coordinators',  'Marketing and Communications'),
+(NULL ,  'Marketing Communications',  'Marketing and Communications');

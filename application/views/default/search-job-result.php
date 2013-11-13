@@ -22,7 +22,7 @@
             <dt class="search-row-tit">Country</dt>
             <dd class="search-row-nav">
                 <select name="country" class="filter_key">
-                            <option value="">All Counties</option>
+                            <option value="">All Countries</option>
                             <?php foreach ($location as $k=>$v):?>
                             <?php if ($k == $_POST['country']): ?>
                                 <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
@@ -53,11 +53,11 @@
             <dd class="search-row-nav">
                 <select name="city" class="filter_key">
                            <?php if (empty($_POST['city'])): ?>
-                           <option value="">All City</option>
+                           <option value="">All Cities</option>
                            <option value="Beijing">Beijing</option>
                             <?php else: ?>
                             <option value="<?php echo $_POST['city']; ?>"><?php echo $_POST['city']; ?></option>
-                            <option value="">All City</option>
+                            <option value="">All Cities</option>
                             <?php endif; ?>
                 </select>
             </dd>
@@ -223,7 +223,7 @@
             <div class="span1 rel"> <img src="<?php echo $site_url?>attached/users/<?php echo $job['profile_pic']?>" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
             <div class="span2">
                 <h2><?php echo $job["job_name"]; ?></h2>
-                <h3><?php echo $job["username"]; ?></h3>
+                <h3 class="comp_email"><?php echo $job["username"]; ?></h3>
                 <p><?php echo $job["city"]; ?></p>
                 <a href="javascript:void(0);" class="job-viewmore">View More</a> </div>
             <div class="span3">
@@ -257,14 +257,22 @@
                             <dt>Location</dt>
                             <dd>
                                 <input type="hidden" id="address" value="<?php echo $job['location']; ?>" />
+                                <!--
                                 <div id="map" style="width:149px;height:83px;border: 1px solid #DDDDDD"></div>
-                                <strong><?php echo $job['location']; ?></strong>
+                                -->
+                                <strong><a href="<?php echo $site_url?>job/jobDetails/<?php echo $job['id'];?>"><?php echo $job['location']; ?></a></strong>
                             </dd>
                             <dt>Salary</dt>
                             <dd><?php echo getSalaryByID($job["salary_range"]); ?></dd>
                             <dt>Industry</dt>
                             <dd class="industry">
-                                <div><?php echo $job["industry"]; ?></div>
+                                <div>
+                                    <?php
+                                    for($i=0; $i<count($job['industry_arr']); $i++) {
+                                        echo '<a href="#">'.$job['industry_arr'][$i]['industry']."</a> ";
+                                    }
+                                    ?>
+                                </div>
                                 <ul class="industry-ul">
                                     <li class="n1"><b>Type of Employment</b><span><?php if($job['employment_type']) {if(is_numeric($job['employment_type'])) echo getJobtypeByID($job['employment_type']); else echo $job['employment_type']; }?></span></li>
                                     <li class="n2"><b>Length of Employment</b><span><?php if($job['employment_length']) echo getEmploymentLengthByID($job['employment_length']);?></span></li>

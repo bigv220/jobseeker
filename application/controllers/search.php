@@ -79,7 +79,7 @@ class search extends Front_Controller {
             if (!empty($post['industry'])) {
 	            for($i=0;$i<count($post['industry']);$i++) {
 	                if(!empty($post["industry"][$i])) {
-	                    array_push($where_or, "industry like '%".$post["industry"][$i]."%'");
+	                    array_push($where_or, "jip.industry like '%".$post["industry"][$i]."%'");
 	                }
 	            }
             }
@@ -87,7 +87,7 @@ class search extends Front_Controller {
             if (!empty($post['position'])) {
 	            for($i=0;$i<count($post['position']);$i++) {
 	                if(!empty($post["position"][$i]) && $post["position"][$i]!='none') {
-	                    array_push($where_or, "position like '%".$post["position"][$i]."%'");
+	                    array_push($where_or, "jip.position like '%".$post["position"][$i]."%'");
 	                }
 	            }
             }
@@ -136,7 +136,11 @@ class search extends Front_Controller {
 
             }
         }
-        
+
+        for($i=0; $i<count($jobs); $i++) {
+            $jobs[$i]['industry_arr'] = $this->job_model->getJobIndustry($jobs[$i]['id']);
+        }
+
         $data['jobs'] = $jobs;
 
         // generate job id string, this will be used in the filter function at the right side

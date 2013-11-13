@@ -199,14 +199,15 @@ $(function(){
         popMark.fadeOut();
 
         var appBtn = rowObj.find('.job-btn-submit');
+        var job_id = appBtn.attr('data-job-id');
         // APPLY JOB
-        $.post(site_url + 'job/apply', {job_id: appBtn.attr('data-job-id')},
+        $.post(site_url + 'job/apply', {job_id: job_id},
             function(result,status) {
                 if (status=='success') {
                     appBtn.unbind('click');
                     appBtn.bind('click',submitted);
                     appBtn.removeClass('job-btn-submit').addClass('job-btn-submitted');
-
+                    $(".id-"+job_id+" .comp_email").html("");
                 } else if (status =='login') {
                     alert('Please Login to apply a job.');
                 } else {

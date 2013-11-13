@@ -59,7 +59,7 @@
                     <strong>Country</strong>
                     <div class="reg-row">
                         <select name="country">
-                            <option value="">All Counties</option>
+                            <option value="">All Countries</option>
                             <?php foreach ($location as $k=>$v):?>
                                 <option value="<?php echo $k ?>"><?php echo $k ?></option>
                             <?php endforeach;?>
@@ -81,7 +81,7 @@
                     <strong>City</strong>
                     <div class="reg-row">
                         <select name="city">
-                            <option value="">All City</option>
+                            <option value="">All Cities</option>
                             <option value="1">Beijing</option>
                         </select>
                     </div>

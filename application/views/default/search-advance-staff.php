@@ -9,7 +9,7 @@
         <div class="advsearch-min">
             <div class="advsearch-row clearfix">
                 <div class="span1 long_input">
-                    <strong>Search our job database</strong>
+                    <strong>Search our jobseeker database</strong>
                     <div><input type="text" name="keywords" class="kyo-input input-tip" data-tipval="Enter Keywords" value="Enter Keywords"></div>
                 </div>
 
@@ -20,7 +20,7 @@
                     <strong>Country</strong>
                     <div class="reg-row">
                         <select name="country" required>
-                            <option value="">All Counties</option>
+                            <option value="">All Countries</option>
                             <?php foreach ($location as $k=>$v):?>
                                 <?php if ($k == $userinfo['country']): ?>
                                     <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
@@ -50,7 +50,7 @@
                     <strong>City</strong>
                     <div class="reg-row">
                         <select name="city">
-                            <option value="">All City</option>
+                            <option value="">All Cities</option>
                             <option value="1">Beijing</option>
                         </select>
                     </div>
@@ -77,7 +77,7 @@
                 <div class="span2  reg-row">
                     <strong>Position</strong>
                     <select name="position" id="position_1">
-                                <option value="">Position</option>
+                                <option value="">All Positions</option>
                                 <?php
                                 foreach($position as $key=>&$v) {
                                 ?>
@@ -133,6 +133,7 @@
                 </div>
             	<div class="span1">
                 	<strong>Language(s)</strong>
+
                     <div class="reg-row">
                         <select name="language" class="after-select">
                             <option value="" selected="selected">All Languages</option>
@@ -144,6 +145,7 @@
                         </select>
                     </div>
                     <div class="search-row-tip">Hold down 'Command' to select a max of 3</div>
+
                     <div id="sel-language-val" class="show-selval"></div>
                 </div>
 
