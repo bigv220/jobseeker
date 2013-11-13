@@ -155,6 +155,20 @@ class job extends Front_Controller {
             $result['status'] = $this->job_model->applyJob($_POST['job_id'], $uid, 1);
 
             $result['status'] = $result['status'] ? 'success' : 'failed.';
+
+            $user_name = $this->session->userdata('first_name').' '.$this->session->userdata('last_name');
+            if (isset($_POST['email'])) {
+                $this->load->library('email');
+                $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
+                $this->email->to($_POST['email']);
+                $this->email->subject('New Job Application');
+                $this->email->message('<HTML><BODY><div>Hi '.$user_name . ',<br/>Your company has received a new job appliation, Please login 
+                    <a href="http://www.jingjobs.com">Jingjobs</a> to view.</div>
+                    <br />
+                    <div>Thank you!</div><br />
+                    <a href="http://www.jingjobs.com">Jingjobs Team</a></BODY></HTML>');
+                $this->email->send();
+            }
             echo json_encode($result);
         }
 

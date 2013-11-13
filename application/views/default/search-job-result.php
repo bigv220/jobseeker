@@ -232,7 +232,7 @@
                 <a href="javascript:void(0);" class="job-viewmore">View More</a> </div>
             <div class="span3">
                 <div class="zoom"> <a href="#" class="job-btn job-btn-mark" style="display:none"></a> <a href="#" class="job-btn job-btn-marked"></a> <a href="#" class="job-btn job-btn-featured"  style="display:none"></a> <a href="#" class="job-btn job-btn-match">99%</a> </div>
-                <div><a href="javascript:void(0);" class="<?php if (isset($job['id']) && in_array($job['id'], $apply)) echo "job-btn-submitted"; else echo "job-btn-submit"; ?>" data-job-id="<?php echo $job['id']; ?>"></a></div>
+                <div><a href="javascript:void(0);" class="<?php if (isset($job['id']) && in_array($job['id'], $apply)) echo "job-btn-submitted"; else echo "job-btn-submit"; ?>" data-job-id="<?php echo $job['id']; ?>" data-job-email="<?php echo $job["username"]; ?>"></a></div>
             </div>
         </div>
         <div class="sresult-par2">
