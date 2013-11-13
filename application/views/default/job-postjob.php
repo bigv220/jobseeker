@@ -264,7 +264,8 @@ $(document).ready(function() {
                 	$('#postjobForm').serialize(),
      			    function(result,status){
                         var data = $.parseJSON(result);
-     			    	if("success" == status) {alert(data.id);
+     			    	if("success" == status) {
+                             alert('The job you add is being reviewed.');
 							window.location.href=site_url+'job/jobdetails/'+ data.id;
      			    	}
      		});
