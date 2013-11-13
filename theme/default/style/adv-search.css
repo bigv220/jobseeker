@@ -55,3 +55,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .postjob-additional-information textarea{width:100%;}
 .filter_key {width: 230px; height: 25px; padding:3px;}
 .search-row-nav .skills-input {width:215px;}
+.postjob-content-left .advsearch-row .span2 {margin-right:0px;}
+.postjob-content-left .reg-row {padding-bottom: 0px;}
+.postjob-content .delete {margin:-15px 0px;;float:right;width:13px;}
+.postjob-content i { left:0px; top:0px;}
