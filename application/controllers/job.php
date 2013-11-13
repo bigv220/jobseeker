@@ -100,6 +100,11 @@ class job extends Front_Controller {
                 $this->job_model->insertJobLanguage($data_arr);
             }//end for
 
+            for($i=0; $i<count($post["industry"]);$i++) {
+                $data_arr = array('job_id'=>$job_id,'industry'=>$post['industry'][$i],'position'=>$post['position'][$i]);
+                $this->job_model->insertJobIndustry($data_arr);
+            }//end for
+
     		$result['status'] = $result['status'] ? 'success' : 'failed.';
             $result['id'] = $job_id;
     		echo json_encode($result);

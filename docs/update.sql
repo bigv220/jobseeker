@@ -181,3 +181,14 @@ CREATE TABLE `job_apply` (
   `status` tinyint(4) NOT NULL,
   PRIMARY KEY  (`job_id`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+alter table job drop column industry;
+alter table job drop column position;
+CREATE TABLE `job_industry_position` (
+  `id` int(11) NOT NULL auto_increment,
+  `job_id` int(11) default NULL,
+  `industry` varchar(50) default NULL,
+  `position` varchar(50) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

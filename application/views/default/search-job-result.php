@@ -264,7 +264,13 @@
                             <dd><?php echo getSalaryByID($job["salary_range"]); ?></dd>
                             <dt>Industry</dt>
                             <dd class="industry">
-                                <div><?php echo $job["industry"]; ?></div>
+                                <div>
+                                    <?php
+                                    for($i=0; $i<count($job['industry_arr']); $i++) {
+                                        echo '<a href="#">'.$job['industry_arr'][$i]['industry']."</a> ";
+                                    }
+                                    ?>
+                                </div>
                                 <ul class="industry-ul">
                                     <li class="n1"><b>Type of Employment</b><span><?php if($job['employment_type']) {if(is_numeric($job['employment_type'])) echo getJobtypeByID($job['employment_type']); else echo $job['employment_type']; }?></span></li>
                                     <li class="n2"><b>Length of Employment</b><span><?php if($job['employment_length']) echo getEmploymentLengthByID($job['employment_length']);?></span></li>
