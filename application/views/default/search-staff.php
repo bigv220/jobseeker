@@ -52,11 +52,11 @@
           <dd class="search-row-nav">
               <select name="city" class="filter_key">
                   <?php if (empty($_POST['city'])): ?>
-                  <option value="">All City</option>
+                  <option value="">All Cities</option>
                   <option value="Beijing">Beijing</option>
                   <?php else: ?>
                   <option value="<?php echo $_POST['city']; ?>"><?php echo $_POST['city']; ?></option>
-                  <option value="">All City</option>
+                  <option value="">All Cities</option>
                   <?php endif; ?>
               </select>
           </dd>

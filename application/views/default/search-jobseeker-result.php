@@ -57,11 +57,11 @@
             <dd class="search-row-nav">
                 <select name="city" class="filter_key">
                     <?php if (empty($_POST['city'])): ?>
-                    <option value="">All City</option>
+                    <option value="">All Cities</option>
                     <option value="1">Beijing</option>
                     <?php else: ?>
                     <option value="<?php echo $_POST['city']; ?>"><?php echo $_POST['city']; ?></option>
-                    <option value="">All City</option>
+                    <option value="">All Cities</option>
                     <?php endif; ?>
                 </select>
             </dd>
@@ -100,7 +100,7 @@
             <dt class="search-row-tit">Position</dt>
             <dd class="search-row-nav">
                 <select name="position" id="position_1" class="filter_key">
-                    <option value="">Position</option>
+                    <option value="">All Positions</option>
                     <?php
                     foreach($position as $key=>&$v) {
                         ?>

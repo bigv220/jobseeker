@@ -81,7 +81,7 @@
                     <strong>City</strong>
                     <div class="reg-row">
                         <select name="city">
-                            <option value="">All City</option>
+                            <option value="">All Cities</option>
                             <option value="1">Beijing</option>
                         </select>
                     </div>

@@ -10,7 +10,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .search-row:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
 .search-row-tit{display:block;padding:12px 0 2px 0;font-weight:bolder;}
 .search-row-nav{padding:0 0 8px 0;display:block;}
-.search-row-tip{color:#ea6e3b;font-size:11px;padding:0 0 5px 0;}
+.search-row-tip{color:#ea6e3b;font-size:11px;padding:5px 0 5px 0;}
 .result-condition-btnwrap{text-align:right;padding:0 10px 5px 0;}
 .condition-btn{width:128px;height:25px;line-height:25px;display:inline-block;text-align:center;vertical-align:top;border:0;cursor:pointer;background:url(search/button.png) no-repeat;}
 .result-bd{width:500px;float:right;*display:inline;}
