@@ -45,6 +45,14 @@ class jobseeker_model extends MY_Model
             ->result_array();
     }
 
+    public function getEmailByCompanyId($id){
+        return $this->db->select('email')
+            ->from($this->table)
+            ->where('uid', $id)
+            ->get()
+            ->result_array();
+    }
+
     public function getUser($username, $password){
         $where = array('username'=>$username, 'password'=>$password);
         return $this->db->select('*')
