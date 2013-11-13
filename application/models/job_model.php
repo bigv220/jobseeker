@@ -33,10 +33,24 @@ class job_model extends MY_Model
     }
 
     public function getSimilarJobs($id, $industry) {
-        $sql = "SELECT * FROM job WHERE id!=$id AND industry='".$industry ."'";
+        $sql = "SELECT job_id FROM job_industry_position WHERE industry = '$industry'";
+        $result = $this->db->query($sql)->result_array();
+        $id_array = array();
+        foreach ($result as $value) {
+            // If current job id, don't put into select
+            if ($value['job_id'] == $id) continue;
+            $id_array[] = $value['job_id'];
+        }
+        $str = implode(',', $id_array);
+        if (!empty($str)) {
+            $sql = "SELECT * FROM job 
+                    WHERE job.id in ($str)";
 
-        $rtn = $this->db->query($sql)->result_array();
-        return $rtn;
+            $rtn = $this->db->query($sql)->result_array();
+
+            return $rtn;
+        }
+        return array();
     }
     
     public function saveJob($data) {

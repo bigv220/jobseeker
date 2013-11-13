@@ -33,7 +33,7 @@
                 </dl>
                 <dl class="mb30">
                     <dt>Preferred Personal Skills</dt>
-                    <dd><strong><?php echo $jobinfo["preferred_personal_skills"]; ?></strong></dd>
+                    <dd><strong><?php if (!empty($jobinfo["preferred_personal_skills"])) echo str_replace(',',', ',substr($jobinfo["preferred_personal_skills"], 0, -1)); ?></strong></dd>
                 </dl>
                 <dl class="mb30">
                     <dt>Preferred Technical Skills</dt>
@@ -59,8 +59,10 @@
                     <dd><strong><?php echo getSalaryByID($jobinfo["salary_range"]); ?></strong></dd>
                 </dl>
                 <dl class="mb30">
-                    <dt>Idustry</dt>
-                    <dd class="idustry"><?php echo $jobinfo["industry"]; ?></dd>
+                    <dt>Industry</dt>
+                    <dd class="idustry">
+                        <?php echo implode(', ', $industry); ?>
+                    </dd>
                 </dl>
                 <dl class="mb30">
                     <dt>Share This Job</dt>

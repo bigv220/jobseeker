@@ -42,9 +42,20 @@ class job extends Front_Controller {
         $data['job_languages'] = $job_languages;
 
         // get similar jobs
-        $similar_jobs = $this->job_model->getSimilarJobs($job_id, $jobinfo["industry"]);
+        $industry_position = $this->job_model->getJobIndustry($job_id);
+        $industry_arr = array();
+        foreach ($industry_position as $industry) {
+           $industry_arr[] = $industry['industry'];
+        }
+        if (count($industry_position) > 0) {
+            $industry = $industry_position[0]['industry'];
+        } else {
+            $industry = "";
+        }
+        $similar_jobs = $this->job_model->getSimilarJobs($job_id, $industry);
         
 		$data['jobinfo'] = $jobinfo;
+        $data['industry'] = $industry_arr;
         $data["similar_jobs"] = $similar_jobs;
         $this->load->view($data['front_theme']."/job-details",$data);
     }
@@ -61,6 +72,7 @@ class job extends Front_Controller {
         $uid = $this->session->userdata('uid');
         $data["industry"] = $this->jobseeker_model->getIndustry();
         $data["professional_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
+        $data["personal_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
         // get location
         $this->load->helper('location');
         $data['location'] = getLoction();
@@ -85,8 +97,8 @@ class job extends Front_Controller {
 
             $data = array('job_name'=>$post['job_name'],'job_desc'=>$post['job_desc'],
                 'employment_length'=>$post['employment_length'],
-                'employment_type'=>$post['employment_type'],'industry'=>$post['industry'],
-                'position'=>$post['position'],
+                'employment_type'=>$post['employment_type'],
+                'preferred_personal_skills'=>$post['preferred_personal_skills'],
                 'preferred_technical_skills'=>$post['preferred_technical_skills'],
                 'location'=>$post['location'],'country'=>$post['country'],'province'=>$post['province'],
                 'city'=>$post['city'],'salary_range'=>$post['salary_range'],
