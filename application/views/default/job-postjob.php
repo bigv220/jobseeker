@@ -137,15 +137,15 @@
                         <span>Personal Skills Required</span>
                         <div class="reg-row">
                             <div>
-                                <input type="hidden" name="preferred_technical_skills" class="input-tip" value="" data-tipval="">
-                                <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="skills-input input-tip" data-tipval="Start Typing" value="Start Typing" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this,'step8'); return false;}" required>
+                                <input type="hidden" name="preferred_personal_skills" class="input-tip" value="" data-tipval="">
+                                <input type="text" size="24" maxlength="255" autocomplete="on" id="PersonalSkills_input" class="skills-input input-tip" data-tipval="Start Typing" value="Start Typing" onkeypress="if(event.keyCode == 13){ addPersonalSkills('PersonalSkills',this,'step8'); return false;}" required>
                             </div>
                         </div>
                         <div class="skills-vals clearfix">
-                            <ul id="ProfessionalSkills">
-                                <?php foreach($professional_skills as $v) { ?>
+                            <ul id="PersonalSkills">
+                                <?php foreach($personal_skills as $v) { ?>
                                     <li data-val="2">
-                                        <i class="del" onclick="delPersonalSkills('ProfessionalSkills',this,'<?php echo $v['professional_skill']; ?>');"></i>
+                                        <i class="del" onclick="delPersonalSkills('PersonalSkills',this,'<?php echo $v['personal_skill']; ?>');"></i>
                                     </li>
                                 <?php } ?>
                             </ul>
@@ -265,7 +265,6 @@ $(document).ready(function() {
      			    function(result,status){
                         var data = $.parseJSON(result);
      			    	if("success" == status) {
-                             alert('The job you add is being reviewed.');
 							window.location.href=site_url+'job/jobdetails/'+ data.id;
      			    	}
      		});

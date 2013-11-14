@@ -42,9 +42,20 @@ class job extends Front_Controller {
         $data['job_languages'] = $job_languages;
 
         // get similar jobs
-        $similar_jobs = $this->job_model->getSimilarJobs($job_id, $jobinfo["industry"]);
-        
+        $industry_position = $this->job_model->getJobIndustry($job_id);
+        $industry_arr = array();
+        foreach ($industry_position as $industry) {
+           $industry_arr[] = $industry['industry'];
+        }
+        if (count($industry_position) > 0) {
+            $industry = $industry_position[0]['industry'];
+        } else {
+            $industry = "";
+        }
+        //$similar_jobs = $this->job_model->getSimilarJobs($job_id, $industry);
+        $similar_jobs = $this->job_model->getRecentJobs(5);
 		$data['jobinfo'] = $jobinfo;
+        $data['industry'] = $industry_arr;
         $data["similar_jobs"] = $similar_jobs;
         $this->load->view($data['front_theme']."/job-details",$data);
     }
@@ -61,6 +72,7 @@ class job extends Front_Controller {
         $uid = $this->session->userdata('uid');
         $data["industry"] = $this->jobseeker_model->getIndustry();
         $data["professional_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
+        $data["personal_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
         // get location
         $this->load->helper('location');
         $data['location'] = getLoction();
@@ -72,7 +84,7 @@ class job extends Front_Controller {
     		$post = $_POST;
     		$post['post_date'] = date('Y-m-d', time());
     		if (1 == $this->session->userdata('user_type')) {
-    			$post['company_id'] = $this->session->userdata('uid');
+    			$post['company_id'] = $company_id = $this->session->userdata('uid');
     		}
     		
     		if (empty($post['company_id'])) {
@@ -85,8 +97,8 @@ class job extends Front_Controller {
 
             $data = array('job_name'=>$post['job_name'],'job_desc'=>$post['job_desc'],
                 'employment_length'=>$post['employment_length'],
-                'employment_type'=>$post['employment_type'],'industry'=>$post['industry'],
-                'position'=>$post['position'],
+                'employment_type'=>$post['employment_type'],
+                'preferred_personal_skills'=>$post['preferred_personal_skills'],
                 'preferred_technical_skills'=>$post['preferred_technical_skills'],
                 'location'=>$post['location'],'country'=>$post['country'],'province'=>$post['province'],
                 'city'=>$post['city'],'salary_range'=>$post['salary_range'],
@@ -96,17 +108,31 @@ class job extends Front_Controller {
     		$result['status'] = $job_id = $this->job_model->saveJob($data);
 
             if($result['status']) {
+                //send an email to jingjobs.com
                 $user_name = $this->session->userdata('first_name').' '.$this->session->userdata('last_name');
-
                 $this->load->library('email');
                 $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
                 $this->email->to('info@jingjobs.com');
                 $this->email->subject('A new job is posted.');
                 $this->email->message('<HTML><BODY><div>'.$user_name . 'post a new job.</div></BODY></HTML>');
-                if($this->email->send()) {
-                    //$message = 'Post job successful!';
-                } else {
-                    //$message = 'Post job failed.';
+                $this->email->send();
+
+                //send an email to company
+                if(!empty($company_id)) {
+                    //get company email
+                    $company_email = $this->jobseeker_model->getEmailByCompanyId($company_id);
+                    $url = $this->data['site_url'] . 'job/jobdetails/' . $job_id;
+
+                    $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
+                    $this->email->to($company_email);
+                    $this->email->subject('Job is being reviewed.');
+                    $this->email->message('<html>
+            						<head><title>Job is being reviewed</title></head>
+            						<body>Hi, <br><br>
+                                The job you post is being reviewed.
+                                Please click <a href="'.$url.'">HERE</a> to see it.<br><br>
+                                <a href="http://www.jingjobs.com">Jingjobs Team</a>');
+                    $this->email->send();
                 }
             }
 
@@ -143,6 +169,20 @@ class job extends Front_Controller {
             $result['status'] = $this->job_model->applyJob($_POST['job_id'], $uid, 1);
 
             $result['status'] = $result['status'] ? 'success' : 'failed.';
+
+            $user_name = $this->session->userdata('first_name').' '.$this->session->userdata('last_name');
+            if (isset($_POST['email'])) {
+                $this->load->library('email');
+                $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
+                $this->email->to($_POST['email']);
+                $this->email->subject('New Job Application');
+                $this->email->message('<HTML><BODY><div>Hi '.$user_name . ',<br/>Your company has received a new job appliation, Please login 
+                    <a href="http://www.jingjobs.com">Jingjobs</a> to view.</div>
+                    <br />
+                    <div>Thank you!</div><br /><br />
+                    <a href="http://www.jingjobs.com">Jingjobs Team</a></BODY></HTML>');
+                $this->email->send();
+            }
             echo json_encode($result);
         }
 

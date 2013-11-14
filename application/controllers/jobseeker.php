@@ -365,16 +365,20 @@ class jobseeker extends Front_Controller {
      */
     public function addPersonalSkills() {
         $post = $_POST;
-        $uid = $post['uid'];
+        $uid = isset($post['uid'])?$post['uid']:'';
         $skill = $post['skill'];
 
-        // create folder
-        $this->load->model('jobseeker_model');
-        $this->jobseeker_model->addPersonalSkills($uid, $skill);
+        if (!empty($uid)) {
+            // create folder
+            $this->load->model('jobseeker_model');
+            $this->jobseeker_model->addPersonalSkills($uid, $skill);
 
-        $this->_saveRegisterStep($uid, 7);
+            $this->_saveRegisterStep($uid, 7);
 
-        $msg = "success";
+            $msg = "success";
+        } else {
+            $msg = "failed";
+        }
         $result['status'] = $msg;
         echo json_encode($result);
     }
@@ -384,10 +388,10 @@ class jobseeker extends Front_Controller {
      */
     public function addProfessionalSkills() {
         $post = $_POST;
-        $uid = $post['uid'];
+        $uid = isset($post['uid'])?$post['uid']:'';
         $skill = $post['skill'];
 
-        if (isset($uid)) {
+        if (!empty($uid)) {
             // create folder
             $this->load->model('jobseeker_model');
             $this->jobseeker_model->addProfessionalSkills($uid, $skill);

@@ -33,7 +33,7 @@
                 </dl>
                 <dl class="mb30">
                     <dt>Preferred Personal Skills</dt>
-                    <dd><strong><?php echo $jobinfo["preferred_personal_skills"]; ?></strong></dd>
+                    <dd><strong><?php if (!empty($jobinfo["preferred_personal_skills"])) echo str_replace(',',', ',substr($jobinfo["preferred_personal_skills"], 0, -1)); ?></strong></dd>
                 </dl>
                 <dl class="mb30">
                     <dt>Preferred Technical Skills</dt>
@@ -59,8 +59,10 @@
                     <dd><strong><?php echo getSalaryByID($jobinfo["salary_range"]); ?></strong></dd>
                 </dl>
                 <dl class="mb30">
-                    <dt>Idustry</dt>
-                    <dd class="idustry"><?php echo $jobinfo["industry"]; ?></dd>
+                    <dt>Industry</dt>
+                    <dd class="idustry">
+                        <?php echo implode(', ', $industry); ?>
+                    </dd>
                 </dl>
                 <dl class="mb30">
                     <dt>Share This Job</dt>
@@ -102,8 +104,7 @@
                     <dd>
                         <ul class="similar">
                             <?php foreach($similar_jobs as $v) { ?>
-                            <li><!-- <img src="<?php echo $theme_path?>style/home/temp/sponsors2.gif" alt="" />
-                                <i class="png"></i> -->
+                            <li><img src="<?php echo $site_url.'attached/users/'.$v['profile_pic'];?>" alt="" />
                                 <a href="<?php echo $site_url.'job/jobDetails/'.$v['id']; ?>"><?php echo $v['job_name']; ?></a>White Space Design
                             </li>
                             <?php } ?>

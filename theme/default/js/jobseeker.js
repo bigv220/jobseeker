@@ -390,9 +390,16 @@ function delPersonalSkills(id_str,thisO,skill) {
     var uid = $('#uid').val();
 
     if (uid == undefined && id_str != '') {
-        $('input[name=preferred_technical_skills]').val($('input[name=preferred_technical_skills]').val().replace(skill+',',''));
-        if ($('input[name=preferred_technical_skills]').val() == '') {
-            $('#ProfessionalSkills_input').attr('required','');
+        if (id_str == 'ProfessionalSkills') {
+            $('input[name=preferred_technical_skills]').val($('input[name=preferred_technical_skills]').val().replace(skill+',',''));
+            if ($('input[name=preferred_technical_skills]').val() == '') {
+                $('#ProfessionalSkills_input').attr('required','');
+            }
+        } else {
+            $('input[name=preferred_personal_skills]').val($('input[name=preferred_personal_skills]').val().replace(skill+',',''));
+            if ($('input[name=preferred_personal_skills]').val() == '') {
+                $('#PersonalSkills_input').attr('required','');
+            }
         }
     }
 
@@ -411,8 +418,13 @@ function delPersonalSkills(id_str,thisO,skill) {
 // ajax to adding personal skills
 function addPersonalSkillAjax(id_str,uid, v, li_id) {
     if (uid == undefined && id_str != '') {
-        $('input[name=preferred_technical_skills]').val(v+','+$('input[name=preferred_technical_skills]').val());
-        $('#ProfessionalSkills_input').removeAttr('required');
+        if (id_str == 'ProfessionalSkills') {
+            $('input[name=preferred_technical_skills]').val(v+','+$('input[name=preferred_technical_skills]').val());
+            $('#ProfessionalSkills_input').removeAttr('required');
+        } else {
+            $('input[name=preferred_personal_skills]').val(v+','+$('input[name=preferred_personal_skills]').val());
+            $('#PersonalSkills_input').removeAttr('required');
+        }
     }
 
     $.post(site_url + 'jobseeker/add'+ id_str,

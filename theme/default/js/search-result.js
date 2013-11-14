@@ -200,8 +200,9 @@ $(function(){
 
         var appBtn = rowObj.find('.job-btn-submit');
         var job_id = appBtn.attr('data-job-id');
+        var email = appBtn.attr('data-job-email');
         // APPLY JOB
-        $.post(site_url + 'job/apply', {job_id: job_id},
+        $.post(site_url + 'job/apply', {job_id: job_id, email: email},
             function(result,status) {
                 if (status=='success') {
                     appBtn.unbind('click');
