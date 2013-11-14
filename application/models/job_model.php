@@ -31,7 +31,6 @@ class job_model extends MY_Model
         else
             return array();
     }
-
     public function getSimilarJobs($id, $industry) {
         $sql = "SELECT job_id FROM job_industry_position WHERE industry = '$industry'";
         $result = $this->db->query($sql)->result_array();

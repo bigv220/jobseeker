@@ -52,8 +52,8 @@ class job extends Front_Controller {
         } else {
             $industry = "";
         }
-        $similar_jobs = $this->job_model->getSimilarJobs($job_id, $industry);
-        
+        //$similar_jobs = $this->job_model->getSimilarJobs($job_id, $industry);
+        $similar_jobs = $this->job_model->getRecentJobs(5);
 		$data['jobinfo'] = $jobinfo;
         $data['industry'] = $industry_arr;
         $data["similar_jobs"] = $similar_jobs;
