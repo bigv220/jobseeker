@@ -17,7 +17,7 @@ select {font-family: arial;}
 .reg-row b{font-size:13px;height:30px;line-height:30px;}
 .reg-input{border:1px solid #d3d3d3;width:228px;height:22px;line-height:22px;background:#fff;text-indent:3px;color:#777;}
 .reg-textarea{border:1px solid #d3d3d3;width:450px;height:55px;padding:10px;color:#777;}
-.reg-company-img{border:1px solid #d3d3d3;padding-left:2px;cursor:pointer;}
+.reg-company-img{border:1px solid #d3d3d3;cursor:pointer;}
 .reg-row-tip{color:#ea6e3b;padding:5px 0;display:inline-block;}
 .reg-save{width:83px;height:25px;line-height:25px;display:inline-block;text-align:center;vertical-align:top;background:url(reg/save.gif) no-repeat;border:0;cursor:pointer;}
 .reg-btns{height:54px;}

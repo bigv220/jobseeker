@@ -36,7 +36,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .industry-ul li.n2{background:url(company/about2.png) no-repeat 0 10px;}
 .industry-ul li.n3{background:url(company/about3.png) no-repeat 0 10px;}
 .industry-ul li.n4{background:url(company/about4.png) no-repeat 0 10px;}
-.similar li{height:56px;position:relative;}
+.similar li{height:55px;position:relative;overflow: hidden;}
 .similar img{width:45px;height:45px;float:left;margin:0 8px 0 0;border:3px solid #684092;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .similar a{display:block;font-weight:700;font-size:14px;padding:9px 0 0 0;}
 .similar i{display:block;width:69px;height:55px;background:url(company/similar-mark.png) no-repeat;position:absolute;top:0;left:0;}

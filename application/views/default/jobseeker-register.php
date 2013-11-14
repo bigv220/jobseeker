@@ -142,7 +142,7 @@
                         <input type="hidden" name="avatar" id="avatar" value="<?php echo $userinfo['profile_pic']; ?>" />
                         <div id="upload_button">
                             <?php if($userinfo['profile_pic']) {
-                                        $pic = $site_url.'attached/users/'.$this->session->userdata('uid').'/'.$userinfo['profile_pic'];
+                                        $pic = $site_url.'attached/users/'.$userinfo['profile_pic'];
                                    } else {
                                         $pic = $theme_path.'style/reg/com-img.gif';
                                    }
