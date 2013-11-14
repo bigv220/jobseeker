@@ -63,6 +63,7 @@
             <div class="advsearch-row clearfix">
                 <div class="span1 reg-row long_input">
                     <strong>Industry</strong>
+                    <div>
                     <select name="industry" class="industry_options" onchange="changeIndustry(this, false);">
                         <option value="">All Industries</option>
                         <?php foreach($industry as $key=>&$v) {
@@ -71,11 +72,13 @@
                         <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
                         <?php } ?>
                     </select>
+                    </div>
                     <!--<div class="search-row-tip">Hold down 'Command' to select a max of 3</div>-->
                     <div id="sel-industry-val" class="show-selval"><ul></ul></div>
                 </div>
                 <div class="span2  reg-row">
                     <strong>Position</strong>
+                    <div>
                     <select name="position" id="position_1">
                                 <option value="">All Positions</option>
                                 <?php
@@ -84,6 +87,7 @@
                                 <option value="<?php echo $v['name']; ?>"><?php echo $v['name']; ?></option>
                                 <?php } ?>
                             </select>
+                    </div>
                 </div>
 
             </div>
