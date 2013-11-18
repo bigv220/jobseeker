@@ -383,7 +383,8 @@
                                     $from_y = 0;
 
                                     if(count($education_info)) {
-                                        $from_y = $education_info["attend_date_from"];
+                                        $from_y_arr = explode('-',$education_info["attend_date_from"]);
+                                        $from_y = $from_y_arr[0];
                                     }
                                     foreach($yearArray as $v) {
                                         $sel = '';
@@ -395,7 +396,23 @@
                                 <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
                                 <?php } ?>
                             </select>
-                            <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px" disabled="disabled" />
+                            <select name="attended_from_month[]" required>
+                                <option value="">Month</option>
+                                <?php
+                                $from_y = 0;
+                                if(count($education_info)) {
+                                    $from_y_arr = explode('-',$education_info["attend_date_from"]);
+                                    $from_y = $from_y_arr[1];
+                                }
+                                foreach($monthArray as $v) {
+                                    $sel = '';
+                                    if($v == $from_y) {
+                                        $sel = ' selected="selected"';
+                                    }
+                                    ?>
+                                    <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
+                                    <?php } ?>
+                            </select>
                         </div>
                         <p class="p5">To</p>
                         <div class="clearfix">
@@ -405,7 +422,8 @@
                                 $from_y = 0;
 
                                 if(count($education_info)) {
-                                    $from_y = $education_info["attend_date_to"];
+                                    $from_y_arr = explode('-',$education_info["attend_date_to"]);
+                                    $from_y = $from_y_arr[0];
                                 }
                                 foreach($yearArray as $v) {
                                     $sel = '';
@@ -417,7 +435,24 @@
                                 <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
                                 <?php } ?>
                             </select>
-                            <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px" disabled="disabled" />
+                            <select name="attended_to_month[]" required>
+                                <option value="">Month</option>
+                                <?php
+                                $from_y = 0;
+                                if(count($education_info)) {
+                                    $from_y_arr = explode('-',$education_info["attend_date_to"]);
+                                    $from_y = $from_y_arr[1];
+                                }
+                                foreach($monthArray as $v) {
+                                    $sel = '';
+
+                                    if($v == $from_y) {
+                                        $sel = ' selected="selected"';
+                                    }
+                                    ?>
+                                    <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
+                                    <?php } ?>
+                            </select>
                         </div>
 
                     </div>
@@ -484,7 +519,8 @@
                                 $from_y = 0;
 
                                 if(count($work_history)) {
-                                    $from_y = $work_history["period_time_from"];
+                                    $from_y_arr = explode('-',$work_history["period_time_from"]);
+                                    $from_y = $from_y_arr[0];
                                 }
                                 foreach($yearArray as $v) {
                                     $sel = '';
@@ -496,7 +532,24 @@
                                 <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
                                 <?php } ?>
                             </select>
-                            <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px" disabled="disabled" />
+                            <select name="period_time_from_month[]" required>
+                                <option value="">Month</option>
+                                <?php
+                                $from_y = 0;
+                                if(count($work_history)) {
+                                    $from_y_arr = explode('-',$work_history["period_time_from"]);
+                                    $from_y = $from_y_arr[1];
+                                }
+                                foreach($monthArray as $v) {
+                                    $sel = '';
+
+                                    if($v == $from_y) {
+                                        $sel = ' selected="selected"';
+                                    }
+                                    ?>
+                                    <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
+                                    <?php } ?>
+                            </select>
                         </div>
                         <p class="p5">To</p>
                         <div class="clearfix">
@@ -506,7 +559,8 @@
                                 $from_y = 0;
 
                                 if(count($work_history)) {
-                                    $from_y = $work_history["period_time_to"];
+                                    $from_y_arr = explode('-',$work_history["period_time_to"]);
+                                    $from_y = $from_y_arr[0];
                                 }
                                 foreach($yearArray as $v) {
                                     $sel = '';
@@ -518,7 +572,24 @@
                                 <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
                                 <?php } ?>
                             </select>
-                            <input type="text" class="reg-input input-tip" value="year" data-tipval="year" style="width:80px" disabled="disabled" />
+                            <select name="period_time_to_month[]" required>
+                                <option value="">Month</option>
+                                <?php
+                                $from_y = 0;
+                                if(count($work_history)) {
+                                    $from_y_arr = explode('-',$work_history["period_time_to"]);
+                                    $from_y = $from_y_arr[1];
+                                }
+                                foreach($monthArray as $v) {
+                                    $sel = '';
+
+                                    if($v == $from_y) {
+                                        $sel = ' selected="selected"';
+                                    }
+                                    ?>
+                                    <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
+                                    <?php } ?>
+                            </select>
                         </div>
                     </div>
                     </div>

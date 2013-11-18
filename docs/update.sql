@@ -195,3 +195,7 @@ CREATE TABLE `job_industry_position` (
 
 #2013-11-18
 ALTER TABLE `user` modify column availability varchar(50);
+
+#2013-11-18
+ALTER TABLE `user_work_history` modify column period_time_from char(10);
+ALTER TABLE `user_work_history` modify column period_time_to char(10);

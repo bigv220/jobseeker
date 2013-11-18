@@ -62,6 +62,11 @@ class jobseeker extends Front_Controller {
             array_push($year_arr, $i);
         }
 
+        $month_arr = array();
+        for($i = 1; $i <= 12; $i++) {
+            array_push($month_arr, $i);
+        }
+
         //language and level array
         $language_arr = language_arr();
         $level_arr = language_level();
@@ -77,6 +82,7 @@ class jobseeker extends Front_Controller {
         $data['professional_skills'] = $professional_skills;
         $data['seekingIndustry'] = $seekingIndustry;
         $data["industry"] = $industry;
+        $data['monthArray'] = $month_arr;
         $data['yearArray'] = $year_arr;
 
         //user language settings
@@ -240,8 +246,9 @@ class jobseeker extends Front_Controller {
             for($i=0; $i<$school_len;$i++) {
                 if($post['school_name'][$i]) {
                     $data = array('uid'=>$post['uid'],'school_name'=>$post['school_name'][$i],
-                        'attend_date_from'=>$post['attended_from'][$i],
-                        'attend_date_to'=>$post['attended_to'][$i],'degree'=>$post['degree'][$i],
+                        'attend_date_from'=>$post['attended_from'][$i] . '-' . $post['attended_from_month'][$i],
+                        'attend_date_to'=>$post['attended_to'][$i] . '-' . $post['attended_to_month'][$i],
+                        'degree'=>$post['degree'][$i],
                         'major'=>$post['major'][$i],'achievements'=>$post['achievements'][$i]);
 
                     $rtn = $this->jobseeker_model->insertEducation($data);
@@ -285,7 +292,8 @@ class jobseeker extends Front_Controller {
 
                     $data = array('uid'=>$post['uid'],'introduce'=>$post['introduce'][$i],
                         'company_name'=>$post['company_name'][$i],
-                        'period_time_from'=>$post['period_time_from'][$i],'period_time_to'=>$post['period_time_to'][$i],
+                        'period_time_from'=>$post['period_time_from'][$i].'-'.$post['period_time_from_month'][$i],
+                        'period_time_to'=>$post['period_time_to'][$i].'-'.$post['period_time_to_month'][$i],
                         'location'=>null,'description'=>$desc,'is_stillhere'=>$post['is_stillhere'][$i],
                         'work_examples_url'=>$work_example);
 
