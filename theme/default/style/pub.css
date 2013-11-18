@@ -11,7 +11,10 @@ img{border:0;vertical-align:top;}
 table{border-collapse:collapse;border-spacing:0;}
 textarea{overflow:auto;}
 a{text-decoration:none;}
-a:hover{text-decoration:none;}
+a:link { text-decoration: none;  }
+a:visited { text-decoration: none; color: #48225b; }
+a:hover { text-decoration: underline;  }
+a:active, a:focus { text-decoration: none; color: #48225b; }
 .zoom{overflow:hidden;zoom:1;}
 .clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
 .clearfix{zoom:1;}

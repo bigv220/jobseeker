@@ -15,7 +15,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .adv-search-bar{text-align:right;}.adv-search-bar .btn{display:inline-block;width:128px;height:25px;cursor:pointer;}
 .adv-search-bar .find{background:url(search/button.png) no-repeat;}
 .adv-search-bar .post{background:url(company/post.png) no-repeat; width:82px;}
-.adv-search-bar .findnow{background:url(search/find-now.png) no-repeat;display:none;}
+.adv-search-bar .findnow{background:url(search/button.png) no-repeat;display:none;}
 .adv-search-bar .findstaff{background:url(search/find-staff.png) no-repeat;}
 .adv-search-bar .text{text-decoration:underline;color:#ee7340;padding-right:16px;margin-right:10px;display:inline-block;height:25px;line-height:34px;overflow:hidden;}
 .adv-search-bar .base{background:url(search/btn-arr1.png) no-repeat right 16px;display:none;}
