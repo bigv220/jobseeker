@@ -11,7 +11,7 @@
       <div class="text">
         <h2><?php echo $info['first_name'];?></h2>
         <h4><?php echo $info['city'].', '.$info['country'];?></h4>
-        <p>Online now</p>
+        <p>Offline now</p>
       </div>
       <div class="btnarea"> <a href="#" class="png combtn website"></a> <a href="#" class="png combtn bookmark"></a> <a href="#" class="combtn bookmarded" style="display:none;"></a> </div>
     </div>
