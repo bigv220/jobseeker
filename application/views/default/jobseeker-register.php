@@ -762,7 +762,7 @@
 
                 <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="PersonalSkillsForm">
                     <input type="hidden" name="uid" id="uid" value="<?php echo $uid; ?>" />
-                    <div class="reg-area-tit <?php echo $cla; ?>">Personal Skills</div>
+                    <div class="reg-area-tit <?php echo $cla; ?>">Technical Skills</div>
                     <div class="reg-skills-text">
                         <b>Start typing to choose up to 5 personal skills that best suit you</b><span>
                         If you can't find a personal skill from our database just hit the return button to add it</span>
