@@ -98,7 +98,7 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .pop-welcome-bd .span1,.pop-welcome-bd .span3{color:#674092;font-weight:700;font-size:14px;}
 .pop-welcome-bd .pop-welcome-here{width:106px;height:42px;line-height:42px;display:inline-block;text-align:center;vertical-align:top;background:url(home/here.gif) no-repeat;margin-top:10px;}
 .company-hd{height:115px;}.company-hd .face{display:block;width:128px;height:128px;background:url(company/face.png) no-repeat;top:-38px;left:15px;}
-.company-hd .text{float:left;*display:inline;width:210px;padding:10px 0 0 156px;}.company-hd .text h2,.company-hd .text h4{color:#48225b;font-weight:bolder;}
+.company-hd .text{float:left;*display:inline;width:260px;padding:10px 0 0 156px;overflow: hidden;height: 95px;}.company-hd .text h2,.company-hd .text h4{color:#48225b;font-weight:bolder;}
 .company-hd .text h2{font-size:22px;text-transform:uppercase;}
 .company-hd .text h4{font-size:20px;}
 .company-hd .text p{color:#5c5c5c;font-size:15px;}
