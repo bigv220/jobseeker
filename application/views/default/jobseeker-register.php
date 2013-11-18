@@ -342,10 +342,10 @@
                         <div>
                             <input type="hidden" name="availability" id="availability" value="<?php echo $userinfo['availability'];?>" class="kyo-radio"/>
                             <ul class="leng-radio">
-                                <li><i class="kyo-radio" data-id="availability" data-val="1" onclick="selectItem('availability',1);">Weekdays</i></li>
-                                <li><i class="kyo-radio" data-id="availability" data-val="2" onclick="selectItem('availability',1);">Evenings</i></li>
-                                <li><i class="kyo-radio" data-id="availability" data-val="3" onclick="selectItem('availability',1);">Weekends</i></li>
-                                <li><i class="kyo-radio" data-id="availability" data-val="4" onclick="selectItem('availability',1);">Any</i></li>
+                                <?php $avai_arr = explode(",", $userinfo['availability']); ?> 
+                                <li><i class="kyo-checkbox <?php if (in_array("Weekdays", $avai_arr)) echo "kyo-checkbox-sel"; ?>" data-id="availability" data-val="Weekdays">Weekdays</i></li>
+                                <li><i class="kyo-checkbox <?php if (in_array("Evenings", $avai_arr)) echo "kyo-checkbox-sel"; ?>" data-id="availability" data-val="Evenings">Evenings</i></li>
+                                <li><i class="kyo-checkbox <?php if (in_array("Weekends", $avai_arr)) echo "kyo-checkbox-sel"; ?>" data-id="availability" data-val="Weekends">Weekends</i></li>
                             </ul>
                         </div>
                     </div>

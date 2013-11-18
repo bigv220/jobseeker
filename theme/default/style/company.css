@@ -22,7 +22,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .about-btns .apply{background-position:0 -158px;}
 .about-btns .bkmked{background-position:0 -237px;}
 .about-btns .bkmk{background-position:0 0;}
-.required{display:inline-block;width:88px;height:88px;background:url(search/fluent.png) no-repeat;}.required b{display:block;color:#ea6e3b;font-weight:700;font-size:14px;padding:40px 0 0 0;}
+.required{display:inline-block;width:88px;height:88px;background:url(search/fluent.png) no-repeat;}.required b{display:block;color:#ea6e3b;font-weight:700;font-size:14px;padding:40px 0 0 0;height:42px;}
 .sharejob{background:url(company/about-share.png);background-repeat:no-repeat;display:block;float:left;*display:inline;cursor:pointer;width:26px;height:25px;margin-right:12px;}
 .sharejob-f{background-position:0 0;}
 .sharejob-t{background-position:0 -25px;}

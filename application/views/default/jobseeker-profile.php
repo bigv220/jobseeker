@@ -23,8 +23,7 @@
       <div class="btnarea">
           <a href="#" class="png combo_btns view_profile"></a>
           <a href="#" class="png combo_btns start_jingchat "></a>
-          <a href="#" class="png combo_btns shorlist_candidate"></a>
-          <a href="#" class="png combo_btns request_interview"></a> </div>
+         </div>
     </div>
     <div class="company-bd jobseeker-bd">
       <div class="company-bd-left jobseeker-bd-left">

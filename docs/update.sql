@@ -193,3 +193,5 @@ CREATE TABLE `job_industry_position` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+#2013-11-18
+ALTER TABLE `user` modify column availability varchar(50);
