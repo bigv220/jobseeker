@@ -220,7 +220,7 @@
     <?php foreach($jobs as $job): ?>
     <div class="box rel sresult-row id-<?php echo $job['id']?>">
         <div class="sresult-par1">
-            <div class="span1 rel"> <img src="<?php echo $site_url?>attached/users/<?php echo $job['profile_pic']?>" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
+            <div class="span1 rel"> <img src="<?php echo $site_url?>attached/users/<?php echo $job['profile_pic']?$job['profile_pic']:'no-image.png';?>" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
             <div class="span2">
                 <h2><?php echo $job["job_name"]; ?></h2>
                 <?php if (isset($job['id']) && in_array($job['id'], $apply)): ?>
