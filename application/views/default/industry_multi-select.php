@@ -12,7 +12,7 @@
     <strong>Industry<i class="star">*</i></strong>
     <div class="reg-row">
         <select name="industry[]" onchange="changeIndustry(this, false);"  required>
-            <option value="">All industries</option>
+            <option value="">All Industries</option>
             <?php
             foreach($industry as $v) {
                 $str = '';
