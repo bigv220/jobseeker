@@ -75,7 +75,7 @@ var jSelectDate = {
             var selYear = document.createElement("select");
             selYear.id = "selYear" + currentIdx
             selYear.className = jSelectDate.yearClass;
-            selYear.style = "width:150px";
+            //selYear.style = "width:150px";
             selYear.disabled = isDisabled;
             
             //加入选项
@@ -104,7 +104,7 @@ var jSelectDate = {
          * 创建月
          */
             var selMonth = document.createElement("select");
-            selMonth.style = "width:150px";
+            //selMonth.style = "width:150px";
             selMonth.id = "selMonth" + currentIdx;
             selMonth.disabled = isDisabled;
             //加入选项
@@ -132,7 +132,7 @@ var jSelectDate = {
          */
             var selDay = document.createElement("select");
             selDay.id = "selDay" + currentIdx;
-            selDay.style = "width:150px";
+            //selDay.style = "width:150px";
             selDay.disabled = isDisabled;
             //加入选项
             for (var i = 1; i <= 31; i++) {
