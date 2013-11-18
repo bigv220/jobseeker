@@ -234,7 +234,7 @@ class search extends Front_Controller {
 
         //get all search conditions at the left side
         $post = $_POST;
-        $where = '';
+        $where = ' WHERE is_private=1 ';
         $where_arr = array();
         $where_or = array();
         if($post) {
@@ -288,9 +288,9 @@ class search extends Front_Controller {
             $where_or_str = implode(' OR ', $where_or);
 
             if(count($where_arr) && count($where_or)) {
-                $where .= ' WHERE ' . $where_str . " AND (" . $where_or_str . ")";
+                $where .= 'AND ' . $where_str . " AND (" . $where_or_str . ")";
             } else {
-                $where .= ' WHERE ' . $where_str . $where_or_str;
+                $where .= 'AND ' . $where_str . $where_or_str;
             }
 
         }
@@ -362,7 +362,7 @@ class search extends Front_Controller {
         $data["staff_id_str"] = "";
 
         $post = $_POST;
-        $where = '';
+        $where = ' WHERE is_private=1 ';
         if($post) {
 //            if(!empty($post["post_date"])) {
 //                $post_date_timestamp = mktime(0, 0, 0, date("m"), date("d")-$post["post_date"], date("Y"));
@@ -371,7 +371,7 @@ class search extends Front_Controller {
 //            }
 
             if(!empty($post["staffIdStr"])) {
-                $where .= " AND uid in(" . $post["staffIdStr"] . ")";
+                $where .= "AND uid in(" . $post["staffIdStr"] . ")";
             }
 
 //            if(!empty($post["salary_sort"])) {
@@ -465,10 +465,10 @@ class search extends Front_Controller {
             // set up user_type=0
             array_push($where_arr, "user_type = 0");
         }
-        $where = "";
+        $where = " WHERE is_private=1 ";
         if(count($where_arr)) {
             $where_str = implode(' AND ', $where_arr);
-            $where .= ' WHERE ' . $where_str;
+            $where .= 'AND ' . $where_str;
         }
 
         // get jobseekers according to the search

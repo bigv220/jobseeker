@@ -459,10 +459,8 @@ function addPersonalSkills(id_str,thisO,li_id) {
 // change the background image of the checkbox
 function isPrivate(thisO, id_str) {
     if($(thisO).hasClass('kyo-checkbox-sel')) {
-        $(thisO).removeClass('kyo-checkbox-sel');
         $('#'+id_str).val(0);
     } else {
-        $(thisO).addClass('kyo-checkbox-sel');
         $('#'+id_str).val(1);
     }
 }
