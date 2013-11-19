@@ -124,7 +124,8 @@ $(function(){
                     {'first_name':firstName,'last_name':lastName,'email':email, 'password':password, 'user_type':regType, 'newsletter':newsletter},
                     function(data){
                         if(data.userId <1){
-                            $('.email_existing').html(data.message);
+                            //$('.email_existing').html(data.message);
+                            $('.pop-reg-error-msg').show();
                         }
                         else{
                         	$('.pop-reg').fadeOut();

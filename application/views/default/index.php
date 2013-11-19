@@ -142,6 +142,10 @@ $(function(){
 					<i>Already have an account? <a href="javascript:void(0);" class="login_on_regpop">Login</a></i>
 					<b>Sign Up</b>
 				</div>
+                <div class="pop-reg-error-msg">
+                    An account using this email already exists,
+                    please <a href="javascript:void(0);" class="login_on_regpop">login</a>
+                    or request a new password <a href="javascript:void(0);" class="login_on_regpop">here</a></div>
 				<div class="pop-reg-type">
 					<input id="RegType" value="0" class="kyo-radio" style="display:none;"/>
 					<i class="kyo-radio reg-typep font_bold" data-id="RegType" data-val="0">Jobseeker</i>
@@ -188,6 +192,7 @@ $(function(){
 				</div>
             </form>
 		</div>
+        <div class="pop-reg-footer"></div>
 	</div>
 
 	<!--pop login-->
