@@ -52,6 +52,11 @@ function valid_email(email) {
     return patten.test(email);
 }
 
+function show_pop_message(){
+    $('.pop-mark').fadeIn();
+    $('.pop-message').fadeIn();
+
+}
 function show_login_user_menu(){
     var menu = $('#jobseeker_menu').html();
     $('#login_pop').html(menu);

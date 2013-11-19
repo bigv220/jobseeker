@@ -13,6 +13,17 @@
         </div>
     </div>
 </div>
+<!--pop message-->
+<div class="pop-message png">
+    <div class="pop-message-wrap rel">
+        <i class="pop-message-close abs" title="close"></i>
+        <b>An email for you</b>
+        <div class="pop-message-bd">
+            <div class="message_title">We have sent you an email with a special link to complete the registration.</div>
+            <div class="message_content">If you don’t receive the email within several minutes, please check your spam folder.</div>
+        </div>
+    </div>
+</div>
 <!--footer-->
 <div class="pft-wrap">
 	<div class="p-ft w70">

@@ -62,6 +62,11 @@ $(function(){
         popMark.fadeOut();
     })
 
+    $('.pop-message-close').click(function(){
+        $('.pop-message').fadeOut();
+        popMark.fadeOut();
+    });
+
     $('.show_login_btn').click(function(){
         $('#login_pop').fadeIn();
     });
@@ -130,7 +135,7 @@ $(function(){
                         else{
                         	$('.pop-reg').fadeOut();
                         	popMark.fadeOut();
-                        	alert(data.message);
+                            show_pop_message();
                         	/*$('#first_name').attr('value','').css("border-color", "#cecece");
                             $('#last_name').attr('value','').css("border-color", "#cecece");
                             $('#company_name').attr('value','').css("border-color", "#cecece");
