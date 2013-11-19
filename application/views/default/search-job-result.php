@@ -217,6 +217,7 @@
 
 <!--search-result body-->
 <div class="result-bd">
+    <?php if (count($jobs)>0): ?>
     <?php foreach($jobs as $job): ?>
     <div class="box rel sresult-row id-<?php echo $job['id']?>">
         <div class="sresult-par1">
@@ -301,7 +302,15 @@
         </div>
     </div>
     <?php endforeach; ?>
-
+    <?php else: ?>
+     <div class="sresult-par1">
+        <div class="box rel sresult-row id-4">
+        <div class="noresult">
+            Sorry, no matches were found, <br/>please alter your search and try again.
+            </div>
+        </div>
+    </div>
+    <?php endif;?>
 </div>
 
 <!--backtop-->
