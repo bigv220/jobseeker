@@ -14,6 +14,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .result-condition-btnwrap{text-align:right;padding:0 10px 5px 0;}
 .condition-btn{width:128px;height:25px;line-height:25px;display:inline-block;text-align:center;vertical-align:top;border:0;cursor:pointer;background:url(search/button.png) no-repeat;}
 .result-bd{width:500px;float:right;*display:inline;}
+.result-bd .noresult { height: 78px;padding-top: 22px;text-align: center;font-size:18px;color:#674092;font-weight: bold;}
 .sresult-row{margin-bottom:20px;}
 .sresult-par1{overflow:hidden;zoom:1;}.sresult-par1 .span1,.sresult-par1 .span2,.sresult-par1 .span3{*display:inline;}
 .sresult-par1 .span1{width:116px;float:left;margin-right:0;}
