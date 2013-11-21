@@ -175,18 +175,27 @@ $(function(){
 
      //Pop mark
     var popMark =$('.pop-mark'),
-        popApply = $('.pop-apply');
+        popApply = $('.pop-apply'),
+        popReg = $('.pop-reg'),
+        signupApply = $('.signup-pop-apply');
 
     //Pop apply
     var rowObj;
     $('.job-btn-submit').bind('click',function apply(e) {
+        if(userType != 0){
+            popMark.fadeIn();
+            signupApply.fadeIn();
+        }
+        else{
             rowObj = $(this).parents('.sresult-row');
             $('.pop-mark').height($('body').height());
             popMark.fadeIn();
             popApply.fadeIn();
             e.stopPropagation();
             e.preventDefault();
+        }
     });
+
     $('.job-btn-submitted').bind('click',submitted);
 
 
@@ -194,6 +203,16 @@ $(function(){
     $('.pop-apply-close').click(function(){
         popMark.fadeOut();
         popApply.fadeOut();
+    });
+
+    $('.signup-pop-apply-close').click(function(){
+        popMark.fadeOut();
+        signupApply.fadeOut();
+    });
+
+    $('.signup-pop-apply .signup-pop-btn').click(function(){
+        signupApply.fadeOut();
+        popReg.fadeIn();
     });
 
     //click Yes

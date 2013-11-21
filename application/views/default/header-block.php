@@ -28,6 +28,7 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery-ui.1.8.20.min.js" ></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.validate.js" ></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/common.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/home.js"></script>
 
 <script>
 	var site_url = "<?php echo $site_url?>";
@@ -90,6 +91,11 @@
                 <div class="phd-login-pop-footer"><a href="#"></a></div>
             </div>
 
+            <?php  if (-1 == $current_userId || '' == $current_userId):?>
+                <script>userType = -1;//not login</script>
+            <?php else: ?>
+
+
             <div id="jobseeker_menu" class="phd-login-pop png">
                 <div class="phd-login-pop-content">
                     <ul>
@@ -116,11 +122,9 @@
                 <div class="phd-login-pop-footer"></div>
             </div>
 
-            <?php $current_userId = isset($uid)?$uid:-1;
-            if (-1 != $current_userId && '' != $current_userId):?>
-                <script type="text/javascript">show_login_user_menu();</script>
-            <?php endif;?>
+            <script type="text/javascript">show_login_user_menu();</script>
 
+            <?php endif;?>
 
             <div id="resetpw_pop" class="phd-login-pop png">
                 <div class="phd-login-pop-header">

@@ -323,6 +323,19 @@
         </div>
     </div>
 </div>
+
+<div class="signup-pop-apply">
+    <div class="rel">
+        <div class="pop-close signup-pop-apply-close abs"></div>
+        <div class="pop-nav signup-pop-apply-nav">
+            <p>Please register as a jobseeker to apply for jobs.</p>
+        </div>
+        <div class="pop-bar">
+            <button href="javascript:void(0);" class="signup-pop-btn"></button>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="<?php echo $theme_path?>js/reg.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/searchJobPage.js"></script>

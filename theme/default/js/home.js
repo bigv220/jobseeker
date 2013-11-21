@@ -40,7 +40,7 @@ $(function(){
     	//popReg.fadeOut();
         //$('.pop-login').fadeIn();
     });
-    
+
     $('.pop-reg-close').click(function(){
         popMark.fadeOut();
         popReg.fadeOut();
