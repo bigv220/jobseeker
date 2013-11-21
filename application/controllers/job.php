@@ -71,8 +71,8 @@ class job extends Front_Controller {
         //industry lists
         $uid = $this->session->userdata('uid');
         $data["industry"] = $this->jobseeker_model->getIndustry();
-        $data["professional_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
-        $data["personal_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
+        //$data["professional_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
+        //$data["personal_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
         // get location
         $this->load->helper('location');
         $data['location'] = getLoction();
