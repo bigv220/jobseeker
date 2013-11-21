@@ -124,11 +124,13 @@
                         </div>
                         <div class="skills-vals clearfix">
                             <ul id="ProfessionalSkills">
+                                <?php if (count($professional_skills) > 0): ?>
                                 <?php foreach($professional_skills as $v) { ?>
                                     <li data-val="2">
                                         <i class="del" onclick="delPersonalSkills('ProfessionalSkills',this,'<?php echo $v['professional_skill']; ?>');"></i>
                                     </li>
                                 <?php } ?>
+                                <?php endif; ?>
                             </ul>
                         </div>
 
@@ -143,11 +145,13 @@
                         </div>
                         <div class="skills-vals clearfix">
                             <ul id="PersonalSkills">
-                                <?php foreach($personal_skills as $v) { ?>
+                                <?php if (count($personal_skills) > 0): ?>
+                                    <?php foreach($personal_skills as $v) { ?>
                                     <li data-val="2">
                                         <i class="del" onclick="delPersonalSkills('PersonalSkills',this,'<?php echo $v['personal_skill']; ?>');"></i>
                                     </li>
-                                <?php } ?>
+                                    <?php } ?>
+                                <?php endif; ?>
                             </ul>
                         </div>
 
