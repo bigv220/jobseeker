@@ -175,6 +175,7 @@ $(function(){
                         //show_welcome_pop(result.user_type); 
                     }
                     else{
+                        $('.phd-login-pop-content .login-error-msg').html(result.message);
                         $('.phd-login-pop-content .login-error-msg').show();
                     }
                 },

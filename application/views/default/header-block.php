@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="phd-login-pop-content">
-                    <div class="login-error-msg">Either your email or password is incorrect, try again.</div>
+                    <div class="login-error-msg"></div>
                     <form id="login_form" method="post" action="<?php echo $site_url?>user/login">
                         <p class="username-wrap"><input type="text" id="username" name="username" value="" class="input input-user" /></p>
                         <p class="password-wrap"><input type="password" id="login_password" name="login_password" value="" class="input input-pass" /></p>

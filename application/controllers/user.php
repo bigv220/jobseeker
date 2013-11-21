@@ -74,7 +74,7 @@ class user extends Front_Controller {
 	{
         $post = $_POST;
 
-        $result = array('uid'=>-1,'status'=>'error', 'message'=>'Username or Password error, Please try again.');
+        $result = array('uid'=>-1,'status'=>'error', 'message'=>'Either your email or password is incorrect, try again.');
         if ('' == $post['username'])
         {
             $result['message'] = 'Invalid email';
@@ -83,23 +83,24 @@ class user extends Front_Controller {
             $this->load->model('jobseeker_model');
             $user = $this->jobseeker_model->getUser($post['username'], md5($post['login_password']));
             
-            if ( isset($user['user_type']) && 4 == $user['user_type'] ) {
-            	alertmsg('Please check your email and complete email confirmation.');
-            }
+
 
             if($user){
-                $this->load->library('session');
+                if ( isset($user['user_type']) && 4 == $user['user_type'] ) {
+                    //alertmsg('Please check your email and complete email confirmation.');
+                    $result['message'] = 'Please check your email and complete email confirmation.';
+                }
+                else{
+                    $this->load->library('session');
+                    $result['status'] = 'success';
+                    $result['message'] = '';
+                    $result['uid'] = $user['uid'];
+                    $result['first_name'] = $user['first_name'];
+                    $result['last_name'] = $user['last_name'];
+                    $result['user_type'] = $user['user_type'];
 
-                $result['status'] = 'success';
-                $result['message'] = '';
-                $result['uid'] = $user['uid'];
-                $result['first_name'] = $user['first_name'];
-                $result['last_name'] = $user['last_name'];
-                $result['user_type'] = $user['user_type'];
-
-                $this->session->set_userdata($result);
-
-
+                    $this->session->set_userdata($result);
+                }
             }
         }
         //return login status with user data
