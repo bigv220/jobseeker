@@ -86,7 +86,7 @@ class search extends Front_Controller {
 
             if (!empty($post['position'])) {
 	            for($i=0;$i<count($post['position']);$i++) {
-	                if(!empty($post["position"][$i]) && $post["position"][$i]!='none') {
+	                if(!empty($post["position"][$i]) && $post["position"][$i]!='All Positions' && $post["position"][$i]!='none') {
 	                    array_push($where_or, "jip.position like '%".$post["position"][$i]."%'");
 	                }
 	            }

@@ -90,7 +90,7 @@ function show_welcome_pop(usertype){
         $.post(site_url + 'jobseeker/ajaxchangeindustry',
             { ind_name: name },
             function(result,status) {
-                var position_htm = '<option value="">Position</option>';
+                var position_htm = '<option value="">All Positions</option>';
 
                 if(status == 'success'){
                     var obj = eval('('+result+')');
