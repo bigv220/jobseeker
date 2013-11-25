@@ -14,7 +14,7 @@
 
         <div class="reset-password-success">
             <div class="reset-password-success-header">Yippee!</div>
-            <div class="reset-password-success-content">Your password has been reset please login now to GetJinged!</div>
+            <div class="reset-password-success-content">Your password has been reset. Please login now to GetJinged!</div>
             <div class="reset-password-success-btn"></div>
         </div>
     </div>
