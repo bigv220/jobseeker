@@ -32,7 +32,7 @@
                 //Load Model
                 $this->load->model('jobseeker_model');
 
-                $userIndustry = array(array('industry'=>'none','position'=>'none'));
+                $userIndustry = array(array('industry'=>'none','position'=>'All Positions'));
 
                 $data['userIndustry'] = $userIndustry;
                 $data['industry'] = $industry;
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="span2">
-                        <span>Language Level</span>
+                        <strong>Language Level</strong>
                         <div>
                             <select name="language_level[]" required>
                                 <option value="">--Select--</option>
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                         <div class="span2">
-                            <span>Years of Experience Required</span>
+                            <strong>Years of Experience</strong>
                             <div>
                                 <select name="preferred_year_of_experience">
                                     <?php $expe = getExperience();
@@ -115,7 +115,7 @@
 
                 <div class="postjob-content-left-row clearfix">
                     <div class="span1">
-                        <span>Teachnical Skills</span>
+                        <strong>Teachnical Skills</strong>
                         <div class="reg-row">
                             <div>
                                 <input type="hidden" name="preferred_technical_skills" class="input-tip" value="" data-tipval="">
@@ -136,7 +136,7 @@
 
                     </div>
                     <div class="span2">
-                        <span>Personal Skills Required</span>
+                        <strong>Personal Skills</strong>
                         <div class="reg-row">
                             <div>
                                 <input type="hidden" name="preferred_personal_skills" class="input-tip" value="" data-tipval="">
@@ -159,7 +159,7 @@
                 </div>
             </div>
             <div class="postjob-content-right">
-                <div class="postjob-content-right-row clearfix">
+                <div class="postjob-content-left-row clearfix">
                     <div class="span1">
                         <strong>Location *</strong>
                         <div>
@@ -205,7 +205,7 @@
                     </div>
 
                 </div>
-                <div class="postjob-content-right-row clearfix">
+                <div class="postjob-content-left-row clearfix">
                     <div class="span1">
                         <strong>Salary *</strong>
                         <div>
@@ -235,7 +235,7 @@
                     submitID:'post'});
                 });
                 </script>
-                <div><textarea name="job_desc" id="job_desc" rows="7" cols=""></textarea></div>
+                <div><textarea name="job_desc" id="job_desc" rows="21" cols=""></textarea></div>
             </div>
         </div>
 

@@ -42,14 +42,14 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .postjob-content-left{float:left;width:485px;}
 .postjob-content-right{float:right;width:225px;}
 .postjob-content-left-row{padding:0 0 7px 0;}
-.postjob-content-left-row strong{color:#444;}
+.postjob-content-left-row strong, .postjob-additional-information strong {color:#444;}
 .postjob-content-left-row .span1, .postjob-content-left-row .span2{width:232px;float:left;}
 .postjob-content-left-row .span2{margin-left:15px;}
 .postjob-content input{width:220px;}
 .postjob-content select{width:224px;height:24px;}
 .postjob-content-right-row{padding:0 0 9px 0;}
 .postjob-content-right-row input.location-input{width:105px;}
-.postjob-content-right-row select.location-input{width:111px;}
+.postjob-content-right-row select.location-input{width:110px;}
 .postjob-content .adv-search-bar .find{background:url(home/post_job_btn.png) no-repeat;}
 .postjob-additional-information{}
 .postjob-additional-information textarea{width:100%;}
