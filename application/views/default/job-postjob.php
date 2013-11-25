@@ -32,7 +32,7 @@
                 //Load Model
                 $this->load->model('jobseeker_model');
 
-                $userIndustry = array(array('industry'=>'none','position'=>'none'));
+                $userIndustry = array(array('industry'=>'none','position'=>'All Positions'));
 
                 $data['userIndustry'] = $userIndustry;
                 $data['industry'] = $industry;
