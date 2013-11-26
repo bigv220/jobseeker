@@ -115,7 +115,7 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .company-hd .face, .jobseeker-hd .face{background: url("jobseeker/profile_img_masker.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);height: 128px;left: 10px;position: absolute;top: -37px;width: 128px;}
 .company-hd img, .jobseeker-hd img { left: 10px;position: absolute;top: -37px;}
 .jobseeker-hd .text{width:220px;}
-.jobseeker-bd a{color: #ea6e3b;margin-right: 5px;text-decoration: underline;}
+.jobseeker-bd a{color: #ea6e3b;margin-right: 5px;}
 .company-hd .btnarea{float:right;*display:inline;width:375px;padding:0 15px 0 0;text-align:right;position:absolute;top:-6px;right:0;}
 .company-hd .combtn{width:79px;height:79px;line-height:79px;display:inline-block;text-align:center;vertical-align:top;background-image:url(company/btns.png);background-repeat:no-repeat;}
 .company-hd .bookmark{background-position:0 0;}
@@ -178,10 +178,6 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .industry-ul li.n2{background:url(company/about2.png) no-repeat 0 10px;}
 .industry-ul li.n3{background:url(company/about3.png) no-repeat 0 10px;}
 .industry-ul li.n4{background:url(company/about4.png) no-repeat 0 10px;}
-.similar li{height:56px;position:relative;}
-.similar img{width:50px;height:50px;float:left;margin:0 8px 0 0;}
-.similar a{display:block;font-weight:700;font-size:14px;padding:9px 0 0 0;}
-.similar i{display:block;width:69px;height:55px;background:url(company/similar-mark.png) no-repeat;position:absolute;top:0;left:0;}
 .match{height:134px;background:url(company/match.png) no-repeat center;text-align:center;}.match b{font-size:56px;color:#684092;padding:10px 0 0 0;font-family:Myriad Pro;display:block;}
 
 .news-index{padding:15px 20px;margin-bottom:30px;}
@@ -217,3 +213,21 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .signup-pop-apply-close{width:20px;height:20px;right:0px;cursor:pointer;display:block;}
 .signup-pop-apply-nav{padding:22px 20px 8px 20px;font-size:13px;color:#363636;font-weight:bold;}
 .signup-pop-apply .signup-pop-btn{width:190px;height:28px;border:none;cursor:pointer;background: url(search/sign_up_btn_apply.png) no-repeat;}
+.profile_views_num{color:#ebebec;font-size:14px;font-weight:bold;}
+a.edit_jobseeker_profile_link{text-decoration:underline;margin-left:10px;color:#674092;}
+ul.recent_applied_jobs{}
+ul.recent_applied_jobs li{line-height:35px;border-bottom:1px solid #CCCCCC;background:url(jobseeker/right_arrow_pinple.png) no-repeat right;}
+ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underline;width:100%;}
+.square_btn {width: 79px;height: 79px;line-height: 79px;display: inline-block;text-align: center;vertical-align: top;margin-right:5px;}
+.edit_profile_btn{background: url(btns/btn_edit_profile.png) no-repeat;}
+.edit_profile_btn:hover{background-position:0 -79px;}
+.jingchat_inbox_btn{background: url(btns/btn_jingchat_inbox.png) no-repeat;}
+.jingchat_inbox_btn:hover{background-position:0 -79px;}
+.saved_bookmarks_btn{background: url(btns/btn_saved_bookmarks.png) no-repeat;}
+.saved_bookmarks_btn:hover{background-position:0 -79px;}
+.view_my_interviews_btn{background: url(btns/btn_view_my_interviews.png) no-repeat;}
+.view_my_interviews_btn:hover{background-position:0 -79px;}
+
+.bubble{position:absolute;top:-5px;min-width:18px;min-height:18px;font-size:13px;text-align:center;background-color: #674092;color:white;padding:3px;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
+.jingchat_inbox_bubble{right:190px;}
+.view_my_interviews_bubble{right:16px;}

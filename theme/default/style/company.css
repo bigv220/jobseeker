@@ -38,6 +38,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .industry-ul li.n4{background:url(company/about4.png) no-repeat 0 10px;}
 .similar li{height:55px;position:relative;overflow: hidden;}
 .similar img{width:45px;height:45px;float:left;margin:0 8px 0 0;border:3px solid #684092;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
-.similar a{display:block;font-weight:700;font-size:14px;padding:9px 0 0 0;color:#48225b;}
+.similar a{display:block;font-weight:700;font-size:14px;color:#674092;}
 .similar i{display:block;width:69px;height:55px;background:url(company/similar-mark.png) no-repeat;position:absolute;top:0;left:0;}
+.similar p a.view_profile_link{color:#000000;font-size:13px;}
 .match{height:134px;background:url(company/match.png) no-repeat center;text-align:center;}.match b{font-size:56px;color:#684092;padding:10px 0 0 0;font-family:Myriad Pro;display:block;}
