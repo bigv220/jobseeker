@@ -295,11 +295,12 @@
                             <dd>
                                 <?php $languages = $user['languages'];
                                 for($i=0; $i<count($languages); $i++) { ?>
-                                    <span class="required">
-                            <b><?php echo $languages[$i]["language"]; ?></b>
-                            <i><?php echo $languages[$i]["level"]; ?></i>
-                        </span>
-                                    <?php }?>
+                                    <div class="jobseeker_profile_language">
+                                        <label><?php echo $languages[$i]["language"]; ?></label>
+                                        <i><?php echo $languages[$i]["level"]; ?></i>
+                                    </div>
+
+                                <?php }?>
                             </dd>
                         </dl>
                     </div>

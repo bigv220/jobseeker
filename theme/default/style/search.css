@@ -41,12 +41,12 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .jobseeker_request_interview,.jobseeker_request_interview_submitted{margin-top:8px;width:161px;height:25px;display:none;background-image:url(search/request_interview_btn.png);background-repeat:no-repeat;}
 .jobseeker_request_interview{background-position:0 -25px;}
 .jobseeker_request_interview_submitted{background-position:0 0;}
-.sresult_about_me a{color:#ea6e3b;margin-right:5px;text-decoration: underline;}
+.sresult_about_me a{color:#ea6e3b;margin-right:5px;}
 .employment_title{color:#ea6e3b;}
 .emploeyment_period{color:#6d6e71;margin-bottom: 6px;}
 .school_name{color:#ea6e3b;}
 .school_period{margin-bottom:10px;color:#6d6e71;}
-.phone_number{color:#ea6e3b;text-decoration: underline;}
+.phone_number{color:#ea6e3b;}
 .jingchat_wrapper{width:471px;margin:0 auto;background-color:white;height:500px;margin-top:10px;*behavior:url(js/jslib/PIE.htc);border:1px solid #ccc;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
 .jingchat_messages, .jingchat_offline_message{height:422px;}
 .jingchat_messages{padding:0 10px;}
@@ -84,3 +84,4 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .pop-apply-nav p{text-align:center;font-weight:700;font-size:14px;padding:0 30px;}
 #find_a_job_wrapper .advsearch-row .long_input, #find_a_job_wrapper .advsearch-row .long_input input, #find_a_job_wrapper .advsearch-row .long_input select{width:350px;}
 #find_staff_wrapper  .advsearch-row .long_input, #find_staff_wrapper .advsearch-row .long_input input, #find_staff_wrapper .advsearch-row .long_input select{width:350px;}
+.jobseeker_profile_language label{font-weight: bold;margin-right:15px;}
