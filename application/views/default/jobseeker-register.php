@@ -160,6 +160,11 @@
                         <input type="text" name="birthday" id="txtName" class="date" value="<?php echo $birthday; ?>" />
                     </div>
                 </div>
+                <div class="reg-row clearfix"> <strong>Description <i class="star">*</i></strong>
+                    <div>
+                        <textarea class="reg-textarea" name="description" required><?php echo $userinfo['description']; ?></textarea>
+                    </div>
+                </div>
                 <div class="reg-row clearfix">
                     <input type="hidden" name="is_private" id="is_private" value="1" />
                     <?php $is_private = $userinfo["is_private"];

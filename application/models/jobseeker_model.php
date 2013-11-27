@@ -113,7 +113,7 @@ class jobseeker_model extends MY_Model
     {
         $data = array('first_name'=>$data['first_name'],'last_name'=>$data['last_name'],'city'=>$data['city'],
             'province'=>$data['province'],'country'=>$data['country'], 'profile_pic'=>$data['avatar'],
-            'birthday'=>$data['birthday'],'is_private'=>$data['is_private']);
+            'birthday'=>$data['birthday'],'description'=>$data['description'],'is_private'=>$data['is_private']);
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }
 
