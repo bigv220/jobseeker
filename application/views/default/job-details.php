@@ -105,7 +105,8 @@
                         <ul class="similar">
                             <?php foreach($similar_jobs as $v) { ?>
                             <li><img src="<?php echo $site_url.'attached/users/'.$v['profile_pic'];?>" alt="" />
-                                <a href="<?php echo $site_url.'job/jobDetails/'.$v['id']; ?>"><?php echo $v['job_name']; ?></a>White Space Design
+                                <a href="<?php echo $site_url.'job/jobDetails/'.$v['id']; ?>"><?php echo $v['job_name']; ?></a>
+                                <?php echo $v['first_name']; ?>
                             </li>
                             <?php } ?>
                         </ul>

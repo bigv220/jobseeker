@@ -177,6 +177,10 @@ $(function(){
         eq:0
     });
 
+    $('.inbox_content').fxuiTab({
+        evt:'click',
+        eq:0
+    });
 
      //Pop mark
     var popMark =$('.pop-mark'),

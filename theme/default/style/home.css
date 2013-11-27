@@ -224,6 +224,7 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .edit_profile_btn:hover{background-position:0 -79px;}
 .jingchat_inbox_btn{background: url(btns/btn_jingchat_inbox.png) no-repeat;}
 .jingchat_inbox_btn:hover{background-position:0 -79px;}
+.jingchat_inbox_btn_current{background-position:0 -158px;}
 .saved_bookmarks_btn{background: url(btns/btn_saved_bookmarks.png) no-repeat;}
 .saved_bookmarks_btn:hover{background-position:0 -79px;}
 .saved_bookmarks_btn_current{background-position:0 -158px;}
