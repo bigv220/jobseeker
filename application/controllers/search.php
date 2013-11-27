@@ -69,12 +69,6 @@ class search extends Front_Controller {
             if(!empty($post["language"])) {
                 array_push($where_arr, "jl.language=".$post["language"]);
             }
-            if(!empty($post["PersonalSkills_str"])) {
-                array_push($where_arr, "preferred_personal_skills like '%".$post["PersonalSkills_str"]."%'");
-            }
-            if(!empty($post["ProfessionalSkills_str"])) {
-                array_push($where_arr, "preferred_technical_skills like '%".$post["ProfessionalSkills_str"]."%'");
-            }
 
             if (!empty($post['industry'])) {
 	            for($i=0;$i<count($post['industry']);$i++) {
@@ -137,8 +131,46 @@ class search extends Front_Controller {
             }
         }
 
-        for($i=0; $i<count($jobs); $i++) {
-            $jobs[$i]['industry_arr'] = $this->job_model->getJobIndustry($jobs[$i]['id']);
+        //filter personal skills
+        if(!empty($post["PersonalSkills_str"])) {
+            $post_arr = explode(',', $post["PersonalSkills_str"]);
+
+            foreach ($jobs as $key => $one_job) {
+                $skills_arr = explode(",", $one_job['preferred_personal_skills']);
+
+                $delete_flag = true;
+                foreach ($skills_arr as $one_type) {
+                    if (in_array($one_type , $post_arr) === TRUE) {
+                        $delete_flag = false;
+                    }
+                }
+                if($delete_flag) {
+                    unset($jobs[$key]);
+                }
+            }
+        }
+
+        // filter technical skills
+        if(!empty($post["ProfessionalSkills_str"])) {
+            $post_arr = explode(',', $post["ProfessionalSkills_str"]);
+
+            foreach ($jobs as $key => $one_job) {
+                $skills_arr = explode(",", $one_job['preferred_technical_skills']);
+
+                $delete_flag = true;
+                foreach ($skills_arr as $one_type) {
+                    if (in_array($one_type , $post_arr) === TRUE) {
+                        $delete_flag = false;
+                    }
+                }
+                if($delete_flag) {
+                    unset($jobs[$key]);
+                }
+            }
+        }
+
+        foreach($jobs as $key=>$v) {
+            $jobs[$key]['industry_arr'] = $this->job_model->getJobIndustry($jobs[$key]['id']);
         }
 
         $data['jobs'] = $jobs;

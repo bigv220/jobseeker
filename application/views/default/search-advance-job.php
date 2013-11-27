@@ -96,7 +96,7 @@
             $this->load->model('jobseeker_model');
 
             if (empty($work_history['id'])) {
-                $userIndustry = array(array('industry'=>'none','position'=>'All Positions'));
+                $userIndustry = array(array('industry'=>'none','position'=>'none'));
             } else {
                 $userIndustry = $this->jobseeker_model->getUserIndustry($this->session->userdata('uid'), $work_history['id']);
             }
@@ -177,9 +177,10 @@
         	<div class="advsearch-row clearfix">
             	<div class="span1 reg-row">
                 	<strong>Technical Skills</strong>
-                    <select name="technical_skills" class="industry_options">
+                    <input type="hidden" name="ProfessionalSkills_str" id="ProfessionalSkills_str" />
+                    <select name="technical_skills" id="technical_skills" class="industry_options multi_select" multiple="multiple" onchange="selectMultiple('technical_skills','ProfessionalSkills_str')">
                         <option value="">All Skills</option>
-                        <?php foreach($pro_skills as $key=>&$v) {
+                        <?php foreach($tech_skills as $key=>&$v) {
                         if(empty($v['skill'])) continue;
                         ?>
                         <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>
@@ -190,9 +191,10 @@
                 </div>
                 <div class="span2 reg-row">
                     <strong>Personal Skills</strong>
-                    <select name="personal_skills" class="industry_options">
+                    <input type="hidden" name="PersonalSkills_str" id="PersonalSkills_str" />
+                    <select name="personal_skills" id="personal_skills" class="industry_options multi_select" multiple="multiple" onchange="selectMultiple('personal_skills','PersonalSkills_str')">
                         <option value="">All Skills</option>
-                        <?php foreach($tech_skills as $key=>&$v) {
+                        <?php foreach($pro_skills as $key=>&$v) {
                             if(empty($v['skill'])) continue;
                             ?>
                             <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>

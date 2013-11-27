@@ -169,4 +169,15 @@ var addTypeTag = function(label, tag) {
     $('#jobtype_box').tagit("add", {label: label, value: tag});
 }
 
+function selectMultiple(id, str_id)
+{
+    var o = document.getElementById(id);
+    var str = "";
+    for(i=0;i<o.length;i++){
+        if(o.options[i].selected){
+            str+=o.options[i].value+",";
+        }
+    }
 
+    $('#' + str_id).val(str.substr(0,str.length-1));
+}
