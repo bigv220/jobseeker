@@ -443,7 +443,7 @@ function addPersonalSkillAjax(id_str,uid, v, li_id) {
             }
         });
 
-    $('#'+ id_str + '_input').val('Start Typing');
+    $('#'+ id_str + '_input').val('');
 }
 
 //add personal skills or professional skills, using the same function

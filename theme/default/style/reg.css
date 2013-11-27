@@ -61,3 +61,4 @@ ul.tagit li.tagit-new {height:1px;overflow: hidden}
 .delSearchIndustry i { float: right; top: -25px; left:2px;}
 .postjob_del { margin-top:-15px;float:right;width:13px;}
 .postjob_del i { left:0px; top:0px;}
+.reg-row select.multi_select { height: 100px;}
