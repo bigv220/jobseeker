@@ -8,8 +8,7 @@
         $pic = $site_url.'attached/users/'.$userinfo['profile_pic'];
         ?>
         <div class="people_icon">
-          <img src="<?php echo $pic; ?>" alt="" width="128px" height="128px"/>
-          <i class="abs face png"></i>
+          <img src="<?php echo $pic; ?>" alt="" width="128px" height="128px" class="jobseeker_icon"/>
         </div>
 
         <?php else: ?>

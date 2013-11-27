@@ -141,7 +141,7 @@ a:active, a:focus { text-decoration: none; color: #48225b; }
 .pop-box .pop-bar{height:30px;padding:20px 0 0 0;text-align:center;}
 .pop-box .pop-bar-btn{width:83px;height:25px;line-height:25px;display:inline-block;text-align:center;vertical-align:top;background:url(pub/pop-btn.png);text-decoration:none;color:#fff;}.pop-box .pop-bar-btn:hover{text-decoration:none;}
 html{*background:url(about:black) no-repeat fixed;}
-.backtop{display:none;width:62px;height:64px;position:absolute;top:300px;right:-70px;cursor:pointer;background:url(pub/top.png) no-repeat;}
+.backtop{display:none;width:62px;height:64px;z-index:999;position:absolute;top:300px;right:-70px;cursor:pointer;background:url(pub/top.png) no-repeat;}
 .partners{height:185px;}
 .puartners-tit{height:30px;line-height:30px;padding:20px 0 10px 0;font-size:13px;font-weight:bolder;color:#674092;}
 .puartners-ul{margin-right:-10px;}.puartners-ul li{float:left;width:176px;height:103px;margin-right:10px;}

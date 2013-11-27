@@ -172,6 +172,11 @@ $(function(){
         eq:0
     });
 
+    $('.result-condition').fxuiTab({
+        evt:'click',
+        eq:0
+    });
+
 
      //Pop mark
     var popMark =$('.pop-mark'),
