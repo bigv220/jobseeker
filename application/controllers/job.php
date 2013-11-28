@@ -19,13 +19,6 @@ class job extends Front_Controller {
     public function jobDetails($job_id) {
     	$data = $this->data;
     	
-//        $visa_assistance = array('1'=>'Visa will be provided','0'=>'Visa will not be provided');
-//        $housing_assistance = array('1'=>'Accomodation will be provided','0'=>'Accomodation will not be provided');
-//    	$data['constants_arr'] = array(
-//    								'visa_assist'=>$visa_assistance,
-//    								'housing_assist'=>$housing_assistance
-//    								);
-    	
     	//Load Model
         $this->load->model('job_model');
         //get data from db
@@ -71,8 +64,7 @@ class job extends Front_Controller {
         //industry lists
         $uid = $this->session->userdata('uid');
         $data["industry"] = $this->jobseeker_model->getIndustry();
-        //$data["professional_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
-        //$data["personal_skills"] = $this->jobseeker_model->getProfessionalSkills($uid);
+
         // get location
         $this->load->helper('location');
         $data['location'] = getLoction();
@@ -188,4 +180,31 @@ class job extends Front_Controller {
 
     }
 
+    /**
+     * delete job
+     */
+    public function deletebookmarkinfo() {
+        $uid = $this->session->userdata('uid');
+        if (empty($uid)) {
+            $result['status'] = 'login';
+            echo json_encode($result);
+            exit;
+        }
+        if (!empty($_POST['id']) && !empty($uid)) {
+            // do delete
+            $type = $_POST['type'];
+
+            if($type == 'job') {
+                $this->load->model('job_model');
+                $result['status'] = $this->job_model->deleteBookmarkedJob($_POST['id'], $uid);
+            } else {
+                $this->load->model('company_model');
+                $result['status'] = $this->company_model->deleteBookmarkedCompany($_POST['id'], $uid);
+            }
+
+            $result['status'] = $result['status'] ? 'success' : 'failed.';
+
+            echo json_encode($result);
+        }
+    }
 }

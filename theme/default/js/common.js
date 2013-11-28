@@ -181,3 +181,18 @@ function selectMultiple(id, str_id)
 
     $('#' + str_id).val(str.substr(0,str.length-1));
 }
+
+function changeFilterType(thisO) {
+    var v = $(thisO).attr('title');
+    $('#filter_type_str').val(v);
+}
+
+function submitFilterBookmarkForm() {
+    var type = $('#filter_type_str').val();
+
+    if(type == 'jobs') {
+        $('#jobsForm').submit();
+    } else {
+        $('#companiesForm').submit();
+    }
+}

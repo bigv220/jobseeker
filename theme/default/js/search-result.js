@@ -1,74 +1,72 @@
+function formatItem(row){
+    return " <p>"+row +" </p>";
+}
 
-    function formatItem(row){
-        return " <p>"+row +" </p>";
+function formatResult(row){
+    return row[0].replace(/(<.+?>)/gi, '');
+}
+
+function selectItem1(v){
+    addSkillsAjax('PersonalSkills',v);
+}
+
+function selectItem2(v){
+    addSkillsAjax('ProfessionalSkills', v);
+}
+
+function searchJob() {
+    $('#search_form').submit();
+}
+
+function addSkills(id_str, thisO) {
+    var v = $(thisO).val();
+
+    addSkillsAjax(id_str, v);
+}
+
+function addSkillsAjax(id_str, v) {
+    var htm = '<li data-val="2">'+ v +
+        '<i class="del" onclick="delSkills' + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
+
+    var str_key = '#'+ id_str + '_str';
+    var str = $(str_key).val();
+
+    if(str == '') {
+        $(str_key).val(v);
+    } else if(str.indexOf(v)==-1) {
+        $(str_key).val(str+','+v);
+    }
+    $('#'+ id_str).append(htm);
+
+    $('#'+id_str+'_input').val('');
+}
+
+function delSkills(id_str, thisO, v) {
+    var str_key = '#'+ id_str + '_str';
+    var str = $(str_key).val();
+
+    var str_cop = str;
+    if(str != '' && str.indexOf(v)>-1) {
+        var new_str = str_cop.substring(0, str.indexOf(v)-1) + str.substr(str.indexOf(v)+v.length);
+        $(str_key).val(new_str);
     }
 
-    function formatResult(row){
-        return row[0].replace(/(<.+?>)/gi, '');
+    $(thisO).parent().remove();
+}
+
+function clearHint(thisO) {
+    if($(thisO).val() == 'Enter Keywords') {
+        $(thisO).val('');
     }
+}
 
-    function selectItem1(v){
-        addSkillsAjax('PersonalSkills',v);
+function showHint(thisO) {
+    if($(thisO).val() == '') {
+        $(thisO).val('Enter Keywords');
     }
+}
 
-    function selectItem2(v){
-        addSkillsAjax('ProfessionalSkills', v);
-    }
-
-    function searchJob() {
-        $('#search_form').submit();
-    }
-
-    function addSkills(id_str, thisO) {
-        var v = $(thisO).val();
-
-        addSkillsAjax(id_str, v);
-    }
-
-    function addSkillsAjax(id_str, v) {
-        var htm = '<li data-val="2">'+ v +
-            '<i class="del" onclick="delSkills' + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
-
-        var str_key = '#'+ id_str + '_str';
-        var str = $(str_key).val();
-
-        if(str == '') {
-            $(str_key).val(v);
-        } else if(str.indexOf(v)==-1) {
-            $(str_key).val(str+','+v);
-        }
-        $('#'+ id_str).append(htm);
-
-        $('#'+id_str+'_input').val('');
-    }
-
-    function delSkills(id_str, thisO, v) {
-        var str_key = '#'+ id_str + '_str';
-        var str = $(str_key).val();
-
-        var str_cop = str;
-        if(str != '' && str.indexOf(v)>-1) {
-            var new_str = str_cop.substring(0, str.indexOf(v)-1) + str.substr(str.indexOf(v)+v.length);
-            $(str_key).val(new_str);
-        }
-
-        $(thisO).parent().remove();
-    }
-
-    function clearHint(thisO) {
-        if($(thisO).val() == 'Enter Keywords') {
-            $(thisO).val('');
-        }
-    }
-
-    function showHint(thisO) {
-        if($(thisO).val() == '') {
-            $(thisO).val('Enter Keywords');
-        }
-    }
 $(function(){
-    //search result page--------------
-
     //search-result sequence
     $('.kyo-select').kyoSelect({
         width:'145',
@@ -80,8 +78,6 @@ $(function(){
         width:'230',
         height:'25'
     });
-
-
 
     //sel-industry
     $('#sel-industry').checkSelect({
@@ -98,7 +94,6 @@ $(function(){
         height:26,
         ismax:function(){alert('max 3!!!')}
     });
-
 
     //sel-position
     $('#sel-position').checkSelect({
@@ -135,7 +130,6 @@ $(function(){
 
     //gotop
     $('.backtop').fxBacktop();
-
 
     //result-bd
     $('.sresult-par1').click(function(e){
@@ -177,12 +171,13 @@ $(function(){
         eq:0
     });
 
-
      //Pop mark
     var popMark =$('.pop-mark'),
         popApply = $('.pop-apply'),
         popReg = $('.pop-reg'),
         signupApply = $('.signup-pop-apply');
+    var popDeleteJob = $('.pop-delete-job'),
+    popDeleteCom = $('.pop-delete-company');
 
     //Pop apply
     var rowObj;
@@ -203,11 +198,12 @@ $(function(){
 
     $('.job-btn-submitted').bind('click',submitted);
 
-
     //Pop apply close
     $('.pop-apply-close').click(function(){
         popMark.fadeOut();
         popApply.fadeOut();
+        popDeleteJob.fadeOut();
+        popDeleteCom.fadeOut();
     });
 
     $('.signup-pop-apply-close').click(function(){
@@ -242,27 +238,86 @@ $(function(){
                     alert(status);
                 }
             });
-        
     });
 
     //click No
     $('.pop-btn-no').click(function(){
         popApply.fadeOut();
         popMark.fadeOut();
+        popDeleteJob.fadeOut();
+        popDeleteCom.fadeOut();
     });
 
-});    function apply(e){
-            rowObj = $(this).parents('.sresult-row');
-            $('.pop-mark').height($('body').height());
+    // Delete bookmar job PopUp
+    $('.delete_job_btn').bind('click',function apply(e) {
+        if(userType != 0){
             popMark.fadeIn();
-            popApply.fadeIn();
-            e.stopPropagation();
-            e.preventDefault();
-    }
-    function submitted(e){
-            $('.job-btn-submit').unbind('click',apply);
-            alert('You have already applied this job.')
-            return false;
-            e.stopPropagation();
-            e.preventDefault();
-    }
+            popDeleteJob.fadeIn();
+            var id = $(this).attr('data-job-id');
+            $('#selected_job_id').val(id);
+        }
+    });
+
+    //click delete job 'Yes'
+    $('.pop-delete-job-yes').click(function(){
+        popDeleteJob.fadeOut();
+        popMark.fadeOut();
+
+        var job_id = $('#selected_job_id').val();
+        // Delete JOB
+        $.post(site_url + 'job/deletebookmarkinfo', {id: job_id, type: 'job'},
+            function(result,status) {
+                if (status=='success') {
+                    alert('Delete successful!');
+                } else if (status =='login') {
+                    alert('Please Login to delete this job.');
+                } else {
+                    alert(status);
+                }
+            });
+    });
+
+    // delete bookmark company
+    $('.delete_company_btn').bind('click',function apply(e) {
+        if(userType != 0){
+            popMark.fadeIn();
+            popDeleteCom.fadeIn();
+            var id = $(this).attr('data-company-id');
+            $('#selected_company_id').val(id);
+        }
+    });
+
+    //click delete job 'Yes'
+    $('.pop-delete-company-yes').click(function(){
+        popDeleteCom.fadeOut();
+        popMark.fadeOut();
+
+        var com_id = $('#selected_company_id').val();;
+        // Delete JOB
+        $.post(site_url + 'job/deletebookmarkinfo', {id: com_id, type: 'company'},
+            function(result,status) {
+                if (status=='success') {
+                    alert('Delete successful!');
+                } else if (status =='login') {
+                    alert('Please Login to delete this job.');
+                } else {
+                    alert(status);
+                }
+            });
+    });
+});
+function apply(e){
+    rowObj = $(this).parents('.sresult-row');
+    $('.pop-mark').height($('body').height());
+    popMark.fadeIn();
+    popApply.fadeIn();
+    e.stopPropagation();
+    e.preventDefault();
+}
+function submitted(e){
+    $('.job-btn-submit').unbind('click',apply);
+    alert('You have already applied this job.')
+    return false;
+    e.stopPropagation();
+    e.preventDefault();
+}
