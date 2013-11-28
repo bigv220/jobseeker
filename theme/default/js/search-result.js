@@ -255,12 +255,10 @@ $(function(){
 
     // Delete bookmar job PopUp
     $('.delete_job_btn').bind('click',function apply(e) {
-        if(userType != 0){
-            popMark.fadeIn();
-            popDeleteJob.fadeIn();
-            var id = $(this).attr('data-job-id');
-            $('#selected_job_id').val(id);
-        }
+        popMark.fadeIn();
+        popDeleteJob.fadeIn();
+        var id = $(this).attr('data-job-id');
+        $('#selected_job_id').val(id);
     });
 
     //click delete job 'Yes'
@@ -284,12 +282,10 @@ $(function(){
 
     // delete bookmark company
     $('.delete_company_btn').bind('click',function apply(e) {
-        if(userType != 0){
-            popMark.fadeIn();
-            popDeleteCom.fadeIn();
-            var id = $(this).attr('data-company-id');
-            $('#selected_company_id').val(id);
-        }
+        popMark.fadeIn();
+        popDeleteCom.fadeIn();
+        var id = $(this).attr('data-company-id');
+        $('#selected_company_id').val(id);
     });
 
     //click delete job 'Yes'
