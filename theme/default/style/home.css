@@ -244,3 +244,20 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .view_my_interviews_bubble{right:16px;}
 .jobseeker_icon{border:5px solid #674092;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .round_img{-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
+.round_img_border3{border:3px solid #674092;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
+.inbox_overview_list{float:left;width:290px;height:520px;overflow-y:scroll;}
+.inbox_mail_content{float:left;width:454px;height:500px;overflow-y:scroll;padding:10px;line-height:18px;}
+.inbox_overview_row{height:70px;line-height:70px;vertical-align: middle;border-bottom:1px solid #CCCCCC;padding-top:5px;}
+.inbox_overview_row_current{background-color: #e0e0e0;}
+.email_select_checkbox{width:15px;float:left;padding:0px 8px 5px 0px;}
+.sender_avatar{width:50px;float:left;padding-top:5px;}
+.email_short_description{width:190px;float:left;line-height:22px;height:22px;margin-left:10px;font-size:13px;font-weight:bold;}
+.email_short_description .from_name{color:#414042;}
+.email_short_description .received_date{float:right;color:#414042;font-size:10px;}
+.email_short_description .email_subject{color:#674092;}
+.email_short_description .email_actions_bar{padding-top:5px;}
+.email_short_description .email_actions_bar img{margin-right:8px;cursor:pointer;}
+.inbox_mail_content .inbox_detail_header{border-bottom:1px solid #CCCCCC;padding-bottom:12px;}
+.inbox_mail_content .inbox_detail_content{padding:10px;}
+.inbox_multi_actions_bar{float:right;margin-right:22px;}
+.inbox_multi_actions_bar img{cursor:pointer;margin-left:7px;}
