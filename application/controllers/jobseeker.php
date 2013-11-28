@@ -172,9 +172,106 @@ class jobseeker extends Front_Controller {
             $uid = $this->session->userdata('uid');
         }
 
+        $post = $_POST;
+        $where = " WHERE user_id=$uid";
+        $where_arr = array();
+        $filter_type = 'jobs';
+        $jobs = array();
+        $companies = array();
+        if($post) {
+            if ($post["keywords"] == 'Enter Keywords') {
+                $post['keywords'] = '';
+            }
+
+            if($post['filter_type'] == 'jobs') {
+                if(!empty($post["keywords"])) {
+                    array_push($where_arr, "job_name like '%" . $post["keywords"] . "%'");
+                }
+
+                if(!empty($post["country"])) {
+                    array_push($where_arr, "job.country='" .$post["country"]."'");
+                }
+                if(!empty($post["province"])) {
+                    array_push($where_arr, "job.province='" .$post["province"]."'");
+                }
+                if(!empty($post["city"])) {
+                    array_push($where_arr, "job.city='" .$post["city"]."'");
+                }
+
+                if (!empty($post['industry'])) {
+                    for($i=0;$i<count($post['industry']);$i++) {
+                        if(!empty($post["industry"][$i])) {
+                            array_push($where_arr, "jip.industry like '%".$post["industry"][$i]."%'");
+                        }
+                    }
+                }
+            }// filter type "if" condition
+
+            if($post['filter_type'] == 'companies') {
+                $filter_type = 'companies';
+                if(!empty($post["keywords"])) {
+                    array_push($where_arr, "name like '%" . $post["keywords"] . "%'");
+                }
+
+                if(!empty($post["country"])) {
+                    array_push($where_arr, "com.country='" .$post["country"]."'");
+                }
+                if(!empty($post["province"])) {
+                    array_push($where_arr, "com.province='" .$post["province"]."'");
+                }
+                if(!empty($post["city"])) {
+                    array_push($where_arr, "com.city='" .$post["city"]."'");
+                }
+
+                if (!empty($post['industry'])) {
+                    for($i=0;$i<count($post['industry']);$i++) {
+                        if(!empty($post["industry"][$i])) {
+                            array_push($where_arr, "ci.industry like '%".$post["industry"][$i]."%'");
+                        }
+                    }
+                }
+            }// filter type judgement
+        }
+
+        // get where string
+        if(count($where_arr)) {
+            $where_str = implode(' AND ', $where_arr);
+
+            if(count($where_arr)) {
+                $where .= " AND " . $where_str;
+            }
+        }
+
+        if($filter_type == 'jobs') {
+            // get jobs according to the search
+            $this->load->model('job_model');
+            $jobs = $this->job_model->searchBookmarkedJob($where);
+
+            foreach($jobs as $key=>$v) {
+                $jobs[$key]['industry_arr'] = $this->job_model->getJobIndustry($jobs[$key]['id']);
+            }
+        } else {
+            // get jobs according to the search
+            $this->load->model('company_model');
+            $companies = $this->company_model->searchBookmarkedCompany($where);
+        }
+
+        $data['jobs'] = $jobs;
+        $data['companies'] = $companies;
+        $data['filter_type'] = $filter_type;
+
+        //the left side, industry lists
+        $industry = $this->jobseeker_model->getIndustry();
+        $data["industry"] = $industry;
+
+        // get location
+        $this->load->helper('location');
+        $data['location'] = getLoction();
+
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
         $this->load->view($data['front_theme']."/jobseeker-saved-bookmarks",$data);
     }
+
     //save basic info
     public function basicInfo() {
         //Load Model
@@ -526,6 +623,7 @@ class jobseeker extends Front_Controller {
     		exit;
     	}
     	if("province" == $key) {
+            $selected = urldecode($selected);
     		echo json_encode( $location[$country][$selected] );
     		exit;
     	}
