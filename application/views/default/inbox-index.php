@@ -185,7 +185,178 @@
               </div>
           </div>
           <div class="fxui-tab-nav">
-            sdfsdfsdfsdfsfa
+              <div class="jingchatlog_wrapper">
+                  <div class="inbox_overview_list">
+                      <div class="inbox_overview_row inbox_overview_row_current">
+                          <div class="email_select_checkbox">
+                              <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
+                              <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
+                          </div>
+                          <div class="sender_avatar">
+                              <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
+                          </div>
+                          <div class="email_short_description">
+                              <div class="received_date">8/23/13</div>
+                              <div class="from_name">Redstar Works</div>
+
+                              <div class="email_actions_bar">
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_online_icon.png" alt=""/>
+                              </div>
+                          </div>
+                          <div style="clear:both;"></div>
+                      </div>
+
+                      <div class="inbox_overview_row">
+                          <div class="email_select_checkbox">
+                              <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
+                              <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
+                          </div>
+                          <div class="sender_avatar">
+                              <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
+                          </div>
+                          <div class="email_short_description">
+                              <div class="received_date">8/23/13</div>
+                              <div class="from_name">Redstar Works</div>
+
+                              <div class="email_actions_bar">
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_online_icon.png" alt=""/>
+                              </div>
+                          </div>
+                          <div style="clear:both;"></div>
+                      </div>
+
+                      <div class="inbox_overview_row">
+                          <div class="email_select_checkbox">
+                              <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
+                              <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
+                          </div>
+                          <div class="sender_avatar">
+                              <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
+                          </div>
+                          <div class="email_short_description">
+                              <div class="received_date">8/23/13</div>
+                              <div class="from_name">Redstar Works</div>
+
+                              <div class="email_actions_bar">
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_online_icon.png" alt=""/>
+                              </div>
+                          </div>
+                          <div style="clear:both;"></div>
+                      </div>
+
+                      <div class="inbox_overview_row">
+                          <div class="email_select_checkbox">
+                              <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
+                              <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
+                          </div>
+                          <div class="sender_avatar">
+                              <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
+                          </div>
+                          <div class="email_short_description">
+                              <div class="received_date">8/23/13</div>
+                              <div class="from_name">Redstar Works</div>
+
+                              <div class="email_actions_bar">
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_online_icon.png" alt=""/>
+                              </div>
+                          </div>
+                          <div style="clear:both;"></div>
+                      </div>
+
+
+                  </div>
+                  <div class="jingchat_log_content">
+
+                      <div class="jingchat_wrapper">
+                          <div class="jingchat_messages">
+                              <div class="load_older_message">
+                                  Load older messages
+                              </div>
+                              <div class="jingchat_messages_bd">
+                                  <div class="jingchat_message_row_me">
+                                      <div class="jingchat_message_content">
+                                          <img src="<?php echo $theme_path?>style/jingchat/me_jingchat_message_leftarrow.png" class="message_avatar_arrow"/>
+                                          <div class="other_message_top"></div>
+                                          <div class="other_message_content">
+                                              <p>
+                                                  This is the message content send to me from other people. this is the message content send to me from other people.
+                                                  this is the message content send to
+                                              </p>
+                                          </div>
+                                          <div class="other_message_bottom"></div>
+                                      </div>
+                                      <div class="jingchat_message_icon">
+                                          <img src="<?php echo $theme_path?>style/search/job-img1.gif" alt=""/>
+                                      </div>
+                                      <div style="clear:both;"></div>
+                                  </div>
+                                  <div class="jingchat_message_row_other">
+                                      <div class="jingchat_message_content">
+                                          <img src="<?php echo $theme_path?>style/jingchat/other_jingchat_message_rightarrow.png" class="message_avatar_arrow"/>
+                                          <div class="other_message_top"></div>
+                                          <div class="other_message_content">
+                                              <p>
+                                              This is the message content send to me from other people. this is the message content send to me from other people.
+                                              this is the message content send to me from other people. this is the message content send to me from other people.
+                                              </p>
+                                          </div>
+                                          <div class="other_message_bottom"></div>
+                                      </div>
+                                      <div class="jingchat_message_icon">
+                                          <img src="<?php echo $theme_path?>style/search/job-img1.gif" alt=""/>
+                                      </div>
+                                      <div style="clear:both;"></div>
+                                  </div>
+                                  <div class="jingchat_message_row_other">
+                                      <div class="jingchat_message_content">
+                                          <img src="<?php echo $theme_path?>style/jingchat/other_jingchat_message_rightarrow.png" class="message_avatar_arrow"/>
+                                          <div class="other_message_top"></div>
+                                          <div class="other_message_content">
+                                              <p>
+                                                  This is the message content send to me from other people. this is the message content send to me from other people.
+                                                  this is the message content send to me from other people. this is the message content send to me from other people.
+                                              </p>
+                                          </div>
+                                          <div class="other_message_bottom"></div>
+                                      </div>
+                                      <div class="jingchat_message_icon">
+                                          <img src="<?php echo $theme_path?>style/search/job-img1.gif" alt=""/>
+                                      </div>
+                                      <div style="clear:both;"></div>
+                                  </div>
+
+                                  <div class="jingchat_message_row_me">
+                                      <div class="jingchat_message_content">
+                                          <img src="<?php echo $theme_path?>style/jingchat/me_jingchat_message_leftarrow.png" class="message_avatar_arrow"/>
+                                          <div class="other_message_top"></div>
+                                          <div class="other_message_content">
+                                              <p>
+                                                  This is the message content send to me from other people. this is the message content send to me from other people.
+                                                  this is the message content send to
+                                              </p>
+                                          </div>
+                                          <div class="other_message_bottom"></div>
+                                      </div>
+                                      <div class="jingchat_message_icon">
+                                          <img src="<?php echo $theme_path?>style/search/job-img1.gif" alt=""/>
+                                      </div>
+                                      <div style="clear:both;"></div>
+                                  </div>
+
+                              </div>
+                          </div>
+
+                          <div class="jingchat_message_input">
+                              <textarea rows="3" cols="" class="input-tip" data-tipval="Type your message here">Type your message here</textarea>
+                          </div>
+                      </div>
+                  </div>
+                  <div style="clear:both;"></div>
+              </div>
           </div>
       </div>
     </div>

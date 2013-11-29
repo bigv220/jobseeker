@@ -50,12 +50,26 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .phone_number{color:#ea6e3b;}
 .jingchat_wrapper{width:471px;margin:0 auto;background-color:white;height:500px;margin-top:10px;*behavior:url(js/jslib/PIE.htc);border:1px solid #ccc;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
 .jingchat_messages, .jingchat_offline_message{height:422px;}
-.jingchat_messages{padding:0 10px;}
-.load_older_message{color:#b0b7b9;font-weight: bold;}
+.jingchat_messages{padding:0 5px;}
+.load_older_message{width:135px;padding: 10px 0px 5px 5px;cursor:pointer;color:#414042;font-weight: bold;background: url(jingchat/load_old_message_arrow.png) no-repeat right;}
 .jingchat_offline_message{text-align: center;font-weight: bold;}
-.jingchat_message_icon{float:left;}
-.jingchat_message_icon img{width:30px;height:30px;}
-.jingchat_message_content{float:left;width:391px;}
+.jingchat_message_row_me, .jingchat_message_row_other{margin-top: 10px;}
+.jingchat_message_icon{float:left;padding-top:13px;padding-left:11px;}
+.jingchat_message_icon img{width:40px;height:40px;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
+.jingchat_message_content{position:relative;width:396px;float:left;color:#393939;}
+.jingchat_message_content .message_avatar_arrow{position:absolute;top:20px;right:-8px;}
+.jingchat_message_content .other_message_top{height:5px;width:396px;background: url(jingchat/other_jingchat_message_topbg.png);}
+.jingchat_message_content .other_message_content{width:396px;background: url(jingchat/other_jingchat_message_bodybg.png) repeat-y;}
+.jingchat_message_content .other_message_content p{padding:5px 10px;}
+.jingchat_message_content .other_message_bottom{height:6px;width:396px;background: url(jingchat/other_jingchat_message_bottombg.png);}
+
+.jingchat_message_row_me .jingchat_message_icon{float:right;padding-top:13px;padding-left:0px;margin-right:10px;}
+.jingchat_message_row_me .jingchat_message_content{position:relative;width:396px;float:right;}
+.jingchat_message_row_me .jingchat_message_content .message_avatar_arrow{position:absolute;top:20px;left:-8px;}
+.jingchat_message_row_me .jingchat_message_content .other_message_top{height:5px;width:396px;background: url(jingchat/me_jingchat_message_topbg.png) -1;}
+.jingchat_message_row_me .jingchat_message_content .other_message_content{width:396px;background: url(jingchat/me_jingchat_message_bodybg.png) repeat-y;}
+.jingchat_message_row_me .jingchat_message_content .other_message_bottom{height:6px;width:396px;background: url(jingchat/me_jingchat_message_bottombg.png);}
+
 .jingchat_message_input{background: url(search/jingchat_message_inputbg.png) no-repeat;height:78px;padding:10px;}
 .jingchat_message_input textarea{width:446px;margin-top:5px;}
 .sresult-par2{clear:both;padding:10px;display:none;}
