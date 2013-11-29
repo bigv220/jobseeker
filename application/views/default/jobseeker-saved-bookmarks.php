@@ -192,7 +192,7 @@
     <!-- THIS ROW IS FOR JOBS SAVED IN BOOKMARKS -->
     <?php if (count($jobs)>0): ?>
     <?php foreach($jobs as $job): ?>
-<div class="box rel sresult-row">
+<div class="box rel sresult-row" id="jobdiv<?php echo $job['id']; ?>">
     <div class="sresult-par1">
         <div class="span1 rel">
             <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="85px" height="85px" class="round_img"/>
@@ -295,7 +295,7 @@
     <?php foreach($companies as $com): ?>
 <!-- THIS ROW IS FOR COMPANY SAVED IN BOOKMARKS -->
 <div class="box rel sresult-row">
-    <div class="sresult-par1">
+    <div class="sresult-par1" id="companydiv<?php echo $com['company_id']; ?>">
         <div class="span1 rel">
             <img src="<?php echo $theme_path;?>/style/search/job-img1.gif" alt="" width="85px" height="85px" class="round_img"/>
         </div>
@@ -315,21 +315,19 @@
             <span class="fxui-tab-tit">Jobs</span> </div>
         <div class="sresult-tab-bd zoom">
             <div class="fxui-tab-nav ">
-                <div class="text"><?php echo $com['description']; ?>
+                <div class="text">
+                    <?php echo $com['description']; ?>
                     <a href="#" class="orange_link">View Company Profile</a>
                 </div>
 
             </div>
             <div class="fxui-tab-nav sresult-nav-job">
                 <ul class="recent_applied_jobs">
-                    <li><a href="#">Admin Assistant</a></li>
-                    <li><a href="#">UI Designer</a></li>
-                    <li><a href="#">Project Manager</a></li>
-                    <li><a href="#">UI Designer</a></li>
-                    <li><a href="#">Admin Assistant</a></li>
-                    <li><a href="#">UI Designer</a></li>
-                    <li><a href="#">Project Manager</a></li>
-                    <li><a href="#">UI Designer</a></li>
+                    <?php foreach($com['jobs'] as $v): ?>
+                    <li><a href="<?php echo $site_url; ?>job/jobDetails/<?php echo $v['id']; ?>">
+                        <?php echo $v['job_name']; ?></a>
+                    </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>

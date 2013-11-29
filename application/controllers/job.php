@@ -181,6 +181,29 @@ class job extends Front_Controller {
     }
 
     /**
+     * Jobseeker bookmark job AJAX request.
+     *
+     **/
+    public function bookmark() {
+        $uid = $this->session->userdata('uid');
+        if (empty($uid)) {
+            $result['status'] = 'login';
+            echo json_encode($result);
+            exit;
+        }
+        if (!empty($_POST['id']) && !empty($uid)) {
+            // do bookmark
+            $this->load->model('job_model');
+            $result['status'] = $this->job_model->bookmarkJob($_POST['id'], $uid);
+
+            $result['status'] = $result['status'] ? 'success' : 'failed.';
+
+            echo json_encode($result);
+        }
+
+    }
+
+    /**
      * delete job
      */
     public function deletebookmarkinfo() {

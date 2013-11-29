@@ -91,11 +91,11 @@ class job_model extends MY_Model
     }
 
     public function searchBookmarkedJob($where) {
-        $sql = "SELECT *,job.id as id, job.city as city,jl.language as language,
+        $sql = "SELECT *,jb.job_id as id, job.city as city,jl.language as language,
               job.employment_length as employment_length, job.employment_type employment_type,
               c.name as company_name
-        		FROM job
-        		LEFT JOIN job_bookmark as jb on job.company_id=jb.job_id LEFT JOIN job_language_level as jl on job.id=jl.job_id
+        		FROM job_bookmark as jb
+        		LEFT JOIN job on job.id=jb.job_id LEFT JOIN job_language_level as jl on job.id=jl.job_id
         		LEFT JOIN job_industry_position as jip on job.id=jip.job_id
         		LEFT JOIN company c on job.company_id=c.company_id".$where;
 
@@ -143,6 +143,16 @@ class job_model extends MY_Model
     public function delJobLang($job_id) {
     	$this->table = 'job_language_level';
     	return $this->delete($job_id, 'job_id');
+    }
+
+    public function bookmarkJob($job_id, $uid) {
+        $sql = "REPLACE INTO job_bookmark values($uid, $job_id)";
+        return $this->db->query($sql);
+    }
+
+    public function getBookmarkedJobByUser($uid) {
+        $sql = "SELECT * FROM job_bookmark WHERE user_id = $uid";
+        return $this->db->query($sql)->result_array();
     }
 
     public function deleteBookmarkedJob($job_id, $uid) {

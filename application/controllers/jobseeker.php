@@ -163,6 +163,12 @@ class jobseeker extends Front_Controller {
     $this->load->view($data['front_theme']."/jobseeker-myprofile",$data);
 }
     public function savedBookmarks(){
+        $uid = $this->session->userdata('uid');
+        if (!$uid)
+        {
+            redirect('/');
+        }
+
         $this->load->model('jobseeker_model');
 
         $data = $this->data;
@@ -242,9 +248,9 @@ class jobseeker extends Front_Controller {
             }
         }
 
+        $this->load->model('job_model');
         if($filter_type == 'jobs') {
             // get jobs according to the search
-            $this->load->model('job_model');
             $jobs = $this->job_model->searchBookmarkedJob($where);
 
             foreach($jobs as $key=>$v) {
@@ -254,6 +260,9 @@ class jobseeker extends Front_Controller {
             // get jobs according to the search
             $this->load->model('company_model');
             $companies = $this->company_model->searchBookmarkedCompany($where);
+            foreach($companies as $key=>$v) {
+                $companies[$key]['jobs'] = $this->job_model->getCompanyJobList($v['company_id']);
+            }
         }
 
         $data['jobs'] = $jobs;

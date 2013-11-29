@@ -184,6 +184,8 @@ $(function(){
     var popDeleteJob = $('.pop-delete-job'),
     popDeleteCom = $('.pop-delete-company');
 
+    var popBookmark = $('.pop-bookmark');
+
     //Pop apply
     var rowObj;
     $('.job-btn-submit').bind('click',function apply(e) {
@@ -209,6 +211,7 @@ $(function(){
         popApply.fadeOut();
         popDeleteJob.fadeOut();
         popDeleteCom.fadeOut();
+        popBookmark.fadeOut();
     });
 
     $('.signup-pop-apply-close').click(function(){
@@ -251,9 +254,11 @@ $(function(){
         popMark.fadeOut();
         popDeleteJob.fadeOut();
         popDeleteCom.fadeOut();
+        popDeleteCom.fadeOut();
+        popBookmark.fadeOut();
     });
 
-    // Delete bookmar job PopUp
+    // Delete bookmark job PopUp
     $('.delete_job_btn').bind('click',function apply(e) {
         popMark.fadeIn();
         popDeleteJob.fadeIn();
@@ -271,6 +276,7 @@ $(function(){
         $.post(site_url + 'job/deletebookmarkinfo', {id: job_id, type: 'job'},
             function(result,status) {
                 if (status=='success') {
+                    $('#jobdiv'+job_id).css('display', 'none');
                     alert('Delete successful!');
                 } else if (status =='login') {
                     alert('Please Login to delete this job.');
@@ -298,9 +304,41 @@ $(function(){
         $.post(site_url + 'job/deletebookmarkinfo', {id: com_id, type: 'company'},
             function(result,status) {
                 if (status=='success') {
+                    $('#jobdiv'+com_id).css('display', 'none');
                     alert('Delete successful!');
                 } else if (status =='login') {
                     alert('Please Login to delete this job.');
+                } else {
+                    alert(status);
+                }
+            });
+    });
+
+    // bookmark job PopUp
+    $('.job-btn-mark').bind('click',function apply(e) {
+        popMark.fadeIn();
+        popBookmark.fadeIn();
+        var id = $(this).attr('data-job-id');
+        $('#selected_job_id').val(id);
+    });
+
+    $('.job-btn-marked').bind('click',bookmarked);
+
+    //click bookmark job 'Yes'
+    $('.pop-bookmark-yes').click(function(){
+        popBookmark.fadeOut();
+        popMark.fadeOut();
+
+        var job_id = $('#selected_job_id').val();
+        // Delete JOB
+        $.post(site_url + 'job/bookmark', {id: job_id, type: 'job'},
+            function(result,status) {
+                if (status=='success') {
+                    $('#job-mark'+job_id).removeClass('job-btn-mark');
+                    $('#job-mark'+job_id).addClass('job-btn-marked');
+                    alert('Bookmark successful!');
+                } else if (status =='login') {
+                    alert('Please Login to bookmark this job.');
                 } else {
                     alert(status);
                 }
@@ -321,4 +359,8 @@ function submitted(e){
     return false;
     e.stopPropagation();
     e.preventDefault();
+}
+function bookmarked() {
+    alert('You have already bookmarked this job.')
+    return false;
 }

@@ -112,6 +112,18 @@ class search extends Front_Controller {
             array_push($apply, $a_job['job_id']);
         }
         $data['apply'] = $apply;
+
+        // get bookmarked jobs
+        if ($this->session->userdata('uid')) {
+            $bookmarked_job = $this->job_model->getBookmarkedJobByUser($this->session->userdata('uid'));
+        } else {
+            $bookmarked_job = array();
+        }
+        $bookmark = array();
+        foreach ($bookmarked_job as $a_job) {
+            array_push($bookmark, $a_job['job_id']);
+        }
+        $data['bookmark'] = $bookmark;
         
         // Filter employment_type
         if(!empty($post['employment_type'])) {

@@ -232,7 +232,10 @@
                 <p><?php echo $job["city"]; ?></p>
                 <a href="javascript:void(0);" class="job-viewmore">View More</a> </div>
             <div class="span3">
-                <div class="zoom"> <a href="#" class="job-btn job-btn-mark" style="display:none"></a> <a href="#" class="job-btn job-btn-marked"></a> <a href="#" class="job-btn job-btn-featured"  style="display:none"></a> <a href="#" class="job-btn job-btn-match">99%</a> </div>
+                <div class="zoom">
+                    <a href="javascript:void(0);" id="job-mark<?php echo $job['id']; ?>" class="job-btn <?php if (isset($job['id']) && in_array($job['id'], $bookmark)) echo "job-btn-marked"; else echo "job-btn-mark"; ?>" data-job-id="<?php echo $job['id']; ?>"></a>
+                    <a href="#" class="job-btn job-btn-featured"  style="display:none"></a>
+                    <a href="#" class="job-btn job-btn-match">99%</a> </div>
                 <div><a href="javascript:void(0);" class="<?php if (isset($job['id']) && in_array($job['id'], $apply)) echo "job-btn-submitted"; else echo "job-btn-submit"; ?>" data-job-id="<?php echo $job['id']; ?>" data-job-email="<?php echo $job["username"]; ?>"></a></div>
             </div>
         </div>
@@ -338,6 +341,33 @@
         <div class="pop-close signup-pop-apply-close abs"></div>
         <div class="pop-nav signup-pop-apply-nav">
             <p>Please register as a jobseeker to apply for jobs.</p>
+        </div>
+        <div class="pop-bar">
+            <button href="javascript:void(0);" class="signup-pop-btn"></button>
+        </div>
+    </div>
+</div>
+
+<!--pop bookmark job box-->
+<div class="box pop-box pop-bookmark">
+    <div class="rel">
+        <div class="pop-close pop-apply-close"></div>
+        <div class="pop-nav pop-apply-nav">
+            <p>Are you sure you want to bookmark this job?</p>
+        </div>
+        <div class="pop-bar">
+            <input type="hidden" id="selected_job_id" />
+            <a href="javascript:void(0);" class="pop-bar-btn pop-bookmark-yes">Yes</a>
+            <a href="javascript:void(0);" class="pop-bar-btn pop-btn-no">No</a>
+        </div>
+    </div>
+</div>
+
+<div class="signup-pop-bookmark">
+    <div class="rel">
+        <div class="pop-close signup-pop-apply-close abs"></div>
+        <div class="pop-nav signup-pop-apply-nav">
+            <p>Please register as a jobseeker to bookmark jobs.</p>
         </div>
         <div class="pop-bar">
             <button href="javascript:void(0);" class="signup-pop-btn"></button>
