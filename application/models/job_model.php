@@ -78,10 +78,26 @@ class job_model extends MY_Model
     }
 
     public function searchJob($where) {
-        $sql = "SELECT *,job.id as id, job.city as city,jl.language as language,job.employment_length as employment_length, job.employment_type employment_type
+        $sql = "SELECT *,job.id as id, job.city as city,jl.language as language,
+              job.employment_length as employment_length, job.employment_type employment_type,
+              c.name as company_name
         		FROM job 
         		LEFT JOIN user as u on job.company_id=u.uid LEFT JOIN job_language_level as jl on job.id=jl.job_id
-        		LEFT JOIN job_industry_position as jip on job.id=jip.job_id".$where;
+        		LEFT JOIN job_industry_position as jip on job.id=jip.job_id
+        		LEFT JOIN company c on job.company_id=c.company_id".$where;
+
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
+
+    public function searchBookmarkedJob($where) {
+        $sql = "SELECT *,jb.job_id as id, job.city as city,jl.language as language,
+              job.employment_length as employment_length, job.employment_type employment_type,
+              c.name as company_name
+        		FROM job_bookmark as jb
+        		LEFT JOIN job on job.id=jb.job_id LEFT JOIN job_language_level as jl on job.id=jl.job_id
+        		LEFT JOIN job_industry_position as jip on job.id=jip.job_id
+        		LEFT JOIN company c on job.company_id=c.company_id".$where;
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
@@ -128,5 +144,19 @@ class job_model extends MY_Model
     	$this->table = 'job_language_level';
     	return $this->delete($job_id, 'job_id');
     }
-    
+
+    public function bookmarkJob($job_id, $uid) {
+        $sql = "REPLACE INTO job_bookmark values($uid, $job_id)";
+        return $this->db->query($sql);
+    }
+
+    public function getBookmarkedJobByUser($uid) {
+        $sql = "SELECT * FROM job_bookmark WHERE user_id = $uid";
+        return $this->db->query($sql)->result_array();
+    }
+
+    public function deleteBookmarkedJob($job_id, $uid) {
+        $sql = "DELETE FROM job_bookmark WHERE user_id=$uid and job_id=$job_id";
+        return $this->db->query($sql);
+    }
 }

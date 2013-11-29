@@ -102,5 +102,27 @@ class company_model extends MY_Model
 		
 	}
 	
-	
+	public function searchCompany($where) {
+        $sql = "SELECT com.company_id, description,name,city
+        		FROM company as com
+        		LEFT JOIN company_industry as ci on ci.company_id=com.company_id".$where;
+
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
+
+    public function searchBookmarkedCompany($where) {
+        $sql = "SELECT com.company_id, description,name,city
+        		FROM company as com
+        		LEFT JOIN company_industry as ci on ci.company_id=com.company_id
+        		LEFT JOIN company_bookmark as cb on cb.company_id=com.company_id".$where;
+
+        $rtn = $this->db->query($sql)->result_array();
+        return $rtn;
+    }
+
+    public function deleteBookmarkedCompany($id, $uid) {
+        $sql = "DELETE FROM company_bookmark WHERE user_id=$uid and company_id=$id";
+        return $this->db->query($sql);
+    }
 }

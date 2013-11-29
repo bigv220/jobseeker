@@ -35,11 +35,13 @@
 <div class="result-page w770 clearfix" style="margin-top:20px;">
 <!--search-result condition-->
 <div class="result-condition rel box"> <b>Filter Bookmarks</b>
-    <div class="sresult-tab-hd">
-        <span class="fxui-tab-tit">Jobs</span>
-        <span class="fxui-tab-tit">Companies</span>
+    <div class="sresult-tab-hd filter_type_tab">
+        <span class="fxui-tab-tit curr" title="jobs" onclick="changeFilterType(this);">Jobs</span>
+        <span class="fxui-tab-tit" title="companies" onclick="changeFilterType(this);">Companies</span>
     </div>
     <div class="sresult-tab-bd zoom">
+        <form action="<?php echo $site_url; ?>jobseeker/savedBookmarks" method="post" id="jobsForm">
+            <input type="hidden" name="filter_type" value="jobs" />
         <div class="fxui-tab-nav">
             <dl class="search-row">
                 <dt class="search-row-tit">Key Words</dt>
@@ -48,15 +50,45 @@
                 </dd>
             </dl>
             <dl class="search-row">
+                <dt class="search-row-tit">Country</dt>
+                <dd class="search-row-nav">
+                    <select name="country" class="filter_key">
+                        <option value="">All Countries</option>
+                        <?php foreach ($location as $k=>$v):?>
+                        <?php if ($k == $_POST['country']): ?>
+                            <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                            <?php else: ?>
+                            <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                            <?php endif; ?>
+                        <?php endforeach;?>
+                    </select>
+                </dd>
+            </dl>
+            <dl class="search-row">
+                <dt class="search-row-tit">Province</dt>
+                <dd class="search-row-nav">
+                    <select name="province" class="filter_key">
+                        <option value="">All Province</option>
+                        <?php foreach ($location['China'] as $k=>$v):?>
+                        <?php if ($k == $_POST['province']): ?>
+                            <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                            <?php else: ?>
+                            <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                            <?php endif; ?>
+                        <?php endforeach;?>
+                    </select>
+                </dd>
+            </dl>
+            <dl class="search-row">
                 <dt class="search-row-tit">City</dt>
                 <dd class="search-row-nav">
                     <select name="city" class="filter_key">
                         <?php if (empty($_POST['city'])): ?>
-                            <option value="">All Cities</option>
-                            <option value="Beijing">Beijing</option>
+                        <option value="">All Cities</option>
+                        <option value="Beijing">Beijing</option>
                         <?php else: ?>
-                            <option value="<?php echo $_POST['city']; ?>"><?php echo $_POST['city']; ?></option>
-                            <option value="">All Cities</option>
+                        <option value="<?php echo $_POST['city']; ?>"><?php echo $_POST['city']; ?></option>
+                        <option value="">All Cities</option>
                         <?php endif; ?>
                     </select>
                 </dd>
@@ -76,6 +108,10 @@
                 </dd>
             </dl>
         </div>
+        </form>
+
+        <form action="<?php echo $site_url; ?>jobseeker/savedBookmarks" method="post" id="companiesForm">
+            <input type="hidden" name="filter_type" value="companies" />
         <div class="fxui-tab-nav">
             <dl class="search-row">
                 <dt class="search-row-tit">Key Words</dt>
@@ -84,15 +120,45 @@
                 </dd>
             </dl>
             <dl class="search-row">
+                <dt class="search-row-tit">Country</dt>
+                <dd class="search-row-nav">
+                    <select name="country" class="filter_key">
+                        <option value="">All Countries</option>
+                        <?php foreach ($location as $k=>$v):?>
+                        <?php if ($k == $_POST['country']): ?>
+                            <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                            <?php else: ?>
+                            <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                            <?php endif; ?>
+                        <?php endforeach;?>
+                    </select>
+                </dd>
+            </dl>
+            <dl class="search-row">
+                <dt class="search-row-tit">Province</dt>
+                <dd class="search-row-nav">
+                    <select name="province" class="filter_key">
+                        <option value="">All Province</option>
+                        <?php foreach ($location['China'] as $k=>$v):?>
+                        <?php if ($k == $_POST['province']): ?>
+                            <option value="<?php echo $k ?>" selected><?php echo $k ?></option>
+                            <?php else: ?>
+                            <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                            <?php endif; ?>
+                        <?php endforeach;?>
+                    </select>
+                </dd>
+            </dl>
+            <dl class="search-row">
                 <dt class="search-row-tit">City</dt>
                 <dd class="search-row-nav">
                     <select name="city" class="filter_key">
                         <?php if (empty($_POST['city'])): ?>
-                            <option value="">All Cities</option>
-                            <option value="Beijing">Beijing</option>
+                        <option value="">All Cities</option>
+                        <option value="Beijing">Beijing</option>
                         <?php else: ?>
-                            <option value="<?php echo $_POST['city']; ?>"><?php echo $_POST['city']; ?></option>
-                            <option value="">All Cities</option>
+                        <option value="<?php echo $_POST['city']; ?>"><?php echo $_POST['city']; ?></option>
+                        <option value="">All Cities</option>
                         <?php endif; ?>
                     </select>
                 </dd>
@@ -112,32 +178,38 @@
                 </dd>
             </dl>
         </div>
+        </form>
     </div>
 
     <div class="result-condition-btnwrap">
-        <input type="submit" class="search_btn" value=""/>
+        <input type="hidden" name="filter_type_str" id="filter_type_str" value="jobs" />
+        <input type="button" class="search_btn" onclick="submitFilterBookmarkForm()"/>
     </div>
 </div>
 
 <!--search-result body-->
 <div class="result-bd">
     <!-- THIS ROW IS FOR JOBS SAVED IN BOOKMARKS -->
-<div class="box rel sresult-row">
+    <?php if (count($jobs)>0): ?>
+    <?php foreach($jobs as $job): ?>
+<div class="box rel sresult-row" id="jobdiv<?php echo $job['id']; ?>">
     <div class="sresult-par1">
         <div class="span1 rel">
             <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="85px" height="85px" class="round_img"/>
         </div>
         <div class="span2">
-            <h2>Job Title Here</h2>
-            <h3>Company Name</h3>
-            <p>Shanghai</p>
+            <h2><?php echo $job["job_name"]; ?></h2>
+            <h3><?php echo $job['company_name']; ?></h3>
+            <p><?php echo $job["city"]; ?></p>
             <a href="#" class="job-viewmore">View More</a> </div>
         <div class="span3 text_align_right">
             <div class="zoom">
-                <a href="#" class="square_btn delete_job_btn"></a>
+                <a href="javascript:void(0);" data-job-id="<?php echo $job['id']; ?>" class="square_btn delete_job_btn"></a>
                 <a href="#" class="square_btn match_percentage_btn">99%</a>
             </div>
-            <div><a href="#" class="job-btn-submit"></a></div>
+            <div>
+                <a data-job-email="<?php echo $userinfo['email']; ?>" data-job-id="<?php echo $job['id']; ?>" class="job-btn-submit" href="javascript:void(0);" style="display: none;"></a>
+            </div>
         </div>
     </div>
     <div class="sresult-par2">
@@ -149,40 +221,51 @@
             <div class="fxui-tab-nav sresult-nav-job">
                 <div class="sresult-nav-job-left">
                     <div class="text">
-                        <p>We have an exciting opportunity for a full time Graphic Designer to join our creative team.
-                            We are a leading creative, events and media agency with offices in Beijing, London and Qingdao.</p>
-                        <p>We create and distribute amazing work for a variety of retailers and clients. You will be working on great brands such as Baccarat, Arcosteel, Alex Liddy and Marie Claire.</p>
-                        <p>We offer the opportunity to work with a great team on exciting, creative and challenging designs.</p>
-                        <p>Reporting to the marketing manager, you will be assisting on projects ranging from packaging, catalogues, theme and design concepts, product development, decals and surface decorations applied to a range of home products, flyers, ads, signage, posters, for a variety of brands and various brand style applications.</p>
+                        <p><?php echo $job['job_desc'];?></p>
                     </div>
                     <dl class="sresult-nav-job-dl">
                         <dt>Preferred Years of Experience</dt>
-                        <dd>1 to 3 years</dd>
+                        <dd><?php echo getExperienceByID($job["preferred_year_of_experience"]); ?></dd>
                         <dt>Preferred Personal Skills</dt>
-                        <dd>Time Managment, Public Speaking, Networking, Leadership</dd>
+                        <dd><?php echo $job["preferred_personal_skills"]; ?></dd>
                         <dt>Preferred Technical Skills</dt>
-                        <dd>Branding, Adobe Creative Suite, Printing, Critical Thinking</dd>
+                        <dd><?php echo $job["preferred_technical_skills"]; ?></dd>
                         <dt>Language(s) Required</dt>
-                        <dd> <span class="required"> <b>English</b> <i>Fluent</i> </span> <span class="required"> <b>French</b> <i>Fluent</i> </span> <span class="required"> <b>German</b> <i>Fluent</i> </span> </dd>
+                        <dd> <span class="required">
+                            <b><?php echo getLanguageByID($job["language"]); ?></b>
+                            <i><?php echo getLanguageLevelByID($job["level"]); ?></i>
+                            </span>
+                        </dd>
                     </dl>
                 </div>
                 <div class="sresult-nav-job-right">
                     <dl class="sresult-nav-job-dl">
                         <dt>Location</dt>
                         <dd>
-                            <div><img src="style/search/map.gif" alt="" width="151" height="83" />Lee World, Room 301,
-                                Chayong District, Beijing</div>
+                            <input type="hidden" id="address" value="<?php echo $job['location']; ?>" />
+                            <strong><a href="<?php echo $site_url?>job/jobDetails/<?php echo $job['id'];?>">
+                                <?php echo $job['location']; ?></a>
+                            </strong>
                         </dd>
                         <dt>Salary</dt>
-                        <dd>10,000 CNY – 15,000 CNY</dd>
+                        <dd><?php echo getSalaryByID($job["salary_range"]); ?></dd>
                         <dt>Industry</dt>
                         <dd class="industry">
-                            <div> <a href="#">Graphic Design</a> <a href="#">Media</a> <a href="#">Publishing</a> <a href="#">Marketing</a> </div>
+                            <div>
+                                <?php
+                                for($i=0; $i<count($job['industry_arr']); $i++) {
+                                    echo '<a href="#">'.$job['industry_arr'][$i]['industry']."</a> ";
+                                }
+                                ?>
+                            </div>
                             <ul class="industry-ul">
-                                <li class="n1"><b>Type of Employment</b><span>Full Time</span></li>
-                                <li class="n2"><b>Length of Employment</b><span>Long Term (1+ year)</span></li>
-                                <li class="n3"><b>Visa Assistance</b><span>Visa will be provided</span></li>
-                                <li class="n4"><b>Housing Assistance</b><span>Accomodation will be provided</span></li>
+                                <li class="n1"><b>Type of Employment</b>
+                                    <span><?php if($job['employment_type']) {if(is_numeric($job['employment_type'])) echo getJobtypeByID($job['employment_type']); else echo $job['employment_type']; }?></span>
+                                </li>
+                                <li class="n2"><b>Length of Employment</b>
+                                    <span><?php if($job['employment_length']) echo getEmploymentLengthByID($job['employment_length']);?></span>
+                                </li>
+
                             </ul>
                         </dd>
                         <dt>Share This Job</dt>
@@ -205,19 +288,24 @@
         </div>
     </div>
 </div>
+    <?php endforeach; ?>
+    <?php endif;?>
+
+<?php if (count($companies)>0): ?>
+    <?php foreach($companies as $com): ?>
 <!-- THIS ROW IS FOR COMPANY SAVED IN BOOKMARKS -->
 <div class="box rel sresult-row">
-    <div class="sresult-par1">
+    <div class="sresult-par1" id="companydiv<?php echo $com['company_id']; ?>">
         <div class="span1 rel">
             <img src="<?php echo $theme_path;?>/style/search/job-img1.gif" alt="" width="85px" height="85px" class="round_img"/>
         </div>
         <div class="span2">
-            <h2>Company Name</h2>
-            <h3>Location</h3>
+            <h2><?php echo $com['name']; ?></h2>
+            <h3><?php echo $com['city']; ?></h3>
             <a href="#" class="job-viewmore">View More</a> </div>
         <div class="span3 text_align_right">
             <div class="zoom">
-                <a href="#" class="square_btn delete_company_btn"></a>
+                <a href="javascript:void(0);" data-company-id="<?php echo $com['company_id']; ?>" class="square_btn delete_company_btn"></a>
             </div>
         </div>
     </div>
@@ -227,39 +315,118 @@
             <span class="fxui-tab-tit">Jobs</span> </div>
         <div class="sresult-tab-bd zoom">
             <div class="fxui-tab-nav ">
-                <div class="text">Founded in 2003, REDSTAR Media is a fully integrated creative agency with offices in Beijing,
-                    Qingdao and London specialising in graphic design, publishing and events management.
-                    Creativity is the heart and soul of our organisation, with over 50% of the team
-                    involved in the creative process. We believe that new ideas and their thoughtful
-                    implementation moves the world forward. The REDSTAR team offers a wealth of client
-                    experience and creative direction via a culture of personable, involved services
-                    and out-of-the-box thinking.
+                <div class="text">
+                    <?php echo $com['description']; ?>
                     <a href="#" class="orange_link">View Company Profile</a>
                 </div>
 
             </div>
             <div class="fxui-tab-nav sresult-nav-job">
                 <ul class="recent_applied_jobs">
-                    <li><a href="#">Admin Assistant</a></li>
-                    <li><a href="#">UI Designer</a></li>
-                    <li><a href="#">Project Manager</a></li>
-                    <li><a href="#">UI Designer</a></li>
-                    <li><a href="#">Admin Assistant</a></li>
-                    <li><a href="#">UI Designer</a></li>
-                    <li><a href="#">Project Manager</a></li>
-                    <li><a href="#">UI Designer</a></li>
+                    <?php foreach($com['jobs'] as $v): ?>
+                    <li><a href="<?php echo $site_url; ?>job/jobDetails/<?php echo $v['id']; ?>">
+                        <?php echo $v['job_name']; ?></a>
+                    </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+        <?php endforeach; ?>
+    <?php endif;?>
+
+<?php if(count($jobs) == 0 && count($companies) == 0) : ?>
+    <div class="sresult-par1">
+        <div class="box rel sresult-row id-4">
+            <div class="noresult">
+                Sorry, no matches were found, <br/>please alter your search and try again.
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
 
 </div>
 <!--backtop-->
 <div class="backtop png" style="right:200px;"></div>
 </div>
 
+<!--popmark-->
+<div class="pop-mark"></div>
+
+<!--pop box-->
+<div class="box pop-box pop-apply">
+    <div class="rel">
+        <div class="pop-close pop-apply-close"></div>
+        <div class="pop-nav pop-apply-nav">
+            <p>Are you sure you want to apply for this job?</p>
+        </div>
+        <div class="pop-bar">
+            <a href="javascript:void(0);" class="pop-bar-btn pop-btn-yes">Yes</a> <a href="javascript:void(0);" class="pop-bar-btn pop-btn-no">No</a>
+        </div>
+    </div>
+</div>
+
+<div class="signup-pop-apply">
+    <div class="rel">
+        <div class="pop-close signup-pop-apply-close abs"></div>
+        <div class="pop-nav signup-pop-apply-nav">
+            <p>Please register as a jobseeker to apply for jobs.</p>
+        </div>
+        <div class="pop-bar">
+            <button href="javascript:void(0);" class="signup-pop-btn"></button>
+        </div>
+    </div>
+</div>
+
+<!-- Delete bookmark job popup -->
+<div class="box pop-box pop-delete-job">
+    <div class="rel">
+        <div class="pop-close pop-apply-close"></div>
+        <div class="pop-nav pop-apply-nav">
+            <p>Are you sure you want to delete this job?</p>
+        </div>
+        <div class="pop-bar">
+            <input type="hidden" id="selected_job_id" />
+            <a href="javascript:void(0);" class="pop-bar-btn pop-delete-job-yes">Yes</a>
+            <a href="javascript:void(0);" class="pop-bar-btn pop-btn-no">No</a>
+        </div>
+    </div>
+</div>
+
+<!-- Delete bookmark company popup -->
+<div class="box pop-box pop-delete-company">
+    <div class="rel">
+        <div class="pop-close pop-apply-close"></div>
+        <div class="pop-nav pop-apply-nav">
+            <p>Are you sure you want to delete this company?</p>
+        </div>
+        <div class="pop-bar">
+            <input type="hidden" id="selected_company_id" />
+            <a href="javascript:void(0);" class="pop-bar-btn pop-delete-company-yes">Yes</a>
+            <a href="javascript:void(0);" class="pop-bar-btn pop-btn-no">No</a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function() {
+        var filter_type = '<?php echo $filter_type; ?>';
+
+        $(".filter_type_tab .fxui-tab-tit").each(function(){
+            if($(this).attr('title') == filter_type) {
+                $(this).addClass('curr');
+            } else {
+                $(this).removeClass('curr');
+            }
+        });
+
+        $('#filter_type_str').val(filter_type);
+    }
+</script>
+
 <!-- Partners -->
 <?php $this->load->view($front_theme.'/partners-block');?>
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/advsearch.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

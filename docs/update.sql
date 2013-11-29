@@ -199,3 +199,16 @@ ALTER TABLE `user` modify column availability varchar(50);
 #2013-11-18
 ALTER TABLE `user_work_history` modify column period_time_from char(10);
 ALTER TABLE `user_work_history` modify column period_time_to char(10);
+
+#2013-11-28
+CREATE TABLE `job_bookmark` (
+  `user_id` int(11) NOT NULL,
+  `job_id` int(11) NOT NULL,
+  PRIMARY KEY  (`user_id`,`job_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `company_bookmark` (
+  `user_id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  PRIMARY KEY  (`user_id`,`company_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
