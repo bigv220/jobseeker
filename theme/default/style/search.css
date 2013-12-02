@@ -14,6 +14,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .search-row-tip{color:#ea6e3b;font-size:11px;padding:5px 0 5px 0;}
 .result-condition-btnwrap{text-align:right;padding:0 10px 5px 0;}
 .condition-btn{width:128px;height:25px;line-height:25px;display:inline-block;text-align:center;vertical-align:top;border:0;cursor:pointer;background:url(search/button.png) no-repeat;}
+.find-staff-btn{width:128px;height:25px;line-height:25px;display:inline-block;text-align:center;vertical-align:top;border:0;cursor:pointer;background:url(search/find-staff.png) no-repeat;}
 .result-bd{width:500px;float:right;*display:inline;}
 .result-bd .noresult { height: 78px;padding-top: 22px;text-align: center;font-size:18px;color:#674092;font-weight: bold;}
 .sresult-row{margin-bottom:20px;}
