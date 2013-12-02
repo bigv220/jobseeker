@@ -103,7 +103,7 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .pop-message{display:none;z-index:102;width:494px;height:233px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(home/pop-msg-bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
 .pop-message-wrap{padding:10px;}
 .pop-message b{display:block;font-weight:bold;padding:25px 0px 15px 0px;color:#f17343;font-size:24px;text-align:center;}
-.pop-message-close{width:20px;height:20px;right:0px;cursor:pointer;display:block;}
+.pop-message-close{width:20px;height:20px;right:0px;top:-1px;cursor:pointer;display:block;}
 .pop-message-bd{overflow:hidden;zoom:1;width:400px;margin:0 auto;text-align: center;}
 .pop-message-bd .message_title{color:#674092;font-size:16px;font-weight:bold;}
 .pop-message-bd .message_content{color:#674092;font-size:13px;width:330px;margin:0 auto;margin-top:10px;}
@@ -268,4 +268,30 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .jingchat_log_content .jingchat_wrapper{height:509px;width:476px;}
 .jingchat_log_content .jingchat_messages{height:431px;overflow-y: scroll;}
 .jingchat_log_content .jingchat_wrapper{margin-top: 0;}
+.profile_portfolios_wrapper{margin-top:15px;width:470px;}
+.portfolio_row{margin-top:15px;}
+.portfolio_item{float:left;width:134px;height:80px;position:relative;}
+.portfolio_item img{width:134px;height:80px;}
+.portfolio_item .portfolio_caption{position:absolute;bottom:0;width:100%;color:#ffffff;background-color:#723f8a;filter:alpha(opacity=90);-moz-opacity:0.9;opacity:0.9;}
+.portfolio_item .portfolio_caption span{padding-left: 5px;}
 
+.als-container {position: relative; width: 100%; margin: 0px auto;z-index: 0;}
+.als-viewport {position: relative;overflow: hidden;margin: 0px auto;}
+.als-wrapper {position: relative;}
+.als-item {position: relative;display: block;text-align: center;cursor: pointer;float: left;}
+.als-prev, .als-next {position: absolute;cursor: pointer;clear: both;}
+.als-prev{top:80px;left:-3px;}
+.als-next{top:80px;right:2px;}
+
+.view_portfolio_pop{display:none;z-index:102;width:787px;height:663px;position:absolute;top:70%;left:20%;background:url(portfolio/edit_portfolio_popup_bg.png);}
+.view_portfolio_pop_wrap{padding:10px 20px;}
+.view_portfolio_pop_close{width:20px;height:20px;right:3px;top:0px;cursor:pointer;}
+.view_portfolio_body{position:relative;}
+.view_portfolio_content .content_text{padding:10px 20px;background-color:#FFFFFF;overflow-y:scroll;margin-top:10px;border:3px solid #e5e5e5;height:400px;}
+.view_portfolio_content .content_audio{padding:10px 20px;background-color:#FFFFFF;overflow:hidden;margin-top:10px;height:400px;}
+.view_portfolio_content .font_zoom_bar{position:absolute;top:385px;left:300px;height:40px;width:103px;background:url(portfolio/font_zoom_bar_bg.png) no-repeat;}
+.view_portfolio_content .font_zoom_bar img{margin-left:14px;margin-top:5px;cursor:pointer;}
+.view_portfolio_content .font_zoom_bar img.zoom_out{margin-left:24px;margin-top:10px;}
+.view_portfolio_navigator{padding-top:18px;text-align: center;}
+.view_portfolio_navigator img{vertical-align:middle;cursor:pointer; margin-left:10px;}
+.view_portfolio_navigator img.current{border:3px solid #674092;}
