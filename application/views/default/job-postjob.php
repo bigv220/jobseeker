@@ -206,7 +206,7 @@
 
                 </div>
                 <div class="postjob-content-left-row clearfix">
-                    <div class="span1">
+                    <div class="span1" style="margin-top:19px;">
                         <strong>Salary *</strong>
                         <div>
                             <select name="salary_range">

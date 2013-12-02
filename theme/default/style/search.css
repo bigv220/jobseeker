@@ -99,4 +99,4 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .pop-apply-nav p{text-align:center;font-weight:700;font-size:14px;padding:0 30px;}
 #find_a_job_wrapper .advsearch-row .long_input, #find_a_job_wrapper .advsearch-row .long_input input, #find_a_job_wrapper .advsearch-row .long_input select{width:350px;}
 #find_staff_wrapper  .advsearch-row .long_input, #find_staff_wrapper .advsearch-row .long_input input, #find_staff_wrapper .advsearch-row .long_input select{width:350px;}
-.jobseeker_profile_language label{font-weight: bold;margin-right:15px;}
+.jobseeker_profile_language label{font-weight: bold;margin-right:15px;width: 120px; display: inline-block;color:#ea6e3b;}

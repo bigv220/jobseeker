@@ -279,10 +279,11 @@
                 <dd>
                     <?php $languages = $staff['languages'];
                     for($i=0; $i<count($languages); $i++) { ?>
-                        <span class="required">
-                            <b><?php echo $languages[$i]["language"]; ?></b>
+                        <div class="jobseeker_profile_language">
+                            <label><?php echo $languages[$i]["language"]; ?></label>
                             <i><?php echo $languages[$i]["level"]; ?></i>
-                        </span>
+                        </div>
+
                     <?php }?>
                 </dd>
               </dl>

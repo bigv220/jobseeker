@@ -256,7 +256,10 @@
                             <dd><?php echo $job["preferred_technical_skills"]; ?></dd>
                             <dt>Language(s) Required</dt>
                             <dd>
-                            	<span class="required"><b><?php echo getLanguageByID($job["language"]); ?></b> <i><?php echo getLanguageLevelByID($job["level"]); ?></i> </span>
+                                <div class="jobseeker_profile_language">
+                                    <label><?php echo getLanguageByID($job["language"]);?></label>
+                                    <i><?php echo getLanguageLevelByID($job["level"]);?></i>
+                                </div>
                             </dd>
                         </dl>
                     </div>

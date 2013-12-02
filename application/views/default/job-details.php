@@ -46,10 +46,11 @@
                         <?php if(count($job_languages)>0) {
                             foreach($job_languages as $v):
                         ?>
-                    	<span class="required">
-                            <b><?php echo getLanguageByID($v["language"]); ?></b>
-                            <i><?php echo getLanguageLevelByID($v["level"]); ?></i>
-                        </span>
+                                <div class="jobseeker_profile_language">
+                                    <label><?php echo getLanguageByID($v["language"]); ?></label>
+                                    <i><?php echo getLanguageLevelByID($v["level"]); ?></i>
+                                </div>
+
                         <?php endforeach; } ?>
                     </dd>
                     </dd>

@@ -80,7 +80,10 @@
               <dt>Language(s)</dt>
               <dd>
                   <?php foreach ($language as $la): ?>
-                  <span class="required"> <b><?php echo $la['language'];?></b> <i><?php echo $la['level'];?></i> </span>
+                      <div class="jobseeker_profile_language">
+                          <label><?php echo $la['language'];?></label>
+                          <i><?php echo $la['level'];?></i>
+                      </div>
                   <?php endforeach;?>
               </dd>
           </dl>

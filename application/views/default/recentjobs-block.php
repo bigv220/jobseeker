@@ -4,13 +4,13 @@
 		</div>
 		<div class="h-jobs-bd">
 			<div class="w770">
-			<?php foreach ($recently_jobs as $arr):?>
-				<a class="p-jobs-item rel" href="<?php echo $site_url.'job/jobDetails/'.$arr['id']?>">
-			      	<img src="<?php echo $site_url.'attached/users/'.$arr['profile_pic']?>" width="55px;" />
-			      	<div class="jobtitle abs"><?php echo $arr['job_name']?></div>
-			      	<div class="city abs"><?php echo $arr['city']?></div>
+			<?php for($i=0, $len=count($recently_jobs); $i < $len; $i++):?>
+				<a class="p-jobs-item rel" <?php echo ($i==$len-1?"style='border:none;'":"");?> href="<?php echo $site_url.'job/jobDetails/'.$recently_jobs[$i]['id']?>">
+			      	<img src="<?php echo $site_url.'attached/users/'.$recently_jobs[$i]['profile_pic']?>" width="55px;" />
+			      	<div class="jobtitle abs"><?php echo $recently_jobs[$i]['job_name']?></div>
+			      	<div class="city abs"><?php echo $recently_jobs[$i]['city']?></div>
 		      	</a>
-		    <?php endforeach;?>
+		    <?php endfor;?>
 			</div>
 		</div>		
 	</div>
