@@ -486,15 +486,7 @@ class search extends Front_Controller {
             if(!empty($post["location"])) {
                 array_push($where_arr, 'location=' .$post["location"]);
             }
-            /*if(!empty($post["employment_type"])) {
-                array_push($where_arr, 'employment_type=' . $post["employment_type"]);
-            }
-            if(!empty($post["industry"])) {
-                array_push($where_arr, "industry like '%".$post["industry"]."%'");
-            }
-            if(!empty($post["position"])) {
-                array_push($where_arr, "position like '%".$post["position"]."%'");
-            }*/
+
             if(!empty($post["employment_length"])) {
                 array_push($where_arr, 'employment_length='.$post["employment_length"]);
             }
@@ -505,11 +497,8 @@ class search extends Front_Controller {
             if(!empty($post["language"])) {
                 array_push($where_arr, "language like '%".$post["language"]."%'");
             }
-            
-            // set up user_type=0
-            array_push($where_arr, "user_type = 0");
         }
-        $where = " WHERE is_private=1 ";
+        $where = " WHERE is_private=0 AND user_type = 0 ";
         if(count($where_arr)) {
             $where_str = implode(' AND ', $where_arr);
             $where .= 'AND ' . $where_str;
@@ -535,15 +524,46 @@ class search extends Front_Controller {
             }
         }
 
-        //Load Model
-        $this->load->model('jobseeker_model');
-
         for($i=0; $i<count($jobseekers); $i++) {
+             $personal_arr = $this->jobseeker_model->getPersonalSkills($jobseekers[$i]['uid']);
+            //filter personal skills
+            if(!empty($post["PersonalSkills_str"])) {
+                $post_arr = explode(',', $post["PersonalSkills_str"]);
+
+                $delete_flag = true;
+                foreach ($personal_arr as $v) {
+                    if (in_array($v['personal_skill'] , $post_arr) === TRUE) {
+                        $delete_flag = false;
+                    }
+                }
+                if($delete_flag) {
+                    unset($jobseekers[$i]);
+                    continue;
+                }
+            }
+            $jobseekers[$i]['personal_skills'] = $personal_arr;
+
+            //filter Technical skills
+            $technical_arr = $this->jobseeker_model->getProfessionalSkills($jobseekers[$i]['uid']);
+            if(!empty($post["ProfessionalSkills_str"])) {
+                $post_arr = explode(',', $post["ProfessionalSkills_str"]);
+
+                $delete_flag = true;
+                foreach ($technical_arr as $v) {
+                    if (in_array($v['professional_skill'] , $post_arr) === TRUE) {
+                        $delete_flag = false;
+                    }
+                }
+                if($delete_flag) {
+                    unset($jobseekers[$i]);
+                    continue;
+                }
+            }
+            $jobseekers[$i]['professional_skills'] = $technical_arr;
+
             $jobseekers[$i]['educations'] = $this->jobseeker_model->getAllEducationInfo($jobseekers[$i]['uid']);
             $jobseekers[$i]['work_history'] = $this->jobseeker_model->getAllWorkHistory($jobseekers[$i]['uid']);
             $jobseekers[$i]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($jobseekers[$i]['uid']);
-            $jobseekers[$i]['personal_skills'] = $this->jobseeker_model->getPersonalSkills($jobseekers[$i]['uid']);
-            $jobseekers[$i]['professional_skills'] = $this->jobseeker_model->getProfessionalSkills($jobseekers[$i]['uid']);
             $jobseekers[$i]['languages'] = $this->jobseeker_model->getLanguage($jobseekers[$i]['uid']);
         }
         $data['jobseekers'] = $jobseekers;

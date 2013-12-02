@@ -1,4 +1,9 @@
 <?php $this->load->view($front_theme.'/header-block');?>
+<link href="<?php echo $theme_path?>style/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    input.text { width: 215px;}
+</style>
+<script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -173,9 +178,9 @@
             </div>
         </dl>
         <dl class="search-row ">
-            <dt class="search-row-tit">Professional Skills</dt>
+            <dt class="search-row-tit">Technical Skills</dt>
             <dd class="search-row-nav">
-                <input type="hidden" id="ProfessionalSkills_str" name="PersonalSkills_str" />
+                <input type="hidden" id="ProfessionalSkills_str" name="ProfessionalSkills_str" />
                 <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addSkills('ProfessionalSkills',this); return false;}">
                 <div class="search-row-tip" style="display: none;">Hold down 'Command' to select multiple</div>
             </dd>
@@ -184,7 +189,7 @@
             </div>
         </dl>
         <div class="result-condition-btnwrap">
-            <input type="submit" class="condition-btn" value=""/>
+            <input type="submit" class="find-staff-btn" value=""/>
         </div>
     </div>
 </form>
@@ -241,7 +246,7 @@
             <div class="sresult-tab-bd zoom">
                 <div class="fxui-tab-nav sresult-nav-job sresult_about_me">
                     <div class="sresult-nav-job-left">
-                        <div class="text">
+                        <div class="text_r">
                             <p><?php echo $user['description']; ?></p>
                         </div>
                         <dl class="sresult-nav-job-dl">
@@ -416,4 +421,5 @@
 </div>
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/searchJobPage.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>
