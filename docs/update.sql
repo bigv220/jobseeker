@@ -195,13 +195,10 @@ CREATE TABLE `job_industry_position` (
 
 #2013-11-18
 ALTER TABLE `user` modify column availability varchar(50);
-
-#2013-11-18
 ALTER TABLE `user_work_history` modify column period_time_from char(10);
 ALTER TABLE `user_work_history` modify column period_time_to char(10);
 
 #2013-11-28
-<<<<<<< HEAD
 CREATE TABLE `job_bookmark` (
   `user_id` int(11) NOT NULL,
   `job_id` int(11) NOT NULL,
@@ -212,7 +209,7 @@ CREATE TABLE `company_bookmark` (
   `user_id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
   PRIMARY KEY  (`user_id`,`company_id`)
-=======
+
 CREATE TABLE IF NOT EXISTS `inbox` (
   `id` bigint(20) NOT NULL,
   `seq` int(11) NOT NULL,
@@ -224,7 +221,5 @@ CREATE TABLE IF NOT EXISTS `inbox` (
   `user1read` varchar(3) NOT NULL,
   `user2read` varchar(3) NOT NULL,
   `is_delete` tinyint(4) DEFAULT NULL,
-  `is_offline` tinyint(4) DEFAULT NULL
-  
->>>>>>> 06ec0564d9eb9a744b762190b45d0b94966b8a64
+  `is_offline` tinyint(4) DEFAULT NULL,
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
