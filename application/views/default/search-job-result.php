@@ -140,7 +140,7 @@
             <dt class="search-row-tit">Year of experience</dt>
             <dd class="search-row-nav">
                 <select name="experience_year" class="filter_key">
-                    <option value="">--Select--</option>
+                    <option value="">Any Experience</option>
                     <option value="1">Less than 1 year</option>
                     <option value="2">2 years</option>
                     <option value="3">3 years</option>
@@ -165,7 +165,7 @@
             </dd>
         </dl>
         <dl class="search-row ">
-            <dt class="search-row-tit">Personal Skills</dt>
+            <dt class="search-row-tit">Technical Skills</dt>
             <dd class="search-row-nav">
                 <input type="hidden" id="PersonalSkills_str" name="PersonalSkills_str" />
                 <input type="text" size="24" maxlength="255" autocomplete="on" id="PersonalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addSkills('PersonalSkills',this); return false;}">

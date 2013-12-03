@@ -96,7 +96,7 @@
             $this->load->model('jobseeker_model');
 
             if (empty($work_history['id'])) {
-                $userIndustry = array(array('industry'=>'none','position'=>'none'));
+                $userIndustry = array(array('industry'=>'none','position'=>'All Positions'));
             } else {
                 $userIndustry = $this->jobseeker_model->getUserIndustry($this->session->userdata('uid'), $work_history['id']);
             }

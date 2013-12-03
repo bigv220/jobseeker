@@ -120,7 +120,7 @@
             <dt class="search-row-tit">Length of employment</dt>
             <dd class="search-row-nav">
                 <select name="employment_length" class=" filter_key">
-                    <option value="">--Select--</option>
+                    <option value="">All Length</option>
                     <?php $expl = getEmploymentLength();
                     foreach ($expl as $k => $v) {?>
                         <option value="<?php echo $k+1?>"><?php echo $v?></option>
@@ -144,7 +144,7 @@
             <dt class="search-row-tit">Year of experience</dt>
             <dd class="search-row-nav">
                 <select name="experience_year" class=" filter_key">
-                    <option value="" selected="selected">--Select--</option>
+                    <option value="" selected="selected">All Experience</option>
                     <?php $exp = getExperience();
                     foreach($exp as $v) { ?>
                         <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
