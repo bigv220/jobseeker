@@ -18,7 +18,7 @@
                         <strong>Length of Job *</strong>
                         <div>
                             <select name="employment_length" required>
-                                <option value="">--Select--</option>
+                                <option value="">All Length</option>
                                 <?php $empl = getEmploymentLength();
                                 foreach($empl as $k => $v) { ?>
                                 <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
@@ -51,7 +51,7 @@
                         <strong>Language *</strong>
                         <div>
                             <select name="language[]" required>
-                                <option value="">--Select--</option>
+                                <option value="">All Languages</option>
                                 <?php $language = language_arr();
                                 foreach($language as $k => $v) { ?>
                                     <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
@@ -64,7 +64,7 @@
                         <strong>Language Level</strong>
                         <div>
                             <select name="language_level[]" required>
-                                <option value="">--Select--</option>
+                                <option value="">All Level</option>
                                 <?php
                                 $level = language_level();
                                 foreach($level as $k => $v) {
@@ -88,7 +88,7 @@
                         <strong>Type of Job *</strong>
                         <div>
                             <select id="employment_type" >
-                                <option value="">--Select--</option>
+                                <option value="">All Type</option>
                                 <?php $jobtype = jobtype();
                                 foreach ($jobtype as $k => $v) {?>
                                 <option value="<?php echo $v?>"><?php echo $v?></option>

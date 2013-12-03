@@ -199,3 +199,19 @@ ALTER TABLE `user` modify column availability varchar(50);
 #2013-11-18
 ALTER TABLE `user_work_history` modify column period_time_from char(10);
 ALTER TABLE `user_work_history` modify column period_time_to char(10);
+
+#2013-11-28
+CREATE TABLE IF NOT EXISTS `inbox` (
+  `id` bigint(20) NOT NULL,
+  `seq` int(11) NOT NULL,
+  `user1` bigint(20) NOT NULL,
+  `user2` bigint(20) NOT NULL,
+  `title` varchar(256) NOT NULL,
+  `message` text NOT NULL,
+  `timestamp` int(10) NOT NULL,
+  `user1read` varchar(3) NOT NULL,
+  `user2read` varchar(3) NOT NULL,
+  `is_delete` tinyint(4) DEFAULT NULL,
+  `is_offline` tinyint(4) DEFAULT NULL
+  
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
