@@ -221,5 +221,5 @@ CREATE TABLE IF NOT EXISTS `inbox` (
   `user1read` varchar(3) NOT NULL,
   `user2read` varchar(3) NOT NULL,
   `is_delete` tinyint(4) DEFAULT NULL,
-  `is_offline` tinyint(4) DEFAULT NULL,
+  `is_offline` tinyint(4) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
