@@ -277,14 +277,13 @@
             </div>
             <div class="fxui-tab-nav sresult-about">
                 <ul class="recent_applied_jobs">
-                    <li><a href="#">Admin Assistant</a></li>
-                    <li><a href="#">UI Designer</a></li>
-                    <li><a href="#">Project Manager</a></li>
-                    <li><a href="#">UI Designer</a></li>
-                    <li><a href="#">Admin Assistant</a></li>
-                    <li><a href="#">UI Designer</a></li>
-                    <li><a href="#">Project Manager</a></li>
-                    <li><a href="#">UI Designer</a></li>
+                    <?php foreach($job['other_jobs'] as $v) {
+                        if($v['id'] != $job['id']) {
+                    ?>
+                    <li><a href="<?php echo $site_url; ?>job/jobDetails/<?php echo $v['id']; ?>">
+                        <?php echo $v['job_name']; ?></a>
+                    </li>
+                    <?php }} ?>
                 </ul>
             </div>
         </div>
