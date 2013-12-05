@@ -255,6 +255,8 @@ class jobseeker extends Front_Controller {
 
             foreach($jobs as $key=>$v) {
                 $jobs[$key]['industry_arr'] = $this->job_model->getJobIndustry($jobs[$key]['id']);
+
+                $jobs[$key]['other_jobs'] = $this->job_model->getCompanyJobList($jobs[$key]['company_id']);
             }
         } else {
             // get jobs according to the search

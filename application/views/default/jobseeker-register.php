@@ -166,13 +166,15 @@
                     </div>
                 </div>
                 <div class="reg-row clearfix">
-                    <input type="hidden" name="is_private" id="is_private" value="1" />
                     <?php $is_private = $userinfo["is_private"];
-                           $check_sel = "";
-                           if($is_private) {
-                               $check_sel = "kyo-checkbox-sel";
-                           }
+                    $check_sel = "";
+                    $if_private = 0;
+                    if($is_private) {
+                        $if_private = 1;
+                        $check_sel = "kyo-checkbox-sel";
+                    }
                     ?>
+                    <input type="hidden" name="is_private" id="is_private" value="<?php echo $if_private; ?>" />
                     <i class="kyo-checkbox <?php echo $check_sel; ?>" data-val="1" data-id="private" onclick="isPrivate(this,'is_private');">Keep this private</i>
                 </div>
                 <div class="reg-area-bar">

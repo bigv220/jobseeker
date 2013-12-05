@@ -209,7 +209,7 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .story_icon .mask{position:absolute;top:0;left:0;width:50px;height:50px;background: url(home/story_img_mark.png) no-repeat;}
 .story_row .story_icon img{width:50px;height:50px;}
 .story_row .story_title{paddint-top:5px;float:left;width:173px;font-size:14px;font-weight:bold;margin-left:6px;color:#414042;}
-.signup-pop-apply, .pop-delete-job, .pop-delete-company, .pop-bookmark {
+.signup-pop-apply, .pop-delete-job, .pop-delete-company, .pop-bookmark, .signup-pop-bookmark {
     display:none;margin:0 auto;text-align:center;z-index:102;width:237px;
     height:115px;position:absolute;top:50%;left:50%;background:url(search/signup_to_apply_job_pop_bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
 .signup-pop-apply-close{width:20px;height:20px;right:0px;cursor:pointer;display:block;}
@@ -296,12 +296,11 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .view_portfolio_content .font_zoom_bar img.zoom_out{margin-left:24px;margin-top:10px;}
 .view_portfolio_navigator{padding-top:18px;text-align: center;min-height: 120px;}
 .view_portfolio_navigator img{vertical-align:middle;cursor:pointer; margin-left:10px;}
-
 .view_portfolio_navigator .als-item {margin-right: 10px;height:99px;width:99px;text-align: center;}
 .view_portfolio_navigator li.current{border:3px solid #674092;}
 .view_portfolio_navigator .als-item img {display: block;margin: 0 auto;vertical-align: middle;}
 .view_portfolio_navigator .als-prev{top:36px;}
 .view_portfolio_navigator .als-next{top:36px;}
-
 .audio_icon{text-align:center;padding:50px 0 30px 0;}
 .jplayer_wrapper{text-align:center;}
+.view_portfolio_navigator img.current{border:3px solid #674092;}
