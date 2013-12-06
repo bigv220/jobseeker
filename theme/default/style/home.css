@@ -252,11 +252,11 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .inbox_overview_row{height:70px;line-height:70px;vertical-align: middle;border-bottom:1px solid #CCCCCC;padding-top:5px;}
 .inbox_overview_row_current{background-color: #e0e0e0;}
 .email_select_checkbox{width:15px;float:left;padding:0px 8px 5px 0px;}
-.sender_avatar{width:50px;float:left;padding-top:5px;}
-.email_short_description{width:190px;float:left;line-height:22px;height:22px;margin-left:10px;font-size:13px;font-weight:bold;}
+.sender_avatar{width:50px;float:left;padding-top:5px;display:none;}
+.email_short_description{width:237px;float:left;line-height:22px;height:22px;margin-left:10px;font-size:13px;font-weight:bold;}
 .email_short_description .from_name{color:#414042;}
 .email_short_description .received_date{float:right;color:#414042;font-size:10px;}
-.jingchatlog_wrapper .email_short_description .received_date{float:none;text-align:right;line-height:10px;margin-right:10px;}
+.jingchatlog_wrapper .email_short_description .received_date{float:right;text-align:right;}
 .email_short_description .email_subject{color:#674092;}
 .email_short_description .email_actions_bar{padding-top:5px;}
 .email_short_description .email_actions_bar img{margin-right:8px;cursor:pointer;}
