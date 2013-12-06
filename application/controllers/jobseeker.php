@@ -255,6 +255,8 @@ class jobseeker extends Front_Controller {
 
             foreach($jobs as $key=>$v) {
                 $jobs[$key]['industry_arr'] = $this->job_model->getJobIndustry($jobs[$key]['id']);
+
+                $jobs[$key]['other_jobs'] = $this->job_model->getCompanyJobList($jobs[$key]['company_id']);
             }
         } else {
             // get jobs according to the search
@@ -279,6 +281,27 @@ class jobseeker extends Front_Controller {
 
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
         $this->load->view($data['front_theme']."/jobseeker-saved-bookmarks",$data);
+    }
+
+    public function viewInterviews(){
+        $uid = $this->session->userdata('uid');
+        if (!$uid)
+        {
+            redirect('/');
+        }
+
+        $this->load->model('jobseeker_model');
+
+        $data = $this->data;
+        if (isset($_GET['uid'])) {
+            $uid = $_GET['uid'];
+        } else {
+            $uid = $this->session->userdata('uid');
+        }
+
+
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+        $this->load->view($data['front_theme']."/jobseeker-view-interviews",$data);
     }
 
     //save basic info

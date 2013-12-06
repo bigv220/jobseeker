@@ -296,6 +296,7 @@ $(document).ready(function(){
 
         uploadFile(btn_id,upload_id,error_id,input_id);
     });
+
 });
 
 function formatItem(row){

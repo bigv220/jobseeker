@@ -232,6 +232,7 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .saved_bookmarks_btn_current{background-position:0 -158px;}
 .view_my_interviews_btn{background: url(btns/btn_view_my_interviews.png) no-repeat;}
 .view_my_interviews_btn:hover{background-position:0 -79px;}
+.view_my_interviews_btn_current{background-position:0 -158px;}
 .delete_job_btn{background: url(btns/btn_delete_job.png) no-repeat;}
 .delete_company_btn{background: url(btns/btn_delete_company.png) no-repeat;}
 .match_percentage_btn{font-size:25px;line-height:65px;text-align:center;font-weight:bold;color:#FFFFFF;background: url(btns/btn_match_percentage.png) no-repeat;}
@@ -247,16 +248,17 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .jobseeker_icon{border:5px solid #674092;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .round_img{-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .round_img_border3{border:3px solid #674092;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
+.round_corner10_img{-moz-border-radius: 10%;-webkit-border-radius: 10%;border-radius: 10%;}
 .inbox_overview_list{float:left;width:290px;height:520px;overflow-y:scroll;}
 .inbox_mail_content{float:left;width:454px;height:500px;overflow-y:scroll;padding:10px;line-height:18px;}
 .inbox_overview_row{height:70px;line-height:70px;vertical-align: middle;border-bottom:1px solid #CCCCCC;padding-top:5px;}
 .inbox_overview_row_current{background-color: #e0e0e0;}
 .email_select_checkbox{width:15px;float:left;padding:0px 8px 5px 0px;}
-.sender_avatar{width:50px;float:left;padding-top:5px;}
-.email_short_description{width:190px;float:left;line-height:22px;height:22px;margin-left:10px;font-size:13px;font-weight:bold;}
+.sender_avatar{width:50px;float:left;padding-top:5px;display:none;}
+.email_short_description{width:237px;float:left;line-height:22px;height:22px;margin-left:10px;font-size:13px;font-weight:bold;}
 .email_short_description .from_name{color:#414042;}
 .email_short_description .received_date{float:right;color:#414042;font-size:10px;}
-.jingchatlog_wrapper .email_short_description .received_date{float:none;text-align:right;line-height:10px;margin-right:10px;}
+.jingchatlog_wrapper .email_short_description .received_date{float:right;text-align:right;}
 .email_short_description .email_subject{color:#674092;}
 .email_short_description .email_actions_bar{padding-top:5px;}
 .email_short_description .email_actions_bar img{margin-right:8px;cursor:pointer;}
@@ -277,7 +279,7 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 
 .als-container {position: relative; width: 100%; margin: 0px auto;z-index: 0;}
 .als-viewport {position: relative;overflow: hidden;margin: 0px auto;}
-.als-wrapper {position: relative;}
+.als-wrapper {position: relative;list-style: none;}
 .als-item {position: relative;display: block;text-align: center;cursor: pointer;float: left;}
 .als-prev, .als-next {position: absolute;cursor: pointer;clear: both;}
 .als-prev{top:80px;left:-3px;}
@@ -289,9 +291,57 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .view_portfolio_body{position:relative;}
 .view_portfolio_content .content_text{padding:10px 20px;background-color:#FFFFFF;overflow-y:scroll;margin-top:10px;border:3px solid #e5e5e5;height:400px;}
 .view_portfolio_content .content_audio{padding:10px 20px;background-color:#FFFFFF;overflow:hidden;margin-top:10px;height:400px;}
+.view_portfolio_content .content_img{text-align:center;padding-top:10px;}
+.view_portfolio_content .content_img img{height:420px;width:300px;}
 .view_portfolio_content .font_zoom_bar{position:absolute;top:385px;left:300px;height:40px;width:103px;background:url(portfolio/font_zoom_bar_bg.png) no-repeat;}
 .view_portfolio_content .font_zoom_bar img{margin-left:14px;margin-top:5px;cursor:pointer;}
 .view_portfolio_content .font_zoom_bar img.zoom_out{margin-left:24px;margin-top:10px;}
-.view_portfolio_navigator{padding-top:18px;text-align: center;}
+.view_portfolio_navigator{padding-top:18px;text-align: center;min-height: 120px;}
 .view_portfolio_navigator img{vertical-align:middle;cursor:pointer; margin-left:10px;}
+.view_portfolio_navigator .als-item {margin-right: 10px;height:99px;width:99px;text-align: center;}
+.view_portfolio_navigator li.current{border:3px solid #674092;}
+.view_portfolio_navigator .als-item img {display: block;margin: 0 auto;vertical-align: middle;}
+.view_portfolio_navigator .als-prev{top:36px;}
+.view_portfolio_navigator .als-next{top:36px;}
+.audio_icon{text-align:center;padding:50px 0 30px 0;}
+.jplayer_wrapper{text-align:center;}
 .view_portfolio_navigator img.current{border:3px solid #674092;}
+
+.interview_types_navigator{font-size:14px;}
+.interview_types_navigator li{padding: 0 0 0 10px;height:40px;line-height:40px;}
+.interview_types_navigator li div{border-bottom:1px solid #f1f1a5;}
+.interview_types_navigator li.current{background-color:#f1f1a5;}
+.interview_types_navigator li a{color:#000000;text-decoration:none;}
+.search_interviews{padding:10px 0 10px 10px;}
+.search_interviews label{font-size:14px;}
+.search_interviews form{border:1px solid #cacaca;width:228px;margin-top:6px;}
+.search_interview_btn{position:absolute;width:25px;height:25px;line-height:25px;display:inline-block;text-align:center;vertical-align:top;border:0;cursor:pointer;background:url(btns/btn_search_interview.png) no-repeat;}
+.view_interview_page .sresult-par1 .span2 h3{font-size:15px;}
+.view_interview_page .sresult-par1 .span2 p{font-size:15px;}
+.span3 .interview_sent_date{font-size:15px;font-weight:bold;padding:5px 10px 50px 0;text-align:right;color:#f37544;}
+.span3 .interview_action_btns{text-align:right;padding:5px 10px 0 0;}
+.span3 .interview_action_btns img{margin-left:10px;cursor: pointer;}
+.interview_description{border-bottom:1px solid #CCCCCC;padding:0 0 10px 6px;}
+.interview_description .description_left{float:left;width:50%;}
+.interview_description .description_right{float:right;width:50%;}
+.interview_description p{}
+.interview_description p.interview_field_content{color:#f37544;font-size:15px;font-weight:bold;margin-bottom:10px;}
+.interview_description a{text-decoration:underline;color:#674092;font-size:12px;font-weight:bold;}
+.intereview_letter{padding:6px;}
+.reply_interview_request{padding:6px;}
+.reply_interview_request img{cursor:pointer;}
+.reply_message_pop{display:none;z-index:102;width:518px;height:478px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(jobseeker/reply_message_pop_bg.png);}
+.reply_message_pop b{display:block;font-size:15px;color:#ea6e3b;font-weight:bold;padding:20px 0 10px 20px;}
+.reply_message_pop_close{width:20px;height:20px;right:1px;cursor:pointer;display:block;}
+.reply_message_pop_bd{overflow:hidden;zoom:1;padding:0 20px;}
+.reply_message_pop_bd_heder .title{float:left;width:60px;font-weight:bold;font-size:15px;text-align:right;}
+.reply_message_pop_bd_heder .content{float:left;margin-left:5px;}
+.reply_message_pop_bd_heder .content input{border:1px solid #674092;}
+.reply_message_pop_bd_content{padding:8px 17px 10px 0;}
+.reply_message_pop_bd_content textarea{height:280px;width:100%;text-align:left;border-color:#674092;padding:5px;}
+.send_message_function{cursor:pointer;}
+.message_sent_pop{display:none;z-index:102;width:518px;height:100px;position:absolute;top:50%;left:50%;margin:40px 0 0 -245.5px;background:url(jobseeker/message_sent_pop_bg.png);}
+.message_sent_pop_close{width:20px;height:20px;right:1px;cursor:pointer;display:block;}
+.message_sent_pop_bd{overflow:hidden;zoom:1;padding:30px;text-align:center;font-weight: bold;}
+.message_sent_pop_bd .message_title{font-size:16px;color:#ea6e3b;}
+.message_sent_pop_bd .message_content a{font-size:14px;color:#674092;text-decoration: none;}
