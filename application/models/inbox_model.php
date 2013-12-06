@@ -26,6 +26,7 @@ class inbox_model extends MY_Model
     {
         $result = $this->db->select('*')
                  ->from($this->table)
+                 ->join('user', 'user.uid='.$this->table.'.user1')
                  ->where('user2',$uid)
                  ->get()
                  ->result_array();
