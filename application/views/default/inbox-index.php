@@ -327,6 +327,7 @@
                                           <img src="<?php echo $theme_path?>style/jingchat/me_jingchat_message_leftarrow.png" class="message_avatar_arrow"/>
                                           <div class="other_message_top"></div>
                                           <div class="other_message_content">
+                                              <p class="sent_time">3 hours ago</p>
                                               <p>
                                                   This is the message content send to me from other people. this is the message content send to me from other people.
                                                   this is the message content send to
@@ -344,6 +345,7 @@
                                           <img src="<?php echo $theme_path?>style/jingchat/other_jingchat_message_rightarrow.png" class="message_avatar_arrow"/>
                                           <div class="other_message_top"></div>
                                           <div class="other_message_content">
+                                              <p class="sent_time">3 hours ago</p>
                                               <p>
                                               This is the message content send to me from other people. this is the message content send to me from other people.
                                               this is the message content send to me from other people. this is the message content send to me from other people.
@@ -361,6 +363,7 @@
                                           <img src="<?php echo $theme_path?>style/jingchat/other_jingchat_message_rightarrow.png" class="message_avatar_arrow"/>
                                           <div class="other_message_top"></div>
                                           <div class="other_message_content">
+                                              <p class="sent_time">3 hours ago</p>
                                               <p>
                                                   This is the message content send to me from other people. this is the message content send to me from other people.
                                                   this is the message content send to me from other people. this is the message content send to me from other people.
@@ -379,6 +382,7 @@
                                           <img src="<?php echo $theme_path?>style/jingchat/me_jingchat_message_leftarrow.png" class="message_avatar_arrow"/>
                                           <div class="other_message_top"></div>
                                           <div class="other_message_content">
+                                              <p class="sent_time">3 hours ago</p>
                                               <p>
                                                   This is the message content send to me from other people. this is the message content send to me from other people.
                                                   this is the message content send to
