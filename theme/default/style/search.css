@@ -67,7 +67,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .jingchat_message_row_me .jingchat_message_icon{float:right;padding-top:13px;padding-left:0px;margin-right:10px;}
 .jingchat_message_row_me .jingchat_message_content{position:relative;width:396px;float:right;}
 .jingchat_message_row_me .jingchat_message_content .message_avatar_arrow{position:absolute;top:20px;left:-8px;}
-.jingchat_message_row_me .jingchat_message_content .other_message_top{height:5px;width:396px;background: url(jingchat/me_jingchat_message_topbg.png) -1;}
+.jingchat_message_row_me .jingchat_message_content .other_message_top{height:5px;width:396px;background: url(jingchat/me_jingchat_message_topbg.png) -1px;}
 .jingchat_message_row_me .jingchat_message_content .other_message_content{width:396px;background: url(jingchat/me_jingchat_message_bodybg.png) repeat-y;}
 .jingchat_message_row_me .jingchat_message_content .other_message_bottom{height:6px;width:396px;background: url(jingchat/me_jingchat_message_bottombg.png);}
 
