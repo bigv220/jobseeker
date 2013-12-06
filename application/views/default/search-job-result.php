@@ -301,7 +301,7 @@
                     </div>
                 </div>
                 <div class="fxui-tab-nav sresult-about">
-                    <div><?php echo $job["description"]; ?></div><?php print_r($job)?>
+                    <div><?php echo $job["description"]; ?></div>
                     <p><a href="<?php echo $site_url?>company/companyinfo/<?php echo $job['company_id'];?>">View Company Profile</a></p>
                 </div>
             </div>
