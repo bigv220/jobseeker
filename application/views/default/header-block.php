@@ -102,7 +102,7 @@
                         <?php $current_user_type = isset($user_type)?$user_type:-1;?>
                         <?php if (0 == $current_user_type):?>
                             <script>userType = 0;</script>
-                            <li><a href="<?php echo $site_url?>jobseeker/profile">View Profile</a></li>
+                            <li><a href="<?php echo $site_url?>jobseeker/viewprofile">View Profile</a></li>
                             <li><a href="<?php echo $site_url?>jobseeker/register">Edit Profile</a></li>
                             <li><a href="#">Bookmarked Employers</a></li>
                             <li><a href="#">Shortlisted Jobs</a></li>

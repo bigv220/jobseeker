@@ -209,6 +209,7 @@ CREATE TABLE `company_bookmark` (
   `user_id` int(11) NOT NULL,
   `company_id` int(11) NOT NULL,
   PRIMARY KEY  (`user_id`,`company_id`)
+)
 
 CREATE TABLE IF NOT EXISTS `inbox` (
   `id` bigint(20) NOT NULL,

@@ -155,20 +155,28 @@ class job extends Front_Controller {
             echo json_encode($result);
             exit;
         }
-        if (!empty($_POST['job_id']) && !empty($uid)) {
+        $job_id = $_POST['job_id'];
+        if (!empty($job_id) && !empty($uid)) {
             // do apply
             $this->load->model('job_model');
-            $result['status'] = $this->job_model->applyJob($_POST['job_id'], $uid, 1);
+            
+            $result['status'] = $this->job_model->applyJob($job_id, $uid, 1);
 
             $result['status'] = $result['status'] ? 'success' : 'failed.';
 
-            $user_name = $this->session->userdata('first_name').' '.$this->session->userdata('last_name');
+            //$user_name = $this->session->userdata('first_name').' '.$this->session->userdata('last_name');
+            // get company name from job_id
+            $job_arr = $this->job_model->getOne($job_id, 'id');
+            $this->load->model('jobseeker_model');
+            $comp = $this->jobseeker_model->getOne($job_arr['company_id'], 'uid');
+            $company_name = $comp['first_name'];
+            
             if (isset($_POST['email'])) {
                 $this->load->library('email');
                 $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
                 $this->email->to($_POST['email']);
                 $this->email->subject('New Job Application');
-                $this->email->message('<HTML><BODY><div>Hi '.$user_name . ',<br/>Your company has received a new job appliation, Please login 
+                $this->email->message('<HTML><BODY><div>Hi '.$company_name . ',<br/>Your company has received a new job appliation, Please login 
                     <a href="http://www.jingjobs.com">Jingjobs</a> to view.</div>
                     <br />
                     <div>Thank you!</div><br /><br />
