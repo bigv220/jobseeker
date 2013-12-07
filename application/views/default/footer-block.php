@@ -88,6 +88,57 @@
         </div>
     </div>
 </div>
+
+<div class="request_interview_pop png">
+    <div class="request_interview_pop_wrap rel">
+        <i class="request_interview_pop_close abs" title="close"></i>
+        <b>Send Interview request to <span>Name Here</span></b>
+        <div class="request_interview_pop_bd">
+            <div class="request_interview_pop_left">
+                <label>Position Title</label>
+                <select name="position_title">
+                    <option value="">Position Title One</option>
+                    <option value="1">Position Title Two</option>
+                </select>
+                <label>Optional Message</label>
+                <textarea name="optional_message"></textarea>
+                <label>Date</label>
+                <div class="date_selector_wrapper">
+                    <input name="sent_date"/><img src="<?php echo $theme_path;?>/style/portfolio/calendar_selector_btn.png"/>
+                </div>
+            </div>
+            <div class="request_interview_pop_right">
+                <div class="preferred_communication_wrapper">
+                    <label>Preferred Communication</label>
+                    <input type="hidden" name="preferred_communication" id="preferred_communication" value="1" />
+                    <i data-val="0" data-id="preferred_communication" class="kyo-radio kyo-radio-sel">Personal Email</i>
+                    <i data-val="1" data-id="preferred_communication" class="kyo-radio">JingChat</i>
+                    <i data-val="2" data-id="preferred_communication" class="kyo-radio">Phone</i>
+                    <i data-val="3" data-id="preferred_communication" class="kyo-radio">Skype</i>
+                    <i data-val="4" data-id="preferred_communication" class="kyo-radio">Other</i>
+                    <input name="other_preferred_communication"/>
+                </div>
+                <div class="time_selector_wrapper">
+                    <div class="time_zone">
+                        <label>Time Zone</label>
+                        <select name="time_zone">
+                            <option value="0">GMT</option>
+                            <option value="1">UTC</option>
+                        </select>
+                    </div>
+                    <div class="time_wrapper">
+                        <label>Time</label>
+                        <input name="time_input"/>
+                    </div>
+                </div>
+            </div>
+            <div class="request_interview_pop_actions">
+                <img class="cancel_request_interview" src="<?php echo $theme_path;?>/style/btns/btn_cancel.png"/>
+                <img class="send_request_interview" src="<?php echo $theme_path;?>/style/btns/btn_send.png"/>
+            </div>
+        </div>
+    </div>
+</div>
 <!--footer-->
 <div class="pft-wrap">
 	<div class="p-ft w70">

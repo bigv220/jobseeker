@@ -1,5 +1,5 @@
 <?php $this->load->view($front_theme.'/header-block');?>
-<script type="text/javascript" src="<?php echo $theme_path?>js/interview.js"></script>
+
 <!--company login page body-->
 <div class="company-page w770 clearfix rel">
   <div class="company-body box rel mb5">

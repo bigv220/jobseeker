@@ -1,7 +1,8 @@
 $(document).ready(function(){
     var popMarker =$('.pop-mark'),
         popReplyMessage = $('.reply_message_pop'),
-        popMessageSent = $('.message_sent_pop');
+        popMessageSent = $('.message_sent_pop'),
+        popRequestInterview = $('.request_interview_pop');
 
     $('.reply_message_pop_close').click(function(){
         popMarker.fadeOut();
@@ -26,5 +27,27 @@ $(document).ready(function(){
     $('.message_sent_pop_close').click(function(){
         popMarker.fadeOut();
         popMessageSent.fadeOut();
+    });
+
+    $('.jobseeker_request_interview').click(function(e){
+        popRequestInterview.fadeIn();
+        popMarker.fadeIn();
+        e.stopPropagation();
+    });
+
+    $('.request_interview_pop_close').click(function(){
+        popMarker.fadeOut();
+        popRequestInterview.fadeOut();
+    });
+
+    $('.cancel_request_interview').click(function(){
+        popMarker.fadeOut();
+        popRequestInterview.fadeOut();
+    });
+
+    $('.send_request_interview').click(function(){
+        alert('Add send request interview function here');
+        popMarker.fadeOut();
+        popRequestInterview.fadeOut();
     });
 });

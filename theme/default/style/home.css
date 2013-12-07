@@ -345,3 +345,22 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .message_sent_pop_bd{overflow:hidden;zoom:1;padding:30px;text-align:center;font-weight: bold;}
 .message_sent_pop_bd .message_title{font-size:16px;color:#ea6e3b;}
 .message_sent_pop_bd .message_content a{font-size:14px;color:#674092;text-decoration: none;}
+
+.request_interview_pop{display:none;z-index:102;width:600px;height:327px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(company/request_interview_pop_bg.png);}
+.request_interview_pop b{display:block;text-align:center;font-size:15px;color:#434345;font-weight:bold;padding:20px 0 10px 20px;}
+.request_interview_pop b span{color:#ea6e3b;}
+.request_interview_pop_close{width:20px;height:20px;right:1px;cursor:pointer;display:block;}
+.request_interview_pop_bd{overflow:hidden;zoom:1;padding:0 55px;}
+.request_interview_pop_bd label,.request_interview_pop_bd select, .request_interview_pop_bd textarea{display:block;}
+.request_interview_pop_bd label{padding-top:5px;}
+.request_interview_pop_left{float:left;width:50%;}
+.request_interview_pop_left select{width:90%;}
+.request_interview_pop_left textarea{height:72px;width:90%;}
+.request_interview_pop_right{float:right;width:50%;}
+.preferred_communication_wrapper i.kyo-radio{width:215px;display:block;}
+.preferred_communication_wrapper input{width:230px;}
+.time_selector_wrapper .time_zone{float:left;width:50%;}
+.time_selector_wrapper select,.time_selector_wrapper input{width:107px;}
+.time_selector_wrapper .time_wrapper{float:right;width:50%;}
+.request_interview_pop_actions{padding-top:20px;text-align:center;clear:both;}
+.request_interview_pop_actions img{cursor:pointer;margin-right:10px;}
