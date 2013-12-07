@@ -249,7 +249,7 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .round_img{-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .round_img_border3{border:3px solid #674092;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .round_corner10_img{-moz-border-radius: 10%;-webkit-border-radius: 10%;border-radius: 10%;}
-.inbox_overview_list{float:left;width:290px;height:520px;overflow-y:scroll;}
+.inbox_overview_list{float:left;width:290px;height:520px;overflow-y:scroll;padding-top:8px;}
 .inbox_mail_content{float:left;width:454px;height:500px;overflow-y:scroll;padding:10px;line-height:18px;}
 .inbox_overview_row{height:70px;line-height:70px;vertical-align: middle;border-bottom:1px solid #CCCCCC;padding-top:5px;}
 .inbox_overview_row_current{background-color: #e0e0e0;}

@@ -9,6 +9,7 @@ class inbox extends Front_Controller {
     {
         parent::__construct();
         $this->load->library('session');
+        $this->load->helper('time');
         $uid = $this->session->userdata('uid');
         if (!$uid)
         {
@@ -26,9 +27,31 @@ class inbox extends Front_Controller {
         } else {
             $uid = $this->session->userdata('uid');
         }
-
+        // Get current login user info
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
-        $data['messages'] = $this->inbox_model->getmsg($uid);
+        // Set Me ID
+        $data['uid'] = $uid;
+
+        // get message list
+        $data['messages'] = $this->inbox_model->getMsg($uid);
+
+        // Get first detail msg
+        if (!empty($data['messages'])) {
+            $data['msg_detail'] = $this->inbox_model->getDetailMsg($data['messages'][0]['id']);    
+        }
+
+        // Get other user's info, name and profile img
+        if (!empty($data['msg_detail'])) {
+            $user1 = $data['msg_detail'][0]['user1'];
+            $user2 = $data['msg_detail'][0]['user2'];
+
+            if ($user1 == $uid) {
+                $data['user2'] = $this->jobseeker_model->getUserInfo($user2);                
+            } else {
+                $data['user2'] = $this->jobseeker_model->getUserInfo($user1);                
+            }
+        }
+        
         $this->load->view($data['front_theme'].'/inbox-index', $data);
     }
 
@@ -45,10 +68,33 @@ class inbox extends Front_Controller {
             $post = array('id'=>$id+1,'seq'=>1,'title'=>$_POST['title'],'message'=>$_POST['message'],'user1'=>$this->session->userdata('uid'),
                 'user2'=>$_POST['user2'], 'timestamp'=>time(), 'user1read'=>'yes','user2read'=>'no','is_delete'=>0,'is_offline'=>1);
             
-            $this->inbox_model->addmsg($post);
+            $this->inbox_model->addMsg($post);
         }
 
         $this->load->view($data['front_theme'].'/inbox-sentmsg',$data);
+    }
+
+    public function getDetailMsg() 
+    {
+
+    }
+
+    public function response()
+    {
+        $id = $_POST['id'];
+        $data = $this->data;
+        $this->load->model('inbox_model');
+        $seq = $this->inbox_model->getMaxSeqForId($id);
+        
+
+        $post = array('id'=>$id,'seq'=>$seq+1,'title'=>isset($_POST['title'])?$_POST['title']:"",'message'=>$_POST['message'],'user1'=>$this->session->userdata('uid'),
+                'user2'=>$_POST['user2'], 'timestamp'=>time(), 'user1read'=>'yes','user2read'=>'no','is_delete'=>0,'is_offline'=>1);
+            
+        $this->inbox_model->addMsg($post);
+        $data['message'] = $post['message'];
+        $data['timestamp'] = $post['timestamp'];
+        $newmsg = $this->load->view($data['front_theme'].'/inbox-onemsg',$data);
+        echo $newmsg;
     }
 
 }
