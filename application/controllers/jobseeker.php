@@ -283,6 +283,27 @@ class jobseeker extends Front_Controller {
         $this->load->view($data['front_theme']."/jobseeker-saved-bookmarks",$data);
     }
 
+    public function viewAppliedJobs(){
+        $uid = $this->session->userdata('uid');
+        if (!$uid)
+        {
+            redirect('/');
+        }
+
+        $this->load->model('jobseeker_model');
+
+        $data = $this->data;
+        if (isset($_GET['uid'])) {
+            $uid = $_GET['uid'];
+        } else {
+            $uid = $this->session->userdata('uid');
+        }
+
+
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+        $this->load->view($data['front_theme']."/jobseeker-applied-jobs",$data);
+    }
+
     public function viewInterviews(){
         $uid = $this->session->userdata('uid');
         if (!$uid)
