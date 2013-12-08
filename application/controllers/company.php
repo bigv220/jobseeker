@@ -104,4 +104,25 @@ class company extends Front_Controller {
         $this->load->view($data['front_theme']."/company-profile",$data);
     }
 
+
+    public function shortlistCandidates(){
+        $uid = $this->session->userdata('uid');
+        if (!$uid)
+        {
+            redirect('/');
+        }
+
+        $this->load->model('jobseeker_model');
+
+        $data = $this->data;
+        if (isset($_GET['uid'])) {
+            $uid = $_GET['uid'];
+        } else {
+            $uid = $this->session->userdata('uid');
+        }
+
+
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+        $this->load->view($data['front_theme']."/company_view_shortlist_cadidates",$data);
+    }
 }

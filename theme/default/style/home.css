@@ -230,6 +230,9 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .saved_bookmarks_btn{background: url(btns/btn_saved_bookmarks.png) no-repeat;}
 .saved_bookmarks_btn:hover{background-position:0 -79px;}
 .saved_bookmarks_btn_current{background-position:0 -158px;}
+.view_my_candidates_btn{background: url(btns/btn_shortlist_candidate.png) no-repeat;}
+.view_my_candidates_btn:hover{background-position:0 -79px;}
+.view_my_candidates_btn_current{background-position:0 -158px;}
 .view_my_interviews_btn{background: url(btns/btn_view_my_interviews.png) no-repeat;}
 .view_my_interviews_btn:hover{background-position:0 -79px;}
 .view_my_interviews_btn_current{background-position:0 -158px;}
@@ -246,6 +249,7 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .jingchat_inbox_bubble{right:190px;}
 .view_my_interviews_bubble{right:16px;}
 .jobseeker_icon{border:5px solid #674092;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
+.company_icon .jobseeker_icon{border:4px solid #674092;-moz-border-radius: 10%;-webkit-border-radius: 10%;border-radius: 10%;}
 .round_img{-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .round_img_border3{border:3px solid #674092;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .round_corner10_img{-moz-border-radius: 10%;-webkit-border-radius: 10%;border-radius: 10%;}
