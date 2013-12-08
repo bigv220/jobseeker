@@ -17,15 +17,15 @@
       <div class="text">
         <h2><?php echo $userinfo['first_name'].' '.$userinfo['last_name']; ?></h2>
         <h4><?php echo $userinfo['city'].', '.$userinfo['country']; ?></h4>
-        <p class="profile_views_num">4 Profile Views</p>
+        <p class="profile_views_num"><?php echo $userinfo['visit_num']; ?> Profile Views</p>
       </div>
       <div class="btnarea">
           <a href="#" class="png square_btn edit_profile_btn"></a>
           <a href="#" class="png square_btn jingchat_inbox_btn"></a>
-          <span class="bubble jingchat_inbox_bubble">2</span>
+          <?php if (!empty($unread_msg_num)): ?><span class="bubble jingchat_inbox_bubble"><?php echo $unread_msg_num; ?></span><?php endif; ?>
           <a href="#" class="png square_btn saved_bookmarks_btn"></a>
           <a href="#" class="png square_btn view_my_interviews_btn"></a>
-          <span class="bubble view_my_interviews_bubble">10</span>
+          <?php if (!empty($my_interviews_num)): ?><span class="bubble view_my_interviews_bubble"><?php echo $my_interviews_num; ?></span><?php endif;?>
          </div>
     </div>
 
@@ -40,26 +40,33 @@
     <div class="search_interviews">
         <label>Search Applied Jobs</label>
         <form action="#">
-            <input type="text" name="applied_jobs_keywords" class="kyo-input input-tip" style="width:203px;border:none;line-height:23px;height:23px;" data-tipval="Enter Keywords" value="Enter Keywords">
-            <input type="submit" name="search_applied_jobs_btn" class="search_interview_btn search_applied_jobs_btn" value=""/>
+            <input type="text" name="keywords" class="kyo-input input-tip" style="width:203px;border:none;line-height:23px;height:23px;" data-tipval="Enter Keywords" value="Enter Keywords">
+            <input type="submit" class="search_interview_btn search_applied_jobs_btn" value=""/>
         </form>
     </div>
 </div>
 
 <!--search-result body-->
 <div class="result-bd">
+    <?php foreach($jobs as $job):?>
     <div class="box rel sresult-row">
         <div class="sresult-par1">
             <div class="span1 rel">
-                <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="90px" height="90px" class="round_corner10_img"/>
+                <?php if (!empty($job['profile_pic']) && is_file($job['profile_pic'])) {
+                $pic = $site_url.'attached/users/'.$job['profile_pic'];
+                }
+                else
+                $pic = $site_url.'attached/users/no-image.png';
+                ?>
+                <img src="<?php echo $pic; ?>" alt="" width="90px" height="90px" class="round_corner10_img"/>
             </div>
             <div class="span2">
-                <h2>Job Title Here</h2>
-                <h3>Company Name</h3>
-                <p>Beijing, China</p>
+                <h2><?php echo $job['job_name']; ?></h2>
+                <h3><?php echo $job['first_name']; ?></h3>
+                <p><?php echo $job['province'].' '.$job['country']; ?></p>
                 <a href="#" class="job-viewmore">View More</a> </div>
             <div class="span3">
-                <div class="interview_sent_date">DD/MM/YY</div>
+                <div class="interview_sent_date"><div  align="center"><?php $date = explode('-',$job['post_date']); echo $date[2]."/".$date[1]."/".substr($date[0],2,2); ?></div></div>
 
             </div>
         </div>
@@ -69,26 +76,23 @@
                 <div class="sresult-nav-job">
                     <div class="sresult-nav-job-left">
                         <div class="text_r">
-                            <p>We have an exciting opportunity for a full time Graphic Designer to join our creative team.
-                                We are a leading creative, events and media agency with offices in Beijing, London and Qingdao.
-                                We create and distribute amazing work for a variety of retailers and clients. You will be working on great brands such as Baccarat, Arcosteel, Alex Liddy and Marie Claire.
-                                We offer the opportunity to work with a great team on exciting, creative and challenging designs.
-                                Reporting to the marketing manager, you will be assisting on projects ranging from packaging, catalogues, theme and design concepts, product development, decals and surface decorations applied to a range of home products, flyers, ads, signage, posters, for a variety of brands and various brand style applications.</p>
+                            <p><?php echo $job['job_desc'];?></p>
                         </div>
                         <dl class="sresult-nav-job-dl">
                             <dt>Preferred Years of Experience</dt>
-                            <dd>1 to 3 years</dd>
+                            <dd><?php echo $job['preferred_year_of_experience'];?> <?php echo $job['preferred_year_of_experience'] > 1?"years":"year"; ?></dd>
                             <dt>Preferred Personal Skills</dt>
-                            <dd>Time Managment, Public Speaking, Networking, Leadership</dd>
+                            <dd><?php echo str_replace(',', ', ', substr($job['preferred_personal_skills'],0,-1));?></dd>
                             <dt>Preferred Technical Skills</dt>
-                            <dd>Branding, Adobe Creative Suite, Printing, Critical Thinking</dd>
+                            <dd><?php echo str_replace(',', ', ', substr($job['preferred_technical_skills'],0,-1));?></dd>
                             <dt>Language(s) Required</dt>
                             <dd>
                                 <div class="jobseeker_profile_language">
-                                    <label>English</label>
-                                    <i>Yiban</i>
-                                    <label>English</label>
-                                    <i>Yiban</i>
+                                 <?php $languages = $job['languages'];
+                                    for($i=0; $i<count($languages); $i++) { ?>
+                                        <label><?php echo getLanguageByID($languages[$i]["language"]); ?></label>
+                                        <i><?php echo getLanguageLevelByID($languages[$i]["level"]); ?></i>
+                                <?php }?>
                                 </div>
                             </dd>
                         </dl>
@@ -101,23 +105,26 @@
                                 <!--
                                 <div id="map" style="width:149px;height:83px;border: 1px solid #DDDDDD"></div>
                                 -->
-                                <strong><a href="#">Job location</a></strong>
+                                <strong><a href="#"><?php echo $job['location']; ?></a></strong>
                             </dd>
                             <dt>Salary</dt>
-                            <dd>10,000 CNY – 15,000 CNY</dd>
+                            <dd><?php echo getSalaryByID($job['salary_range']);?></dd>
                             <dt>Industry</dt>
                             <dd class="industry">
                                 <div>
-                                    <a href="#">Graphic Design</a>
-                                    <a href="#">Media Publishing</a>
-                                    <a href="#">Marketing</a>
-
+                                    <?php 
+                                    if (!empty($job['industries'])):
+                                    foreach($job['industries'] as $industry): ?>
+                                    <a href="#"><?php echo $industry['industry']; ?></a>
+                                    <?php 
+                                    endforeach;
+                                    endif; ?>
                                 </div>
                                 <ul class="industry-ul">
-                                    <li class="n1"><b>Type of Employment</b><span>full time</span></li>
-                                    <li class="n2"><b>Length of Employment</b><span>long term</span></li>
-                                    <li class="n3"><b>Visa Assistance</b><span>Visa will be provided</span></li>
-                                    <li class="n4"><b>Housing Assistance</b><span>Accomodation will be provided</span>
+                                    <li class="n1"><b>Type of Employment</b><span><?php echo str_replace(',',', ',$job['employment_type']); ?></span></li>
+                                    <li class="n2"><b>Length of Employment</b><span><?php if (!empty($job['employment_length'])) echo getEmploymentLengthByID($job['employment_length']); ?></span></li>
+                                    <?php if($job['is_visa_assistance'] == 1) : ?><li class="n3"><b>Visa Assistance</b><span>Visa will be provided</span></li><?php endif;?>
+                                    <?php if($job['is_housing_assistance'] == 1) : ?><li class="n4"><b>Housing Assistance</b><span>Accomodation will be provided</span><?php endif;?>
                                     </li>
                                 </ul>
                             </dd>
@@ -131,7 +138,7 @@
 
         </div>
     </div>
-
+    <?php endforeach; ?>
 </div>
 <!--backtop-->
 <div class="backtop png" style="right:200px;"></div>

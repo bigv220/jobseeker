@@ -224,3 +224,6 @@ CREATE TABLE IF NOT EXISTS `inbox` (
   `is_delete` tinyint(4) DEFAULT NULL,
   `is_offline` tinyint(4) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+#2013-12-08 Add column number of viewed profile.
+ALTER TABLE  user ADD  `visit_num` INT(11) NULL DEFAULT 0;
