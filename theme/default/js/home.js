@@ -166,7 +166,7 @@ $(function(){
                     	if(result.user_type == "1") {
                         	window.location.href = site_url + "search/findstaff";
                         } else {
-                        	window.location.href = site_url + "search/findjob";
+                        	window.location.href = site_url + "jobseeker/viewprofile";
                         } 
                     	$('.pop-login').fadeOut();
                         //$('.phd-login-pop').remove();
