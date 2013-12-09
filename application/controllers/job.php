@@ -87,6 +87,15 @@ class job extends Front_Controller {
     		$this->load->model('job_model');
             unset($post['nameOfSelect']);
 
+            if ($post['preferred_personal_skills'] == 'Start Typing') {
+                $post['preferred_personal_skills'] = "";
+            }
+
+            if ($post['preferred_technical_skills'] == 'Start Typing') {
+                $post['preferred_technical_skills'] = "";
+            }
+
+
             $data = array('job_name'=>$post['job_name'],'job_desc'=>$post['job_desc'],
                 'employment_length'=>$post['employment_length'],
                 'employment_type'=>$post['employment_type'],
@@ -186,6 +195,34 @@ class job extends Front_Controller {
             echo json_encode($result);
         }
 
+    }
+
+    public function appliedjobs() {
+        $data = $this->data;
+
+        $this->load->model('jobseeker_model');
+        if (isset($_GET['uid'])) {
+            $uid = $_GET['uid'];
+        } else {
+            $uid = $this->session->userdata('uid');
+        }
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+
+        if (isset($_GET['keywords'])) {
+            $filter = $_GET['keywords'] == 'Enter Keywords'?'':$_GET['keywords'];
+        } else {
+            $filter = '';
+        }
+
+        $this->load->model('job_model');
+        $data['jobs'] = $this->job_model->getAppliedJobByUser($uid, $filter);
+
+        foreach($data['jobs'] as $key=>$job) {
+            $data['jobs'][$key]['languages'] = $this->job_model->getJobLanguages($job['id']);
+            $data['jobs'][$key]['industries'] = $this->job_model->getJobIndustry($job['id']);
+        }
+        
+        $this->load->view($data['front_theme']."/jobseeker-applied-jobs",$data);
     }
 
     /**

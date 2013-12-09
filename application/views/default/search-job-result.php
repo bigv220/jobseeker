@@ -251,9 +251,9 @@
                             <dt>Preferred Years of Experience</dt>
                             <dd><?php echo getExperienceByID($job["preferred_year_of_experience"]); ?></dd>
                             <dt>Preferred Personal Skills</dt>
-                            <dd><?php echo $job["preferred_personal_skills"]; ?></dd>
+                            <dd><?php echo str_replace(',',', ',substr($job["preferred_personal_skills"],0, -1)); ?></dd>
                             <dt>Preferred Technical Skills</dt>
-                            <dd><?php echo $job["preferred_technical_skills"]; ?></dd>
+                            <dd><?php echo str_replace(',', ', ', substr($job["preferred_technical_skills"], 0, -1)); ?></dd>
                             <dt>Language(s) Required</dt>
                             <dd>
                                 <div class="jobseeker_profile_language">

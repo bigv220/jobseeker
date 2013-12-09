@@ -135,9 +135,23 @@ class job_model extends MY_Model
         return $this->db->query($sql);
     }
 
-    public function getAppliedJobByUser($uid) {
-        $sql = "SELECT * FROM job_apply WHERE user_id = $uid";
-        return $this->db->query($sql)->result_array();
+    public function getAppliedJobByUser($uid, $filter = '') {
+        //$sql = "SELECT * FROM job_apply WHERE user_id = $uid";
+        //return $this->db->query($sql)->result_array();
+
+        $result = $this->db->select('*')
+            ->from('job_apply')
+            ->join('job', 'job.id=job_apply.job_id')
+            ->join('user', 'job.company_id=user.uid')
+            ->where('user_id',$uid)
+            ->like('job_name',$filter)
+            ->order_by('post_date','desc')
+            ->get()
+            ->result_array();
+        if (isset($result))    
+            return $result;
+        else
+            return array();
     }
     
     public function delJobLang($job_id) {
