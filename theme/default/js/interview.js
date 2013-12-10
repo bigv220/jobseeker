@@ -10,16 +10,46 @@ $(document).ready(function(){
     });
 
     $('.reply_interview_function').click(function(e){
+        var id = $(this).attr('alt');
+        var company_name = $('#int' + id).find('#company_name').html();
+        $('#reply_to').html(company_name);
+
+        var interview_id = $('#int' + id).find('#interview_id').val();
+        $('#interviewId').val(interview_id);
+
+        //interview message
+        var msg = $('#int'+ id).find('#interview_msg').html();
+        $('#reply_msg').html(msg);
+
         popMarker.fadeIn();
         popReplyMessage.fadeIn();
         e.stopPropagation();
     });
     $('.delete_interview_function').click(function(e){
-        alert('add delete interview code here');
+        if(confirm('Are you sure to delete this interview request?')) {
+            var id = $(this).attr('alt');
+            $.post(site_url + 'search/deleteinterviewrequest',
+                {id: id},
+                function(result,status){
+                    if(status == 'success'){
+                        alert('Delete successful!');
+                        $('#int'+ id).css('display', 'none');
+                    }
+                });
+        }
         e.stopPropagation();
     });
 
     $('.send_message_function').click(function(){
+        var form = $('#replyInterviewRequest');
+        $.post(site_url + 'search/replyinterviewrequest',
+            form.serialize(),
+            function(result,status){
+                if(status == 'success'){
+
+                }
+        });
+
         popReplyMessage.fadeOut();
         popMessageSent.fadeIn();
     });
@@ -30,6 +60,14 @@ $(document).ready(function(){
     });
 
     $('.jobseeker_request_interview').click(function(e){
+        var uid = $(this).prev().val();
+        var name = $(this).prev().prev().val();
+        $('#jobseeker_name').html(name);
+        $('#jobseeker_uid').val(uid);
+
+        var position_lists = $('#current_user_jobs').html();
+        $('#position_title').html(position_lists);
+
         popRequestInterview.fadeIn();
         popMarker.fadeIn();
         e.stopPropagation();
@@ -46,8 +84,22 @@ $(document).ready(function(){
     });
 
     $('.send_request_interview').click(function(){
-        alert('Add send request interview function here');
+        sendInterviewRequest();
         popMarker.fadeOut();
         popRequestInterview.fadeOut();
     });
 });
+
+function sendInterviewRequest() {
+    var interviewForm = $('#sendInterviewRequest');
+
+    $.post(site_url + 'search/sendinterviewrequest',
+        interviewForm.serialize(),
+        function(result,status){
+            if(status == 'success'){
+                $('.pop-mark').fadeIn();
+                $('.request_interview_pop').fadeOut();
+                $('.request-sent-pop-message').fadeIn();
+            }
+        });
+}

@@ -64,6 +64,7 @@ $(function(){
 
     $('.pop-message-close').click(function(){
         $('.pop-message').fadeOut();
+        $('.request-sent-pop-message').fadeOut();
         popMark.fadeOut();
     });
 

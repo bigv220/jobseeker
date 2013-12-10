@@ -100,7 +100,7 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .pop-welcome-bd .span2{font-size:22px;padding:10px 0 0 0;}
 .pop-welcome-bd .span1,.pop-welcome-bd .span3{color:#674092;font-weight:700;font-size:14px;}
 .pop-welcome-bd .pop-welcome-here{width:106px;height:42px;line-height:42px;display:inline-block;text-align:center;vertical-align:top;background:url(home/here.gif) no-repeat;margin-top:10px;}
-.pop-message{display:none;z-index:102;width:494px;height:233px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(home/pop-msg-bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
+.pop-message, .request-sent-pop-message {display:none;z-index:102;width:494px;height:233px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(home/pop-msg-bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
 .pop-message-wrap{padding:10px;}
 .pop-message b{display:block;font-weight:bold;padding:25px 0px 15px 0px;color:#f17343;font-size:24px;text-align:center;}
 .pop-message-close{width:20px;height:20px;right:0px;top:-1px;cursor:pointer;display:block;}
@@ -370,3 +370,5 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .request_interview_pop_actions img{cursor:pointer;margin-right:10px;}
 h2.applied_jobs_title{color:#674092;font-size:18px;font-weight:bold;padding-left:10px;}
 .view_applied_jobs_page .interview_sent_date{width:75px;padding-top:45px;float:right;margin-right:12px;background:url(jobseeker/job_applied_date_bg.png) no-repeat;}
+.pop-succ-message {text-align: center; color: red; font-size: 16px;margin-top:20px; font-weight:bold;}
+.request-sent-pop-message { height: 100px;}

@@ -409,4 +409,32 @@ class jobseeker_model extends MY_Model
         return $this->db->query($sql)->result_array();
     }
 
+    public function sendInterviewRequest($data) {
+        return $this->db->insert('interview', $data);
+    }
+
+    public function getInterviews($where) {
+        $sql = "SELECT *,i.id as interview_id, i.company_id as company_id from interview as i LEFT JOIN user as u on u.uid=i.company_id
+            LEFT JOIN job as j on i.job_id=j.id
+            WHERE $where";
+
+        return $this->db->query($sql)->result_array();
+    }
+
+    public function deleteInterviews($id) {
+        $select_sql = 'SELECT is_deleted FROM interview WHERE id=' . $id;
+        $result = $this->db->query($select_sql)->result_array();
+
+        if($result[0]['is_deleted'] == 0) {
+            $sql = 'UPDATE interview SET is_deleted=1 WHERE id='.$id;
+        } else {
+            $sql = 'DELETE FROM interview WHERE id='.$id;
+        }
+        return $this->db->query($sql);
+    }
+
+    public function saveInterviewReply($reply_id, $id) {
+        $sql = "UPDATE interview SET reply_id=$reply_id WHERE id=".$id;
+        return $this->db->query($sql);
+    }
 }
