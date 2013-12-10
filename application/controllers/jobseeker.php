@@ -319,9 +319,60 @@ class jobseeker extends Front_Controller {
         } else {
             $uid = $this->session->userdata('uid');
         }
-
-
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+
+        $where = 'i.uid=' . $uid . ' And is_deleted=0';
+        $post = $_POST;
+        if($post) {
+            if ($post["interview_keywords"] == 'Enter Keywords') {
+                $post['interview_keywords'] = '';
+            }
+            if(!empty($post["interview_keywords"])) {
+                 $where .= " AND j.job_name like '%" . $post["interview_keywords"] . "%' or u.username like '%". $post['interview_keywords'] ."%'";
+            }
+        }
+
+        $this->load->model('job_model');
+
+        $interviews = $this->jobseeker_model->getInterviews($where);
+        for($i=0; $i<count($interviews);$i++) {
+            $positions = $this->job_model->getJobIndustry($interviews[$i]['job_id']);
+            $interviews[$i]['position_arr'] = $positions;
+        }
+        $data['interviews'] = $interviews;
+        $data['selected_tab'] = 1;
+
+        $this->load->view($data['front_theme']."/jobseeker-view-interviews",$data);
+    }
+
+    public function getInterviewsInTrash(){
+        $uid = $this->session->userdata('uid');
+        if (!$uid)
+        {
+            redirect('/');
+        }
+
+        $this->load->model('jobseeker_model');
+
+        $data = $this->data;
+        if (isset($_GET['uid'])) {
+            $uid = $_GET['uid'];
+        } else {
+            $uid = $this->session->userdata('uid');
+        }
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+
+        $where = 'i.uid=' . $uid . ' And is_deleted=1';
+
+        $this->load->model('job_model');
+        $interviews = $this->jobseeker_model->getInterviews($where);
+        for($i=0; $i<count($interviews);$i++) {
+            $positions = $this->job_model->getJobIndustry($interviews[$i]['job_id']);
+            $interviews[$i]['position_arr'] = $positions;
+        }
+        $data['interviews'] = $interviews;
+        $data['selected_tab'] = 2;
+
         $this->load->view($data['front_theme']."/jobseeker-view-interviews",$data);
     }
 

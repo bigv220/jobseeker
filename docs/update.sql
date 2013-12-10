@@ -227,3 +227,21 @@ CREATE TABLE IF NOT EXISTS `inbox` (
 
 #2013-12-08 Add column number of viewed profile.
 ALTER TABLE  user ADD  `visit_num` INT(11) NULL DEFAULT 0;
+
+#2013-12-10 Add interview table
+CREATE TABLE `interview` (
+  `id` int(11) NOT NULL auto_increment,
+  `uid` int(11) default NULL COMMENT 'interview request to',
+  `company_id` int(11) default NULL COMMENT 'interview request from',
+  `job_id` int(11) default NULL,
+  `communication_type` varchar(20) default NULL,
+  `message` text,
+  `communication_other` varchar(100) default NULL,
+  `date` date default NULL,
+  `time` varchar(20) default NULL,
+  `time_zone` varchar(20) default NULL,
+  `insert_date` varchar(10) default NULL,
+  `is_deleted` smallint(6) default NULL,
+  `reply_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
