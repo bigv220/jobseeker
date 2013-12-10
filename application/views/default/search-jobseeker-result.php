@@ -1,5 +1,6 @@
 <?php $this->load->view($front_theme.'/header-block');?>
 <link href="<?php echo $theme_path?>style/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+
 <style type="text/css">
     input.text { width: 215px;}
 </style>
@@ -7,6 +8,10 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $(function() {
+            $( "#datepicker" ).datepicker();
+        });
+
         $("select[name='country']").change(function() {
             change_location($(this),'country');
         });
@@ -216,6 +221,12 @@
 
 <!--search-result body-->
 <div class="result-bd">
+    <select id="current_user_jobs" style="display: none">
+    <?php foreach($current_user_jobs as $job): ?>
+        <option value="<?php echo $job['id']; ?>"><?php echo $job['job_name']; ?></option>
+    <?php endforeach; ?>
+    </select>
+
     <?php if (count($jobseekers) > 0): ?>
     <?php foreach ($jobseekers as $user):
     ?>
@@ -234,7 +245,11 @@
                     <a href="#" class="job-btn jobseeker-btn-shortlisted"></a>
                     <a href="#" class="job-btn job-btn-match">99%</a>
                 </div>
-                <div><a href="#" class="jobseeker_request_interview"></a></div>
+                <div>
+                    <input type="hidden" name="jobseeker_name" value="<?php echo $user['first_name']?>" />
+                    <input type="hidden" name="jobseeker_uid" value="<?php echo $user['uid']?>" />
+                    <a href="#" class="jobseeker_request_interview"></a>
+                </div>
             </div>
         </div>
         <div class="sresult-par2">
@@ -422,4 +437,7 @@
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/searchJobPage.js"></script>
+
+<script type="text/javascript" src="<?php echo $theme_path?>js/My97DatePicker/WdatePicker.js"></script>
+
 <?php $this->load->view($front_theme.'/footer-block');?>

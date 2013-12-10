@@ -89,41 +89,49 @@
     </div>
 </div>
 
+<div class="request-sent-pop-message png">
+    <div class="pop-message-wrap rel">
+        <i class="pop-message-close abs" title="close"></i>
+        <div class="pop-succ-message">Your interview request has been sent successful!</div>
+    </div>
+</div>
+
+<form action="<?php echo $site_url; ?>search/sendinterviewrequest" method="post" id="sendInterviewRequest">
 <div class="request_interview_pop png">
     <div class="request_interview_pop_wrap rel">
         <i class="request_interview_pop_close abs" title="close"></i>
-        <b>Send Interview request to <span>Name Here</span></b>
+        <b>Send Interview request to <span id="jobseeker_name"></span></b>
+        <input type="hidden" name="jobseeker_uid" id="jobseeker_uid" />
         <div class="request_interview_pop_bd">
             <div class="request_interview_pop_left">
                 <label>Position Title</label>
-                <select name="position_title">
-                    <option value="">Position Title One</option>
-                    <option value="1">Position Title Two</option>
+                <select name="job_id" id="position_title">
+                    <option value="">Position Title</option>
                 </select>
                 <label>Optional Message</label>
                 <textarea name="optional_message"></textarea>
                 <label>Date</label>
                 <div class="date_selector_wrapper">
-                    <input name="sent_date"/><img src="<?php echo $theme_path;?>/style/portfolio/calendar_selector_btn.png"/>
+                    <input class="Wdate" name="interview_date" type="text" onClick="WdatePicker({lang:'en'})" />
                 </div>
             </div>
             <div class="request_interview_pop_right">
                 <div class="preferred_communication_wrapper">
                     <label>Preferred Communication</label>
-                    <input type="hidden" name="preferred_communication" id="preferred_communication" value="1" />
-                    <i data-val="0" data-id="preferred_communication" class="kyo-radio kyo-radio-sel">Personal Email</i>
-                    <i data-val="1" data-id="preferred_communication" class="kyo-radio">JingChat</i>
-                    <i data-val="2" data-id="preferred_communication" class="kyo-radio">Phone</i>
-                    <i data-val="3" data-id="preferred_communication" class="kyo-radio">Skype</i>
-                    <i data-val="4" data-id="preferred_communication" class="kyo-radio">Other</i>
+                    <input type="hidden" name="preferred_communication" id="preferred_communication" value="Personal Email" />
+                    <i data-val="Personal Email" data-id="preferred_communication" class="kyo-radio kyo-radio-sel">Personal Email</i>
+                    <i data-val="JingChat" data-id="preferred_communication" class="kyo-radio">JingChat</i>
+                    <i data-val="Phone" data-id="preferred_communication" class="kyo-radio">Phone</i>
+                    <i data-val="Skype" data-id="preferred_communication" class="kyo-radio">Skype</i>
+                    <i data-val="Other" data-id="preferred_communication" class="kyo-radio">Other</i>
                     <input name="other_preferred_communication"/>
                 </div>
                 <div class="time_selector_wrapper">
                     <div class="time_zone">
                         <label>Time Zone</label>
                         <select name="time_zone">
-                            <option value="0">GMT</option>
-                            <option value="1">UTC</option>
+                            <option value="GMT">GMT</option>
+                            <option value="UTC">UTC</option>
                         </select>
                     </div>
                     <div class="time_wrapper">
@@ -139,6 +147,7 @@
         </div>
     </div>
 </div>
+</form>
 <!--footer-->
 <div class="pft-wrap">
 	<div class="p-ft w70">
@@ -181,8 +190,6 @@
 		</div>
 	</div>
 </div>
-
-<!-- <script type="text/javascript" src=""></script> -->
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.jSelectDate.js" ></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/tagit.js" ></script>
