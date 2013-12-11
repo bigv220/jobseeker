@@ -15,9 +15,9 @@
             </div>
             <div class="about-btns"> 
 	            <a href="#" class="png abtn apply"></a> 
-	            <a href="<?php echo $site_url.'company/companyInfo/'.$company_id?>" class="png abtn view"></a> 
-	            <a href="#" class="png abtn bkmk"></a> 
-	            <a href="#" class="png abtn bkmked" style="display:none;"></a> 
+	            <a href="<?php echo $site_url.'company/companyInfo/'.$company_id?>" class="png abtn view"></a>
+                <a href="javascript:void(0);" id="job-mark<?php echo $jobinfo['id']; ?>" class="png abtn <?php if (isset($jobinfo['id']) && in_array($jobinfo['id'], $bookmark)) echo "bkmked job-btn-marked"; else echo "bkmk job-btn-mark"; ?>" data-job-id="<?php echo $jobinfo['id']; ?>"></a>
+
             </div>
         </div>
         <div class="clear"></div>
@@ -121,6 +121,37 @@
 <!-- Partners -->
 <?php $this->load->view($front_theme.'/partners-block');?>
 
+<!--popmark-->
+<div class="pop-mark"></div>
+
+<!--pop bookmark job box-->
+<div class="box pop-box pop-bookmark">
+    <div class="rel">
+        <div class="pop-close pop-apply-close"></div>
+        <div class="pop-nav pop-apply-nav">
+            <p>Are you sure you want to bookmark this job?</p>
+        </div>
+        <div class="pop-bar">
+            <input type="hidden" id="selected_job_id" />
+            <a href="javascript:void(0);" class="pop-bar-btn pop-bookmark-yes">Yes</a>
+            <a href="javascript:void(0);" class="pop-bar-btn pop-btn-no">No</a>
+        </div>
+    </div>
+</div>
+
+<div class="signup-pop-bookmark">
+    <div class="rel">
+        <div class="pop-close signup-pop-apply-close abs"></div>
+        <div class="pop-nav signup-pop-apply-nav">
+            <p>Please register as a jobseeker to bookmark jobs.</p>
+        </div>
+        <div class="pop-bar">
+            <button href="javascript:void(0);" class="signup-pop-btn"></button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript">
     var map;
