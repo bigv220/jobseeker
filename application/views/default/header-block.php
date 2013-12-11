@@ -105,14 +105,14 @@
                             <script>userType = 0;</script>
                             <li><a href="<?php echo $site_url?>jobseeker/viewprofile">View Profile</a></li>
                             <li><a href="<?php echo $site_url?>jobseeker/register">Edit Profile</a></li>
-                            <li><a href="#">Bookmarked Employers</a></li>
+                            <li><a href="<?php echo $site_url; ?>jobseeker/savedBookmarks">Bookmarked Employers</a></li>
                             <li><a href="#">Shortlisted Jobs</a></li>
                             <li><a href="<?php echo $site_url?>job/appliedjobs">Applied Jobs</a></li>
                         <?php elseif(1 == $current_user_type): ?>
                             <script>userType = 1;</script>
                             <li><a href="<?php echo $site_url?>company/companyprofile">View Profile</a></li>
                             <li><a href="<?php echo $site_url?>company/register">Edit Company Profile</a></li>
-                            <li><a href="#">Manage Job listings</a></li>
+                            <li><a href="<?php echo $site_url?>company/joblisting">Manage Job listings</a></li>
                             <li><a href="#">View Shortlisted Candidates</a></li>
                             <li><a href="#">Inbox</a></li>
                         <?php endif;?>

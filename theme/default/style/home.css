@@ -214,7 +214,7 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
     height:115px;position:absolute;top:50%;left:50%;background:url(search/signup_to_apply_job_pop_bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
 .signup-pop-apply-close{width:20px;height:20px;right:0px;cursor:pointer;display:block;}
 .signup-pop-apply-nav{padding:22px 20px 8px 20px;font-size:13px;color:#363636;font-weight:bold;}
-.signup-pop-apply .signup-pop-btn, signup-pop-bookmark{width:190px;height:28px;border:none;cursor:pointer;background: url(search/sign_up_btn_apply.png) no-repeat;}
+.signup-pop-apply .signup-pop-btn, .signup-pop-bookmark .signup-pop-btn {width:190px;height:28px;border:none;cursor:pointer;background: url(search/sign_up_btn_apply.png) no-repeat;}
 .profile_views_num{color:#ebebec;font-size:14px;font-weight:bold;}
 a.edit_jobseeker_profile_link{text-decoration:underline;margin-left:10px;color:#674092;}
 div.text{margin-top: 8px;}
