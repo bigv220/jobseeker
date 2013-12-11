@@ -373,7 +373,7 @@
             <p>Please register as a jobseeker to bookmark jobs.</p>
         </div>
         <div class="pop-bar">
-            <button href="javascript:void(0);" class="signup-pop-btn"></button>
+            <button href="<?php echo $site_url; ?>" class="signup-pop-btn"></button>
         </div>
     </div>
 </div>

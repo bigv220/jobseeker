@@ -160,6 +160,9 @@ class jobseeker extends Front_Controller {
     $data['language'] = $this->jobseeker_model->getLanguage($uid);
     $data['seekingIndustry'] = $this->jobseeker_model->getAllSeekingIndustry($uid);
     $data['similar_peoples'] = $this->jobseeker_model->getSimilarUsers($uid);
+
+    $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid");
+    $data['interview_num'] = count($interview_num);
     $this->load->view($data['front_theme']."/jobseeker-myprofile",$data);
 }
     public function savedBookmarks(){
