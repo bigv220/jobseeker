@@ -17,7 +17,7 @@
       <div class="text">
         <h2><?php echo $userinfo['first_name'].' '.$userinfo['last_name']; ?></h2>
         <h4><?php echo $userinfo['city'].', '.$userinfo['country']; ?></h4>
-        <p class="profile_views_num">4 Profile Views</p>
+        <p class="profile_views_num"><?php echo $userinfo['visit_num']; ?> Profile Views</p>
       </div>
       <div class="btnarea">
           <a href="#" class="png square_btn edit_profile_btn"></a>
@@ -77,6 +77,7 @@
                               </div>
                               <div class="jingchat_messages_bd">
                                   <?php 
+                                  if (!empty($msg_detail)):
                                   foreach($msg_detail as $detail): ?>
                                   <div class="<?php if ($detail['user1'] == $uid) echo "jingchat_message_row_me"; else echo "jingchat_message_row_other"; ?>">
                                       <div class="jingchat_message_content">
@@ -91,17 +92,16 @@
                                           <div class="other_message_bottom"></div>
                                       </div>
                                       <div class="jingchat_message_icon">
-                                          <img src="<?php echo $theme_path?>style/search/job-img1.gif" alt=""/>
+                                          <img src="<?php if ($detail['user1'] == $uid) echo $site_url.'attached/users/'.$userinfo['profile_pic']; else echo $site_url.'attached/users/'. $other_user['profile_pic']; ?>" alt=""/>
                                       </div>
                                       <div style="clear:both;"></div>
                                   </div>
                                   <?php endforeach; ?>
-
+                                  <?php endif; ?>
                               </div>
                           </div>
                           <input type="hidden" id="msg_id" value="<?php echo $id; ?>"/>
                           <input type="hidden" id="user2" value="<?php echo $user2; ?>"/>
-                          <input type="button" id="send_msg" value="Send" style="z-index:100"/>
                           <div class="jingchat_message_input">
                               <textarea id="message" rows="3" cols="" class="input-tip" data-tipval="Type your message here">Type your message here</textarea>
                           </div>
@@ -113,131 +113,31 @@
           <div class="fxui-tab-nav">
               <div class="jingchatlog_wrapper">
               <div class="inbox_overview_list">
-                  <div class="inbox_overview_row inbox_overview_row_current">
-                      <div class="email_select_checkbox">
-                          <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
-                          <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
-                      </div>
-                      <div class="sender_avatar">
-                          <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
-                      </div>
-                      <div class="email_short_description">
-                          <div class="received_date">Yesterday</div>
-                          <div class="from_name">Redstar Works</div>
-                          <div class="email_subject">Job oppotunity for you</div>
-                          <div class="email_actions_bar">
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_online_icon.png" alt=""/>
+                   <?php foreach($send_messages as $msg): 
+                      $id = $msg['id'];
+                      $user2 = $msg['user1'];
+                      ?>
+                      <div class="inbox_overview_row" data-id='<?php echo $msg['id']; ?>'>
+                          <div class="email_select_checkbox">
+                              <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
+                              <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
                           </div>
-                      </div>
-                      <div style="clear:both;"></div>
-                  </div>
-
-                  <div class="inbox_overview_row">
-                      <div class="email_select_checkbox">
-                          <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
-                          <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
-                      </div>
-                      <div class="sender_avatar">
-                          <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
-                      </div>
-                      <div class="email_short_description">
-                          <div class="received_date">Yesterday</div>
-                          <div class="from_name">Redstar Works</div>
-                          <div class="email_subject">Job oppotunity for you</div>
-                          <div class="email_actions_bar">
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_online_icon.png" alt=""/>
+                          <div class="sender_avatar">
+                              <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
                           </div>
-                      </div>
-                      <div style="clear:both;"></div>
-                  </div>
-
-                  <div class="inbox_overview_row">
-                      <div class="email_select_checkbox">
-                          <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
-                          <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
-                      </div>
-                      <div class="sender_avatar">
-                          <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
-                      </div>
-                      <div class="email_short_description">
-                          <div class="received_date">Yesterday</div>
-                          <div class="from_name">Redstar Works</div>
-                          <div class="email_subject">Job oppotunity for you</div>
-                          <div class="email_actions_bar">
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_offline_icon.png" alt=""/>
+                          <div class="email_short_description">
+                              <div class="received_date">Yesterday</div>
+                              <div class="from_name"><?php echo $userinfo['first_name']; ?> <?php echo $userinfo['last_name']; ?></div>
+                              <div class="email_subject"><?php echo $msg['message']; ?></div>
+                              <div class="email_actions_bar">
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
+                                  <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_online_icon.png" alt=""/>
+                              </div>
                           </div>
+                          <div style="clear:both;"></div>
                       </div>
-                      <div style="clear:both;"></div>
-                  </div>
-
-                  <div class="inbox_overview_row">
-                      <div class="email_select_checkbox">
-                          <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
-                          <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
-                      </div>
-                      <div class="sender_avatar">
-                          <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
-                      </div>
-                      <div class="email_short_description">
-                          <div class="received_date">Yesterday</div>
-                          <div class="from_name">Redstar Works</div>
-                          <div class="email_subject">Job oppotunity for you</div>
-                          <div class="email_actions_bar">
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_offline_icon.png" alt=""/>
-                          </div>
-                      </div>
-                      <div style="clear:both;"></div>
-                  </div>
-
-                  <div class="inbox_overview_row">
-                      <div class="email_select_checkbox">
-                          <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
-                          <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
-                      </div>
-                      <div class="sender_avatar">
-                          <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
-                      </div>
-                      <div class="email_short_description">
-                          <div class="received_date">Yesterday</div>
-                          <div class="from_name">Redstar Works</div>
-                          <div class="email_subject">Job oppotunity for you</div>
-                          <div class="email_actions_bar">
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_offline_icon.png" alt=""/>
-                          </div>
-                      </div>
-                      <div style="clear:both;"></div>
-                  </div>
-
-                  <div class="inbox_overview_row">
-                      <div class="email_select_checkbox">
-                          <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
-                          <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
-                      </div>
-                      <div class="sender_avatar">
-                          <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
-                      </div>
-                      <div class="email_short_description">
-                          <div class="received_date">Yesterday</div>
-                          <div class="from_name">Redstar Works</div>
-                          <div class="email_subject">Job oppotunity for you</div>
-                          <div class="email_actions_bar">
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt=""/>
-                              <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_online_icon.png" alt=""/>
-                          </div>
-                      </div>
-                      <div style="clear:both;"></div>
-                  </div>
+                      <?php endforeach; ?>
               </div>
                   <div class="jingchat_log_content">
 
@@ -316,7 +216,7 @@
                                           <div class="other_message_bottom"></div>
                                       </div>
                                       <div class="jingchat_message_icon">
-                                          <img src="<?php echo $theme_path?>style/search/job-img1.gif" alt=""/>
+                                          <img src="<?php echo $pic; ?>" alt=""/>
                                       </div>
                                       <div style="clear:both;"></div>
                                   </div>

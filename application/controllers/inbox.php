@@ -35,6 +35,8 @@ class inbox extends Front_Controller {
         // get message list
         $data['messages'] = $this->inbox_model->getMsg($uid);
 
+        $data['send_messages'] = $this->inbox_model->getMsgSentByMe($uid);
+
         // Get first detail msg
         if (!empty($data['messages'])) {
             $data['msg_detail'] = $this->inbox_model->getDetailMsg($data['messages'][0]['id']);    
@@ -46,9 +48,9 @@ class inbox extends Front_Controller {
             $user2 = $data['msg_detail'][0]['user2'];
 
             if ($user1 == $uid) {
-                $data['user2'] = $this->jobseeker_model->getUserInfo($user2);                
+                $data['other_user'] = $this->jobseeker_model->getUserInfo($user2);                
             } else {
-                $data['user2'] = $this->jobseeker_model->getUserInfo($user1);                
+                $data['other_user'] = $this->jobseeker_model->getUserInfo($user1);                
             }
         }
         
@@ -76,7 +78,33 @@ class inbox extends Front_Controller {
 
     public function getDetailMsg() 
     {
+        $data = $this->data;
 
+        $this->load->model('jobseeker_model');
+        if (isset($_GET['uid'])) {
+            $uid = $_GET['uid'];
+        } else {
+            $uid = $this->session->userdata('uid');
+        }
+        // Get current login user info
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+
+        $this->load->model('inbox_model');
+        
+        $data['msg_detail'] = $this->inbox_model->getDetailMsg($_POST['msg_id']);   
+        // Get other user's info, name and profile img
+        if (!empty($data['msg_detail'])) {
+            $user1 = $data['msg_detail'][0]['user1'];
+            $user2 = $data['msg_detail'][0]['user2'];
+
+            if ($user1 == $uid) {
+                $data['other_user'] = $this->jobseeker_model->getUserInfo($user2);                
+            } else {
+                $data['other_user'] = $this->jobseeker_model->getUserInfo($user1);                
+            }
+        } 
+        $detail_msg = $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
+        echo $detail_msg;
     }
 
     public function response()
@@ -93,6 +121,15 @@ class inbox extends Front_Controller {
         $this->inbox_model->addMsg($post);
         $data['message'] = $post['message'];
         $data['timestamp'] = $post['timestamp'];
+
+        $this->load->model('jobseeker_model');
+        if (isset($_GET['uid'])) {
+            $uid = $_GET['uid'];
+        } else {
+            $uid = $this->session->userdata('uid');
+        }
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+        
         $newmsg = $this->load->view($data['front_theme'].'/inbox-onemsg',$data);
         echo $newmsg;
     }

@@ -124,7 +124,7 @@ class search extends Front_Controller {
             array_push($bookmark, $a_job['job_id']);
         }
         $data['bookmark'] = $bookmark;
-        
+
         // Filter employment_type
         if(!empty($post['employment_type'])) {
             $filter_employment_type = explode(",", $post['employment_type']);
@@ -524,8 +524,28 @@ class search extends Front_Controller {
             }
         }
 
+        // Get shortlist candiate
+        $this->load->model('company_model');
+        if ($this->session->userdata('uid')) {
+            $candiates_arr = $this->company_model->getCandidateIdForCompany($this->session->userdata('uid'));
+        } else {
+            $candiates_arr = array();
+        }
+        $candidates = array();
+        foreach ($candiates_arr as $value) {
+            array_push($candidates, $value['user_id']);
+        }
+
         for($i=0; $i<count($jobseekers); $i++) {
-             $personal_arr = $this->jobseeker_model->getPersonalSkills($jobseekers[$i]['uid']);
+
+            // Check if Shortlist Candidate is checked
+            if (in_array($jobseekers[$i]['uid'], $candidates)) {
+                $jobseekers[$i]['is_shortlisted'] = true;
+            } else {
+                $jobseekers[$i]['is_shortlisted'] = false;
+            }
+
+            $personal_arr = $this->jobseeker_model->getPersonalSkills($jobseekers[$i]['uid']);
             //filter personal skills
             if(!empty($post["PersonalSkills_str"])) {
                 $post_arr = explode(',', $post["PersonalSkills_str"]);

@@ -236,13 +236,19 @@
             <div class="span2">
                 <h2><?php echo $user['first_name']; ?></h2>
                 <h3>
-                    Accounting
+                    <?php
+                                $industry_arr = $user['industry_arr'];
+                                if (!empty($industry_arr)) {
+                                    echo ''.$industry_arr[0]['industry']." ";
+                                }
+                                
+                                ?>
                 </h3>
                 <p><?php echo $user['city'].' '.$user['province'].' '.$user['country']; ?></p>
                 <a href="#" class="job-viewmore">View More</a> </div>
             <div class="span3">
                 <div class="zoom">
-                    <a href="#" class="job-btn jobseeker-btn-shortlisted"></a>
+                    <a href="#" data-id="<?php echo $user['uid']?>" class="job-btn jobseeker-btn-shortlisted <?php if ($user['is_shortlisted']==1):?>jobseeker-btn-shortlisted_current<?php endif; ?>"></a>
                     <a href="#" class="job-btn job-btn-match">99%</a>
                 </div>
                 <div>
