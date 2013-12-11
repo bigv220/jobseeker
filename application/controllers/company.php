@@ -106,6 +106,10 @@ class company extends Front_Controller {
 
 
     public function shortlistCandidates(){
+        if (!isCompany($this->session->userdata('user_type'))) {
+            securelychk();
+        }
+
         $uid = $this->session->userdata('uid');
         if (!$uid)
         {
@@ -113,7 +117,7 @@ class company extends Front_Controller {
         }
 
         $this->load->model('jobseeker_model');
-
+        $this->load->model('company_model');
         $data = $this->data;
         if (isset($_GET['uid'])) {
             $uid = $_GET['uid'];
@@ -123,6 +127,75 @@ class company extends Front_Controller {
 
 
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+        if (!isset($_GET['keywords']) || $_GET['keywords'] == 'Enter Keywords') {
+            $filter = '';
+        } else {
+            $filter = $_GET['keywords'];
+        }
+        $data['candidates'] = $this->company_model->getCandidatesForCompany($uid, $filter);
+        foreach ($data['candidates'] as $key=>$value) {
+            $data['candidates'][$key]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($data['candidates'][$key]['uid']);
+            $data['candidates'][$key]['educations'] = $this->jobseeker_model->getAllEducationInfo($data['candidates'][$key]['uid']);
+            $data['candidates'][$key]['work_history'] = $this->jobseeker_model->getAllWorkHistory($data['candidates'][$key]['uid']);
+            $data['candidates'][$key]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($data['candidates'][$key]['uid']);
+            $data['candidates'][$key]['languages'] = $this->jobseeker_model->getLanguage($data['candidates'][$key]['uid']);
+
+            $personal_arr = $this->jobseeker_model->getPersonalSkills($data['candidates'][$key]['uid']);
+            //filter personal skills
+            if(!empty($post["PersonalSkills_str"])) {
+                $post_arr = explode(',', $post["PersonalSkills_str"]);
+
+                $delete_flag = true;
+                foreach ($personal_arr as $v) {
+                    if (in_array($v['personal_skill'] , $post_arr) === TRUE) {
+                        $delete_flag = false;
+                    }
+                }
+                if($delete_flag) {
+                    unset($data['candidates'][$key]);
+                    continue;
+                }
+            }
+            $data['candidates'][$key]['personal_skills'] = $personal_arr;
+
+            //filter Technical skills
+            $technical_arr = $this->jobseeker_model->getProfessionalSkills($data['candidates'][$key]['uid']);
+            if(!empty($post["ProfessionalSkills_str"])) {
+                $post_arr = explode(',', $post["ProfessionalSkills_str"]);
+
+                $delete_flag = true;
+                foreach ($technical_arr as $v) {
+                    if (in_array($v['professional_skill'] , $post_arr) === TRUE) {
+                        $delete_flag = false;
+                    }
+                }
+                if($delete_flag) {
+                    unset($data['candidates'][$key]);
+                    continue;
+                }
+            }
+            $data['candidates'][$key]['professional_skills'] = $technical_arr;
+        }
         $this->load->view($data['front_theme']."/company_view_shortlist_cadidates",$data);
+    }
+
+    public function addCandidate() {
+        $uid = $this->session->userdata('uid');
+        if (!$uid)
+        {
+            redirect('/');
+        }
+
+        $this->load->model('company_model');
+        $post = array('company_id'=>$uid, 'user_id'=>$_POST['user_id']);
+        $insert_id = $this->company_model->addCandidate($post);
+
+        if ($insert_id != -1) {
+            $msg = "success";
+        } else {
+            $msg = "failed";
+        }
+        $result['status'] = $msg;
+        echo json_encode($result);
     }
 }

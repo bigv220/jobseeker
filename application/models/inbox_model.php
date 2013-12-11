@@ -42,6 +42,23 @@ class inbox_model extends MY_Model
         return $result;
     }
 
+    /**
+     * Get Messages that I sent.
+     * 
+     **/
+    public function getMsgSentByMe($uid)
+    {
+        $result = $this->db->select('*')
+                 ->from($this->table)
+                 //->join('user', 'user.uid='.$this->table.'.user1')
+                 ->where('user1',$uid)
+                 ->group_by('id')
+                 ->order_by('seq','desc')
+                 ->get()
+                 ->result_array();
+        return $result;
+    }
+
     public function getDetailMsg($msg_id)
     {
         $result = $this->db->select('*')

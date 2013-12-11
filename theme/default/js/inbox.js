@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
 	$('.inbox_overview_row').click(function() {
 		getmsgdetail(this,$(this).attr('data-id'));
 	})	
@@ -9,7 +10,12 @@ $(document).ready(function() {
 		change_current_log_view(this1);
 		// AJAX get message list
 		$('#msg_id').val(id);
-		
+		$.post(base_url + "inbox/getDetailMsg", { msg_id:$(this1).attr('data-id') },
+		  	function(data){
+		  		//TODO: 定位到最下面
+		    	$('.jingchat_messages_bd').html(data);
+
+		});
 	}
 
 	var change_current_log_view = function(this1) {
@@ -18,14 +24,19 @@ $(document).ready(function() {
 	}
 
 	
-
-	$('#send_msg').click(function() {
-		$.post(base_url + "inbox/response", { id:$('#msg_id').val(), user2:$('#user2').val(), message:$('#message').val() },
-		  function(data){
-		  	//TODO: 定位到最下面
-		    $('.jingchat_messages_bd').append(data);
-		});
-	})
+	$('.jingchat_message_input textarea').keypress(function(event) {
+    	// Check the keyCode and if the user pressed Enter (code = 13) 
+    	if (event.keyCode == 13) {
+	        $.post(base_url + "inbox/response", { id:$('#msg_id').val(), user2:$('#user2').val(), message:$('#message').val() },
+		  	function(data){
+		  		//TODO: 定位到最下面
+		    	$('.jingchat_messages_bd').append(data);
+		    	
+		    	$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
+				$('.jingchat_message_input textarea').val('');
+			});
+    	}
+	});
 
 });
 
