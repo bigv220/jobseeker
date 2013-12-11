@@ -20,7 +20,7 @@
         <p class="profile_views_num">4 Profile Views</p>
       </div>
       <div class="btnarea">
-          <a href="#" class="png square_btn edit_profile_btn"></a>
+          <a href="<?php echo $site_url?>company/register" class="png square_btn edit_profile_btn"></a>
           <a href="#" class="png square_btn jingchat_inbox_btn"></a>
           <span class="bubble jingchat_inbox_bubble">2</span>
           <a href="#" class="png square_btn view_my_candidates_btn view_my_candidates_btn_current"></a>
