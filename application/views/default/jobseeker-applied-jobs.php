@@ -23,9 +23,11 @@
           <a href="<?php echo $site_url?>jobseeker/register" class="png square_btn edit_profile_btn"></a>
           <a href="#" class="png square_btn jingchat_inbox_btn"></a>
           <?php if (!empty($unread_msg_num)): ?><span class="bubble jingchat_inbox_bubble"><?php echo $unread_msg_num; ?></span><?php endif; ?>
-          <a href="#" class="png square_btn saved_bookmarks_btn"></a>
-          <a href="#" class="png square_btn view_my_interviews_btn"></a>
-          <?php if (!empty($my_interviews_num)): ?><span class="bubble view_my_interviews_bubble"><?php echo $my_interviews_num; ?></span><?php endif;?>
+          <a href="<?php echo $site_url; ?>jobseeker/savedBookmarks" class="png square_btn saved_bookmarks_btn"></a>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <?php if (!empty($my_interviews_num)): ?>
+          <span class="bubble view_my_interviews_bubble"><?php echo $my_interviews_num; ?></span>
+          <?php endif;?>
          </div>
     </div>
 

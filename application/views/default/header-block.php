@@ -105,7 +105,7 @@
                             <script>userType = 0;</script>
                             <li><a href="<?php echo $site_url?>jobseeker/viewprofile">View Profile</a></li>
                             <li><a href="<?php echo $site_url?>jobseeker/register">Edit Profile</a></li>
-                            <li><a href="#">Bookmarked Employers</a></li>
+                            <li><a href="<?php echo $site_url; ?>jobseeker/savedBookmarks">Bookmarked Employers</a></li>
                             <li><a href="#">Shortlisted Jobs</a></li>
                             <li><a href="<?php echo $site_url?>job/appliedjobs">Applied Jobs</a></li>
                         <?php elseif(1 == $current_user_type): ?>
