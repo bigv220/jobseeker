@@ -112,7 +112,7 @@
                             <script>userType = 1;</script>
                             <li><a href="<?php echo $site_url?>company/companyprofile">View Profile</a></li>
                             <li><a href="<?php echo $site_url?>company/register">Edit Company Profile</a></li>
-                            <li><a href="#">Manage Job listings</a></li>
+                            <li><a href="<?php echo $site_url?>company/joblisting">Manage Job listings</a></li>
                             <li><a href="#">View Shortlisted Candidates</a></li>
                             <li><a href="#">Inbox</a></li>
                         <?php endif;?>

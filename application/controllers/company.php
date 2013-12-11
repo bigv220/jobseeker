@@ -125,4 +125,18 @@ class company extends Front_Controller {
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
         $this->load->view($data['front_theme']."/company_view_shortlist_cadidates",$data);
     }
+    
+    public function joblisting() {
+    	$uid = $this->session->userdata('uid');
+    	if (!$uid)
+    	{
+    		redirect('/');
+    	}
+    	
+    	$data = $this->data;
+    	$this->load->model('jobseeker_model');
+    	$data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+    	
+    	$this->load->view($data['front_theme']."/company_job_listing",$data);
+    }
 }
