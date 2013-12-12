@@ -61,7 +61,7 @@
     <div class="box rel sresult-row" id="int<?php echo $int['interview_id']; ?>">
         <div class="sresult-par1">
             <div class="span1 rel">
-                <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="90px" height="90px" class="round_corner10_img"/>
+                <img src="<?php echo $site_url;?>attached/users/<?php echo $int['profile_pic']?$int['profile_pic']:'no-image.png';?>" alt="" width="90px" height="90px" class="round_corner10_img"/>
             </div>
             <div class="span2">
                 <h2><?php echo $int['job_name']; ?></h2>

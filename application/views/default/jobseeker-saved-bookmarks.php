@@ -195,7 +195,7 @@
 <div class="box rel sresult-row" id="jobdiv<?php echo $job['id']; ?>">
     <div class="sresult-par1">
         <div class="span1 rel">
-            <img src="<?php echo $theme_path;?>/users/<?php echo $job['profile_pic']; ?>" alt="" width="85px" height="85px" class="round_img"/>
+            <img src="<?php echo $site_url;?>attached/users/<?php echo $job['profile_pic']?$job['profile_pic']:'no-image.png';?>" alt="" width="85px" height="85px" class="round_img"/>
         </div>
         <div class="span2">
             <h2><?php echo $job["job_name"]; ?></h2>
@@ -298,7 +298,7 @@
 <div class="box rel sresult-row">
     <div class="sresult-par1" id="companydiv<?php echo $com['company_id']; ?>">
         <div class="span1 rel">
-            <img src="<?php echo $theme_path;?>/users/<?php echo $com['profile_pic']; ?>" alt="" width="85px" height="85px" class="round_img"/>
+            <img src="<?php echo $site_url;?>attached/users/<?php echo $com['profile_pic']?$com['profile_pic']:'no-image.png';?>" alt="" width="85px" height="85px" class="round_img"/>
         </div>
         <div class="span2">
             <h2><?php echo $com['name']; ?></h2>

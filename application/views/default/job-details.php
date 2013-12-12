@@ -5,7 +5,7 @@
     <div class="company-body box rel mb20">
         <div class="company-hd rel"> 
         <div class="people_icon">
-	        <img src="<?php echo $site_url.'attached/users/'.$company_avatar?>" alt="" width="128px" height="128px"/>
+	        <img src="<?php echo $site_url; ?>attached/users/<?php echo $company_avatar?$company_avatar:'no-image.png';?>" alt="" width="128px" height="128px"/>
 	        <i class="abs face png"></i>
         </div>
             <div class="text" style="width:320px;">
