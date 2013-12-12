@@ -32,12 +32,13 @@ $(document).ready(function(){
                 {id: id},
                 function(result,status){
                     if(status == 'success'){
-                        alert('Delete successful!');
                         $('#int'+ id).css('display', 'none');
                     }
                 });
         }
         e.stopPropagation();
+        e.preventDefault();
+
     });
 
     $('.send_message_function').click(function(){
