@@ -93,11 +93,11 @@ class job_model extends MY_Model
     public function searchBookmarkedJob($where) {
         $sql = "SELECT *,jb.job_id as id, job.city as city,jl.language as language,
               job.employment_length as employment_length, job.employment_type employment_type,
-              c.name as company_name,job.company_id as company_id
+              c.username as company_name,job.company_id as company_id
         		FROM job_bookmark as jb
         		LEFT JOIN job on job.id=jb.job_id LEFT JOIN job_language_level as jl on job.id=jl.job_id
         		LEFT JOIN job_industry_position as jip on job.id=jip.job_id
-        		LEFT JOIN company c on job.company_id=c.company_id".$where;
+        		LEFT JOIN user c on job.company_id=c.uid".$where;
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;

@@ -103,19 +103,19 @@ class company_model extends MY_Model
 	}
 	
 	public function searchCompany($where) {
-        $sql = "SELECT com.company_id, description,name,city
-        		FROM company as com
-        		LEFT JOIN company_industry as ci on ci.company_id=com.company_id".$where;
+        $sql = "SELECT u.uid as company_id, description,username as name,city
+        		FROM user as u
+        		LEFT JOIN company_industry as ci on ci.company_id=u.uid".$where;
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
     }
 
     public function searchBookmarkedCompany($where) {
-        $sql = "SELECT com.company_id, description,name,city
-        		FROM company as com
-        		LEFT JOIN company_industry as ci on ci.company_id=com.company_id
-        		LEFT JOIN company_bookmark as cb on cb.company_id=com.company_id".$where;
+        $sql = "SELECT u.uid as company_id, description,username as name,city,profile_pic
+        		FROM user as u
+        		LEFT JOIN company_industry as ci on ci.company_id=u.uid
+        		LEFT JOIN company_bookmark as cb on cb.company_id=u.uid".$where;
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
