@@ -245,3 +245,6 @@ CREATE TABLE `interview` (
   `reply_id` int(11) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+#2013-12-12
+drop table company;

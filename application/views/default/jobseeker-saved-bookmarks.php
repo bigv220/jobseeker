@@ -23,9 +23,9 @@
           <a href="<?php echo $site_url?>jobseeker/register" class="png square_btn edit_profile_btn"></a>
           <a href="#" class="png square_btn jingchat_inbox_btn"></a>
           <span class="bubble jingchat_inbox_bubble">2</span>
-          <a href="#" class="png square_btn saved_bookmarks_btn saved_bookmarks_btn_current"></a>
-          <a href="#" class="png square_btn view_my_interviews_btn"></a>
-          <span class="bubble view_my_interviews_bubble">10</span>
+          <a href="<?php echo $site_url; ?>jobseeker/savedBookmarks" class="png square_btn saved_bookmarks_btn saved_bookmarks_btn_current"></a>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <span class="bubble view_my_interviews_bubble"><?php echo $interview_num; ?></span>
          </div>
     </div>
 
@@ -195,7 +195,7 @@
 <div class="box rel sresult-row" id="jobdiv<?php echo $job['id']; ?>">
     <div class="sresult-par1">
         <div class="span1 rel">
-            <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="85px" height="85px" class="round_img"/>
+            <img src="<?php echo $theme_path;?>/users/<?php echo $job['profile_pic']; ?>" alt="" width="85px" height="85px" class="round_img"/>
         </div>
         <div class="span2">
             <h2><?php echo $job["job_name"]; ?></h2>
@@ -298,7 +298,7 @@
 <div class="box rel sresult-row">
     <div class="sresult-par1" id="companydiv<?php echo $com['company_id']; ?>">
         <div class="span1 rel">
-            <img src="<?php echo $theme_path;?>/style/search/job-img1.gif" alt="" width="85px" height="85px" class="round_img"/>
+            <img src="<?php echo $theme_path;?>/users/<?php echo $com['profile_pic']; ?>" alt="" width="85px" height="85px" class="round_img"/>
         </div>
         <div class="span2">
             <h2><?php echo $com['name']; ?></h2>

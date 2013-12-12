@@ -211,7 +211,7 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .story_row .story_title{paddint-top:5px;float:left;width:173px;font-size:14px;font-weight:bold;margin-left:6px;color:#414042;}
 .signup-pop-apply, .pop-delete-job, .pop-delete-company, .pop-bookmark, .signup-pop-bookmark {
     display:none;margin:0 auto;text-align:center;z-index:102;width:237px;
-    height:115px;position:absolute;top:50%;left:50%;background:url(search/signup_to_apply_job_pop_bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
+    height:115px;position:absolute;top:42%;left:42%;background:url(search/signup_to_apply_job_pop_bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
 .signup-pop-apply-close{width:20px;height:20px;right:0px;cursor:pointer;display:block;}
 .signup-pop-apply-nav{padding:22px 20px 8px 20px;font-size:13px;color:#363636;font-weight:bold;}
 .signup-pop-apply .signup-pop-btn, .signup-pop-bookmark .signup-pop-btn {width:190px;height:28px;border:none;cursor:pointer;background: url(search/sign_up_btn_apply.png) no-repeat;}
