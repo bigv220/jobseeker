@@ -34,9 +34,37 @@ $(document).ready(function() {
 		    	
 		    	$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
 				$('.jingchat_message_input textarea').val('');
+				$('.jingchat_message_input textarea').val('');
 			});
     	}
 	});
 
+	var msg_id = 0;
+	// Delete a message
+	$('.delete_msg').click(function(e) {
+		
+		msg_id = $(this).attr('data-id');
+
+		$('.pop-mark').fadeIn();
+        $('.pop-apply').fadeIn();
+       
+        e.stopPropagation();
+        e.preventDefault();
+	});
+
+	$('.delete-message-yes').click(function(e) {
+		if (msg_id != 0) {
+			$.post(base_url + "inbox/delete", { id:msg_id },
+		  	function(data){
+		  		//TODO: 定位到最下面
+		    	$('.inbox_overview_row[attr-id='+id+']').remove();
+			});	
+		}
+		$('.pop-mark').fadeOut();
+        $('.pop-apply').fadeOut();
+	});
 });
 
+var refresh = function(mode) {
+	window.location.href = base_url + 'inbox/index/' + mode;
+}

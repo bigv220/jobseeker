@@ -22,6 +22,9 @@ class inbox extends Front_Controller {
         $this->load->model('jobseeker_model');
         $this->load->model('inbox_model');
         $data = $this->data;
+
+        $data['mode'] = $this->uri->segment(3);
+
         if (isset($_GET['uid'])) {
             $uid = $_GET['uid'];
         } else {
@@ -33,10 +36,14 @@ class inbox extends Front_Controller {
         $data['uid'] = $uid;
 
         // get message list
-        $data['messages'] = $this->inbox_model->getMsg($uid);
-
-        $data['send_messages'] = $this->inbox_model->getMsgSentByMe($uid);
-
+        if ($data['mode'] == 'jingchat') {
+            $data['messages'] = $this->inbox_model->getMsg($uid);
+        } else if($data['mode'] == 'sent') {
+            $data['messages'] = $this->inbox_model->getMsgSentByMe($uid);
+        } else {
+            $data['messages'] = $this->inbox_model->getTrashMsg($uid);
+        }
+        $data['unread'] = $this->inbox_model->getUnReadMessageNum($uid);
         // Get first detail msg
         if (!empty($data['messages'])) {
             $data['msg_detail'] = $this->inbox_model->getDetailMsg($data['messages'][0]['id']);    
@@ -53,6 +60,7 @@ class inbox extends Front_Controller {
                 $data['other_user'] = $this->jobseeker_model->getUserInfo($user1);                
             }
         }
+
         
         $this->load->view($data['front_theme'].'/inbox-index', $data);
     }
@@ -103,6 +111,9 @@ class inbox extends Front_Controller {
                 $data['other_user'] = $this->jobseeker_model->getUserInfo($user1);                
             }
         } 
+        // Update to read for this msg
+        $this->inbox_model->updateMessageToRead($_POST['msg_id']);
+
         $detail_msg = $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
         echo $detail_msg;
     }
@@ -132,6 +143,13 @@ class inbox extends Front_Controller {
         
         $newmsg = $this->load->view($data['front_theme'].'/inbox-onemsg',$data);
         echo $newmsg;
+    }
+
+    public function delete() 
+    {
+        $id = $_POST['id'];
+        $this->load->model('inbox_model');
+        $this->inbox_model->deleteMessage($id);
     }
 
 }
