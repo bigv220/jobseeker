@@ -76,9 +76,17 @@ class company extends Front_Controller {
     	if (empty($company_id)) {
     		redirect('/');
     	}
+
         $this->load->model('company_model');
         $this->load->model('job_model');
         $data = $this->data;
+
+        //Save the user who reviewed it
+        $uid = $this->session->userdata('uid');
+        if($uid != $company_id) {
+            $this->company_model->saveCompanyViewed($uid, $company_id, date('Y-m-d'));
+        }
+
         $data["jobinfo"] = $this->job_model->getCompanyJobList($company_id);
         $data["info"] = $this->company_model->getUserInfo($company_id);
         $data['industries'] = $this->company_model->getIndustry($company_id);

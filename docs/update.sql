@@ -269,3 +269,11 @@ CREATE TABLE `company_candidate` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY  (`company_id`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+#2013-12-13 Add company viewed table
+CREATE TABLE `company_viewed` (
+  `uid` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `view_date` date default NULL,
+  PRIMARY KEY  (`uid`,`company_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

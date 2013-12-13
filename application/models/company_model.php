@@ -197,4 +197,12 @@ class company_model extends MY_Model
         $sql = "DELETE FROM company_candidate WHERE company_id=$company_id and user_id=$uid";
         return $this->db->query($sql);
     }
+
+    /**
+     * When user view a company, record it
+     */
+    public function saveCompanyViewed($uid, $company_id, $date) {
+        $sql = "REPLACE INTO company_viewed values($uid, $company_id, '$date');";
+        return $this->db->query($sql);
+    }
 }

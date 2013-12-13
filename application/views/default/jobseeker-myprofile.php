@@ -277,25 +277,23 @@
               <dt>Recently Applied For</dt>
               <dd>
                   <ul class="recent_applied_jobs">
-                      <li><a href="#">Admin Assistant</a></li>
-                      <li><a href="#">UI Designer</a></li>
-                      <li><a href="#">UI Designer</a></li>
+                      <?php foreach($applied_jobs as $job): ?>
+                      <li><a href="<?php echo $site_url; ?>job/jobdetails/<?php echo $job['id']; ?>">
+                          <?php echo $job['job_name']; ?></a></li>
+                      <?php endforeach; ?>
                   </ul>
               </dd>
               <dt>Recently Viewed Companies</dt>
               <dd>
                   <ul class="similar">
-                      <li><img src="<?php echo $theme_path.'style/home/temp/sponsors3.gif';?>" alt="" />
-                          <p><a href="#">Company Name Here</a></p>
-                          <p><a href="#" class="view_profile_link">View Profile</a></p>
-                      </li>
-                      <li><img src="<?php echo $theme_path.'style/home/temp/sponsors3.gif';?>" alt="" />
-                          <p><a href="#">Company Name Here</a></p>
-                          <p><a href="#" class="view_profile_link">View Profile</a></p>
-                      </li>
-                      <li><img src="<?php echo $theme_path.'style/home/temp/sponsors3.gif';?>" alt="" />
-                          <p><a href="#">Company Name Here</a></p>
-                          <p><a href="#" class="view_profile_link">View Profile</a></p>
+                      <li>
+                          <?php foreach($viewed_company as $com): ?>
+                          <img src="<?php echo $site_url; ?>attached/users/<?php echo $com['profile_pic']?$com['profile_pic']:'no-image.png';?>" width="71px" height="85px" alt="" />
+                          <p><a href="<?php echo $site_url; ?>company/companyInfo/<?php echo $com['company_id']; ?>">
+                              <?php echo $com['job_name']; ?></a></p>
+                          <p><a href="<?php echo $site_url; ?>company/companyInfo/<?php echo $com['company_id']; ?>" class="view_profile_link">
+                              View Profile</a></p>
+                          <?php endforeach; ?>
                       </li>
                   </ul>
               </dd>
