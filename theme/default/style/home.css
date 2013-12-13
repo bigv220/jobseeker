@@ -100,7 +100,7 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .pop-welcome-bd .span2{font-size:22px;padding:10px 0 0 0;}
 .pop-welcome-bd .span1,.pop-welcome-bd .span3{color:#674092;font-weight:700;font-size:14px;}
 .pop-welcome-bd .pop-welcome-here{width:106px;height:42px;line-height:42px;display:inline-block;text-align:center;vertical-align:top;background:url(home/here.gif) no-repeat;margin-top:10px;}
-.pop-message{display:none;z-index:102;width:494px;height:233px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(home/pop-msg-bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
+.pop-message, .request-sent-pop-message {display:none;z-index:102;width:494px;height:233px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(home/pop-msg-bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
 .pop-message-wrap{padding:10px;}
 .pop-message b{display:block;font-weight:bold;padding:25px 0px 15px 0px;color:#f17343;font-size:24px;text-align:center;}
 .pop-message-close{width:20px;height:20px;right:0px;top:-1px;cursor:pointer;display:block;}
@@ -211,10 +211,10 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .story_row .story_title{paddint-top:5px;float:left;width:173px;font-size:14px;font-weight:bold;margin-left:6px;color:#414042;}
 .signup-pop-apply, .pop-delete-job, .pop-delete-company, .pop-bookmark, .signup-pop-bookmark {
     display:none;margin:0 auto;text-align:center;z-index:102;width:237px;
-    height:115px;position:absolute;top:50%;left:50%;background:url(search/signup_to_apply_job_pop_bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
+    height:115px;position:absolute;top:42%;left:42%;background:url(search/signup_to_apply_job_pop_bg.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
 .signup-pop-apply-close{width:20px;height:20px;right:0px;cursor:pointer;display:block;}
 .signup-pop-apply-nav{padding:22px 20px 8px 20px;font-size:13px;color:#363636;font-weight:bold;}
-.signup-pop-apply .signup-pop-btn, signup-pop-bookmark{width:190px;height:28px;border:none;cursor:pointer;background: url(search/sign_up_btn_apply.png) no-repeat;}
+.signup-pop-apply .signup-pop-btn, .signup-pop-bookmark .signup-pop-btn {width:190px;height:28px;border:none;cursor:pointer;background: url(search/sign_up_btn_apply.png) no-repeat;}
 .profile_views_num{color:#ebebec;font-size:14px;font-weight:bold;}
 a.edit_jobseeker_profile_link{text-decoration:underline;margin-left:10px;color:#674092;}
 div.text{margin-top: 8px;}
@@ -253,7 +253,7 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .round_img{-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .round_img_border3{border:3px solid #674092;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;}
 .round_corner10_img{-moz-border-radius: 10%;-webkit-border-radius: 10%;border-radius: 10%;}
-.inbox_overview_list{float:left;width:290px;height:520px;overflow-y:scroll;}
+.inbox_overview_list{float:left;width:290px;height:520px;overflow-y:scroll;padding-top:8px;}
 .inbox_mail_content{float:left;width:454px;height:500px;overflow-y:scroll;padding:10px;line-height:18px;}
 .inbox_overview_row{height:70px;line-height:70px;vertical-align: middle;border-bottom:1px solid #CCCCCC;padding-top:5px;}
 .inbox_overview_row_current{background-color: #e0e0e0;}
@@ -386,3 +386,6 @@ h2.applied_jobs_title{color:#674092;font-size:18px;font-weight:bold;padding-left
 .portfolio_list ul li{line-height:23px;padding: 6px 0;}
 .portfolio_list ul li span{display:inline-block;width:200px;}
 .portfolio_list ul li img{cursor:pointer;}
+.pop-succ-message {text-align: center; color: red; font-size: 16px;margin-top:20px; font-weight:bold;}
+.request-sent-pop-message { height: 100px;}
+

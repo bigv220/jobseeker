@@ -26,9 +26,11 @@
           <a href="<?php echo $site_url?>jobseeker/register" class="png square_btn edit_profile_btn"></a>
           <a href="#" class="png square_btn jingchat_inbox_btn"></a>
           <span class="bubble jingchat_inbox_bubble">2</span>
-          <a href="#" class="png square_btn saved_bookmarks_btn"></a>
-          <a href="#" class="png square_btn view_my_interviews_btn"></a>
-          <span class="bubble view_my_interviews_bubble">10</span>
+          <a href="<?php echo $site_url; ?>jobseeker/savedBookmarks" class="png square_btn saved_bookmarks_btn"></a>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <span class="bubble view_my_interviews_bubble">
+              <?php echo $interview_num; ?>
+          </span>
          </div>
     </div>
     <div class="company-bd jobseeker-bd">

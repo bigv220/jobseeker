@@ -16,9 +16,9 @@ $(function(){
 
     //pub top login 
     $('.phd-login').hover(function(){
-        $('#login_pop').stop().fadeIn();
+        $('#login_pop').stop().show();
     },function(){
-        $('#login_pop').stop().fadeOut();
+        $('#login_pop').stop().hide();
     })
     $('.input-wrap input')
     .focusin(function(event) {

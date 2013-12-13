@@ -26,7 +26,7 @@
           <a href="#" class="png square_btn view_my_candidates_btn view_my_candidates_btn_current"></a>
           <a href="#" class="png square_btn view_my_interviews_btn"></a>
           <span class="bubble view_my_interviews_bubble">10</span>
-         </div>
+      </div>
     </div>
 
   </div>
@@ -36,35 +36,30 @@
 <!--search-result condition-->
 <div class="result-condition rel box">
     <div class="search_interviews">
-        <label>Search Saved Candidates</label>
-        <form action="">
-            <input type="text" name="keywords" class="kyo-input input-tip" style="width:203px;border:none;line-height:23px;height:23px;" data-tipval="Enter Keywords" value="Enter Keywords">
-            <input type="submit" id="search_saved_candidates_btn" class="search_interview_btn search_saved_candidates_btn" value=""/>
+        <label>Search Job Listings</label>
+        <form action="#">
+            <input type="text" name="saved_candidates_keywords" class="kyo-input input-tip" style="width:203px;border:none;line-height:23px;height:23px;" data-tipval="Enter Keywords" value="Enter Keywords">
+            <input type="submit" name="search_saved_candidates_btn" class="search_interview_btn search_saved_candidates_btn" value=""/>
         </form>
     </div>
 </div>
 
 <!--search-result body-->
 <div class="result-bd">
-    <?php foreach($candidates as $user): ?>
-    <div class="box rel sresult-row" id="sresult-user<?php echo $user['uid']; ?>">
+	<?php foreach ($jobs as $job):?>
+    <div class="box rel sresult-row">
         <div class="sresult-par1">
             <div class="span1 rel">
-                <img src="<?php echo $site_url?>attached/users/<?php echo $user['profile_pic']?$user['profile_pic']:'no-image.png';?>" alt="" width="80px" height="80px" class="round_corner10_img"/>
+                <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="80px" height="80px" class="round_corner10_img"/>
             </div>
             <div class="span2">
-                <h2><?php echo $user['first_name']. ' '. $user['last_name']; ?></h2>
-                <h3> <?php
-                                $industry_arr = $user['industry_arr'];
-                                if (!empty($industry_arr)) {
-                                    echo ''.$industry_arr[0]['industry']." ";
-                                }
-                                ?></h3>
-                <p><?php echo $user['city'].' '.$user['province'].' '.$user['country']; ?></p>
+                <h2>Job Title Here</h2>
+                <h3>Company Name</h3>
+                <p>Beijing, China</p>
                 <a href="#" class="job-viewmore">View More</a> </div>
             <div class="span3">
                 <div class="zoom">
-                    <a href="#" class="job-btn jobseeker-btn-delete-candidate" data-id="<?php echo $user['uid']; ?>"></a>
+                    <a href="#" class="company-btn-delete-job"></a>
                     <a href="#" class="job-btn job-btn-match">93%</a>
                 </div>
                 <div><a href="#" class="jobseeker_request_interview"></a></div>
@@ -81,65 +76,47 @@
                 <div class="fxui-tab-nav sresult-nav-job sresult_about_me">
                     <div class="sresult-nav-job-left">
                         <div class="text_r">
-                            <p><?php echo $user['description']; ?></p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         </div>
                         <dl class="sresult-nav-job-dl">
                             <dt>Industry</dt>
                             <dd>
-                                <?php
-                                $industry_arr = $user['industry_arr'];
-                                for($i=0; $i<count($industry_arr); $i++) {
-                                    echo '<a href="#">'.$industry_arr[$i]['industry']."</a> ";
-                                }
-                                ?>
+                                <a href='#'>Graphic Design</a>
+                                <a href='#'>Media Publishing</a>
+                                <a href='#'>Marketing</a>
                             </dd>
-                            <?php foreach($user['work_history'] as $v) {
-                            if($v['period_time_to'] == date('Y') || $v['is_stillhere'] == 1) {
-                                ?>
-                                <dt>Current Employment</dt>
-                                <?php } else { ?>
-                                <dt>Previous Employment</dt>
-                                <?php } ?>
-
-                            <dd><p class="employment_title"><?php echo $v['introduce']; ?></p>
+                            <dt>Current Employment</dt>
+                            <dd><p class="employment_title">Clinical Nurse Specialist for NHS London</p>
                                 <p class="emploeyment_period">
-                                    <?php echo $v['period_time_from'] . ' - ' . $v['period_time_to']; ?>
+                                    June 2011 – Present (2 years 3 months)
                                 </p>
-                                <p class="employment_description"><?php echo $v['description']; ?></p></dd>
-                            <?php } ?>
+                                <p class="employment_description">
+                                    My main role is to provide an in-reach service to HMP Addiewell where I support and develop the testing service, assess and support patients through treatment for hepatitis C. I co-lead a project called HATMEP (hepatitis awareness and treatment of minority ethnic populations).
+                                </p>
+                            </dd>
+                            <dt>Previous Employment</dt>
+                            <dd><p class="employment_title">Keep Well Outreach Worker/Project Nurse for NHS London</p>
+                                <p class="emploeyment_period">
+                                    December 2009 – June 2011 (1 year 7 months)
+                                </p>
+                                <p class="employment_description">
+                                    Keep well's vision is to reduce health inequalities and tackle the incidence of cardiovascular disease in the homeless, gypsy/traveller, offender and ex-offender populations of 35+yrs old by providing anticipatory care.
+                                    As an outreach worker and project nurse specifically working with the homeless and travelling populations, I support, buddy, mentor, advise, educate, signpost and develop tailor made support programmes/information for my client group.
+                                    Courses completed - motivational interviewing, solution focused interviewing, smoking cessation, alcohol brief intervention, safetalk, ASSIST training.
+                                </p>
+                            </dd>
 
                             <dt>Personal Skills</dt>
-                            <dd><?php
-                            $arr = $user['personal_skills'];
-                            for($i=0; $i<count($arr); $i++) {
-                                if($i==0) {
-                                    echo $arr[$i]['personal_skill'];
-                                } else {
-                                    echo ", " . $arr[$i]['personal_skill'];
-                                }
-                            }
-                            ?><dd>
+                            <dd>Time Managment, Public Speaking, Networking, Leadership<dd>
                             <dt>Technical Skills</dt>
-                            <dd><?php
-                                $arr = $user['professional_skills'];
-                                for($i=0; $i<count($arr); $i++) {
-                                    if($i==0) {
-                                        echo $arr[$i]['professional_skill'];
-                                    } else {
-                                        echo ", " . $arr[$i]['professional_skill'];
-                                    }
-                                }
-                                ?></dd>
+                            <dd>Branding, Adobe Creative Suite, Printing, Critical Thinking</dd>
                             <dt>Language(s)</dt>
                             <dd>
-                                <?php $languages = $user['languages'];
-                                for($i=0; $i<count($languages); $i++) { ?>
-                                    <div class="jobseeker_profile_language">
-                                        <label><?php echo $languages[$i]["language"]; ?></label>
-                                        <i><?php echo $languages[$i]["level"]; ?></i>
-                                    </div>
+                                <div class="jobseeker_profile_language">
+                                    <label>English</label>
+                                    <i>Yiban</i>
+                                </div>
 
-                                <?php }?>
                             </dd>
                         </dl>
                     </div>
@@ -147,41 +124,30 @@
                         <dl class="sresult-nav-job-dl">
                             <dt>Birthday</dt>
                             <dd>
-                                <p class="jobseeker_birthday"><?php echo date('M j Y',strtotime($user['birthday'])); ?></p>
+                                <p class="jobseeker_birthday">May 15 1984</p>
                             </dd>
                             <dt>Education</dt>
                             <dd>
-                                <?php $educations = $user['educations'];
-                                for($i=0; $i<count($educations); $i++) { ?>
-                                    <p class="school_name"><?php echo $educations[$i]['school_name']; ?></p>
-                                    <p class="school_major"><?php echo $educations[$i]['major']; ?></p>
-                                    <p class="school_period"><?php echo $educations[$i]['attend_date_from'] . ' - ' . $educations[$i]['attend_date_to']; ?></p>
-                                    <?php }?>
+                                <p class="school_name">School Name Here</p>
+                                <p class="school_major">School Major</p>
+                                <p class="school_period">2004 - 2008</p>
                             </dd>
                             <dt>Elsewhere on Web</dt>
                             <dd>
-                                <?php if (!empty($user['twitter'])):?>
-                                <p><a href="<?php echo $user['twitter']?>">Twitter</a></p>
-                                <?php endif;?>
-                                <?php if (!empty($user['facebook'])):?>
-                                <p><a href="<?php echo $user['facebook']?>">Facebook</a></p>
-                                <?php endif;?>
-                                <?php if (!empty($user['linkedin'])):?>
-                                <p><a href="<?php echo $user['linkedin']?>">Linkedin</a></p>
-                                <?php endif;?>
-                                <?php if (!empty($user['weibo'])):?>
-                                <p><a href="<?php echo $user['weibo']?>">Weibo</a></p>
-                                <?php endif;?>
+                                <p><a href="#">Twitter</a></p>
+                                <p><a href="#">Facebook</a></p>
+                                <p><a href="#">Linkedin</a></p>
+                                <p><a href="#">Weibo</a></p>
                             </dd>
 
                             <dt>Phone</dt>
-                            <dd><p class="phone_number"><?php echo $user['phone']; ?></p></dd>
+                            <dd><p class="phone_number">15553226263</p></dd>
                             <dd class="industry">
                                 <ul class="industry-ul">
                                     <li class="n1"><b>Type of Employment</b><span>Full Time</span></li>
                                     <li class="n2"><b>Length of Employment</b><span>Long Term (1+ year)</span></li>
-                                    <!-- <li class="n3"><b>Visa Assistance</b><span>Visa will be provided</span></li>
-                              <li class="n4"><b>Housing Assistance</b><span>Accomodation will be provided</span></li> -->
+                                    <li class="n3"><b>Visa Assistance</b><span>Visa will be provided</span></li>
+                              <li class="n4"><b>Housing Assistance</b><span>Accomodation will be provided</span></li>
                                 </ul>
                             </dd>
                         </dl>
@@ -221,7 +187,7 @@
             </div>
         </div>
     </div>
-    <?php endforeach; ?>
+	<?php endforeach;?>
 </div>
 <!--backtop-->
 <div class="backtop png" style="right:200px;"></div>
@@ -272,20 +238,6 @@
         <div class="message_sent_pop_bd">
             <div class="message_title">Your message has been sent</div>
             <div class="message_content"><a href="#">View in JingChat Inbox Now</a></div>
-        </div>
-    </div>
-</div>
-<!--popmark-->
-<div class="pop-mark"></div>
-<!--pop box-->
-<div class="box pop-box pop-apply">
-    <div class="rel">
-        <div class="pop-close pop-apply-close"></div>
-        <div class="pop-nav pop-candidate-nav">
-            <p>Are you sure you want to delete this candidate?</p>
-        </div>
-        <div class="pop-bar">
-            <a href="#yes" class="pop-bar-btn delete-candidate-yes">Yes</a> <a href="#no" class="pop-bar-btn pop-btn-no">No</a>
         </div>
     </div>
 </div>

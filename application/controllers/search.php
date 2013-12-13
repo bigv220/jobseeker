@@ -124,7 +124,7 @@ class search extends Front_Controller {
             array_push($bookmark, $a_job['job_id']);
         }
         $data['bookmark'] = $bookmark;
-        
+
         // Filter employment_type
         if(!empty($post['employment_type'])) {
             $filter_employment_type = explode(",", $post['employment_type']);
@@ -524,8 +524,28 @@ class search extends Front_Controller {
             }
         }
 
+        // Get shortlist candiate
+        $this->load->model('company_model');
+        if ($this->session->userdata('uid')) {
+            $candiates_arr = $this->company_model->getCandidateIdForCompany($this->session->userdata('uid'));
+        } else {
+            $candiates_arr = array();
+        }
+        $candidates = array();
+        foreach ($candiates_arr as $value) {
+            array_push($candidates, $value['user_id']);
+        }
+
         for($i=0; $i<count($jobseekers); $i++) {
-             $personal_arr = $this->jobseeker_model->getPersonalSkills($jobseekers[$i]['uid']);
+
+            // Check if Shortlist Candidate is checked
+            if (in_array($jobseekers[$i]['uid'], $candidates)) {
+                $jobseekers[$i]['is_shortlisted'] = true;
+            } else {
+                $jobseekers[$i]['is_shortlisted'] = false;
+            }
+
+            $personal_arr = $this->jobseeker_model->getPersonalSkills($jobseekers[$i]['uid']);
             //filter personal skills
             if(!empty($post["PersonalSkills_str"])) {
                 $post_arr = explode(',', $post["PersonalSkills_str"]);
@@ -567,6 +587,10 @@ class search extends Front_Controller {
             $jobseekers[$i]['languages'] = $this->jobseeker_model->getLanguage($jobseekers[$i]['uid']);
         }
         $data['jobseekers'] = $jobseekers;
+
+        $uid = $this->session->userdata('uid');
+        $current_user_jobs = $this->job_model->getCompanyJobList($uid);
+        $data['current_user_jobs'] = $current_user_jobs;
 
         $this->load->view($data['front_theme']."/search-jobseeker-result",$data);
     }
@@ -628,4 +652,86 @@ class search extends Front_Controller {
         $this->load->view($data['front_theme']."/search-advance-job",$data);
     }
 
+    //Send interview request
+    public function sendinterviewrequest() {
+        //Load Model
+        $this->load->model('jobseeker_model');
+
+        $post = $_POST;
+        $uid = $this->session->userdata('uid');
+
+        if ($post) {
+            $data = array('uid'=>$post['jobseeker_uid'],'company_id'=>$uid,
+                'job_id'=>$post['job_id'],
+                'communication_type'=>$post['preferred_communication'],
+                'message'=>$post['optional_message'],
+                'communication_other'=>$post['other_preferred_communication'],
+                'date'=>$post['interview_date'],'time_zone'=>$post['time_zone'],
+                'time'=>$post['time_input'],'insert_date'=>date('d/m/Y'),'is_deleted'=>0,
+                'reply_id'=>null);
+            $rtn = $this->jobseeker_model->sendInterviewRequest($data);
+
+            if($rtn) {
+                $msg = "success";
+            } else {
+                $msg = "failed";
+            }
+
+            $result['status'] = $msg;
+            echo json_encode($result);
+        }
+    }
+
+    //Reply interview request
+    public function replyinterviewrequest() {
+        //Load Model
+        $this->load->model('jobseeker_model');
+        $this->load->model('inbox_model');
+
+        $post = $_POST;
+        $uid = $this->session->userdata('uid');
+
+        if ($post) {
+            $interview_id = $post['interviewId'];
+            // Get ID
+            $id = $this->inbox_model->getMaxMessageId();
+            $data = array('id'=>$id+1,'seq'=>1,'title'=>$post['message_subject'],'message'=>$post['message'],
+                'user1'=>$uid,
+                'user2'=>$interview_id, 'timestamp'=>time(), 'user1read'=>'yes',
+                'user2read'=>'no','is_delete'=>0,'is_offline'=>1);
+            $this->inbox_model->addmsg($data);
+
+            $rtn = $this->jobseeker_model->saveInterviewReply($id+1, $interview_id);
+
+            if($rtn) {
+                $msg = "success";
+            } else {
+                $msg = "failed";
+            }
+
+            $result['status'] = $msg;
+            echo json_encode($result);
+        }
+    }
+
+    //Send interview request
+    public function deleteinterviewrequest() {
+        //Load Model
+        $this->load->model('jobseeker_model');
+
+        $post = $_POST;
+        if ($post) {
+            $id = $post['id'];
+            $rtn = $this->jobseeker_model->deleteInterviews($id);
+
+            if($rtn) {
+                $msg = "success";
+            } else {
+                $msg = "failed";
+            }
+
+            $result['status'] = $msg;
+            echo json_encode($result);
+        }
+    }
 }

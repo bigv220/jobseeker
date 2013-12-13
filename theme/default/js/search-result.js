@@ -184,7 +184,8 @@ $(function(){
     var popDeleteJob = $('.pop-delete-job'),
     popDeleteCom = $('.pop-delete-company');
 
-    var popBookmark = $('.pop-bookmark');
+    var popBookmark = $('.pop-bookmark'),
+        popBookmarkSignup = $('.signup-pop-bookmark');
 
     //Pop apply
     var rowObj;
@@ -217,10 +218,16 @@ $(function(){
     $('.signup-pop-apply-close').click(function(){
         popMark.fadeOut();
         signupApply.fadeOut();
+        popBookmarkSignup.fadeOut();
     });
 
     $('.signup-pop-apply .signup-pop-btn').click(function(){
         signupApply.fadeOut();
+        popReg.fadeIn();
+    });
+
+    $('.signup-pop-bookmark .signup-pop-btn').click(function(){
+        popBookmarkSignup.fadeOut();
         popReg.fadeIn();
     });
 
@@ -264,6 +271,9 @@ $(function(){
         popDeleteJob.fadeIn();
         var id = $(this).attr('data-job-id');
         $('#selected_job_id').val(id);
+
+        e.stopPropagation();
+        e.preventDefault();
     });
 
     //click delete job 'Yes'
@@ -274,10 +284,11 @@ $(function(){
         var job_id = $('#selected_job_id').val();
         // Delete JOB
         $.post(site_url + 'job/deletebookmarkinfo', {id: job_id, type: 'job'},
-            function(result,status) {
+            function(result) {
+                result = eval('('+result+')');
+                var status  = result.status;
                 if (status=='success') {
                     $('#jobdiv'+job_id).css('display', 'none');
-                    alert('Delete successful!');
                 } else if (status =='login') {
                     alert('Please Login to delete this job.');
                 } else {
@@ -292,6 +303,9 @@ $(function(){
         popDeleteCom.fadeIn();
         var id = $(this).attr('data-company-id');
         $('#selected_company_id').val(id);
+
+        e.stopPropagation();
+        e.preventDefault();
     });
 
     //click delete job 'Yes'
@@ -302,10 +316,11 @@ $(function(){
         var com_id = $('#selected_company_id').val();;
         // Delete JOB
         $.post(site_url + 'job/deletebookmarkinfo', {id: com_id, type: 'company'},
-            function(result,status) {
+            function(result) {
+                result = eval('('+result+')');
+                var status  = result.status;
                 if (status=='success') {
                     $('#jobdiv'+com_id).css('display', 'none');
-                    alert('Delete successful!');
                 } else if (status =='login') {
                     alert('Please Login to delete this job.');
                 } else {
@@ -320,6 +335,9 @@ $(function(){
         popBookmark.fadeIn();
         var id = $(this).attr('data-job-id');
         $('#selected_job_id').val(id);
+
+        e.stopPropagation();
+        e.preventDefault();
     });
 
     $('.job-btn-marked').bind('click',bookmarked);
@@ -332,17 +350,62 @@ $(function(){
         var job_id = $('#selected_job_id').val();
         // Delete JOB
         $.post(site_url + 'job/bookmark', {id: job_id, type: 'job'},
-            function(result,status) {
+            function(result) {
+                result = eval('('+result+')');
+                var status  = result.status;
                 if (status=='success') {
                     $('#job-mark'+job_id).removeClass('job-btn-mark');
                     $('#job-mark'+job_id).addClass('job-btn-marked');
-                    alert('Bookmark successful!');
                 } else if (status =='login') {
-                    alert('Please Login to bookmark this job.');
+                    popMark.fadeIn();
+                    $('.signup-pop-bookmark').css('display', 'block');
+                    //alert('Please Login to bookmark this job.');
                 } else {
                     alert(status);
                 }
             });
+    });
+
+    $('.jobseeker-btn-shortlisted').click(function(e) {
+        var user_id = $(this).attr('data-id');
+        
+        $.post(site_url + 'company/addCandidate', {user_id:user_id},
+            function(result,status) {
+                if (status=='success') {
+                    // TO check why $(this).addClass doesn't work.
+                    if (!$('a[data-id='+user_id+']').hasClass('jobseeker-btn-shortlisted_current')) {
+                        $('a[data-id='+user_id+']').addClass('jobseeker-btn-shortlisted_current');
+                    } else {
+                        $('a[data-id='+user_id+']').removeClass('jobseeker-btn-shortlisted_current');
+                    }
+                }
+        });
+        
+        e.stopPropagation();
+        e.preventDefault();
+    });
+
+    var user_id = 0;
+    $('.jobseeker-btn-delete-candidate').click(function(e) {
+        user_id = $(this).attr('data-id');
+        popMark.fadeIn();
+        popApply.fadeIn();
+       
+        
+        e.stopPropagation();
+        e.preventDefault();
+    });
+
+    $('.delete-candidate-yes').click(function(e) {
+         $.post(site_url + 'company/addCandidate', {user_id:user_id},
+            function(result,status) {
+                if (status=='success') {
+                    // TO check why $(this).addClass doesn't work.                  
+                    $('#sresult-user'+user_id).remove();
+                }
+        });
+        popMark.fadeOut();
+        popApply.fadeOut();
     });
 });
 function apply(e){

@@ -160,8 +160,12 @@ class jobseeker extends Front_Controller {
     $data['language'] = $this->jobseeker_model->getLanguage($uid);
     $data['seekingIndustry'] = $this->jobseeker_model->getAllSeekingIndustry($uid);
     $data['similar_peoples'] = $this->jobseeker_model->getSimilarUsers($uid);
+
     $this->load->model('portfolioproject_model');
     $data['portfolio_projects'] = $this->portfolioproject_model->getUserPortfolioProjects($uid);
+
+    $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid");
+    $data['interview_num'] = count($interview_num);
     $this->load->view($data['front_theme']."/jobseeker-myprofile",$data);
 }
     public function savedBookmarks(){
@@ -218,17 +222,17 @@ class jobseeker extends Front_Controller {
             if($post['filter_type'] == 'companies') {
                 $filter_type = 'companies';
                 if(!empty($post["keywords"])) {
-                    array_push($where_arr, "name like '%" . $post["keywords"] . "%'");
+                    array_push($where_arr, "username like '%" . $post["keywords"] . "%'");
                 }
 
                 if(!empty($post["country"])) {
-                    array_push($where_arr, "com.country='" .$post["country"]."'");
+                    array_push($where_arr, "u.country='" .$post["country"]."'");
                 }
                 if(!empty($post["province"])) {
-                    array_push($where_arr, "com.province='" .$post["province"]."'");
+                    array_push($where_arr, "u.province='" .$post["province"]."'");
                 }
                 if(!empty($post["city"])) {
-                    array_push($where_arr, "com.city='" .$post["city"]."'");
+                    array_push($where_arr, "u.city='" .$post["city"]."'");
                 }
 
                 if (!empty($post['industry'])) {
@@ -282,6 +286,10 @@ class jobseeker extends Front_Controller {
         $data['location'] = getLoction();
 
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+
+        $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid");
+        $data['interview_num'] = count($interview_num);
+
         $this->load->view($data['front_theme']."/jobseeker-saved-bookmarks",$data);
     }
 
@@ -321,9 +329,60 @@ class jobseeker extends Front_Controller {
         } else {
             $uid = $this->session->userdata('uid');
         }
-
-
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+
+        $where = 'i.uid=' . $uid . ' And is_deleted=0';
+        $post = $_POST;
+        if($post) {
+            if ($post["interview_keywords"] == 'Enter Keywords') {
+                $post['interview_keywords'] = '';
+            }
+            if(!empty($post["interview_keywords"])) {
+                 $where .= " AND j.job_name like '%" . $post["interview_keywords"] . "%' or u.username like '%". $post['interview_keywords'] ."%'";
+            }
+        }
+
+        $this->load->model('job_model');
+
+        $interviews = $this->jobseeker_model->getInterviews($where);
+        for($i=0; $i<count($interviews);$i++) {
+            $positions = $this->job_model->getJobIndustry($interviews[$i]['job_id']);
+            $interviews[$i]['position_arr'] = $positions;
+        }
+        $data['interviews'] = $interviews;
+        $data['selected_tab'] = 1;
+
+        $this->load->view($data['front_theme']."/jobseeker-view-interviews",$data);
+    }
+
+    public function getInterviewsInTrash(){
+        $uid = $this->session->userdata('uid');
+        if (!$uid)
+        {
+            redirect('/');
+        }
+
+        $this->load->model('jobseeker_model');
+
+        $data = $this->data;
+        if (isset($_GET['uid'])) {
+            $uid = $_GET['uid'];
+        } else {
+            $uid = $this->session->userdata('uid');
+        }
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+
+        $where = 'i.uid=' . $uid . ' And is_deleted=1';
+
+        $this->load->model('job_model');
+        $interviews = $this->jobseeker_model->getInterviews($where);
+        for($i=0; $i<count($interviews);$i++) {
+            $positions = $this->job_model->getJobIndustry($interviews[$i]['job_id']);
+            $interviews[$i]['position_arr'] = $positions;
+        }
+        $data['interviews'] = $interviews;
+        $data['selected_tab'] = 2;
+
         $this->load->view($data['front_theme']."/jobseeker-view-interviews",$data);
     }
 

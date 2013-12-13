@@ -50,6 +50,19 @@ class job extends Front_Controller {
 		$data['jobinfo'] = $jobinfo;
         $data['industry'] = $industry_arr;
         $data["similar_jobs"] = $similar_jobs;
+
+        // get bookmarked jobs
+        if ($this->session->userdata('uid')) {
+            $bookmarked_job = $this->job_model->getBookmarkedJobByUser($this->session->userdata('uid'));
+        } else {
+            $bookmarked_job = array();
+        }
+        $bookmark = array();
+        foreach ($bookmarked_job as $a_job) {
+            array_push($bookmark, $a_job['job_id']);
+        }
+        $data['bookmark'] = $bookmark;
+
         $this->load->view($data['front_theme']."/job-details",$data);
     }
     
@@ -221,6 +234,9 @@ class job extends Front_Controller {
             $data['jobs'][$key]['languages'] = $this->job_model->getJobLanguages($job['id']);
             $data['jobs'][$key]['industries'] = $this->job_model->getJobIndustry($job['id']);
         }
+
+        $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid");
+        $data['my_interviews_num'] = count($interview_num);
         
         $this->load->view($data['front_theme']."/jobseeker-applied-jobs",$data);
     }

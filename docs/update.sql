@@ -241,4 +241,31 @@ CREATE TABLE `portfolio_project` (
   `type` tinyint(4) default NULL COMMENT '0 for text files, 1 for images,2-audio,3-video£¬4-zip files',
   `uid` bigint(20) default NULL COMMENT 'user id of user table',
   PRIMARY KEY  (`pid`)
+
+#2013-12-10 Add interview table
+CREATE TABLE `interview` (
+  `id` int(11) NOT NULL auto_increment,
+  `uid` int(11) default NULL COMMENT 'interview request to',
+  `company_id` int(11) default NULL COMMENT 'interview request from',
+  `job_id` int(11) default NULL,
+  `communication_type` varchar(20) default NULL,
+  `message` text,
+  `communication_other` varchar(100) default NULL,
+  `date` date default NULL,
+  `time` varchar(20) default NULL,
+  `time_zone` varchar(20) default NULL,
+  `insert_date` varchar(10) default NULL,
+  `is_deleted` smallint(6) default NULL,
+  `reply_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+#2013-12-12
+drop table company;
+
+#2013-12-12 Add Company candidate table
+CREATE TABLE `company_candidate` (
+  `company_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY  (`company_id`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
