@@ -196,3 +196,59 @@ function submitFilterBookmarkForm() {
         $('#companiesForm').submit();
     }
 }
+
+function uploadFile(btn_id, upload_btn, error_id,input_id) {
+    var oBtn = document.getElementById(btn_id);
+    var upload_button = document.getElementById(upload_btn);
+    var oRemind = document.getElementById(error_id);
+    new AjaxUpload(oBtn,{
+        action:site_url+"jobseeker/ajaxuploadfile",
+        name:"workexample",
+        data: {},
+        onSubmit:function(file,ext){
+        },
+        onComplete:function(file,response){
+            oBtn.disabled = "";
+            var response = response.split("|");
+            if ( response[0] == 'success') {
+                oRemind.style.color = "green";
+                oRemind.innerHTML = "Upload successful.";
+
+                var filename = response[1];
+                $('#'+input_id).val(filename);
+            } else {
+                oRemind.style.color = "red";
+                oRemind.innerHTML = response;
+            }
+
+        }
+    });
+}
+
+function getUploadedFileType(filename){
+    var type = -1;
+    if(filename.length > 4){
+        var filenames = filename.split(".");
+        var extension = filenames[filenames.length - 1];
+        if($.inArray(extension, ['txt','doc','docx','ppt','pptx','xls','xlsx','pdf']) >= 0){
+            type = 0;
+        }
+        else if($.inArray(extension, ['png','gif','jpg','jpeg']) >= 0){
+            type = 1;
+        }
+        else if($.inArray(extension, ['mp3','wav']) >= 0){
+            type = 2;
+        }
+        else if($.inArray(extension, ['avi','mpg']) >= 0){
+            type = 3;
+        }
+        else if($.inArray(extension, ['rar','zip']) >= 0){
+            type = 4;
+        }
+    }
+    else
+        alert("Wrong file name");
+
+    return type;
+
+}

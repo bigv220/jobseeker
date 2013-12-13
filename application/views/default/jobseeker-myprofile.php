@@ -95,10 +95,58 @@
               </dd>
           </dl>
           <div class="profile_portfolios_wrapper">
-              <dt>Portfolio<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+              <dt>Portfolio<a href="javascript:void(0);" class="edit_jobseeker_profile_link edit_portfolio_link">Edit</a></dt>
               <div class="als-container" id="portfolio_list">
                   <span class="als-prev"><img src="<?php echo $theme_path;?>/style/btns/previous_arrow.png" alt="prev" title="previous" /></span>
                   <div class="als-viewport">
+                      <div class="profile_portfolios als-wrapper"">
+                      <?php if(count($portfolio_projects) > 0):?>
+                          <?php for($i=0,$len=count($portfolio_projects); $i < $len; $i++):?>
+                              <?php if($i % 6 == 0):?>
+                                    <div class="als-item">
+                              <?php endif;?>
+
+                                  <?php if($i % 3 == 0):?>
+                                        <div class="portfolio_row">
+                                  <?php endif;?>
+                                      <a href="javascript:void(0);" class="portfolio_item" project-name="<?php echo $portfolio_projects[$i]['name'];?>" project-description="<?php echo $portfolio_projects[$i]['description'];?>" project-id="<?php echo $portfolio_projects[$i]['pid'];?>" file-type="<?php echo $portfolio_projects[$i]['type'];?>" file-url="<?php echo $site_url . 'attached/workExamples/' . $portfolio_projects[$i]['file_url'];?>">
+                                          <?php switch($portfolio_projects[$i]['type']){
+                                              case 0:
+                                                  echo "<img src='" . $theme_path . "/style/portfolio/portfolio_text_file.png" ."'/>";
+                                                  break;
+                                              case 1:
+                                                  echo "<img src='" . $site_url . "attached/workExamples/" .$portfolio_projects[$i]['file_url']  ."'/>";
+                                                  break;
+                                              case 2:
+                                                  echo "<img src='" . $theme_path . "/style/portfolio/portfolio_audio_file.png" ."'/>";
+                                                  break;
+                                              case 3:
+                                                  echo "<img src='" . $theme_path . "/style/portfolio/portfolio_audio_file.png" ."'/>";
+                                                  break;
+                                              case 4:
+                                                  echo "<img src='" . $theme_path . "/style/portfolio/portfolio_text_file.png" ."'/>";
+                                                  break;
+                                              default:
+                                                  echo "<img src='" . $theme_path . "/style/portfolio/portfolio_text_file.png" ."'/>";
+                                                  break;
+
+                                          };?>
+                                          <div class="portfolio_caption"><span><?php echo $portfolio_projects[$i]['name'];?></span></div>
+                                      </a>
+                                  <?php if($i % 3 == 2 || $i == ($len - 1)):?>
+                                        <div style="clear:both;"></div>
+                                      </div><!-- end of portfolio_row -->
+                                  <?php endif;?>
+
+                              <?php if($i % 6 == 5|| $i == ($len - 1)):?>
+                                  </div><!-- end of als-item -->
+                              <?php endif;?>
+                          <?php endfor ?>
+                      <?php else:?>
+                          No Projects in Portfolio.
+                        <?php endif;?>
+                      </div>
+                      <!--
                       <div class="profile_portfolios als-wrapper"">
                       <div class="als-item">
                           <div class="portfolio_row">
@@ -203,6 +251,7 @@
                       </div>
 
                       </div>
+                  -->
 
                 </div>
                 <span class="als-next"><img src="<?php echo $theme_path;?>/style/btns/forward_arrow.png" alt="next" title="next" /></span> <!-- "next" button -->
@@ -212,12 +261,13 @@
           <script type="text/javascript">
               $(document).ready(function(){
                   $("#portfolio_list").als({
-                      circular: "yes",
+                      circular: "no",
                       //autoscroll: "yes",
                       visible_items: 1
                   });
               });
           </script>
+      <div style="clear:both;"></div>
       </div>
 
       <div class="company-bd-right  jobseeker-bd-right">
@@ -350,18 +400,7 @@
         <div class="view_portfolio_body">
             <div class="view_portfolio_content text_style">
                 <div class="content_text">
-                Lorem ipsum dolor sit amet
-
-                consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
-                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-                1914 translation by H. Rackham
-                "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
-                Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
-                "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
-                1914 translation by H. Rackham
-                "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains."
-
+                Loading content...
                 </div>
                 <div class="font_zoom_bar">
                     <img class="zoom_in" src="<?php echo $theme_path;?>/style/portfolio/btn_zoom_in.png" alt="prev" title="previous" />
@@ -409,19 +448,7 @@
                             //<![CDATA[
                             $(document).ready(function(){
 
-                                $("#jquery_jplayer_1").jPlayer({
-                                    ready: function (event) {
-                                        $(this).jPlayer("setMedia", {
-                                            m4a:"http://www.jplayer.org/audio/m4a/TSP-01-Cro_magnon_man.m4a",
-                                            oga:"http://www.jplayer.org/audio/ogg/TSP-01-Cro_magnon_man.ogg"
-                                        });
-                                    },
-                                    swfPath: "js",
-                                    supplied: "m4a, oga",
-                                    wmode: "window",
-                                    smoothPlayBar: true,
-                                    keyEnabled: true
-                                });
+
                             });
                             //]]>
                         </script>
@@ -436,12 +463,44 @@
                 </div>
 
             </div>
+            <div class="view_portfolio_content other_text_style" style="display:none;">
+                <div class="other_text_content">
+                    <a href="#" target="_blank">Open/Download this file</a>
+                </div>
+
+            </div>
 
             <div class="view_portfolio_navigator">
                 <div class="als-container" id="portfolio_view_bar">
                     <span class="als-prev"><img src="<?php echo $theme_path;?>/style/btns/previous_arrow.png" alt="prev" title="previous" /></span>
                     <div class="als-viewport">
                         <ul class="als-wrapper">
+                            <?php for($i=0,$len=count($portfolio_projects); $i < $len; $i++):?>
+                                <li class="als-item" project-id="<?php echo $portfolio_projects[$i]['pid'];?>" project-name="<?php echo $portfolio_projects[$i]['name'];?>" project-description="<?php echo $portfolio_projects[$i]['description'];?>" file-type="<?php echo $portfolio_projects[$i]['type'];?>" file-url="<?php echo $site_url . 'attached/workExamples/' . $portfolio_projects[$i]['file_url'];?>">
+                                    <?php switch($portfolio_projects[$i]['type']){
+                                        case 0:
+                                            echo "<img src='" . $theme_path . "style/portfolio/edit_txt_file_btn.png" ."'/>";
+                                            break;
+                                        case 1:
+                                            echo "<img src='" . $site_url . "attached/workExamples/" .$portfolio_projects[$i]['file_url']  ."'/>";
+                                            break;
+                                        case 2:
+                                            echo "<img src='" . $theme_path . "style/portfolio/edit_audio_file_btn.png" ."'/>";
+                                            break;
+                                        case 3:
+                                            echo "<img src='" . $theme_path . "style/portfolio/edit_audio_file_btn.png" ."'/>";
+                                            break;
+                                        case 4:
+                                            echo "<img src='" . $theme_path . "style/portfolio/edit_txt_file_btn.png" ."'/>";
+                                            break;
+                                        default:
+                                            echo "<img src='" . $theme_path . "style/portfolio/edit_txt_file_btn.png" ."'/>";
+                                            break;
+
+                                    };?>
+                                </li>
+                            <?php endfor ?>
+                            <!--
                             <li class="als-item current"><img src="<?php echo $theme_path;?>/style/portfolio/edit_txt_file_btn.png"/></li>
                             <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
                             <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
@@ -454,6 +513,7 @@
                             <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_txt_file_btn.png"/></li>
                             <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
                             <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
+                           -->
                         </ul>
 
                     </div>
@@ -464,13 +524,45 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 $("#portfolio_view_bar").als({
-                    circular: "yes",
+                    circular: "no",
                     autoscroll: "no",
                     scrolling_items: 1,
-                    visible_items: 6
+                    visible_items: <?php echo count($portfolio_projects)>6?6:count($portfolio_projects);?>
                 });
             });
         </script>
+        </div>
+    </div>
+</div>
+
+<div class="edit_portfolio_pop png">
+    <div class="edit_portfolio_pop_wrap rel">
+        <i class="edit_portfolio_pop_close abs" title="close"></i>
+        <b>Portfolio Management</b>
+        <div class="edit_portfolio_pop_bd">
+            <div class="add_new_portfolio">
+
+                <div><label>Project Name:</label><input name="project_name" id="project_name"/></div>
+                <div><label>Project Description:</label><textarea name="project_desc" id="project_desc"></textarea></div>
+                <input type="hidden" name="portfolio_file_name" id="portfolio_file_name" value=""/>
+                <div>
+                    <button id="upload_portfolio_file_btn">Upload a project file</button>
+                    <span id="upload_portfolio_file_status_message"></span>
+                </div>
+
+                <div><img class="add_portfolio_project_btn" src="<?php echo $theme_path;?>style/reg/save.gif"/></div>
+
+                <script>
+                    uploadFile("upload_portfolio_file_btn",'upload_portfolio_file_btn','upload_portfolio_file_status_message','portfolio_file_name');
+                </script>
+            </div>
+            <div class="portfolio_list">
+                <ul>
+                    <?php foreach($portfolio_projects as $project):?>
+                        <li><span><?php echo $project['name'];?></span><img project-id="<?php echo $project['pid'];?>" project-file="<?php echo $project['file_url'];?>" class="delete_portfolio_project" src="<?php echo $theme_path;?>style/btns/btn_inbox_multi_delete_off.png"></li>
+                    <?php endforeach;?>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

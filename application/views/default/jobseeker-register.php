@@ -4,7 +4,6 @@
    .advsearch-row .delete {width: 13px;float:right;margin-right: 0px;}
 </style>
 
-<script type="text/javascript" src="<?php echo $theme_path?>js/jslib/ajaxupload.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
 <script type="text/javascript">

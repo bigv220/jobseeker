@@ -160,6 +160,8 @@ class jobseeker extends Front_Controller {
     $data['language'] = $this->jobseeker_model->getLanguage($uid);
     $data['seekingIndustry'] = $this->jobseeker_model->getAllSeekingIndustry($uid);
     $data['similar_peoples'] = $this->jobseeker_model->getSimilarUsers($uid);
+    $this->load->model('portfolioproject_model');
+    $data['portfolio_projects'] = $this->portfolioproject_model->getUserPortfolioProjects($uid);
     $this->load->view($data['front_theme']."/jobseeker-myprofile",$data);
 }
     public function savedBookmarks(){
@@ -735,6 +737,40 @@ class jobseeker extends Front_Controller {
 
         $msg = "success";;
         $result['status'] = $msg;
+        echo json_encode($result);
+    }
+
+    public function addPortfolioProject(){
+        $post = $_POST;
+        $result = array('pid'=>-1);
+        $this->load->model('portfolioproject_model');
+        $result['pid'] = $this->portfolioproject_model->addProject($post);
+        //select all projects of the current user, so that his portfolio list will be update with js code
+        $result['portfolio_projects'] = $this->portfolioproject_model->getUserPortfolioProjects($post['uid']);
+        echo json_encode($result);
+    }
+
+    public function readPortfolioTextFileContent(){
+        $post = $_POST;
+        $result = array('content'=>'Loading content...');
+        $this->load->helper('file');
+        $result['content'] = read_file($post['file_path']);
+        echo json_encode($result);
+    }
+
+    public function deletePortfolioProject(){
+        $post = $_POST;
+        $result = array('status'=>"error");
+        $this->load->model('portfolioproject_model');
+        $deleted = $this->portfolioproject_model->delProject($post['pid']);
+        if($deleted){//delete the uploaded file
+            $this->load->helper('file');
+            delete_files($post['file']);
+            $result['status'] = 'success';
+            //select all projects of the current user, so that his portfolio list will be update with js code
+            $result['portfolio_projects'] = $this->portfolioproject_model->getUserPortfolioProjects($post['uid']);
+        }
+
         echo json_encode($result);
     }
 }

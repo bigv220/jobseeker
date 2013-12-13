@@ -359,33 +359,6 @@ function uploadImage(old_avatar) {
     });
 }
 
-function uploadFile(btn_id, upload_btn, error_id,input_id) {
-    var oBtn = document.getElementById(btn_id);
-    var upload_button = document.getElementById(upload_btn);
-    var oRemind = document.getElementById(error_id);
-    new AjaxUpload(oBtn,{
-        action:site_url+"jobseeker/ajaxuploadfile",
-        name:"workexample",
-        data: {},
-        onSubmit:function(file,ext){
-        },
-        onComplete:function(file,response){
-            oBtn.disabled = "";
-            var response = response.split("|");
-            if ( response[0] == 'success') {
-                oRemind.style.color = "green";
-                oRemind.innerHTML = "Upload successful.";
-
-                var filename = response[1];
-                $('#'+input_id).val(filename);
-            } else {
-                oRemind.style.color = "red";
-                oRemind.innerHTML = response;
-            }
-
-        }
-    });
-}
 
 function delPersonalSkills(id_str,thisO,skill) {
     var uid = $('#uid').val();

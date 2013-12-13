@@ -171,7 +171,6 @@
     </div>
 </div>
 
-<script type="text/javascript" src="<?php echo $theme_path?>js/jslib/ajaxupload.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     uploadImage();

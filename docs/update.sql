@@ -227,3 +227,18 @@ CREATE TABLE IF NOT EXISTS `inbox` (
 
 #2013-12-08 Add column number of viewed profile.
 ALTER TABLE  user ADD  `visit_num` INT(11) NULL DEFAULT 0;
+
+#2013-12-10 create table of portfolio projects
+-- ----------------------------
+-- Table structure for `portfolio_project`
+-- ----------------------------
+DROP TABLE IF EXISTS `portfolio_project`;
+CREATE TABLE `portfolio_project` (
+  `pid` bigint(20) NOT NULL auto_increment COMMENT 'project id',
+  `name` varchar(50) default NULL COMMENT 'project name',
+  `description` text COMMENT 'project description',
+  `file_url` varchar(100) default NULL COMMENT 'the uploaded filed location',
+  `type` tinyint(4) default NULL COMMENT '0 for text files, 1 for images,2-audio,3-video£¬4-zip files',
+  `uid` bigint(20) default NULL COMMENT 'user id of user table',
+  PRIMARY KEY  (`pid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
