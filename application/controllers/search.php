@@ -58,7 +58,7 @@ class search extends Front_Controller {
                 array_push($where_arr, 'location=' .$post["location"]);
             }
             if(!empty($post["employment_length"])) {
-                array_push($where_arr, 'employment_length='.$post["employment_length"]);
+                array_push($where_arr, 'job.employment_length='.$post["employment_length"]);
             }
             if(!empty($post["salary"])) {
                 array_push($where_arr, 'salary_range='.$post["salary"]);

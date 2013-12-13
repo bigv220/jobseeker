@@ -70,7 +70,7 @@
                     <option value="">All Type</option>
                     <?php $jobtype = jobtype();
                     foreach ($jobtype as $k => $v) {?>
-                    <option value="<?php echo $k+1?>"><?php echo $v?></option>
+                    <option value="<?php echo $v?>"><?php echo $v?></option>
                     <?php }?>
                 </select>
                 <input type="hidden" name="employment_type" id="jobtype_tag"/>
@@ -130,8 +130,8 @@
                 <select name="salary" class="filter_key">
                     <option value="0" selected="selected">Any Salary</option>
                     <?php $salary = getSalary();
-                    foreach($salary as $v) { ?>
-                    <option value="<?php echo $v+1; ?>"><?php echo $v; ?></option>
+                    foreach($salary as $k=>$v) { ?>
+                    <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
                     <?php } ?>
                 </select>
             </dd>
