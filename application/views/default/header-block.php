@@ -67,7 +67,7 @@
                 login
                 <?php else: ?>
                     <?php echo isset($first_name)?$first_name:"";?>&nbsp;
-                    <?php echo isset($last_name)?$last_name:"";?>
+                    <?php if ($current_user_type!=1) echo isset($last_name)?$last_name:"";?>
                 <?php endif;?>
             </div>
 
