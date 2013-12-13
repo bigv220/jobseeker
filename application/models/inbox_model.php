@@ -121,6 +121,7 @@ class inbox_model extends MY_Model
     {
         $result = $this->db->select('*')
                  ->from($this->table)
+                 ->where('user2', $uid)
                  ->where('user2read', 'no')
                  ->where('is_delete', 0)
                  ->group_by('id')
