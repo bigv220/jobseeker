@@ -241,6 +241,7 @@ CREATE TABLE `portfolio_project` (
   `type` tinyint(4) default NULL COMMENT '0 for text files, 1 for images,2-audio,3-video£¬4-zip files',
   `uid` bigint(20) default NULL COMMENT 'user id of user table',
   PRIMARY KEY  (`pid`)
+  ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 #2013-12-10 Add interview table
 CREATE TABLE `interview` (
