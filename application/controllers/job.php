@@ -236,7 +236,9 @@ class job extends Front_Controller {
         }
 
         $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid");
-        $data['my_interviews_num'] = count($interview_num);
+        $data['interview_num'] = count($interview_num);
+        $this->load->model('inbox_model');
+        $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
         
         $this->load->view($data['front_theme']."/jobseeker-applied-jobs",$data);
     }

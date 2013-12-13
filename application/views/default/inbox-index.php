@@ -21,11 +21,11 @@
       </div>
       <div class="btnarea">
           <a href="#" class="png square_btn edit_profile_btn"></a>
-          <?php if ($unread != 0) : ?>
-          <a href="#" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
-          <span class="bubble jingchat_inbox_bubble"><?php echo $unread; ?></span>
+          <?php if ($chat_unread != 0) : ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
+          <span class="bubble jingchat_inbox_bubble"><?php echo $chat_unread; ?></span>
           <?php else: ?>
-          <a href="#" class="png square_btn jingchat_inbox_btn"></a>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn"></a>
           <?php endif; ?>
           <a href="#" class="png square_btn saved_bookmarks_btn"></a>
           <a href="#" class="png square_btn view_my_interviews_btn"></a>

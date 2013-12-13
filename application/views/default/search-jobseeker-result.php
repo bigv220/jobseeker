@@ -401,7 +401,7 @@
                             <p>your message be sent to their Jingchat inbox</p>
                         </div>
                         <div class="jingchat_message_input">
-                            <textarea rows="3" cols=""></textarea>
+                              <textarea data-user="<?php echo $user['uid']?>" id="message" rows="3" cols="" class="input-tip" data-tipval="Type your message here">Type your message here</textarea>
                         </div>
                     </div>
                 </div>

@@ -24,13 +24,25 @@
       </div>
       <div class="btnarea">
           <a href="<?php echo $site_url?>jobseeker/register" class="png square_btn edit_profile_btn"></a>
-          <a href="#" class="png square_btn jingchat_inbox_btn"></a>
-          <span class="bubble jingchat_inbox_bubble">2</span>
+          <!-- JINGCHAT BEGIN -->
+          <?php if ($chat_unread != 0) : ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
+          <span class="bubble jingchat_inbox_bubble"><?php echo $chat_unread; ?></span>
+          <?php else: ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn"></a>
+          <?php endif; ?>
+          <!-- JINGCHAT END -->
           <a href="<?php echo $site_url; ?>jobseeker/savedBookmarks" class="png square_btn saved_bookmarks_btn"></a>
-          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <!-- INTERVIEW START -->
+          <?php if ($interview_num != 0) : ?>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn view_my_interviews_btn_current"></a>
           <span class="bubble view_my_interviews_bubble">
               <?php echo $interview_num; ?>
           </span>
+        <?php else: ?>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+        <?php endif; ?>
+          <!-- INTERVIEW END -->
          </div>
     </div>
     <div class="company-bd jobseeker-bd">

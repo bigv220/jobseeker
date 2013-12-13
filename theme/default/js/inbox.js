@@ -27,13 +27,12 @@ $(document).ready(function() {
 	$('.jingchat_message_input textarea').keypress(function(event) {
     	// Check the keyCode and if the user pressed Enter (code = 13) 
     	if (event.keyCode == 13) {
-	        $.post(base_url + "inbox/response", { id:$('#msg_id').val(), user2:$('#user2').val(), message:$('#message').val() },
+	        $.post(base_url + "inbox/response", { user2:$('#user2').val(), message:$('#message').val() },
 		  	function(data){
 		  		//TODO: 定位到最下面
 		    	$('.jingchat_messages_bd').append(data);
 		    	
 		    	$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
-				$('.jingchat_message_input textarea').val('');
 				$('.jingchat_message_input textarea').val('');
 			});
     	}

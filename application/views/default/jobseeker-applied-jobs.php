@@ -21,13 +21,25 @@
       </div>
       <div class="btnarea">
           <a href="<?php echo $site_url?>jobseeker/register" class="png square_btn edit_profile_btn"></a>
-          <a href="<?php echo $site_url?>inbox" class="png square_btn jingchat_inbox_btn"></a>
-          <?php if (!empty($unread_msg_num)): ?><span class="bubble jingchat_inbox_bubble"><?php echo $unread_msg_num; ?></span><?php endif; ?>
+           <!-- JINGCHAT BEGIN -->
+          <?php if ($chat_unread != 0) : ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
+          <span class="bubble jingchat_inbox_bubble"><?php echo $chat_unread; ?></span>
+          <?php else: ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn"></a>
+          <?php endif; ?>
+          <!-- JINGCHAT END -->
           <a href="<?php echo $site_url; ?>jobseeker/savedBookmarks" class="png square_btn saved_bookmarks_btn"></a>
-          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
-          <?php if (!empty($my_interviews_num)): ?>
-          <span class="bubble view_my_interviews_bubble"><?php echo $my_interviews_num; ?></span>
-          <?php endif;?>
+          <!-- INTERVIEW START -->
+          <?php if ($interview_num != 0) : ?>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn view_my_interviews_btn_current"></a>
+          <span class="bubble view_my_interviews_bubble">
+              <?php echo $interview_num; ?>
+          </span>
+          <?php else: ?>
+              <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <?php endif; ?>
+          <!-- INTERVIEW END -->
          </div>
     </div>
 
@@ -141,6 +153,15 @@
         </div>
     </div>
     <?php endforeach; ?>
+    <?php if(count($jobs) == 0) : ?>
+    <div class="sresult-par1">
+        <div class="box rel sresult-row id-4">
+            <div class="noresult">
+                Sorry, no matches were found, <br/>please alter your search and try again.
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
 </div>
 <!--backtop-->
 <div class="backtop png" style="right:200px;"></div>

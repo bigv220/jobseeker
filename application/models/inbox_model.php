@@ -25,6 +25,16 @@ class inbox_model extends MY_Model
         return 1;   
     }
 
+    public function checkIfConversationExist($user1, $user2) {
+        $result = $this->db->select('*')
+                           ->from($this->table)
+                           ->where('user1',$user1)
+                           ->where('user2',$user2)
+                           ->get()
+                           ->result_array();
+        return $result;                           
+    }
+
     public function addMsg($data) 
     {
     	$this->db->insert('inbox', $data);

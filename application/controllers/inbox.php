@@ -43,7 +43,7 @@ class inbox extends Front_Controller {
         } else {
             $data['messages'] = $this->inbox_model->getTrashMsg($uid);
         }
-        $data['unread'] = $this->inbox_model->getUnReadMessageNum($uid);
+        $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
         // Get first detail msg
         if (!empty($data['messages'])) {
             $data['msg_detail'] = $this->inbox_model->getDetailMsg($data['messages'][0]['id']);    
@@ -69,19 +69,35 @@ class inbox extends Front_Controller {
     {
         $this->load->model('inbox_model');
         $data = $this->data;
-        if (isset($_POST['title'])) {
-            // Get ID
-            $id = $this->inbox_model->getMaxMessageId();
-            if ($id === 0) {
-                echo "Error occured"; exit;
+        if (!empty($_POST['user2']) && !empty($_POST['message'])) {
+            // Judge if user2 and user1 has conversion
+            $result = $this->inbox_model->checkIfConversationExist($this->session->userdata('uid'), $_POST['user2']);
+
+            // No Conversation yet
+            if (count($result) == 0) {
+                // Get ID
+                $id = $this->inbox_model->getMaxMessageId();
+                if ($id === 0) {
+                    echo "Error occured"; exit;
+                }
+                $post = array('id'=>$id+1,'seq'=>1,'title'=>isset($_POST['title'])?$_POST['title']:"",'message'=>$_POST['message'],'user1'=>$this->session->userdata('uid'),
+                    'user2'=>$_POST['user2'], 'timestamp'=>time(), 'user1read'=>'yes','user2read'=>'no','is_delete'=>0,'is_offline'=>1);
+                
+                $this->inbox_model->addMsg($post);
+            } else {
+                $seq = $this->inbox_model->getMaxSeqForId($result[0]['id']);
+        
+                $post = array('id'=>$result[0]['id'],'seq'=>$seq+1,'title'=>isset($_POST['title'])?$_POST['title']:"",'message'=>$_POST['message'],'user1'=>$this->session->userdata('uid'),
+                        'user2'=>$_POST['user2'], 'timestamp'=>time(), 'user1read'=>'yes','user2read'=>'no','is_delete'=>0,'is_offline'=>1);
+                    
+                $this->inbox_model->addMsg($post);
+                $data['message'] = $post['message'];
+                $data['timestamp'] = $post['timestamp'];
             }
-            $post = array('id'=>$id+1,'seq'=>1,'title'=>$_POST['title'],'message'=>$_POST['message'],'user1'=>$this->session->userdata('uid'),
-                'user2'=>$_POST['user2'], 'timestamp'=>time(), 'user1read'=>'yes','user2read'=>'no','is_delete'=>0,'is_offline'=>1);
             
-            $this->inbox_model->addMsg($post);
         }
 
-        $this->load->view($data['front_theme'].'/inbox-sentmsg',$data);
+        //$this->load->view($data['front_theme'].'/inbox-sentmsg',$data);
     }
 
     public function getDetailMsg() 

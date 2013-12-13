@@ -166,6 +166,8 @@ class jobseeker extends Front_Controller {
 
     $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid");
     $data['interview_num'] = count($interview_num);
+    $this->load->model('inbox_model');
+    $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
     $this->load->view($data['front_theme']."/jobseeker-myprofile",$data);
 }
     public function savedBookmarks(){
@@ -289,7 +291,8 @@ class jobseeker extends Front_Controller {
 
         $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid");
         $data['interview_num'] = count($interview_num);
-
+        $this->load->model('inbox_model');
+        $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
         $this->load->view($data['front_theme']."/jobseeker-saved-bookmarks",$data);
     }
 
