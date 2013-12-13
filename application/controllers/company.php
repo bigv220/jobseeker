@@ -191,6 +191,9 @@ class company extends Front_Controller {
     	$this->load->model('jobseeker_model');
     	$data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
     	
+    	$this->load->model('job_model');
+    	$data['jobs'] = $this->job_model->getCompanyJobList($uid);
+    	
     	$this->load->view($data['front_theme']."/company_job_listing",$data);
     }
 

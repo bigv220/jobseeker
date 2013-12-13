@@ -20,13 +20,13 @@
         <p class="profile_views_num">4 Profile Views</p>
       </div>
       <div class="btnarea">
-          <a href="#" class="png square_btn edit_profile_btn"></a>
+          <a href="<?php echo $site_url?>company/register" class="png square_btn edit_profile_btn"></a>
           <a href="#" class="png square_btn jingchat_inbox_btn"></a>
           <span class="bubble jingchat_inbox_bubble">2</span>
           <a href="#" class="png square_btn view_my_candidates_btn view_my_candidates_btn_current"></a>
           <a href="#" class="png square_btn view_my_interviews_btn"></a>
           <span class="bubble view_my_interviews_bubble">10</span>
-         </div>
+      </div>
     </div>
 
   </div>
@@ -46,6 +46,7 @@
 
 <!--search-result body-->
 <div class="result-bd">
+	<?php foreach ($jobs as $job):?>
     <div class="box rel sresult-row">
         <div class="sresult-par1">
             <div class="span1 rel">
@@ -186,7 +187,7 @@
             </div>
         </div>
     </div>
-
+	<?php endforeach;?>
 </div>
 <!--backtop-->
 <div class="backtop png" style="right:200px;"></div>

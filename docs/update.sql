@@ -248,3 +248,10 @@ CREATE TABLE `interview` (
 
 #2013-12-12
 drop table company;
+
+#2013-12-12 Add Company candidate table
+CREATE TABLE `company_candidate` (
+  `company_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY  (`company_id`,`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
