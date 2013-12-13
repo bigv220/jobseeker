@@ -103,19 +103,19 @@ class company_model extends MY_Model
 	}
 	
 	public function searchCompany($where) {
-        $sql = "SELECT com.company_id, description,name,city
-        		FROM company as com
-        		LEFT JOIN company_industry as ci on ci.company_id=com.company_id".$where;
+        $sql = "SELECT u.uid as company_id, description,username as name,city
+        		FROM user as u
+        		LEFT JOIN company_industry as ci on ci.company_id=u.uid".$where;
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
     }
 
     public function searchBookmarkedCompany($where) {
-        $sql = "SELECT com.company_id, description,name,city
-        		FROM company as com
-        		LEFT JOIN company_industry as ci on ci.company_id=com.company_id
-        		LEFT JOIN company_bookmark as cb on cb.company_id=com.company_id".$where;
+        $sql = "SELECT u.uid as company_id, description,username as name,city,profile_pic
+        		FROM user as u
+        		LEFT JOIN company_industry as ci on ci.company_id=u.uid
+        		LEFT JOIN company_bookmark as cb on cb.company_id=u.uid".$where;
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
@@ -123,6 +123,78 @@ class company_model extends MY_Model
 
     public function deleteBookmarkedCompany($id, $uid) {
         $sql = "DELETE FROM company_bookmark WHERE user_id=$uid and company_id=$id";
+        return $this->db->query($sql);
+    }
+
+
+    public function getUsersWhoAppliedJobForCompany($company_id) {
+
+    	// Get user_id array
+    	$where = "job_id in (SELECT job_id FROM job where company_id = ".$company_id.")";
+ 		$result = $this->db->select('user_id')->distinct()
+            			   ->from('job_apply')
+            			   ->where($where)
+            			   ->get()
+            			   ->result_array();
+
+        // Get detail user info by user ids.
+		$user_array = array();            			
+		$select_sql = "";
+		if (empty($result)) {
+			return array();
+		}
+        foreach ($result as $user_id) {
+        	array_push($user_array, $user_id['user_id']);
+        }
+        
+        $user_result = $this->db->select('*')->from('user')->where_in('uid',$user_array)
+        		 ->get()->result_array();
+
+        return $user_result;   	
+    }
+
+    public function getCandidatesForCompany($company_id, $filter = '') {
+        $where = "uid in (SELECT user_id FROM company_candidate where company_id = ".$company_id.")";
+        $result = $this->db->select('*')
+                           ->from('user')
+                           ->where($where)
+                           ->like('first_name',$filter)
+                           ->get()
+                           ->result_array();
+        return $result;                    
+    }
+
+    public function addCandidate($data) {
+    	$result = $this->db->select('*')
+    						 ->from('company_candidate')
+    						 ->where('company_id',$data['company_id'])
+    						 ->where('user_id', $data['user_id'])
+    						 ->get()->result_array();
+
+    	if (empty($result)) {
+    		$this->db->insert('company_candidate', $data);
+    	} else {
+    		$this->deleteCandidate($data['company_id'], $data['user_id']);
+    	}
+    	
+        return $this->db->insert_id();
+    }
+
+    /*
+     *  Get Shortlist candidates for company.
+	 *  @param company_id   
+	 *  @return jobseeker array
+     */
+    public function getCandidateIdForCompany($uid) {
+    	return $this->db->select('*')
+    			 ->from('company_candidate')
+    			 ->where('company_id', $uid)
+    			 ->get()
+    			 ->result_array();
+    }
+
+    public function deleteCandidate($company_id, $uid) {
+        $sql = "DELETE FROM company_candidate WHERE company_id=$company_id and user_id=$uid";
         return $this->db->query($sql);
     }
 }

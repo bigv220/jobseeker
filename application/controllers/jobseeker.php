@@ -219,17 +219,17 @@ class jobseeker extends Front_Controller {
             if($post['filter_type'] == 'companies') {
                 $filter_type = 'companies';
                 if(!empty($post["keywords"])) {
-                    array_push($where_arr, "name like '%" . $post["keywords"] . "%'");
+                    array_push($where_arr, "username like '%" . $post["keywords"] . "%'");
                 }
 
                 if(!empty($post["country"])) {
-                    array_push($where_arr, "com.country='" .$post["country"]."'");
+                    array_push($where_arr, "u.country='" .$post["country"]."'");
                 }
                 if(!empty($post["province"])) {
-                    array_push($where_arr, "com.province='" .$post["province"]."'");
+                    array_push($where_arr, "u.province='" .$post["province"]."'");
                 }
                 if(!empty($post["city"])) {
-                    array_push($where_arr, "com.city='" .$post["city"]."'");
+                    array_push($where_arr, "u.city='" .$post["city"]."'");
                 }
 
                 if (!empty($post['industry'])) {
@@ -283,6 +283,10 @@ class jobseeker extends Front_Controller {
         $data['location'] = getLoction();
 
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+
+        $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid");
+        $data['interview_num'] = count($interview_num);
+
         $this->load->view($data['front_theme']."/jobseeker-saved-bookmarks",$data);
     }
 

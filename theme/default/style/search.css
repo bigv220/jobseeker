@@ -40,7 +40,8 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .job-btn-submit,.job-btn-submitted{margin-top:8px;width:161px;height:25px;display:none;background-image:url(search/apply-btn.png);background-repeat:no-repeat;}
 .job-btn-submit{background-position:0 -25px;}
 .job-btn-submitted{background-position:0 0;}
-.jobseeker-btn-shortlisted{width:75px;height:75px;display:block;float:left;margin-right:11px;background-image:url(search/shortlist_cadidate.png);}
+.jobseeker-btn-shortlisted{width:75px;height:75px;display:block;float:left;margin-right:11px;background-image:url(btns/btn_shortlist_candidate.png);}
+.jobseeker-btn-shortlisted_current{background-position:0 -158px;}
 .jobseeker-btn-delete-candidate{width:75px;height:75px;display:block;float:left;margin-right:11px;background-image:url(btns/btn_delete_candidate.png);}
 .jobseeker_request_interview,.jobseeker_request_interview_submitted{margin-top:8px;width:161px;height:25px;display:none;background-image:url(search/request_interview_btn.png);background-repeat:no-repeat;}
 .jobseeker_request_interview{background-position:0 -25px;}
@@ -101,6 +102,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .sresult-about a{color:#ea6e3b;}
 .pop-apply{width:230px;height:116px;position:absolute;top:50%;left:50%;margin:-58px 0 0 -115px;position:fixed;_position:absolute;zoom:1;}
 .pop-apply-nav p{text-align:center;font-weight:700;font-size:14px;padding:0 30px;}
+.pop-candidate-nav p{text-align:center;font-weight:700;font-size:14px;padding:0 20px;}
 #find_a_job_wrapper .advsearch-row .long_input, #find_a_job_wrapper .advsearch-row .long_input input, #find_a_job_wrapper .advsearch-row .long_input select{width:350px;}
 #find_staff_wrapper  .advsearch-row .long_input, #find_staff_wrapper .advsearch-row .long_input input, #find_staff_wrapper .advsearch-row .long_input select{width:350px;}
 .jobseeker_profile_language label{font-weight: bold;margin-right:15px;width: 120px; display: inline-block;color:#ea6e3b;}

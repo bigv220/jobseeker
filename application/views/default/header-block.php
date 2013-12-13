@@ -67,7 +67,7 @@
                 login
                 <?php else: ?>
                     <?php echo isset($first_name)?$first_name:"";?>&nbsp;
-                    <?php if ($current_user_type!=1) echo isset($last_name)?$last_name:"";?>
+                    <?php echo isset($last_name)?$last_name:"";?>
                 <?php endif;?>
             </div>
 
@@ -114,7 +114,8 @@
                             <li><a href="<?php echo $site_url?>company/register">Edit Company Profile</a></li>
                             <li><a href="<?php echo $site_url?>company/joblisting">Manage Job listings</a></li>
                             <li><a href="<?php echo $site_url?>company/shortlistCandidates">View Shortlisted Candidates</a></li>
-                            <li><a href="#">Inbox</a></li>
+                            <li><a href="<?php echo $site_url?>inbox">Inbox</a></li>
+
                         <?php endif;?>
                         <li class="last"><a href="<?php echo $site_url?>user/logout">Sign out</a></li>
                     </ul>
