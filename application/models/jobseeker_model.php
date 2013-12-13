@@ -437,4 +437,11 @@ class jobseeker_model extends MY_Model
         $sql = "UPDATE interview SET reply_id=$reply_id WHERE id=".$id;
         return $this->db->query($sql);
     }
+
+    public function getViewedCompany($uid) {
+        $sql = "SELECT company_id, profile_pic, username as job_name FROM company_viewed as cv
+                LEFT JOIN user as u on cv.company_id=u.uid WHERE cv.uid=$uid ORDER BY view_date DESC LIMIT 3";
+
+        return $this->db->query($sql)->result_array();
+    }
 }

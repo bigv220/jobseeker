@@ -164,10 +164,18 @@ class jobseeker extends Front_Controller {
     $this->load->model('portfolioproject_model');
     $data['portfolio_projects'] = $this->portfolioproject_model->getUserPortfolioProjects($uid);
 
+    //get the number of interviews user received
     $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid");
     $data['interview_num'] = count($interview_num);
-    $this->load->model('inbox_model');
-    $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
+
+    //get the top 3 jobs user applied
+    $this->load->model('job_model');
+    $applied_jobs = $this->job_model->getAppliedJobByUser($uid);
+    $data['applied_jobs'] = array_slice($applied_jobs, 0, 3);
+
+    //get the top 3 companies user reviewed
+    $viewed_company = $this->jobseeker_model->getViewedCompany($uid);
+    $data['viewed_company'] = $viewed_company;
     $this->load->view($data['front_theme']."/jobseeker-myprofile",$data);
 }
     public function savedBookmarks(){
