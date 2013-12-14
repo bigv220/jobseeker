@@ -50,6 +50,7 @@ $(function(){
 	}).click(function(){
 		if($(this).hasClass('kyo-checkbox-sel')){
 			$(this).removeClass('kyo-checkbox-sel');
+			$(this).removeClass('kyo-checkbox-sel-hover');
 		}else{
 			$(this).addClass('kyo-checkbox-sel');
 		}

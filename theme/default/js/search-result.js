@@ -65,7 +65,7 @@ function showHint(thisO) {
         $(thisO).val('Enter Keywords');
     }
 }
-
+/********DOCUMENT READY*****************/
 $(function(){
     //search-result sequence
     $('.kyo-select').kyoSelect({

@@ -535,9 +535,9 @@ class search extends Front_Controller {
         foreach ($candiates_arr as $value) {
             array_push($candidates, $value['user_id']);
         }
-
+        $ids = "";
         for($i=0; $i<count($jobseekers); $i++) {
-
+            $ids .= $jobseekers[$i]['uid'].',';
             // Check if Shortlist Candidate is checked
             if (in_array($jobseekers[$i]['uid'], $candidates)) {
                 $jobseekers[$i]['is_shortlisted'] = true;
@@ -586,6 +586,7 @@ class search extends Front_Controller {
             $jobseekers[$i]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($jobseekers[$i]['uid']);
             $jobseekers[$i]['languages'] = $this->jobseeker_model->getLanguage($jobseekers[$i]['uid']);
         }
+        $data['ids'] = substr($ids, 0, -1);
         $data['jobseekers'] = $jobseekers;
 
         $uid = $this->session->userdata('uid');

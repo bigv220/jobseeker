@@ -34,7 +34,7 @@
     <div class="inbox_content">
         <div class="inbox_multi_actions_bar">
             <!--<img src="<?php echo $theme_path;?>/style/btns/btn_inbox_multi_edit_on.png" alt=""/>-->
-            <img src="<?php echo $theme_path;?>/style/btns/btn_inbox_multi_delete_on.png" alt=""/>
+            <img id="multi_delete" src="<?php echo $theme_path;?>/style/btns/btn_inbox_multi_delete_on.png" alt=""/>
         </div>
       <div class="sresult-tab-hd-m">
           <span class="fxui-tab-tit-m <?php if($mode == ''): ?>curr<?php endif; ?>" onclick="refresh('');">JingChat</span>
@@ -51,8 +51,8 @@
                       ?>
                       <div class="inbox_overview_row" data-id='<?php echo $msg['id']; ?>'>
                           <div class="email_select_checkbox">
-                              <input id="email_checkbox_1" value="1" class="kyo-checkbox" style="display:none;"/>
-                              <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="0"></i>
+                              <input id="email_checkbox_1" value="0" class="kyo-checkbox" style="display:none;"/>
+                              <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="<?php echo $msg['id']; ?>"></i>
                           </div>
                           <div class="sender_avatar">
                               <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="50px" height="50px" class="round_img_border3"/>
@@ -64,13 +64,13 @@
                               <div class="email_actions_bar">
                                   <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>
                                   <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt="" class="delete_msg" data-id="<?php echo $msg['id']; ?>"/>
-                                  <img src="<?php echo $theme_path;?>/style/btns/btn_jingchat_online_icon.png" alt=""/>
+                                  <img style="display:none" class="online_status" online-id="<?php echo $msg['user1']; ?>" src="<?php echo $theme_path;?>/style/btns/btn_jingchat_online_icon.png" alt=""/>
                               </div>
                           </div>
                           <div style="clear:both;"></div>
                       </div>
                       <?php endforeach; ?>
-                      
+                  <input type="hidden" id="delete_ids" value="" />        
                   </div>
                   <div class="jingchat_log_content">
 
@@ -81,8 +81,10 @@
                               </div>
                               <div class="jingchat_messages_bd">
                                   <?php 
+                                  $seq = 0;
                                   if (!empty($msg_detail)):
-                                  foreach($msg_detail as $detail): ?>
+                                  foreach($msg_detail as $detail): 
+                                    $seq = $detail['seq']; ?>
                                   <div class="<?php if ($detail['user1'] == $uid) echo "jingchat_message_row_me"; else echo "jingchat_message_row_other"; ?>">
                                       <div class="jingchat_message_content">
                                           <img src="<?php echo $theme_path?>style/jingchat/me_jingchat_message_leftarrow.png" class="message_avatar_arrow"/>
@@ -102,10 +104,12 @@
                                   </div>
                                   <?php endforeach; ?>
                                   <?php endif; ?>
+                            <input type="hidden" id="msg_id" value="<?php echo $id; ?>"/>
+                          <input type="hidden" id="seq" value="<?php echo $seq; ?>"/>
+                          <input type="hidden" id="user2" value="<?php echo $user2; ?>"/>
                               </div>
                           </div>
-                          <input type="hidden" id="msg_id" value="<?php echo $id; ?>"/>
-                          <input type="hidden" id="user2" value="<?php echo $user2; ?>"/>
+         
                           <?php if ($mode != 'trash') : ?>
                           <div class="jingchat_message_input">
                               <textarea id="message" rows="3" cols="" class="input-tip" data-tipval="Type your message here">Type your message here</textarea>
@@ -132,6 +136,19 @@
         </div>
         <div class="pop-bar">
             <a href="#yes" class="pop-bar-btn delete-message-yes">Yes</a> <a href="#no" class="pop-bar-btn pop-btn-no">No</a>
+        </div>
+    </div>
+</div>
+
+<!--Other pop box-->
+<div class="box pop-box pop-multi-delete">
+    <div class="rel">
+        <div class="pop-close pop-apply-close"></div>
+        <div class="pop-nav pop-multi-delete-nav">
+            <p>Are you sure you want to delete selected conversation(s)?</p>
+        </div>
+        <div class="pop-bar">
+            <a href="#yes" class="pop-bar-btn delete-multi-message-yes">Yes</a> <a href="#no" class="pop-bar-btn pop-btn-no">No</a>
         </div>
     </div>
 </div>

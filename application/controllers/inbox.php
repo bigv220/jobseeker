@@ -43,6 +43,8 @@ class inbox extends Front_Controller {
         } else {
             $data['messages'] = $this->inbox_model->getTrashMsg($uid);
         }
+
+        $online_users = $this->jobseeker_model->getUserOnlineStatus();
         $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
         // Get first detail msg
         if (!empty($data['messages'])) {
@@ -134,9 +136,43 @@ class inbox extends Front_Controller {
         echo $detail_msg;
     }
 
+    public function getRealTimeMessage()
+    {
+        $data = $this->data;
+
+        $this->load->model('jobseeker_model');
+        if (isset($_POST['uid'])) {
+            $uid = $_POST['uid'];
+        } else {
+            $uid = $this->session->userdata('uid');
+        }
+        // Get current login user info
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+
+        $this->load->model('inbox_model');
+        
+        $data['msg_detail'] = $this->inbox_model->getRealTimeMessage($_POST['msg_id'], $_POST['seq']);   
+        // Get other user's info, name and profile img
+        if (!empty($data['msg_detail'])) {
+            $user1 = $data['msg_detail'][0]['user1'];
+            $user2 = $data['msg_detail'][0]['user2'];
+
+            if ($user1 == $uid) {
+                $data['other_user'] = $this->jobseeker_model->getUserInfo($user2);                
+            } else {
+                $data['other_user'] = $this->jobseeker_model->getUserInfo($user1);                
+            }
+        } 
+        // Update to read for this msg
+        $this->inbox_model->updateMessageToRead($_POST['msg_id']);
+
+        $detail_msg = $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
+        echo $detail_msg;
+    }
+
     public function response()
     {
-        $id = $_POST['id'];
+        $id = $_POST['msg_id'];
         $data = $this->data;
         $this->load->model('inbox_model');
         $seq = $this->inbox_model->getMaxSeqForId($id);
@@ -165,6 +201,9 @@ class inbox extends Front_Controller {
     {
         $id = $_POST['id'];
         $this->load->model('inbox_model');
+        if (strlen($id) > 1) {
+            $id = substr($id, 0, -1);
+        }
         $this->inbox_model->deleteMessage($id);
     }
 

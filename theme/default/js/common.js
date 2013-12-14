@@ -1,5 +1,8 @@
 var userType = -1;//not login
 $(function(){
+    setInterval(function(){
+        checkstatus();
+    }, 10000);
      //pub input tips
     $('.input-tip')
     .focusin(function(event) {
@@ -37,8 +40,13 @@ $(function(){
     //pub pop mark
     $('.pop-mark').height($('body').height());
 
-})
+});
+var checkstatus = function() {
+    var ajax=$.getJSON(base_url + 'user/checkstatus', {},
+        function() {
 
+        });
+}
 var randNum = function(){
     var rnd = {};
     rnd.today = new Date();

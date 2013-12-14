@@ -110,10 +110,22 @@ class inbox_model extends MY_Model
         return $result;   
     }
 
+    public function getRealTimeMessage($msg_id, $seq) {
+        $result = $this->db->select('*')
+                 ->from($this->table)
+                 ->where('id',$msg_id)
+                 ->where('seq >',$seq)
+                 ->order_by('seq','desc')
+                 ->limit(1)
+                 ->get()
+                 ->result_array();
+        return $result;                
+    }
+
     public function deleteMessage($msg_id) 
     {
         $data = array('is_delete'=>1);
-        $this->db->where('id', $msg_id);
+        $this->db->where_in('id', $msg_id);
         $this->db->update('inbox', $data); 
     }
 

@@ -278,3 +278,12 @@ CREATE TABLE `company_viewed` (
   `view_date` date default NULL,
   PRIMARY KEY  (`uid`,`company_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+#2013-12-14 Add User Online status table
+CREATE TABLE `user_status` (
+  `uid` bigint(20) NOT NULL,
+  `status` int(11) NOT NULL,
+  `lastlogin` datetime default NULL,
+  `lastrequest` datetime default NULL,
+  PRIMARY KEY  (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
