@@ -1,3 +1,11 @@
+//Pop mark
+var popMark =null,
+    popViewPortfolio = null;
+
+$(document).ready(function(){
+    popMark =$('.pop-mark');
+    popViewPortfolio = $('.view_portfolio_pop');
+});
 function showContentOfPortfolio(name, desc, type, file_url){
     $('.view_portfolio_header h1').html(name);
     $('.view_portfolio_header p').html(desc);
@@ -7,10 +15,12 @@ function showContentOfPortfolio(name, desc, type, file_url){
     $('.audio_style').hide();
     $('.image_style').hide();
     $('.other_text_style').hide();
+
     if(type == 0){//text type files, includes txt, pdf, ppt,pptx,xls
         if(extension == 'txt'){//show content of txt file
             $('.text_style .content_text').html("Loading content...");
             $('.text_style').show();
+
             //load TXT file content from server
             var file_path = './' + file_url.substring(file_url.indexOf('attached'));
             $.post(site_url + '/jobseeker/readPortfolioTextFileContent',
@@ -54,14 +64,36 @@ function showContentOfPortfolio(name, desc, type, file_url){
         $('.other_text_style').show();
     }
 }
+function openPortfolioDetails(){
+    var clicked_project_id = $(this).attr('project-id');
+    var clicked_project_type = $(this).attr('file-type');
+    var clicked_project_name = $(this).attr('project-name');
+    var clicked_project_desc = $(this).attr('project-description');
+    var file_url = $(this).attr('file-url');
+
+    $('#portfolio_view_bar ul li').each(function(){
+        var current_project_id = $(this).attr('project-id');
+        if(clicked_project_id == current_project_id){
+            $(this).children("img").addClass('current');
+        }
+        else
+            $(this).children("img").removeClass('current');
+    });
+
+    //load content for portfolio pop view
+    showContentOfPortfolio(clicked_project_name, clicked_project_desc, clicked_project_type, file_url);
+    popMark.fadeIn();
+    popViewPortfolio.fadeIn();
+}
+
 
 function recreatePortfolioList(portfolio_projects){
     var htmltext = "";
     var navigatorBarHtml = "";
     var portfolioMgmtListHtml = "";
-
-    if(portfolio_projects.length > 0){
-        for(var i = 0, len = portfolio_projects.length; i < len; i++){
+    var len = portfolio_projects.length;
+    if(len > 0){
+        for(var i = 0; i < len; i++){
             if(i%6 == 0){
                 htmltext += '<div class="als-item">';
             }
@@ -75,35 +107,41 @@ function recreatePortfolioList(portfolio_projects){
                 + '" file-url="' + site_url + 'attached/workExamples/' + portfolio_projects[i]['file_url'] + '">';
 
             htmltext = htmltext + '<a href="javascript:void(0);" class="portfolio_item" ' + itemParameterStr;
-            navigatorBarHtml = navigatorBarHtml + '<li class="als-item" ';
-            portfolioMgmtListHtml = portfolioMgmtListHtml + "<li><span>" + portfolio_projects[i]['name'] + "</span><img project-id=''"
+            navigatorBarHtml = navigatorBarHtml + '<li class="als-item" ' + itemParameterStr;
+            portfolioMgmtListHtml = portfolioMgmtListHtml + "<li><span>" + portfolio_projects[i]['name'] + "</span><img project-id='"
                 + portfolio_projects[i]['pid'] + "'  project-file='"
                 + portfolio_projects[i]['file_url'] + "' "
                 + 'class="delete_portfolio_project" src="' + theme_url + 'style/btns/btn_inbox_multi_delete_off.png"></li>';
 
-            var imgHtml = "";
+            var imgHtml = "", navigatorBarImgHtml;
             switch(portfolio_projects[i]['type']){
-                case 0:
-                    imgHtml = "<img src='" + theme_url + "/style/portfolio/portfolio_text_file.png" + "'/>";
+                case '0':
+                    imgHtml = "<img src='" + theme_url + "style/portfolio/portfolio_text_file.png" + "'/>";
+                    navigatorBarImgHtml = "<img src='" + theme_url + "style/portfolio/edit_txt_file_btn.png" + "'/>";
                     break;
-                case 1:
-                    imgHtml = "<img src='" + site_url + "attached/workExamples/" .$portfolio_projects[i]['file_url']  +"'/>";
+                case '1':
+                    imgHtml = "<img src='" + site_url + "attached/workExamples/" + portfolio_projects[i]['file_url']  +"'/>";
+                    navigatorBarImgHtml = "<img src='" + site_url + "attached/workExamples/" + portfolio_projects[i]['file_url']  +"'/>";
                     break;
-                case 2:
-                    imgHtml = "<img src='" + theme_url + "/style/portfolio/portfolio_audio_file.png" +"'/>";
+                case '2':
+                    imgHtml = "<img src='" + theme_url + "style/portfolio/portfolio_audio_file.png" +"'/>";
+                    navigatorBarImgHtml = "<img src='" + theme_url + "style/portfolio/edit_audio_file_btn.png" +"'/>";
                     break;
-                case 3:
-                    imgHtml = "<img src='" + theme_url + "/style/portfolio/portfolio_audio_file.png" +"'/>";
+                case '3':
+                    imgHtml = "<img src='" + theme_url + "style/portfolio/portfolio_audio_file.png" +"'/>";
+                    navigatorBarImgHtml = "<img src='" + theme_url + "style/portfolio/edit_audio_file_btn.png" +"'/>";
                     break;
-                case 4:
-                    imgHtml = "<img src='" + theme_url + "/style/portfolio/portfolio_text_file.png" +"'/>";
+                case '4':
+                    imgHtml = "<img src='" + theme_url + "style/portfolio/portfolio_text_file.png" +"'/>";
+                    navigatorBarImgHtml = "<img src='" + theme_url + "style/portfolio/edit_txt_file_btn.png" +"'/>";
                     break;
                 default:
-                    imgHtml = "<img src='" + theme_url + "/style/portfolio/portfolio_text_file.png" +"'/>";
+                    imgHtml = "<img src='" + theme_url + "style/portfolio/portfolio_text_file.png" +"'/>";
+                    navigatorBarImgHtml = "<img src='" + theme_url + "style/portfolio/edit_txt_file_btn.png" +"'/>";
                     break;
             }
             htmltext = htmltext + imgHtml + '<div class="portfolio_caption"><span>' + portfolio_projects[i]['name'] + '</span></div></a>';
-            navigatorBarHtml = navigatorBarHtml + imgHtml + "</li>";
+            navigatorBarHtml = navigatorBarHtml + navigatorBarImgHtml + "</li>";
             if(i%3==2 || i == len - 1){
                 htmltext+= '<div style="clear:both;"></div></div>';//<!-- end of portfolio_row -->
             }
@@ -111,25 +149,51 @@ function recreatePortfolioList(portfolio_projects){
                 htmltext+= "</div>";//<!-- end of als-item -->
             }
         }
-        $('#portfolio_list .profile_portfolios').html(htmltext);
-        $("#portfolio_list").als({
-            circular: "no",
-            //autoscroll: "yes",
-            visible_items: 1
-        });
+        /*
+        $('.als-prev img').show();
+        $('.als-next img').show();
+        */
+
+        htmltext = '<span class="als-prev"><img src="' + theme_url + 'style/btns/previous_arrow.png" alt="prev" title="previous"/></span><div class="als-viewport"><div class="profile_portfolios als-wrapper"">'
+                    + htmltext
+                    + '</div><span class="als-next"><img src="' + theme_url + 'style/btns/forward_arrow.png" alt="next" title="next"  /></span>';
+
+        $('#portfolio_list').html(htmltext);
+
+        //$('#portfolio_list .profile_portfolios').html(htmltext);
+        if(len>3){
+            $("#portfolio_list").als({
+                circular: "no",
+                //autoscroll: "yes",
+                visible_items: 1
+            });
+        }
+
+        navigatorBarHtml = '<span class="als-prev"><img src="' + theme_url + 'style/btns/previous_arrow.png" alt="prev" title="previous" /></span><div class="als-viewport"><ul class="als-wrapper">'
+                            + navigatorBarHtml
+                            + '</ul></div><span class="als-next"><img src="' + theme_url + 'style/btns/forward_arrow.png" alt="next" title="next" /></span>';
 
         $('#portfolio_view_bar').html(navigatorBarHtml);
         $("#portfolio_view_bar").als({
             circular: "no",
             autoscroll: "no",
             scrolling_items: 1,
-            visible_items: 6
-        });
+            visible_items: len>6?6:len
+            });
 
-        $('.portfolio_list ul').html(portfolioMgmtListHtml);
+        $('.portfolio_item').click(openPortfolioDetails);
+        $('#portfolio_view_bar ul li').click(openPortfolioDetails);
+        $('.portfolio_mgmt_list ul').html(portfolioMgmtListHtml);
+        $('.delete_portfolio_project').click(function(){
+            var project_id = $(this).attr('project-id');
+            var file = $(this).attr('project-file');
+            deletePortfolioProject(project_id, file);
+        });
     }
     else{
-        $('#portfolio_list .profile_portfolios').html("No Projects in Portfolio.");
+        var emptyMessage = "No Projects in Portfolio.";
+        $('#portfolio_list .profile_portfolios').html(emptyMessage);
+        $('.portfolio_mgmt_list ul').html("<li>" + emptyMessage + "</li>");
     }
 }
 
@@ -147,35 +211,11 @@ function deletePortfolioProject(project_id, file){
 }
 
 $(function(){
-    //Pop mark
-    var popMark =$('.pop-mark'),
-        popViewPortfolio = $('.view_portfolio_pop');
-
-    function openPortfolioDetails(){
-        var clicked_project_id = $(this).attr('project-id');
-        var clicked_project_type = $(this).attr('file-type');
-        var clicked_project_name = $(this).attr('project-name');
-        var clicked_project_desc = $(this).attr('project-description');
-        var file_url = $(this).attr('file-url');
-
-        $('#portfolio_view_bar ul li').each(function(){
-            var current_project_id = $(this).attr('project-id');
-            if(clicked_project_id == current_project_id){
-                $(this).children("img").addClass('current');
-            }
-            else
-                $(this).children("img").removeClass('current');
-        });
-        //load content for portfolio pop view
-        showContentOfPortfolio(clicked_project_name, clicked_project_desc, clicked_project_type, file_url);
-        popMark.fadeIn();
-        popViewPortfolio.fadeIn();
-    }
-
     $('.portfolio_item').click(openPortfolioDetails);
     $('#portfolio_view_bar ul li').click(openPortfolioDetails);
 
     $('.view_portfolio_pop_close').click(function(){
+        $("#jquery_jplayer_1").jPlayer( "stop" );
         popMark.fadeOut();
         popViewPortfolio.fadeOut();
     });
@@ -183,7 +223,6 @@ $(function(){
     $('.delete_portfolio_project').click(function(){
         var project_id = $(this).attr('project-id');
         var file = $(this).attr('project-file');
-        alert(project_id);
         deletePortfolioProject(project_id, file);
     });
 

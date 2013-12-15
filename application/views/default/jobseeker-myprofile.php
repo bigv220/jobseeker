@@ -99,7 +99,7 @@
           <div class="profile_portfolios_wrapper">
               <dt>Portfolio<a href="javascript:void(0);" class="edit_jobseeker_profile_link edit_portfolio_link">Edit</a></dt>
               <div class="als-container" id="portfolio_list">
-                  <span class="als-prev"><img src="<?php echo $theme_path;?>/style/btns/previous_arrow.png" alt="prev" title="previous" /></span>
+                  <span class="als-prev"><img src="<?php echo $theme_path;?>/style/btns/previous_arrow.png" alt="prev" title="previous" style="display:<?php echo (count($portfolio_projects) < 1 ? 'none':'block'); ?>"/></span>
                   <div class="als-viewport">
                       <div class="profile_portfolios als-wrapper"">
                       <?php if(count($portfolio_projects) > 0):?>
@@ -114,22 +114,22 @@
                                       <a href="javascript:void(0);" class="portfolio_item" project-name="<?php echo $portfolio_projects[$i]['name'];?>" project-description="<?php echo $portfolio_projects[$i]['description'];?>" project-id="<?php echo $portfolio_projects[$i]['pid'];?>" file-type="<?php echo $portfolio_projects[$i]['type'];?>" file-url="<?php echo $site_url . 'attached/workExamples/' . $portfolio_projects[$i]['file_url'];?>">
                                           <?php switch($portfolio_projects[$i]['type']){
                                               case 0:
-                                                  echo "<img src='" . $theme_path . "/style/portfolio/portfolio_text_file.png" ."'/>";
+                                                  echo "<img src='" . $theme_path . "style/portfolio/portfolio_text_file.png" ."'/>";
                                                   break;
                                               case 1:
                                                   echo "<img src='" . $site_url . "attached/workExamples/" .$portfolio_projects[$i]['file_url']  ."'/>";
                                                   break;
                                               case 2:
-                                                  echo "<img src='" . $theme_path . "/style/portfolio/portfolio_audio_file.png" ."'/>";
+                                                  echo "<img src='" . $theme_path . "style/portfolio/portfolio_audio_file.png" ."'/>";
                                                   break;
                                               case 3:
-                                                  echo "<img src='" . $theme_path . "/style/portfolio/portfolio_audio_file.png" ."'/>";
+                                                  echo "<img src='" . $theme_path . "style/portfolio/portfolio_audio_file.png" ."'/>";
                                                   break;
                                               case 4:
-                                                  echo "<img src='" . $theme_path . "/style/portfolio/portfolio_text_file.png" ."'/>";
+                                                  echo "<img src='" . $theme_path . "style/portfolio/portfolio_text_file.png" ."'/>";
                                                   break;
                                               default:
-                                                  echo "<img src='" . $theme_path . "/style/portfolio/portfolio_text_file.png" ."'/>";
+                                                  echo "<img src='" . $theme_path . "style/portfolio/portfolio_text_file.png" ."'/>";
                                                   break;
 
                                           };?>
@@ -144,131 +144,28 @@
                                   </div><!-- end of als-item -->
                               <?php endif;?>
                           <?php endfor ?>
+                            <?php if($len>3):?>
+                          <script type="text/javascript">
+                              $(document).ready(function(){
+                                  $("#portfolio_list").als({
+                                      circular: "no",
+                                      //autoscroll: "yes",
+                                      visible_items: 1
+                                  });
+                              });
+                          </script>
+                      <?php endif;?>
                       <?php else:?>
                           No Projects in Portfolio.
                         <?php endif;?>
                       </div>
-                      <!--
-                      <div class="profile_portfolios als-wrapper"">
-                      <div class="als-item">
-                          <div class="portfolio_row">
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/1.jpg"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_text_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_audio_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <div style="clear:both;"></div>
-                          </div>
-                          <div class="portfolio_row">
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/1.jpg"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_text_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_audio_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <div style="clear:both;"></div>
-                          </div>
-
-                      </div>
-
-                      <div class="als-item">
-                          <div class="portfolio_row">
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/1.jpg"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_text_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_audio_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <div style="clear:both;"></div>
-                          </div>
-                          <div class="portfolio_row">
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/1.jpg"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_text_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_audio_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <div style="clear:both;"></div>
-                          </div>
-
-                      </div>
-
-                      <div class="als-item">
-                          <div class="portfolio_row">
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/1.jpg"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_text_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_audio_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <div style="clear:both;"></div>
-                          </div>
-                          <div class="portfolio_row">
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/1.jpg"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_text_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <a href="javascript:void(0);" class="portfolio_item">
-                                  <img src="<?php echo $theme_path;?>/style/portfolio/portfolio_audio_file.png"/>
-                                  <div class="portfolio_caption"><span>Project Name</span></div>
-                              </a>
-                              <div style="clear:both;"></div>
-                          </div>
-
-                      </div>
-
-                      </div>
-                  -->
 
                 </div>
-                <span class="als-next"><img src="<?php echo $theme_path;?>/style/btns/forward_arrow.png" alt="next" title="next" /></span> <!-- "next" button -->
+                <span class="als-next"><img src="<?php echo $theme_path;?>/style/btns/forward_arrow.png" alt="next" title="next"  style="display:<?php echo (count($portfolio_projects) < 1 ? 'none':'block'); ?>"/></span> <!-- "next" button -->
               </div>
 
           </div>
-          <script type="text/javascript">
-              $(document).ready(function(){
-                  $("#portfolio_list").als({
-                      circular: "no",
-                      //autoscroll: "yes",
-                      visible_items: 1
-                  });
-              });
-          </script>
+
       <div style="clear:both;"></div>
       </div>
 
@@ -474,7 +371,7 @@
 
             <div class="view_portfolio_navigator">
                 <div class="als-container" id="portfolio_view_bar">
-                    <span class="als-prev"><img src="<?php echo $theme_path;?>/style/btns/previous_arrow.png" alt="prev" title="previous" /></span>
+                    <span class="als-prev"><img src="<?php echo $theme_path;?>style/btns/previous_arrow.png" alt="prev" title="previous" /></span>
                     <div class="als-viewport">
                         <ul class="als-wrapper">
                             <?php for($i=0,$len=count($portfolio_projects); $i < $len; $i++):?>
@@ -502,24 +399,11 @@
                                     };?>
                                 </li>
                             <?php endfor ?>
-                            <!--
-                            <li class="als-item current"><img src="<?php echo $theme_path;?>/style/portfolio/edit_txt_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_txt_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_txt_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_txt_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
-                            <li class="als-item"><img src="<?php echo $theme_path;?>/style/portfolio/edit_audio_file_btn.png"/></li>
-                           -->
+
                         </ul>
 
                     </div>
-                    <span class="als-next"><img src="<?php echo $theme_path;?>/style/btns/forward_arrow.png" alt="next" title="next" /></span> <!-- "next" button -->
+                    <span class="als-next"><img src="<?php echo $theme_path;?>style/btns/forward_arrow.png" alt="next" title="next" /></span> <!-- "next" button -->
 
                 </div>
             </div>
@@ -558,7 +442,7 @@
                     uploadFile("upload_portfolio_file_btn",'upload_portfolio_file_btn','upload_portfolio_file_status_message','portfolio_file_name');
                 </script>
             </div>
-            <div class="portfolio_list">
+            <div class="portfolio_mgmt_list">
                 <ul>
                     <?php foreach($portfolio_projects as $project):?>
                         <li><span><?php echo $project['name'];?></span><img project-id="<?php echo $project['pid'];?>" project-file="<?php echo $project['file_url'];?>" class="delete_portfolio_project" src="<?php echo $theme_path;?>style/btns/btn_inbox_multi_delete_off.png"></li>

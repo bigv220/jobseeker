@@ -293,13 +293,13 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .view_portfolio_pop_wrap{padding:10px 20px;}
 .view_portfolio_pop_close{width:20px;height:20px;right:3px;top:0px;cursor:pointer;}
 .view_portfolio_body{position:relative;}
-.view_portfolio_content .content_text{padding:10px 20px;background-color:#FFFFFF;overflow-y:scroll;margin-top:10px;border:3px solid #e5e5e5;height:400px;}
+.view_portfolio_content .content_text{padding:10px 20px;background-color:#FFFFFF;overflow-y:scroll;margin-top:10px;border:3px solid #e5e5e5;height:394px;}
 .view_portfolio_content .content_audio{padding:10px 20px;background-color:#FFFFFF;overflow:hidden;margin-top:10px;height:400px;}
 .view_portfolio_content .content_img{text-align:center;padding-top:10px;}
 .view_portfolio_content .content_img img{height:420px;width:300px;}
 .other_text_style{height:430px;text-align:center;}
 .other_text_style .other_text_content{padding-top:90px;}
-.view_portfolio_content .font_zoom_bar{position:absolute;top:385px;left:300px;height:40px;width:103px;background:url(portfolio/font_zoom_bar_bg.png) no-repeat;}
+.view_portfolio_content .font_zoom_bar{position:absolute;top:379px;left:300px;height:40px;width:103px;background:url(portfolio/font_zoom_bar_bg.png) no-repeat;}
 .view_portfolio_content .font_zoom_bar img{margin-left:14px;margin-top:5px;cursor:pointer;}
 .view_portfolio_content .font_zoom_bar img.zoom_out{margin-left:24px;margin-top:10px;}
 .view_portfolio_navigator{padding-top:18px;text-align: center;min-height: 120px;}
@@ -382,10 +382,10 @@ h2.applied_jobs_title{color:#674092;font-size:18px;font-weight:bold;padding-left
 .add_new_portfolio label{display:inline-block;width:120px;text-align:right;vertical-align: top;}
 .add_new_portfolio textarea{width:200px;height:200px;}
 .add_new_portfolio input{width:200px;}
-.portfolio_list{padding-top:10px;height:300px;overflow-y:auto;}
-.portfolio_list ul li{line-height:23px;padding: 6px 0;}
-.portfolio_list ul li span{display:inline-block;width:200px;}
-.portfolio_list ul li img{cursor:pointer;}
+.portfolio_mgmt_list{padding-top:10px;height:300px;overflow-y:auto;}
+.portfolio_mgmt_list ul li{line-height:23px;padding: 6px 0;}
+.portfolio_mgmt_list ul li span{display:inline-block;width:200px;}
+.portfolio_mgmt_list ul li img{cursor:pointer;}
 .pop-succ-message {text-align: center; color: red; font-size: 16px;margin-top:20px; font-weight:bold;}
 .request-sent-pop-message { height: 100px;}
 
