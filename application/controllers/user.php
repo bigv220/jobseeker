@@ -82,7 +82,7 @@ class user extends Front_Controller {
         else{
             $this->load->model('jobseeker_model');
             $user = $this->jobseeker_model->getUser($post['username'], md5($post['login_password']));
-            
+
 
 
             if($user){
@@ -100,6 +100,8 @@ class user extends Front_Controller {
                     $result['user_type'] = $user['user_type'];
 
                     $this->session->set_userdata($result);
+
+                    $this->jobseeker_model->updateUserStatus($user['uid'], 1);
                 }
             }
         }
@@ -110,7 +112,12 @@ class user extends Front_Controller {
 	public function logout()
 	{
 		$this->load->library('session');
+        if ($this->session->userdata('uid')) {
+            $this->load->model('jobseeker_model');
+            $this->jobseeker_model->updateUserStatus($this->session->userdata('uid'), -1);
+        }
 		$this->session->sess_destroy();
+
 		redirect('/');
 	}
 
@@ -270,5 +277,21 @@ class user extends Front_Controller {
 			securelychk();
 		}
 	}
+
+    public function getstatus() 
+    {
+        $this->load->model('jobseeker_model');
+        $result = $this->jobseeker_model->getUserOnlineStatus();
+        
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');  
+        echo json_encode($result);
+    }
+
+    public function checkstatus()
+    {
+        $this->load->model('jobseeker_model');
+        $this->jobseeker_model->cleanUp();
+        $this->jobseeker_model->updateUserStatus($this->session->userdata('uid'), 1);
+    }
 
 }

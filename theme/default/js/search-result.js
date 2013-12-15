@@ -65,7 +65,7 @@ function showHint(thisO) {
         $(thisO).val('Enter Keywords');
     }
 }
-
+/********DOCUMENT READY*****************/
 $(function(){
     //search-result sequence
     $('.kyo-select').kyoSelect({
@@ -406,6 +406,22 @@ $(function(){
         });
         popMark.fadeOut();
         popApply.fadeOut();
+    });
+
+    // Send Message
+    $('.sresult-par2 .jingchat_message_input textarea').keypress(function(event) {
+        // Check the keyCode and if the user pressed Enter (code = 13) 
+        if (event.keyCode == 13) {
+            $.post(base_url + "inbox/sendmsg", { user2:$(this).attr('data-user'), message:$(this).val() },
+            function(data){
+                //TODO: 定位到最下面
+                $('.jingchat_messages_bd').append(data);
+                
+                $(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
+                $('.jingchat_message_input textarea').val('');
+                alert('Your message has been sent to their Jingchat inbox.')
+            });
+        }
     });
 });
 function apply(e){

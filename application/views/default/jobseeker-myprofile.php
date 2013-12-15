@@ -24,13 +24,25 @@
       </div>
       <div class="btnarea">
           <a href="<?php echo $site_url?>jobseeker/register" class="png square_btn edit_profile_btn"></a>
-          <a href="#" class="png square_btn jingchat_inbox_btn"></a>
-          <span class="bubble jingchat_inbox_bubble">2</span>
+          <!-- JINGCHAT BEGIN -->
+          <?php if ($chat_unread != 0) : ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
+          <span class="bubble jingchat_inbox_bubble"><?php echo $chat_unread; ?></span>
+          <?php else: ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn"></a>
+          <?php endif; ?>
+          <!-- JINGCHAT END -->
           <a href="<?php echo $site_url; ?>jobseeker/savedBookmarks" class="png square_btn saved_bookmarks_btn"></a>
-          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <!-- INTERVIEW START -->
+          <?php if ($interview_num != 0) : ?>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn view_my_interviews_btn_current"></a>
           <span class="bubble view_my_interviews_bubble">
               <?php echo $interview_num; ?>
           </span>
+        <?php else: ?>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+        <?php endif; ?>
+          <!-- INTERVIEW END -->
          </div>
     </div>
     <div class="company-bd jobseeker-bd">
@@ -174,25 +186,23 @@
               <dt>Recently Applied For</dt>
               <dd>
                   <ul class="recent_applied_jobs">
-                      <li><a href="#">Admin Assistant</a></li>
-                      <li><a href="#">UI Designer</a></li>
-                      <li><a href="#">UI Designer</a></li>
+                      <?php foreach($applied_jobs as $job): ?>
+                      <li><a href="<?php echo $site_url; ?>job/jobdetails/<?php echo $job['id']; ?>">
+                          <?php echo $job['job_name']; ?></a></li>
+                      <?php endforeach; ?>
                   </ul>
               </dd>
               <dt>Recently Viewed Companies</dt>
               <dd>
                   <ul class="similar">
-                      <li><img src="<?php echo $theme_path.'style/home/temp/sponsors3.gif';?>" alt="" />
-                          <p><a href="#">Company Name Here</a></p>
-                          <p><a href="#" class="view_profile_link">View Profile</a></p>
-                      </li>
-                      <li><img src="<?php echo $theme_path.'style/home/temp/sponsors3.gif';?>" alt="" />
-                          <p><a href="#">Company Name Here</a></p>
-                          <p><a href="#" class="view_profile_link">View Profile</a></p>
-                      </li>
-                      <li><img src="<?php echo $theme_path.'style/home/temp/sponsors3.gif';?>" alt="" />
-                          <p><a href="#">Company Name Here</a></p>
-                          <p><a href="#" class="view_profile_link">View Profile</a></p>
+                      <li>
+                          <?php foreach($viewed_company as $com): ?>
+                          <img src="<?php echo $site_url; ?>attached/users/<?php echo $com['profile_pic']?$com['profile_pic']:'no-image.png';?>" width="71px" height="85px" alt="" />
+                          <p><a href="<?php echo $site_url; ?>company/companyInfo/<?php echo $com['company_id']; ?>">
+                              <?php echo $com['job_name']; ?></a></p>
+                          <p><a href="<?php echo $site_url; ?>company/companyInfo/<?php echo $com['company_id']; ?>" class="view_profile_link">
+                              View Profile</a></p>
+                          <?php endforeach; ?>
                       </li>
                   </ul>
               </dd>

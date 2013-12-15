@@ -437,4 +437,41 @@ class jobseeker_model extends MY_Model
         $sql = "UPDATE interview SET reply_id=$reply_id WHERE id=".$id;
         return $this->db->query($sql);
     }
+
+    public function getViewedCompany($uid) {
+        $sql = "SELECT company_id, profile_pic, username as job_name FROM company_viewed as cv
+                LEFT JOIN user as u on cv.company_id=u.uid WHERE cv.uid=$uid ORDER BY view_date DESC LIMIT 3";
+
+        return $this->db->query($sql)->result_array();
+    }
+
+    /**
+     * Update User online status
+     * 
+     **/
+    public function updateUserStatus($uid, $status) {
+        $time = date("Y-m-d H:i:s",time());
+        $sql = "REPLACE INTO user_status values($uid, $status, '$time','$time')";
+
+        return $this->db->query($sql);
+    }
+
+    public function getUserOnlineStatus($user_ids='') {
+        $result = $this->db->select('*')
+                 ->from('user_status')
+                 //->where('status',1)
+                 //->where_in('uid',$user_ids)
+                 ->get()
+                 ->result_array();
+        return $result;
+    }
+
+    public function cleanUp() {
+        if (rand(1,3) == 1) {
+            $timestamp = 240;
+            $sql = "update user_status set status=-1 where UNIX_TIMESTAMP(Now())-UNIX_TIMESTAMP(lastrequest)+14400>" . $timestamp;
+
+            @ $this->db->query($sql);
+        }
+    }
 }

@@ -270,3 +270,20 @@ CREATE TABLE `company_candidate` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY  (`company_id`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+#2013-12-13 Add company viewed table
+CREATE TABLE `company_viewed` (
+  `uid` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `view_date` date default NULL,
+  PRIMARY KEY  (`uid`,`company_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+#2013-12-14 Add User Online status table
+CREATE TABLE `user_status` (
+  `uid` bigint(20) NOT NULL,
+  `status` int(11) NOT NULL,
+  `lastlogin` datetime default NULL,
+  `lastrequest` datetime default NULL,
+  PRIMARY KEY  (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

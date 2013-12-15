@@ -22,6 +22,7 @@
 </script>
 <!--search-result body-->
 <div class="result-page w770 rel clearfix">
+<input type="hidden" id="ids" value="<?php echo $ids; ?>" />
 <!--search-result condition-->
 <form action="<?php echo $site_url; ?>search/searchJobseeker" method="post">
     <input type="hidden" name="top_search" value="0" />
@@ -401,7 +402,7 @@
                             <p>your message be sent to their Jingchat inbox</p>
                         </div>
                         <div class="jingchat_message_input">
-                            <textarea rows="3" cols=""></textarea>
+                              <textarea data-user="<?php echo $user['uid']?>" id="message" rows="3" cols="" class="input-tip" data-tipval="Type your message here">Type your message here</textarea>
                         </div>
                     </div>
                 </div>
@@ -440,7 +441,7 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="<?php echo $theme_path?>js/inbox.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/searchJobPage.js"></script>
 
