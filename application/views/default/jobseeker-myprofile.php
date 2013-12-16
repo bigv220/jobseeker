@@ -303,8 +303,8 @@
     <div class="view_portfolio_pop_wrap rel">
         <i class="view_portfolio_pop_close abs" title="close"></i>
         <div class="view_portfolio_header">
-            <h1>Project Name</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <h1>Loading...</h1>
+            <p>Loading...</p>
         </div>
         <div class="view_portfolio_body">
             <div class="view_portfolio_content text_style">
@@ -353,14 +353,7 @@
                                 </div>
                             </div>
                         </div>
-                        <script type="text/javascript">
-                            //<![CDATA[
-                            $(document).ready(function(){
 
-
-                            });
-                            //]]>
-                        </script>
                     </div>
                 </div>
 

@@ -70,7 +70,19 @@ function openPortfolioDetails(){
     var clicked_project_name = $(this).attr('project-name');
     var clicked_project_desc = $(this).attr('project-description');
     var file_url = $(this).attr('file-url');
-
+    //if we're on find staff page, we have to update the view bar html with the hidden one
+    var current_page_url = window.location.href;
+    if(current_page_url.indexOf('searchJobseeker') != -1 && $(this).is('a')){
+        var user_id = $(this).attr("user-id");
+        $('#portfolio_view_bar').html($('#portfolio_view_bar_' + user_id).html());
+        $("#portfolio_view_bar").als({
+            circular: "no",
+            autoscroll: "no",
+            scrolling_items: 1,
+            visible_items: 6
+        });
+        $('#portfolio_view_bar ul li').click(openPortfolioDetails);
+    }
     $('#portfolio_view_bar ul li').each(function(){
         var current_project_id = $(this).attr('project-id');
         if(clicked_project_id == current_project_id){

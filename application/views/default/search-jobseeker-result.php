@@ -1,4 +1,8 @@
 <?php $this->load->view($front_theme.'/header-block');?>
+<script type="text/javascript" src="<?php echo $theme_path?>js/jquery.als-1.2.min.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/portfolio.js"></script>
+<link href="<?php echo $theme_path?>js/jplayer/skin/jobseeker/jplayer.jobseeker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo $theme_path?>js/jplayer/jquery.jplayer.min.js"></script>
 <link href="<?php echo $theme_path?>style/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
 
 <style type="text/css">
@@ -376,7 +380,101 @@
                     </div>
                 </div>
                 <div class="fxui-tab-nav sresult-portfolio">
-                    <div class="portfolio_row"></div>
+                    <div id="portfolio_view_bar_<?php echo $user['uid'];?>" class="hide">
+                        <span class="als-prev"><img src="<?php echo $theme_path;?>style/btns/previous_arrow.png" alt="prev" title="previous" /></span>
+                        <div class="als-viewport">
+                            <ul class="als-wrapper">
+                                <?php for($i=0,$len=count($user['portfolio_projects']); $i < $len; $i++):?>
+                                    <li class="als-item" user-id="<?php echo $user['uid'];?>" project-id="<?php echo $user['portfolio_projects'][$i]['pid'];?>" project-name="<?php echo $user['portfolio_projects'][$i]['name'];?>" project-description="<?php echo $user['portfolio_projects'][$i]['description'];?>" file-type="<?php echo $user['portfolio_projects'][$i]['type'];?>" file-url="<?php echo $site_url . 'attached/workExamples/' . $user['portfolio_projects'][$i]['file_url'];?>">
+                                        <?php switch($user['portfolio_projects'][$i]['type']){
+                                            case 0:
+                                                echo "<img src='" . $theme_path . "style/portfolio/edit_txt_file_btn.png" ."'/>";
+                                                break;
+                                            case 1:
+                                                echo "<img src='" . $site_url . "attached/workExamples/" .$user['portfolio_projects'][$i]['file_url']  ."'/>";
+                                                break;
+                                            case 2:
+                                                echo "<img src='" . $theme_path . "style/portfolio/edit_audio_file_btn.png" ."'/>";
+                                                break;
+                                            case 3:
+                                                echo "<img src='" . $theme_path . "style/portfolio/edit_audio_file_btn.png" ."'/>";
+                                                break;
+                                            case 4:
+                                                echo "<img src='" . $theme_path . "style/portfolio/edit_txt_file_btn.png" ."'/>";
+                                                break;
+                                            default:
+                                                echo "<img src='" . $theme_path . "style/portfolio/edit_txt_file_btn.png" ."'/>";
+                                                break;
+
+                                        };?>
+                                    </li>
+                                <?php endfor ?>
+
+                            </ul>
+
+                        </div>
+                        <span class="als-next"><img src="<?php echo $theme_path;?>style/btns/forward_arrow.png" alt="next" title="next" /></span> <!-- "next" button -->
+                    </div>
+
+                    <div class="profile_portfolios_wrapper">
+                        <div class="als-container" id="portfolio_list_<?php echo $user['uid'];?>">
+                            <span class="als-prev"><img src="<?php echo $theme_path;?>/style/btns/previous_arrow.png" alt="prev" title="previous" style="display:<?php echo (count($user['portfolio_projects']) < 1 ? 'none':'block'); ?>"/></span>
+                            <div class="als-viewport">
+                                <div class="profile_portfolios als-wrapper"">
+                                <?php if(count($user['portfolio_projects']) > 0):?>
+                                    <?php for($i=0,$len=count($user['portfolio_projects']); $i < $len; $i++):?>
+                                    <?php if($i % 6 == 0):?>
+                                    <div class="als-item">
+                                <?php endif;?>
+
+                                    <?php if($i % 3 == 0):?>
+                                <div class="portfolio_row">
+                                <?php endif;?>
+                                    <a href="javascript:void(0);" class="portfolio_item" user-id="<?php echo $user['uid'];?>" project-name="<?php echo $user['portfolio_projects'][$i]['name'];?>" project-description="<?php echo $user['portfolio_projects'][$i]['description'];?>" project-id="<?php echo $user['portfolio_projects'][$i]['pid'];?>" file-type="<?php echo $user['portfolio_projects'][$i]['type'];?>" file-url="<?php echo $site_url . 'attached/workExamples/' . $user['portfolio_projects'][$i]['file_url'];?>">
+                                        <?php switch($user['portfolio_projects'][$i]['type']){
+                                            case 0:
+                                                echo "<img src='" . $theme_path . "style/portfolio/portfolio_text_file.png" ."'/>";
+                                                break;
+                                            case 1:
+                                                echo "<img src='" . $site_url . "attached/workExamples/" .$user['portfolio_projects'][$i]['file_url']  ."'/>";
+                                                break;
+                                            case 2:
+                                                echo "<img src='" . $theme_path . "style/portfolio/portfolio_audio_file.png" ."'/>";
+                                                break;
+                                            case 3:
+                                                echo "<img src='" . $theme_path . "style/portfolio/portfolio_audio_file.png" ."'/>";
+                                                break;
+                                            case 4:
+                                                echo "<img src='" . $theme_path . "style/portfolio/portfolio_text_file.png" ."'/>";
+                                                break;
+                                            default:
+                                                echo "<img src='" . $theme_path . "style/portfolio/portfolio_text_file.png" ."'/>";
+                                                break;
+
+                                        };?>
+                                        <div class="portfolio_caption"><span><?php echo $user['portfolio_projects'][$i]['name'];?></span></div>
+                                    </a>
+                                    <?php if($i % 3 == 2 || $i == ($len - 1)):?>
+                                    <div style="clear:both;"></div>
+                                </div><!-- end of portfolio_row -->
+                                <?php endif;?>
+
+                                    <?php if($i % 6 == 5|| $i == ($len - 1)):?>
+                                    </div><!-- end of als-item -->
+                                <?php endif;?>
+                                <?php endfor ?>
+                                <?php if($len>3):?>
+
+                                <?php endif;?>
+                                <?php else:?>
+                                    No Projects in Portfolio.
+                                <?php endif;?>
+                            </div>
+
+                        </div>
+                        <span class="als-next"><img src="<?php echo $theme_path;?>/style/btns/forward_arrow.png" alt="next" title="next"  style="display:<?php echo (count($user['portfolio_projects']) < 1 ? 'none':'block'); ?>"/></span> <!-- "next" button -->
+                    </div>
+                </div>
                 </div>
                 <div class="fxui-tab-nav sresult-jingchat">
                     <div class="jingchat_wrapper">
@@ -425,7 +523,106 @@
 <!--backtop-->
 <div class="backtop png"></div>
 </div>
+    <div class="view_portfolio_pop png">
+        <div class="view_portfolio_pop_wrap rel">
+            <i class="view_portfolio_pop_close abs" title="close"></i>
+            <div class="view_portfolio_header">
+                <h1>Loading...</h1>
+                <p>Loading...</p>
+            </div>
+            <div class="view_portfolio_body">
+                <div class="view_portfolio_content text_style">
+                    <div class="content_text">
+                        Loading content...
+                    </div>
+                    <div class="font_zoom_bar">
+                        <img class="zoom_in" src="<?php echo $theme_path;?>/style/portfolio/btn_zoom_in.png" alt="prev" title="previous" />
+                        <img class="zoom_out" src="<?php echo $theme_path;?>/style/portfolio/btn_zoom_out.png" alt="prev" title="previous" />
+                    </div>
+                </div>
+                <div class="view_portfolio_content audio_style" style="display:none;">
+                    <div class="content_audio">
+                        <div class="audio_icon"><img class="zoom_out" src="<?php echo $theme_path;?>/style/portfolio/audio_icon.png"/></div>
+                        <div class="jplayer_wrapper">
+                            <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                            <div id="jp_container_1" class="jp-audio">
+                                <div class="jp-type-single">
+                                    <div class="jp-gui jp-interface">
+                                        <ul class="jp-controls">
+                                            <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                                            <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+                                            <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+                                            <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+                                            <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+                                            <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+                                        </ul>
+                                        <div class="jp-progress">
+                                            <div class="jp-seek-bar">
+                                                <div class="jp-play-bar"></div>
+                                            </div>
+                                        </div>
+                                        <div class="jp-volume-bar">
+                                            <div class="jp-volume-bar-value"></div>
+                                        </div>
+                                        <div class="jp-time-holder">
+                                            <div class="jp-current-time"></div>
+                                            <div class="jp-duration"></div>
 
+                                        </div>
+                                    </div>
+
+                                    <div class="jp-no-solution">
+                                        <span>Update Required</span>
+                                        To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="view_portfolio_content image_style" style="display:none;">
+                    <div class="content_img">
+                        <img src="<?php echo $theme_path;?>/style/portfolio/1.jpg"/>
+                    </div>
+
+                </div>
+                <div class="view_portfolio_content other_text_style" style="display:none;">
+                    <div class="other_text_content">
+                        <a href="#" target="_blank">Open/Download this file</a>
+                    </div>
+
+                </div>
+
+                <div class="view_portfolio_navigator">
+                    <div class="als-container" id="portfolio_view_bar">
+                        <span class="als-prev"><img src="<?php echo $theme_path;?>style/btns/previous_arrow.png" alt="prev" title="previous" /></span>
+                        <div class="als-viewport">
+                            <ul class="als-wrapper">
+
+
+                            </ul>
+
+                        </div>
+                        <span class="als-next"><img src="<?php echo $theme_path;?>style/btns/forward_arrow.png" alt="next" title="next" /></span> <!-- "next" button -->
+
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $("#portfolio_view_bar").als({
+                            circular: "no",
+                            autoscroll: "no",
+                            scrolling_items: 1,
+                            visible_items: 6
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
 <!--popmark-->
 <div class="pop-mark"></div>
 

@@ -289,6 +289,9 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .als-prev{top:80px;left:-3px;}
 .als-next{top:80px;right:2px;}
 
+.sresult-portfolio .als-prev{top:80px;left:0px;}
+.sresult-portfolio .als-viewport {margin-left:33px;}
+.sresult-portfolio .profile_portfolios_wrapper{margin-top:0;}
 .view_portfolio_pop{display:none;z-index:102;width:787px;height:663px;position:absolute;top:70%;left:20%;background:url(portfolio/edit_portfolio_popup_bg.png);}
 .view_portfolio_pop_wrap{padding:10px 20px;}
 .view_portfolio_pop_close{width:20px;height:20px;right:3px;top:0px;cursor:pointer;}

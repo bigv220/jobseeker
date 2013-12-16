@@ -536,6 +536,8 @@ class search extends Front_Controller {
             array_push($candidates, $value['user_id']);
         }
         $ids = "";
+        $this->load->model('portfolioproject_model');
+
         for($i=0; $i<count($jobseekers); $i++) {
             $ids .= $jobseekers[$i]['uid'].',';
             // Check if Shortlist Candidate is checked
@@ -544,6 +546,8 @@ class search extends Front_Controller {
             } else {
                 $jobseekers[$i]['is_shortlisted'] = false;
             }
+            //get portfolio projects of the user
+            $jobseekers[$i]['portfolio_projects'] = $this->portfolioproject_model->getUserPortfolioProjects($jobseekers[$i]['uid']);
 
             $personal_arr = $this->jobseeker_model->getPersonalSkills($jobseekers[$i]['uid']);
             //filter personal skills
