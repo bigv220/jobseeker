@@ -1,3 +1,17 @@
+function getDetailMsgForSearchResult(this1) {
+       $.post(base_url + "inbox/getDetailMsg", { msg_id:$(this1).attr('data-id') },
+            function(data){
+                if (data.trim() != '') {
+                    var jingchat = $(this1).parent().next().children().last();
+                    jingchat.find('.jingchat_messages').html(data);
+                    jingchat.find('.jingchat_messages').show().css('opacity',0.5);
+                    jingchat.find('.jingchat_offline_message').css('position','absolute').css('left','100px').css('top','160px');
+                    jingchat.find('.jingchat_messages').scrollTop(jingchat.find('.jingchat_messages')[0].scrollHeight);
+                } else {
+                    jingchat.find('.jingchat_offline_message').show();
+                }
+        });
+    }
 function formatItem(row){
     return " <p>"+row +" </p>";
 }
@@ -23,7 +37,6 @@ function addSkills(id_str, thisO) {
 
     addSkillsAjax(id_str, v);
 }
-
 function addSkillsAjax(id_str, v) {
     var htm = '<li data-val="2">'+ v +
         '<i class="del" onclick="delSkills' + '(\''+ id_str + '\',this,\''+ v + '\');"></i></li>'
@@ -424,6 +437,7 @@ $(function(){
         }
     });
 });
+
 function apply(e){
     rowObj = $(this).parents('.sresult-row');
     $('.pop-mark').height($('body').height());

@@ -1,4 +1,4 @@
-<div class="jingchat_message_row_me">
+<div class="jingchat_message_row_me" data-seq='<?php echo $seq; ?>'>
                                       <div class="jingchat_message_content">
                                           <img src="<?php echo $theme_path?>style/jingchat/me_jingchat_message_leftarrow.png" class="message_avatar_arrow"/>
                                           <div class="other_message_top"></div>

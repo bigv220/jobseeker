@@ -133,7 +133,8 @@ class inbox extends Front_Controller {
         $this->inbox_model->updateMessageToRead($_POST['msg_id']);
 
         $detail_msg = $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
-        echo $detail_msg;
+        
+        echo $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
     }
 
     public function getRealTimeMessage()
@@ -151,7 +152,7 @@ class inbox extends Front_Controller {
 
         $this->load->model('inbox_model');
         
-        $data['msg_detail'] = $this->inbox_model->getRealTimeMessage($_POST['msg_id'], $_POST['seq']);   
+        $data['msg_detail'] = $this->inbox_model->getRealTimeMessage($_POST['msg_id'], $_POST['seq']); 
         // Get other user's info, name and profile img
         if (!empty($data['msg_detail'])) {
             $user1 = $data['msg_detail'][0]['user1'];
@@ -166,8 +167,8 @@ class inbox extends Front_Controller {
         // Update to read for this msg
         $this->inbox_model->updateMessageToRead($_POST['msg_id']);
 
-        $detail_msg = $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
-        echo $detail_msg;
+        $return = array();
+        echo  $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
     }
 
     public function response()
@@ -184,6 +185,7 @@ class inbox extends Front_Controller {
         $this->inbox_model->addMsg($post);
         $data['message'] = $post['message'];
         $data['timestamp'] = $post['timestamp'];
+        $data['seq'] = $seq+1;
 
         $this->load->model('jobseeker_model');
         if (isset($_GET['uid'])) {

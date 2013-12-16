@@ -41,6 +41,28 @@ class inbox_model extends MY_Model
         return $this->db->insert_id();
     }
 
+    public function getGeneralMsgForUser($uid)
+    {
+        $result = $this->db->select('*')
+                 ->from($this->table)
+                 ->where('user1',$uid)
+                 ->or_where('user2',$uid)
+                 ->where('is_delete',0)
+                 ->group_by('id')
+                 ->get()
+                 ->result_array();
+        $key_value_result = array();                 
+        foreach($result as $row){
+            if ($row['user2'] == $uid) {
+                $key_value_result[$row['user1']] = $row;    
+            } else {
+                $key_value_result[$row['user2']] = $row;    
+            }
+            
+        }         
+        return $key_value_result;   
+    }
+
     public function getMsg($uid)
     {
         $result = $this->db->select('*')

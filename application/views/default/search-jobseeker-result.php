@@ -7,6 +7,7 @@
 
 <style type="text/css">
     input.text { width: 215px;}
+    .jingchat_message_content {width:390px;}
 </style>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 
@@ -257,8 +258,8 @@
                     <a href="#" class="job-btn job-btn-match">99%</a>
                 </div>
                 <div>
-                    <input type="hidden" name="jobseeker_name" value="<?php echo $user['first_name']?>" />
-                    <input type="hidden" name="jobseeker_uid" value="<?php echo $user['uid']?>" />
+                    <input type="hidden" name="jobseeker_name" value="<?php echo $user['first_name'];?>" />
+                    <input type="hidden" name="jobseeker_uid" value="<?php echo $user['uid'];?>" />
                     <a href="#" class="jobseeker_request_interview"></a>
                 </div>
             </div>
@@ -267,7 +268,7 @@
             <div class="sresult-tab-hd">
                 <span class="fxui-tab-tit">About me</span>
                 <span class="fxui-tab-tit">Portfolio</span>
-                <span class="fxui-tab-tit">JingChat</span>
+                <span class="fxui-tab-tit" onclick="getDetailMsgForSearchResult(this);" data-id="<?php echo empty($user['jingchat']['id'])?0:$user['jingchat']['id']; ?>" data-user="<?php echo $user['uid']; ?>">JingChat</span>
             </div>
             <div class="sresult-tab-bd zoom">
                 <div class="fxui-tab-nav sresult-nav-job sresult_about_me">
@@ -638,7 +639,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo $theme_path?>js/inbox.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/searchJobPage.js"></script>
 

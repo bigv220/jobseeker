@@ -535,6 +535,10 @@ class search extends Front_Controller {
         foreach ($candiates_arr as $value) {
             array_push($candidates, $value['user_id']);
         }
+        // Get All Chat Message of this user, include SENT AND RECEIVED
+        $this->load->model('inbox_model');
+        $chats = $this->inbox_model->getGeneralMsgForUser($this->session->userdata('uid'));
+
         $ids = "";
         $this->load->model('portfolioproject_model');
 
@@ -589,6 +593,11 @@ class search extends Front_Controller {
             $jobseekers[$i]['work_history'] = $this->jobseeker_model->getAllWorkHistory($jobseekers[$i]['uid']);
             $jobseekers[$i]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($jobseekers[$i]['uid']);
             $jobseekers[$i]['languages'] = $this->jobseeker_model->getLanguage($jobseekers[$i]['uid']);
+
+            // Jingchat
+            if (isset($chats[$jobseekers[$i]['uid']])) {
+                $jobseekers[$i]['jingchat'] = $chats[$jobseekers[$i]['uid']];            
+            }
         }
         $data['ids'] = substr($ids, 0, -1);
         $data['jobseekers'] = $jobseekers;
