@@ -1,4 +1,7 @@
 function getDetailMsgForSearchResult(this1) {
+       if ($(this1).attr('data-id') == 0) {
+            return;
+       }
        $.post(base_url + "inbox/getDetailMsg", { msg_id:$(this1).attr('data-id') },
             function(data){
                 if (data.trim() != '') {

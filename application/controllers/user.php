@@ -288,7 +288,10 @@ class user extends Front_Controller {
     }
 
     public function checkstatus()
-    {
+    {   
+        if (!$this->session->userdata('uid')) {
+            return;
+        }
         $this->load->model('jobseeker_model');
         $this->jobseeker_model->cleanUp();
         $this->jobseeker_model->updateUserStatus($this->session->userdata('uid'), 1);
