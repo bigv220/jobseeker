@@ -198,8 +198,8 @@ class job extends Front_Controller {
                 $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
                 $this->email->to($_POST['email']);
                 $this->email->subject('New Job Application');
-                $this->email->message('<HTML><BODY><div>Hi '.$company_name . ',<br/>Your company has received a new job appliation, Please login 
-                    <a href="http://www.jingjobs.com">Jingjobs</a> to view.</div>
+                $this->email->message('<HTML><BODY><div>Hi '.strtoupper($company_name) . ',<br/>Your company has received a new job application, Please login to 
+                		<a href="http://www.jingjobs.com">Jingjobs</a> account to view.</div>
                     <br />
                     <div>Thank you!</div><br /><br />
                     <a href="http://www.jingjobs.com">Jingjobs Team</a></BODY></HTML>');
