@@ -49,7 +49,7 @@
                       $id = $msg['id'];
                       $user2 = $msg['user1'];
                       ?>
-                      <div class="inbox_overview_row" data-id='<?php echo $msg['id']; ?>'>
+                      <div class="inbox_overview_row" data-id='<?php echo $msg['id']; ?>' data-user="<?php echo $msg['user1']; ?>">
                           <div class="email_select_checkbox">
                               <input id="email_checkbox_1" value="0" class="kyo-checkbox" style="display:none;"/>
                               <i class="kyo-checkbox" data-id="email_checkbox_1" data-val="<?php echo $msg['id']; ?>"></i>
@@ -85,7 +85,7 @@
                                   if (!empty($msg_detail)):
                                   foreach($msg_detail as $detail): 
                                     $seq = $detail['seq']; ?>
-                                  <div class="<?php if ($detail['user1'] == $uid) echo "jingchat_message_row_me"; else echo "jingchat_message_row_other"; ?>">
+                                  <div class="<?php if ($detail['user1'] == $uid) echo "jingchat_message_row_me"; else echo "jingchat_message_row_other"; ?>" data-seq='<?php echo $seq; ?>'>
                                       <div class="jingchat_message_content">
                                           <img src="<?php echo $theme_path?>style/jingchat/me_jingchat_message_leftarrow.png" class="message_avatar_arrow"/>
                                           <div class="other_message_top"></div>
@@ -104,10 +104,9 @@
                                   </div>
                                   <?php endforeach; ?>
                                   <?php endif; ?>
-                            <input type="hidden" id="msg_id" value="<?php echo $id; ?>"/>
-                          <input type="hidden" id="seq" value="<?php echo $seq; ?>"/>
-                          <input type="hidden" id="user2" value="<?php echo $user2; ?>"/>
                               </div>
+                              <input type="hidden" id="msg_id" value="<?php echo $id; ?>"/>
+                              <input type="hidden" id="user2" value="<?php echo $user2; ?>"/>
                           </div>
          
                           <?php if ($mode != 'trash') : ?>

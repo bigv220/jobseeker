@@ -54,7 +54,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .phone_number{color:#ea6e3b;}
 .jingchat_wrapper{width:471px;margin:0 auto;background-color:white;height:500px;margin-top:10px;*behavior:url(js/jslib/PIE.htc);border:1px solid #ccc;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
 .jingchat_messages, .jingchat_offline_message{height:422px;}
-.jingchat_messages{padding:0 5px;}
+.jingchat_messages{padding:0 5px;overflow-y:scroll;}
 .load_older_message{width:135px;padding: 10px 0px 5px 5px;cursor:pointer;color:#414042;font-weight: bold;background: url(jingchat/load_old_message_arrow.png) no-repeat right;}
 .jingchat_offline_message{text-align: center;font-weight: bold;}
 .jingchat_message_row_me, .jingchat_message_row_other{margin-top: 10px;}

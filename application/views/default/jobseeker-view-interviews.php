@@ -70,7 +70,8 @@
                 <p><?php echo $int['city']; ?>, <?php echo $int['country']; ?></p>
                 <a href="#" class="job-viewmore">View More</a> </div>
             <div class="span3">
-                <div class="interview_sent_date"><?php echo $int['insert_date']; ?></div>
+                <div class="interview_sent_date">
+                    <?php echo date('d/m/Y', strtotime($int['insert_date'])); ?></div>
                 <div class="interview_action_btns">
                     <img src="<?php echo $theme_path;?>style/btns/btn_email_reply.png" alt="<?php echo $int['interview_id']; ?>" class="reply_interview_function"/>
                     <img src="<?php echo $theme_path;?>style/btns/btn_email_delete.png" alt="<?php echo $int['interview_id']; ?>" class="delete_interview_function"/>
@@ -92,7 +93,8 @@
                 </div>
                 <div class="description_right">
                     <p>Interview Date</p>
-                    <p class="interview_field_content"><?php echo $int['date']; ?></p>
+                    <p class="interview_field_content">
+                        <?php echo date('l, F j',strtotime($int['date'])); ?></p>
                     <p>Interview Time</p>
                     <p class="interview_field_content"><?php echo $int['time']; ?> <?php echo $int['time_zone']; ?></p>
                     <a href="<?php echo $site_url; ?>company/companyInfo/<?php echo $int['company_id']; ?>">View company profile &gt;</a>
