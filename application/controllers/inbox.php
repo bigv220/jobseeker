@@ -132,8 +132,6 @@ class inbox extends Front_Controller {
         // Update to read for this msg
         $this->inbox_model->updateMessageToRead($_POST['msg_id']);
 
-        $detail_msg = $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
-        
         echo $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
     }
 

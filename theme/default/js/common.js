@@ -2,7 +2,7 @@ var userType = -1;//not login
 $(function(){
     setInterval(function(){
         checkstatus();
-    }, 10000);
+    }, 15000);
      //pub input tips
     $('.input-tip')
     .focusin(function(event) {
