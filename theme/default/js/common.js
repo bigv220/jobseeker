@@ -1,8 +1,5 @@
 var userType = -1;//not login
 $(function(){
-    setInterval(function(){
-        checkstatus();
-    }, 15000);
      //pub input tips
     $('.input-tip')
     .focusin(function(event) {
@@ -46,6 +43,9 @@ var checkstatus = function() {
         function() {
 
         });
+}
+var checkJson = function(json) {
+    return (json!=null)&&(typeof(json)!="undefined");
 }
 var randNum = function(){
     var rnd = {};

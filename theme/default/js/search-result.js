@@ -4,8 +4,10 @@ function getDetailMsgForSearchResult(this1) {
        }
        $.post(base_url + "inbox/getDetailMsg", { msg_id:$(this1).attr('data-id') },
             function(data){
+                $('#msg_id').val($(this1).attr('data-id'));
+                $('#user2').val($(this1).attr('data-user'));
+                var jingchat = $(this1).parent().next().children().last();
                 if (data.trim() != '') {
-                    var jingchat = $(this1).parent().next().children().last();
                     jingchat.find('.jingchat_messages').html(data);
                     jingchat.find('.jingchat_messages').show().css('opacity',0.5);
                     jingchat.find('.jingchat_offline_message').css('position','absolute').css('left','100px').css('top','160px');
@@ -13,8 +15,38 @@ function getDetailMsgForSearchResult(this1) {
                 } else {
                     jingchat.find('.jingchat_offline_message').show();
                 }
+                if ($(this1).attr('data-user') != 0)
+                    checkonlinestatus($(this1).attr('data-user'), jingchat);
         });
+        
     }
+var checkonlinestatus = function(user_id, jingchat) {
+        var ajax=$.post(base_url + 'user/getstatus', {
+            'userid': user_id
+        }, function(status){         
+            if (status != '[]' && checkJson(status)) {
+                if (status[0].status == '1') {
+                    jingchat.find('.jingchat_messages').css('opacity',1);
+                    jingchat.find('.jingchat_offline_message').hide();
+                }
+                else
+                    jingchat.find('.jingchat_offline_message').show();
+            }
+        });
+}
+var getRealTimeMessage = function() {
+     if ($('#msg_id').val() == 0 || $('#msg_id').val() == '') 
+        return;
+     var seq = $('.jingchat_messages:visible').children().last().attr('data-seq');
+     if (seq==undefined) 
+        return;
+     $.post(base_url + "inbox/getRealTimeMessage", { msg_id:$('#msg_id').val(),user2:$('#user2').val(),seq:seq},
+            function(data){
+                $('.jingchat_messages:visible').append(data);
+                
+                $('.jingchat_messages:visible').scrollTop($('.jingchat_messages:visible')[0].scrollHeight);
+            });
+}
 function formatItem(row){
     return " <p>"+row +" </p>";
 }
@@ -83,6 +115,9 @@ function showHint(thisO) {
 }
 /********DOCUMENT READY*****************/
 $(function(){
+    setInterval(function(){
+         getRealTimeMessage();
+    }, 5000);
     //search-result sequence
     $('.kyo-select').kyoSelect({
         width:'145',
@@ -431,11 +466,12 @@ $(function(){
             $.post(base_url + "inbox/sendmsg", { user2:$(this).attr('data-user'), message:$(this).val() },
             function(data){
                 //TODO: 定位到最下面
-                $('.jingchat_messages_bd').append(data);
+                $('.jingchat_messages:visible').append(data);
                 
-                $(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
+                $('.jingchat_messages:visible').scrollTop($('.jingchat_messages:visible')[0].scrollHeight);
                 $('.jingchat_message_input textarea').val('');
-                alert('Your message has been sent to their Jingchat inbox.')
+                if ($(this).parent().parent().eq(1).is(':hidden')) 
+                    alert('Your message has been sent to their Jingchat inbox.')
             });
         }
     });

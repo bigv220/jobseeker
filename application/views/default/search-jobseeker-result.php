@@ -7,7 +7,8 @@
 
 <style type="text/css">
     input.text { width: 215px;}
-    .jingchat_message_content {width:390px;}
+    .jingchat_message_row_me .jingchat_message_content,.jingchat_message_row_other .jingchat_message_content {width:390px;}
+    .jingchat_message_content .message_avatar_arrow {right:-14px;}
 </style>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 
@@ -518,7 +519,8 @@
         </div>
     </div>
     <?php endif;?>
-
+    <input type="hidden" id="msg_id" />
+    <input type="hidden" id="user2" />
 </div>
 
 <!--backtop-->

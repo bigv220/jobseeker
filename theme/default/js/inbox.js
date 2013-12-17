@@ -138,7 +138,6 @@ var checkonlinestatus = function() {
 			
             if (checkJson(status)) {
                 
-                //$('#eachtwindexlist li span.on-line-status').html(twinium.twindex.getStatusImg('-1'));
                 $.each(status, function(i, statusItem){
                 	if (statusItem.status == 1)
                     	$('.online_status[online-id=' + statusItem.uid + ']').show();
@@ -158,8 +157,4 @@ var getRealTimeMessage = function() {
 		    	
 		    	$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
 			});
-}
-
-var checkJson = function(json) {
-	return (json!=null)&&(typeof(json)!="undefined");
 }

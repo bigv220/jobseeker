@@ -460,6 +460,16 @@ class jobseeker_model extends MY_Model
         return $this->db->query($sql);
     }
 
+    public function getUserOnlineStatusById($user_ids='') {
+        $result = $this->db->select('*')
+                 ->from('user_status')
+                 //->where('status',1)
+                 ->where('uid',$user_ids)
+                 ->get()
+                 ->result_array();
+        return $result;
+    }
+
     public function getUserOnlineStatus($user_ids='') {
         $result = $this->db->select('*')
                  ->from('user_status')
@@ -472,8 +482,8 @@ class jobseeker_model extends MY_Model
 
     public function cleanUp() {
         if (rand(1,3) == 1) {
-            $timestamp = 240;
-            $sql = "update user_status set status=-1 where UNIX_TIMESTAMP(Now())-UNIX_TIMESTAMP(lastrequest)+14400>" . $timestamp;
+            $timestamp = 3600; // Half hour didn't have request, set offline
+            $sql = "update user_status set status=-1 where UNIX_TIMESTAMP(Now())-UNIX_TIMESTAMP(lastrequest)>" . $timestamp;
 
             @ $this->db->query($sql);
         }
