@@ -167,6 +167,5 @@
 
 <!-- Partners -->
 <?php $this->load->view($front_theme.'/partners-block');?>
-<script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/inbox.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

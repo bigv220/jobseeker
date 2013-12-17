@@ -281,7 +281,11 @@ class user extends Front_Controller {
     public function getstatus() 
     {
         $this->load->model('jobseeker_model');
-        $result = $this->jobseeker_model->getUserOnlineStatus();
+        if (!empty($_POST['userid'])) {
+            $result = $this->jobseeker_model->getUserOnlineStatusById($_POST['userid']);    
+        } else {
+            $result = $this->jobseeker_model->getUserOnlineStatus();
+        }
         
         $this->output->set_header('Content-Type: application/json; charset=utf-8');  
         echo json_encode($result);

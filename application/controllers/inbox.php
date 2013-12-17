@@ -36,12 +36,12 @@ class inbox extends Front_Controller {
         $data['uid'] = $uid;
 
         // get message list
-        if ($data['mode'] == 'jingchat') {
-            $data['messages'] = $this->inbox_model->getMsg($uid);
-        } else if($data['mode'] == 'sent') {
+        if($data['mode'] == 'sent') {
             $data['messages'] = $this->inbox_model->getMsgSentByMe($uid);
-        } else {
+        } else if ($data['mode'] == 'trash') {
             $data['messages'] = $this->inbox_model->getTrashMsg($uid);
+        } else {
+            $data['messages'] = $this->inbox_model->getMsg($uid);
         }
 
         $online_users = $this->jobseeker_model->getUserOnlineStatus();
@@ -167,7 +167,6 @@ class inbox extends Front_Controller {
         // Update to read for this msg
         $this->inbox_model->updateMessageToRead($_POST['msg_id']);
 
-        $return = array();
         echo  $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
     }
 

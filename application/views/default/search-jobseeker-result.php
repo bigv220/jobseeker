@@ -7,7 +7,8 @@
 
 <style type="text/css">
     input.text { width: 215px;}
-    .jingchat_message_content {width:390px;}
+    .jingchat_message_row_me .jingchat_message_content,.jingchat_message_row_other .jingchat_message_content {width:390px;}
+    .jingchat_message_content .message_avatar_arrow {right:-14px;}
 </style>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 
@@ -478,7 +479,7 @@
                 </div>
                 </div>
                 <div class="fxui-tab-nav sresult-jingchat">
-                    <div class="jingchat_wrapper">
+                    <div class="jingchat_wrapper" id="message_list_<?php echo $user['uid']; ?>" data-id="<?php echo empty($user['jingchat']['id'])?0:$user['jingchat']['id']; ?>" data-user="<?php echo $user['uid']; ?>">
                         <div class="jingchat_messages" style="display:none;">
                             <div class="load_older_message">
                                 Load older messages
@@ -518,7 +519,8 @@
         </div>
     </div>
     <?php endif;?>
-
+    <input type="hidden" id="msg_id" />
+    <input type="hidden" id="user2" />
 </div>
 
 <!--backtop-->
