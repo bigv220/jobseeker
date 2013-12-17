@@ -461,10 +461,11 @@ class jobseeker_model extends MY_Model
     }
 
     public function getUserOnlineStatusById($user_ids='') {
+        $user_arr = explode(',',$user_ids);
         $result = $this->db->select('*')
                  ->from('user_status')
                  //->where('status',1)
-                 ->where('uid',$user_ids)
+                 ->where_in('uid',$user_arr)
                  ->get()
                  ->result_array();
         return $result;

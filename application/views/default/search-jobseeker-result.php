@@ -479,7 +479,7 @@
                 </div>
                 </div>
                 <div class="fxui-tab-nav sresult-jingchat">
-                    <div class="jingchat_wrapper">
+                    <div class="jingchat_wrapper" id="message_list_<?php echo $user['uid']; ?>" data-id="<?php echo empty($user['jingchat']['id'])?0:$user['jingchat']['id']; ?>" data-user="<?php echo $user['uid']; ?>">
                         <div class="jingchat_messages" style="display:none;">
                             <div class="load_older_message">
                                 Load older messages
