@@ -3,6 +3,7 @@
 <script type="text/javascript" src="<?php echo $theme_path?>js/portfolio.js"></script>
 <link href="<?php echo $theme_path?>js/jplayer/skin/jobseeker/jplayer.jobseeker.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<?php echo $theme_path?>js/jplayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/editprofile.js"></script>
 <!--company login page body-->
 <div class="company-page w770 clearfix rel">
   <div class="company-body box rel mb5">
@@ -45,32 +46,45 @@
           <!-- INTERVIEW END -->
          </div>
     </div>
-    <div class="company-bd jobseeker-bd">
+    <div class="company-bd jobseeker-bd jobseeker_profile_bd">
       <div class="company-bd-left jobseeker-bd-left">
         <dl class="mb30">
-          <dt>About me<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
-          <dd><strong><?php echo $userinfo['description']; ?></strong></dd>
+          <dt>About me<a href="javascript:void(0);" class="edit_jobseeker_profile_about_me_link edit_profile_link_ajax">Edit</a></dt>
+          <dd>
+              <div class="show_content"><?php echo $userinfo['description']; ?></div>
+              <div class="edit_content">
+                  <textarea name="profile_description" id="profile_description"><?php echo $userinfo['description']; ?></textarea>
+                  <input type="button" class="reg-save" data-index="1" onclick="saveProfileDescription(this);">
+              </div>
+          </dd>
         </dl>
         <dl class="mb30">
-          <dt>Industry<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+          <dt>Industry<a href="javascript:void(0);" class="edit_jobseeker_profile_industry_link edit_profile_link_ajax">Edit</a></dt>
           <dd class="idustry">
-            <?php foreach($seekingIndustry as $si): ?>
-            <a href="javascript:void(0);"><?php echo $si['industry'];?></a>
-          <?php endforeach; ?>
-              </dd>
+
+              <div class="show_content">
+                  <?php foreach($seekingIndustry as $si): ?>
+                      <a href="javascript:void(0);"><?php echo $si['industry'];?></a>
+                  <?php endforeach; ?>
+              </div>
+              <div class="edit_content">
+                  <textarea name="profile_description"></textarea>
+                  <input type="button" class="reg-save" data-index="2" onclick="saveProfileSeekingIndustry(this);">
+              </div>
+          </dd>
         </dl>
           <dl class="sresult-nav-job-dl">
               <?php foreach($workhistory as $wh): 
                 if ($wh['is_stillhere'] == 1):
               ?>
-              <dt>Current Employement<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+              <dt>Current Employement<a href="javascript:void(0);" class="edit_jobseeker_profile_current_employment_link">Edit</a></dt>
               <dd>
                   <p class="employment_title"><?php echo $wh['company_name']; ?></p>
                   <p class="emploeyment_period"><?php echo $wh['period_time_from'];?> - <?php echo $wh['period_time_to']; ?></p>
                   <p class="employment_description"><?php echo $wh['introduce'];?></p>
               </dd>
             <?php else: ?>
-              <dt>Previous Employment<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+              <dt>Previous Employment<a href="javascript:void(0);" class="edit_jobseeker_profile_previous_employment_link">Edit</a></dt>
               <dd>
                   <p class="employment_title"><?php echo $wh['company_name']; ?></p>
                   <p class="emploeyment_period"><?php echo $wh['period_time_from'];?> - <?php echo $wh['period_time_to']; ?></p>
@@ -78,7 +92,7 @@
               </dd>
             <?php endif;?>
           <?php endforeach; ?>
-              <dt>Personal Skills<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+              <dt>Personal Skills<a href="javascript:void(0);" class="edit_jobseeker_profile_personal_skills_link">Edit</a></dt>
               <dd><?php 
               $str = '';
               foreach($personal_skills as $ps): ?>
@@ -88,7 +102,7 @@
                   <?php endforeach; ?>
                   <?php $str = substr($str, 0, -2);
                    echo $str;?><dd>
-              <dt>Technical Skills<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+              <dt>Technical Skills<a href="javascript:void(0);" class="edit_jobseeker_profile_technical_skills_link">Edit</a></dt>
               <dd><?php 
               $str = '';
               foreach($professional_skills as $ps): ?>
@@ -98,7 +112,7 @@
                   <?php endforeach; ?>
                   <?php $str = substr($str, 0, -2);
                    echo $str;?><dd>
-              <dt>Language(s)<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+              <dt>Language(s)<a href="javascript:void(0);" class="edit_jobseeker_profile_languages_link">Edit</a></dt>
               <dd>
                   <?php foreach ($language as $la): ?>
                       <div class="jobseeker_profile_language">
@@ -206,11 +220,11 @@
                       </li>
                   </ul>
               </dd>
-              <dt>Birthday<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+              <dt>Birthday<a href="javascript:void(0);" class="edit_jobseeker_profile_birthday_link">Edit</a></dt>
               <dd>
                   <p class="jobseeker_birthday"><?php echo date("F j Y",strtotime($userinfo['birthday'])); ?></p>
               </dd>
-              <dt>Education<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+              <dt>Education<a href="javascript:void(0);" class="edit_jobseeker_profile_education_link">Edit</a></dt>
               <dd>
                   <?php foreach($education_info as $ei): ?>
                   <p class="school_name"><?php echo $ei['school_name'];?></p>
@@ -221,7 +235,7 @@
                   <p class="school_period"><?php echo $ei['attend_date_from'];?> - <?php echo $ei['attend_date_to'];?></p>
                   <?php endforeach; ?>
               </dd>
-              <dt>Elsewhere on Web<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+              <dt>Elsewhere on Web<a href="javascript:void(0);" class="edit_jobseeker_profile_sns_link">Edit</a></dt>
               <dd>
 
                   <?php if (!empty($userinfo['twitter'])): ?>
@@ -245,7 +259,7 @@
 
               </dd>
 
-              <dt>Phone<a href="#" class="edit_jobseeker_profile_link">Edit</a></dt>
+              <dt>Phone<a href="javascript:void(0);" class="edit_jobseeker_profile_phone_link">Edit</a></dt>
               <dd><p class="phone_number"><?php echo $userinfo['phone']; ?></p></dd>
               <dd class="industry">
                   <ul class="industry-ul">

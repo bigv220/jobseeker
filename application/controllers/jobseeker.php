@@ -398,6 +398,20 @@ class jobseeker extends Front_Controller {
         $this->load->view($data['front_theme']."/jobseeker-view-interviews",$data);
     }
 
+    public function updateDescription(){
+        $this->load->model('jobseeker_model');
+        $uid = $this->session->userdata('uid');
+        $post = $_POST;
+        $status = "failed";
+        if($post){
+            $rtn = $this->jobseeker_model->updateUserDescription($uid, $post['description']);
+            if($rtn){
+                $status = "success";
+            }
+        }
+        $result['status'] = $status;
+        echo json_encode($result);
+    }
     //save basic info
     public function basicInfo() {
         //Load Model
