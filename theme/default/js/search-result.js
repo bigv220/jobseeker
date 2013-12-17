@@ -157,6 +157,13 @@ $(function(){
         var aMark = $(this).parents('.sresult-row').find('.job-mark');
         var aViewMore = $(this).find('.job-viewmore');
         if(oDom.css('display')=='none'){
+            if(window.location.href.indexOf('search/searchJobseeker') >0) {
+                $.post(site_url + 'user/updateVisitNum',
+                    {uid: aViewMore.attr('alt')},
+                    function(result) {
+
+                });
+            }
             aMark.addClass('job-mark2').removeClass('job-mark1');
             oDom.slideDown();
             abtn.css({display:'block'}).show();

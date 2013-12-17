@@ -478,4 +478,9 @@ class jobseeker_model extends MY_Model
             @ $this->db->query($sql);
         }
     }
+
+    public function updateVisitNum($uid) {
+        $sql = "UPDATE user set visit_num=visit_num+1 WHERE uid=$uid";
+        return $this->db->query($sql);
+    }
 }

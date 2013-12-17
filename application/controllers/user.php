@@ -297,4 +297,23 @@ class user extends Front_Controller {
         $this->jobseeker_model->updateUserStatus($this->session->userdata('uid'), 1);
     }
 
+    public function updateVisitNum() {
+        $this->load->model('jobseeker_model');
+
+        $post = $_POST;
+        $uid = $post['uid'];
+
+        if ($post) {
+            $rtn = $this->jobseeker_model->updateVisitNum($uid);
+
+            if($rtn) {
+                $msg = "success";
+            } else {
+                $msg = "failed";
+            }
+
+            $result['status'] = $msg;
+            echo json_encode($result);
+        }
+    }
 }

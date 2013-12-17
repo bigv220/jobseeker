@@ -235,7 +235,7 @@ class job extends Front_Controller {
             $data['jobs'][$key]['industries'] = $this->job_model->getJobIndustry($job['id']);
         }
 
-        $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid");
+        $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid and is_deleted=0");
         $data['interview_num'] = count($interview_num);
         $this->load->model('inbox_model');
         $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);

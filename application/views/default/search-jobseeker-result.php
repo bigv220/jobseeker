@@ -251,7 +251,7 @@
                                 ?>
                 </h3>
                 <p><?php echo $user['city'].' '.$user['province'].' '.$user['country']; ?></p>
-                <a href="#" class="job-viewmore">View More</a> </div>
+                <a href="#" class="job-viewmore" alt="<?php echo $user['uid']; ?>">View More</a> </div>
             <div class="span3">
                 <div class="zoom">
                     <a href="#" data-id="<?php echo $user['uid']?>" class="job-btn jobseeker-btn-shortlisted <?php if ($user['is_shortlisted']==1):?>jobseeker-btn-shortlisted_current<?php endif; ?>"></a>

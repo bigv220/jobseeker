@@ -21,7 +21,7 @@
       <div class="text">
         <h2><?php echo $userinfo['first_name'].' '.$userinfo['last_name']; ?></h2>
         <h4><?php echo $userinfo['city'].', '.$userinfo['country']; ?></h4>
-        <p class="profile_views_num">4 Profile Views</p>
+        <p class="profile_views_num"><?php echo $userinfo['visit_num']; ?> Profile Views</p>
       </div>
       <div class="btnarea">
           <a href="<?php echo $site_url?>jobseeker/register" class="png square_btn edit_profile_btn"></a>

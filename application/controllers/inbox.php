@@ -63,7 +63,9 @@ class inbox extends Front_Controller {
             }
         }
 
-        
+        $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid and is_deleted=0");
+        $data['interview_num'] = count($interview_num);
+
         $this->load->view($data['front_theme'].'/inbox-index', $data);
     }
 
@@ -117,7 +119,7 @@ class inbox extends Front_Controller {
 
         $this->load->model('inbox_model');
         
-        $data['msg_detail'] = $this->inbox_model->getDetailMsg($_POST['msg_id']);   
+        $data['msg_detail'] = $this->inbox_model->getDetailMsg($_POST['msg_id']);
         // Get other user's info, name and profile img
         if (!empty($data['msg_detail'])) {
             $user1 = $data['msg_detail'][0]['user1'];
@@ -131,8 +133,6 @@ class inbox extends Front_Controller {
         } 
         // Update to read for this msg
         $this->inbox_model->updateMessageToRead($_POST['msg_id']);
-
-        $detail_msg = $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
         
         echo $this->load->view($data['front_theme'].'/inbox-detailmsg',$data);
     }
