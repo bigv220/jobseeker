@@ -92,7 +92,7 @@
 <div class="request-sent-pop-message png">
     <div class="pop-message-wrap rel">
         <i class="pop-message-close abs" title="close"></i>
-        <div class="pop-succ-message">Your interview request has been sent successful!</div>
+        <div class="pop-succ-message">Your interview request has been sent successfully!</div>
     </div>
 </div>
 
