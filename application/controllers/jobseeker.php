@@ -173,7 +173,9 @@ class jobseeker extends Front_Controller {
     $this->load->model('job_model');
     $applied_jobs = $this->job_model->getAppliedJobByUser($uid);
     $data['applied_jobs'] = array_slice($applied_jobs, 0, 3);
-
+    //industry lists
+    $industry = $this->jobseeker_model->getIndustry();
+    $data["industry"] = $industry;
     //get the top 3 companies user reviewed
     $viewed_company = $this->jobseeker_model->getViewedCompany($uid);
     $data['viewed_company'] = $viewed_company;
@@ -412,6 +414,27 @@ class jobseeker extends Front_Controller {
         $result['status'] = $status;
         echo json_encode($result);
     }
+    public function updateProfileSeekingIndustry(){
+        $this->load->model('jobseeker_model');
+        $uid = $this->session->userdata('uid');
+        $post = $_POST;
+        $status = "failed";
+        if($post){
+            // delete old industry data
+            $this->jobseeker_model->delSeekingIndustry($uid);
+            //save seeking industry to db
+            $industry_len = count($post['industry_1']);
+            for($i=0; $i<$industry_len;$i++) {
+                if($post['industry_1'][$i] && $post['position_1'][$i]) {
+                    $this->jobseeker_model->addSeekingIndustry($uid, $post['industry_1'][$i], $post['position_1'][$i]);
+                }
+            }
+            $status = "success";
+        }
+        $result['status'] = $status;
+        echo json_encode($result);
+    }
+
     //save basic info
     public function basicInfo() {
         //Load Model
@@ -643,7 +666,7 @@ class jobseeker extends Front_Controller {
      */
     public function addPersonalSkills() {
         $post = $_POST;
-        $uid = isset($post['uid'])?$post['uid']:'';
+        $uid = $this->session->userdata('uid');
         $skill = $post['skill'];
 
         if (!empty($uid)) {
@@ -666,7 +689,7 @@ class jobseeker extends Front_Controller {
      */
     public function addProfessionalSkills() {
         $post = $_POST;
-        $uid = isset($post['uid'])?$post['uid']:'';
+        $uid = $this->session->userdata('uid');
         $skill = $post['skill'];
 
         if (!empty($uid)) {

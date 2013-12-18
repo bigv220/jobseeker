@@ -4,6 +4,9 @@
 <link href="<?php echo $theme_path?>js/jplayer/skin/jobseeker/jplayer.jobseeker.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<?php echo $theme_path?>js/jplayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/editprofile.js"></script>
+<link href="<?php echo $theme_path?>style/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
 <!--company login page body-->
 <div class="company-page w770 clearfix rel">
   <div class="company-body box rel mb5">
@@ -18,7 +21,7 @@
         <?php else: ?>
         <i class="abs face png"></i>
         <?php endif; ?>
-      <div class="text">
+      <div class="text_wrapper">
         <h2><?php echo $userinfo['first_name'].' '.$userinfo['last_name']; ?></h2>
         <h4><?php echo $userinfo['city'].', '.$userinfo['country']; ?></h4>
         <p class="profile_views_num">4 Profile Views</p>
@@ -68,8 +71,47 @@
                   <?php endforeach; ?>
               </div>
               <div class="edit_content">
-                  <textarea name="profile_description"></textarea>
+                  <form action="<?php echo $site_url; ?>jobseeker/updateProfileSeekingIndustry" method="post" id="editIndustryForm">
+                  <div class="reg-row">
+                      <?php
+                      $i = 0;
+                      if (!count($seekingIndustry)) {
+                          $seekingIndustry = array(array('industry'=>'none','position'=>'none'));
+                      }
+                      foreach($seekingIndustry as $v): ?>
+                          <?php
+                          $i++;
+                          if($i == 1) {echo '<div id="industry_lists">';} ?>
+
+                          <select name="industry_1[]" id="industry_1" required="required" onchange="changeIndustry(this, true);">
+                              <option value="">Industry</option>
+                              <?php
+                              $user_industry = $v["industry"];
+                              foreach($industry as $key=>&$val) {
+                                  $str = '';
+                                  if($val['name'] == $user_industry) {
+                                      $str = ' selected="selected"';
+                                  }
+                                  ?>
+                                  <option value="<?php echo $val['name']; ?>"<?php echo $str;?>><?php echo $val['name']; ?></option>
+                              <?php } ?>
+                          </select>
+                          <select name="position_1[]" id="position_1" required>
+                              <option value="<?php echo $v['position']; ?>"><?php echo $v['position']; ?></option>
+                          </select>
+                          <?php if($i==1) {echo "</div>";} ?>
+
+                          <?php if($i>1): ?>
+                              <span class="delSeekingIndustry"><i onclick="delSeekingIndustry(this,'<?php echo $v['industry']; ?>','<?php echo $v['position']; ?>');" class="del"></i></span>
+                          <?php endif; ?>
+
+                      <?php endforeach; ?>
+                      <a id="addIndustry" class="reg-row-tip" href="javascript:void(0);">
+                          + Add Another Industry</a>
+                  </div>
+                  </form>
                   <input type="button" class="reg-save" data-index="2" onclick="saveProfileSeekingIndustry(this);">
+
               </div>
           </dd>
         </dl>
@@ -92,26 +134,81 @@
               </dd>
             <?php endif;?>
           <?php endforeach; ?>
-              <dt>Personal Skills<a href="javascript:void(0);" class="edit_jobseeker_profile_personal_skills_link">Edit</a></dt>
-              <dd><?php 
-              $str = '';
-              foreach($personal_skills as $ps): ?>
-                  <?php 
-                  $str .= $ps['personal_skill'].', ';
-                  ?>
-                  <?php endforeach; ?>
-                  <?php $str = substr($str, 0, -2);
-                   echo $str;?><dd>
-              <dt>Technical Skills<a href="javascript:void(0);" class="edit_jobseeker_profile_technical_skills_link">Edit</a></dt>
-              <dd><?php 
-              $str = '';
-              foreach($professional_skills as $ps): ?>
-                  <?php 
-                  $str .= $ps['professional_skill'].', ';
-                  ?>
-                  <?php endforeach; ?>
-                  <?php $str = substr($str, 0, -2);
-                   echo $str;?><dd>
+              <dt>Personal Skills<a href="javascript:void(0);" class="edit_jobseeker_profile_personal_skills_link edit_profile_link_ajax">Edit</a></dt>
+              <dd>
+
+                  <div class="show_content">
+                      <?php
+                      $str = '';
+                      foreach($personal_skills as $ps): ?>
+                          <?php
+                          $str .= $ps['personal_skill'].', ';
+                          ?>
+                      <?php endforeach; ?>
+                      <?php $str = substr($str, 0, -2);
+                      echo $str;?>
+                  </div>
+                  <div class="edit_content">
+                      <form action="<?php echo $site_url; ?>jobseeker/updateProfileSeekingIndustry" method="post" id="editPersonalSkillsForm">
+                      <div class="skills-vals clearfix">
+                          <ul id="PersonalSkills">
+                              <?php foreach($personal_skills as $v) { ?>
+                                  <li data-val="2">
+                                      <?php echo $v["personal_skill"]; ?>
+                                      <img src="<?php echo $theme_path;?>style/reg/del.gif" onclick="delPersonalSkills('PersonalSkills',this,'<?php echo $v['personal_skill']; ?>');"/>
+                                  </li>
+                              <?php } ?>
+                          </ul>
+                      </div>
+                      <div class="reg-row">
+                          <div>
+                              <input type="text" size="24" maxlength="255" autocomplete="on" id="PersonalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('PersonalSkills',this,'step7'); return false;}">
+                          </div>
+                      </div>
+                      </form>
+                      <input type="button" class="reg-save" data-index="2" onclick="savePersonalSkills(this,'PersonalSkills');">
+                  </div>
+
+              <dd>
+              <dt>Technical Skills
+                  <a href="javascript:void(0);" class="edit_jobseeker_profile_technical_skills_link edit_profile_link_ajax">Edit</a>
+              </dt>
+              <dd>
+
+                  <div class="show_content">
+                      <?php
+                      $str = '';
+                      foreach($professional_skills as $ps): ?>
+                          <?php
+                          $str .= $ps['professional_skill'].', ';
+                          ?>
+                      <?php endforeach; ?>
+                      <?php $str = substr($str, 0, -2);
+                      echo $str;?>
+                  </div>
+                  <div class="edit_content">
+                      <div class="skills-vals clearfix">
+                          <ul id="ProfessionalSkills">
+                              <?php foreach($professional_skills as $v) { ?>
+                                  <li data-val="2">
+                                      <?php echo $v["professional_skill"]; ?>
+                                      <img src="<?php echo $theme_path;?>style/reg/del.gif" onclick="delPersonalSkills('ProfessionalSkills',this,'<?php echo $v['professional_skill']; ?>');"/>
+                                  </li>
+                              <?php } ?>
+                          </ul>
+
+                      </div>
+                      <div class="reg-row">
+                          <div>
+                              <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this,'step8'); return false;}">
+                          </div>
+                      </div>
+                      <input type="button" class="reg-save" data-index="2" onclick="savePersonalSkills(this, 'ProfessionalSkills');">
+                  </div>
+
+
+
+              <dd>
               <dt>Language(s)<a href="javascript:void(0);" class="edit_jobseeker_profile_languages_link">Edit</a></dt>
               <dd>
                   <?php foreach ($language as $la): ?>

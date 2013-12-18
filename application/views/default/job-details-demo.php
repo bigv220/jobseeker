@@ -4,7 +4,7 @@
 <div class="company-page w770 clearfix rel">
   <div class="company-body box rel mb20">
     <div class="company-hd rel"> <i class="abs face png"></i>
-      <div class="text" <?php echo $theme_path?>style="width:320px;">
+      <div class="text_wrapper" <?php echo $theme_path?>style="width:320px;">
         <h2>JOB TITLE HERE</h2>
         <h4>Redstar Works, Beijing</h4>
         <p>Posted on 6th Aug 2013</p>

@@ -14,7 +14,7 @@
         <?php else: ?>
         <i class="abs face png"></i>
         <?php endif; ?>
-      <div class="text">
+      <div class="text_wrapper">
         <h2><?php echo $userinfo['first_name'].' '.$userinfo['last_name']; ?></h2>
         <h4><?php echo $userinfo['city'].', '.$userinfo['country']; ?></h4>
         <p class="profile_views_num">4 Profile Views</p>

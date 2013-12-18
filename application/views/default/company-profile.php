@@ -8,7 +8,7 @@
     		<img src="<?php echo $site_url.'attached/users/'.$info['profile_pic']?>" alt="" width="128px" height="128px"/>
     		<i class="abs face png" ></i>
     	</div>
-      <div class="text">
+      <div class="text_wrapper">
         <h2><?php echo $info['first_name'];?></h2>
         <h4><?php echo $info['city'].', '.$info['country'];?></h4>
         <p></p>

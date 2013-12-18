@@ -8,7 +8,7 @@
 	        <img src="<?php echo $site_url; ?>attached/users/<?php echo $company_avatar?$company_avatar:'no-image.png';?>" alt="" width="128px" height="128px"/>
 	        <i class="abs face png"></i>
         </div>
-            <div class="text" style="width:320px;">
+            <div class="text_wrapper" style="width:320px;">
                 <h2><?php echo $jobinfo["job_name"]; ?></h2>
                 <h4><?php echo $jobinfo["location"].' '.$jobinfo["city"]; ?></h4>
                 <p>Posted on <?php echo $jobinfo["post_date"]; ?></p>

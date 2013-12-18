@@ -108,13 +108,14 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .pop-message-bd .message_title{color:#674092;font-size:16px;font-weight:bold;}
 .pop-message-bd .message_content{color:#674092;font-size:13px;width:330px;margin:0 auto;margin-top:10px;}
 .company-hd{height:115px;}.company-hd .face{display:block;width:128px;height:128px;background:url(company/face.png) no-repeat;top:-38px;left:15px;}
-.company-hd .text{float:left;*display:inline;width:260px;padding:10px 0 0 156px;overflow: hidden;height: 95px;}.company-hd .text h2,.company-hd .text h4{color:#48225b;font-weight:bolder;}
-.company-hd .text h2{font-size:22px;text-transform:uppercase;}
-.company-hd .text h4{font-size:20px;}
-.company-hd .text p{color:#5c5c5c;font-size:15px;}
+.company-hd .text_wrapper{float:left;*display:inline;width:260px;padding:10px 0 0 156px;overflow: hidden;height: 95px;}
+.company-hd .text_wrapper h2,.company-hd .text_wrapper h4{color:#48225b;font-weight:bolder;}
+.company-hd .text_wrapper h2{font-size:22px;text-transform:uppercase;}
+.company-hd .text_wrapper h4{font-size:20px;}
+.company-hd .text_wrapper p{color:#5c5c5c;font-size:15px;}
 .company-hd .face, .jobseeker-hd .face{background: url("jobseeker/profile_img_masker.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);height: 128px;left: 10px;position: absolute;top: -37px;width: 128px;}
 .company-hd img, .jobseeker-hd img { left: 10px;position: absolute;top: -37px;}
-.jobseeker-hd .text{width:220px;}
+.jobseeker-hd .text_wrapper{width:220px;}
 .jobseeker-bd a{color: #ea6e3b;margin-right: 5px;}
 .company-hd .btnarea{float:right;*display:inline;width:375px;padding:0 15px 0 0;text-align:right;position:absolute;top:-6px;right:0;}
 .company-hd .combtn{width:79px;height:79px;line-height:79px;display:inline-block;text-align:center;vertical-align:top;background-image:url(company/btns.png);background-repeat:no-repeat;}
@@ -219,6 +220,7 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 a.edit_jobseeker_profile_link{text-decoration:underline;margin-left:10px;color:#674092;}
 .jobseeker_profile_bd dt a{text-decoration:underline;margin-left:10px;color:#674092;}
 .jobseeker_profile_bd .edit_content{display:none;}
+.jobseeker-bd-left .edit_content{width:490px;}
 #profile_description{width:100%;height:80px;}
 div.text{margin-top: 8px;}
 ul.recent_applied_jobs{}
