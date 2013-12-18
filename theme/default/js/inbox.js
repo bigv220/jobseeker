@@ -152,9 +152,7 @@ var checkonlinestatus = function() {
 var getRealTimeMessage = function() {
 	 $.post(base_url + "inbox/getRealTimeMessage", { msg_id:$('#msg_id').val(),user2:$('#user2').val(),seq:$('.jingchat_messages_bd').children().last().attr('data-seq')},
 		  	function(data){
-		  		//TODO: 定位到最下面
 		    	$('.jingchat_messages_bd').append(data);
-		    	
-		    	$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
+		    	//$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
 			});
 }

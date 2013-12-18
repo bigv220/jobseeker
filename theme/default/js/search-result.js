@@ -52,7 +52,6 @@ var getRealTimeMessage = function() {
         $.post(base_url + "inbox/getRealTimeMessage", { msg_id:msg_id,user2:user2,seq:seq},
             function(html){
                 $(data).append(html);
-                
                 $(data).scrollTop($(data)[0].scrollHeight);
             });
      });
