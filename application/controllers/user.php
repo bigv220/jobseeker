@@ -142,7 +142,7 @@ class user extends Front_Controller {
             $this->email->from('do-not-reply@jingjobs.com', 'JingJobs Team');
             $this->email->to($_POST['username']);
 
-            $this->email->subject('RESET PASSWORD EMIAL FROM JINGJOBS');
+            $this->email->subject('RESET PASSWORD EMAIL FROM JINGJOBS');
             $this->email->message("<HTML><BODY><div>You requested that your password be reset. To reset your password please follow this link: <br/>[<a href='$resetPwLink'>Reset My Password</a>]<br/>Thanks,<br/>The JingJobs Team</div></BODY></HTML>");
 
             if (!$this->email->send()) {

@@ -269,7 +269,7 @@ $(document).ready(function() {
      			    function(result,status){
                         var data = $.parseJSON(result);
      			    	if("success" == status) {
-                             alert('Post successful!');
+                            alert('Post successful!');
 							window.location.href=site_url+'job/jobdetails/'+ data.id;
      			    	}
      		});
