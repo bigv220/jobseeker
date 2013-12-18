@@ -9,7 +9,7 @@
 .ac_loading{background:url('reg/indicator.gif') right center no-repeat;}
 .ac_over{background-color:#EFEFEF;}
 
-.text{background:url(reg/autocomplete_text.png) no-repeat;}
-.text{width:400px;height:22px;padding:4px 7px;padding:6px 7px 2px;font:16px arial;
+.autocomplete_text{background:url(reg/autocomplete_text.png) no-repeat;}
+.autocomplete_text{width:400px;height:22px;padding:4px 7px;padding:6px 7px 2px;font:16px arial;
     border:1px solid #cdcdcd;border-color:#9a9a9a #cdcdcd #cdcdcd #9a9a9a;
     vertical-align:top;outline:none;margin:0 5px 0 0;background-color: white;}

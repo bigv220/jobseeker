@@ -78,7 +78,7 @@ class job_model extends MY_Model
     }
 
     public function searchJob($where) {
-        $sql = "SELECT *,job.id as id, job.city as city,jl.language as language,
+        $sql = "SELECT *,job.id as id, job.country as country, job.province as province, job.city as city,jl.language as language,
               job.employment_length as employment_length, job.employment_type employment_type,
               u.username as company_name, job.company_id as company_id, u.description as description
         		FROM job 
@@ -151,6 +151,11 @@ class job_model extends MY_Model
             return $result;
         else
             return array();
+    }
+
+    public function getJobLang($job_id) {
+        $sql = "SELECT * FROM job_language_level WHERE job_id = $job_id";
+        return $this->db->query($sql)->result_array();
     }
     
     public function delJobLang($job_id) {
