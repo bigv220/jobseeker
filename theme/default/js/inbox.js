@@ -157,6 +157,6 @@ var getRealTimeMessage = function() {
 	 $.post(base_url + "inbox/getRealTimeMessage", { msg_id:$('#msg_id').val(),user2:$('#user2').val(),seq:seq},
 		  	function(data){
 		    	$('.jingchat_messages_bd').append(data);
-		    	//$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
+		    	$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
 			});
 }

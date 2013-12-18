@@ -127,6 +127,7 @@ class inbox_model extends MY_Model
         $result = $this->db->select('*')
                  ->from($this->table)
                  ->where('id',$msg_id)
+                 ->where('is_delete',0)
                  ->get()
                  ->result_array();
         return $result;   

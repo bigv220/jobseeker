@@ -54,7 +54,10 @@
           <div class="fxui-tab-nav">
               <div class="inbox_wrapper">
                   <div class="inbox_overview_list">
-                      <?php foreach($messages as $msg): 
+                      <?php 
+                      $id = 0;
+                      $user2 = 0;
+                      foreach($messages as $msg): 
                       $id = $msg['id'];
                       $user2 = $msg['user1'];
                       ?>
@@ -95,8 +98,6 @@
                               <div class="jingchat_messages_bd">
                                   <?php 
                                   $seq = 0;
-                                  $id = 0;
-                                  $user2 = 0;
                                   if (!empty($msg_detail)):
                                   foreach($msg_detail as $detail): 
                                     $seq = $detail['seq']; ?>
