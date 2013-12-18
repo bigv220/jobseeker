@@ -62,3 +62,6 @@ ul.tagit li.tagit-new {height:1px;overflow: hidden}
 .postjob_del { margin-top:-15px;float:right;width:13px;}
 .postjob_del i { left:0px; top:0px;}
 .reg-row select.multi_select { height: 100px;}
+.postjob-content { width: 720px}
+.managejob-content .skills-vals li {height:18px; font-size:14px;font-weight: normal;line-height: 12px;margin: 2px 5px 2px 0;padding: 2px 13px 3px 4px;}
+.managejob-content .skills-vals .del {height:12px;margin: 0px 5px 2px 0;width:14px;}

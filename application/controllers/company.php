@@ -213,10 +213,19 @@ class company extends Front_Controller {
     	$data = $this->data;
     	$this->load->model('jobseeker_model');
     	$data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+
+        // get location
+        $this->load->helper('location');
+        $data['location'] = getLoction();
     	
     	$this->load->model('job_model');
-    	$data['jobs'] = $this->job_model->getCompanyJobList($uid);
-    	
+        $jobs = $this->job_model->searchJob(" WHERE uid=$uid");
+
+        foreach($jobs as $key=>&$job) {
+            $job['languages'] = $this->job_model->getJobLang($job['id']);
+        }
+
+        $data['jobs'] = $jobs;
     	$this->load->view($data['front_theme']."/company_job_listing",$data);
     }
 

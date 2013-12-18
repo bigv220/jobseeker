@@ -42,4 +42,4 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .similar i{display:block;width:69px;height:55px;background:url(company/similar-mark.png) no-repeat;position:absolute;top:0;left:0;}
 .similar p a.view_profile_link{color:#000000;font-size:13px;}
 .match{height:134px;background:url(company/match.png) no-repeat center;text-align:center;}.match b{font-size:56px;color:#684092;padding:10px 0 0 0;font-family:Myriad Pro;display:block;}
-.company-btn-delete-job {width: 75px;height: 75px;display: block;float: left;margin-right: 11px;background-image: url(btns/btn_delete_job.png);}
+.company-btn-delete-job {width: 75px;height: 75px;display: block;float: right;margin-right: 11px;background-image: url(btns/btn_delete_job.png);}

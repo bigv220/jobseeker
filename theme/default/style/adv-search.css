@@ -45,6 +45,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .postjob-content-left-row strong, .postjob-additional-information strong {color:#444;}
 .postjob-content-left-row .span1, .postjob-content-left-row .span2{width:232px;float:left;}
 .postjob-content-left-row .span2{margin-left:15px;}
+.postjob-content-left-row .job-listing {width:200px; margin-right: 10px;}
 .postjob-content input{width:220px;}
 .postjob-content select{width:224px;height:24px;}
 .postjob-content-right-row{padding:0 0 9px 0;}
@@ -59,3 +60,13 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .postjob-content-left .reg-row {padding-bottom: 0px;}
 .postjob-content .delete {margin:-15px 0px;;float:right;width:13px;}
 .postjob-content i { left:0px; top:0px;}
+.managejob-content input{width:210px;}
+.managejob-content select{width:210px;height:24px;}
+.managejob-content select.location-input {
+    width: 110px;
+    margin-bottom: 5px;
+}
+.managejob-content input.location-input {
+    width: 110px;
+}
+.adv-search-bar .update-job-listing{background:url(company/update_job_listing.png) no-repeat; width:129px;}
