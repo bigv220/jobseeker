@@ -85,12 +85,18 @@
 
                       <div class="jingchat_wrapper">
                           <div class="jingchat_messages">
+                              <?php if (!empty($msg_detail)): ?>
                               <div class="load_older_message">
                                   Load older messages
                               </div>
+                              <?php else: ?>
+                                 <div align="center" style="padding-top:200px;"> No Message </div>
+                              <?php endif; ?>
                               <div class="jingchat_messages_bd">
                                   <?php 
                                   $seq = 0;
+                                  $id = 0;
+                                  $user2 = 0;
                                   if (!empty($msg_detail)):
                                   foreach($msg_detail as $detail): 
                                     $seq = $detail['seq']; ?>
@@ -122,7 +128,7 @@
                               <input type="hidden" id="user2" value="<?php echo $user2; ?>"/>
                           </div>
          
-                          <?php if ($mode != 'trash') : ?>
+                          <?php if ($mode != 'trash' && !empty($msg_detail)) : ?>
                           <div class="jingchat_message_input">
                               <textarea id="message" rows="3" cols="" class="input-tip" data-tipval="Type your message here">Type your message here</textarea>
                           </div>
