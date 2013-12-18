@@ -20,15 +20,24 @@
         <p class="profile_views_num"><?php echo $userinfo['visit_num']; ?> Profile Views</p>
       </div>
       <div class="btnarea">
-          <a href="#" class="png square_btn edit_profile_btn"></a>
+          <a href="<?php echo $site_url?>jobseeker/register" class="png square_btn edit_profile_btn"></a>
           <?php if ($chat_unread != 0) : ?>
           <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
           <span class="bubble jingchat_inbox_bubble"><?php echo $chat_unread; ?></span>
           <?php else: ?>
-          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn"></a>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
           <?php endif; ?>
-          <a href="#" class="png square_btn saved_bookmarks_btn"></a>
-          <a href="#" class="png square_btn view_my_interviews_btn"></a>
+          <a href="<?php echo $site_url; ?>jobseeker/savedBookmarks" class="png square_btn saved_bookmarks_btn"></a>
+          <!-- INTERVIEW START -->
+          <?php if ($interview_num != 0) : ?>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <span class="bubble view_my_interviews_bubble">
+              <?php echo $interview_num; ?>
+          </span>
+          <?php else: ?>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <?php endif; ?>
+          <!-- INTERVIEW END -->
          </div>
     </div>
     <div class="inbox_content">
@@ -45,7 +54,10 @@
           <div class="fxui-tab-nav">
               <div class="inbox_wrapper">
                   <div class="inbox_overview_list">
-                      <?php foreach($messages as $msg): 
+                      <?php 
+                      $id = 0;
+                      $user2 = 0;
+                      foreach($messages as $msg): 
                       $id = $msg['id'];
                       $user2 = $msg['user1'];
                       ?>
@@ -60,7 +72,7 @@
                           <div class="email_short_description">
                               <div class="received_date"><?php echo time_elapsed_string($msg['timestamp']); ?></div>
                               <div class="from_name"><?php echo $msg['first_name']; ?> <?php echo $msg['last_name']; ?></div>
-                              <div class="email_subject"><?php echo $msg['message']; ?></div>
+                              <div class="email_subject"><?php echo Truncate($msg['message'],32); ?></div>
                               <div class="email_actions_bar">
                                   <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>
                                   <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt="" class="delete_msg" data-id="<?php echo $msg['id']; ?>"/>
@@ -76,9 +88,13 @@
 
                       <div class="jingchat_wrapper">
                           <div class="jingchat_messages">
+                              <?php if (!empty($msg_detail)): ?>
                               <div class="load_older_message">
                                   Load older messages
                               </div>
+                              <?php else: ?>
+                                 <div align="center" style="padding-top:200px;"> No Message </div>
+                              <?php endif; ?>
                               <div class="jingchat_messages_bd">
                                   <?php 
                                   $seq = 0;
@@ -87,7 +103,11 @@
                                     $seq = $detail['seq']; ?>
                                   <div class="<?php if ($detail['user1'] == $uid) echo "jingchat_message_row_me"; else echo "jingchat_message_row_other"; ?>" data-seq='<?php echo $seq; ?>'>
                                       <div class="jingchat_message_content">
+                                          <?php if ($detail['user1'] == $uid):?>
                                           <img src="<?php echo $theme_path?>style/jingchat/me_jingchat_message_leftarrow.png" class="message_avatar_arrow"/>
+                                          <?php else: ?>
+                                          <img src="<?php echo $theme_path?>style/jingchat/other_jingchat_message_rightarrow.png" class="message_avatar_arrow"/>
+                                          <?php endif; ?>
                                           <div class="other_message_top"></div>
                                           <div class="other_message_content">
                                               <p class="sent_time"><?php echo time_elapsed_string($detail['timestamp']); ?></p>
@@ -109,7 +129,7 @@
                               <input type="hidden" id="user2" value="<?php echo $user2; ?>"/>
                           </div>
          
-                          <?php if ($mode != 'trash') : ?>
+                          <?php if ($mode != 'trash' && !empty($msg_detail)) : ?>
                           <div class="jingchat_message_input">
                               <textarea id="message" rows="3" cols="" class="input-tip" data-tipval="Type your message here">Type your message here</textarea>
                           </div>
@@ -154,6 +174,5 @@
 
 <!-- Partners -->
 <?php $this->load->view($front_theme.'/partners-block');?>
-<script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/inbox.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>

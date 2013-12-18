@@ -142,7 +142,7 @@ class user extends Front_Controller {
             $this->email->from('do-not-reply@jingjobs.com', 'JingJobs Team');
             $this->email->to($_POST['username']);
 
-            $this->email->subject('RESET PASSWORD EMIAL FROM JINGJOBS');
+            $this->email->subject('RESET PASSWORD EMAIL FROM JINGJOBS');
             $this->email->message("<HTML><BODY><div>You requested that your password be reset. To reset your password please follow this link: <br/>[<a href='$resetPwLink'>Reset My Password</a>]<br/>Thanks,<br/>The JingJobs Team</div></BODY></HTML>");
 
             if (!$this->email->send()) {
@@ -281,12 +281,22 @@ class user extends Front_Controller {
     public function getstatus() 
     {
         $this->load->model('jobseeker_model');
-        $result = $this->jobseeker_model->getUserOnlineStatus();
+        if (!empty($_POST['userid'])) {
+            $result = $this->jobseeker_model->getUserOnlineStatusById($_POST['userid']);    
+        } else {
+            $result = $this->jobseeker_model->getUserOnlineStatus();
+        }
         
         $this->output->set_header('Content-Type: application/json; charset=utf-8');  
         echo json_encode($result);
     }
 
+    public function awaystatus() 
+    {
+        $this->load->model('jobseeker_model');
+        $this->jobseeker_model->updateUserLastRequest($this->session->userdata('uid'), 1);
+    }
+    
     public function checkstatus()
     {   
         if (!$this->session->userdata('uid')) {
@@ -297,4 +307,23 @@ class user extends Front_Controller {
         $this->jobseeker_model->updateUserStatus($this->session->userdata('uid'), 1);
     }
 
+    public function updateVisitNum() {
+        $this->load->model('jobseeker_model');
+
+        $post = $_POST;
+        $uid = $post['uid'];
+
+        if ($post) {
+            $rtn = $this->jobseeker_model->updateVisitNum($uid);
+
+            if($rtn) {
+                $msg = "success";
+            } else {
+                $msg = "failed";
+            }
+
+            $result['status'] = $msg;
+            echo json_encode($result);
+        }
+    }
 }

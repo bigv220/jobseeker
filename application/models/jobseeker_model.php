@@ -449,6 +449,14 @@ class jobseeker_model extends MY_Model
         return $this->db->query($sql)->result_array();
     }
 
+    public function updateUserLastRequest($uid, $status)
+    {
+        $time = date("Y-m-d H:i:s",time());
+        $data = array('lastrequest'=>$time);
+        $this->db->where('uid', $uid);
+        $this->db->update('user_status',$data);
+    }
+
     /**
      * Update User online status
      * 
@@ -458,6 +466,17 @@ class jobseeker_model extends MY_Model
         $sql = "REPLACE INTO user_status values($uid, $status, '$time','$time')";
 
         return $this->db->query($sql);
+    }
+
+    public function getUserOnlineStatusById($user_ids='') {
+        $user_arr = explode(',',$user_ids);
+        $result = $this->db->select('*')
+                 ->from('user_status')
+                 //->where('status',1)
+                 ->where_in('uid',$user_arr)
+                 ->get()
+                 ->result_array();
+        return $result;
     }
 
     public function getUserOnlineStatus($user_ids='') {
@@ -472,10 +491,15 @@ class jobseeker_model extends MY_Model
 
     public function cleanUp() {
         if (rand(1,3) == 1) {
-            $timestamp = 240;
-            $sql = "update user_status set status=-1 where UNIX_TIMESTAMP(Now())-UNIX_TIMESTAMP(lastrequest)+14400>" . $timestamp;
+            $timestamp = 144;
+            $sql = "update user_status set status=-1 where UNIX_TIMESTAMP(Now())-UNIX_TIMESTAMP(lastrequest)>" . $timestamp;
 
             @ $this->db->query($sql);
         }
+    }
+
+    public function updateVisitNum($uid) {
+        $sql = "UPDATE user set visit_num=visit_num+1 WHERE uid=$uid";
+        return $this->db->query($sql);
     }
 }

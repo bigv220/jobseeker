@@ -1,8 +1,30 @@
 var userType = -1;//not login
+var statusTime=(new Date()).getTime(); // Set user active status time
+// Update User's Mouse move
+$(document.body).bind('mousemove',function(){
+    statusTime=(new Date()).getTime();
+});
+// Check if user is still viewing the page
+function updateuserstatus() {
+    var t=(new Date()).getTime();
+    if((t-statusTime)>1000*120){
+        var ajax=$.getJSON(base_url+'user/awaystatus',{'status':0},function(flag){
+            
+        });     
+    }else{
+        var ajax=$.getJSON(base_url+'user/awaystatus',{'status':1},function(flag){
+            
+        });     
+    }
+}
 $(function(){
     setInterval(function(){
-        checkstatus();
-    }, 10000);
+        updateuserstatus();
+    },30000);
+    setInterval(function(){
+        var ajax=$.getJSON(base_url+'/user/checkstatus',function(flag){
+        });
+    }, 300000);
      //pub input tips
     $('.input-tip')
     .focusin(function(event) {
@@ -46,6 +68,9 @@ var checkstatus = function() {
         function() {
 
         });
+}
+var checkJson = function(json) {
+    return (json!=null)&&(typeof(json)!="undefined");
 }
 var randNum = function(){
     var rnd = {};

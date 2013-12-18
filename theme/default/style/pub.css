@@ -159,3 +159,4 @@ input.error,select.error,textarea.error {border: 1px solid red;box-shadow:0 1px 
 .page {width:730px;margin: auto;margin-bottom: 30px;color:#35302D;}
 .page .title {color:#674092;margin-bottom:15px;}
 .xheLayout {margin-bottom: 5px !important;}
+textarea {font-family: Arial, Helvetica, sans-serif;;}

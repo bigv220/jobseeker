@@ -17,7 +17,7 @@
       <div class="text_wrapper">
         <h2><?php echo $userinfo['first_name'].' '.$userinfo['last_name']; ?></h2>
         <h4><?php echo $userinfo['city'].', '.$userinfo['country']; ?></h4>
-        <p class="profile_views_num">4 Profile Views</p>
+        <p class="profile_views_num"><?php echo $userinfo['visit_num']; ?> Profile Views</p>
       </div>
       <div class="btnarea">
           <a href="<?php echo $site_url?>jobseeker/register" class="png square_btn edit_profile_btn"></a>
@@ -32,7 +32,7 @@
           <a href="<?php echo $site_url; ?>jobseeker/savedBookmarks" class="png square_btn saved_bookmarks_btn saved_bookmarks_btn_current"></a>
           <!-- INTERVIEW START -->
           <?php if ($interview_num != 0) : ?>
-          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn view_my_interviews_btn_current"></a>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
           <span class="bubble view_my_interviews_bubble">
               <?php echo $interview_num; ?>
           </span>
@@ -355,7 +355,7 @@
     <div class="sresult-par1">
         <div class="box rel sresult-row id-4">
             <div class="noresult">
-                Sorry, no matches were found, <br/>please alter your search and try again.
+                No saved bookmarks.
             </div>
         </div>
     </div>

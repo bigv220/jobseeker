@@ -784,7 +784,7 @@
                     </div>
                     <div class="reg-row">
                         <div>
-                            <input type="text" size="24" maxlength="255" autocomplete="on" id="PersonalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('PersonalSkills',this,'step7'); return false;}">
+                            <input type="text" size="24" maxlength="255" autocomplete="on" id="PersonalSkills_input" class="autocomplete_text skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('PersonalSkills',this,'step7'); return false;}">
                         </div>
                     </div>
                     <div class="reg-area-bar">
@@ -823,7 +823,7 @@
                     </div>
                     <div class="reg-row">
                         <div>
-                            <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="text skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this,'step8'); return false;}">
+                            <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="autocomplete_text skills-input" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this,'step8'); return false;}">
                         </div>
                     </div>
                     <div class="reg-area-bar">

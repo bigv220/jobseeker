@@ -1,5 +1,9 @@
 <?php $this->load->view($front_theme.'/header-block');?>
-
+<style type="text/css">
+    input.text { width: 215px;}
+    .jingchat_message_row_me .jingchat_message_content,.jingchat_message_row_other .jingchat_message_content {width:390px;}
+    .jingchat_message_content .message_avatar_arrow {right:-14px;}
+</style>
 <!--company login page body-->
 <div class="company-page w770 clearfix rel">
   <div class="company-body box rel mb5">
@@ -17,15 +21,29 @@
       <div class="text_wrapper">
         <h2><?php echo $userinfo['first_name'].' '.$userinfo['last_name']; ?></h2>
         <h4><?php echo $userinfo['city'].', '.$userinfo['country']; ?></h4>
-        <p class="profile_views_num">4 Profile Views</p>
+        <p class="profile_views_num"><?php echo $userinfo['visit_num']; ?> Profile Views</p>
       </div>
       <div class="btnarea">
           <a href="<?php echo $site_url?>company/register" class="png square_btn edit_profile_btn"></a>
-          <a href="#" class="png square_btn jingchat_inbox_btn"></a>
-          <span class="bubble jingchat_inbox_bubble">2</span>
+          <!-- JINGCHAT BEGIN -->
+          <?php if ($chat_unread != 0) : ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
+          <span class="bubble jingchat_inbox_bubble"><?php echo $chat_unread; ?></span>
+          <?php else: ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn"></a>
+          <?php endif; ?>
+          <!-- JINGCHAT END -->
           <a href="#" class="png square_btn view_my_candidates_btn view_my_candidates_btn_current"></a>
-          <a href="#" class="png square_btn view_my_interviews_btn"></a>
-          <span class="bubble view_my_interviews_bubble">10</span>
+          <!-- INTERVIEW START -->
+          <?php if ($interview_num != 0) : ?>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <span class="bubble view_my_interviews_bubble">
+              <?php echo $interview_num; ?>
+          </span>
+          <?php else: ?>
+              <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <?php endif; ?>
+          <!-- INTERVIEW END -->
          </div>
     </div>
 
@@ -75,7 +93,7 @@
             <div class="sresult-tab-hd">
                 <span class="fxui-tab-tit">About me</span>
                 <span class="fxui-tab-tit">Portfolio</span>
-                <span class="fxui-tab-tit">JingChat</span>
+                <span class="fxui-tab-tit" onclick="getDetailMsgForSearchResult(this);" data-id="<?php echo empty($user['jingchat']['id'])?0:$user['jingchat']['id']; ?>" data-user="<?php echo $user['uid']; ?>">JingChat</span>
             </div>
             <div class="sresult-tab-bd zoom">
                 <div class="fxui-tab-nav sresult-nav-job sresult_about_me">
@@ -191,22 +209,9 @@
                     <div class="portfolio_row"></div>
                 </div>
                 <div class="fxui-tab-nav sresult-jingchat">
-                    <div class="jingchat_wrapper">
+                    <div class="jingchat_wrapper" id="message_list_<?php echo $user['uid']; ?>" data-id="<?php echo empty($user['jingchat']['id'])?0:$user['jingchat']['id']; ?>" data-user="<?php echo $user['uid']; ?>">
                         <div class="jingchat_messages" style="display:none;">
-                            <div class="load_older_message">
-                                Load older messages
-                            </div>
-                            <div class="jingchat_messages_bd">
-                                <div class="jingchat_message_row_other">
-                                    <div class="jingchat_message_icon"><img src="<?php echo $theme_path?>style/search/job-img1.gif" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i></div>
-                                    <div class="jingchat_message_content">this is a message other person said</div>
-                                </div>
-                                <div class="jingchat_message_row_me">
-                                    <div class="jingchat_message_icon"></div>
-                                    <div class="jingchat_message_content">this is a message other sent by myself</div>
-                                    <div style="clear:both;"></div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="jingchat_offline_message">
                             <p style="height:200px;"></p>
@@ -214,7 +219,7 @@
                             <p>your message be sent to their Jingchat inbox</p>
                         </div>
                         <div class="jingchat_message_input">
-                            <textarea rows="3" cols=""></textarea>
+                              <textarea data-user="<?php echo $user['uid']?>" id="message" rows="3" cols="" class="input-tip" data-tipval="Type your message here">Type your message here</textarea>
                         </div>
                     </div>
                 </div>
@@ -222,6 +227,8 @@
         </div>
     </div>
     <?php endforeach; ?>
+    <input type="hidden" id="msg_id" />
+    <input type="hidden" id="user2" />
 </div>
 <!--backtop-->
 <div class="backtop png" style="right:200px;"></div>

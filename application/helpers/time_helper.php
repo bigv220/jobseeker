@@ -3,10 +3,15 @@ function time_elapsed_string($ptime)
 {
     $etime = time() - $ptime;
 
-    if ($etime < 1)
+    // if ($etime < 1)
+    // {
+    //     return '1 seconds';
+    // }
+    if (($etime / (24 * 60 * 60) < 1))
     {
-        return '0 seconds';
+        return date('g:i:s a',$ptime);
     }
+    
 
     $a = array( 12 * 30 * 24 * 60 * 60  =>  'year',
                 30 * 24 * 60 * 60       =>  'month',

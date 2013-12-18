@@ -7,7 +7,8 @@
 
 <style type="text/css">
     input.text { width: 215px;}
-    .jingchat_message_content {width:390px;}
+    .jingchat_message_row_me .jingchat_message_content,.jingchat_message_row_other .jingchat_message_content {width:390px;}
+    .jingchat_message_content .message_avatar_arrow {right:-14px;}
 </style>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 
@@ -251,7 +252,7 @@
                                 ?>
                 </h3>
                 <p><?php echo $user['city'].' '.$user['province'].' '.$user['country']; ?></p>
-                <a href="#" class="job-viewmore">View More</a> </div>
+                <a href="#" class="job-viewmore" alt="<?php echo $user['uid']; ?>">View More</a> </div>
             <div class="span3">
                 <div class="zoom">
                     <a href="#" data-id="<?php echo $user['uid']?>" class="job-btn jobseeker-btn-shortlisted <?php if ($user['is_shortlisted']==1):?>jobseeker-btn-shortlisted_current<?php endif; ?>"></a>
@@ -478,27 +479,15 @@
                 </div>
                 </div>
                 <div class="fxui-tab-nav sresult-jingchat">
-                    <div class="jingchat_wrapper">
+                    <div class="jingchat_wrapper" id="message_list_<?php echo $user['uid']; ?>" data-id="<?php echo empty($user['jingchat']['id'])?0:$user['jingchat']['id']; ?>" data-user="<?php echo $user['uid']; ?>">
                         <div class="jingchat_messages" style="display:none;">
-                            <div class="load_older_message">
-                                Load older messages
-                            </div>
                             <div class="jingchat_messages_bd">
-                                <div class="jingchat_message_row_other">
-                                    <div class="jingchat_message_icon"><img src="<?php echo $theme_path?>style/search/job-img1.gif" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i></div>
-                                    <div class="jingchat_message_content">this is a message other person said</div>
-                                </div>
-                                <div class="jingchat_message_row_me">
-                                    <div class="jingchat_message_icon"></div>
-                                    <div class="jingchat_message_content">this is a message other sent by myself</div>
-                                    <div style="clear:both;"></div>
-                                </div>
                             </div>
                         </div>
                         <div class="jingchat_offline_message">
                             <p style="height:200px;"></p>
                             <p>Jobseeker is currently offline,</p>
-                            <p>your message be sent to their Jingchat inbox</p>
+                            <p>your message will sent to their Jingchat inbox</p>
                         </div>
                         <div class="jingchat_message_input">
                               <textarea data-user="<?php echo $user['uid']?>" id="message" rows="3" cols="" class="input-tip" data-tipval="Type your message here">Type your message here</textarea>
@@ -518,7 +507,8 @@
         </div>
     </div>
     <?php endif;?>
-
+    <input type="hidden" id="msg_id" />
+    <input type="hidden" id="user2" />
 </div>
 
 <!--backtop-->

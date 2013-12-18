@@ -7,7 +7,11 @@ $seq = 0;
                                      $id = $detail['id'];?>
                                   <div class="<?php if ($detail['user1'] == $uid) echo "jingchat_message_row_me"; else echo "jingchat_message_row_other"; ?>" data-seq='<?php echo $seq; ?>'>
                                       <div class="jingchat_message_content">
+                                          <?php if ($detail['user1'] == $uid):?>
                                           <img src="<?php echo $theme_path?>style/jingchat/me_jingchat_message_leftarrow.png" class="message_avatar_arrow"/>
+                                          <?php else: ?>
+                                          <img src="<?php echo $theme_path?>style/jingchat/other_jingchat_message_rightarrow.png" class="message_avatar_arrow"/>
+                                          <?php endif; ?>
                                           <div class="other_message_top"></div>
                                           <div class="other_message_content">
                                               <p class="sent_time"><?php echo time_elapsed_string($detail['timestamp']); ?></p>
