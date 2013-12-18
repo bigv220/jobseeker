@@ -29,7 +29,7 @@ var checkonlinestatus = function(user_id, jingchat) {
             if ( checkJson(status)) {
                 $.each(status, function(i, data){
                     if (data.status == 1) {
-                        $('#message_list_'+data.uid).find('.jingchat_messages').css('opacity',1);
+                        $('#message_list_'+data.uid).find('.jingchat_messages').show().css('opacity',1);
                         $('#message_list_'+data.uid).find('.jingchat_offline_message').hide();
                     } else {
                         $('#message_list_'+data.uid).find('.jingchat_offline_message').show();    
