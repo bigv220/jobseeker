@@ -8,11 +8,11 @@ $(document.body).bind('mousemove',function(){
 function updateuserstatus() {
     var t=(new Date()).getTime();
     if((t-statusTime)>1000*120){
-        var ajax=$.getJSON(base_url+'/user/awaystatus',{'status':0},function(flag){
+        var ajax=$.getJSON(base_url+'user/awaystatus',{'status':0},function(flag){
             
         });     
     }else{
-        var ajax=$.getJSON(base_url+'/user/awaystatus',{'status':1},function(flag){
+        var ajax=$.getJSON(base_url+'user/awaystatus',{'status':1},function(flag){
             
         });     
     }

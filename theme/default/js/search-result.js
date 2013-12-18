@@ -40,9 +40,6 @@ var checkonlinestatus = function(user_id, jingchat) {
         });
 }
 var getRealTimeMessage = function() {
-     if ($('#msg_id').val() == 0 || $('#msg_id').val() == '') 
-        return;
-     
      $('.jingchat_messages:visible').each(function(index,data) {
         var seq = $(data).children().last().attr('data-seq');
         var msg_id = $(data).parent().attr('data-id');
@@ -481,12 +478,13 @@ $(function(){
 
     // Send Message
     $('.sresult-par2 .jingchat_message_input textarea').keypress(function(event) {
+        var curr_text = $(this);
         // Check the keyCode and if the user pressed Enter (code = 13) 
         if (event.keyCode == 13) {
             $.post(base_url + "inbox/sendmsg", { user2:$(this).attr('data-user'), message:$(this).val() },
             function(data){
                 $('.jingchat_message_input textarea').val('');
-                if ($(this).parent().parent().find('.jingchat_messages').is(':hidden')) 
+                if (curr_text.parent().parent().find('.jingchat_messages').is(':hidden')) 
                     alert('Your message has been sent to their Jingchat inbox.')
             });
         }

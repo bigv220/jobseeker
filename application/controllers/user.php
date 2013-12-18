@@ -294,8 +294,7 @@ class user extends Front_Controller {
     public function awaystatus() 
     {
         $this->load->model('jobseeker_model');
-        $this->jobseeker_model->cleanUp();
-        $this->jobseeker_model->updateUserStatus($this->session->userdata('uid'), 1);
+        $this->jobseeker_model->updateUserLastRequest($this->session->userdata('uid'), 1);
     }
     
     public function checkstatus()

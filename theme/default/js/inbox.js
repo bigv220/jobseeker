@@ -117,6 +117,7 @@ $(document).ready(function() {
 
 	$('.pop-btn-no, .pop-close').click(function(){
 		$('.pop-mark').fadeOut();
+        $('.pop-apply').fadeOut();
         $('.pop-multi-delete').fadeOut();
 	});
 });

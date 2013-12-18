@@ -449,6 +449,14 @@ class jobseeker_model extends MY_Model
         return $this->db->query($sql)->result_array();
     }
 
+    public function updateUserLastRequest($uid, $status)
+    {
+        $time = date("Y-m-d H:i:s",time());
+        $data = array('lastrequest'=>$time);
+        $this->db->where('uid', $uid);
+        $this->db->update('user_status',$data);
+    }
+
     /**
      * Update User online status
      * 
@@ -483,7 +491,7 @@ class jobseeker_model extends MY_Model
 
     public function cleanUp() {
         if (rand(1,3) == 1) {
-            $timestamp = 3600; // Half hour didn't have request, set offline
+            $timestamp = 144;
             $sql = "update user_status set status=-1 where UNIX_TIMESTAMP(Now())-UNIX_TIMESTAMP(lastrequest)>" . $timestamp;
 
             @ $this->db->query($sql);
