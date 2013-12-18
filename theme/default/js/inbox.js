@@ -117,6 +117,7 @@ $(document).ready(function() {
 
 	$('.pop-btn-no, .pop-close').click(function(){
 		$('.pop-mark').fadeOut();
+        $('.pop-apply').fadeOut();
         $('.pop-multi-delete').fadeOut();
 	});
 });
@@ -155,9 +156,7 @@ var getRealTimeMessage = function() {
         return;
 	 $.post(base_url + "inbox/getRealTimeMessage", { msg_id:$('#msg_id').val(),user2:$('#user2').val(),seq:seq},
 		  	function(data){
-		  		//TODO: 定位到最下面
 		    	$('.jingchat_messages_bd').append(data);
-		    	
-		    	$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
+		    	//$(".jingchat_messages").scrollTop($(".jingchat_messages_bd")[0].scrollHeight);
 			});
 }

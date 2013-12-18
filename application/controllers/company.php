@@ -140,6 +140,11 @@ class company extends Front_Controller {
         } else {
             $filter = $_GET['keywords'];
         }
+
+        // Get All Chat Message of this user, include SENT AND RECEIVED
+        $this->load->model('inbox_model');
+        $chats = $this->inbox_model->getGeneralMsgForUser($this->session->userdata('uid'));
+
         $data['candidates'] = $this->company_model->getCandidatesForCompany($uid, $filter);
         foreach ($data['candidates'] as $key=>$value) {
             $data['candidates'][$key]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($data['candidates'][$key]['uid']);
@@ -183,7 +188,17 @@ class company extends Front_Controller {
                 }
             }
             $data['candidates'][$key]['professional_skills'] = $technical_arr;
+             // Jingchat
+            if (isset($chats[$data['candidates'][$key]['uid']])) {
+                $data['candidates'][$key]['jingchat'] = $chats[$data['candidates'][$key]['uid']];            
+            }
         }
+
+        $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid and is_deleted=0");
+        $data['interview_num'] = count($interview_num);
+        $this->load->model('inbox_model');
+        $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
+
         $this->load->view($data['front_theme']."/company_view_shortlist_cadidates",$data);
     }
 

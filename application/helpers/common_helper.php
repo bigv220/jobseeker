@@ -33,6 +33,15 @@
 		);
 		return $lang_arr[$lang];
 	}
+
+	function Truncate($text, $length) {
+		if ($text === null)
+			return "";
+		if (strlen($text) > $length)
+			return substr($text, 0, $length -1) . "...";
+		else
+			return $text;
+	}
 	
 	/**
 	 * Add system log
