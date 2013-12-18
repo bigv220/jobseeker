@@ -499,7 +499,7 @@
                         <div class="jingchat_offline_message">
                             <p style="height:200px;"></p>
                             <p>Jobseeker is currently offline,</p>
-                            <p>your message be sent to their Jingchat inbox</p>
+                            <p>your message will sent to their Jingchat inbox</p>
                         </div>
                         <div class="jingchat_message_input">
                               <textarea data-user="<?php echo $user['uid']?>" id="message" rows="3" cols="" class="input-tip" data-tipval="Type your message here">Type your message here</textarea>

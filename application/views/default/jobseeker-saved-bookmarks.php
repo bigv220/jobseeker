@@ -355,7 +355,7 @@
     <div class="sresult-par1">
         <div class="box rel sresult-row id-4">
             <div class="noresult">
-                Sorry, no matches were found, <br/>please alter your search and try again.
+                No saved bookmarks.
             </div>
         </div>
     </div>
