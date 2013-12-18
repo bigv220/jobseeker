@@ -69,7 +69,7 @@
                           <div class="email_short_description">
                               <div class="received_date"><?php echo time_elapsed_string($msg['timestamp']); ?></div>
                               <div class="from_name"><?php echo $msg['first_name']; ?> <?php echo $msg['last_name']; ?></div>
-                              <div class="email_subject"><?php echo $msg['message']; ?></div>
+                              <div class="email_subject"><?php echo Truncate($msg['message'],32); ?></div>
                               <div class="email_actions_bar">
                                   <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>
                                   <img src="<?php echo $theme_path;?>/style/btns/btn_email_delete.png" alt="" class="delete_msg" data-id="<?php echo $msg['id']; ?>"/>
