@@ -364,7 +364,7 @@ class jobseeker extends Front_Controller {
 
         $this->load->model('job_model');
 
-        $interviews = $this->jobseeker_model->getInterviews($where);print_r($interviews);
+        $interviews = $this->jobseeker_model->getInterviews($where);
         for($i=0; $i<count($interviews);$i++) {
             $positions = $this->job_model->getJobIndustry($interviews[$i]['id']);
             $interviews[$i]['position_arr'] = $positions;
