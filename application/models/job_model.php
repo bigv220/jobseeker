@@ -57,6 +57,10 @@ class job_model extends MY_Model
         return $this->db->insert_id();
     }
 
+    public function updateJob($id, $data) {
+        return $this->db->where('id', $id)->update($this->table, $data);
+    }
+
     public function insertJobLanguage($data) {
         return $this->db->insert('job_language_level', $data);
     }
@@ -65,6 +69,11 @@ class job_model extends MY_Model
         $sql = "SELECT language,level from job_language_level WHERE job_id=$id";
 
         return $this->db->query($sql)->result_array();
+    }
+
+    public function updateJobLanguage($data) {
+        $sql = "UPDATE job_language_level SET language='".$data['language']."',level='".$data['level']."' WHERE id=".$data['id'];
+        $this->db->query($sql);
     }
 
     public function insertJobIndustry($data) {
@@ -175,6 +184,11 @@ class job_model extends MY_Model
 
     public function deleteBookmarkedJob($job_id, $uid) {
         $sql = "DELETE FROM job_bookmark WHERE user_id=$uid and job_id=$job_id";
+        return $this->db->query($sql);
+    }
+
+    public function deleteJob($id) {
+        $sql = "DELETE FROM job WHERE id=$id";
         return $this->db->query($sql);
     }
 }

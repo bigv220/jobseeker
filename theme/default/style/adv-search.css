@@ -63,10 +63,10 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .managejob-content input{width:210px;}
 .managejob-content select{width:210px;height:24px;}
 .managejob-content select.location-input {
-    width: 110px;
+    width: 105px;
     margin-bottom: 5px;
 }
 .managejob-content input.location-input {
-    width: 110px;
+    width: 100px;
 }
 .adv-search-bar .update-job-listing{background:url(company/update_job_listing.png) no-repeat; width:129px;}

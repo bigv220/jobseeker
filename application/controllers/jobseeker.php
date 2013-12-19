@@ -346,7 +346,12 @@ class jobseeker extends Front_Controller {
         }
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
 
-        $where = 'i.uid=' . $uid . ' And is_deleted=0';
+        if (1 == $this->session->userdata('user_type')) {
+            $where = 'i.company_id=' . $uid . ' And is_deleted=0';
+        } else {
+            $where = 'i.uid=' . $uid . ' And is_deleted=0';
+        }
+
         $post = $_POST;
         if($post) {
             if ($post["interview_keywords"] == 'Enter Keywords') {
@@ -390,7 +395,11 @@ class jobseeker extends Front_Controller {
         }
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
 
-        $where = 'i.uid=' . $uid . ' And is_deleted=1';
+        if (1 == $this->session->userdata('user_type')) {
+            $where = 'i.company_id=' . $uid . ' And is_deleted=1';
+        } else {
+            $where = 'i.uid=' . $uid . ' And is_deleted=1';
+        }
 
         $this->load->model('job_model');
         $interviews = $this->jobseeker_model->getInterviews($where);
@@ -400,6 +409,9 @@ class jobseeker extends Front_Controller {
         }
         $data['interviews'] = $interviews;
         $data['selected_tab'] = 2;
+
+        $this->load->model('inbox_model');
+        $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
 
         $this->load->view($data['front_theme']."/jobseeker-view-interviews",$data);
     }
