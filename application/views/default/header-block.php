@@ -114,6 +114,7 @@
                             <li><a href="<?php echo $site_url?>company/companyprofile">View Profile</a></li>
                             <li><a href="<?php echo $site_url?>company/register">Edit Company Profile</a></li>
                             <li><a href="<?php echo $site_url?>company/joblisting">Manage Job Listings</a></li>
+                            <li><a href="<?php echo $site_url?>company/applicants">View Applicants</a></li>
                             <li><a href="<?php echo $site_url?>company/shortlistCandidates">View Shortlisted Candidates</a></li>
                             <li><a href="<?php echo $site_url?>inbox">JINGCHAT Inbox</a></li>
 

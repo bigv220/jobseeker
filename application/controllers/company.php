@@ -248,4 +248,10 @@ class company extends Front_Controller {
         $result['status'] = $msg;
         echo json_encode($result);
     }
+    
+    public function applicants() {
+    	$data = $this->data;
+    	
+    	$this->load->view($data['front_theme']."/company_applicants",$data);
+    }
 }
