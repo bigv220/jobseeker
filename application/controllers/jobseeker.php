@@ -179,6 +179,7 @@ class jobseeker extends Front_Controller {
     //get the top 3 companies user reviewed
     $viewed_company = $this->jobseeker_model->getViewedCompany($uid);
     $data['viewed_company'] = $viewed_company;
+    $data['language_arr'] = language_arr();
     $this->load->view($data['front_theme']."/jobseeker-myprofile",$data);
 }
     public function savedBookmarks(){
@@ -345,7 +346,12 @@ class jobseeker extends Front_Controller {
         }
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
 
-        $where = 'i.uid=' . $uid . ' And is_deleted=0';
+        if (1 == $this->session->userdata('user_type')) {
+            $where = 'i.company_id=' . $uid . ' And is_deleted=0';
+        } else {
+            $where = 'i.uid=' . $uid . ' And is_deleted=0';
+        }
+
         $post = $_POST;
         if($post) {
             if ($post["interview_keywords"] == 'Enter Keywords') {
@@ -389,7 +395,11 @@ class jobseeker extends Front_Controller {
         }
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
 
-        $where = 'i.uid=' . $uid . ' And is_deleted=1';
+        if (1 == $this->session->userdata('user_type')) {
+            $where = 'i.company_id=' . $uid . ' And is_deleted=1';
+        } else {
+            $where = 'i.uid=' . $uid . ' And is_deleted=1';
+        }
 
         $this->load->model('job_model');
         $interviews = $this->jobseeker_model->getInterviews($where);
@@ -399,6 +409,9 @@ class jobseeker extends Front_Controller {
         }
         $data['interviews'] = $interviews;
         $data['selected_tab'] = 2;
+
+        $this->load->model('inbox_model');
+        $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
 
         $this->load->view($data['front_theme']."/jobseeker-view-interviews",$data);
     }
@@ -452,6 +465,28 @@ class jobseeker extends Front_Controller {
             if($rtn) {
                 $msg = "success";
                 $this->_saveRegisterStep($uid, 1);
+            } else {
+                $msg = "failed";
+            }
+
+            $result['status'] = $msg;
+            echo json_encode($result);
+        }
+    }
+
+    //save birthday
+    public function updateBirthday() {
+        //Load Model
+        $this->load->model('jobseeker_model');
+
+        $post = $_POST;
+        $uid = $this->session->userdata('uid');
+
+        if ($post) {
+            $rtn = $this->jobseeker_model->updateBirthday($uid, $post);
+
+            if($rtn) {
+                $msg = "success";
             } else {
                 $msg = "failed";
             }
@@ -627,7 +662,7 @@ class jobseeker extends Front_Controller {
             $lan_len = count($post['language']);
             for($i=0; $i<$lan_len;$i++) {
                 if($post['language'][$i]) {
-                    $data = array('uid'=>$post['uid'],
+                    $data = array('uid'=>$uid,
                         'language'=>$post['language'][$i],
                         'level'=>$post['level'][$i]);
 
@@ -839,7 +874,7 @@ class jobseeker extends Front_Controller {
 
     public function delLanguage() {
         $post = $_POST;
-        $uid = $post['uid'];
+        $uid = $uid = $this->session->userdata('uid');
         $language = $post['language'];
 
         // load model

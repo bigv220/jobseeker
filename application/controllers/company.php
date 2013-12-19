@@ -109,6 +109,13 @@ class company extends Front_Controller {
         $data["jobinfo"] = $this->job_model->getCompanyJobList($company_id);
         $data["info"] = $this->company_model->getUserInfo($company_id);
         $data['industries'] = $this->company_model->getIndustry($company_id);
+
+        $this->load->model('jobseeker_model');
+        $interview_num = $this->jobseeker_model->getInterviews("i.company_id=$company_id and is_deleted=0");
+        $data['interview_num'] = count($interview_num);
+        $this->load->model('inbox_model');
+        $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($company_id);
+
         $this->load->view($data['front_theme']."/company-profile",$data);
     }
 
@@ -217,15 +224,39 @@ class company extends Front_Controller {
         // get location
         $this->load->helper('location');
         $data['location'] = getLoction();
+
+        $data['selected_tab'] = 1;
+
+        $post = $_POST;
+        $where = "  WHERE uid=$uid";
+        if($post) {
+            if ($post["search_keywords"] == 'Enter Keywords') {
+                $post['search_keywords'] = '';
+            }
+            if(!empty($post["search_keywords"])) {
+                $where .= " AND job.job_name like '%" . $post["search_keywords"] . "%' or u.username like '%". $post['search_keywords'] ."%'";
+            }
+
+            $data['selected_tab'] = 3;
+        }
     	
     	$this->load->model('job_model');
-        $jobs = $this->job_model->searchJob(" WHERE uid=$uid");
+        $jobs = $this->job_model->searchJob($where);
 
         foreach($jobs as $key=>&$job) {
             $job['languages'] = $this->job_model->getJobLang($job['id']);
         }
 
         $data['jobs'] = $jobs;
+
+        // get the number of interviews
+        $interview_num = $this->jobseeker_model->getInterviews("i.company_id=$uid and is_deleted=0");
+        $data['interview_num'] = count($interview_num);
+
+        //get the number of messages
+        $this->load->model('inbox_model');
+        $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
+
     	$this->load->view($data['front_theme']."/company_job_listing",$data);
     }
 
