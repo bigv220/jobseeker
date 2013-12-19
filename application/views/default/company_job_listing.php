@@ -23,11 +23,25 @@
       </div>
       <div class="btnarea">
           <a href="<?php echo $site_url?>company/register" class="png square_btn edit_profile_btn"></a>
-          <a href="#" class="png square_btn jingchat_inbox_btn"></a>
-          <span class="bubble jingchat_inbox_bubble">2</span>
-          <a href="#" class="png square_btn view_my_candidates_btn view_my_candidates_btn_current"></a>
-          <a href="#" class="png square_btn view_my_interviews_btn"></a>
-          <span class="bubble view_my_interviews_bubble">10</span>
+          <!-- JINGCHAT BEGIN -->
+          <?php if ($chat_unread != 0) : ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
+          <span class="bubble jingchat_inbox_bubble"><?php echo $chat_unread; ?></span>
+          <?php else: ?>
+          <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn"></a>
+          <?php endif; ?>
+          <!-- JINGCHAT END -->
+          <a href="#" class="png square_btn view_my_candidates_btn"></a>
+          <!-- INTERVIEW START -->
+          <?php if ($interview_num != 0) : ?>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <span class="bubble view_my_interviews_bubble">
+              <?php echo $interview_num; ?>
+          </span>
+          <?php else: ?>
+          <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
+          <?php endif; ?>
+          <!-- INTERVIEW END -->
       </div>
     </div>
 
@@ -37,10 +51,18 @@
 <div class="result-page w770 clearfix view_applied_jobs_page" style="margin-top:20px;">
 <!--search-result condition-->
 <div class="result-condition rel box">
-    <div class="search_interviews">
-        <label>Search Job Listings</label>
-        <form action="#">
-            <input type="text" name="saved_candidates_keywords" class="kyo-input input-tip" style="width:203px;border:none;line-height:23px;height:23px;" data-tipval="Enter Keywords" value="Enter Keywords">
+    <ul class="job-listing-ul">
+        <a href="<?php echo $site_url; ?>company/joblisting">
+            <li <?php if($selected_tab == 1) echo 'class="curr"'; ?>>Manage Job Listings</li>
+        </a>
+        <a href="<?php echo $site_url; ?>job/postjob">
+            <li>Post a Job</li>
+        </a>
+    </ul>
+    <div class="search_joblisting">
+        <label <?php if($selected_tab == 3) echo 'class="curr"'; ?>>Search Job Listings</label>
+        <form action="<?php echo $site_url; ?>company/joblisting" method="post">
+            <input type="text" name="search_keywords" class="kyo-input input-tip" style="width:203px;border:none;line-height:23px;height:23px;" data-tipval="Enter Keywords" value="Enter Keywords">
             <input type="submit" name="search_saved_candidates_btn" class="search_interview_btn search_saved_candidates_btn" value=""/>
         </form>
     </div>
@@ -50,19 +72,20 @@
 <div class="result-bd">
 	<?php foreach ($jobs as $job):?>
         <form id="updateForm<?php echo $job['id']; ?>">
-    <div class="box rel sresult-row">
+        <input type="hidden" name="job_id" value="<?php echo $job['id']; ?>" />
+    <div class="box rel sresult-row" id="jobdiv<?php echo $job['id']; ?>">
         <div class="sresult-par1">
             <div class="span1 rel">
-                <img src="<?php echo $theme_path;?>/style/search/job-img2.gif" alt="" width="80px" height="80px" class="round_corner10_img"/>
+                <img src="<?php echo $site_url;?>attached/users/<?php echo $job['profile_pic']?$job['profile_pic']:'no-image.png';?>" alt="" width="80px" height="80px" class="round_corner10_img"/>
             </div>
             <div class="span2">
                 <h2><?php echo $job['job_name']; ?></h2>
                 <h3><?php echo $job['username']; ?></h3>
                 <p><?php echo $job['city']; ?>, <?php echo $job['country']; ?></p>
-                <a href="#" class="job-viewmore">Edit</a> </div>
+                <a href="#" class="job-edit">Edit</a> </div>
             <div class="span3 text_align_right">
                 <div class="zoom">
-                    <a href="#" class="company-btn-delete-job"></a>
+                    <a href="#" data-job-id="<?php echo $job['id']; ?>" class="company-btn-delete-job"></a>
                 </div>
             </div>
         </div>
@@ -70,7 +93,7 @@
             <div class="postjob-content-left-row clearfix">
                 <div class="span1 job-listing">
                     <strong>Position Title *</strong>
-                    <div><input type="text" name="job_name" value="<?php echo $job['position']; ?>" required></div>
+                    <div><input type="text" name="job_name" value="<?php echo $job['job_name']; ?>" required></div>
                 </div>
                 <div class="span2">
                     <strong>Length of Job *</strong>
@@ -134,6 +157,7 @@
                 <div class="span1 job-listing">
                     <strong>Language *</strong>
                     <div>
+                        <input type="hidden" name="jobLangId[]" value="<?php echo $lang['id']; ?>" />
                         <select name="language[]" required>
                             <option value="">All Languages</option>
                             <?php $language = language_arr();
@@ -167,7 +191,7 @@
                 <div class="span1">
                     <strong>Salary *</strong>
                     <div>
-                        <select name="salary_range">
+                        <select name="salary_range" required>
                             <?php $salary = getSalary();
                             foreach($salary as $k => $v) { ?>
                                 <option value="<?php echo $k+1; ?>" <?php if($k+1 == $job['salary_range']) echo "selected"; ?>>
@@ -182,7 +206,7 @@
                 <div class="span1 job-listing">
                     <strong>Type of Job *</strong>
                     <div>
-                        <select id="employment_type" >
+                        <select id="employment_type" required>
                             <option value="">All Type</option>
                             <?php $jobtype = jobtype();
                             foreach ($jobtype as $k => $v) {?>
@@ -283,7 +307,7 @@
             </div>
 
             <div class="adv-search-bar">
-                <a href="javascript:void(0);" class="btn update-job-listing" alt="<?php echo $job['id']; ?>"></a>
+                <a href="javascript:void(0);" class="btn update-job-listing" onclick="updateJobListing(this)" alt="<?php echo $job['id']; ?>"></a>
             </div>
 
             <div class="clearfix"></div>
@@ -299,48 +323,17 @@
 <!--popmark-->
 <div class="pop-mark"></div>
 
-<div class="reply_message_pop png">
-    <div class="reply_message_pop_wrap rel">
-        <i class="reply_message_pop_close abs" title="close"></i>
-        <b>Send JingChat Message</b>
-        <div class="reply_message_pop_bd">
-            <div class="reply_message_pop_bd_heder">
-                <div>
-                    <div class="title">To:</div>
-                    <div class="content">Redstar Works Ltd.</div>
-                    <div style="clear:both;"></div>
-                </div>
-                <div>
-                    <div class="title">Subject:</div>
-                    <div class="content"><input name="message_subject" value="Re:Interview Request"/></div>
-                    <div style="clear:both;"></div>
-                </div>
-            </div>
-            <div class="reply_message_pop_bd_content">
-                <textarea>
-                    On November 22, 2013 4:05 AM,  Redstar Works wrote:
-                    --------------------
-
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-                    I look forward to speaking with you on Tuesday,
-
-                    Joe Bloggs
-                </textarea>
-            </div>
-            <div class="reply_message_pop_bd_action_bar">
-                <img src="<?php echo $theme_path;?>/style/btns/btn_send_message.png" alt="" class="send_message_function"/>
-            </div>
+<!-- Delete bookmark job popup -->
+<div class="box pop-box pop-company-delete-job">
+    <div class="rel">
+        <div class="pop-close pop-apply-close"></div>
+        <div class="pop-nav pop-apply-nav">
+            <p>Are you sure you want to delete this job?</p>
         </div>
-    </div>
-</div>
-
-<div class="message_sent_pop png">
-    <div class="message_sent_pop_wrap rel">
-        <i class="message_sent_pop_close abs" title="close"></i>
-        <div class="message_sent_pop_bd">
-            <div class="message_title">Your message has been sent</div>
-            <div class="message_content"><a href="#">View in JingChat Inbox Now</a></div>
+        <div class="pop-bar">
+            <input type="hidden" id="selected_job_id" />
+            <a href="javascript:void(0);" class="pop-bar-btn pop-company-delete-job-yes">Yes</a>
+            <a href="javascript:void(0);" class="pop-bar-btn pop-btn-no">No</a>
         </div>
     </div>
 </div>

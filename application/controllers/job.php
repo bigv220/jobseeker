@@ -166,6 +166,41 @@ class job extends Front_Controller {
     	}
     }
 
+    public function updatejob() {
+        $uid = $this->session->userdata('uid');
+
+        if (!empty($_POST)) {
+            $post = $_POST;
+            $post['post_date'] = date('Y-m-d', time());
+            if (1 == $this->session->userdata('user_type')) {
+                $company_id = $uid;
+            }
+
+            //Load Model
+            $this->load->model('job_model');
+
+            $data = array('job_name'=>$post['job_name'],'job_desc'=>$post['job_desc'],
+                'employment_length'=>$post['employment_length'],
+                'employment_type'=>$post['employment_type'],
+                'preferred_personal_skills'=>$post['preferred_personal_skills'],
+                'preferred_technical_skills'=>$post['preferred_technical_skills'],
+                'location'=>$post['location'],'country'=>$post['country'],'province'=>$post['province'],
+                'city'=>$post['city'],'salary_range'=>$post['salary_range'],
+                'preferred_year_of_experience'=>$post['preferred_year_of_experience'],
+                'post_date'=>$post['post_date'],
+                'company_id'=>$company_id);
+            $result['status'] = $job_id = $this->job_model->updateJob($post['job_id'], $data);
+
+            for($i=0; $i<count($post["language"]);$i++) {
+                $data_arr = array('id'=>$post['jobLangId'][$i],'language'=>$post['language'][$i],'level'=>$post['language_level'][$i]);
+                $this->job_model->updateJobLanguage($data_arr);
+            }//end for
+
+            $result['status'] = $result['status'] ? 'success' : 'failed.';
+            echo json_encode($result);
+        }
+    }
+
     /**
      * Jobseeker apply job AJAX request.
      * 
@@ -267,7 +302,7 @@ class job extends Front_Controller {
     }
 
     /**
-     * delete job
+     * delete bookmarked job
      */
     public function deletebookmarkinfo() {
         $uid = $this->session->userdata('uid');
@@ -287,6 +322,27 @@ class job extends Front_Controller {
                 $this->load->model('company_model');
                 $result['status'] = $this->company_model->deleteBookmarkedCompany($_POST['id'], $uid);
             }
+
+            $result['status'] = $result['status'] ? 'success' : 'failed.';
+
+            echo json_encode($result);
+        }
+    }
+
+    /**
+     * delete job
+     */
+    public function deleteJob() {
+        $uid = $this->session->userdata('uid');
+        if (empty($uid)) {
+            $result['status'] = 'login';
+            echo json_encode($result);
+            exit;
+        }
+        if (!empty($_POST['id']) && !empty($uid)) {
+            // do delete
+            $this->load->model('job_model');
+            $result['status'] = $this->job_model->deleteJob($_POST['id']);
 
             $result['status'] = $result['status'] ? 'success' : 'failed.';
 
