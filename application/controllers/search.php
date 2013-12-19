@@ -680,7 +680,7 @@ class search extends Front_Controller {
                 'communication_type'=>$post['preferred_communication'],
                 'message'=>$post['optional_message'],
                 'communication_other'=>$post['other_preferred_communication'],
-                'date'=>$post['interview_date'],'time_zone'=>$post['time_zone'],
+                'date'=>$post['interview_date'],'country'=>$post['country'],'city'=>$post['city'],
                 'time'=>$post['time_input'],'insert_date'=>date('d/m/Y'),'is_deleted'=>0,
                 'reply_id'=>null);
             $rtn = $this->jobseeker_model->sendInterviewRequest($data);

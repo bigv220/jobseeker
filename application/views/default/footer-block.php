@@ -128,15 +128,26 @@
                 </div>
                 <div class="time_selector_wrapper">
                     <div class="time_zone">
-                        <label>Time Zone</label>
-                        <select name="time_zone">
-                            <option value="GMT">GMT</option>
-                            <option value="UTC">UTC</option>
+                        <label>Country</label>
+                        <select name="country">
+                            <?php
+                                $this->load->helper('location');
+                                $location = getLoction();
+                                foreach ($location as $k=>$v):
+                            ?>
+                            <option value="<?php echo $k ?>"><?php echo $k ?></option>
+                            <?php endforeach;?>
                         </select>
                     </div>
-                    <div class="time_wrapper">
+
+                    <div class="city">
+                        <label>City</label>
+                        <input type="text" name="city" />
+                    </div>
+
+                    <div class="time_zone">
                         <label>Time</label>
-                        <input name="time_input"/>
+                        <input type="text" name="time_input"/>
                     </div>
                 </div>
             </div>

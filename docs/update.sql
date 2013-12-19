@@ -287,3 +287,8 @@ CREATE TABLE `user_status` (
   `lastrequest` datetime default NULL,
   PRIMARY KEY  (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+#2013-12-19
+alter table interview drop column time_zone;
+alter table interview add column country varchar(50);
+alter table interview add column city varchar(50);
