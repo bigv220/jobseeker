@@ -117,6 +117,12 @@ class jobseeker_model extends MY_Model
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }
 
+    public function updateBirthday($uid,$data)
+    {
+        $data = array('birthday'=>$data['birthday']);
+        return $this->db->where('uid', $uid)->update($this->table, $data);
+    }
+
     public function updateUserDescription($uid, $desc){
         $data = array('description'=>$desc);
         return $this->db->where('uid', $uid)->update($this->table, $data);

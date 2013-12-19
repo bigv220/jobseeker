@@ -193,7 +193,7 @@ function addLanguageBtnClick(thisO) {
 }
 
 function delLanguage(thisO, language) {
-    var uid = $('#uid').val();
+    var uid = current_login_user_id; //actually the uid is useless we load it from session from server side
 
     $.post(site_url + 'jobseeker/delLanguage',
         {uid:uid, language:language},

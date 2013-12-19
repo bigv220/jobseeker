@@ -7,6 +7,7 @@
 <link href="<?php echo $theme_path?>style/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/jquery.autocomplete.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/My97DatePicker/WdatePicker.js"></script>
 <!--company login page body-->
 <div class="company-page w770 clearfix rel">
   <div class="company-body box rel mb5">
@@ -119,14 +120,14 @@
               <?php foreach($workhistory as $wh): 
                 if ($wh['is_stillhere'] == 1):
               ?>
-              <dt>Current Employement<a href="javascript:void(0);" class="edit_jobseeker_profile_current_employment_link">Edit</a></dt>
+              <dt>Current Employement<a href="<?php echo $site_url;?>jobseeker/register#reg5" class="edit_jobseeker_profile_current_employment_link">Edit</a></dt>
               <dd>
                   <p class="employment_title"><?php echo $wh['company_name']; ?></p>
                   <p class="emploeyment_period"><?php echo $wh['period_time_from'];?> - <?php echo $wh['period_time_to']; ?></p>
                   <p class="employment_description"><?php echo $wh['introduce'];?></p>
               </dd>
             <?php else: ?>
-              <dt>Previous Employment<a href="javascript:void(0);" class="edit_jobseeker_profile_previous_employment_link">Edit</a></dt>
+              <dt>Previous Employment<a href="<?php echo $site_url;?>jobseeker/register#reg5" class="edit_jobseeker_profile_previous_employment_link">Edit</a></dt>
               <dd>
                   <p class="employment_title"><?php echo $wh['company_name']; ?></p>
                   <p class="emploeyment_period"><?php echo $wh['period_time_from'];?> - <?php echo $wh['period_time_to']; ?></p>
@@ -169,7 +170,7 @@
                       <input type="button" class="reg-save" data-index="2" onclick="savePersonalSkills(this,'PersonalSkills');">
                   </div>
 
-              <dd>
+              </dd>
               <dt>Technical Skills
                   <a href="javascript:void(0);" class="edit_jobseeker_profile_technical_skills_link edit_profile_link_ajax">Edit</a>
               </dt>
@@ -208,15 +209,84 @@
 
 
 
+              </dd>
+
+
+              <dt>Language(s)<a href="javascript:void(0);" class="edit_jobseeker_profile_languages_link edit_profile_link_ajax">Edit</a></dt>
               <dd>
-              <dt>Language(s)<a href="javascript:void(0);" class="edit_jobseeker_profile_languages_link">Edit</a></dt>
-              <dd>
-                  <?php foreach ($language as $la): ?>
-                      <div class="jobseeker_profile_language">
-                          <label><?php echo $la['language'];?></label>
-                          <i><?php echo $la['level'];?></i>
+                  <div class="show_content">
+                      <?php foreach ($language as $la): ?>
+                          <div class="jobseeker_profile_language">
+                              <label><?php echo $la['language'];?></label>
+                              <i><?php echo $la['level'];?></i>
+                          </div>
+                      <?php endforeach;?>
+                  </div>
+                  <div class="edit_content">
+                      <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="languageForm">
+                          <?php
+                          $i = 0;
+                          if (empty($language)) {
+                              $language = array(array('language'=>'none','level'=>'none'));
+                          }
+                          foreach($language as $lan):
+                          if(++$i == 1) {echo '<div class="advsearch-row clearfix" id="language_lists">';}
+                          else { echo '<div class="advsearch-row clearfix">';}
+                          ?>
+
+                          <div class="span1">
+                              <strong>Language<i class="star">*</i></strong>
+                              <div class="reg-row">
+                                  <select name="language[]" id="language_1" required>
+                                      <option value="">Language</option>
+                                      <?php
+                                      foreach($language_arr as $v) {
+                                          $str = '';
+                                          if($v == $lan['language']) {
+                                              $str = ' selected="selected"';
+                                          }
+                                          ?>
+                                          <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="span2">
+                              <strong>Proficiency</strong>
+                              <div class="reg-row">
+                                  <select name="level[]" id="level_1" required>
+                                      <option value="">Proficiency</option>
+                                      <?php $level = language_level();
+                                      foreach($level as $v) {
+                                          $str = '';
+                                          if($v == $lan['level']) {
+                                              $str = ' selected="selected"';
+                                          }
+                                          ?>
+                                          <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                          </div>
+                          <?php if($i>1) {?>
+                              <div class="span3">
+                                  <i class="del" onclick="delLanguage(this, '<?php echo $lan['language']; ?>');"></i>
+                              </div>
+                          <?php }?>
+
                       </div>
-                  <?php endforeach;?>
+                      <?php endforeach; ?>
+
+                      <div class="advsearch-row clearfix">
+                          <div class="span1">
+                              <input type="hidden" name="grop_num[]" value="<?php echo count($language); ?>" />
+                              <a class="reg-row-tip" href="javascript:void(0);" onclick="addLanguageBtnClick(this);">+ Add another language</a>
+                          </div>
+                      </div>
+
+                  </form>
+                  <input type="button" class="reg-save" onclick="saveLanguage(this);"  data-index="0"/>
+                  </div>
               </dd>
           </dl>
           <div class="profile_portfolios_wrapper">
@@ -319,9 +389,10 @@
               </dd>
               <dt>Birthday<a href="javascript:void(0);" class="edit_jobseeker_profile_birthday_link">Edit</a></dt>
               <dd>
-                  <p class="jobseeker_birthday"><?php echo date("F j Y",strtotime($userinfo['birthday'])); ?></p>
+                  <input type="hidden" id="jobseeker_birthday_input" value="<?php echo $userinfo['birthday']; ?>"/>
+                  <p class="jobseeker_birthday" id="jobseeker_birthday"><?php echo date("F j Y",strtotime($userinfo['birthday'])); ?></p>
               </dd>
-              <dt>Education<a href="javascript:void(0);" class="edit_jobseeker_profile_education_link">Edit</a></dt>
+              <dt>Education<a href="<?php echo $site_url;?>jobseeker/register#reg4" class="edit_jobseeker_profile_education_link">Edit</a></dt>
               <dd>
                   <?php foreach($education_info as $ei): ?>
                   <p class="school_name"><?php echo $ei['school_name'];?></p>

@@ -397,3 +397,5 @@ h2.applied_jobs_title{color:#674092;font-size:18px;font-weight:bold;padding-left
 .pop-succ-message {text-align: center; color: #674092; font-size: 16px;margin-top:20px; font-weight:bold;}
 .request-sent-pop-message { height: 105px;}
 
+.jobseeker_profile_bd .edit_content .advsearch-row .span1,.jobseeker_profile_bd .edit_content  .advsearch-row .span2{margin-right:0px;}
+.jobseeker_profile_bd .edit_content  .advsearch-row .span3{width:18px;}
