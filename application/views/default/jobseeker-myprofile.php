@@ -120,14 +120,14 @@
               <?php foreach($workhistory as $wh): 
                 if ($wh['is_stillhere'] == 1):
               ?>
-              <dt>Current Employement<a href="<?php echo $site_url;?>jobseeker/register#reg5" class="edit_jobseeker_profile_current_employment_link">Edit</a></dt>
+              <dt>Current Employement<a href="<?php echo $site_url;?>jobseeker/register#reg5" target="_blank" class="edit_jobseeker_profile_current_employment_link">Edit</a></dt>
               <dd>
                   <p class="employment_title"><?php echo $wh['company_name']; ?></p>
                   <p class="emploeyment_period"><?php echo $wh['period_time_from'];?> - <?php echo $wh['period_time_to']; ?></p>
                   <p class="employment_description"><?php echo $wh['introduce'];?></p>
               </dd>
             <?php else: ?>
-              <dt>Previous Employment<a href="<?php echo $site_url;?>jobseeker/register#reg5" class="edit_jobseeker_profile_previous_employment_link">Edit</a></dt>
+              <dt>Previous Employment<a href="<?php echo $site_url;?>jobseeker/register#reg5" target="_blank" class="edit_jobseeker_profile_previous_employment_link">Edit</a></dt>
               <dd>
                   <p class="employment_title"><?php echo $wh['company_name']; ?></p>
                   <p class="emploeyment_period"><?php echo $wh['period_time_from'];?> - <?php echo $wh['period_time_to']; ?></p>
@@ -392,7 +392,7 @@
                   <input type="hidden" id="jobseeker_birthday_input" value="<?php echo $userinfo['birthday']; ?>"/>
                   <p class="jobseeker_birthday" id="jobseeker_birthday"><?php echo date("F j Y",strtotime($userinfo['birthday'])); ?></p>
               </dd>
-              <dt>Education<a href="<?php echo $site_url;?>jobseeker/register#reg4" class="edit_jobseeker_profile_education_link">Edit</a></dt>
+              <dt>Education<a href="<?php echo $site_url;?>jobseeker/register#reg4" target="_blank" class="edit_jobseeker_profile_education_link">Edit</a></dt>
               <dd>
                   <?php foreach($education_info as $ei): ?>
                   <p class="school_name"><?php echo $ei['school_name'];?></p>
@@ -403,32 +403,71 @@
                   <p class="school_period"><?php echo $ei['attend_date_from'];?> - <?php echo $ei['attend_date_to'];?></p>
                   <?php endforeach; ?>
               </dd>
-              <dt>Elsewhere on Web<a href="javascript:void(0);" class="edit_jobseeker_profile_sns_link">Edit</a></dt>
+              <dt>Elsewhere on Web<a href="javascript:void(0);" class="edit_jobseeker_profile_sns_link edit_profile_link_ajax">Edit</a></dt>
               <dd>
+                  <div class="show_content">
+                      <?php if (!empty($userinfo['twitter'])): ?>
+                          <p><a href="http://twitter.com/<?php echo $userinfo['twitter'];?>" target="_blank">Twitter</a></p>
+                      <?php endif; ?>
+                      <?php if (!empty($userinfo['facebook'])):?>
+                          <p><a href="<?php echo $userinfo['facebook']?>">Facebook</a></p>
+                      <?php endif;?>
+                      <?php if (!empty($userinfo['linkedin'])):?>
+                          <p><a href="<?php echo $userinfo['linkedin']?>">Linkedin</a></p>
+                      <?php endif;?>
+                      <?php if (!empty($userinfo['weibo'])):?>
+                          <p><a href="<?php echo $userinfo['weibo']?>">Weibo</a></p>
+                      <?php endif;?>
+                      <?php if (!empty($userinfo['personal_website'])): ?>
+                          <p><a href="<?php echo $userinfo['personal_website']; ?>" target="_blank">Personal Website</a></p>
+                      <?php endif; ?>
+                  </div>
+                  <div class="edit_content">
+                      <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="updateSNSForm">
 
-                  <?php if (!empty($userinfo['twitter'])): ?>
-                    <p><a href="http://twitter.com/$userinfo['twitter']" target="_blank">Twitter</a></p>
-                  <?php endif; ?>
-                  <?php if (!empty($userinfo['linkedin'])): ?>
-                  <p><a href="#">Linkedin</a></p>
-                  <?php endif; ?>
-                  <?php if (!empty($userinfo['facebook'])):?>
-                  <p><a href="<?php echo $userinfo['facebook']?>">Facebook</a></p>
-                  <?php endif;?>
-                  <?php if (!empty($userinfo['linkedin'])):?>
-                  <p><a href="<?php echo $userinfo['linkedin']?>">Linkedin</a></p>
-                  <?php endif;?>
-                  <?php if (!empty($userinfo['weibo'])):?>
-                  <p><a href="<?php echo $userinfo['weibo']?>">Weibo</a></p>
-                  <?php endif;?>
-                  <?php if (!empty($userinfo['personal_website'])): ?>
-                  <p><a href="http://<?php echo $userinfo['personal_website']; ?>" target="_blank">Personal Website</a></p>
-                <?php endif; ?>
+                          <div class="reg-row"> <b>Twitter</b>
+                              <div>
+                                  <input type="text" name="twitter" class="reg-input" value="<?php echo $userinfo['twitter']; ?>" />
+                              </div>
+                          </div>
+                          <div class="reg-row"> <b>Facebook</b>
+                              <div>
+                                  <input type="text" name="facebook" class="reg-input" value="<?php echo $userinfo['facebook']; ?>" />
+                              </div>
+                          </div>
+                          <div class="reg-row"> <b>Linkedin</b>
+                              <div>
+                                  <input type="text" name="linkedin" class="reg-input" value="<?php echo $userinfo['linkedin']; ?>" />
+                              </div>
+                          </div>
+                          <div class="reg-row"> <b>Weibo</b>
+                              <div>
+                                  <input type="text" name="weibo" class="reg-input" value="<?php echo $userinfo['weibo']; ?>" />
+                              </div>
+                          </div>
+                          <div class="reg-row"> <b>Personal website</b>
+                              <div>
+                                  <input type="text" name="website" class="reg-input" value="<?php echo $userinfo['personal_website']; ?>" />
+                              </div>
+                          </div>
+
+                      </form>
+                      <input type="button" class="reg-save" data-index="1" onclick="saveSNSInfos(this);">
+                  </div>
+
+
 
               </dd>
 
-              <dt>Phone<a href="javascript:void(0);" class="edit_jobseeker_profile_phone_link">Edit</a></dt>
-              <dd><p class="phone_number"><?php echo $userinfo['phone']; ?></p></dd>
+              <dt>Phone<a href="javascript:void(0);" class="edit_jobseeker_profile_phone_link edit_profile_link_ajax">Edit</a></dt>
+              <dd>
+                  <div class="show_content"><p class="phone_number"><?php echo $userinfo['phone']; ?></p></div>
+                  <div class="edit_content">
+                      <input type="text" name="profile_phone_number" id="profile_phone_number" value="<?php echo $userinfo['phone']; ?>"/>
+                      <input type="button" class="reg-save" data-index="1" onclick="saveProfilePhoneNumber(this);">
+                  </div>
+
+              </dd>
               <dd class="industry">
                   <ul class="industry-ul">
                   	<!-- 

@@ -49,6 +49,36 @@ function saveProfileSeekingIndustry(thisObj){
         });
 }
 
+function saveSNSInfos(thisObj){
+    var snsForm = $('#updateSNSForm');
+
+    $.post(site_url + 'jobseeker/updateSNSInfos',
+    snsForm.serialize(),
+    function(result,status){
+        result = eval('('+result+')');
+        if(result.status == 'success'){
+            var website = $('input[name="website"]').val();
+            var twitter = $('input[name="twitter"]').val();
+            var linkedin = $('input[name="linkedin"]').val();
+            var facebook = $('input[name="facebook"]').val();
+            var weibo = $('input[name="weibo"]').val();
+
+            var htmltext = '<p><a href="http://twitter.com/' + twitter + '">Twitter</a></p>'
+                            + '<p><a href="' + facebook + '">Facebook</a></p>'
+                            + '<p><a href="' + linkedin + '">Linkedin</a></p>'
+                            + '<p><a href="' + weibo + '">Weibo</a></p>'
+                            + '<p><a href="' + website + '">Personal Website</a></p>';
+
+            $(thisObj).parent().prev().html(htmltext);
+            $(thisObj).parent().prev().show();
+            $(thisObj).parent().hide();
+        }
+        else{
+            alert('Save failed!');
+        }
+    });
+}
+
 function saveLanguage(thisObj) {
     var languageForm = $('#languageForm');
     languageForm.validate();
@@ -84,9 +114,23 @@ function saveLanguage(thisObj) {
     }
 }
 
-function updateBirthday(){
-    alert();
+function saveProfilePhoneNumber(thisObj){
+    var phoneNumber = $('#profile_phone_number').val();
+    $.post(site_url + 'jobseeker/updatePhoneNumber',
+        {phoneNumber:phoneNumber},
+        function(result){
+            result = eval('('+result+')');
+            if(result.status == 'success'){
+                $(thisObj).parent().prev().html('<p class="phone_number">' + phoneNumber + '</p>');
+                $(thisObj).parent().prev().show();
+                $(thisObj).parent().hide();
+            }
+            else{
+                alert('Save failed!');
+            }
+        });
 }
+
 $(document).ready(function(){
     $('.edit_jobseeker_profile_birthday_link').click(function(){
         WdatePicker({el: 'jobseeker_birthday' ,
