@@ -418,6 +418,37 @@ class jobseeker extends Front_Controller {
         $result['status'] = $status;
         echo json_encode($result);
     }
+
+    public function updatePhoneNumber(){
+        $this->load->model('jobseeker_model');
+        $uid = $this->session->userdata('uid');
+        $post = $_POST;
+        $status = "failed";
+        if($post){
+            $rtn = $this->jobseeker_model->updatePhoneNumber($uid, $post['phoneNumber']);
+            if($rtn){
+                $status = "success";
+            }
+        }
+        $result['status'] = $status;
+        echo json_encode($result);
+    }
+
+    public function updateSNSInfos(){
+        $this->load->model('jobseeker_model');
+        $uid = $this->session->userdata('uid');
+        $post = $_POST;
+        $status = "failed";
+        if($post){
+            $rtn = $this->jobseeker_model->updateSNSInfos($uid, $post);
+            if($rtn){
+                $status = "success";
+            }
+        }
+        $result['status'] = $status;
+        echo json_encode($result);
+    }
+
     public function updateProfileSeekingIndustry(){
         $this->load->model('jobseeker_model');
         $uid = $this->session->userdata('uid');

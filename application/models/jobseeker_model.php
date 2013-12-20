@@ -127,6 +127,11 @@ class jobseeker_model extends MY_Model
         $data = array('description'=>$desc);
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }
+
+    public function updatePhoneNumber($uid, $phoneNumber){
+        $data = array('phone'=>$phoneNumber);
+        return $this->db->where('uid', $uid)->update($this->table, $data);
+    }
     /**
      * update contact details
      *
@@ -140,6 +145,11 @@ class jobseeker_model extends MY_Model
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }
 
+    public function updateSNSInfos($uid, $data){
+        $data = array('personal_website'=>$data['website'],'twitter'=>$data['twitter'],
+            'linkedin'=>$data['linkedin'],'facebook'=>$data['facebook'],'weibo'=>$data['weibo']);
+        return $this->db->where('uid', $uid)->update($this->table, $data);
+    }
     /**
      * update preferences
      *
