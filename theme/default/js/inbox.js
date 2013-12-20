@@ -34,7 +34,9 @@ $(document).ready(function() {
 	}
 
 	
-	$('.jingchat_message_input textarea').keypress(function(event) {
+	$('.jingchat_message_input textarea').keyup(function(event) {
+		if ($('#message').val().trim()=='')
+			return;
     	// Check the keyCode and if the user pressed Enter (code = 13) 
     	if (event.keyCode == 13) {
 	        $.post(base_url + "inbox/response", { msg_id:$('#msg_id').val(),user2:$('#user2').val(), message:$('#message').val() },
