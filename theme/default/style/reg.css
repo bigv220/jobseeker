@@ -66,3 +66,18 @@ ul.tagit li.tagit-new {height:1px;overflow: hidden}
 .postjob-content { width: 720px}
 .managejob-content .skills-vals li {height:18px; font-size:14px;font-weight: normal;line-height: 12px;margin: 2px 5px 2px 0;padding: 2px 13px 3px 4px;}
 .managejob-content .skills-vals .del {height:12px;margin: 0px 5px 2px 0;width:14px;}
+.job-listing-ul{width:226px;margin:auto;}
+.job-listing-ul li{border-bottom:1px solid #dddddd;height:34px;line-height:34px;
+    background-image:url(reg/del-job-listing-ul.png);background-repeat:no-repeat;
+    background-position:0 -24px;}
+.job-listing-ul a{font-weight:bolder;color:#4e4e4e;}
+.job-listing-ul li.curr{background-position:0 10px;color:#EA6E3B}
+.search_joblisting {
+    color: #4E4E4E;
+    padding: 10px 0 10px 10px;
+    font-size: 12px;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+.search_joblisting .curr{ color:#EA6E3B }

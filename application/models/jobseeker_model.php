@@ -434,7 +434,8 @@ class jobseeker_model extends MY_Model
     }
 
     public function getInterviews($where) {
-        $sql = "SELECT *,i.id as interview_id, i.company_id as company_id from interview as i LEFT JOIN user as u on u.uid=i.company_id
+        $sql = "SELECT *,i.id as interview_id, i.company_id as company_id,i.country as time_country
+            ,i.city as time_city from interview as i LEFT JOIN user as u on u.uid=i.company_id
             LEFT JOIN job as j on i.job_id=j.id
             WHERE $where";
 

@@ -108,7 +108,8 @@
                     <p class="interview_field_content">
                         <?php echo date('l, F j',strtotime($int['date'])); ?></p>
                     <p>Interview Time</p>
-                    <p class="interview_field_content"><?php echo $int['time']; ?> <?php echo $int['time_zone']; ?></p>
+                    <p class="interview_field_content"><?php echo $int['time']; ?> <?php echo $int['time_country']; ?>
+                        <?php echo $int['time_city']; ?></p>
                     <a href="<?php echo $site_url; ?>company/companyInfo/<?php echo $int['company_id']; ?>">View company profile &gt;</a>
                 </div>
                 <div style="clear:both;"></div>
