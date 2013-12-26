@@ -83,7 +83,7 @@
                 <a href="#" class="job-viewmore">View More</a> </div>
             <div class="span3">
                 <div class="interview_sent_date">
-                    <?php echo date('d/m/Y', strtotime($int['insert_date'])); ?></div>
+                    <?php echo $int['insert_date']; ?></div>
                 <div class="interview_action_btns">
                     <img src="<?php echo $theme_path;?>style/btns/btn_email_reply.png" alt="<?php echo $int['interview_id']; ?>" class="reply_interview_function"/>
                     <img src="<?php echo $theme_path;?>style/btns/btn_email_delete.png" alt="<?php echo $int['interview_id']; ?>" class="delete_interview_function"/>

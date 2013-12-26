@@ -206,6 +206,10 @@ class company extends Front_Controller {
         $this->load->model('inbox_model');
         $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
 
+        $this->load->model('job_model');
+        $current_user_jobs = $this->job_model->getCompanyJobList($uid);
+        $data['current_user_jobs'] = $current_user_jobs;
+
         $this->load->view($data['front_theme']."/company_view_shortlist_cadidates",$data);
     }
 

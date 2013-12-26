@@ -514,7 +514,9 @@ $(function(){
     });
 
     // Send Message
-    $('.sresult-par2 .jingchat_message_input textarea').keypress(function(event) {
+    $('.sresult-par2 .jingchat_message_input textarea').keyup(function(event) {
+        if ($(this).val().trim()=='')
+            return;
         var curr_text = $(this);
         // Check the keyCode and if the user pressed Enter (code = 13) 
         if (event.keyCode == 13) {

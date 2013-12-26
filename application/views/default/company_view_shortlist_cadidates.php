@@ -64,6 +64,12 @@
 
 <!--search-result body-->
 <div class="result-bd">
+    <select id="current_user_jobs" style="display: none">
+        <?php foreach($current_user_jobs as $job): ?>
+        <option value="<?php echo $job['id']; ?>"><?php echo $job['job_name']; ?></option>
+        <?php endforeach; ?>
+    </select>
+
     <?php foreach($candidates as $user): ?>
     <div class="box rel sresult-row" id="sresult-user<?php echo $user['uid']; ?>">
         <div class="sresult-par1">
@@ -85,7 +91,10 @@
                     <a href="#" class="job-btn jobseeker-btn-delete-candidate" data-id="<?php echo $user['uid']; ?>"></a>
                     <a href="#" class="job-btn job-btn-match">93%</a>
                 </div>
-                <div><a href="#" class="jobseeker_request_interview"></a></div>
+                <div>
+                    <input type="hidden" name="jobseeker_name" value="<?php echo $user['first_name'];?>" />
+                    <input type="hidden" name="jobseeker_uid" value="<?php echo $user['uid'];?>" />
+                    <a href="#" class="jobseeker_request_interview"></a></div>
 
             </div>
         </div>
@@ -300,4 +309,5 @@
 <?php $this->load->view($front_theme.'/partners-block');?>
 <script type="text/javascript" src="<?php echo $theme_path?>js/search-result.js"></script>
 <script type="text/javascript" src="<?php echo $theme_path?>js/advsearch.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/My97DatePicker/WdatePicker.js"></script>
 <?php $this->load->view($front_theme.'/footer-block');?>
