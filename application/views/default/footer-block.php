@@ -112,7 +112,7 @@
                 <textarea name="optional_message"></textarea>
                 <label>Date</label>
                 <div class="date_selector_wrapper">
-                    <input class="Wdate" name="interview_date" type="text" onClick="WdatePicker({lang:'en'})" />
+                    <input class="Wdate" name="interview_date" type="text" onClick="WdatePicker({lang:'en'})" required />
                 </div>
             </div>
             <div class="request_interview_pop_right">
@@ -129,7 +129,7 @@
                 <div class="time_selector_wrapper">
                     <div class="time_zone">
                         <label>Country</label>
-                        <select name="country">
+                        <select name="country" required>
                             <?php
                                 $this->load->helper('location');
                                 $location = getLoction();
@@ -142,12 +142,12 @@
 
                     <div class="city">
                         <label>City</label>
-                        <input type="text" name="city" />
+                        <input type="text" name="city" required />
                     </div>
 
                     <div class="time_zone">
                         <label>Time</label>
-                        <input type="text" name="time_input"/>
+                        <input type="text" name="time_input" required />
                     </div>
                 </div>
             </div>

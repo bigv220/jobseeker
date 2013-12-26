@@ -85,9 +85,14 @@ $(document).ready(function(){
     });
 
     $('.send_request_interview').click(function(){
-        sendInterviewRequest();
-        popMarker.fadeOut();
-        popRequestInterview.fadeOut();
+        var Form = $('#sendInterviewRequest');
+        Form.validate();
+
+        if (Form.valid()) {
+            sendInterviewRequest();
+            popMarker.fadeOut();
+            popRequestInterview.fadeOut();
+        }
     });
 });
 

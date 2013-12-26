@@ -83,7 +83,11 @@ class job extends Front_Controller {
         $data['location'] = getLoction();
 
     	if (empty($_POST)) {
+            $tech_skills_arr = $this->jobseeker_model->getSkills('tech_skills','');
+            $pro_skills_arr = $this->jobseeker_model->getSkills('personal_skills','');
 
+            $data["tech_skills"] = $tech_skills_arr;
+            $data["pro_skills"] = $pro_skills_arr;
     		$this->load->view($data['front_theme']."/job-postjob",$data);
     	} else {
     		$post = $_POST;
@@ -100,20 +104,11 @@ class job extends Front_Controller {
     		$this->load->model('job_model');
             unset($post['nameOfSelect']);
 
-            if ($post['preferred_personal_skills'] == 'Start Typing') {
-                $post['preferred_personal_skills'] = "";
-            }
-
-            if ($post['preferred_technical_skills'] == 'Start Typing') {
-                $post['preferred_technical_skills'] = "";
-            }
-
-
             $data = array('job_name'=>$post['job_name'],'job_desc'=>$post['job_desc'],
                 'employment_length'=>$post['employment_length'],
                 'employment_type'=>$post['employment_type'],
-                'preferred_personal_skills'=>$post['preferred_personal_skills'],
-                'preferred_technical_skills'=>$post['preferred_technical_skills'],
+                'preferred_personal_skills'=>$post['PersonalSkills_str'],
+                'preferred_technical_skills'=>$post['ProfessionalSkills_str'],
                 'location'=>$post['location'],'country'=>$post['country'],'province'=>$post['province'],
                 'city'=>$post['city'],'salary_range'=>$post['salary_range'],
                 'preferred_year_of_experience'=>$post['preferred_year_of_experience'],
