@@ -43,6 +43,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .jobseeker-btn-shortlisted{width:75px;height:75px;display:block;float:left;margin-right:11px;background-image:url(btns/btn_shortlist_candidate.png);}
 .jobseeker-btn-shortlisted_current{background-position:0 -158px;}
 .jobseeker-btn-delete-candidate{width:75px;height:75px;display:block;float:left;margin-right:11px;background-image:url(btns/btn_delete_candidate.png);}
+.jobseeker-btn-delete-applicant{width:75px;height:75px;display:block;float:left;margin-right:11px;background-image:url(btns/btn-delete-applicant.png);}
 .jobseeker_request_interview,.jobseeker_request_interview_submitted{margin-top:8px;width:161px;height:25px;display:none;background-image:url(search/request_interview_btn.png);background-repeat:no-repeat;}
 .jobseeker_request_interview{background-position:0 -25px;}
 .jobseeker_request_interview_submitted{background-position:0 0;}

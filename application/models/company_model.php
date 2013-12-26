@@ -205,4 +205,12 @@ class company_model extends MY_Model
         $sql = "REPLACE INTO company_viewed values($uid, $company_id, '$date');";
         return $this->db->query($sql);
     }
+    
+    public function getApplicants($jobid) {
+    	$sql = 'SELECT * FROM job_apply 
+				LEFT JOIN user 
+    			ON user.uid = job_apply.user_id
+    			WHERE job_apply.job_id = '.$jobid;
+    	return $this->db->query($sql)->result_array();
+    }
 }

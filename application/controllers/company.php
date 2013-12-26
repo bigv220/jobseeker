@@ -280,8 +280,66 @@ class company extends Front_Controller {
         echo json_encode($result);
     }
     
-    public function applicants() {
-    	$data = $this->data;
+    public function applicants($jobid = -1) {
+    	if (!isCompany($this->session->userdata('user_type'))) {
+            securelychk();
+        }
+
+        $uid = $this->session->userdata('uid');
+        if (!$uid)
+        {
+            redirect('/');
+        }
+
+        $this->load->model('jobseeker_model');
+        $data = $this->data;
+
+        $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
+        
+        // Get All Chat Message of this user, include SENT AND RECEIVED
+        $this->load->model('inbox_model');
+        $chats = $this->inbox_model->getGeneralMsgForUser($uid);
+        
+        
+        $interview_num = $this->jobseeker_model->getInterviews("i.uid=$uid and is_deleted=0");
+        $data['interview_num'] = count($interview_num);
+        $this->load->model('inbox_model');
+        $data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
+    	
+    	$data['jobid'] = $jobid;
+    	
+    	// get posted jobs
+    	$this->load->model('job_model');
+    	$data['jobs'] = $this->job_model->getTable(array('company_id'=>$uid));
+    	
+    	// get users who applied job
+    	if ($jobid != -1) {
+    		$this->load->model('company_model');
+    		$users = $this->company_model->getApplicants($jobid);
+    		
+    		// get users industry
+    		for ($i = 0; $i < count($users); $i++) {
+    			$users[$i]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($users[$i]['uid']);
+    			$users[$i]['educations'] = $this->jobseeker_model->getAllEducationInfo($users[$i]['uid']);
+    			$users[$i]['work_history'] = $this->jobseeker_model->getAllWorkHistory($users[$i]['uid']);
+    			$users[$i]['industry_arr'] = $this->jobseeker_model->getSeekingIndustry($users[$i]['uid']);
+    			$users[$i]['languages'] = $this->jobseeker_model->getLanguage($users[$i]['uid']);
+    			
+    			$users[$i]['personal_skills'] = $this->jobseeker_model->getPersonalSkills($users[$i]['uid']);
+    			
+    			$users[$i]['professional_skills'] = $this->jobseeker_model->getProfessionalSkills($users[$i]['uid']);
+
+    		}
+    		$data['users'] = $users;
+    	}
+
+    	// get the number of interviews
+    	$interview_num = $this->jobseeker_model->getInterviews("i.company_id=$uid and is_deleted=0");
+    	$data['interview_num'] = count($interview_num);
+    	
+    	//get the number of messages
+    	$this->load->model('inbox_model');
+    	$data['chat_unread'] = $this->inbox_model->getUnReadMessageNum($uid);
     	
     	$this->load->view($data['front_theme']."/company_applicants",$data);
     }

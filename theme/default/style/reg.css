@@ -69,7 +69,8 @@ ul.tagit li.tagit-new {height:1px;overflow: hidden}
 .job-listing-ul{width:226px;margin:auto;}
 .job-listing-ul li{border-bottom:1px solid #dddddd;height:34px;line-height:34px;
     background-image:url(reg/del-job-listing-ul.png);background-repeat:no-repeat;
-    background-position:0 -24px;}
+    background-position:0 -24px;
+	overflow: hidden;}
 .job-listing-ul a{font-weight:bolder;color:#4e4e4e;}
 .job-listing-ul li.curr{background-position:0 10px;color:#EA6E3B}
 .search_joblisting {
