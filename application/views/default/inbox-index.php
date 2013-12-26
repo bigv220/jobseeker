@@ -27,7 +27,11 @@
           <?php else: ?>
           <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
           <?php endif; ?>
+          <?php if ($userinfo['user_type'] === 0): ?>
           <a href="<?php echo $site_url; ?>jobseeker/savedBookmarks" class="png square_btn saved_bookmarks_btn"></a>
+          <?php else: ?>
+          <a href="<?php echo $site_url; ?>company/shortlistCandidates" class="png square_btn view_my_candidates_btn"></a>
+          <?php endif; ?>
           <!-- INTERVIEW START -->
           <?php if ($interview_num != 0) : ?>
           <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>
@@ -118,7 +122,7 @@
                                           <div class="other_message_bottom"></div>
                                       </div>
                                       <div class="jingchat_message_icon">
-                                          <img src="<?php if ($detail['user1'] == $uid) echo $site_url.'attached/users/'.$userinfo['profile_pic']; else echo $site_url.'attached/users/'. $other_user['profile_pic']; ?>" alt=""/>
+                                          <img src="<?php if ($detail['user1'] == $uid) echo $site_url.'attached/users/'.($userinfo['profile_pic']?$userinfo['profile_pic']:'no-image.png'); else echo $site_url.'attached/users/'. ($other_user['profile_pic']?$other_user['profile_pic']:'no-image.png'); ?>" alt=""/>
                                       </div>
                                       <div style="clear:both;"></div>
                                   </div>

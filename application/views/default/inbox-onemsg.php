@@ -11,7 +11,7 @@
                                           <div class="other_message_bottom"></div>
                                       </div>
                                       <div class="jingchat_message_icon">
-                                          <img src="<?php echo $site_url.'attached/users/'.$userinfo['profile_pic'];?>" alt=""/>
+                                          <img src="<?php echo $site_url.'attached/users/'.($userinfo['profile_pic']?$userinfo['profile_pic']:'no-image.png');?>" alt=""/>
                                       </div>
                                       <div style="clear:both;"></div>
                                   </div>

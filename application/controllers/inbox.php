@@ -30,6 +30,7 @@ class inbox extends Front_Controller {
         } else {
             $uid = $this->session->userdata('uid');
         }
+
         // Get current login user info
         $data['userinfo'] = $this->jobseeker_model->getUserInfo($uid);
         // Set Me ID
