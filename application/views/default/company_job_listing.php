@@ -31,7 +31,7 @@
           <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn"></a>
           <?php endif; ?>
           <!-- JINGCHAT END -->
-          <a href="#" class="png square_btn view_my_candidates_btn"></a>
+          <a href="<?php echo $site_url; ?>company/shortlistCandidates" class="png square_btn view_my_candidates_btn"></a>
           <!-- INTERVIEW START -->
           <?php if ($interview_num != 0) : ?>
           <a href="<?php echo $site_url; ?>jobseeker/viewInterviews" class="png square_btn view_my_interviews_btn"></a>

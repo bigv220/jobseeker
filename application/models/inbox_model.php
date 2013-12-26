@@ -69,6 +69,7 @@ class inbox_model extends MY_Model
                  ->from($this->table)
                  ->join('user', 'user.uid='.$this->table.'.user1')
                  ->where('user2',$uid)
+                 ->or_where('user1',$uid)
                  ->where('is_delete',0)
                  ->group_by('id')
                  ->get()

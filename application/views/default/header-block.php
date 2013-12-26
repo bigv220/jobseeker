@@ -115,7 +115,7 @@
                             <li><a href="<?php echo $site_url?>company/register">Edit Company Profile</a></li>
                             <li><a href="<?php echo $site_url?>company/joblisting">Manage Job Listings</a></li>
                             <li><a href="<?php echo $site_url?>company/shortlistCandidates">View Shortlisted Candidates</a></li>
-                            <li><a href="<?php echo $site_url?>inbox">JINGCHAT Inbox</a></li>
+                            <li><a href="<?php echo $site_url?>inbox">JingChat</a></li>
 
                         <?php endif;?>
                         <li class="last"><a href="<?php echo $site_url?>user/logout">Sign out</a></li>

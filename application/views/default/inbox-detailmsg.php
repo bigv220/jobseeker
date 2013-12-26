@@ -22,7 +22,7 @@ $seq = 0;
                                           <div class="other_message_bottom"></div>
                                       </div>
                                       <div class="jingchat_message_icon">
-                                          <img src="<?php if ($detail['user1'] == $uid) echo $site_url.'attached/users/'.$userinfo['profile_pic']; else echo $site_url.'attached/users/'. $other_user['profile_pic']; ?>" alt=""/>
+                                          <img src="<?php if ($detail['user1'] == $uid) echo $site_url.'attached/users/'.($userinfo['profile_pic']?$userinfo['profile_pic']:'no-image.png'); else echo $site_url.'attached/users/'. ($other_user['profile_pic']?$other_user['profile_pic']:'no-image.png'); ?>" alt=""/>
                                       </div>
                                       <div style="clear:both;"></div>
                                   </div>
