@@ -512,6 +512,30 @@ $(function(){
         popMark.fadeOut();
         popApply.fadeOut();
     });
+    
+    // delete applicant
+    var user_id = 0;
+    $('.jobseeker-btn-delete-applicant').click(function(e) {
+        user_id = $(this).attr('data-id');
+        popMark.fadeIn();
+        popApply.fadeIn();
+       
+        
+        e.stopPropagation();
+        e.preventDefault();
+    });
+
+    $('.delete-applicant-yes').click(function(e) {
+         $.post(site_url + 'company/ajaxDelApplicant', {user_id:user_id},
+            function(result,status) {
+                if (status=='success') {
+                    // TO check why $(this).addClass doesn't work.                  
+                    $('#sresult-user'+user_id).remove();
+                }
+        });
+        popMark.fadeOut();
+        popApply.fadeOut();
+    });
 
     // Send Message
     $('.sresult-par2 .jingchat_message_input textarea').keyup(function(event) {

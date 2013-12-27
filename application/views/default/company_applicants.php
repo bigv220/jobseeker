@@ -304,10 +304,10 @@
     <div class="rel">
         <div class="pop-close pop-apply-close"></div>
         <div class="pop-nav pop-candidate-nav">
-            <p>Are you sure you want to delete this candidate?</p>
+            <p>Are you sure you want to delete this applicant?</p>
         </div>
         <div class="pop-bar">
-            <a href="#yes" class="pop-bar-btn delete-candidate-yes">Yes</a> <a href="#no" class="pop-bar-btn pop-btn-no">No</a>
+            <a href="#yes" class="pop-bar-btn delete-applicant-yes">Yes</a> <a href="#no" class="pop-bar-btn pop-btn-no">No</a>
         </div>
     </div>
 </div>

@@ -347,4 +347,25 @@ class company extends Front_Controller {
     	
     	$this->load->view($data['front_theme']."/company_applicants",$data);
     }
+    
+    public function ajaxDelApplicant() {
+    	/*$uid = $this->session->userdata('uid');
+    	if (!$uid)
+    	{
+    		$msg = "failed";
+    	}
+    	
+    	$this->load->model('company_model');
+    	$post = array('company_id'=>$uid, 'user_id'=>$_POST['user_id']);
+    	//$insert_id = $this->company_model->addCandidate($post);
+    	
+    	if ($insert_id != -1) {
+    		$msg = "success";
+    	} else {
+    		$msg = "failed";
+    	}
+    	$result['status'] = $msg;
+    	echo json_encode($result);*/
+    	echo json_encode("success");
+    }
 }
