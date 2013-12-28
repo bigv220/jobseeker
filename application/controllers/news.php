@@ -22,4 +22,9 @@ class news extends Front_Controller {
         $data['article'] = $this->article_model->getOne($aid, 'aid');
         $this->load->view($data['front_theme'].'/news-view', $data);
     }
+
+    public function newsDetails(){
+        $data = $this->data;
+        $this->load->view($data['front_theme'].'/news-details', $data);
+    }
 }

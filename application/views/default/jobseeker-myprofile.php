@@ -224,58 +224,61 @@
                   </div>
                   <div class="edit_content">
                       <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="languageForm">
-                          <?php
-                          $i = 0;
-                          if (empty($language)) {
-                              $language = array(array('language'=>'none','level'=>'none'));
-                          }
-                          foreach($language as $lan):
-                          if(++$i == 1) {echo '<div class="advsearch-row clearfix" id="language_lists">';}
-                          else { echo '<div class="advsearch-row clearfix">';}
-                          ?>
 
-                          <div class="span1">
-                              <strong>Language<i class="star">*</i></strong>
-                              <div class="reg-row">
-                                  <select name="language[]" id="language_1" required>
-                                      <option value="">Language</option>
-                                      <?php
-                                      foreach($language_arr as $v) {
-                                          $str = '';
-                                          if($v == $lan['language']) {
-                                              $str = ' selected="selected"';
-                                          }
-                                          ?>
-                                          <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
-                                      <?php } ?>
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="span2">
-                              <strong>Proficiency</strong>
-                              <div class="reg-row">
-                                  <select name="level[]" id="level_1" required>
-                                      <option value="">Proficiency</option>
-                                      <?php $level = language_level();
-                                      foreach($level as $v) {
-                                          $str = '';
-                                          if($v == $lan['level']) {
-                                              $str = ' selected="selected"';
-                                          }
-                                          ?>
-                                          <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
-                                      <?php } ?>
-                                  </select>
-                              </div>
-                          </div>
-                          <?php if($i>1) {?>
-                              <div class="span3">
-                                  <i class="del" onclick="delLanguage(this, '<?php echo $lan['language']; ?>');"></i>
-                              </div>
-                          <?php }?>
+                              <?php
+                              $i = 0;
+                              if (empty($language)) {
+                                  $language = array(array('language'=>'none','level'=>'none'));
+                              }
+                              foreach($language as $lan):
+                              if(++$i == 1) :?>
+                                  <div class="advsearch-row clearfix" id="language_lists">
+                              <?php else:?>
+                                <div class="advsearch-row clearfix">
+                              <?php endif;?>
 
-                      </div>
-                      <?php endforeach; ?>
+                              <div class="span1">
+                                  <strong>Language<i class="star">*</i></strong>
+                                  <div class="reg-row">
+                                      <select name="language[]" id="language_1" required>
+                                          <option value="">Language</option>
+                                          <?php
+                                          foreach($language_arr as $v) {
+                                              $str = '';
+                                              if($v == $lan['language']) {
+                                                  $str = ' selected="selected"';
+                                              }
+                                              ?>
+                                              <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                                          <?php } ?>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="span2">
+                                  <strong>Proficiency</strong>
+                                  <div class="reg-row">
+                                      <select name="level[]" id="level_1" required>
+                                          <option value="">Proficiency</option>
+                                          <?php $level = language_level();
+                                          foreach($level as $v) {
+                                              $str = '';
+                                              if($v == $lan['level']) {
+                                                  $str = ' selected="selected"';
+                                              }
+                                              ?>
+                                              <option value="<?php echo $v; ?>"<?php echo $str; ?>><?php echo $v; ?></option>
+                                          <?php } ?>
+                                      </select>
+                                  </div>
+                              </div>
+                              <?php if($i>1) {?>
+                                  <div class="span3">
+                                      <i class="del" onclick="delLanguage(this, '<?php echo $lan['language']; ?>');"></i>
+                                  </div>
+                              <?php }?>
+
+                          </div>
+                          <?php endforeach; ?>
 
                       <div class="advsearch-row clearfix">
                           <div class="span1">
@@ -283,8 +286,7 @@
                               <a class="reg-row-tip" href="javascript:void(0);" onclick="addLanguageBtnClick(this);">+ Add another language</a>
                           </div>
                       </div>
-
-                  </form>
+                        </form>
                   <input type="button" class="reg-save" onclick="saveLanguage(this);"  data-index="0"/>
                   </div>
               </dd>

@@ -184,7 +184,17 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .match{height:134px;background:url(company/match.png) no-repeat center;text-align:center;}.match b{font-size:56px;color:#684092;padding:10px 0 0 0;font-family:Myriad Pro;display:block;}
 
 .news-index{padding:15px 20px;margin-bottom:30px;}
+.news_top_header .title{color:#674092;font-size:24px;font-weight:bold;padding-bottom: 10px;line-height: 28px;}
+.news_top_header .subtitle, .read_more_stories .title{color:#674092;font-size:16px;font-weight:bold;padding-bottom: 10px;line-height: 24px;}
+.sns_share_btns {padding-bottom:10px;}
+.sns_share_btns a{margin-right:15px;}
 .news-index-left{float:left;width:483px;}
+.news_details .news-index-left{padding-right:12px;width:478px;border-right:1px solid #CCCCCC;}
+.news_details .article{border-bottom:none;}
+.read_more_stories .title{}
+.read_more_stories ul li{line-height:20px;margin-bottom:10px;}
+.read_more_stories ul li a{color:#414042;text-decoration: none;font-size:14px;}
+.read_more_stories ul li a:visited{color:#414042;}
 .article, .profile, .upcoming_events{padding-bottom:5px;margin-bottom:10px;border-bottom: 5px solid #e6e650;}
 .article .title, .titles .main_title, .useful_links .title, .upcoming_events .title, .top_stories .title{color:#674092;font-size:24px;font-weight:bold;padding-bottom: 10px;line-height: 28px;}
 .article .content{font-size:12px;}
