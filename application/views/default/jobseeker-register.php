@@ -163,6 +163,7 @@
                     <div>
                         <textarea class="reg-textarea" name="description" required><?php echo $userinfo['description']; ?></textarea>
                     </div>
+                    Describe yourself in 300 words or less.
                 </div>
                 <div class="reg-row clearfix">
                     <?php $is_private = $userinfo["is_private"];
@@ -174,7 +175,7 @@
                     }
                     ?>
                     <input type="hidden" name="is_private" id="is_private" value="<?php echo $if_private; ?>" />
-                    <i class="kyo-checkbox <?php echo $check_sel; ?>" data-val="1" data-id="private" onclick="isPrivate(this,'is_private');">Keep this private</i>
+                    <i style="font-size: 12px;" class="kyo-checkbox <?php echo $check_sel; ?>" data-val="1" data-id="private" onclick="isPrivate(this,'is_private');">Keep this private</i>
                 </div>
                 <div class="reg-area-bar">
                     <input type="button" class="reg-save" data-index="1" onclick="basicInfoSubmit()" />
@@ -271,7 +272,7 @@
                     }
                     ?>
                     <div class="reg-area-tit <?php echo $cla; ?>">Preferences</div>
-                    <div class="reg-row"><strong>Prefered length of employment?<i class="star">*</i></strong>
+                    <div class="reg-row"><strong>Preferred length of employment?<i class="star">*</i></strong>
                         <div>
                             <input type="text" name='employment_length' id="employment_length" value="<?php echo $userinfo['employment_length']; ?>" style="display:none" class="kyo-radio"/>
                             <ul class="leng-radio">
@@ -282,7 +283,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="reg-row"><strong>Prefered type of employment?<i class="star">*</i></strong>
+                    <div class="reg-row"><strong>Preferred type of employment?<i class="star">*</i></strong>
                         <div>
                             <input type="hidden" name="employment_type" id="employment_type" value="<?php echo $userinfo['employment_type'];?>" class="kyo-checkout" />
                             <ul class="leng-radio">
@@ -297,12 +298,12 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="reg-row"><strong>Do you require Visa assistance from employers?<i class="star">*</i></strong>
+                    <div class="reg-row"><strong>Do you require visa assistance from employers?<i class="star">*</i></strong>
                             <input type="hidden" name="is_visa_assistance" id="is_visa_assistance" value="<?php echo $userinfo['is_visa_assistance']; ?>" class="kyo-radio"/>
                             <i class="kyo-radio" data-id="is_visa_assistance" data-val="1" onclick="selectItem('is_visa_assistance',1);">Yes</i>
                             <i class="kyo-radio" data-id="is_visa_assistance" data-val="2" onclick="selectItem('is_visa_assistance',0);">No</i>
                     </div>
-                    <div class="reg-row"><strong>Do you require accomodation assistance from employer?<i class="star">*</i></strong>
+                    <div class="reg-row"><strong>Do you require accommodation assistance from employer?<i class="star">*</i></strong>
                             <input type="hidden" name="is_accomodation_assistance" id="is_accomodation_assistance" value="<?php echo $userinfo['is_accomodation_assistance'];?>" class="kyo-radio"/>
                             <i class="kyo-radio" data-id="is_accomodation_assistance" data-val="1" onclick="selectItem('is_accomodation_assistance',1);">Yes</i>
                             <i class="kyo-radio" data-id="is_accomodation_assistance" data-val="2" onclick="selectItem('is_accomodation_assistance',0);">No</i>
@@ -504,7 +505,7 @@
                 <div class="reg-area-tit <?php echo $cla; ?>">Work History</div>
                 <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="workhistoryForm" enctype="multipart/form-data">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-
+					<!-- hide Introduce for now
                     <div id="every_job_part1">
                         <input type="hidden" name="id[]" value="<?php if(count($work_history)) echo $work_history["id"]; ?>" />
                     <div class="reg-row"> <b>Introduce yourself</b>
@@ -512,6 +513,7 @@
                             <textarea class="reg-textarea" name="introduce[]"><?php if(count($work_history)) echo $work_history["introduce"]; ?></textarea>
                         </div>
                     </div>
+                     -->
                     <div class="reg-row"> <strong>Company name<i class="star">*</i></strong>
                         <div>
                             <input type="text" class="reg-input" name="company_name[]" value="<?php if(count($work_history)) echo $work_history["company_name"]; ?>" required />

@@ -98,7 +98,7 @@ function show_login_user_menu(){
 function show_welcome_pop(usertype){
     //as we show welcome pop up after login, so we show the login user menu here
     show_login_user_menu();
-    var lefttext = "Let us know your<br/>job preference";
+    var lefttext = "Fill out your<br/>Jing Profile";
     var righttext = "Start looking at<br/>jobs in China now";
 
     var lefthref = base_url + "jobseeker/register";

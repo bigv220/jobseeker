@@ -100,7 +100,9 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .pop-welcome-bd .span2{font-size:22px;padding:10px 0 0 0;}
 .pop-welcome-bd .span1,.pop-welcome-bd .span3{color:#674092;font-weight:700;font-size:14px;}
 .pop-welcome-bd .pop-welcome-here{width:106px;height:42px;line-height:42px;display:inline-block;text-align:center;vertical-align:top;background:url(home/here.gif) no-repeat;margin-top:10px;}
-.pop-message, .request-sent-pop-message {display:none;z-index:102;width:494px;height:233px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(home/pop-msg-bg-small.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
+.request-sent-pop-message {display:none;z-index:102;width:494px;height:233px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(home/pop-msg-bg-small.png);}
+.pop-message {display:none;z-index:102;width:494px;height:233px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(home/pop-msg-bg.png);}
+.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}
 .pop-message-wrap{padding:10px;}
 .pop-message b{display:block;font-weight:bold;padding:25px 0px 15px 0px;color:#f17343;font-size:24px;text-align:center;}
 .pop-message-close{width:20px;height:20px;right:0px;top:-1px;cursor:pointer;display:block;}
