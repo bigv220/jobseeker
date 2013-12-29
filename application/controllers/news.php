@@ -27,4 +27,9 @@ class news extends Front_Controller {
         $data = $this->data;
         $this->load->view($data['front_theme'].'/news-details', $data);
     }
+
+    public function expatProfile(){
+        $data = $this->data;
+        $this->load->view($data['front_theme'].'/expat-profile', $data);
+    }
 }

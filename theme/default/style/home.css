@@ -207,7 +207,8 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .profile .profile_header .titles{float:left;width:301px;}
 .profile .profile_img{float:right;width:130px;position:relative;}
 .profile_img .mask{position:absolute;top:0;left:0;width:100%;height:130px;background: url(home/profile_img_mark.png) no-repeat;}
-.titles .subtitle{color:#674092;font-size:15px;font-weight:bold;margin-bottom:15px;}
+.titles .subtitle{color:#674092;font-size:16px;font-weight:bold;margin-bottom:15px;}
+.titles .subtitle_orange{color:#f06f39;}
 .titles .small_title{font-size:14px; color:#414042;font-weight:bold;margin-bottom:5px;}
 .useful_links ul{padding-bottom: 10px;}
 .useful_links ul li{font-size:14px;font-weight:bold;border-bottom:1px solid #cbdb30;line-height:30px;}
@@ -234,6 +235,9 @@ a.edit_jobseeker_profile_link{text-decoration:underline;margin-left:10px;color:#
 .jobseeker_profile_bd .edit_content{display:none;}
 .jobseeker-bd-left .edit_content{width:490px;}
 #profile_description{width:100%;height:80px;}
+.expat_profile .profile .profile_header .titles {width:520px;}
+.expat_profile .content .small_title{font-size:14px; font-weight:bold;color:#674092;margin-top:10px;}
+.expat_profile .article, .profile{border-bottom:none;}
 div.text{margin-top: 8px;}
 ul.recent_applied_jobs{}
 ul.recent_applied_jobs li{line-height:35px;border-bottom:1px solid #CCCCCC;background:url(jobseeker/right_arrow_pinple.png) no-repeat right;}
