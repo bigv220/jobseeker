@@ -296,3 +296,9 @@ alter table interview add column city varchar(50);
 #2013-12-31
 alter table article add column content_general text;
 alter table article add column profile_pic varchar(255);
+
+#2014-1-1 NEW YEAR IS HERE. FIGHTING
+#ADD CATEGORY FOR NEWS
+INSERT INTO `category` VALUES ('112', '1', 'Hot News', null, 'hot-news', '50', null);
+INSERT INTO `category` VALUES ('113', '1', 'Top Stories', null, 'top-stories', '50', null);
+INSERT INTO `category` VALUES ('114', '1', 'Upcoming Events', null, 'upcoming-events', '50', null);
