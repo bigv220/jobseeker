@@ -4,8 +4,9 @@
 
         <div class="news-index box rel mb10">
             <div class="news-index-left">
+                <?php if (empty($hot_news)): ?>
                 <div class="article">
-                    <div class="title">Russia & China To Start Youth Exchange Program</div>
+                    <div class="title">Russia & China To Start Youth Exchange Program. </div>
                     <div class="content">
                         <img src="<?php echo $theme_path?>style/home/article_img.jpg"/>
                         <p>
@@ -22,7 +23,30 @@
                         <a href="#" class="share_btn">Share</a>
                     </div> -->
                 </div>
-
+                <?php else: 
+                $hot_news = $hot_news[0];
+                ?>
+                <div class="article">
+                    <div class="title"><?php echo $hot_news['title']; ?></div>
+                    <div class="content">
+                        <?php if(!empty($hot_news['profile_pic'])) {
+                                        $pic = $site_url.'attached/article/'.$hot_news['profile_pic'];
+                                   } else {
+                                        $pic = $theme_path."style/home/article_img.jpg";
+                                   }
+                            ?>
+                        <img src="<?php echo $pic?>" width="480"/>
+                        <p>
+                        <?php echo $hot_news['content_general']; ?>
+                        <a href="<?php echo $site_url?>news/view/166">Continue reading</a>
+                        </p>
+                    </div>
+                    <!-- <div class="share-sns">
+                        <a href="#" class="like_btn">Like</a>
+                        <a href="#" class="share_btn">Share</a>
+                    </div> -->
+                </div>
+                <?php endif; ?>
                 <div class="profile">
                     <div class="profile_header">
                         <div class="titles">

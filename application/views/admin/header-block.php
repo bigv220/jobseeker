@@ -15,6 +15,13 @@
 <!--[if IE]>
 <link rel="stylesheet" type="text/css" href="<?php echo $theme_path?>css/ie-sucks.css" />
 <![endif]-->
+<script>
+var site_url = "<?php echo $site_url?>";
+var base_url = "<?php echo $base_url?>";
+var theme_url = "<?php echo $theme_path?>";
+var current_login_user_id = "<?php echo (isset($uid)?$uid:-1)?>";
+    
+</script>
 </head>
 
 <body>

@@ -12,6 +12,7 @@ class news extends Front_Controller {
     {
         //redirect('/');
         $data = $this->data;
+        $data['hot_news'] = $this->article_model->getListByCat('hot-news', 'en', 1);
         $this->load->view($data['front_theme'].'/news-index', $data);
     }
 

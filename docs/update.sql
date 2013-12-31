@@ -292,3 +292,7 @@ CREATE TABLE `user_status` (
 alter table interview drop column time_zone;
 alter table interview add column country varchar(50);
 alter table interview add column city varchar(50);
+
+#2013-12-31
+alter table article add column content_general text;
+alter table article add column profile_pic varchar(255);
