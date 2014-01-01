@@ -32,4 +32,9 @@ class news extends Front_Controller {
         $data = $this->data;
         $this->load->view($data['front_theme'].'/expat-profile', $data);
     }
+
+    public function topStories(){
+        $data = $this->data;
+        $this->load->view($data['front_theme'].'/top-stories', $data);
+    }
 }
