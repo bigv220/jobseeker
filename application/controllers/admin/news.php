@@ -72,7 +72,7 @@ class news extends Admin_Controller {
 			//$this->data['cid'] = $cid;
 			$this->load->model('category_model');
 			$this->data['cat_tree'] = $this->category_model->getCatList(1);
-			$this->data['lang'] = $this->session->userdata('lang');
+			$this->data['lang'] = $this->session->userdata('lang')==null?'en':$this->session->userdata('lang');
 			$this->load->view($this->data['admin_theme'].'/news-edit', $this->data);
 		}
 		else
@@ -131,6 +131,27 @@ class news extends Admin_Controller {
 		else 
 		{
 			showmsg(site_url().'admin/news/index/'.$cid, 'Error');
+		}
+	}
+
+		/**
+	 *  update user's photo
+	 */
+	public function ajaxuploadimage() {
+		// create folder
+		$this->load->model('jobseeker_model');
+		$uid = $this->session->userdata('uid');
+		//$user_path = realpath(dirname(__FILE__))."/../../theme/default/users/";
+		$user_path = FCPATH . 'attached/article/';
+		$this->jobseeker_model->creatUserfolder ( $user_path.'/' ) or exit ( 'error: can not creat folder.' );
+		// upload
+		if (is_uploaded_file ( $_FILES ['avatar'] ['tmp_name'] )) {
+			$file_name = uniqid().'-'.iconv('utf-8','gb2312',$_FILES['avatar']['name']);
+			move_uploaded_file ( $_FILES ['avatar'] ['tmp_name'], $user_path .$file_name);
+	
+			exit('success|'.$file_name);
+		} else {
+			exit('error|can not upload avatar image.');
 		}
 	}
 }
