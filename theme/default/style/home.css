@@ -191,7 +191,6 @@ body{background:url(home/body_bg.png) no-repeat top fixed;}
 .news-index-left{float:left;width:483px;}
 .news_details .news-index-left{padding-right:12px;width:478px;border-right:1px solid #CCCCCC;}
 .news_details .article{border-bottom:none;}
-.read_more_stories .title{}
 .read_more_stories ul li{line-height:20px;margin-bottom:10px;}
 .read_more_stories ul li a{color:#414042;text-decoration: none;font-size:14px;}
 .read_more_stories ul li a:visited{color:#414042;}
@@ -415,3 +414,16 @@ h2.applied_jobs_title{color:#674092;font-size:18px;font-weight:bold;padding-left
 
 .jobseeker_profile_bd .edit_content .advsearch-row .span1,.jobseeker_profile_bd .edit_content  .advsearch-row .span2{margin-right:0px;}
 .jobseeker_profile_bd .edit_content  .advsearch-row .span3{width:18px;}
+.news-index-left .article_row{margin-bottom:10px;}
+.news-index-left .article_row .article_thumbnail{float:left;width:80px;}
+.news-index-left .article_row .article_abstract{float:left;margin-left:10px;width:385px;font-size:12px;}
+.news-index-left .article_row .article_abstract .title{font-size:14px;font-weight:bold;color:#414042;}
+.news-index-left .article_row .article_abstract .post_date{color:#939598;}
+.news-index-left .article_row .article_abstract .content_abstract{color:#414042;}
+.news-index-left .article_row .article_abstract a{color:#f06f39;text-decoration:none;}
+
+.news-index-right #search_top_stories_form input{background-image:url(search/search_top_stories_bg.png);}
+#search_top_stories_form{height:36px;}
+.news-index-right .search_top_stories_input{border:0;height:24px;line-height:24px;width:206px;text-indent:3px;color:#828282;}
+.news-index-right .search_top_stories_btn{background-position:-206px 0;width:24px;height:24px;line-height:24px;display:inline-block;text-align:center;vertical-align:top;cursor:pointer;background-repeat:no-repeat;border:0;margin-left:206px;}
+.filter_top_stories_title{color:#674092;font-size:16px;font-weight:bold;padding-bottom: 10px;line-height: 24px;}
