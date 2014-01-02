@@ -89,7 +89,7 @@
                                    }
                             ?>
                         <div class="profile_img" style="position:absolute;left:350px;">
-                            <img src="<?php echo $pic?>" width="120" height="120" alt="" />
+                            <img src="<?php echo $pic?>" width="120" height="120" alt="" class="round_img"/>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -117,66 +117,30 @@
             <div class="news-index-right">
                 <div class="upcoming_events">
                     <div class="title">Upcoming Networking Events and Job Fairs</div>
+                    <?php if (!empty($events)): ?>
+                    <?php foreach ($events as $event): ?>
                     <div class="event_row">
-                        <a href="#">
-                            <div class="event_title">THE 2013 JOB FAIR FOR FOREIGNERS IN BEIJING</div>
-                            <div class="event_time">Time: Saturday November 16th 2013 9:00 – 16:00</div>
-                            <div class="event_place">Location: 2nd Floor, Swissotel Beijing (five star)</div>
+                        <a href="<?php echo $site_url?>news/view/<?php echo $event['aid']; ?>">
+                        <div class="event_title"><?php echo $event['title']; ?></div>
+                        <p><?php echo $event['descrip']; ?></p>
                         </a>
                     </div>
-                    <div class="event_row">
-                        <a href="#">
-                            <div class="event_title">THE SINO-GERMAN JOB FAIR BEIJING</div>
-                            <div class="event_time">Time: Saturday October 19th 2013 9:00 – 16:00</div>
-                            <div class="event_place">Location: Beijing Marriot Hotel Northeast</div>
-                        </a>
-                    </div>
-                    <div class="event_row">
-                        <a href="#">
-                            <div class="event_title">Kooka Networking Events</div>
-                            <div class="event_time">Time: 6.30pm to 9.30pm, on the last Friday of every month.</div>
-                            <div class="event_place">Location: Various bars and nightspots around Beijing.</div>
-                        </a>
-                    </div>
-                    <div class="event_row">
-                        <a href="#">
-                            <div class="event_title">The FC Group “Anything Goes” Networking Social</div>
-                            <div class="event_time">Time: November 5th 2013, 7.30pm to 10.30pm</div>
-                            <div class="event_place">Location: Suzie Wong, Chaoyang Park West Gate, Beijing</div>
-                        </a>
-                    </div>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
                     <div class="more_link"><a href="#">See All Upcoming Events</a></div>
                 </div>
                 <div class="top_stories">
                     <div class="title">Top Stories</div>
+                    <?php if (!empty($stories)): ?>
+                    <?php foreach ($stories as $story): ?>
                     <div class="story_row">
-                        <a href="<?php echo $site_url?>news/view/169">
-                            <!-- <div class="story_icon">
-                                <img src="<?php echo $theme_path?>style/home/temp/temp-h2.gif">
-                                <i class="mask"></i>
-                            </div> -->
-                            <div class="story_title">Shanghai Free Trade Zone to welcome hotel boom.</div>
+                        <a href="<?php echo $site_url?>news/view/<?php echo $story['aid']; ?>">
+                            <div class="story_title"><?php echo $story['title']; ?></div>
                             <div class="clearfix"></div>
                         </a>
                     </div>
-                    <div class="story_row">
-                        <a href="<?php echo $site_url?>news/view/168">
-                            <div class="story_title">Beijing has a new plan to fight city smog.</div>
-                            <div class="clearfix"></div>
-                        </a>
-                    </div>
-                    <div class="story_row">
-                        <a href="<?php echo $site_url?>news/view/167">
-                            <div class="story_title">UK transport official wants stronger links with China. </div>
-                            <div class="clearfix"></div>
-                        </a>
-                    </div>
-                    <div class="story_row">
-                        <a href="<?php echo $site_url?>news/view/166">
-                            <div class="story_title">Russia & China To Start Youth Exchange Program.</div>
-                            <div class="clearfix"></div>
-                        </a>
-                    </div>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
                     <div class="more_link"><a href="#">See All Articles</a></div>
                 </div>
             </div>

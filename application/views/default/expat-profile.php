@@ -11,8 +11,14 @@ $expat_profile = $expat_profile[0];
                     <div class="titles">
                         <div class="main_title"><?php echo $expat_profile['title']; ?></div>
                     </div>
+                     <?php if(!empty($expat_profile['profile_pic'])) {
+                                        $pic = $site_url.'attached/article/'.$expat_profile['profile_pic'];
+                                   } else {
+                                        $pic = $theme_path."style/company/face.png";
+                                   }
+                            ?>
                     <div class="profile_img" style="position:absolute;left:620px;">
-                        <img class="round_img" src="<?php echo $theme_path?>style/home/temp/newsletter-expat.png" width="120" height="120" alt="" />
+                        <img class="round_img" src="<?php echo $pic?>" width="120" height="120" alt="" />
                     </div>
                     <div class="clearfix"></div>
                 </div>
