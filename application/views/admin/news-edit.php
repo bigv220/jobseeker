@@ -48,7 +48,7 @@
 							                });
 							        });
 							</script>
-                    		<textarea name="content" id="content_general">
+                    		<textarea name="content_general" id="content_general">
                     			<?php if(!empty($article)) echo htmlspecialchars($article['content_general']) ?>
                     		</textarea>
                     		<br />

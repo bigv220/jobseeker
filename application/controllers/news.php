@@ -13,6 +13,10 @@ class news extends Front_Controller {
         //redirect('/');
         $data = $this->data;
         $data['hot_news'] = $this->article_model->getListByCat('hot-news', 'en', 1);
+        $data['expat_profile'] = $this->article_model->getListByCat('expat-profile', 'en', 1);
+
+        $data['stories'] = $this->article_model->getListByCat('top-stories', 'en', 4);
+        $data['events'] = $this->article_model->getListByCat('upcoming-events', 'en', 4);
         $this->load->view($data['front_theme'].'/news-index', $data);
     }
 
@@ -26,11 +30,14 @@ class news extends Front_Controller {
 
     public function newsDetails(){
         $data = $this->data;
+        $data['hot_news'] = $this->article_model->getListByCat('hot-news', 'en', 1);
+        $data['stories'] = $this->article_model->getListByCat('top-stories', 'en', 3);
         $this->load->view($data['front_theme'].'/news-details', $data);
     }
 
     public function expatProfile(){
         $data = $this->data;
+        $data['expat_profile'] = $this->article_model->getListByCat('expat-profile', 'en', 1);
         $this->load->view($data['front_theme'].'/expat-profile', $data);
     }
 
