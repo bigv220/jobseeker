@@ -78,6 +78,7 @@ class news extends Admin_Controller {
 		else
 		{
 			$post = $_POST;
+			$post['lang'] = 'en';
 			$post['date'] = strtotime($post['date']);
 			$flag = $this->article_model->add($post);
 			if ($flag)

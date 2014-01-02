@@ -1,4 +1,7 @@
-<?php $this->load->view($front_theme.'/header-block');?>
+<?php $this->load->view($front_theme.'/header-block');
+
+$expat_profile = $expat_profile[0];
+?>
 
     <div class="w770 rel clearfix">
 
@@ -6,45 +9,20 @@
             <div class="profile">
                 <div class="profile_header">
                     <div class="titles">
-                        <div class="main_title">Expat Profile</div>
-                        <div class="subtitle">Every month we will bring you a new interview with an expat already
-                            living and working in China.</div>
-                        <div class="subtitle subtitle_orange">
-                            <div>Name: Michaela Williams</div>
-                            <div>Location: Shanghai</div>
-                            <div>Works as a Marketing Manager</div>
-                        </div>
+                        <div class="main_title"><?php echo $expat_profile['title']; ?></div>
                     </div>
-                    <div class="profile_img">
+                    <div class="profile_img" style="position:absolute;left:620px;">
                         <img class="round_img" src="<?php echo $theme_path?>style/home/temp/newsletter-expat.png" width="120" height="120" alt="" />
                     </div>
                     <div class="clearfix"></div>
                 </div>
 
-                <div class="content">
-                    <div class="small_title">
-                        There are many places around the world to work, but what was it about China that attracted you?
-                    </div>
-                    <p> I decided to go to China for a few differe ibrant and booming economy. Companies across the globe are vying to do business with China and having first-hand knowledge of Chinese business culture would be a real asset to my professional development. Another reason I chose China is because the culture is so different and it would be a completely new and interesting experience. As soon as I arrived in China, I knew that I had made the right choice. China is so vibrant and diverse that no 2 days are the same and there is never an opportunity to be bored.
-
+                <div class="content titles">
+                    <p>
+                        <?php echo $expat_profile['content_general']; ?>
                     </p>
-                    <div class="small_title">
-                        There are many places around the world to work, but what was it about China that attracted you?
-                    </div>
-                    <p> I decided to go to China for a few differe ibrant and booming economy. Companies across the globe are vying to do business with China and having first-hand knowledge of Chinese business culture would be a real asset to my professional development. Another reason I chose China is because the culture is so different and it would be a completely new and interesting experience. As soon as I arrived in China, I knew that I had made the right choice. China is so vibrant and diverse that no 2 days are the same and there is never an opportunity to be bored.
-
-                    </p>
-                    <div class="small_title">
-                        There are many places around the world to work, but what was it about China that attracted you?
-                    </div>
-                    <p> I decided to go to China for a few differe ibrant and booming economy. Companies across the globe are vying to do business with China and having first-hand knowledge of Chinese business culture would be a real asset to my professional development. Another reason I chose China is because the culture is so different and it would be a completely new and interesting experience. As soon as I arrived in China, I knew that I had made the right choice. China is so vibrant and diverse that no 2 days are the same and there is never an opportunity to be bored.
-
-                    </p>
-                    <div class="small_title">
-                        There are many places around the world to work, but what was it about China that attracted you?
-                    </div>
-                    <p> I decided to go to China for a few differe ibrant and booming economy. Companies across the globe are vying to do business with China and having first-hand knowledge of Chinese business culture would be a real asset to my professional development. Another reason I chose China is because the culture is so different and it would be a completely new and interesting experience. As soon as I arrived in China, I knew that I had made the right choice. China is so vibrant and diverse that no 2 days are the same and there is never an opportunity to be bored.
-
+                    <p>
+                        <?php echo $expat_profile['content']; ?>
                     </p>
                 </div>
                 <!-- <div class="share-sns">

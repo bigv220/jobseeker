@@ -38,7 +38,7 @@
                         <img src="<?php echo $pic?>" width="480"/>
                         <p>
                         <?php echo $hot_news['content_general']; ?>
-                        <a href="<?php echo $site_url?>news/view/166">Continue reading</a>
+                        <a href="<?php echo $site_url?>news/newsDetails/<?php echo $hot_news['aid']; ?>">Continue reading</a>
                         </p>
                     </div>
                     <!-- <div class="share-sns">
@@ -47,6 +47,9 @@
                     </div> -->
                 </div>
                 <?php endif; ?>
+
+                <!-- EXPAT PROFILE -->
+                <?php if (empty($expat_profile)): ?>
                 <div class="profile">
                     <div class="profile_header">
                         <div class="titles">
@@ -67,14 +70,39 @@
                     <div class="content">
 
                         <p> I decided to go to China for a few different reasons, firstly because China has such a vibrant and booming economy. Companies across the globe are vying to do business with China and having first-hand knowledge of Chinese business culture would be a real asset to my professional development. Another reason I chose China is because the culture is so different and it would be a completely new and interesting experience. As soon as I arrived in China, I knew that I had made the right choice. China is so vibrant and diverse that no 2 days are the same and there is never an opportunity to be bored.
-                            <a href="#">Continue reading</a>
+                            <a href="<?php echo $site_url?>news/view/<?php echo $hot_news['aid']; ?>">Continue reading</a>
                         </p>
                     </div>
-                    <!-- <div class="share-sns">
-                        <a href="#" class="like_btn">Like</a>
-                        <a href="#" class="share_btn">Share</a>
-                    </div> -->
                 </div>
+                <?php else: 
+                $expat_profile = $expat_profile[0];
+                ?>
+                <div class="profile">
+                    <div class="profile_header">
+                        <div class="titles">
+                            <div class="main_title"><?php echo $expat_profile['title']; ?></div>
+                        </div>
+                        <?php if(!empty($expat_profile['profile_pic'])) {
+                                        $pic = $site_url.'attached/article/'.$expat_profile['profile_pic'];
+                                   } else {
+                                        $pic = $theme_path."style/company/face.png";
+                                   }
+                            ?>
+                        <div class="profile_img" style="position:absolute;left:350px;">
+                            <img src="<?php echo $pic?>" width="120" height="120" alt="" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="content titles">
+
+                        <p>
+                            <?php echo $expat_profile['content_general']; ?>
+                            <a href="<?php echo $site_url?>news/expatProfile/<?php echo $expat_profile['aid']; ?>">Continue reading</a>
+                        </p>
+                    </div>
+                </div>
+                <?php endif; ?>
 
                 <div class="useful_links">
                     <div class="title">Useful Links and Things We Like</div>
