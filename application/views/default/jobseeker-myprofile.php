@@ -399,8 +399,11 @@
                   <?php foreach($education_info as $ei): ?>
                   <p class="school_name"><?php echo $ei['school_name'];?></p>
                   <?php if(!empty($ei['degree'])): ?>
-                     <p class="school_major"><?php echo $ei['degree'];?>,  <?php echo $ei['major']; ?></p>
-                     <p class="school_major"><?php echo $ei['achievements'];?></p>
+                     <p class="school_major"><?php echo $ei['degree'];?></p>
+                     <p><?php echo $ei['major']; ?></p>
+                     <p class="school_major">
+                         <?php echo str_replace("\n",'<br/>', $ei['achievements']);?>
+                     </p>
                   <?php endif; ?>
                   <p class="school_period"><?php echo $ei['attend_date_from'];?> - <?php echo $ei['attend_date_to'];?></p>
                   <?php endforeach; ?>
