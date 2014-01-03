@@ -167,7 +167,7 @@
                         <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>
                         <?php } ?>
                     </select>
-                    <!--<div class="search-row-tip">Hold down 'Command' to select a max of 5</div>-->
+
                     <div id="sel-technical-val" class="show-selval"></div>
                 </div>
                 <div class="span2 reg-row">
@@ -184,7 +184,9 @@
                     <!--<div class="search-row-tip">Hold down 'Command' to select a max of 5</div>-->
                     <div id="sel-personal-val" class="show-selval"></div>
                 </div>
+
             </div>
+            <div class="search-row-tip">Hold down Command to select multiple entries</div>
 
         </div>
         <div class="adv-search-bar">
