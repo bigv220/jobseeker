@@ -117,20 +117,19 @@
           </dd>
         </dl>
           <dl class="sresult-nav-job-dl">
+              <dt>Employement History<a href="<?php echo $site_url;?>jobseeker/register#reg5" target="_blank" class="edit_jobseeker_profile_current_employment_link">Edit</a></dt>
               <?php foreach($workhistory as $wh): 
                 if ($wh['is_stillhere'] == 1):
               ?>
-              <dt>Current Employement<a href="<?php echo $site_url;?>jobseeker/register#reg5" target="_blank" class="edit_jobseeker_profile_current_employment_link">Edit</a></dt>
               <dd>
                   <p class="employment_title"><?php echo $wh['company_name']; ?></p>
-                  <p class="emploeyment_period"><?php echo $wh['period_time_from'];?> - <?php echo $wh['period_time_to']; ?></p>
+                  <p class="emploeyment_period"><?php echo date('Y F', strtotime($wh['period_time_from'].'-1'));?> - Present</p>
                   <p class="employment_description"><?php echo $wh['introduce'];?></p>
               </dd>
             <?php else: ?>
-              <dt>Previous Employment<a href="<?php echo $site_url;?>jobseeker/register#reg5" target="_blank" class="edit_jobseeker_profile_previous_employment_link">Edit</a></dt>
               <dd>
                   <p class="employment_title"><?php echo $wh['company_name']; ?></p>
-                  <p class="emploeyment_period"><?php echo $wh['period_time_from'];?> - <?php echo $wh['period_time_to']; ?></p>
+                  <p class="emploeyment_period"><?php echo date('Y F', strtotime($wh['period_time_from'].'-1'));?> - <?php echo date('Y F', strtotime($wh['period_time_to'].'-1')); ?></p>
                   <p class="employment_description"><?php echo $wh['introduce'];?></p>
               </dd>
             <?php endif;?>
@@ -405,7 +404,7 @@
                          <?php echo str_replace("\n",'<br/>', $ei['achievements']);?>
                      </p>
                   <?php endif; ?>
-                  <p class="school_period"><?php echo $ei['attend_date_from'];?> - <?php echo $ei['attend_date_to'];?></p>
+                  <p class="school_period"><?php echo date('Y F', strtotime($ei['attend_date_from'].'-1'));?> - <?php echo date('Y F', strtotime($ei['attend_date_to'].'-1'));?></p>
                   <?php endforeach; ?>
               </dd>
               <dt>Elsewhere on Web<a href="javascript:void(0);" class="edit_jobseeker_profile_sns_link edit_profile_link_ajax">Edit</a></dt>
@@ -473,6 +472,7 @@
                   </div>
 
               </dd>
+              <dt>Looking for</dt>
               <dd class="industry">
                   <ul class="industry-ul">
                   	<!-- 
