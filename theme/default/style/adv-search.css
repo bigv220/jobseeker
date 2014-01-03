@@ -47,7 +47,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .postjob-content-left-row .span2{margin-left:15px;}
 .postjob-content-left-row .job-listing {width:200px; margin-right: 10px;}
 .postjob-content input{width:220px;}
-.postjob-content select{width:224px;height:24px;}
+.postjob-content select{width:224px;height:24px;padding:3px;}
 .postjob-content-right-row{padding:0 0 9px 0;}
 .postjob-content-right-row input.location-input{width:105px;}
 .postjob-content-right-row select.location-input{width:110px;}

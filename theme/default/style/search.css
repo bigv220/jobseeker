@@ -22,6 +22,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .sresult-par1 .span1{width:116px;float:left;margin-right:0;}
 .sresult-par1 .span2{width:203px;float:left;}
 .sresult-par1 .span3{width:175px;float:right;}
+.sresult-par1 .candidate-span{width:90px;}
 .sresult-par1 .span1 img{margin:10px 0 0 15px;}
 .sresult-par1 .span1 .job-mark{width:105px;height:100px;overflow:hidden;display:block;top:0;left:0;background-image:url(search/job-yuan.png);background-repeat:no-repeat;}
 .sresult-par1 .span1 .job-mark1{background-position:0 0;}

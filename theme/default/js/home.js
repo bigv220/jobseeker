@@ -166,7 +166,7 @@ $(function(){
                         current_login_user_id = result.uid;
                     	// if not new account will goto findpage directly
                     	if(result.user_type == "1") {
-                        	window.location.href = site_url + "search/findstaff";
+                        	window.location.href = site_url + "job/postjob";
                         } else {
                         	window.location.href = site_url + "jobseeker/viewprofile";
                         } 

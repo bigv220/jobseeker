@@ -27,7 +27,7 @@
           <?php else: ?>
           <a href="<?php echo $site_url.'inbox'; ?>" class="png square_btn jingchat_inbox_btn jingchat_inbox_btn_current"></a>
           <?php endif; ?>
-          <?php if ($userinfo['user_type'] === 0): ?>
+          <?php if ($userinfo['user_type'] == 0): ?>
           <a href="<?php echo $site_url; ?>jobseeker/savedBookmarks" class="png square_btn saved_bookmarks_btn"></a>
           <?php else: ?>
           <a href="<?php echo $site_url; ?>company/shortlistCandidates" class="png square_btn view_my_candidates_btn"></a>
@@ -75,7 +75,7 @@
                           </div>
                           <div class="email_short_description">
                               <div class="received_date"><?php echo time_elapsed_string($msg['timestamp']); ?></div>
-                              <div class="from_name"><?php echo Truncate($msg['first_name'].' '.$msg['last_name'],25); ?></div>
+                              <div class="from_name"><?php echo empty($msg['jingchat_username'])?(Truncate($msg['first_name'].' '.$msg['last_name'],25)):$msg['jingchat_username']; ?></div>
                               <div class="email_subject"><?php echo Truncate($msg['message'],32); ?></div>
                               <div class="email_actions_bar">
                                   <img src="<?php echo $theme_path;?>/style/btns/btn_email_reply.png" alt=""/>

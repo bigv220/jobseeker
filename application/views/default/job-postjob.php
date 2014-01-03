@@ -115,7 +115,7 @@
 
                 <div class="postjob-content-left-row clearfix">
                     <div class="span1">
-                        <strong>Teachnical Skills</strong>
+                        <strong>Technical Skills</strong>
                         <div class="reg-row">
                             <div>
                                 <input type="hidden" name="preferred_technical_skills" class="input-tip" value="" data-tipval="">

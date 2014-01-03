@@ -86,10 +86,9 @@
                                 ?></h3>
                 <p><?php echo $user['city'].' '.$user['province'].' '.$user['country']; ?></p>
                 <a href="#" class="job-viewmore">View More</a> </div>
-            <div class="span3">
+            <div class="span3 candidate-span">
                 <div class="zoom">
                     <a href="#" class="job-btn jobseeker-btn-delete-candidate" data-id="<?php echo $user['uid']; ?>"></a>
-                    <a href="#" class="job-btn job-btn-match">93%</a>
                 </div>
                 <div>
                     <input type="hidden" name="jobseeker_name" value="<?php echo $user['first_name'];?>" />

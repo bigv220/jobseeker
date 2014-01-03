@@ -111,6 +111,9 @@ class company extends Front_Controller {
         $data['industries'] = $this->company_model->getIndustry($company_id);
 
         $this->load->model('jobseeker_model');
+        /**
+         * Get Interview and Chat Number
+         **/
         $interview_num = $this->jobseeker_model->getInterviews("i.company_id=$company_id and is_deleted=0");
         $data['interview_num'] = count($interview_num);
         $this->load->model('inbox_model');
