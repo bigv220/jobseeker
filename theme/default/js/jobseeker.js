@@ -334,7 +334,7 @@ function uploadImage(old_avatar) {
                 oBtn.disabled = "disabled";
             }else{
                 oRemind.style.color = "red";
-                oRemind.innerHTML = "Sorry, Do not support this image type.";
+                oRemind.innerHTML = "Sorry, we do not support this image type. Please use jpg or png.";
                 return false;
             }
         },

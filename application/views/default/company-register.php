@@ -23,7 +23,8 @@
     </div>
     <div class="reg-right-wrap">
         <div class="reg-right box mb20"> 
-            <p class="reg-right-text">Please fill out the mandatory fields to enhance your JingJobs experience,and promote your company to jobseekers.</p>
+            <p class="reg-right-text">Please fill out the mandatory fields to enhance your JingJobs
+                experience and promote your company to jobseekers.</p>
             <form action="" id="basicForm" method="post">
             <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
             <div class="reg-area"> <a id="reg1" name="reg1"></a>
