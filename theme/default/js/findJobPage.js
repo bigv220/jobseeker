@@ -17,9 +17,10 @@ function addIndustryBtnClick(thisO) {
 
     var html = '<div class="advsearch-row clearfix">';
     html += $('#one_list').html();
-    html += '<div class="delete"><i class="del" onclick="delNewUserIndustry(this);">'+
+    html += '<div class="delete">'+
+            '<i class="del" onclick="delNewUserIndustry(this);">'+
             '</i></div>';
-    html += '</div>';
+    html += '</div><div class="list_id_line"><input type="hidden" value="" name="ind_id[]" /></div>';
     $(thisO).parent().parent().before(html);
 }
 
@@ -41,6 +42,6 @@ function delUserIndustry(thisO,id) {
 function delNewUserIndustry(thisO) {
     var v = $(thisO).parent().parent().parent().find('input[name="grop_num[]"]').val();
     $(thisO).parent().parent().parent().find('input[name="grop_num[]"]').val(parseInt(v)-1);
-
+    $(thisO).parent().parent().next().remove();
     $(thisO).parent().parent().remove();
 }

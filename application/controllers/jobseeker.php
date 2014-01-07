@@ -647,10 +647,6 @@ class jobseeker extends Front_Controller {
             $company_len = count($post['company_name']);
             for($i=0; $i<$company_len;$i++) {
                 $id = $post["id"][$i];
-                if($id) {
-                    // delete old jobs
-                    $this->jobseeker_model->delWorkHistory($id);
-                }
 
                 if($post['company_name'][$i]) {
                     $work_example = $post['work_example'][$i]?$post['work_example'][$i]:'';
@@ -664,13 +660,21 @@ class jobseeker extends Front_Controller {
                         'location'=>null,'description'=>$desc,'is_stillhere'=>$post['is_stillhere'][$i],
                         'work_examples_url'=>$work_example);
 
-                    $id = $this->jobseeker_model->insertWorkHistory($data);
+                    if($id) {
+                        $this->jobseeker_model->updateWorkHistory($id, $data);
+                    } else {
+                        $id = $this->jobseeker_model->insertWorkHistory($data);
+                    }
 
                     $user_industry_num = $post["grop_num"][$i];
                     $num = $i*$post["grop_num"][0] + $user_industry_num;
                     for($j=$i*$post["grop_num"][0];$j<$num;$j++) {
                         $data_arr = array('parent_id'=>$id,'uid'=>$post["uid"],'industry'=>$post['industry'][$j],'position'=>$post['position'][$j]);
-                        $this->jobseeker_model->insertUserIndustry($data_arr);
+                        if($post['ind_id'][$j]) {
+                            $this->jobseeker_model->updateUserIndustry($post['ind_id'][$j], $data_arr);
+                        } else {
+                            $this->jobseeker_model->insertUserIndustry($data_arr);
+                        }
                     }//end for
                 }//end if
             }

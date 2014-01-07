@@ -505,9 +505,10 @@
                 <div class="reg-area-tit <?php echo $cla; ?>">Work History</div>
                 <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="workhistoryForm" enctype="multipart/form-data">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
-					<!-- hide Introduce for now
+
+                    <input type="hidden" name="id[]" value="<?php if(count($work_history)) echo $work_history["id"]; ?>" />
                     <div id="every_job_part1">
-                        <input type="hidden" name="id[]" value="<?php if(count($work_history)) echo $work_history["id"]; ?>" />
+                    <!-- hide Introduce for now
                     <div class="reg-row"> <b>Introduce yourself</b>
                         <div>
                             <textarea class="reg-textarea" name="introduce[]"><?php if(count($work_history)) echo $work_history["introduce"]; ?></textarea>

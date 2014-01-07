@@ -286,7 +286,8 @@ $(document).ready(function(){
         var upload_id = 'example_upload_button'+len;
         var error_id = 'exampleerrorRemind'+len;
 
-        html = '<div class="new_added">'+html1+html_middle+html2 + '<div class="reg-row">'+
+        html = '<div class="new_added"><input type="hidden" name="id[]" value="" />'+
+            html1+html_middle+html2 + '<div class="reg-row">'+
             '<input type="hidden" name="work_example[]" id="'+input_id+'" />'+
             '<div id="'+upload_id+'">'+
             '<span id="'+btn_id+'" class="reg-row-tip">Upload examples of work</span></div>'+

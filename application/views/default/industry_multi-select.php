@@ -43,5 +43,8 @@
 <?php }?>
 
 </div>
+<div class="list_id_line">
+    <input type="hidden" value="<?php if(array_key_exists('id',$ind)) echo $ind['id']; ?>" name="ind_id[]" />
+</div>
 
 <?php } ?>

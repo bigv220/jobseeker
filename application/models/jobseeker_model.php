@@ -237,6 +237,10 @@ class jobseeker_model extends MY_Model
 
         return $this->db->insert_id();
     }
+
+    public function updateWorkHistory($id, $data) {
+        return $this->db->where('id', $id)->update("user_work_history", $data);
+    }
     
     public function delWorkHistory($id) {
     	$sql = 'DELETE FROM user_work_history WHERE id='.$id;
@@ -416,6 +420,10 @@ class jobseeker_model extends MY_Model
 
     public function insertUserIndustry($data) {
         return $this->db->insert('user_industry_position', $data);
+    }
+
+    public function updateUserIndustry($id, $data) {
+        return $this->db->where('id', $id)->update("user_industry_position", $data);
     }
 
     public function delUserIndusry($id) {
