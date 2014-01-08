@@ -223,7 +223,7 @@
             </div>
             <div class="clearfix"></div>
             <div class="postjob-additional-information">
-                <strong>Position Description or Addtional Information *</strong>
+                <strong>Position Description or Additional Information *</strong>
                 <script type="text/javascript" src="<?php echo $theme_path?>js/jslib/xheditor/xheditor-1.1.14-en.min.js"></script>
                 <script>
                 $(document).ready(function() {

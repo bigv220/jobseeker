@@ -24,9 +24,9 @@ $expat_profile = $expat_profile[0];
                 </div>
 
                 <div class="content titles">
-                    <p>
-                        <?php echo $expat_profile['content_general']; ?>
-                    </p>
+                    <!-- <p>
+                        <?php //echo $expat_profile['content_general']; ?>
+                    </p> -->
                     <p>
                         <?php echo $expat_profile['content']; ?>
                     </p>
