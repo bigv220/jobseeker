@@ -179,7 +179,6 @@
                 	<strong>Technical Skills</strong>
                     <input type="hidden" name="ProfessionalSkills_str" id="ProfessionalSkills_str" />
                     <select name="technical_skills" id="technical_skills" class="industry_options multi_select" multiple="multiple" onchange="selectMultiple('technical_skills','ProfessionalSkills_str')">
-                        <option value="">All Skills</option>
                         <?php foreach($tech_skills as $key=>&$v) {
                         if(empty($v['skill'])) continue;
                         ?>
@@ -193,7 +192,6 @@
                     <strong>Personal Skills</strong>
                     <input type="hidden" name="PersonalSkills_str" id="PersonalSkills_str" />
                     <select name="personal_skills" id="personal_skills" class="industry_options multi_select" multiple="multiple" onchange="selectMultiple('personal_skills','PersonalSkills_str')">
-                        <option value="">All Skills</option>
                         <?php foreach($pro_skills as $key=>&$v) {
                             if(empty($v['skill'])) continue;
                             ?>

@@ -391,9 +391,9 @@ class jobseeker_model extends MY_Model
 
     public function getSkills($skill_type, $query_str) {
         if(!empty($query_str)) {
-            $sql = "SELECT id,skill FROM " . $skill_type . " WHERE skill like '" . $query_str . "%'";
+            $sql = "SELECT id,skill FROM " . $skill_type . " WHERE skill like '" . $query_str . "%' ORDER BY skill ASC";
         } else {
-            $sql = "SELECT id,skill FROM " . $skill_type;
+            $sql = "SELECT id,skill FROM " . $skill_type . " ORDER BY skill ASC";
         }
 
         return $this->db->query($sql)->result_array();

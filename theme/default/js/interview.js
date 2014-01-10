@@ -85,27 +85,27 @@ $(document).ready(function(){
     });
 
     $('.send_request_interview').click(function(){
-        sendInterviewRequest();
-        popMarker.fadeOut();
-        popRequestInterview.fadeOut();
+        var Form = $('#sendInterviewRequest');
+        Form.validate();
+
+        if (Form.valid()) {
+            sendInterviewRequest();
+            popMarker.fadeOut();
+            popRequestInterview.fadeOut();
+        }
     });
 });
 
 function sendInterviewRequest() {
     var interviewForm = $('#sendInterviewRequest');
-    interviewForm.validate();
 
-    if (interviewForm.valid()) {
-        $.post(site_url + 'search/sendinterviewrequest',
-            interviewForm.serialize(),
-            function(result,status){
-                if(status == 'success'){
-                    $('.pop-mark').fadeIn();
-                    $('.request_interview_pop').fadeOut();
-                    $('.request-sent-pop-message').fadeIn();
-                }
-            });
-    } else {
-        exit;
-    }
+    $.post(site_url + 'search/sendinterviewrequest',
+        interviewForm.serialize(),
+        function(result,status){
+            if(status == 'success'){
+                $('.pop-mark').fadeIn();
+                $('.request_interview_pop').fadeOut();
+                $('.request-sent-pop-message').fadeIn();
+            }
+        });
 }

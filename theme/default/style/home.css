@@ -375,7 +375,7 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .message_sent_pop_bd .message_title{font-size:16px;color:#ea6e3b;}
 .message_sent_pop_bd .message_content a{font-size:14px;color:#674092;text-decoration: none;}
 
-.request_interview_pop{display:none;z-index:102;width:600px;height:327px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(company/request_interview_pop_bg.png);}
+.request_interview_pop{display:none;z-index:102;width:600px;height:355px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(company/request_interview_pop_bg.png);}
 .request_interview_pop b{display:block;text-align:center;font-size:15px;color:#434345;font-weight:bold;padding:20px 0 10px 20px;}
 .request_interview_pop b span{color:#ea6e3b;}
 .request_interview_pop_close{width:20px;height:20px;right:1px;cursor:pointer;display:block;}
@@ -391,7 +391,7 @@ ul.recent_applied_jobs li a{font-size:13px;color:#674092;text-decoration: underl
 .time_selector_wrapper .time_zone{float:left;width:50%;}
 .time_selector_wrapper select,.time_selector_wrapper input{width:107px;}
 .time_selector_wrapper .time_wrapper{float:right;width:50%;}
-.request_interview_pop_actions{padding-top:8px;text-align:center;clear:both;}
+.request_interview_pop_actions{padding-top:14px;text-align:center;clear:both;}
 .request_interview_pop_actions img{cursor:pointer;margin-right:10px;}
 h2.applied_jobs_title{color:#674092;font-size:18px;font-weight:bold;padding-left:10px;}
 .view_applied_jobs_page .interview_sent_date{width:75px;padding-top:45px;float:right;margin-right:12px;background:url(jobseeker/job_applied_date_bg.png) no-repeat;}
