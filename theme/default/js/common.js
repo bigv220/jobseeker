@@ -206,9 +206,15 @@ function selectMultiple(id, str_id)
 {
     var o = document.getElementById(id);
     var str = "";
+    var selected_num = 0;
+
     for(i=0;i<o.length;i++){
         if(o.options[i].selected){
-            str+=o.options[i].value+",";
+            if(++selected_num > 5) {
+                o.options[i].selected = false;
+            } else {
+                str+=o.options[i].value+",";
+            }
         }
     }
 

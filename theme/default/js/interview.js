@@ -93,14 +93,19 @@ $(document).ready(function(){
 
 function sendInterviewRequest() {
     var interviewForm = $('#sendInterviewRequest');
+    interviewForm.validate();
 
-    $.post(site_url + 'search/sendinterviewrequest',
-        interviewForm.serialize(),
-        function(result,status){
-            if(status == 'success'){
-                $('.pop-mark').fadeIn();
-                $('.request_interview_pop').fadeOut();
-                $('.request-sent-pop-message').fadeIn();
-            }
-        });
+    if (interviewForm.valid()) {
+        $.post(site_url + 'search/sendinterviewrequest',
+            interviewForm.serialize(),
+            function(result,status){
+                if(status == 'success'){
+                    $('.pop-mark').fadeIn();
+                    $('.request_interview_pop').fadeOut();
+                    $('.request-sent-pop-message').fadeIn();
+                }
+            });
+    } else {
+        exit;
+    }
 }

@@ -114,46 +114,32 @@
                 </div>
 
                 <div class="postjob-content-left-row clearfix">
-                    <div class="span1">
+                    <div class="span1 reg-row">
                         <strong>Technical Skills</strong>
-                        <div class="reg-row">
-                            <div>
-                                <input type="hidden" name="preferred_technical_skills" class="input-tip" value="" data-tipval="">
-                                <input type="text" size="24" maxlength="255" autocomplete="on" id="ProfessionalSkills_input" class="skills-input input-tip" data-tipval="Start Typing" value="Start Typing" onkeypress="if(event.keyCode == 13){ addPersonalSkills('ProfessionalSkills',this,'step8'); return false;}" required>
-                            </div>
-                        </div>
-                        <div class="skills-vals clearfix">
-                            <ul id="ProfessionalSkills">
-                                <?php if (isset($professional_skills) > 0): ?>
-                                <?php foreach($professional_skills as $v) { ?>
-                                    <li data-val="2">
-                                        <i class="del" onclick="delPersonalSkills('ProfessionalSkills',this,'<?php echo $v['professional_skill']; ?>');"></i>
-                                    </li>
-                                <?php } ?>
-                                <?php endif; ?>
-                            </ul>
-                        </div>
+                        <input type="hidden" name="ProfessionalSkills_str" id="ProfessionalSkills_str" />
+                        <select name="technical_skills" id="technical_skills" class="industry_options multi_select" multiple="multiple" onchange="selectMultiple('technical_skills','ProfessionalSkills_str')">
+                            <?php foreach($tech_skills as $key=>&$v) {
+                            if(empty($v['skill'])) continue;
+                            ?>
+                            <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>
+                            <?php } ?>
+                        </select>
+                        <div class="search-row-tip">Hold down 'Command' to select a max of 5</div>
+                        <div id="sel-technical-val" class="show-selval"></div>
 
                     </div>
-                    <div class="span2">
+                    <div class="span2 reg-row">
                         <strong>Personal Skills</strong>
-                        <div class="reg-row">
-                            <div>
-                                <input type="hidden" name="preferred_personal_skills" class="input-tip" value="" data-tipval="">
-                                <input type="text" size="24" maxlength="255" autocomplete="on" id="PersonalSkills_input" class="skills-input input-tip" data-tipval="Start Typing" value="Start Typing" onkeypress="if(event.keyCode == 13){ addPersonalSkills('PersonalSkills',this,'step8'); return false;}" required>
-                            </div>
-                        </div>
-                        <div class="skills-vals clearfix">
-                            <ul id="PersonalSkills">
-                                <?php if (isset($personal_skills) > 0): ?>
-                                    <?php foreach($personal_skills as $v) { ?>
-                                    <li data-val="2">
-                                        <i class="del" onclick="delPersonalSkills('PersonalSkills',this,'<?php echo $v['personal_skill']; ?>');"></i>
-                                    </li>
-                                    <?php } ?>
-                                <?php endif; ?>
-                            </ul>
-                        </div>
+                        <input type="hidden" name="PersonalSkills_str" id="PersonalSkills_str" />
+                        <select name="personal_skills" id="personal_skills" class="industry_options multi_select" multiple="multiple" onchange="selectMultiple('personal_skills','PersonalSkills_str')">
+                            <?php foreach($pro_skills as $key=>&$v) {
+                            if(empty($v['skill'])) continue;
+                            ?>
+                            <option value="<?php echo $v['skill']; ?>"><?php echo $v['skill']; ?></option>
+                            <?php } ?>
+                        </select>
+                        <!--<div class="search-row-tip">Hold down 'Command' to select a max of 5</div>-->
+                        <div id="sel-personal-val" class="show-selval"></div>
 
                     </div>
                 </div>
