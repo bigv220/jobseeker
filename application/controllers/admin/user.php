@@ -44,11 +44,11 @@ class user extends Admin_Controller {
 			if ($flag)
 			{
 				//addSysLog('增加用户：'.$post['username']);
-				showmsg(site_url().'/admin/user/');
+				showmsg(site_url().'admin/user/');
 			}
 			else 
 			{
-				showmsg(site_url().'/admin/user/add/', 'Error');
+				showmsg(site_url().'admin/user/add/', 'Error');
 			}
 		}
 	}
@@ -75,11 +75,11 @@ class user extends Admin_Controller {
 			if ($flag)
 			{
 				//addSysLog('编辑用户ID：'.$id);
-				showmsg(site_url().'/admin/user/');
+				showmsg(site_url().'admin/user/');
 			}
 			else 
 			{
-				showmsg(site_url().'/admin/user/edit/'.$id, 'Error');
+				showmsg(site_url().'admin/user/edit/'.$id, 'Error');
 			}
 		}
 	}
@@ -90,11 +90,11 @@ class user extends Admin_Controller {
 		if ($flag)
 		{
 			//addSysLog('删除用户：'.$id);
-			showmsg(site_url().'/admin/user/');
+			showmsg(site_url().'admin/user/');
 		}
 		else 
 		{
-			showmsg(site_url().'/admin/user/', 'Error');
+			showmsg(site_url().'admin/user/', 'Error');
 		}
 	}
 }

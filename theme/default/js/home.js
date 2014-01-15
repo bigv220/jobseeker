@@ -126,7 +126,7 @@ $(function(){
                 if(newsletter != 1) newsletter = 0;
                 //post data to server
                 $.post(
-                    site_url + "/user/signup",
+                    site_url + "user/signup",
                     {'first_name':firstName,'last_name':lastName,'email':email, 'password':password, 'user_type':regType, 'newsletter':newsletter},
                     function(data){
                         if(data.userId <1){
