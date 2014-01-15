@@ -23,7 +23,7 @@ function showContentOfPortfolio(name, desc, type, file_url){
 
             //load TXT file content from server
             var file_path = './' + file_url.substring(file_url.indexOf('attached'));
-            $.post(site_url + '/jobseeker/readPortfolioTextFileContent',
+            $.post(site_url + 'jobseeker/readPortfolioTextFileContent',
                 {file_path:file_path},
                 function(result, status){
                     result = eval('(' + result + ')');
@@ -244,7 +244,7 @@ $(function(){
         var portfolioFileName = $('#portfolio_file_name').val();
         var type = getUploadedFileType(portfolioFileName);
 
-        $.post(site_url + '/jobseeker/addPortfolioProject',
+        $.post(site_url + 'jobseeker/addPortfolioProject',
             {name:projectName, description:projectDesc, file_url:portfolioFileName, type:type,uid:current_login_user_id},
             function(result, status){
                 result = eval('(' + result + ')');

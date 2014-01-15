@@ -27,7 +27,7 @@ function addIndustryBtnClick(thisO) {
 function delUserIndustry(thisO,id) {
     var uid = $('#uid').val();
 
-    $.post(site_url + '/jobseeker/delUserIndustry',
+    $.post(site_url + 'jobseeker/delUserIndustry',
         { id:id },
         function(result,status){
             if(status == 'success'){

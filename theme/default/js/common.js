@@ -22,7 +22,7 @@ $(function(){
         updateuserstatus();
     },30000);
     setInterval(function(){
-        var ajax=$.getJSON(base_url+'/user/checkstatus',function(flag){
+        var ajax=$.getJSON(base_url+'user/checkstatus',function(flag){
         });
     }, 300000);
      //pub input tips
