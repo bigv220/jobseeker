@@ -39,11 +39,11 @@ class job extends Admin_Controller {
 			if ($flag)
 			{
 				//addSysLog('编辑用户ID：'.$id);
-				showmsg(site_url().'/admin/job/');
+				showmsg(site_url().'admin/job/');
 			}
 			else 
 			{
-				showmsg(site_url().'/admin/job/edit/'.$id, 'Error');
+				showmsg(site_url().'admin/job/edit/'.$id, 'Error');
 			}
 		}
 	}
@@ -54,11 +54,11 @@ class job extends Admin_Controller {
 				$this->job_model->delJobLang($id);
 		if ($flag)
 		{
-			showmsg(site_url().'/admin/job/');
+			showmsg(site_url().'admin/job/');
 		}
 		else 
 		{
-			showmsg(site_url().'/admin/job/', 'Error');
+			showmsg(site_url().'admin/job/', 'Error');
 		}
 	}
 }

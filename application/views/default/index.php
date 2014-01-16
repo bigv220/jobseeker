@@ -66,69 +66,6 @@ $(function(){
 	
 	<!-- Partners -->
 	<?php $this->load->view($front_theme.'/partners-block');?>
-	
-	<!-- sponsors -->
-	<!-- 
-	<div class="p-bd">
-		<div class="p-sponsors w100">
-		  <div class="scroll-out">
-		    <div class="scroll-box">
-		      <a class="scroll-item p-sponsors-item" href="#">
-		      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif" widthh="71" height="85" alt="" />
-		      	<i class="mark"></i>
-		      	<p>
-		      		<b>microsoft, Beijing</b>
-					<span>Technical Engineer</span>
-		      	</p>
-		      </a>
-		      <a class="scroll-item p-sponsors-item" href="#">
-				<img src="<?php echo $theme_path?>style/home/temp/sponsors2.gif" widthh="71" height="85" alt="" />
-		      	<i class="mark"></i>
-		      	<p>
-		      		<b>microsoft, Beijing</b>
-					<span>Technical Engineer</span>
-		      	</p>
-		      </a>
-		      <a class="scroll-item p-sponsors-item" href="#">
-				<img src="<?php echo $theme_path?>style/home/temp/sponsors3.gif" widthh="71" height="85" alt="" />
-		      	<i class="mark"></i>
-		      	<p>
-		      		<b>microsoft, Beijing</b>
-					<span>Technical Engineer</span>
-		      	</p>
-		      </a>
-		      <a class="scroll-item p-sponsors-item" href="#">
-		      	<img src="<?php echo $theme_path?>style/home/temp/sponsors1.gif" widthh="71" height="85" alt="" />
-		      	<i class="mark"></i>
-		      	<p>
-		      		<b>microsoft, Beijing</b>
-					<span>User Interface Midweight Designer</span>
-		      	</p>
-		      </a>
-		      <a class="scroll-item p-sponsors-item" href="#">
-				<img src="<?php echo $theme_path?>style/home/temp/sponsors2.gif" widthh="71" height="85" alt="" />
-		      	<i class="mark"></i>
-		      	<p>
-		      		<b>microsoft, Beijing</b>
-					<span>Technical Engineer</span>
-		      	</p>
-		      </a>
-		      <a class="scroll-item p-sponsors-item" href="#">
-				<img src="<?php echo $theme_path?>style/home/temp/sponsors3.gif" widthh="71" height="85" alt="" />
-		      	<i class="mark"></i>
-		      	<p>
-		      		<b>microsoft, Beijing</b>
-					<span>Technical Engineer</span>
-		      	</p>
-		      </a>
-		    </div>
-		  </div>
-		  <div class="scroll-bar scroll-left"></div>
-		  <div class="scroll-bar scroll-right"></div>
-		</div>
-	</div>
-	-->
-
 
 	<!--pop login-->
 	<div class="pop-login png">

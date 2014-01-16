@@ -2,7 +2,7 @@ var basicFormSubmit = function(is_all) {
 		$('#basicForm').validate();
 		if ($('#basicForm').valid()) {
 			$.post(
-				site_url + '/company/register',
+				site_url + 'company/register',
 				$('#basicForm').serialize(),
             	function(result,status){
                 if(status == 'success'){
@@ -22,7 +22,7 @@ var basicFormSubmit = function(is_all) {
 		$('#contactForm').validate();
 		if ($('#contactForm').valid()) {
 			$.post(
-				site_url + '/company/register',
+				site_url + 'company/register',
 				$('#contactForm').serialize(),
             	function(result,status){
                 if(status == 'success'){

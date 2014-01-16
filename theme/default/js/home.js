@@ -126,7 +126,7 @@ $(function(){
                 if(newsletter != 1) newsletter = 0;
                 //post data to server
                 $.post(
-                    site_url + "/user/signup",
+                    site_url + "user/signup",
                     {'first_name':firstName,'last_name':lastName,'email':email, 'password':password, 'user_type':regType, 'newsletter':newsletter},
                     function(data){
                         if(data.userId <1){
@@ -158,7 +158,7 @@ $(function(){
    //login form ajax submit
     var loginform = $('#login_form');
     loginform.submit(function(){
-        $.post(site_url + '/user/login',
+        $.post(site_url + 'user/login',
                 loginform.serialize(),
                 function(result, status){
 
@@ -217,7 +217,7 @@ $(function(){
             alert('Wrong email address');
         }
         else{
-            $.post(site_url + '/index/newsletter',
+            $.post(site_url + 'index/newsletter',
                     newsletterform.serialize(),
                     function(result, status){
                         $('#newsletter_email').attr('value', 'Email address');
