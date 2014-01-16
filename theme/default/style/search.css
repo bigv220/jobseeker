@@ -104,7 +104,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .share-job a.n5{background-position:0 -72px;}
 .sresult-about{padding:10px 0 0 0;}.sresult-about p{text-align:right;}
 .sresult-about a{color:#ea6e3b;}
-.pop-apply{width:230px;height:116px;position:absolute;top:50%;left:50%;margin:-58px 0 0 -115px;position:fixed;_position:absolute;zoom:1;}
+.pop-apply{width:230px;height:116px;position:fixed;top:50%;left:50%;margin:-58px 0 0 -115px;position:fixed;_position:absolute;zoom:1;}
 .pop-apply-nav p{text-align:center;font-weight:700;font-size:14px;padding:0 30px;}
 .pop-multi-delete{width:230px;height:116px;position:absolute;top:50%;left:50%;margin:-58px 0 0 -115px;position:fixed;_position:absolute;zoom:1;}
 .pop-multi-delete-nav p{text-align:center;font-weight:700;font-size:13px;padding:0 10px;}
