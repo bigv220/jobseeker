@@ -436,11 +436,14 @@ $(function(){
 
     // bookmark job PopUp
     $('.job-btn-mark').bind('click',function apply(e) {
-        popMark.fadeIn();
-        popBookmark.fadeIn();
-        var id = $(this).attr('data-job-id');
-        $('#selected_job_id').val(id);
-
+        if(userType == 0){//employee
+            popMark.fadeIn();
+            popBookmark.fadeIn();
+            var id = $(this).attr('data-job-id');
+            $('#selected_job_id').val(id);
+        }
+        else
+            alert("You couldn't bookmark this job as you're a company account.");
         e.stopPropagation();
         e.preventDefault();
     });
