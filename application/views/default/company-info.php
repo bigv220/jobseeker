@@ -13,7 +13,7 @@
         <h4><?php echo $info['city'].', '.$info['country'];?></h4>
         <p>Offline now</p>
       </div>
-      <div class="btnarea"> <a href="#" class="png combtn website"></a> <a href="#" class="png combtn bookmark"></a> <a href="#" class="combtn bookmarded" style="display:none;"></a> </div>
+      <div class="btnarea"> <a href="<?php echo $info['personal_website'];?>" class="png combtn website"></a> <a href="#" class="png combtn bookmark"></a> <a href="#" class="combtn bookmarded" style="display:none;"></a> </div>
     </div>
     <div class="company-bd">
       <div class="company-bd-left">

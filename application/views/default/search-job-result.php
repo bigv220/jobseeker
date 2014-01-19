@@ -223,11 +223,11 @@
         <div class="sresult-par1">
             <div class="span1 rel"> <img src="<?php echo $site_url?>attached/users/<?php echo $job['profile_pic']?$job['profile_pic']:'no-image.png';?>" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
             <div class="span2">
-                <h2><?php echo $job["job_name"]; ?></h2>
+                <h2 onclick="window.location.href='<?php echo $site_url?>job/jobDetails/<?php echo $job['id'];?>'"><?php echo $job["job_name"]; ?></h2>
                 <?php if (isset($job['id']) && in_array($job['id'], $apply)): ?>
                     <h3 class="comp_email"></h3>
                 <?php else: ?>
-                    <h3 class="comp_email"><?php echo $job["username"]; ?></h3>
+                    <h3 class="comp_email"><?php //client doesn't want to show email here.  echo $job["username"]; ?></h3>
                 <?php endif; ?>
                 <p><?php echo $job["city"]; ?></p>
                 <a href="javascript:void(0);" class="job-viewmore">View More</a> </div>

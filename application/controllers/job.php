@@ -120,12 +120,12 @@ class job extends Front_Controller {
 
             if($result['status']) {
                 //send an email to jingjobs.com
-                $user_name = $this->session->userdata('first_name').' '.$this->session->userdata('last_name');
+                $user_name = $this->session->userdata('first_name');
                 $this->load->library('email');
                 $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
                 $this->email->to('info@jingjobs.com');
                 $this->email->subject('A new job is posted.');
-                $this->email->message('<HTML><BODY><div>'.$user_name . 'post a new job.</div></BODY></HTML>');
+                $this->email->message('<HTML><BODY><div>'.$user_name . ' has posted a new job.</div></BODY></HTML>');
                 $this->email->send();
 
                 //send an email to company

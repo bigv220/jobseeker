@@ -372,8 +372,15 @@
                             <dd><p class="phone_number"><?php echo $user['phone']; ?></p></dd>
                             <dd class="industry">
                                 <ul class="industry-ul">
-                                    <li class="n1"><b>Type of Employment</b><span>Full Time</span></li>
-                                    <li class="n2"><b>Length of Employment</b><span>Long Term (1+ year)</span></li>
+                                  <?php if(!empty($user['employment_type'])):?>
+			                        <li class="n1"><b>Type of Employment</b><span>Full Time</span></li>
+			                      <?php endif;?>
+			                      
+			                      <?php if(!empty($user['employment_length'])):?>
+			                        <li class="n2"><b>Length of Employment</b><span>
+			                        <?php echo getEmploymentLengthByID($user['employment_length']) ?></span></li>
+			                      <?php endif;?>
+			                      
                                     <!-- <li class="n3"><b>Visa Assistance</b><span>Visa will be provided</span></li>
                               <li class="n4"><b>Housing Assistance</b><span>Accomodation will be provided</span></li> -->
                                 </ul>

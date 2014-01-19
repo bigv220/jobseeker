@@ -17,13 +17,13 @@ $news = $hot_news[0];?>
             <div class="news-index-left">
                 <div class="article">
                     <div class="content">
+                    	<style>img{margin:5px;}</style>
                         <?php if(!empty($news['profile_pic'])) {
                                         $pic = $site_url.'attached/article/'.$news['profile_pic'];
-                                   } else {
-                                        $pic = $theme_path."style/home/article_img.jpg";
+                                        echo '<img src="'.$pic.'" width="480"/>';
                                    }
                             ?>
-                        <img src="<?php echo $pic?>" width="480"/>
+                        
                         <p>
                         <?php echo $news['content_general']; ?>
                         <?php echo $news['content']; ?>

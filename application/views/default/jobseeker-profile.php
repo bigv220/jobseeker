@@ -165,10 +165,15 @@
                         <?php endif; ?></span>
                       </li>
                       -->
-                      <li class="n1"><b>Type of Employment</b><span>
+                      <?php if(!empty($userinfo['employment_type'])):?>
+                        <li class="n1"><b>Type of Employment</b><span>
                         <?php echo str_replace(",", ", ", $userinfo['employment_type']); ?></span></li>
-                      <li class="n2"><b>Length of Employment</b><span>
-                      <?php echo getEmploymentLengthByID($userinfo['employment_length']) ?></span></li>
+                      <?php endif;?>
+                      
+                      <?php if(!empty($userinfo['employment_length'])):?>
+                        <li class="n2"><b>Length of Employment</b><span>
+                        <?php echo getEmploymentLengthByID($userinfo['employment_length']) ?></span></li>
+                      <?php endif;?>
                   </ul>
               </dd>
               <!-- <dt>Similar to people <?php echo $userinfo['first_name']; ?></dt>
