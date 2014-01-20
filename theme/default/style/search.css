@@ -22,6 +22,7 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .sresult-par1 .span1{width:116px;float:left;margin-right:0;}
 .sresult-par1 .span2{width:203px;float:left;}
 .sresult-par1 .span3{width:175px;float:right;}
+.sresult-par1 .span3 .zoom {height: 115px;}
 .sresult-par1 .candidate-span{width:90px;}
 .sresult-par1 .span1 img{margin:10px 0 0 15px;}
 .sresult-par1 .span1 .job-mark{width:105px;height:100px;overflow:hidden;display:block;top:0;left:0;background-image:url(search/job-yuan.png);background-repeat:no-repeat;}
@@ -33,10 +34,10 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .sresult-par1 .span2 p{padding:3px 0;color:#5d5d5d;}
 .sresult-par1 .span2 a{color:#ea6e3b;}
 .job-btn{width:75px;height:75px;display:block;float:left;background-image:url(search/job1-btn.png);}
-.job-btn-mark{background-position:0 0;top:-1px;margin-right:11px;}
+.job-btn-mark{position:absolute;left:0px;background-position:0 0;top:0px;margin-right:11px;}
 .job-btn-marked{background-position:0 -150px;margin-right:11px;}
 .job-btn-featured{background-position:0 -75px;}
-.job-btn-match{background-position:0 -225px;line-height:60px;text-decoration:none;color:#fff;font-size:25px;text-align:center;}.job-btn-match:hover{text-decoration:none;}
+.job-btn-match{position:absolute;right: 14px;background-position:0 -225px;line-height:60px;text-decoration:none;color:#fff;font-size:25px;text-align:center;}.job-btn-match:hover{text-decoration:none;}
 .job-btn-match:visited{color:#FFFFFF;}
 .job-btn-submit,.job-btn-submitted{margin-top:8px;width:161px;height:25px;display:none;background-image:url(search/apply-btn.png);background-repeat:no-repeat;}
 .job-btn-submit{background-position:0 -25px;}

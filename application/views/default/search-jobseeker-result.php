@@ -255,13 +255,17 @@
                 <a href="#" class="job-viewmore" alt="<?php echo $user['uid']; ?>">View More</a> </div>
             <div class="span3">
                 <div class="zoom">
+                	<?php if (isCompany($user_type)):?>
                     <a href="#" data-id="<?php echo $user['uid']?>" class="job-btn jobseeker-btn-shortlisted <?php if ($user['is_shortlisted']==1):?>jobseeker-btn-shortlisted_current<?php endif; ?>"></a>
+                    <?php endif;?>
                     <a href="#" class="job-btn job-btn-match">99%</a>
                 </div>
                 <div>
                     <input type="hidden" name="jobseeker_name" value="<?php echo $user['first_name'];?>" />
                     <input type="hidden" name="jobseeker_uid" value="<?php echo $user['uid'];?>" />
+                    <?php if (isCompany($user_type)):?>
                     <a href="#" class="jobseeker_request_interview"></a>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
