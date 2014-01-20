@@ -230,20 +230,21 @@
                     <h3 class="comp_email"><?php //client doesn't want to show email here.  echo $job["username"]; ?></h3>
                 <?php endif; ?>
                 <p><?php echo $job["city"]; ?></p>
-                <a href="javascript:void(0);" class="job-viewmore">View More</a> </div>
+                <a href="javascript:void(0);" class="job-viewmore">View More</a> 
+            </div>
             <div class="span3">
                 <div class="zoom rel">
                 	<?php if (!isCompany($user_type)):?>
                     <a href="javascript:void(0);" id="job-mark<?php echo $job['id']; ?>" class="job-btn <?php if (isset($job['id']) && in_array($job['id'], $bookmark)) echo "job-btn-marked"; else echo "job-btn-mark"; ?>" data-job-id="<?php echo $job['id']; ?>"></a>
                     <?php endif;?>
                     <a href="#" class="job-btn job-btn-featured"  style="display:none"></a>
-                    <a href="#" class="job-btn job-btn-match"><?php echo ($jobs_match==0)?'0':$job["match"]; ?>%</a> </div>
-				</div>
+                    <a href="#" class="job-btn job-btn-match"><?php echo ($jobs_match==0)?'0':$job["match"]; ?>%</a>
+                </div>
                 <?php if (!isCompany($user_type)):?>
-<div><a href="javascript:void(0);" class="<?php if (isset($job['id']) && in_array($job['id'], $apply)) echo "job-btn-submitted"; else echo "job-btn-submit"; ?>" data-job-id="<?php echo $job['id']; ?>" data-job-email="<?php echo $job["username"]; ?>"></a></div>
+				<div><a href="javascript:void(0);" class="<?php if (isset($job['id']) && in_array($job['id'], $apply)) echo "job-btn-submitted"; else echo "job-btn-submit"; ?>" data-job-id="<?php echo $job['id']; ?>" data-job-email="<?php echo $job["username"]; ?>"></a></div>
             	<?php endif;?>
             </div>
-        </div>
+        </div><!-- /sresult-par1 -->
         <div class="sresult-par2">
             <div class="sresult-tab-hd"> <span class="fxui-tab-tit">The Job</span> <span class="fxui-tab-tit">The Company</span> </div>
             <div class="sresult-tab-bd zoom">
