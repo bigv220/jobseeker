@@ -123,14 +123,13 @@ class job extends Front_Controller {
     		$result['status'] = $job_id = $this->job_model->saveJob($data);
 
             if($result['status']) {
-            	$joburl = $this->data['site_url'] . 'job/jobdetails/' . $job_id;
                 //send an email to jingjobs.com
-                $user_name = $this->session->userdata('first_name');
+                $user_name = $this->session->userdata('first_name').' '.$this->session->userdata('last_name');
                 $this->load->library('email');
                 $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
                 $this->email->to('info@jingjobs.com');
                 $this->email->subject('A new job is posted.');
-                $this->email->message('<HTML><BODY><div>'.$user_name . ' has posted a new <a href="'.$joburl.'">job</a>.</div></BODY></HTML>');
+                $this->email->message('<HTML><BODY><div>'.$user_name . 'post a new job.</div></BODY></HTML>');
                 $this->email->send();
 
                 //send an email to company
@@ -138,7 +137,7 @@ class job extends Front_Controller {
                     //get company email
                     $company_email_arr = $this->jobseeker_model->getEmailByCompanyId($company_id);
                     $company_email = $company_email_arr[0]["email"];
-                    
+                    $url = $this->data['site_url'] . 'job/jobdetails/' . $job_id;
 
                     $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
                     $this->email->to($company_email);
@@ -146,8 +145,8 @@ class job extends Front_Controller {
                     $this->email->message('<html>
             						<head><title>Job is being reviewed</title></head>
             						<body>Hi, <br><br>
-                                The job you posted is being reviewed.
-                                Please click <a href="'.$joburl.'">HERE</a> to see it.<br><br>
+                                The job you post is being reviewed.
+                                Please click <a href="'.$url.'">HERE</a> to see it.<br><br>
                                 <a href="http://www.jingjobs.com">Jingjobs Team</a>');
                     $this->email->send();
                 }
@@ -271,7 +270,7 @@ class job extends Front_Controller {
                 $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
                 $this->email->to($_POST['email']);
                 $this->email->subject('New Job Application');
-                $this->email->message('<HTML><BODY><div>Hi '.strtoupper($company_name) . ',<br/>Your company has received a new job <a href="'.$this->data['site_url'].'company/applicants/'.$job_id.'">application</a>, Please login to 
+                $this->email->message('<HTML><BODY><div>Hi '.strtoupper($company_name) . ',<br/>Your company has received a new job application, Please login to 
                 		<a href="http://www.jingjobs.com">Jingjobs</a> account to view.</div>
                     <br />
                     <div>Thank you!</div><br /><br />

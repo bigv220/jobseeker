@@ -34,8 +34,7 @@ class company extends Front_Controller {
 			
 			// set up default avatar
 			if (empty($post['avatar'])) {
-				//$post['avatar'] = $data['site_url'] . 'attached/users/no-image.png';
-				$post['avatar'] = 'no-image.png';
+				$post['avatar'] = $data['site_url'] . 'attached/users/no-image.png';
 			}
 			
             if (isset($post['name']) && !isset($post['last_name'])) {
@@ -85,7 +84,6 @@ class company extends Front_Controller {
         //Save the user who reviewed it
         $uid = $this->session->userdata('uid');
         if($uid != $company_id) {
-        	if (empty($uid)) $uid = 0; // if no one login
             $this->company_model->saveCompanyViewed($uid, $company_id, date('Y-m-d'));
         }
 
