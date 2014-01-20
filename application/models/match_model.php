@@ -261,7 +261,7 @@ class match_model extends MY_Model
          
        foreach($jobs as $job_key => $job)
        {
-           $a=$b=$c=$d=$e=$f = $total_msjob_language_level = $total_msjob_industry_position   =       0;  // Reset all values.
+           $a=$b=$c=$d=$e=$f = $total_msjob_language_level = $total_msjob_industry_position   =    $match=   0;  // Reset all values.
            // Emplyment Type
            if($skip_employment_type==FALSE AND $job['msjob_employment_type'] != '') // Both values doesn't EMPTY.
            {

@@ -258,7 +258,8 @@
                 	<?php if (isCompany($user_type)):?>
                     <a href="#" data-id="<?php echo $user['uid']?>" class="job-btn jobseeker-btn-shortlisted <?php if ($user['is_shortlisted']==1):?>jobseeker-btn-shortlisted_current<?php endif; ?>"></a>
                     <?php endif;?>
-                    <a href="#" class="job-btn job-btn-match"><?php echo ($jobs_match==0)?'<a href="'.$site_url.'company/joblisting">Search from "Listing Manager" to see Match%.</a>':$user["match"].'%'; ?></a>                </div>
+                    <a href="#" class="job-btn job-btn-match"><?php echo ($jobs_match==0)?'<a onclick="window.location.href=\''.$site_url.'company/joblisting\'" href="'.$site_url.'company/joblisting">Search from "Listing Manager" to see Match%.</a>':$user["match"].'%'; ?></a>
+                </div>
                 <div>
                     <input type="hidden" name="jobseeker_name" value="<?php echo $user['first_name'];?>" />
                     <input type="hidden" name="jobseeker_uid" value="<?php echo $user['uid'];?>" />
