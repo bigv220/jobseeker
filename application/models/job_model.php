@@ -89,10 +89,18 @@ class job_model extends MY_Model
     public function searchJob($where) {
         $sql = "SELECT *,job.id as id, job.country as country, job.province as province, job.city as city,jl.language as language,
               job.employment_length as employment_length, job.employment_type employment_type,
-              u.username as company_name, job.company_id as company_id, u.description as description
+              u.username as company_name, job.company_id as company_id, u.description as description,
+              job.is_visa_assistance, job.is_visa_assistance,
+              ms.employment_type as msjob_employment_type,
+              ms.employment_length as msjob_employment_length,
+              ms.is_visa_assistance as msjob_is_visa_assistance,
+              ms.is_housing_assistance as msjob_is_housing_assistance,
+              ms.language_level as msjob_language_level,
+              ms.industry_position as msjob_industry_position
         		FROM job 
         		LEFT JOIN user as u on job.company_id=u.uid LEFT JOIN job_language_level as jl on job.id=jl.job_id
-        		LEFT JOIN job_industry_position as jip on job.id=jip.job_id".$where;
+        		LEFT JOIN job_industry_position as jip on job.id=jip.job_id
+                        LEFT JOIN match_score as ms on job.id=ms.job_id".$where;
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;
@@ -123,8 +131,24 @@ class job_model extends MY_Model
         return $rtn;
     }
 
-    public function searchJobseeker($where) {
-        $sql = "SELECT * FROM user ".$where;
+    public function searchJobseeker($where,$jobid=0)  // JOB ID is only passed from FIND JOB section as part of MATCH% calculation.
+    {
+        if($jobid)
+        {
+            $sql    =   'SELECT 
+                                    user.*, 
+                                    ms.employment_type as msjob_employment_type,
+                                    ms.employment_length as msjob_employment_length,
+                                    ms.is_visa_assistance as msjob_is_visa_assistance,
+                                    ms.is_housing_assistance as msjob_is_housing_assistance,
+                                    ms.language_level as msjob_language_level,
+                                    ms.industry_position as msjob_industry_position 
+                        FROM    user 
+                                LEFT JOIN match_score as ms on user.uid=ms.uid '.$where;
+        }
+        else // OLD COde as it is.
+            $sql = "SELECT * FROM user ".$where;
+        
 
         $rtn = $this->db->query($sql)->result_array();
         return $rtn;

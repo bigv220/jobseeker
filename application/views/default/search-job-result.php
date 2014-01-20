@@ -223,25 +223,20 @@
         <div class="sresult-par1">
             <div class="span1 rel"> <img src="<?php echo $site_url?>attached/users/<?php echo $job['profile_pic']?$job['profile_pic']:'no-image.png';?>" alt="" width="85" height="81"/> <i class="job-mark job-mark1 png abs"></i> </div>
             <div class="span2">
-                <h2 onclick="window.location.href='<?php echo $site_url?>job/jobDetails/<?php echo $job['id'];?>'"><?php echo $job["job_name"]; ?></h2>
+                <h2><?php echo $job["job_name"]; ?></h2>
                 <?php if (isset($job['id']) && in_array($job['id'], $apply)): ?>
                     <h3 class="comp_email"></h3>
                 <?php else: ?>
-                    <h3 class="comp_email"><?php //client doesn't want to show email here.  echo $job["username"]; ?></h3>
+                    <h3 class="comp_email"><?php echo $job["username"]; ?></h3>
                 <?php endif; ?>
                 <p><?php echo $job["city"]; ?></p>
                 <a href="javascript:void(0);" class="job-viewmore">View More</a> </div>
             <div class="span3">
-                <div class="zoom rel">
-                	<?php if (!isCompany($user_type)):?>
+                <div class="zoom">
                     <a href="javascript:void(0);" id="job-mark<?php echo $job['id']; ?>" class="job-btn <?php if (isset($job['id']) && in_array($job['id'], $bookmark)) echo "job-btn-marked"; else echo "job-btn-mark"; ?>" data-job-id="<?php echo $job['id']; ?>"></a>
-                    <?php endif;?>
                     <a href="#" class="job-btn job-btn-featured"  style="display:none"></a>
-                    <a href="#" class="job-btn job-btn-match">99%</a>
-                </div>
-                <?php if (!isCompany($user_type)):?>
+                    <a href="#" class="job-btn job-btn-match"><?php echo ($jobs_match==0)?'0':$job["match"]; ?>%</a> </div>
                 <div><a href="javascript:void(0);" class="<?php if (isset($job['id']) && in_array($job['id'], $apply)) echo "job-btn-submitted"; else echo "job-btn-submit"; ?>" data-job-id="<?php echo $job['id']; ?>" data-job-email="<?php echo $job["username"]; ?>"></a></div>
-            	<?php endif;?>
             </div>
         </div>
         <div class="sresult-par2">

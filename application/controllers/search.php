@@ -23,7 +23,8 @@ class search extends Front_Controller {
 
         //Load Model
         $this->load->model('job_model');
-
+        $this->load->model('match_model');
+        
         $this->load->helper('location');
         $data['location'] = getLoction();
 
@@ -184,8 +185,23 @@ class search extends Front_Controller {
         foreach($jobs as $key=>$v) {
             $jobs[$key]['industry_arr'] = $this->job_model->getJobIndustry($jobs[$key]['id']);
         }
-
-        $data['jobs'] = $jobs;
+        
+        // MATCH-SCORE Calculation
+        if ($this->session->userdata('uid') != '' AND $this->session->userdata('user_type') ==0 AND (count($jobs)>0 AND is_array($jobs)==TRUE)) 
+        {           
+            // User is logged in and the User Type is "0" ie STAFF, we will shows MATCH%
+            $jobs               =   $this->match_model->jobMatchPercentageForUser($jobs,$this->session->userdata('uid'));
+            $jobs_match         =   1; // match calculation is performed.
+        }
+        else 
+        {
+           $jobs_match  =   '0'; // User is not logged in or not the prefered user type.      
+        }
+        
+        $data['jobs_match'] = $jobs_match;
+        $data['jobs']       = $jobs;
+        
+        //echo '<pre>'; print_r($data['jobs']); echo '</pre>';
 
         // generate job id string, this will be used in the filter function at the right side
         $job_id_str = '';
@@ -455,7 +471,14 @@ class search extends Front_Controller {
     public function searchJobseeker() {
         $data = $this->data;
         $this->load->model('job_model');
-        $post = $_POST;
+        $this->load->model('match_model');
+        //Only if a JOB is selected from Listing Manager. LEFT MENU SEARCH form submission url is modified with this value, if present.
+        $url_params     =   $this->uri->uri_to_assoc();
+        $jobid          =   0;
+        if(array_key_exists('jobid', $url_params))
+            $jobid      =   $url_params['jobid'];
+        
+        $post   =   $_POST;
         $where_arr = array();
         // get location
         $this->load->helper('location');
@@ -505,7 +528,7 @@ class search extends Front_Controller {
         }
 
         // get jobseekers according to the search
-        $jobseekers = $this->job_model->searchJobseeker($where);
+        $jobseekers = $this->job_model->searchJobseeker($where,$jobid); // Modified as part of MATCH% calculation. 
         // Filter employment_type
         if (!empty($post['employment_type'])) {
         $filter_employment_type = explode(",", $post['employment_type']);
@@ -600,12 +623,30 @@ class search extends Front_Controller {
             }
         }
         $data['ids'] = substr($ids, 0, -1);
-        $data['jobseekers'] = $jobseekers;
+        
 
         $uid = $this->session->userdata('uid');
         $current_user_jobs = $this->job_model->getCompanyJobList($uid);
-        $data['current_user_jobs'] = $current_user_jobs;
-
+        $data['current_user_jobs']      = $current_user_jobs;
+        
+        
+        $data['jobid']                  = $jobid; // See the declaration in the top.
+        // MATCH-SCORE Calculation
+        if ($this->session->userdata('uid') != '' AND $this->session->userdata('user_type') ==1 AND $jobid !=0 AND (count($jobseekers)>0 AND is_array($jobseekers)==TRUE)) 
+        {   
+            // User is logged in and the User Type is "0" ie STAFF, we will shows MATCH%
+            $jobseekers         =   $this->match_model->jobMatchPercentageForUser($jobseekers,0,$jobid);
+            $jobs_match         =   1; // match calculation is performed.
+        }
+        else 
+        {
+           $jobs_match          =   '0'; // User is not logged in or not the prefered user type.      
+        }
+        
+        $data['jobs_match']     =   $jobs_match;        
+        
+        $data['jobseekers']     =   $jobseekers;
+        
         $this->load->view($data['front_theme']."/search-jobseeker-result",$data);
     }
 

@@ -82,7 +82,9 @@
                 <h2><?php echo $job['job_name']; ?></h2>
                 <h3><?php echo $job['username']; ?></h3>
                 <p><?php echo $job['city']; ?>, <?php echo $job['country']; ?></p>
-                <a href="#" class="job-edit">Edit</a> </div>
+                <a href="#" class="job-edit">Edit</a> 
+                | <a href="<?php echo $site_url;?>search/searchJobseeker/jobid/<?php echo $job['id'];?>" class="company-btn-find-staff">Find Staff</a>
+            </div>
             <div class="span3 text_align_right">
                 <div class="zoom">
                     <a href="#" data-job-id="<?php echo $job['id']; ?>" class="company-btn-delete-job"></a>
@@ -201,13 +203,13 @@
                     </div>
                 </div>
             </div>
+            
 
             <div class="postjob-content-left-row clearfix">
                 <div class="span1 job-listing">
                     <strong>Type of Job *</strong>
                     <div>
                         <select id="employment_type" required>
-                            <option value="">All Type</option>
                             <?php $jobtype = jobtype();
                             foreach ($jobtype as $k => $v) {?>
                                 <option value="<?php echo $v?>" <?php if($v == $job['employment_type']) echo "selected"; ?>>
@@ -231,10 +233,32 @@
                     </div>
                 </div>
             </div>
+            
 
             <div class="postjob-content-left-row clearfix">
                 <div class="span1 job-listing">
-                    <strong>Teachnical Skills</strong>
+                    <strong>Visa Assistance *</strong>
+                    <div>
+                        <select id="is_visa_assistance" name="is_visa_assistance">
+                         <option value="1" <?php if($job['is_visa_assistance'] == 1) echo "selected"; ?>>Yes</option>
+                         <option value="2" <?php if($job['is_visa_assistance'] == 2 OR $job['is_visa_assistance'] == '') echo "selected"; ?>>No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="span2">
+                    <strong>Accommodation Assistance *</strong>
+                    <div>
+                        <select name="is_housing_assistance">
+                         <option value="1" <?php if($job['is_housing_assistance'] == 1) echo "selected"; ?>>Yes</option>
+                         <option value="2" <?php if($job['is_housing_assistance'] == 2 OR $job['is_housing_assistance'] == '') echo "selected"; ?>>No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>            
+
+            <div class="postjob-content-left-row clearfix">
+                <div class="span1 job-listing">
+                    <strong>Technical Skills</strong>
                     <div class="reg-row">
                         <div>
                             <input type="hidden" name="preferred_technical_skills" id="ProfessionalSkills_str"  class="input-tip" value="<?php echo $job['preferred_technical_skills']; ?>" data-tipval="">
