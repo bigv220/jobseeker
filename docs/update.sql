@@ -303,3 +303,29 @@ INSERT INTO `category` VALUES ('112', '1', 'Hot News', null, 'hot-news', '50', n
 INSERT INTO `category` VALUES ('113', '1', 'Top Stories', null, 'top-stories', '50', null);
 INSERT INTO `category` VALUES ('114', '1', 'Upcoming Events', null, 'upcoming-events', '50', null);
 INSERT INTO `category` VALUES ('115', '1', 'Expat Profile', null, 'expat-profile', '50', null); 
+
+#20140120 - match system
+CREATE TABLE IF NOT EXISTS `employment_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employment_type` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+INSERT INTO `employment_type` (`id`, `employment_type`) VALUES
+(1, 'Full Time'),
+(2, 'Part Time'),
+(3, 'Contract'),
+(4, 'Internship');
+
+CREATE TABLE IF NOT EXISTS `match_score` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `job_id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `employment_type` varchar(100) NOT NULL,
+  `employment_length` int(11) NOT NULL,
+  `is_visa_assistance` int(11) NOT NULL,
+  `is_housing_assistance` int(11) NOT NULL,
+  `language_level` varchar(500) NOT NULL,
+  `industry_position` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
