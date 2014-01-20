@@ -71,13 +71,13 @@
                 </dl>
             </div>
             <div class="company-bd-right">
-                <div class="match"> <b>93%</b> </div>
+                <div class="match"> <b>99%</b> </div>
                 <dl class="mb20">
                     <dt>Location</dt>
                     <dd class="location">
-                        <input type="hidden" id="address" value="<?php echo $jobinfo['location']; ?>" />
+                        <input type="hidden" id="address" value="<?php echo $jobinfo['location'].', '.$jobinfo["city"]; ?>" />
                         <div id="map" style="width:229px;height:125px;border: 1px solid #DDDDDD"></div>
-                        <strong><?php echo $jobinfo['location']; ?></strong>
+                        <strong><?php echo $jobinfo['location'].', '.$jobinfo["city"]; ?></strong>
                     </dd>
                 </dl>
                 <dl class="mb20">
