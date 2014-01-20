@@ -255,12 +255,16 @@
                 <a href="#" class="job-viewmore" alt="<?php echo $user['uid']; ?>">View More</a> </div>
             <div class="span3">
                 <div class="zoom">
+                	<?php if (isCompany($user_type)):?>
                     <a href="#" data-id="<?php echo $user['uid']?>" class="job-btn jobseeker-btn-shortlisted <?php if ($user['is_shortlisted']==1):?>jobseeker-btn-shortlisted_current<?php endif; ?>"></a>
                     <?php endif;?>
-                    <a href="#" class="job-btn job-btn-match"><?php echo ($jobs_match==0)?'<a href="'.$site_url.'company/joblisting">Search from "Listing Manager" to see Match%.</a>':$user["match"].'%'; ?></a>                </div>                <div>
+                    <a href="#" class="job-btn job-btn-match"><?php echo ($jobs_match==0)?'<a href="'.$site_url.'company/joblisting">Search from "Listing Manager" to see Match%.</a>':$user["match"].'%'; ?></a>                </div>
+                <div>
                     <input type="hidden" name="jobseeker_name" value="<?php echo $user['first_name'];?>" />
                     <input type="hidden" name="jobseeker_uid" value="<?php echo $user['uid'];?>" />
+                    <?php if (isCompany($user_type)):?>
                     <a href="#" class="jobseeker_request_interview"></a>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
@@ -371,8 +375,15 @@
                             <dd><p class="phone_number"><?php echo $user['phone']; ?></p></dd>
                             <dd class="industry">
                                 <ul class="industry-ul">
-                                    <li class="n1"><b>Type of Employment</b><span>Full Time</span></li>
-                                    <li class="n2"><b>Length of Employment</b><span>Long Term (1+ year)</span></li>
+                                  <?php if(!empty($user['employment_type'])):?>
+			                        <li class="n1"><b>Type of Employment</b><span>Full Time</span></li>
+			                      <?php endif;?>
+			                      
+			                      <?php if(!empty($user['employment_length'])):?>
+			                        <li class="n2"><b>Length of Employment</b><span>
+			                        <?php echo getEmploymentLengthByID($user['employment_length']) ?></span></li>
+			                      <?php endif;?>
+			                      
                                     <!-- <li class="n3"><b>Visa Assistance</b><span>Visa will be provided</span></li>
                               <li class="n4"><b>Housing Assistance</b><span>Accomodation will be provided</span></li> -->
                                 </ul>
