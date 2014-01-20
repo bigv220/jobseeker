@@ -237,7 +237,7 @@ class company extends Front_Controller {
         $data['selected_tab'] = 1;
 
         $post = $_POST;
-        $where = "  WHERE uid=$uid";
+        $where = "  WHERE u.uid=$uid";
         if($post) {
             if ($post["search_keywords"] == 'Enter Keywords') {
                 $post['search_keywords'] = '';

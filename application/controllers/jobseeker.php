@@ -567,7 +567,8 @@ class jobseeker extends Front_Controller {
     public function preferences() {
         //Load Model
         $this->load->model('jobseeker_model');
-
+        $this->load->model('match_model');
+        
         $post = $_POST;
         $uid = $this->session->userdata('uid');
 
@@ -582,8 +583,22 @@ class jobseeker extends Front_Controller {
             for($i=0; $i<$industry_len;$i++) {
                 if($post['industry_1'][$i] && $post['position_1'][$i]) {
                     $this->jobseeker_model->addSeekingIndustry($uid, $post['industry_1'][$i], $post['position_1'][$i]);
+                    
+                    $data_arr                   =   array('industry'=>$post['industry_1'][$i],'position'=>$post['position_1'][$i]);
+                    $industry_position_array[]  =   $data_arr;
                 }
             }
+            
+            $industry_position                              =       $this->match_model->generateIndustryPositionInfo($industry_position_array); 
+            $employment_type_id                             =       $this->match_model->getEmploymentTypeId($post['employment_type']);
+            $match_score_info['employment_type']            =       $employment_type_id;
+            $match_score_info['employment_length']          =       1; //$post['employment_length'];
+            $match_score_info['industry_position']          =       $industry_position;
+            $match_score_info['is_visa_assistance']         =       $post['is_visa_assistance'];
+            $match_score_info['is_housing_assistance']      =       $post['is_accomodation_assistance'];
+
+            $this->match_model->createRecordIfNotExists($uid,$job_id=0); // All usertypes are 4 during SIGNUP.Call record creation during SIGNUP.
+            $this->match_model->updateRecordUsingUserID($uid,$match_score_info);            
 
             if($rtn) {
                 $msg = "success";
@@ -691,7 +706,8 @@ class jobseeker extends Front_Controller {
     public function language() {
         //Load Model
         $this->load->model('jobseeker_model');
-
+        $this->load->model('match_model');
+        
         $post = $_POST;
         $uid = $this->session->userdata('uid');
 
@@ -707,8 +723,14 @@ class jobseeker extends Front_Controller {
                         'level'=>$post['level'][$i]);
 
                     $rtn = $this->jobseeker_model->insertLanguage($data);
+                    
+                    $language_level_array[] =   $data;
                 }
             }
+            $language_level                                 =       $this->match_model->generateLanguageLevelInfoUsingText($language_level_array);
+            $match_score_info['language_level']             =       $language_level;
+            $this->match_model->createRecordIfNotExists($uid,$job_id=0); // All usertypes are 4 during SIGNUP.Call record creation during SIGNUP.
+            $this->match_model->updateRecordUsingUserID($uid,$match_score_info);
 
             if($rtn) {
                 $msg = "success";

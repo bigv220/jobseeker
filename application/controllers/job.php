@@ -20,7 +20,8 @@ class job extends Front_Controller {
     	$data = $this->data;
     	
     	//Load Model
-        $this->load->model('job_model');
+        $this->load->model('job_model');        
+        $this->load->model('match_model');        
         //get data from db
         $jobinfo = $this->job_model->getJobInfo($job_id);
 
@@ -74,6 +75,7 @@ class job extends Front_Controller {
     	
     	$data = $this->data;
         $this->load->model('jobseeker_model');
+        $this->load->model('match_model');
         //industry lists
         $uid = $this->session->userdata('uid');
         $data["industry"] = $this->jobseeker_model->getIndustry();
@@ -115,7 +117,9 @@ class job extends Front_Controller {
                 'city'=>$post['city'],'salary_range'=>$post['salary_range'],
                 'preferred_year_of_experience'=>$post['preferred_year_of_experience'],
                 'post_date'=>$post['post_date'],
-                'company_id'=>$post['company_id']);
+                'company_id'=>$post['company_id'],
+                'is_visa_assistance'    =>  $post['is_visa_assistance'],
+                'is_housing_assistance' =>  $post['is_housing_assistance']);
     		$result['status'] = $job_id = $this->job_model->saveJob($data);
 
             if($result['status']) {
@@ -152,16 +156,35 @@ class job extends Front_Controller {
             for($i=0; $i<count($post["language"]);$i++) {
                 $data_arr = array('job_id'=>$job_id,'language'=>$post['language'][$i],'level'=>$post['language_level'][$i]);
                 $this->job_model->insertJobLanguage($data_arr);
+                
+                $language_level_array[] =   $data_arr;
             }//end for
+            
+            $language_level             =   $this->match_model->generateLanguageLevelInfo($language_level_array);
 
             for($i=0; $i<count($post["industry"]);$i++) {
                 $data_arr = array('job_id'=>$job_id,'industry'=>$post['industry'][$i],'position'=>$post['position'][$i]);
                 $this->job_model->insertJobIndustry($data_arr);
+                
+                $industry_position_array[] =   $data_arr;
             }//end for
 
-    		$result['status'] = $result['status'] ? 'success' : 'failed.';
+            $industry_position             =   $this->match_model->generateIndustryPositionInfo($industry_position_array);           
+            $employment_type_id            =   $this->match_model->getEmploymentTypeId($post['employment_type']);
+            
+            $match_score_info['job_id']                     =       $job_id;
+            $match_score_info['employment_type']            =       $employment_type_id;
+            $match_score_info['employment_length']          =       $post['employment_length'];
+            $match_score_info['is_visa_assistance']         =       $post['is_visa_assistance'];
+            $match_score_info['is_housing_assistance']      =       $post['is_housing_assistance'];
+            $match_score_info['language_level']             =       $language_level;   
+            $match_score_info['industry_position']          =       $industry_position;
+            
+            $this->match_model->insertRecord($match_score_info);
+                    
+            $result['status'] = $result['status'] ? 'success' : 'failed.';
             $result['id'] = $job_id;
-    		echo json_encode($result);
+            echo json_encode($result);
     	}
     }
 
@@ -177,7 +200,8 @@ class job extends Front_Controller {
 
             //Load Model
             $this->load->model('job_model');
-
+            $this->load->model('match_model');
+            
             $data = array('job_name'=>$post['job_name'],'job_desc'=>$post['job_desc'],
                 'employment_length'=>$post['employment_length'],
                 'employment_type'=>$post['employment_type'],
@@ -187,14 +211,29 @@ class job extends Front_Controller {
                 'city'=>$post['city'],'salary_range'=>$post['salary_range'],
                 'preferred_year_of_experience'=>$post['preferred_year_of_experience'],
                 'post_date'=>$post['post_date'],
-                'company_id'=>$company_id);
+                'company_id'=>$company_id,
+                'is_visa_assistance'    =>  $post['is_visa_assistance'],
+                'is_housing_assistance' =>  $post['is_housing_assistance']);
             $result['status'] = $job_id = $this->job_model->updateJob($post['job_id'], $data);
 
             for($i=0; $i<count($post["language"]);$i++) {
                 $data_arr = array('id'=>$post['jobLangId'][$i],'language'=>$post['language'][$i],'level'=>$post['language_level'][$i]);
                 $this->job_model->updateJobLanguage($data_arr);
+                
+                $language_level_array[] =   $data_arr;
             }//end for
 
+            $language_level                                 =       $this->match_model->generateLanguageLevelInfo($language_level_array);            
+            $employment_type_id                             =       $this->match_model->getEmploymentTypeId($post['employment_type']);
+            $match_score_info['employment_type']            =       $employment_type_id;
+            $match_score_info['employment_length']          =       $post['employment_length'];
+            $match_score_info['is_visa_assistance']         =       $post['is_visa_assistance'];
+            $match_score_info['is_housing_assistance']      =       $post['is_housing_assistance'];
+            $match_score_info['language_level']             =       $language_level;  
+            
+            $this->match_model->createRecordIfNotExists($uid=0,$post['job_id']); // If you empty the database, we don't need this function call.
+            $this->match_model->updateRecordUsingJobID($post['job_id'],$match_score_info);
+            
             $result['status'] = $result['status'] ? 'success' : 'failed.';
             echo json_encode($result);
         }

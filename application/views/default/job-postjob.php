@@ -87,7 +87,7 @@
                     <div class="span1">
                         <strong>Type of Job *</strong>
                         <div>
-                            <select id="employment_type" >
+                            <select id="employment_type" required>
                                 <option value="">All Type</option>
                                 <?php $jobtype = jobtype();
                                 foreach ($jobtype as $k => $v) {?>
@@ -101,7 +101,7 @@
                         <div class="span2">
                             <strong>Years of Experience</strong>
                             <div>
-                                <select name="preferred_year_of_experience">
+                                <select name="preferred_year_of_experience" required>
                                     <?php $expe = getExperience();
                                     foreach($expe as $k => $v) { ?>
                                         <option value="<?php echo $k+1; ?>"><?php echo $v; ?></option>
@@ -207,6 +207,35 @@
                     </div>
 
                 </div>
+                
+                
+                <div class="postjob-content-left-row clearfix">
+                    <div class="span1" style="margin-top:19px;">
+                        <strong>Visa Assistance *</strong>
+                        <div>
+                            <select name="is_visa_assistance">
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>                
+                
+                
+                <div class="postjob-content-left-row clearfix">
+                    <div class="span1" style="margin-top:19px;">
+                        <strong>Accommodation Assistance *</strong>
+                        <div>
+                            <select name="is_housing_assistance">
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>                  
+                
 
             </div>
             <div class="clearfix"></div>
