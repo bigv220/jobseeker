@@ -3,7 +3,7 @@
 	function isLogin()
 	{
 		$c = &get_instance();
-		return $c->session->userdata('username') ? TRUE : FALSE;
+		return $c->session->userdata('uid') ? TRUE : FALSE;
 	}
 	
 	function isAdmin()
