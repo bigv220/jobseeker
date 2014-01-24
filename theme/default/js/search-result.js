@@ -380,6 +380,14 @@ $(function(){
         e.stopPropagation();
         e.preventDefault();
     });
+    
+    // goto find staff in manage job listing page
+    $('.company-btn-find-staff').bind('click',function apply(e) {
+    	window.location.href=$(this).attr("href");
+    	
+    	e.stopPropagation();
+        e.preventDefault();
+    });
 
     //click delete job 'Yes'
     $('.pop-company-delete-job-yes').click(function(){

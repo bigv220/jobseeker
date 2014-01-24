@@ -6,15 +6,23 @@
             <div class="news-index-left">
                 <?php if (empty($hot_news)): ?>
                 <div class="article">
-                    <div class="title">Russia & China To Start Youth Exchange Program. </div>
+                    <div class="title">1Russia & China To Start Youth Exchange Program. </div>
                     <div class="content">
                         <img src="<?php echo $theme_path?>style/home/article_img.jpg"/>
                         <p>
-                        As the world looks to China in awe, the middle kingdom itself is strengthening ties with its immediate neighbours. <br />
-						In fact, Russia and China will send 10,000 students to each other’s countries, to strengthen international relations as part of the Youth Friendly Exchanges Year. <br />
-						Chinese Vice Premier Liu Yandong said:<br />
-						"We will launch a youth exchange program that involves 100 schools and 10,000 students from each country.<br />
-						"We will earnestly plan and prepare for the opening ceremony of the youth year to be held in Russia next spring...<br />                 
+                        JingJobs has now officially launched and is ready to use! 
+                        Although we have tried our hardest, 
+                        there may still be some kinks with the website in the first few weeks, 
+                        so we would be incredibly grateful if you would bear with us patiently in the meantime. 
+                        The launch of JingJobs coincides (very auspiciously) with the arrival of the New Year! 
+                        To anyone who is stuck in a rut, or unhappy with their jobs, take this as a sign and sign up with us. 
+                        China is a land of myriad opportunities and Beijing is a booming hub for job seekers, 
+                        filled with new experiences. JingJobs is the first international platform of its kind based in Beijing. 
+                        Our aim is to make it as easy and seamless as possible for English-speaking job seekers to find their dream career. 
+                        In order to do just that we have incorporated features such as JingChat into our website, 
+                        which makes the gap between potential employers and jobseekers as small as possible. 
+                        Join us for a fresh outlook on life and an exciting change of environment and make 2014 your best year ever!
+                        <br />                 
                         <a href="<?php echo $site_url?>news/view/166">Continue reading</a>
                         </p>
                     </div>

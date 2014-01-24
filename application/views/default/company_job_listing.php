@@ -83,11 +83,12 @@
                 <h3><?php echo $job['username']; ?></h3>
                 <p><?php echo $job['city']; ?>, <?php echo $job['country']; ?></p>
                 <a href="#" class="job-edit">Edit</a> 
-                | <a href="<?php echo $site_url;?>search/searchJobseeker/jobid/<?php echo $job['id'];?>" onclick="window.location.href='<?php echo $site_url;?>search/searchJobseeker/jobid/<?php echo $job['id'];?>'" class="company-btn-find-staff">Find Staff</a>
+                
             </div>
             <div class="span3 text_align_right">
-                <div class="zoom">
+                <div class="zoom rel">
                     <a href="#" data-job-id="<?php echo $job['id']; ?>" class="company-btn-delete-job"></a>
+                    <a href="<?php echo $site_url;?>search/searchJobseeker/jobid/<?php echo $job['id'];?>" class="company-btn-find-staff"> </a>
                 </div>
             </div>
         </div>
