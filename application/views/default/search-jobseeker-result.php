@@ -229,8 +229,9 @@ input.text {
 			</div>
 			<div class="sresult-par2">
 				<div class="sresult-tab-hd">
-					<span class="fxui-tab-tit">About me</span> <span
-						class="fxui-tab-tit">Portfolio</span> <span class="fxui-tab-tit"
+					<span class="fxui-tab-tit">About me</span> 
+					<span class="fxui-tab-tit">Portfolio</span> 
+					<span class="fxui-tab-tit"
 						onclick="getDetailMsgForSearchResult(this);"
 						data-id="<?php echo empty($user['jingchat']['id'])?0:$user['jingchat']['id']; ?>"
 						data-user="<?php echo $user['uid']; ?>">JingChat</span>
@@ -270,23 +271,41 @@ input.text {
 							<dl class="sresult-nav-job-dl">
 								<dt>Birthday</dt>
 								<dd>
-									<p class="jobseeker_birthday"><?php echo date('M j Y',strtotime($user['birthday'])); ?></p>
+									<p class="jobseeker_birthday"><?php echo date('jS M Y',strtotime($user['birthday'])); ?></p>
 								</dd>
 								<dt>Education</dt>
-								<dd>                                <?php $educations = $user['educations'];                                for($i=0; $i<count($educations); $i++) { ?>                                    <p
-										class="school_name"><?php echo $educations[$i]['school_name']; ?></p>
+								<dd> 
+									<?php $educations = $user['educations'];
+								      for($i=0; $i<count($educations); $i++) { ?>
+									<p class="school_name"><?php echo $educations[$i]['school_name']; ?></p>
 									<p class="school_major"><?php echo $educations[$i]['major']; ?></p>
-									<p class="school_period"><?php echo $educations[$i]['attend_date_from'] . ' - ' . $educations[$i]['attend_date_to']; ?></p>                                    <?php }?>                            </dd>
+									<?php $data_to = $educations[$i]['attend_date_to'] == '-' ? 'Now' : date('M Y',strtotime($educations[$i]['attend_date_to']))?>
+									<p class="school_period"><?php echo date('M Y',strtotime($educations[$i]['attend_date_from'])) . ' - ' . $data_to; ?></p>
+									<?php }?>                            
+								</dd>
 								<dt>Elsewhere on Web</dt>
-								<dd>                                <?php if (!empty($user['twitter'])):?>                                <p>
+								<dd>                                
+									<?php if (!empty($user['twitter'])):?>
+								    <p>
 										<a href="<?php echo $user['twitter']?>">Twitter</a>
-									</p>                                <?php endif;?>                                <?php if (!empty($user['facebook'])):?>                                <p>
+									</p>
+									<?php endif;?>
+									<?php if (!empty($user['facebook'])):?>                                
+									<p>
 										<a href="<?php echo $user['facebook']?>">Facebook</a>
-									</p>                                <?php endif;?>                                <?php if (!empty($user['linkedin'])):?>                                <p>
+									</p>                                
+									<?php endif;?>                                
+									<?php if (!empty($user['linkedin'])):?>                                
+									<p>
 										<a href="<?php echo $user['linkedin']?>">Linkedin</a>
-									</p>                                <?php endif;?>                                <?php if (!empty($user['weibo'])):?>                                <p>
+									</p>                                
+									<?php endif;?>                                
+									<?php if (!empty($user['weibo'])):?>                                
+									<p>
 										<a href="<?php echo $user['weibo']?>">Weibo</a>
-									</p>                                <?php endif;?>                            </dd>
+									</p>                                
+									<?php endif;?>
+								</dd>
 								<dt>Phone</dt>
 								<dd>
 									<p class="phone_number"><?php echo $user['phone']; ?></p>
