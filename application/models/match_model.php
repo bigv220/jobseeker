@@ -198,9 +198,10 @@ class match_model extends MY_Model
         else
             $where_case         =       "job_id=$job_id";
         $query                  =       $this->db->query("SELECT employment_type, employment_length, is_visa_assistance, is_housing_assistance, language_level, industry_position  from match_score WHERE $where_case");
-        if($query->num_rows()==0) // User doesn't have a record in MATCH-SCORE table.
-            return $jobs;        
         
+        if($query->num_rows()==0) // User doesn't have a record in MATCH-SCORE table.
+            return $jobs; 
+
         // Retrieve record if present.
         $msuser_info                =       $query->row();
         
@@ -258,6 +259,8 @@ class match_model extends MY_Model
                 endforeach;
             }
         }
+        
+        
          
        foreach($jobs as $job_key => $job)
        {
@@ -297,9 +300,9 @@ class match_model extends MY_Model
                 if(count($msjob_language_level) > 0 AND is_array($msjob_language_level) == TRUE ) // Minimum one Language Level is selected.
                 {
                     if($user_id)
-                        $total_msjob_language_level            =     count($msjob_language_level); // Final Match works related. Job Listing Count   
+                        $total_msjob_language_level             =     count($msjob_language_level); // Final Match works related. Job Listing Count  
                     else
-                        $total_msjob_language_level            =     count($msuser_language_level); // Final Match works related. Job Listing Count  
+                        $total_msjob_language_level             =     count($msuser_language_level); // Final Match works related. Job Listing Count  
                     
                     foreach ($msjob_language_level as $msjob_language_level_info):
                         
@@ -338,9 +341,9 @@ class match_model extends MY_Model
                     if($user_id)
                         $total_msjob_industry_position          =     count($msjob_industry_position); // Final Match works related 
                     else
-                        $total_msjob_industry_position          =     count($msuser_industry_position); // Final Match works related 
-                    
-                    foreach ($msjob_industry_position as $msjob_industry_position_info):
+                        $total_msjob_industry_position          =     count($msuser_industry_position); // Final Match works related  
+                        
+                     foreach ($msjob_industry_position as $msjob_industry_position_info):
                         
                         $msjob_industry                         =     substr($msjob_industry_position_info, 0, 3);
                         $msjob_position                         =     substr($msjob_industry_position_info, 3, 3);  
@@ -355,11 +358,17 @@ class match_model extends MY_Model
                     endforeach;
                 }
            }   
-           
+
            // Final Match Percentage Calculation           
-           $final_value             =   $a + $b + $c + $d  + ($e / $total_msjob_language_level) + ($f / $total_msjob_industry_position);
-           $match                   =   round( ($final_value*99)/100 );
+           $final_value             =   $a + $b + $c + $d;
+           if($e > 0)
+            $final_value            =   $final_value + ($e / $total_msjob_language_level);
            
+           if($f > 0)
+            $final_value            =   $final_value + ($f / $total_msjob_industry_position);    
+
+           $match                   =   round( ($final_value*99)/100 );
+          
            $jobs[$job_key]['match'] =   $match;
        }
        

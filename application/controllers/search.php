@@ -630,22 +630,27 @@ class search extends Front_Controller {
         $data['current_user_jobs']      = $current_user_jobs;
         
         
-        $data['jobid']                  = $jobid; // See the declaration in the top.
+        $data['jobid']                  =   $jobid; // See the declaration in the top.
+        $match_error_type               =   0;
         // MATCH-SCORE Calculation
-        if ($this->session->userdata('uid') != '' AND $this->session->userdata('user_type') ==1 AND $jobid !=0 AND (count($jobseekers)>0 AND is_array($jobseekers)==TRUE)) 
+        if ($this->session->userdata('uid') != '' AND $this->session->userdata('user_type') !=1 )
+            $match_error_type          =    1; // User is not logged in or not the prefered user type.   Shows 0%  
+        elseif ($this->session->userdata('user_type') ==1 AND $jobid == 0) 
+             $match_error_type          =   2; // Correct User Type but not selected any JOB. Shows link with message.         
+        elseif ($this->session->userdata('user_type') == 1 AND $jobid !=0 AND (count($jobseekers)>0 AND is_array($jobseekers)==TRUE)) 
         {   
             // User is logged in and the User Type is "0" ie STAFF, we will shows MATCH%
             $jobseekers         =   $this->match_model->jobMatchPercentageForUser($jobseekers,0,$jobid);
-            $jobs_match         =   1; // match calculation is performed.
+            // It may also shows 0% if the specific JOB or Job-Seeker doesnt have a Match-Score record.
         }
         else 
         {
-           $jobs_match          =   '0'; // User is not logged in or not the prefered user type.      
+           $match_error_type            =   3; // There is no result set for the serach or some other case. Shows 0%   
         }
         
-        $data['jobs_match']     =   $jobs_match;        
+        $data['match_error_type']       =   $match_error_type;        
         
-        $data['jobseekers']     =   $jobseekers;
+        $data['jobseekers']             =   $jobseekers;
         
         $this->load->view($data['front_theme']."/search-jobseeker-result",$data);
     }
