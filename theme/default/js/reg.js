@@ -150,6 +150,11 @@ function change_location(this1, key, location) {
 	var html_option = "";
 
 	if("country" == key) {
+            
+                // Disable and shows Loading message.
+                $("select[name='province']").prop("disabled", true);
+                $("select[name='province']").html('<option value="">Loading...</option>');   
+            
 		var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected;
 		$.get(url, function(data){
 			var obj = eval('('+data+')');
@@ -157,10 +162,18 @@ function change_location(this1, key, location) {
 				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
 			}
 			$("select[name='province']").html(html_option);
+                        
+                        // Enable the drop down.
+                        $("select[name='province']").prop("disabled", false); 
 		});
 	}
 	
 	if("province" == key) {
+            
+                // Disable and shows Loading message.
+                $("select[name='city']").prop("disabled", true);
+                $("select[name='city']").html('<option value="">Loading...</option>');             
+            
 		var country = $("select[name='country']").val();
 		var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected + "/" + country;
 		$.get(url, function(data){
@@ -169,6 +182,10 @@ function change_location(this1, key, location) {
 				html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";		
 			}
 			$("select[name='city']").html(html_option);
+                        
+                        // Enable the drop down.
+                        $("select[name='city']").prop("disabled", false);                         
+                        
 		});
 	}
 	

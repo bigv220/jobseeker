@@ -213,4 +213,109 @@ class company_model extends MY_Model
     			WHERE job_apply.job_id = '.$jobid;
     	return $this->db->query($sql)->result_array();
     }
+    
+    
+    /**
+     * Account Deletion to remove records from all tables which are having UID field. 
+     * Same function is used during User & Company profile deletion cases.
+     */
+    public function deleteRecordsUsingUID($uid)
+    {
+        // We have company_id but it is same to uid.
+        $this->db->delete('job', array('company_id' => $uid));
+        $this->db->delete('interview', array('company_id' => $uid));
+        $this->db->delete('company_viewed', array('company_id' => $uid));
+        $this->db->delete('company_social', array('company_id' => $uid));
+        $this->db->delete('company_industry', array('company_id' => $uid));
+        $this->db->delete('company_candidate', array('company_id' => $uid));
+        $this->db->delete('company_bookmark', array('company_id' => $uid));
+        $this->db->delete('company', array('company_id' => $uid));
+        
+        
+        // Here the field name is user_id. I assumes it is same to uid.
+        $this->db->delete('company_bookmark', array('user_id' => $uid));
+        $this->db->delete('company_candidate', array('user_id' => $uid));
+        $this->db->delete('job_apply', array('user_id' => $uid));
+        $this->db->delete('job_bookmark', array('user_id' => $uid)); 
+        
+        
+        // Two Tables - I think only for ADMIN User.
+        $this->db->delete('article', array('uid' => $uid));
+        $this->db->delete('admin', array('uid' => $uid));
+        
+        $this->db->delete('company_viewed', array('uid' => $uid));
+        $this->db->delete('interview', array('uid' => $uid));
+        $this->db->delete('match_score', array('uid' => $uid)); 
+        $this->db->delete('portfolio_project', array('uid' => $uid)); 
+        $this->db->delete('user', array('uid' => $uid));        
+        $this->db->delete('user_education', array('uid' => $uid));        
+        $this->db->delete('user_industry_position', array('uid' => $uid));         
+        $this->db->delete('user_language', array('uid' => $uid));         
+        $this->db->delete('user_personal_skills', array('uid' => $uid));         
+        $this->db->delete('user_professional_skills', array('uid' => $uid));  
+        $this->db->delete('user_seeking_industry', array('uid' => $uid)); 
+        $this->db->delete('user_social', array('uid' => $uid)); 
+        $this->db->delete('user_status', array('uid' => $uid)); 
+        $this->db->delete('user_work_history', array('uid' => $uid));
+    }   
+    
+    /**
+     * Finding the job postings done by this specific User.
+     * 
+     * Here we pass the uid from SESSION. But in the job table, this field is named as "company_id".
+     * One user can able associated with one company and it is clear in that way.
+     * 
+     */
+    public function readJobIDS($company_id)
+    {
+     	$sql    =   'SELECT id FROM job WHERE company_id='.$company_id;
+    	return $this->db->query($sql)->result_array();
+    }    
+    
+    
+    /**
+     * Receive an array of the job ids (job table) which this user is posted.
+     * Remove those records.
+     * 
+     */    
+    public function deleteRecordsUsingJobID($job_ids)
+    {
+
+        $string_job_ids     =   implode(',', $job_ids);
+        
+        $sql = 'DELETE FROM interview WHERE job_id IN('.$string_job_ids.')';
+        $this->db->query($sql);          
+        
+        $sql = 'DELETE FROM job_apply WHERE job_id IN('.$string_job_ids.')';
+        $this->db->query($sql);          
+        
+        $sql = 'DELETE FROM job_bookmark WHERE job_id IN('.$string_job_ids.')';
+        $this->db->query($sql);        
+       
+        $sql = 'DELETE FROM job_industry_position WHERE job_id IN('.$string_job_ids.')';
+        $this->db->query($sql);
+        
+        $sql = 'DELETE FROM job_language_level WHERE job_id IN('.$string_job_ids.')';
+        $this->db->query($sql); 
+        
+        $sql = 'DELETE FROM match_score WHERE job_id IN('.$string_job_ids.')';
+        $this->db->query($sql); 
+    }    
+    
+    /**
+     * Records which are saved during CHAT. Table name is "inbox".
+     * 
+     * The chat is done between two users (ie user1 and user2 ) 
+     * Each time any of this person respond, there is a "seq" incrementation also happening.
+     * "id" value will be same for all time in between "user1 & user2".
+     * 
+     * What we do during deletion is, delete ALL RECORDS on which either user1 or user2 is the received uid.
+     * 
+     */    
+    public function deleteChatRecords($uid)
+    {
+        $sql = "DELETE FROM inbox WHERE user1=$uid OR user2=$uid";
+        $this->db->query($sql);   
+    }    
+    
 }

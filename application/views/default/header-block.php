@@ -51,11 +51,17 @@
 				<li class="home"><a href="<?php echo $site_url?>"></a></li>
 				<li class="about"><a href="<?php echo $site_url?>page/aboutus"></a></li>
 				<li class="news"><a href="<?php echo $site_url?>news"></a></li>
-                <?php if(isCompany($user_type)):?>
-				<li class="findstaff"><a href="<?php echo $site_url?>company/joblisting"></a></li>
-				<?php else:?>
+                <?php $current_user_type = isset($user_type)?$user_type:-1;
+                if (true || 0 == $current_user_type):?>
 				<li class="jobs"><a href="<?php echo $site_url?>search/findjob"></a></li>
-				<?php endif; ?>
+
+                <?php endif; ?>
+                                <?php if($this->session->userdata('user_type')==1): // COMPANY LOGGED IN ?>
+                                <li class="findstaff"><a href="<?php echo $site_url?>company/joblisting"></a></li>
+                                <?php else: ?>
+				<li class="findstaff"><a href="<?php echo $site_url?>search/findstaff"></a></li>
+                                <?php endif; ?>
+                                
 				<li class="post"><a href="<?php echo $site_url?>job/postjob" class="check_login_user_type_for_postjob"></a></li>
 			</ul>
 		</div>
@@ -66,7 +72,7 @@
                 login
                 <?php else: ?>
                 	<?php echo isset($first_name)?$first_name:"";?>&nbsp;
-                	<?php if(isCompany($user_type)) {
+                	<?php if(!isCompany($user_type)) {
                 		echo isset($last_name)?$last_name:"";
                 	}?>
                 <?php endif;?>

@@ -12,11 +12,12 @@ class news extends Front_Controller {
     {
         //redirect('/');
         $data = $this->data;
-        $data['hot_news'] = $this->article_model->getListByCat('hot-news', 'en', 1);
-        $data['expat_profile'] = $this->article_model->getListByCat('expat-profile', 'en', 1);
+        $data['hot_news']       = $this->article_model->getListByCat('hot-news', 'en', 1,'aid DESC');
+        $data['expat_profile']  = $this->article_model->getListByCat('expat-profile', 'en', 1);
 
-        $data['stories'] = $this->article_model->getListByCat('top-stories', 'en', 4);
-        $data['events'] = $this->article_model->getListByCat('upcoming-events', 'en', 4);
+        $data['stories']        = $this->article_model->getListByCat('top-stories', 'en', 4);
+        $data['events']         = $this->article_model->getListByCat('upcoming-events', 'en', 4);
+        $data['useful_links']   = $this->article_model->getListByCat(118, 'en'); // 118 is the Useful Links category id.
         $this->load->view($data['front_theme'].'/news-index', $data);
     }
 

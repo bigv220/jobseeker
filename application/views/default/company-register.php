@@ -1,5 +1,10 @@
 <?php $this->load->view($front_theme.'/header-block');?>
 
+<!--Deletion Works. -->
+<link href="<?php echo $theme_path?>style/delete.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo $theme_path?>js/deletecompany.js"></script>
+<!--Deletion Works. Ends here. -->
+
 <!--company page body-->
 <div class="reg-page w770 clearfix rel">
     <div class="reg-left abs box mb20">
@@ -168,9 +173,68 @@
             </form>
             </div>
         </div>
-        <div class="reg-btns"> <a href="javascript:void(0);" onclick="saveAll();" class="reg-btns-save"></a><a href="<?php echo $site_url?>job/postjob" class="reg-btns-post"></a><a href="<?php echo $site_url?>search/searchjobseeker" class="reg-btns-find"></a> </div>
+        <div class="reg-btns"> <a href="javascript:void(0);" onclick="saveAll();" class="reg-btns-save"></a><a href="<?php echo $site_url?>job/postjob" class="reg-btns-post"></a><a href="<?php echo $site_url?>search/searchjobseeker" class="reg-btns-find"></a>
+
+                            <a href="javascript:void(0);" class="pbn-delete-company-btn">Delete Account</a>
+        </div>
     </div>
 </div>
+
+
+<!-- Delete Company Account - starts here -->
+<div class="pop-mark-company-delete"></div>
+
+<!--First Pop Up window for Delete Account. -->
+<div class="pop-reg-company-delete png">
+    <div class="pop-reg-company-delete-wrap rel">
+        <form id="signup_form" method="post" action="">
+            <div class="pop-reg-company-delete-close abs" title="close"></div>
+            
+            <div class="pop-reg-company-delete-tit">
+                Deleting your account can be done in 3 easy steps:
+            </div>
+
+            
+            <div class="pop-reg-company-delete-personal">
+                1. Type "DELETE" in all Caps. <br>
+                <input type="text" id="delete_text" name="delete_text" class="kyo-input"/>
+            </div>
+            <div class="pop-reg-company-delete-agree">
+               2. Check the box below to confirm that you know this is an irreversible action (there is no way to restore your account after it is deleted). <br>
+               
+                             
+               <br> <input id="confirm_deletion" value="0" class="kyo-checkbox" style="display:none;"/>
+                    <i class="kyo-checkbox" data-id="confirm_deletion" data-val="1"></i>
+
+                
+            </div>
+            <div class="pop-reg-company-delete-mail">
+                3. Click button below
+            </div>
+            
+            <div class="pop-reg-company-delete-submit">
+                <input type="text" id="pop-reg-company-delete-submit" class="pop-reg-company-delete-submit-btn" />
+            </div>
+        </form>
+    </div>
+    <div class="pop-reg-company-delete-footer"></div>
+</div>
+<!-- Delete Company Account - Ends here -->
+
+<!-- Delete Company Account - Success window. -->
+<div class="pop-message-delete-message png">
+    <div class="pop-message-delete-message-wrap rel">
+        <i class="pop-message-delete-message-close abs" title="close"></i>
+        <b>Your account is deleted.</b>
+        <div class="pop-message-delete-message-bd">
+            <div class="message_title">Logout and redirecting you to Site Index....</div>
+            <div class="message_content"></div>
+        </div>
+    </div>
+</div>
+<!-- Delete Company Account - Success window. Ends here -->
+
+
 
 <script type="text/javascript">
 $(document).ready(function(){

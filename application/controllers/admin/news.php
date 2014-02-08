@@ -76,10 +76,19 @@ class news extends Admin_Controller {
 			$this->load->view($this->data['admin_theme'].'/news-edit', $this->data);
 		}
 		else
-		{
+		{                   
 			$post = $_POST;
 			$post['lang'] = 'en';
 			$post['date'] = strtotime($post['date']);
+                        
+                        // If the user selected "Useful Links", we need to remove all tags.
+                        // Useful Links category never change to make this working perfectly.
+                        if($_POST['cid']==118):
+                            $post['descrip']            = strip_tags($post['descrip']);
+                            $post['content_general']    = strip_tags($post['content_general']);
+                            $post['content']            = strip_tags($post['content']);
+                        endif;
+                        
 			$flag = $this->article_model->add($post);
 			if ($flag)
 			{
@@ -107,6 +116,15 @@ class news extends Admin_Controller {
 		{
 			$post = $_POST;
 			$post['date'] = strtotime($post['date']);
+                        
+                        // If the user selected "Useful Links", we need to remove all tags.
+                        // Useful Links category never change to make this working perfectly.
+                        if($_POST['cid']==118):
+                            $post['descrip']            = strip_tags($post['descrip']);
+                            $post['content_general']    = strip_tags($post['content_general']);
+                            $post['content']            = strip_tags($post['content']);
+                        endif;   
+                        
 			$flag = $this->article_model->edit($post, 'aid');
 			if ($flag)
 			{

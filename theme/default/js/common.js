@@ -118,7 +118,14 @@ function show_welcome_pop(usertype){
     $('.pop-welcome').fadeIn();
 }
 // change industry
-    function changeIndustry(thisO, next_element) {
+    function changeIndustry(thisO, next_element) {        
+                if(next_element) {
+                    $(thisO).next('select').prop("disabled", true);
+                    $(thisO).next('select').html('<option value="">Loading...</option>'); 
+                } else {
+                    $(thisO).parent().parent().next().find('select').prop("disabled", true);
+                    $(thisO).parent().parent().next().find('select').html('<option value="">Loading...</option>'); 
+                }
         var name = $(thisO).val();
         $.post(site_url + 'jobseeker/ajaxchangeindustry',
             { ind_name: name },
@@ -133,8 +140,10 @@ function show_welcome_pop(usertype){
                 }
                 if(next_element) {
                     $(thisO).next('select').html(position_htm);
+                    $(thisO).next('select').prop("disabled",false);
                 } else {
                     $(thisO).parent().parent().next().find('select').html(position_htm);
+                    $(thisO).parent().parent().next().find('select').prop("disabled",false);
                 }
             });
     }
@@ -144,8 +153,9 @@ function show_welcome_pop(usertype){
 
         var selected = this1.val();
         var html_option = "";
-
         if("country" == key) {
+            $("select[name='province']").prop("disabled",true);
+            $("select[name='province']").html('<option value="">Loading...</option>');
             var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected;
             $.get(url, function(data){
                 var obj = eval('('+data+')');
@@ -153,10 +163,13 @@ function show_welcome_pop(usertype){
                     html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
                 }
                 $("select[name='province']").html(html_option);
+                $("select[name='province']").prop("disabled",false);
             });
         }
 
         if("province" == key) {
+            $("select[name='city']").prop("disabled",true);
+            $("select[name='city']").html('<option value="">Loading...</option>');            
             var country = $("select[name='country']").val();
             var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected + "/" + country;
             $.get(url, function(data){
@@ -165,6 +178,7 @@ function show_welcome_pop(usertype){
                     html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
                 }
                 $("select[name='city']").html(html_option);
+                $("select[name='city']").prop("disabled",false);
             });
         }
 

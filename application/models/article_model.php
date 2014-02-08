@@ -7,7 +7,12 @@ class article_model extends MY_Model
 		$this->table = 'article';
 	}
 	
-	public function getListByCat($cat, $lang, $limit=100)
+        /**
+         * On the Home, we need to display latest HOT NEWS. There is no time associated with date and thus two posting on same date
+         * doesnt have any difference. So for HOT NEWS, I am passing an additional ORDER BY field named "aid" which is an autoincrement field.
+         * 
+         */
+	public function getListByCat($cat, $lang, $limit=100,$order_by='')
 	{
 		if (is_numeric($cat))
 		{
@@ -27,7 +32,12 @@ class article_model extends MY_Model
 			}
 			$this->table = 'article';
 		}
-		return $this->getTable(array('cid'=>$cid,'lang'=>$lang), $limit, 'date DESC', $lang);
+                
+                // Modified on Jan/25/2014 See comments on top.
+                if($order_by=='')
+                    $order_by   =    'date DESC';
+                
+		return $this->getTable(array('cid'=>$cid,'lang'=>$lang), $limit, $order_by, $lang);
 	} 
 	
 	public function getBlock($key, $lang)

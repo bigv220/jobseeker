@@ -19,7 +19,7 @@
                     		<input name="title" id="title" type="text" value="<?php if(!empty($article)) echo $article['title']?>" />
                     		<br />
                     		<label for="descrip">Description:</label> 
-                    		<textarea name="descrip" id="descrip" style="height:50px;"><?php if(!empty($article)) echo $article['descrip']?></textarea>
+                    		<textarea name="descrip" id="descrip" style="height:50px;"><?php if(!empty($article)) echo $article['descrip']; else echo 'If "Useful Link" put hover-text here.'; ?></textarea>
                     		<br />
                     		<label for="content_short">General Content:</label> 
                     		<script charset="utf-8" src="<?php echo $theme_path?>js/editor/kindeditor-min.js"></script>
@@ -49,7 +49,7 @@
 							        });
 							</script>
                     		<textarea name="content_general" id="content_general">
-                    			<?php if(!empty($article)) echo htmlspecialchars($article['content_general']) ?>
+                                    <?php if(!empty($article)) echo htmlspecialchars($article['content_general']); else echo 'If "Useful Link" put link title here.'; ?>
                     		</textarea>
                     		<br />
                         <label for="content1">Content:</label> 
@@ -80,7 +80,7 @@
                       });
               </script>
                         <textarea name="content" id="content1">
-                          <?php if(!empty($article)) echo htmlspecialchars($article['content']) ?>
+                          <?php if(!empty($article)) echo htmlspecialchars($article['content']); else echo 'If "Useful Link" put link address here.'; ?>
                         </textarea>
                     		
                     		<link rel="stylesheet" type="text/css" href="<?php echo $theme_path?>js/datepicker/jquery-ui-1.8.4.datepicker.css" />
@@ -136,11 +136,11 @@
                     </form>
 					<script type="text/javascript">
 					$("#form").submit(function(){
-						if($("#title").val() == "") {
+						/*if($("#title").val() == "") {
 							alert("Please fill in title.");
 							$("#title").focus();
 							return false;
-						}
+						}*/
 						if($("#cid option:selected").html().substr(0,2) == "--") {
 							alert("Please select a perant category.");
 							$("#cid").focus();

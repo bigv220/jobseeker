@@ -6,24 +6,16 @@
             <div class="news-index-left">
                 <?php if (empty($hot_news)): ?>
                 <div class="article">
-                    <div class="title">1Russia & China To Start Youth Exchange Program. </div>
+                    <div class="title">Russia & China To Start Youth Exchange Program. </div>
                     <div class="content">
                         <img src="<?php echo $theme_path?>style/home/article_img.jpg"/>
                         <p>
-                        JingJobs has now officially launched and is ready to use! 
-                        Although we have tried our hardest, 
-                        there may still be some kinks with the website in the first few weeks, 
-                        so we would be incredibly grateful if you would bear with us patiently in the meantime. 
-                        The launch of JingJobs coincides (very auspiciously) with the arrival of the New Year! 
-                        To anyone who is stuck in a rut, or unhappy with their jobs, take this as a sign and sign up with us. 
-                        China is a land of myriad opportunities and Beijing is a booming hub for job seekers, 
-                        filled with new experiences. JingJobs is the first international platform of its kind based in Beijing. 
-                        Our aim is to make it as easy and seamless as possible for English-speaking job seekers to find their dream career. 
-                        In order to do just that we have incorporated features such as JingChat into our website, 
-                        which makes the gap between potential employers and jobseekers as small as possible. 
-                        Join us for a fresh outlook on life and an exciting change of environment and make 2014 your best year ever!
-                        <br />                 
-                        <a href="<?php echo $site_url?>news/view/166">Continue reading</a>
+                        As the world looks to China in awe, the middle kingdom itself is strengthening ties with its immediate neighbours. <br />
+						In fact, Russia and China will send 10,000 students to each other’s countries, to strengthen international relations as part of the Youth Friendly Exchanges Year. <br />
+						Chinese Vice Premier Liu Yandong said:<br />
+						"We will launch a youth exchange program that involves 100 schools and 10,000 students from each country.<br />
+						"We will earnestly plan and prepare for the opening ceremony of the youth year to be held in Russia next spring...                 
+                        <br /><a href="<?php echo $site_url?>news/view/166">Continue reading</a>
                         </p>
                     </div>
                     <!-- <div class="share-sns">
@@ -37,16 +29,15 @@
                 <div class="article">
                     <div class="title"><?php echo $hot_news['title']; ?></div>
                     <div class="content">
-                        <?php if(!empty($hot_news['profile_pic'])) {
-                                        $pic = $site_url.'attached/article/'.$hot_news['profile_pic'];
-                                   } else {
-                                        $pic = $theme_path."style/home/article_img.jpg";
-                                   }
-                            ?>
-                        <img src="<?php echo $pic?>" width="480"/>
+                        
+                        <?php if(!empty($hot_news['profile_pic'])): // Only display if there is image associated with article. ?>
+                                <?php $pic = $site_url.'attached/article/'.$hot_news['profile_pic']; ?>
+                                <img src="<?php echo $pic?>" width="480"/>
+                        <?php endif; ?>
+                                
                         <p>
                         <?php echo $hot_news['content_general']; ?>
-                        <a href="<?php echo $site_url?>news/newsDetails/<?php echo $hot_news['aid']; ?>">Continue reading</a>
+                        <br /><a href="<?php echo $site_url?>news/newsDetails/<?php echo $hot_news['aid']; ?>">Continue reading</a>
                         </p>
                     </div>
                     <!-- <div class="share-sns">
@@ -115,9 +106,9 @@
                 <div class="useful_links">
                     <div class="title">Useful Links and Things We Like</div>
                     <ul>
-                        <li><a href="http://gradrecruiter.wordpress.com/2013/08/29/is-your-mind-set-to-global/">7 ways to improve your global mindset</a></li>
-                        <li><a href="http://www.theatlantic.com/infocus/2013/09/scenes-from-21st-century-china/100586/">Scenes from 21st Century China</a></li>
-                        <li><a href="<?php echo $site_url?>news/view/169">Shanghai Free Trade Zone to welcome hotel boom</a></li>
+                        <?php foreach($useful_links as $useful_link): ?>
+                        <li><a href="<?=$useful_link['content']?>" title="<?=$useful_link['descrip']?>"><?=$useful_link['content_general']?></a></li>
+                        <?php endforeach; ?>    
                     </ul>
                 </div>
 

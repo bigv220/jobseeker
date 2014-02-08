@@ -34,8 +34,7 @@ class company extends Front_Controller {
 			
 			// set up default avatar
 			if (empty($post['avatar'])) {
-				//$post['avatar'] = $data['site_url'] . 'attached/users/no-image.png';
-				$post['avatar'] = 'no-image.png';
+				$post['avatar'] = $data['site_url'] . 'attached/users/no-image.png';
 			}
 			
             if (isset($post['name']) && !isset($post['last_name'])) {
@@ -85,7 +84,6 @@ class company extends Front_Controller {
         //Save the user who reviewed it
         $uid = $this->session->userdata('uid');
         if($uid != $company_id) {
-        	if (empty($uid)) $uid = 0; // if no one login
             $this->company_model->saveCompanyViewed($uid, $company_id, date('Y-m-d'));
         }
 
@@ -373,4 +371,47 @@ class company extends Front_Controller {
     	echo json_encode($result);*/
     	echo json_encode("success");
     }
+    
+    /**
+     * Function used to delete user account. 
+     * 
+     * User may either COMPANY or Normal Job Seeker. 
+     * Company is also having an entry in the user table and thus using same function.
+     * Only difference, here we have is "job ids" deletion and is limited to "company only".
+     * Javascript file associated with this is deletecompany.js. delete.css for formatting the Pop Up window.
+     * Once the response reached on client side, it is redirected to default LOGOUT page and then to SITE HOME.
+     */
+    public function delete() 
+    {  
+        $this->load->model('company_model');        
+        $uid    =   $this->session->userdata('uid');        
+        // User must be Logged In and must be a COMPANY-USER.
+        if($uid != '' AND $this->session->userdata('user_type') == 1)
+        {      
+            // Logged In is Company User.
+            // All tables are using "uid" (user table id) as "company_id".
+            // Firstly going to call deletion from tables using "uid". Same is using for USER-DELETION.
+            $this->company_model->deleteRecordsUsingUID($uid);    
+            
+            // Delete records associated with CHAT. ie inbox table.
+            $this->company_model->deleteChatRecords($uid);   
+            
+            // Read all job ids which the user is posted. Only for COMPANY-USER. Then delete those jobs.
+            $job_ids    =   $this->company_model->readJobIDS($uid);            
+            if(count($job_ids)>0):
+               $this->company_model->deleteRecordsUsingJobID($job_ids);
+            endif;
+        }
+        elseif($uid != '' AND $this->session->userdata('user_type') != 1) // We assumed it as Job Seekers. There uid=4 or uid=0
+        {
+            // Normal User ie Job Seeker.
+            $this->company_model->deleteRecordsUsingUID($uid);
+            
+            // Delete records associated with CHAT. ie inbox table.
+            $this->company_model->deleteChatRecords($uid);  
+        }    
+        
+        echo json_encode("success");
+    }
+    
 }

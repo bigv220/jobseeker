@@ -1,7 +1,7 @@
 <?php $this->load->view($front_theme.'/header-block');?>
 <script type="text/javascript">
     $(document).ready(function() {
-        $("select[name='country']").change(function() {
+        $("select[name='country']").change(function() {          
             change_location($(this),'country');
         });
         $("select[name='province']").change(function() {
@@ -16,6 +16,8 @@
         var html_option = "";
 
         if("country" == key) {
+            $("select[name='province']").html('<option>Loading...</option>'); 
+            $("select[name='province']").prop('disabled',true);
             var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected;
             $.get(url, function(data){
                 var obj = eval('('+data+')');
@@ -23,10 +25,13 @@
                     html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
                 }
                 $("select[name='province']").html(html_option);
+                $("select[name='province']").prop('disabled',false); 
             });
         }
 
         if("province" == key) {
+            $("select[name='city']").html('<option>Loading...</option>');
+            $("select[name='city']").prop('disabled',true);
             var country = $("select[name='country']").val();
             var url = site_url + "jobseeker/ajaxlocation/" + key + "/" + selected + "/" + country;
             $.get(url, function(data){
@@ -35,6 +40,7 @@
                     html_option += "<option value='"+obj[i]+"'>"+obj[i]+"</option>";
                 }
                 $("select[name='city']").html(html_option);
+                $("select[name='city']").prop('disabled',false);
             });
         }
 
