@@ -9,6 +9,7 @@ class company extends Front_Controller {
 	{
 		parent::__construct();
         $this->load->library('session');
+        //$this->load->helper('json');
 	}
 	
 	public function index()
@@ -36,6 +37,37 @@ class company extends Front_Controller {
 			if (empty($post['avatar'])) {
 				$post['avatar'] = $data['site_url'] . 'attached/users/no-image.png';
 			}
+			
+			 if ($post['personal_website'] != "")  {
+	                        if (strncasecmp('http://', $post['personal_website'], 7) && strncasecmp('https://', $post['personal_website'], 8)) {
+	                            $post['personal_website'] = "http://" . $post['personal_website'];
+	                        }
+                        }
+                        
+                        if ($post['linkedin'] != "")  {
+	                        if (strncasecmp('http://', $post['linkedin'], 7) && strncasecmp('https://', $post['linkedin'], 8)) {
+	                            $post['linkedin'] = "http://" . $post['linkedin'];
+	                        }
+                        }
+                        
+                        if ($post['twitter'] != "")  {
+	                        if (strncasecmp('http://', $post['twitter'], 7) && strncasecmp('https://', $post['twitter'], 8)) {
+	                            $post['twitter'] = "http://" . $post['twitter'];
+	                        }
+                        }
+                        
+                        if ($post['weibo'] != "")  {
+	                        if (strncasecmp('http://', $post['weibo'], 7 && strncasecmp('https://', $post['weibo'], 8))) {
+	                            $post['weibo'] = "http://" . $post['weibo'];
+	                        }
+                        }
+                        
+                        if ($post['facebook'] != "")  {
+	                        if (strncasecmp('http://', $post['facebook'], 7) && strncasecmp('https://', $post['facebook'], 8)) {
+	                            $post['facebook'] = "http://" . $post['facebook'];
+	                        }
+                        }
+
 			
             if (isset($post['name']) && !isset($post['last_name'])) {
                 $this->company_model->updateBasicInfo($post);    
@@ -83,13 +115,28 @@ class company extends Front_Controller {
 
         //Save the user who reviewed it
         $uid = $this->session->userdata('uid');
-        if($uid != $company_id) {
+        if($uid != $company_id && $uid != null) {
             $this->company_model->saveCompanyViewed($uid, $company_id, date('Y-m-d'));
         }
 
         $data["jobinfo"] = $this->job_model->getCompanyJobList($company_id);
         $data["info"] = $this->company_model->getUserInfo($company_id);
         $data['industries'] = $this->company_model->getIndustry($company_id);
+        
+        if ($uid != null) {
+            $bookmarked_company = $this->job_model->getBookmarkedCompanyByUser($this->session->userdata('uid'));
+        } else {
+            $bookmarked_company = array();
+        }
+
+        $bookmark = array();
+
+        foreach ($bookmarked_company as $a_company) {
+            array_push($bookmark, $a_company['company_id']);
+        }
+
+        $data['bookmark'] = $bookmark;
+        
         $this->load->view($data['front_theme']."/company-info",$data);
     }
 
@@ -241,14 +288,14 @@ class company extends Front_Controller {
                 $post['search_keywords'] = '';
             }
             if(!empty($post["search_keywords"])) {
-                $where .= " AND job.job_name like '%" . $post["search_keywords"] . "%' or u.username like '%". $post['search_keywords'] ."%'";
+                $where .= " AND (job.job_name like '%" . $post["search_keywords"] . "%' or u.username like '%". $post['search_keywords'] ."%')";
             }
 
             $data['selected_tab'] = 3;
         }
     	
     	$this->load->model('job_model');
-        $jobs = $this->job_model->searchJob($where);
+        $jobs = $this->job_model->searchJobUnique($where);
 
         foreach($jobs as $key=>&$job) {
             $job['languages'] = $this->job_model->getJobLang($job['id']);
@@ -317,7 +364,7 @@ class company extends Front_Controller {
     	
     	// get posted jobs
     	$this->load->model('job_model');
-    	$data['jobs'] = $this->job_model->getTable(array('company_id'=>$uid));
+    	$data['jobs'] = $this->job_model->getTable(array('company_id'=>$uid,'job_status_id'=>2));
     	
     	// get users who applied job
     	if ($jobid != -1) {
@@ -352,24 +399,18 @@ class company extends Front_Controller {
     }
     
     public function ajaxDelApplicant() {
-    	/*$uid = $this->session->userdata('uid');
-    	if (!$uid)
-    	{
-    		$msg = "failed";
-    	}
-    	
-    	$this->load->model('company_model');
-    	$post = array('company_id'=>$uid, 'user_id'=>$_POST['user_id']);
-    	//$insert_id = $this->company_model->addCandidate($post);
-    	
-    	if ($insert_id != -1) {
-    		$msg = "success";
-    	} else {
-    		$msg = "failed";
-    	}
-    	$result['status'] = $msg;
-    	echo json_encode($result);*/
-    	echo json_encode("success");
+        $uid = $this->session->userdata('uid');
+        if (!$uid) {
+            $msg = "failed";
+        }
+
+        $this->load->model('company_model');
+//        $post = array('company_id' => $uid, 'user_id' => $_POST['user_id']);
+        if ($this->company_model->deleteCandidate($_POST['job_id'], $_POST['user_id'])) {
+            echo "success";
+        } else {
+            echo "failed";
+        }    
     }
     
     /**
@@ -414,4 +455,21 @@ class company extends Front_Controller {
         echo json_encode("success");
     }
     
+    public function changepass() 
+    {  
+        $this->load->model('company_model');        
+        $uid  =  $this->session->userdata('uid');        
+        // User must be Logged In and must be a COMPANY-USER.
+        $oldpass = $_POST['oldpass'];
+        $newpass = $_POST['newpass'];
+        
+        $user = $this->company_model->getUserInfo($uid);
+        
+        if($user['password'] == md5($oldpass)){
+            $this->company_model->updatePassword($uid, md5($newpass));
+            echo "success";
+        }else{
+            echo "failed";
+        }
+    }
 }

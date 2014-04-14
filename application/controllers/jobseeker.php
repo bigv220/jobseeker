@@ -1,14 +1,14 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Employer Controller, Registraion, Profile page, etc.
  *
  **/
-class jobseeker extends Front_Controller {
-
+class jobseeker extends Front_Controller
+{
     public function __construct()
     {
-        parent::__construct();
-       
+        parent::__construct();  
+        //$this->load->helper('json');    
     }
 
     public function index()
@@ -45,7 +45,7 @@ class jobseeker extends Front_Controller {
         
         //get data from db
         $userinfo = $this->jobseeker_model->getUserInfo($uid);
-        $education_info = $this->jobseeker_model->getEducationInfo($uid);
+        $education_history = $this->jobseeker_model->getAllEducationInfo($uid);
         $workhistory = $this->jobseeker_model->getWorkHistory($uid);
         $personal_skills = $this->jobseeker_model->getPersonalSkills($uid);
         $professional_skills = $this->jobseeker_model->getProfessionalSkills($uid);
@@ -75,7 +75,7 @@ class jobseeker extends Front_Controller {
 
         $data["uid"] = $uid;
         $data["userinfo"] = $userinfo;
-        $data["education_info"] = $education_info;
+        $data["education_history"] = $education_history;
         $data["work_history"] = $workhistory;
         $data["step_arr"] = $step_arr;
         $data["personal_skills"] = $personal_skills;
@@ -112,8 +112,77 @@ class jobseeker extends Front_Controller {
             $reg_step_str = implode('&', $step_arr);
             $this->jobseeker_model->saveRegisterStep($uid, $reg_step_str);
         }
-
     }
+    
+    /*
+     * Delete work history item 
+     */
+    public function deleteWorkHistoryItem() {
+        $this->load->model('jobseeker_model');
+        $work_id = $_POST['work_id'];
+        
+        if ($work_id != 0 && $work_id != null) {
+            if ($this->jobseeker_model->delWorkHistory($work_id)) {
+	            if ($this->jobseeker_model->delWorkHistoryIndustry($work_id)) {
+	                echo true; 
+	            } else {
+	                echo false;
+                    }
+            } else {
+                echo false;
+            }
+        } else {
+            redirect('/');
+        }
+    }
+    
+    public function getWorkHistoryRow() {
+        $this->load->model('jobseeker_model');
+        $work_id = $_POST['work_id'];
+        
+        $work_history = $this->jobseeker_model->getWorkHistoryFromId($work_id);
+        
+        if ($work_history == null) {
+            $work_history = $this->jobseeker_model->getWorkHistoryWithoutIndustry($work_id);
+        }
+        
+        echo json_encode($work_history);
+    }
+    
+    
+    /*
+     * Delete education history item 
+     */
+
+    public function deleteEducationHistoryItem() {
+        $this->load->model('jobseeker_model');
+        $edu_id = $_POST['edu_id'];
+
+        if ($edu_id != 0 && $edu_id != null) {
+            if ($this->jobseeker_model->delEducationHistory($edu_id)) {
+                echo true;
+            } else {
+                echo false;
+            }
+        } else {
+            redirect('/');
+        }
+    }
+
+    /*
+     * Get selected education history row to edit 
+     */
+
+    public function getEducationHistoryRow() {
+        $this->load->model('jobseeker_model');
+        $edu_id = $_POST['edu_id'];
+
+        $education = $this->jobseeker_model->getEducationHistoryFromId($edu_id);
+
+        echo json_encode($education);
+    }
+    
+    
 
     /**
      * View personal profile.
@@ -541,6 +610,38 @@ class jobseeker extends Front_Controller {
         $uid = $this->session->userdata('uid');
 
         if ($post) {
+        
+		if ($post['website'] != "")  {
+	                if (strncasecmp('http://', $post['website'], 7) && strncasecmp('https://', $post['website'], 8)) {
+	                    $post['website'] = "http://" . $post['website'];
+	                }
+	        }
+	        
+	        if ($post['linkedin'] != "")  {
+	                if (strncasecmp('http://', $post['linkedin'], 7) && strncasecmp('https://', $post['linkedin'], 8)) {
+	                    $post['linkedin'] = "http://" . $post['linkedin'];
+	                }
+	        }
+	        
+	        if ($post['twitter'] != "")  {
+	                if (strncasecmp('http://', $post['twitter'], 7) && strncasecmp('https://', $post['twitter'], 8)) {
+	                    $post['twitter'] = "http://" . $post['twitter'];
+	                }
+	        }
+	        
+	        if ($post['weibo'] != "")  {
+	                if (strncasecmp('http://', $post['weibo'], 7 && strncasecmp('https://', $post['weibo'], 8))) {
+	                    $post['weibo'] = "http://" . $post['weibo'];
+	                }
+	        }
+	        
+	        if ($post['facebook'] != "")  {
+	                if (strncasecmp('http://', $post['facebook'], 7) && strncasecmp('https://', $post['facebook'], 8)) {
+	                    $post['facebook'] = "http://" . $post['facebook'];
+	                }
+	        }
+
+        
             $rtn = $this->jobseeker_model->updateContactDetails($uid, $post);
 
             $socialNetwork = $post['socialNetwork'];
@@ -619,33 +720,34 @@ class jobseeker extends Front_Controller {
 
         $post = $_POST;
         $uid = $this->session->userdata('uid');
+        $edu_id = $post['hidden_education_history_id'];
 
         if ($post) {
-            //we should delete all schools related to this jobseeker
-            $this->jobseeker_model->deleteEducation($uid);
             //save schools to db
-            $school_len = count($post['school_name']);
-            for($i=0; $i<$school_len;$i++) {
-                if($post['school_name'][$i]) {
-                    $data = array('uid'=>$post['uid'],'school_name'=>$post['school_name'][$i],
-                        'attend_date_from'=>$post['attended_from'][$i] . '-' . $post['attended_from_month'][$i],
-                        'attend_date_to'=>$post['attended_to'][$i] . '-' . $post['attended_to_month'][$i],
-                        'degree'=>$post['degree'][$i],
-                        'major'=>$post['major'][$i],'achievements'=>$post['achievements'][$i]);
+            if ($post['school_name']) {
+                $data = array('uid' => $post['uid'], 'school_name' => $post['school_name'],
+                    'attend_date_from' => $post['attended_from'] . '-' . $post['attended_from_month'],
+                    'attend_date_to' => $post['attended_to'] . '-' . $post['attended_to_month'],
+                    'degree' => $post['degree'],
+                    'major' => $post['major'], 'achievements' => $post['achievements']);
 
-                    $rtn = $this->jobseeker_model->insertEducation($data);
+                if ($edu_id != 0) {
+                    $this->jobseeker_model->updateEducationHistory($edu_id, $data);
+                } else {
+                    $edu_id = $this->jobseeker_model->insertEducation($data);
                 }
-            }
 
-            if($rtn) {
-                $msg = "success";
-                $this->_saveRegisterStep($uid, 4);
-            } else {
-                $msg = "failed";
-            }
 
-            $result['status'] = $msg;
-            echo json_encode($result);
+                if ($edu_id != 0) {
+                    $msg = $edu_id;
+                    $this->_saveRegisterStep($uid, 4);
+                } else {
+                    $msg = "failed";
+                }
+
+                $result['status'] = $msg;
+                echo json_encode($result);
+            }
         }
     }
 
@@ -656,51 +758,45 @@ class jobseeker extends Front_Controller {
 
         $post = $_POST;
         $uid = $this->session->userdata('uid');
+        $work_id = $post['hidden_work_history_id'];
 
         if ($post) {
-            //save job to db
-            $company_len = count($post['company_name']);
-            for($i=0; $i<$company_len;$i++) {
-                $id = $post["id"][$i];
+            //save job to db     
+            if ($post['company_name']) {
+                $work_example = $post['work_example'] ? $post['work_example'] : '';
 
-                if($post['company_name'][$i]) {
-                    $work_example = $post['work_example'][$i]?$post['work_example'][$i]:'';
+                $desc = $post['description'] == '350 Characters' ? '' : $post['description'];
 
-                    $desc = $post['description'][$i] == '350 Characters' ? '' : $post['description'][$i];
+                $data = array('uid' => $post['uid'], 'introduce' => null,
+                    'company_name' => $post['company_name'],
+                    'period_time_from' => $post['period_time_from'] . '-' . $post['period_time_from_month'],
+                    'period_time_to' => $post['period_time_to'] . '-' . $post['period_time_to_month'],
+                    'location' => null, 'description' => $desc, 'is_stillhere' => $post['is_stillhere'],
+                    'work_examples_url' => $work_example);
 
-                    $data = array('uid'=>$post['uid'],'introduce'=>$post['introduce'][$i],
-                        'company_name'=>$post['company_name'][$i],
-                        'period_time_from'=>$post['period_time_from'][$i].'-'.$post['period_time_from_month'][$i],
-                        'period_time_to'=>$post['period_time_to'][$i].'-'.$post['period_time_to_month'][$i],
-                        'location'=>null,'description'=>$desc,'is_stillhere'=>$post['is_stillhere'][$i],
-                        'work_examples_url'=>$work_example);
+                if ($work_id != 0) {
+                    $this->jobseeker_model->updateWorkHistory($work_id, $data);
+                } else {
+                    $work_id = $this->jobseeker_model->insertWorkHistory($data);
+                }
 
-                    if($id) {
-                        $this->jobseeker_model->updateWorkHistory($id, $data);
-                    } else {
-                        $id = $this->jobseeker_model->insertWorkHistory($data);
-                    }
+                $data_arr = array('parent_id' => $work_id, 'uid' => $post["uid"], 'industry' => $post['industry'][0], 'position' => $post['position'][0]);
+                if ($post['ind_id'][0]) {
+                    $this->jobseeker_model->updateUserIndustry($post['ind_id'][0], $data_arr);
+                } else {
+                    $this->jobseeker_model->insertUserIndustry($data_arr);
+                }
 
-                    $user_industry_num = $post["grop_num"][$i];
-                    $num = $i*$post["grop_num"][0] + $user_industry_num;
-                    for($j=$i*$post["grop_num"][0];$j<$num;$j++) {
-                        $data_arr = array('parent_id'=>$id,'uid'=>$post["uid"],'industry'=>$post['industry'][$j],'position'=>$post['position'][$j]);
-                        if($post['ind_id'][$j]) {
-                            $this->jobseeker_model->updateUserIndustry($post['ind_id'][$j], $data_arr);
-                        } else {
-                            $this->jobseeker_model->insertUserIndustry($data_arr);
-                        }
-                    }//end for
-                }//end if
+                $msg = $work_id;
+                $this->_saveRegisterStep($uid, 5);
+
+                $result['status'] = $msg;
+                echo json_encode($result);
             }
-
-            $msg = "success";
-            $this->_saveRegisterStep($uid, 5);
-
-            $result['status'] = $msg;
-            echo json_encode($result);
         }
     }
+    
+    
 
     //save language
     public function language() {
@@ -831,23 +927,89 @@ class jobseeker extends Front_Controller {
         echo json_encode($result);
     }
 
-    //upload work examples
-    public function ajaxuploadfile() {
-        $data = $this->data;
-
-        $uid = $this->session->userdata('uid');
-        // load model
-        $this->load->model('jobseeker_model');
-        $user_path = FCPATH . 'attached/workExamples/';
-        $this->jobseeker_model->creatUserfolder ( $user_path.$uid.'/' ) or exit ( 'error: can not creat folder.' );
-        // upload
-        if (is_uploaded_file ( $_FILES ['workexample'] ['tmp_name'] )) {
-            $file_name = $uid.'/'.uniqid().'-'.iconv('utf-8','gb2312',$_FILES['workexample']['name']);
-            move_uploaded_file ( $_FILES ['workexample'] ['tmp_name'], $user_path .$file_name);
-            exit ( 'success|'.$file_name );
-        } else {
-            exit ( 'error: can not upload avatar image.' );
+    /**
+     * This function receive an IMAGE File uploaded from User-View Profile -> Portfolio section. 
+     * The image is uploaded using Ajax File Upload. 
+     * 
+     * It checks whether the image is valid (jpg/gif/png) and size less than 10mb.
+     * User have a limit of 12 Images in their Portfolio.
+     * 
+     * It returns the File Name, on completion.
+     */
+    public function ajaxuploadfile()
+    {
+        $data                       =   $this->data;
+        $uid                        =   $this->session->userdata('uid');
+    
+        $this->load->model('portfolioproject_model');
+        $image_upload_directory     =   FCPATH.'attached/workExamples/tmp/';
+               
+        $error                      =   FALSE; // Not an image or not an allowed image type.
+        $error_message              =   ''; // Store Error Message to send back to calling page.
+       
+        /**
+         * Image Type & Size Validation.
+         * 
+         * Type can be Gif/PNG/JPEG 
+         * Size muts be less than 10 MB.
+         */
+        if ($error == FALSE AND is_uploaded_file($_FILES['workexample']['tmp_name']))
+        {            
+            // Type Validation
+            $sizes              =       getimagesize($_FILES['workexample']['tmp_name']);
+            if($sizes[2] == 1)
+                    $imgformat	=	strtoupper('gif');
+            elseif($sizes[2] == 2)
+                    $imgformat	=	strtoupper('jpg');
+            elseif($sizes[2] == 3)
+                    $imgformat	=	strtoupper('png');
+            else
+            {
+                 $error         =       TRUE; // Not an image or not an allowed image type.
+                 $error_message =       'Only jpg/png/gif image is allowed.';
+            }
+            
+            // Size Validation.
+            if($error == FALSE AND ($_FILES['workexample']['size']/1048576) > 10): // A Megabyte is 1,048,576 bytes. Limit is 10 MB
+                $error         =       TRUE; // Not an image or not an allowed image type.
+                $error_message =       'Image with less than 10MB is allowed.';            
+            endif;   
+            
+            // Limit Validation    
+            if($error == FALSE AND $this->portfolioproject_model->canUploadPortfolioImage($uid)==FALSE):
+                $error                  =       TRUE; 
+                $error_message          =       'You have reached the allowed Portfolio Limit of 12 Images.';                 
+            endif;
         }
+        else
+        {
+            $error         =       TRUE; // Not an image or not an allowed image type.
+            $error_message =       'Image Upload failed. Please try again.';     
+        }        
+        
+        if($error==FALSE):
+
+            $unique_name	=	$uid.'_'.uniqid().'.'.strtolower($imgformat);             
+
+            move_uploaded_file($_FILES ['workexample']['tmp_name'],$image_upload_directory.$unique_name);
+            
+            $this->portfolioproject_model->proportionThumbGeneration($unique_name,'attached/workExamples/tmp/','attached/workExamples/500/',500,275);
+            chmod('attached/workExamples/500/'.$unique_name, 0644);
+            
+            $this->portfolioproject_model->proportionThumbGeneration($unique_name,'attached/workExamples/tmp/','attached/workExamples/200/',200,275);
+            chmod('attached/workExamples/200/'.$unique_name, 0644);
+            
+            exit('success|'.$unique_name);
+            
+        else:
+           
+            exit("$error_message");
+            
+        endif;
+        
+        
+        
+        
     }
 
     public function personalskillsautocomplete() {

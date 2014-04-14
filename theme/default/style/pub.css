@@ -4,6 +4,7 @@ body{font-family:Helvetica, Arial, sans-serif !important;}
 body,form,h1,h2,h3,h4,h5,h6,p,ul,li,dl,dd{margin:0;}
 h2,h3{font-size:14px;}
 h4,h5,h6{font-size:12px;font-weight:300;}
+.right{float:right;}
 ul,ol{padding:0;}
 b{font-weight:normal;}
 i{font-style:normal;}
@@ -60,7 +61,15 @@ a:active, a:focus { text-decoration: none; color: #48225b; }
 .ora{color:#ea6e3b;}
 .pur{color:#481052;}
 .p-hd{background:#522162 url(pub/header.gif) center no-repeat;height:104px;position:relative;z-index:11;}
-.phd-logo{position:absolute;width:162px;height:173px;background:url(pub/logo.png) no-repeat;top:0;left:50%;margin:0 0 0 -81px;}
+.phd-logo{
+    position:relative;
+    width:162px;
+    height:173px;
+    top:0;
+    left:60%;
+    margin:0 0 0 -81px;
+}
+.phd-menu {z-index:-10;height:100px;}
 .phd-menu ul{padding:53px 0 0 112px;}
 .phd-menu li{float:left;*display:inline;}
 .phd-menu a{color:#e6e74f;font-size:13px;font-weight:bolder;float:left;}
@@ -79,7 +88,7 @@ a:active, a:focus { text-decoration: none; color: #48225b; }
 .phd-menu .findstaff a{width:70px;height:10px;background:url(home/menu_findstaff.png) no-repeat;}
 .phd-menu .post a{width:70px;height:10px;background:url(home/menu_postajob.png) no-repeat;}
 .phd-login{float:right;*display:inline;*behavior:url(js/jslib/PIE.htc);min-height:75px;border-radius:0 0 2px 2px;background:#ef7641;margin:0 15px 0 0;}
-.phd-login-text{max-width:135px;padding:50px 10px 0 10px;/*height:25px;*/text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;word-wrap: break-word;}
+.phd-login-text{max-width:135px;padding:50px 10px 0 10px;/*height:25px;*/text-align:center;color:#fff;cursor:pointer;word-wrap: break-word;}
 .phd-login-text-user{width:61px;padding:35px 0 0 0;height:40px;text-align:center;text-transform:uppercase;color:#fff;cursor:pointer;font-size:12px;}
 .pft-wrap{overflow:hidden;zoom:1;padding:20px 0 0 0;background:#fafafa url(pub/footer-bg.gif) repeat-x;}
 .p-ft{font-family:Arial;color:#7f7f7f;}
@@ -92,7 +101,7 @@ a:active, a:focus { text-decoration: none; color: #48225b; }
 .p-footer-contact b{font-weight:bolder;color:#ea6e3b;}
 .p-footer-contact a{color:#7f7f7f;}
 .p-footer-weibo{padding:5px 0 0 0;}
-.pficon{background:url(pub/weibo.gif);background-repeat:no-repeat;display:block;float:left;*display:inline;cursor:pointer;width:26px;height:25px;margin-right:12px;}
+.pficon{background:url(pub/footer_logos.gif);background-repeat:no-repeat;display:block;float:left;*display:inline;cursor:pointer;width:26px;height:25px;margin-right:12px;}
 .pfi-i{background-position:0 0;}
 .pfi-f{background-position:-27px 0;}
 .pfi-t{background-position:-54px 0;}
@@ -103,16 +112,17 @@ a:active, a:focus { text-decoration: none; color: #48225b; }
 .pf-input,.pf-btn{position:absolute;background:none;border:none;}
 .pf-input{top:7px;left:5px;width:183px;height:18px;line-height:18px;color:#777;}
 .pf-btn{width:31px;height:32px;cursor:pointer;top:0px;left:196px;}
-.pop-mark{width:100%;height:100%;background:#fff;position:absolute;top:0;left:0;filter:alpha(opacity=60);-moz-opacity:0.6;opacity:0.6;z-index:100;display:none;}
+.pop-mark{width:100%;height:205%;background:#fff;position:absolute;top:0;left:0;filter:alpha(opacity=60);-moz-opacity:0.6;opacity:0.6;z-index:100;display:none;}
 .phd-login-pop{position:absolute;display:none;width:238px;min-height:149px;top:70px;left:-92px;padding-top:23px;background:url(pub/login_body_bg.png) no-repeat;}
 .phd-login-pop-header{padding:0 10px;background:url(pub/login_content_bg.png) repeat-y;}
 .phd-login-pop-header .phd-login-pop-header-txt{float:left;text-size:12px;font-weight:bold;}
 .phd-login-pop-header .forget-pw{float:right;font-size:10px;text-align: right;}
 .phd-login-pop-header a{display:inline-block;text-decoration: underline;color:#000000;}
-.phd-login-pop-content{background:url(pub/login_content_bg.png) repeat-y;padding:4px 10px;}
+.phd-login-pop-content{background:url(pub/login_content_bg.png) repeat-y;padding:4px 5px;}
 .phd-login-pop-content .ok_btn{width:214px;height:28px;background:url(pub/ok_btn_bg.png);}
 .phd-login-pop-content .login-error-msg{display:none;}
-.phd-login-pop-footer{height:14px;background:url(pub/login_footer_bg.png);}
+.phd-login-pop-content li a {text-decoration: none !important;}
+.phd-login-pop-footer{height:14px;background:url(pub/login_footer_bg.png) no-repeat;}
 .phd-login-pop .input-wrap{padding:0 0 0 42px;}
 .phd-login-pop .username-wrap{border:1px solid #CCCCCC;padding:0 0 0 25px;background:url(pub/username_input_bg.png) no-repeat 6px center;}
 .phd-login-pop .password-wrap{border:1px solid #CCCCCC;padding:0 0 0 25px;background:url(pub/password_input_bg.png) no-repeat 6px center;}
@@ -157,7 +167,97 @@ input.error,select.error,textarea.error {border: 1px solid red;box-shadow:0 1px 
 .reset-password-wrapper input.has{background:#fafafa;}
 .reset-password-wrapper .btn{width:214px;height:28px;display:inline-block;cursor:pointer;background:url(pub/reset_pw_btn.png) no-repeat;}
 .hr {height:0px; line-height:0px; margin: 10px 0 15px 0; border-bottom: 1px #ccc solid;}
-.page {width:730px;margin: auto;margin-bottom: 30px;color:#35302D;}
+.page {width:727px;word-wrap:break-word; margin: auto;margin-bottom: 30px;color:#35302D;}
 .page .title {color:#674092;margin-bottom:15px;}
 .xheLayout {margin-bottom: 5px !important;}
-textarea {font-family: Arial, Helvetica, sans-serif;;}
+textarea {font-family: Arial, Helvetica, sans-serif;}
+.search-input {
+    z-index: 15;
+}
+.view_profile_logo {
+    padding: 0 0 0 25px;
+    background: url(pub/logos/profile_icon_black.png) no-repeat 6px center;
+}
+.view_profile_logo:hover {
+    background: url(pub/logos/profile_icon_orange.png) no-repeat 6px center;
+}
+.edit_profile_logo {
+    padding: 0 0 0 25px;
+    background: url(pub/logos/edit_profile_icon_black.png) no-repeat 6px center;
+}
+.edit_profile_logo:hover {
+    background: url(pub/logos/edit_profile_icon_orange.png) no-repeat 6px center;
+}
+.saved_bookmarks_logo {
+    padding: 0 0 0 25px;
+    background: url(pub/logos/bookmark_icon_black.png) no-repeat 6px center;
+}
+.saved_bookmarks_logo:hover {
+    background: url(pub/logos/bookmark_icon_orange.png) no-repeat 6px center;
+}
+.applied_jobs_logo {
+    padding: 0 0 0 25px;
+    background: url(pub/logos/applied_icon_black.png) no-repeat 6px center;
+}
+.applied_jobs_logo:hover {
+    background: url(pub/logos/applied_icon_orange.png) no-repeat 6px center;
+}
+.sign_out_logo {
+    padding: 0 0 0 25px;
+    background: url(pub/logos/signout_icon_black.png) no-repeat 6px center;
+}
+.sign_out_logo:hover {
+    background: url(pub/logos/signout_icon_orange.png) no-repeat 6px center;
+}
+.jingchat_logo {
+    padding: 0 0 0 25px;
+    background: url(pub/logos/jingchat_icon_black.png) no-repeat 6px center;
+}
+.jingchat_logo:hover {
+    background: url(pub/logos/jingchat_icon_orange.png) no-repeat 6px center;
+}
+.manage_job_logo {
+    padding: 0 0 0 25px;
+    background: url(pub/logos/manage_job_icon_black.png) no-repeat 6px center;
+}
+.manage_job_logo:hover {
+    background: url(pub/logos/manage_job_icon_orange.png) no-repeat 6px center;
+}
+.candidates_logo {
+    padding: 0 0 0 25px;
+    background: url(pub/logos/candidates_icon_black.png) no-repeat 6px center;
+}
+.candidates_logo:hover {
+    background: url(pub/logos/candidates_icon_orange.png) no-repeat 6px center;
+}
+.title_not_bold {
+    font-weight: normal !important;
+}
+.shortlist_candidate_block {
+    margin-right: 15%;
+}
+.loading_dialog {
+    background: url(pub/job_being_saved.png);
+    width: 265px;
+    height: 133px;
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    z-index: 105;
+    display: none;
+}
+#loading_spinner {
+    position: absolute;
+    top: 69%;
+    left: 50%;
+}
+
+.table_edit_profile_list{
+	text-align: center;
+	border-bottom: 1px solid #e0e0e0;
+	width:485px;
+}
+
+.th_left_align{
+	text-align: left;
+}

@@ -2,13 +2,30 @@
 
 <!--Deletion Works. -->
 <link href="<?php echo $theme_path?>style/delete.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $theme_path?>style/changepass.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<?php echo $theme_path?>js/deletecompany.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/changepass.js"></script>
 <!--Deletion Works. Ends here. -->
+
+<?php 
+/**
+ * Image Upload & Cropping: 
+ * See the documentaion in user/uploadimage
+ * 
+ * URL http://defunkt.io/facebox/ [Popup Implementation]
+ */
+?>
+<link href="<?php echo $theme_path?>cropimage/facebox.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="<?php echo $theme_path?>cropimage/facebox.js" type="text/javascript"></script>
 
 <!--company page body-->
 <div class="reg-page w770 clearfix rel">
     <div class="reg-left abs box mb20">
         <h2 class="reg-left-tit">NiHAO <span title="<?php echo $basic_info['first_name'];?>"><?php echo substr($basic_info['first_name'],0,8);?></span></h2>
+        <ul class="reg-ul-top">
+        <li><a href="<?php echo $site_url?>job/postjob">Post a Job</a></li>
+        <li><a href="<?php echo $site_url?>company/joblisting">Find Staff</a></li>
+        </ul>
         <ul class="reg-ul">
             <?php 
             $cla = '';
@@ -80,9 +97,13 @@
                                    }
                             ?>
                             <img id="image_profile" height='100px' src="<?php echo $pic; ?>" class="reg-company-img" />
+                            <p><span>Select jpg, gif or png image with size less than 3MB.</span></p>
                     </div>
                     <span class="" id="errorRemind"></span>
                 </div>
+                
+                
+                
                 <div class="reg-row clearfix"> <strong>Industry <i class="star">*</i></strong>
                     
                     <select name="industry" id="industry" title="" <?php if (empty($industries)): ?>required<?php endif; ?>>
@@ -173,9 +194,12 @@
             </form>
             </div>
         </div>
-        <div class="reg-btns"> <a href="javascript:void(0);" onclick="saveAll();" class="reg-btns-save"></a><a href="<?php echo $site_url?>job/postjob" class="reg-btns-post"></a><a href="<?php echo $site_url?>search/searchjobseeker" class="reg-btns-find"></a>
-
-                            <a href="javascript:void(0);" class="pbn-delete-company-btn">Delete Account</a>
+         <div class="reg-btns">
+            <a href="javascript: void(0);" class="reg-btns-saveall png" onclick="saveAll();"></a>
+            <p class="right reg-btns-down-page">
+            <a href="javascript:void(0);" class="pbn-change-password-btn">Change Password</a>
+            <a href="javascript:void(0);" class="pbn-delete-company-btn">Delete Account</a>
+            <p>
         </div>
     </div>
 </div>
@@ -213,7 +237,7 @@
             </div>
             
             <div class="pop-reg-company-delete-submit">
-                <input type="text" id="pop-reg-company-delete-submit" class="pop-reg-company-delete-submit-btn" />
+                <input type="button" id="pop-reg-company-delete-submit" class="pop-reg-company-delete-submit-btn" />
             </div>
         </form>
     </div>
@@ -234,20 +258,94 @@
 </div>
 <!-- Delete Company Account - Success window. Ends here -->
 
+<!-- Edit Password - starts here -->
+<div class="pop-mark-change-password"></div>
+
+<!--First Pop Up window for Edit Password. -->
+<div class="pop-reg-change-password png">
+    <div class="pop-reg-change-password-wrap rel">
+        <form id="change_pass_form" method="post" action="">
+            <div class="pop-reg-change-password-close abs" title="close"></div>
+            
+            <div class="pop-reg-change-password-tit">
+                Change Password:
+            </div>
+            <div class="pop-reg-change-password-agree">
+                1. Old password. <br>
+                <input type="password" id="old-pass" name="old-pass" class="kyo-input"/>
+                <p id="wrong-old" class="red"></p>
+            </div>
+            <div class="pop-reg-change-password-agree">
+                2. New password. <br>
+                <input type="password" id="new-pass" name="new-pass" class="kyo-input"/>  
+                <p id="wrong-new" class="red"></p>              
+            </div>
+            <div class="pop-reg-change-password-agree">
+                3. Confirm new password. <br>
+                <input type="password" id="conf-pass" name="conf-pass" class="kyo-input"/>
+                <p id="wrong-conf" class="red"></p>
+            </div>
+            
+            <div class="pop-reg-change-password-submit">
+                <input type="text" id="pop-reg-change-password-submit" class="pop-reg-change-password-submit-btn" />
+            </div>
+        </form>
+    </div>
+    <div class="pop-reg-change-password-footer"></div>
+</div>
+<!-- change-password - Ends here -->
 
 
 <script type="text/javascript">
+/**
+ * Called from facebox popup page once the real IMAGE CROPPING is over.
+ * 1. It hide the IMAGE AREA containers (in some cases, it is not closing automatically)
+ * 2. Shows preview of new cropped image.
+ * 3. Store the cropped image name into avatar for datbase updation.
+ */                      
+function thumbnailPreview(thumb_image_name_with_ext)
+{ 
+   $(".imgareaselect-outer").hide(); 
+   $(".imgareaselect-selection").hide(); 
+   $(".imgareaselect-border1").hide(); 
+   $(".imgareaselect-border2").hide(); 
+   
+   var img_path = "<?php echo $site_url; ?>attached/users/profileimage/"+thumb_image_name_with_ext;
+   
+   $("#image_profile").attr( "src", img_path);
+   $("#errorRemind").html('Image has been saved.');
+   
+    var profile_pic = "profileimage/"+thumb_image_name_with_ext;
+    $('#avatar').val(profile_pic);
+}   
+
+    
 $(document).ready(function(){
     uploadImage();
-    }
-);
+
+/**
+ * It hide the IMAGE AREA containers (in some cases, it is not closing automatically).
+ * This is needed when user started cropping but stopped without completing all steps.
+ */
+$(document).bind('close.facebox', function() {
+	// close tinymce or whatever you need..
+    $(".imgareaselect-outer").hide(); 
+    $(".imgareaselect-selection").hide(); 
+    $(".imgareaselect-border1").hide(); 
+    $(".imgareaselect-border2").hide(); 
+});
+
+/**
+ * Company Logo uploaded to Server via ajax.
+ * Trigger Facebox for PopUp and shows the Image Preview (Resized version) for Cropping. 
+ */
 function uploadImage(old_avatar) {
         var oBtn = document.getElementById("image_profile");
         var upload_button = document.getElementById("upload_button");
         var oRemind = document.getElementById("errorRemind");
         new AjaxUpload(oBtn,{
-            action:"<?php echo $site_url?>user/ajaxuploadimage",
-            name:"avatar",
+            action:"<?php echo $site_url?>user/uploadimage",
+            name:"image",
             data: {},
             onSubmit:function(file,ext){
                 if(ext && /^(jpg|jpeg|png|gif)$/.test(ext)){
@@ -264,15 +362,13 @@ function uploadImage(old_avatar) {
                 oBtn.disabled = "";
                 var response = response.split("|");
                 if ( response[0] == 'success') {
-                    oRemind.style.color = "green";
-                    oRemind.innerHTML = "Upload successful.";
-
-                    //var reg = /\s/g;
-                    var filename = response[1];
-
-                    var img_path = "<?php echo $site_url; ?>attached/users/" + filename;
-                    $('#avatar').val(filename);
-                    upload_button.innerHTML = "<img id='image_profile' src='" + img_path + "?" +  Math.floor(Math.random()*99999 + 1) + "' height='100' style='border:1px solid gray;' />";
+                    oRemind.style.color =   "green";
+                    oRemind.innerHTML   =   "Now cropping image...";
+                    
+                    // Trigger Facebox PopUp call.
+                    // After successfull cropping, the thumbnailPreview() will be calledback.
+                    jQuery.facebox({ ajax: '<?php echo $site_url; ?>user/cropimage' });
+                    
                 } else {
                     oRemind.style.color = "red";
                     oRemind.innerHTML = response[1];
@@ -280,6 +376,9 @@ function uploadImage(old_avatar) {
             }
         });
     }
+    
+        }
+);
 </script>
 <script type="text/javascript">
 $(document).ready(function() {

@@ -13,7 +13,7 @@ class job extends Admin_Controller {
 	{
 		$data = $this->data;
 		//$data['user'] = $this->job_model->getTable();
-		$data['jobs'] = $this->job_model->searchJob(null);
+		$data['jobs'] = $this->job_model->searchJobUnique(null);
 		$this->load->view($data['admin_theme'].'/job-index', $data);
 	}
 	

@@ -25,7 +25,7 @@ class user extends Admin_Controller {
 				$where = array('user_type' => '4');
 			}
 		}
-		$data['user'] = $this->user_model->getTable($where);
+		$data['user'] = $this->user_model->getTable($where, 1000);
 		$this->load->view($data['admin_theme'].'/user-index', $data);
 	}
 	
@@ -96,5 +96,27 @@ class user extends Admin_Controller {
 		{
 			showmsg(site_url().'admin/user/', 'Error');
 		}
+	}
+        
+        /**
+         * Authenticate a User. 
+         * 
+         * This page is called from ADMIN-USER Listing using Ajax.
+         * It is called by passing the UID. 
+         * It chnaged the user_type in User Table to either JobSeeker/Company based on User Selection.
+         * 
+         * It checks whether the Logged In user is ADMIN and do the work.
+         * 
+         * Written on: MARCH/03/2014.
+         */
+	public function authenticate()
+	{
+            // User must be Logged In and must be SITE ADMIN.
+            if($this->session->userdata('isadmin') == 1 AND $_POST['uid']!='' AND ($_POST['user_type']==1 OR $_POST['user_type']==0) )
+            { 
+                // Authenticate User.
+                $this->user_model->authenticate($_POST['uid'],$_POST['user_type']);  
+            }    
+            echo json_encode("success");
 	}
 }

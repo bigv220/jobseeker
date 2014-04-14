@@ -118,7 +118,7 @@ function show_welcome_pop(usertype){
     $('.pop-welcome').fadeIn();
 }
 // change industry
-    function changeIndustry(thisO, next_element) {        
+    function changeIndustry(thisO, next_element, position) {        
                 if(next_element) {
                     $(thisO).next('select').prop("disabled", true);
                     $(thisO).next('select').html('<option value="">Loading...</option>'); 
@@ -145,7 +145,15 @@ function show_welcome_pop(usertype){
                     $(thisO).parent().parent().next().find('select').html(position_htm);
                     $(thisO).parent().parent().next().find('select').prop("disabled",false);
                 }
+                
+                position = position || null;
+    
+                if (position != null) {
+                    $('#position_combobox').val(position);
+                }
             });
+            
+            
     }
 
     // ajax localtion

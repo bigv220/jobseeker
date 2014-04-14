@@ -36,6 +36,9 @@ class search extends Front_Controller {
         $where = '';
         $where_arr = array();
         $where_or = array();
+        
+        array_push($where_arr, "job.job_status_id=2"); // We always shows APPROVED JOBS only.
+        
         if($post) {
             if ($post["keywords"] == 'Enter Keywords') {
                 $post['keywords'] = '';
@@ -102,7 +105,15 @@ class search extends Front_Controller {
         }
 
         // get jobs according to the search
-        $jobs = $this->job_model->searchJob($where);
+        $jobs = $this->job_model->searchJobUnique($where);
+      
+        
+        //Associated with a Job Posting, there maybe one or languages selected.
+        //We need to retrieve that details.
+        foreach($jobs as $job_info_key=>$job_info_value):
+            $jobs[$job_info_key]['job_languages']   =   $this->job_model->getJobLanguages($job_info_value['id']);
+        endforeach;
+         
         if ($this->session->userdata('uid')) {
             $appyied_job = $this->job_model->getAppliedJobByUser($this->session->userdata('uid'));
         } else {
@@ -192,6 +203,10 @@ class search extends Front_Controller {
             // User is logged in and the User Type is "0" ie STAFF, we will shows MATCH%
             $jobs               =   $this->match_model->jobMatchPercentageForUser($jobs,$this->session->userdata('uid'));
             $jobs_match         =   1; // match calculation is performed.
+
+            // SORT THE RESULTS BASED ON MATCH_SCORE to display the TOP SCORE firstly.
+            // If not logged in, we use the default SORTING by POST-DATE.
+            usort($jobs, array($this->job_model, "sortJobsByMatchScore")); 
         }
         else 
         {
@@ -200,8 +215,6 @@ class search extends Front_Controller {
         
         $data['jobs_match'] = $jobs_match;
         $data['jobs']       = $jobs;
-        
-        //echo '<pre>'; print_r($data['jobs']); echo '</pre>';
 
         // generate job id string, this will be used in the filter function at the right side
         $job_id_str = '';
@@ -232,6 +245,7 @@ class search extends Front_Controller {
         $data['constants_arr'] = $constants;
         $this->load->view($data['front_theme']."/search-job-result",$data);
     }
+
 
     public function filterJob() {
         $data = $this->data;
@@ -470,6 +484,11 @@ class search extends Front_Controller {
 
     public function searchJobseeker() {
         $data = $this->data;
+		
+		if ($this->session->userdata('user_type') != 1){
+            redirect('/');
+        }
+		
         $this->load->model('job_model');
         $this->load->model('match_model');
         //Only if a JOB is selected from Listing Manager. LEFT MENU SEARCH form submission url is modified with this value, if present.
@@ -521,7 +540,7 @@ class search extends Front_Controller {
                 array_push($where_arr, "language like '%".$post["language"]."%'");
             }
         }
-        $where = " WHERE is_private=0 AND user_type = 0 ";
+        $where = " WHERE profile_completed=1 AND user_type = 0 ";
         if(count($where_arr)) {
             $where_str = implode(' AND ', $where_arr);
             $where .= 'AND ' . $where_str;
@@ -642,6 +661,10 @@ class search extends Front_Controller {
             // User is logged in and the User Type is "0" ie STAFF, we will shows MATCH%
             $jobseekers         =   $this->match_model->jobMatchPercentageForUser($jobseekers,0,$jobid);
             // It may also shows 0% if the specific JOB or Job-Seeker doesnt have a Match-Score record.
+            
+            // SORT THE RESULTS BASED ON MATCH_SCORE to display the TOP SCORE firstly.
+            // If not logged in, we use the default SORTING by POST-DATE.
+            usort($jobseekers, array($this->job_model, "sortJobsByMatchScore"));
         }
         else 
         {
@@ -657,6 +680,10 @@ class search extends Front_Controller {
 
     public function findstaff() {
         $data = $this->data;
+		
+		if ($this->session->userdata('user_type') != 1){
+            redirect('/');
+        }
 
          // get location
         $this->load->helper('location');

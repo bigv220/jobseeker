@@ -26,7 +26,7 @@
 
                         <strong>Position Title *</strong>
 
-                        <div><input type="text" name="job_name" required></div>
+                        <div><input type="text" name="job_name" maxlength="40" required></div>
 
                     </div>
 
@@ -124,7 +124,7 @@
 
                     <div class="span2">
 
-                        <strong>Language Level</strong>
+                        <strong>Language Level *</strong>
 
                         <div>
 
@@ -304,7 +304,7 @@
 
                         <div>
 
-                            <input type="text" name="location" class="input-tip" value="Street Address" data-tipval="Street Address" required>
+                            <input type="text" name="location" placeholder="Street Address" required>
 
                         </div>
 
@@ -492,7 +492,7 @@
 
                 $('#job_desc').xheditor({
 
-                    tools:'Bold,Italic,Underline,|,Align,List,|,Link,Img,Table,|,Source,Fullscreen',
+                    tools:'Bold,Italic,Underline,|,List', 
 
                     skin:'nostyle',
 
@@ -500,7 +500,10 @@
 
                     forcePtag:false,
 
-                    submitID:'post'});
+                    submitID:'post',
+                    
+                    cleanPaste: 3
+                    });
 
                 });
 
@@ -532,23 +535,57 @@
 
 
 
+<div class="pop-mark"></div>
+<div class="loading_dialog">
+    <div id="loading_spinner"></div>
+</div>
+
+
+
 <!-- Partners -->
 
 <?php $this->load->view($front_theme.'/partners-block');?>
 
 <script type="text/javascript" src="<?php echo $theme_path?>js/jobseeker.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path ?>js/spin.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path ?>js/spin.min.js"></script>	
 
-	
 
 <script type="text/javascript">
 
+	var popMark = $('.pop-mark');
+     	var loading_dialog = $('.loading_dialog');
+
+	var opts = {
+                lines: 10, // The number of lines to draw
+                length: 7, // The length of each line
+                width: 4, // The line thickness
+                radius: 10, // The radius of the inner circle
+                corners: 1, // Corner roundness (0..1)
+                rotate: 0, // The rotation offset
+                color: '#000', // #rgb or #rrggbb
+                speed: 1, // Rounds per second
+                trail: 60, // Afterglow percentage
+                shadow: false, // Whether to render a shadow
+                hwaccel: false, // Whether to use hardware acceleration
+                className: 'spinner', // The CSS class to assign to the spinner
+                zIndex: 2e9, // The z-index (defaults to 2000000000)
+                top: 25, // Top position relative to parent in px
+                left: 25 // Left position relative to parent in px
+            };
+
+            var spinner = null;
+            var spinner_div = 0;
+
+
 $(document).ready(function() {
+	spinner_div = $('#loading_spinner').get(0);
+	
+     	$("select[name='country']").change(function() {
 
-     $("select[name='country']").change(function() {
+        	change_location($(this),'country');
 
-        change_location($(this),'country');
-
-    });
+    	});
 
     $("select[name='province']").change(function() {
 
@@ -557,7 +594,17 @@ $(document).ready(function() {
     });
 
     $('#post').click(function() {
-
+    	$('html, body').animate({scrollTop: 0}, 'fast');
+    
+	popMark.fadeIn();
+	loading_dialog.fadeIn();
+	
+        if (spinner == null) {
+        	spinner = new Spinner(opts).spin(spinner_div);
+    	} else {
+        	spinner.spin(spinner_div);
+    	}  
+    	
         $('#postjobForm').validate();
 
         if ($('#postjobForm').valid()) {
@@ -573,16 +620,22 @@ $(document).ready(function() {
                         var data = $.parseJSON(result);
 
      			    	if("success" == status) {
+     			    		popMark.fadeOut();
+     			    		loading_dialog.fadeOut();
+					spinner.stop(spinner_div);
 
-                            alert('Post successful!');
-
-							window.location.href=site_url+'job/jobdetails/'+ data.id;
+					window.location.href=site_url+'job/jobdetails/'+ data.id;
 
      			    	}
 
-     		});
-
-        }
+     				});
+			} else {
+                              	$('html, body').animate({scrollTop: 0}, 'fast');                    
+                                popMark.fadeOut();
+                                loading_dialog.fadeOut();
+				spinner.stop(spinner_div);
+				                                   
+        		}
 
     });
 
@@ -596,9 +649,9 @@ function addLanguageBtnClick(thisO) {
 
 
 
-    if(num >= 3) {
+    if(num >= 8) {
 
-        alert("The can only add 3 languages.");
+        alert("The can only add 8 languages.");
 
         return;
 
@@ -682,4 +735,3 @@ function delNewUserLanguage(thisO) {
 <script type="text/javascript" src="<?php echo $theme_path?>js/findJobPage.js"></script>
 
 <?php $this->load->view($front_theme.'/footer-block');?>
-

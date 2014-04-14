@@ -41,7 +41,7 @@ class user extends Front_Controller {
             $this->load->library('email');
             $config['mailtype'] = 'html';
             $this->email->initialize($config);
-            
+            $this->email->reply_to('do-not-reply@jingjobs.com', 'JingJobs');
             $this->email->from('do-not-reply@jingjobs.com', 'JingJobs');
             $this->email->to($uEmail);
             $this->email->subject('Email confirmation');
@@ -326,4 +326,242 @@ class user extends Front_Controller {
             echo json_encode($result);
         }
     }
+    
+        /**
+         * This function generate the Image based on the attributes or area selected by the User from the FACEBOX POPUP.
+         * This page serves via Ajax Request. 
+         * It generates the image using CROP LIBRARY and returns details back to calling page.
+         * 
+         * PHASE 3 is going here. Check PHASE 1 for more information.
+         */
+        public function cropimagesave()
+        {
+            error_reporting (E_ALL ^ E_NOTICE);
+            session_start(); //Do not remove this             
+            
+            $this->load->model('cropimage_model');
+           
+            $crop_info      =   $_SESSION['crop'];
+            
+            if (isset($_POST["x1"])) 
+            {
+                //Get the new coordinates to crop the image.
+                $x1         =   $_POST["x1"];
+                $y1         =   $_POST["y1"];
+                $x2         =   $_POST["x2"];
+                $y2         =   $_POST["y2"];
+                $w          =   $_POST["w"];
+                $h          =   $_POST["h"];
+                //Scale the image to the thumb_width set above
+                $scale      =   $crop_info['thumb_width']/$w;
+                $cropped    =   $this->cropimage_model->resizeThumbnailImage($crop_info['thumb_image_location'], $crop_info['large_image_location'],$w,$h,$x1,$y1,$scale);
+                $result     =	array('status'	=> 'success', 'message' => 'Cropping is comppleted.','thumb_image_name_with_ext'    =>  $crop_info['thumb_image_name_with_ext']);
+            }
+            else
+            {
+                $result     =	array('status'	=> 'error', 'message' => 'Image Cropping is failed.','thumb_image_name_with_ext'    =>  '');
+            }            
+            
+            echo json_encode($result);
+        }         
+        
+        /**
+         * This function shows the IMAGE which is Uploaded via Ajax Upload in a Facebox PopUp page.
+         * 
+         * This PopUp is called from previous ajax file upload page. This page doesnt have Site Layout.
+         * This page shows the IMAGE and instantiates the CROPIMAGE Library and its functions. 
+         * 
+         * PHASE 2 work is going here. Check PHASE 1 for more information.
+         */
+        public function cropimage()
+        {
+            error_reporting (E_ALL ^ E_NOTICE);
+            session_start(); //Do not remove this  
+            
+            $data               =   $this->data;
+            $data['crop']       =   $_SESSION['crop'];           
+            $this->load->view($data['front_theme'].'/cropimage', $data);
+        }        
+        
+        
+        /**
+         * Function upload the IMAGE via AJAX FILE UPLOAD from company/register.
+         * The same function can be used for other pages also.
+         * 
+         * IMAGE UPLOAD and CROP functions. This is done in three steps and are:
+         * 
+         * PHASE 1. (uploadimage function) Image Upload page using Ajax File Upload.
+         * PHASE 2. (cropimage function) Shows a Preview of the Image in Facebox PopUp for IMAGE CROPPING.
+         * PHASE 3. (cropimagesave function) Generate the CROPPED IMAGE and return the information back.
+         * 
+         * PHASE 1 is handling in this function. Major works are: 
+         * 
+         * Initialize the IMAGE CROP library and assoictaed works.
+         * Receive the UPLOAD FILE.
+         * Resize it to a size which can be shown for CROP
+         * Save some details into SESSION for using in the coming phases.
+         * Return the details into calling page.
+         * 
+         * PACKAGE for IMAGE CROP: http://www.webmotionuk.co.uk/php-jquery-image-upload-and-crop/
+         * PACKAGE for AJAX FILE UPLOAD: see (company-register.php view file)
+         * PACKAGE for PopUp: facebox PopUp (URL http://defunkt.io/facebox/)
+         * 
+         * Implemented by: Aniesh Joseph on FEB/11/2014 (anieshjoseph@gmail.com)
+         * 
+         */
+	public function uploadimage() 
+        {
+            // Contains the CROP IMAGE functions which are available in the LIBRRAY.
+            $this->load->model('cropimage_model');
+            
+            // IMAGE CROPPING: LIBRARY Works STARTS >>
+            error_reporting (E_ALL ^ E_NOTICE);
+            session_start(); //Do not remove this
+            //File Name creation. (Combine User ID and Time)
+            $_SESSION['random_key']     =   $this->session->userdata('uid').strtotime(date('Y-m-d H:i:s'));
+            $_SESSION['user_file_ext']  =   "";
+            
+            // echo '<pre>SESSION DIRECT: '; print_r($_SESSION);  echo '</pre>'; 
+           
+            #########################################################################################################
+            # CONSTANTS
+            # You can alter the options below														#
+            #########################################################################################################
+            $upload_dir         = "attached/users/profileimage";    // The directory for the images to be saved in
+            $upload_path        = $upload_dir."/";                  // The path to where the image will be saved
+            $large_image_prefix = "resize_";                        // The prefix name to large image
+            $thumb_image_prefix = "thumbnail_";                     // The prefix name to the thumb image
+            $large_image_name   = $large_image_prefix.$_SESSION['random_key'];     // New name of the large image (append the timestamp to the filename)
+            $thumb_image_name   = $thumb_image_prefix.$_SESSION['random_key'];     // New name of the thumbnail image(append the timestamp to the filename)
+            $max_file           = "3"; 							// Maximum file size in MB
+            $max_width          = "500";						// Max width allowed for the large image
+            $thumb_width        = "138";    // Width of thumbnail image. Other places, we use the same settings. So change here will effect everywhere.
+            $thumb_height       = "138";    // Height of thumbnail image Other places, we use the same settings. So change here will effect everywhere.
+            // Only one of these image types should be allowed for upload
+            $allowed_image_types = array('image/pjpeg'=>"jpg",'image/jpeg'=>"jpg",'image/jpg'=>"jpg",'image/png'=>"png",'image/x-png'=>"png",'image/gif'=>"gif");
+            $allowed_image_ext = array_unique($allowed_image_types); // do not change this
+            $image_ext = "";	// initialise variable, do not change this.
+            foreach ($allowed_image_ext as $mime_type => $ext) {
+                $image_ext.= strtoupper($ext)." ";
+            }
+
+            //Image Locations
+            $large_image_location = $upload_path.$large_image_name.$_SESSION['user_file_ext'];
+            $thumb_image_location = $upload_path.$thumb_image_name.$_SESSION['user_file_ext'];
+
+            //Create the upload directory with the right permissions if it doesn't exist
+            if(!is_dir($upload_dir)){
+                    mkdir($upload_dir, 0777);
+                    chmod($upload_dir, 0777);
+            }
+
+            //Check to see if any images with the same name already exist
+            $large_photo_exists     =   "";
+            $thumb_photo_exists     =   "";          
+
+            // FILE UPLOADING - Validation
+            if(is_uploaded_file ( $_FILES ['image'] ['tmp_name'])) 
+            { 
+                    //Get the file information
+                    $userfile_name = $_FILES['image']['name'];
+                    $userfile_tmp = $_FILES['image']['tmp_name'];
+                    $userfile_size = $_FILES['image']['size'];
+                    $userfile_type = $_FILES['image']['type'];
+                    $filename = basename($_FILES['image']['name']);
+                    $file_ext = strtolower(substr($filename, strrpos($filename, '.') + 1));
+
+                    //Only process if the file is a JPG, PNG or GIF and below the allowed limit
+                    if((!empty($_FILES["image"])) && ($_FILES['image']['error'] == 0)) {
+
+                            foreach ($allowed_image_types as $mime_type => $ext) {
+                                    //loop through the specified image types and if they match the extension then break out
+                                    //everything is ok so go and check file size
+                                    if($file_ext==$ext && $userfile_type==$mime_type){
+                                            $error = "";
+                                            break;
+                                    }else{
+                                            $error = "Only <strong>".$image_ext."</strong> images accepted for upload<br />";
+                                    }
+                            }
+                            //check if the file size is above the allowed limit
+                            if ($userfile_size > ($max_file*1048576)) {
+                                    $error.= "Images must be under ".$max_file."MB in size";
+                            }
+
+                    }else{
+                            $error= "Select an image for upload";
+                    }
+                    //Everything is ok, so we can upload the image.
+                    if (strlen($error)==0)
+                    {
+
+                            if (isset($_FILES['image']['name']))
+                            {
+                                    //this file could now has an unknown file extension (we hope it's one of the ones set above!)
+                                    $large_image_location = $large_image_location.".".$file_ext;
+                                    $thumb_image_location = $thumb_image_location.".".$file_ext;
+
+                                    //put the file ext in the session so we know what file to look for once its uploaded
+                                    $_SESSION['user_file_ext']=".".$file_ext;
+
+                                    move_uploaded_file($userfile_tmp, $large_image_location);
+                                    chmod($large_image_location, 0777);
+
+                                    $width  =   $this->cropimage_model->getWidth($large_image_location);
+                                    $height =   $this->cropimage_model->getHeight($large_image_location);
+                                    //Scale the image if it is greater than the width set above
+                                    if ($width > $max_width)
+                                    {
+                                            $scale = $max_width/$width;
+                                            $uploaded = $this->cropimage_model->resizeImage($large_image_location,$width,$height,$scale);
+                                    }
+                                    else
+                                    {
+                                            $scale = 1;
+                                            $uploaded = $this->cropimage_model->resizeImage($large_image_location,$width,$height,$scale);
+                                    }
+                                    //Delete the thumbnail file so the user can create a new one
+                                    if (file_exists($thumb_image_location)) 
+                                    {
+                                            unlink($thumb_image_location);
+                                    }
+                            }                            
+                            
+                            //Refresh the page to show the new uploaded image
+                            $return_path                                    =   $upload_path.$large_image_name.$_SESSION['user_file_ext'];
+                            
+                            // Save necessary info into SESSION for CROP Works in the coming PHASES.
+                            // Otherwise, we need to initialise the CROP Variables everywhere.
+                            $crop_info['current_large_image_width']         =   $this->cropimage_model->getWidth($large_image_location);
+                            $crop_info['current_large_image_height']        =   $this->cropimage_model->getHeight($large_image_location);
+                            $crop_info['thumb_width']                       =   $thumb_width;
+                            $crop_info['thumb_height']                      =   $thumb_height; 
+                            
+                            // Created by Aniesh. This is for storing the random generated NAMES of both Resized & Thumbnail images.
+                            $crop_info['large_image_name_with_ext']         =   $large_image_name.$_SESSION['user_file_ext'];
+                            $crop_info['thumb_image_name_with_ext']         =   $thumb_image_name.$_SESSION['user_file_ext'];
+                            
+                            $crop_info['thumb_height']                      =   $thumb_height;                             
+                            
+                            $crop_info['thumb_image_location']              =   $thumb_image_location; // Used in ajax crop save page
+                            $crop_info['large_image_location']              =   $large_image_location; // Used in ajax crop save page  
+                            
+                            $crop_info['image_path']                        =   $return_path; 
+                            $_SESSION['crop']                               =   $crop_info;
+
+                            exit("success|$return_path");
+                    }
+                    else
+                    {
+                        exit("error|$error");
+                    }
+            }
+            else
+            {
+                exit("error|Upload an image.");
+            }
+	}        
+    
+    
+    
 }

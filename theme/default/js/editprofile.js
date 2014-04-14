@@ -150,9 +150,9 @@ $(document).ready(function(){
         });
     });
 
-    $('.edit_profile_link_ajax').click(function(){
-        $(this).parent().next().find('.show_content').hide();
-        $(this).parent().next().find('.edit_content').show();
+    $('.edit_profile_link_ajax').click(function(){		if ($(this).parent().next().find('.show_content').is(":visible")) {
+			$(this).parent().next().find('.show_content').hide();
+			$(this).parent().next().find('.edit_content').show();			$(this).css({                'color': '#674092'            });		} else {			$(this).parent().next().find('.show_content').show();			$(this).parent().next().find('.edit_content').hide();			$(this).css({                'color': '#ea6e3b'            });		}
     });
     $('.edit_jobseeker_profile_about_me_link').click(function(){
 

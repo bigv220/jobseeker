@@ -86,7 +86,14 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 .sresult-tab-hd-m{background:url(search/job-tob2.gif) repeat-x bottom;height:36px;}.sresult-tab-hd-m .fxui-tab-tit-m{font-weight:bolder;padding:0 14px;float:left;cursor:pointer;color:#807f7f;height:36px;line-height:36px;}
 .sresult-tab-hd-m .curr{color:#ea6e3b;background:url(search/job-tob.gif) no-repeat bottom;}
 .sresult-tab-bd{font-family:Arial;}
-.sresult-nav-job-left{width:300px;float:left;*display:inline;}.sresult-nav-job-left .text_r p{margin:10px 0;}
+.sresult-nav-job-left{width:300px;word-wrap: break-word;/*border:1px solid #e9ea6d;*/overflow:hidden;float:left;*display:inline;}
+.sresult-nav-job-left .text_r{
+    max-height: 600px;
+    overflow: auto;
+    /*border: 1px solid #e9ea6d;*/
+    /*padding: 8px;*/
+}
+.sresult-nav-job-left .text_r p{margin:10px 0;}
 .sresult-nav-job-left .required{display:inline-block;width:88px;height:88px;background:url(search/fluent.png) no-repeat;}.sresult-nav-job-left .required b{display:block;color:#ea6e3b;font-weight:700;font-size:14px;padding:40px 0 0 0;}
 .sresult-nav-job-dl{color:#2d2a2b;}.sresult-nav-job-dl dt{font-weight:700;height:24px;line-height:24px;}
 .sresult-nav-job-dl dd{padding:5px 0;}
@@ -116,3 +123,16 @@ html{background:#b5d335 url(pub/inner-htmlbg.gif) repeat-x;}
 input.text {padding:1px 6px;}
 .reg-row select {padding:2px;}
 .pop-message-nav p {font-size: 14px;font-weight: 700;padding: 0 20px;text-align: center;}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.no-underline:hover {
+    text-decoration: none;
+    color:#674092!important;
+}
+
+.click-job-viewmore {
+    width: 5em;
+}

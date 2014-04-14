@@ -113,7 +113,7 @@ class jobseeker_model extends MY_Model
     {
         $data = array('first_name'=>$data['first_name'],'last_name'=>$data['last_name'],'city'=>$data['city'],
             'province'=>$data['province'],'country'=>$data['country'], 'profile_pic'=>$data['avatar'],
-            'birthday'=>$data['birthday'],'description'=>$data['description'],'is_private'=>$data['is_private']);
+            'birthday'=>$data['birthday'],'description'=>$data['description']);
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }
 
@@ -198,8 +198,31 @@ class jobseeker_model extends MY_Model
 
     //save education
     public function insertEducation($data) {
-        return $this->db->insert('user_education', $data);
+        $this->db->insert('user_education', $data);
+        return $this->db->insert_id();
     }
+    
+    //
+    //Education 
+    //
+    public function delEducationHistory($id) {
+        $sql = 'DELETE FROM user_education WHERE id =' . $id;
+        return $this->db->query($sql);
+    }
+
+    public function getEducationHistoryFromId($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('user_education');
+        return $query->row();
+    }
+
+    public function updateEducationHistory($id, $data) {
+        return $this->db->where('id', $id)->update("user_education", $data);
+    }
+
+    //
+    //Work history 
+    //
 
     //get work history
     public function getWorkHistory($uid) {
@@ -210,7 +233,8 @@ class jobseeker_model extends MY_Model
             ->result_array();
 
         if(count($result)) {
-            return $result[0];
+            return $result;
+//            return $result[0];
         } else {
             return array();
         }
@@ -246,6 +270,47 @@ class jobseeker_model extends MY_Model
     	$sql = 'DELETE FROM user_work_history WHERE id='.$id;
     	return $this->db->query($sql);
     }
+    
+    public function getWorkHistoryFromId($id) { 
+        $this->db->join('user_industry_position uip ', 'uwh.id = uip.parent_id');
+        $this->db->where('uwh.id', $id);
+        
+        $query = $this->db->get('user_work_history uwh');
+        return $query->row();
+    }
+    
+    public function getWorkHistoryWithoutIndustry($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('user_work_history');
+        return $query->row();
+    }
+    
+    public function delWorkHistoryIndustry($parent_id) {
+        $this->db->where('parent_id', $parent_id);
+        $this->db->delete('user_industry_position');
+    }
+    
+    
+    public function insertWorkHistoryRow($work_h) {
+        $this->db->insert('user_work_history', $work_h);
+        return $this->db->insert_id();
+    }
+    
+    public function updateWorkHistoryRow($work_h, $id) {
+        $this->db->where('id', $id);
+        $this->db->update('user_work_history', $work_h);
+    }
+    
+    public function insertWorkHistoryIndustry($industry) {
+        $this->db->insert('user_industry_position', $industry);
+        return $this->db->insert_id();
+    }
+    
+    public function updateWorkHistoryIndustry($industry, $id) {
+        $this->db->where('id', $id);
+        $this->db->update('user_industry_position', $industry);
+    }
+    
 
     //save language
     public function insertLanguage($data) {
@@ -285,7 +350,18 @@ class jobseeker_model extends MY_Model
 
     //save register step
     public function saveRegisterStep($uid, $reg_str) {
-        $data = array('register_step'=>$reg_str);
+        // Check whether the User completed section 1 to 6, if so mark the PROFILE_COMPLETD=1, else 0
+        $section_numbers                =       array(1,2,3,4,5,6);
+        $completed_sections             =       explode('&',$reg_str);
+        $array_intersect_result         =       array_intersect($section_numbers, $completed_sections);        
+        if(count($array_intersect_result)==6): // Means, user completed all SIX required sections.
+            $data['profile_completed']  =       1; // COMPLETED
+        else:
+            $data['profile_completed']  =       0; // NOT COMPELETD
+        endif;        
+        
+        // OLD works of this function. Updating the latest values into TABLE.
+        $data['register_step']  =   $reg_str;
         return $this->db->where('uid', $uid)->update($this->table, $data);
     }
 

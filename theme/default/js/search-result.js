@@ -193,7 +193,7 @@ $(function(){
     $('.backtop').fxBacktop();
 
     //result-bd
-    $('.sresult-par1').click(function(e){
+    $('.click-job-viewmore').click(function(e){
 
         var abtn = $(this).parents('.sresult-row').find('.job-btn-submit');
         var abtn_submitted = $(this).parents('.sresult-row').find('.job-btn-submitted');
@@ -215,14 +215,14 @@ $(function(){
             abtn.css({display:'block'}).show();
             abtn_submitted.css({display:'block'}).show();
             requestinterviewbtn.css({display:'block'}).show();
-            aViewMore.html("View Less");
+            aViewMore.html("View Less");			aViewMore.css({                'color': '#674092'            });
         }else{
             oDom.slideUp();
             abtn.hide();
             abtn_submitted.hide();
             requestinterviewbtn.hide();
             aMark.addClass('job-mark1').removeClass('job-mark2');
-            aViewMore.html("View More");
+            aViewMore.html("View More");			aViewMore.css({                'color': '#ea6e3b'            });
         }
 
         e.stopPropagation();
@@ -443,20 +443,25 @@ $(function(){
     });
 
     // bookmark job PopUp
+    var datatype = '';
     $('.job-btn-mark').bind('click',function apply(e) {
         if(userType == 0){//employee
             popMark.fadeIn();
             popBookmark.fadeIn();
             var id = $(this).attr('data-job-id');
             $('#selected_job_id').val(id);
+            
+            datatype = $(this).attr('data-type');
         }
         else
-            alert("You couldn't bookmark this job as you're a company account.");
+            alert("You have to be logged in as a jobseeker to be able to bookmark jobs.");
         e.stopPropagation();
         e.preventDefault();
     });
 
-    $('.job-btn-marked').bind('click',bookmarked);
+    $('.job-btn-marked').bind('click', bookmarked);
+    $('.bkmked').bind('click', bookmarked);
+    $('.bookmarded').bind('click', bookmarked);
 
     //click bookmark job 'Yes'
     $('.pop-bookmark-yes').click(function(){
@@ -470,8 +475,14 @@ $(function(){
                 result = eval('('+result+')');
                 var status  = result.status;
                 if (status=='success') {
-                    $('#job-mark'+job_id).removeClass('job-btn-mark');
-                    $('#job-mark'+job_id).addClass('job-btn-marked');
+                    if (datatype == 'details') {
+	                    $('#job-mark' + job_id).removeClass('bkmk');
+	                    $('#job-mark' + job_id).addClass('bkmked');
+	                    $('#job-mark' + job_id).removeClass('job-btn-mark');
+	                } else {
+	                    $('#job-mark' + job_id).removeClass('job-btn-mark');
+	                    $('#job-mark' + job_id).addClass('job-btn-marked');
+	            }
                 } else if (status =='login') {
                     popMark.fadeIn();
                     $('.signup-pop-bookmark').css('display', 'block');
@@ -481,6 +492,54 @@ $(function(){
                 }
             });
     });
+    
+    //
+    //Bookmark company
+    //
+    $(document).on("click", ".click_bookmark_company", function(e) {
+        if (userType == 0) {//employee
+            popMark.fadeIn();
+            popBookmark.fadeIn();
+
+            var id = $(this).attr('data-company-id');
+            $('#selected_company_id').val(id);
+            //Next -> click-yes-popup 
+        }
+
+        else
+            alert("You have to be logged in as a jobseeker to be able to bookmark companies.");
+
+        e.stopPropagation();
+        e.preventDefault();
+
+    });
+
+    $('.pop-bookmark-company-yes').click(function() {
+        popBookmark.fadeOut();
+        popMark.fadeOut();
+
+        var company_id = $('#selected_company_id').val();
+
+        $.post(site_url + 'job/bookmarkCompany', {company_id: company_id},
+        function(result) {
+
+            result = eval('(' + result + ')');
+            var status = result.status;
+
+            if (status == 'success') {
+                $('#company-mark' + company_id).addClass('bookmarded');
+                
+            } else if (status == 'login') {
+                popMark.fadeIn();
+                $('.signup-pop-bookmark').css('display', 'block');
+                //alert('Please Login to bookmark this job.');
+                
+            } else {
+                alert(status);
+            }
+        });
+    });
+    
 
     $('.jobseeker-btn-shortlisted').click(function(e) {
         var user_id = $(this).attr('data-id');
@@ -526,26 +585,43 @@ $(function(){
     
     // delete applicant
     var user_id = 0;
+    var job_id = 0;
     $('.jobseeker-btn-delete-applicant').click(function(e) {
         user_id = $(this).attr('data-id');
+        job_id = $(this).attr('data-job-id');
+        
         popMark.fadeIn();
         popApply.fadeIn();
-       
-        
+
+
+
+
+
         e.stopPropagation();
+
         e.preventDefault();
+
     });
 
+
+
     $('.delete-applicant-yes').click(function(e) {
-         $.post(site_url + 'company/ajaxDelApplicant', {user_id:user_id},
-            function(result,status) {
-                if (status=='success') {
-                    // TO check why $(this).addClass doesn't work.                  
-                    $('#sresult-user'+user_id).remove();
-                }
+        $.post(site_url + 'company/ajaxDelApplicant', {user_id: user_id, job_id: job_id},
+        function(status) {
+
+            if (status == 'success') {
+                // TO check why $(this).addClass doesn't work.                  
+                $('#sresult-user' + user_id).remove();
+            } else {
+                alert(status);
+            }
+
         });
+
         popMark.fadeOut();
+
         popApply.fadeOut();
+
     });
 
     // Send Message

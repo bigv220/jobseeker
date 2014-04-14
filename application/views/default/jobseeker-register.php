@@ -12,23 +12,133 @@
         select_location('province','<?php echo $userinfo['province'];?>');
 
         //upload user avatar
-        uploadImage();
+        //uploadImage(); OLD IMAGE Upload works. Details written in jobseeker.js file.
 
         //upload work examples
-        uploadFile("image_example",'example_upload_button','exampleerrorRemind','work_example');
+        //uploadFile("image_example",'example_upload_button','exampleerrorRemind','work_example');
+        
+        
+      /* New Upload Image & crop works STARTS here. */       
+     uploadImageAndCrop();
+
+    /**
+     * It hide the IMAGE AREA containers (in some cases, it is not closing automatically).
+     * This is needed when user started cropping but stopped without completing all steps.
+     */
+    $(document).bind('close.facebox', function() {
+            // close tinymce or whatever you need..
+        $(".imgareaselect-selection").remove(); 
+        $(".imgareaselect-border1").remove(); 
+        $(".imgareaselect-border2").remove(); 
+        $(".imgareaselect-border3").remove();
+        $(".imgareaselect-border4").remove(); 
+        $(".imgareaselect-handle").remove(); 
+        $(".imgareaselect-outer").remove();
+        
+        $("#errorRemind").html('');
     });
+
+    /**
+     * Company Logo uploaded to Server via ajax.
+     * Trigger Facebox for PopUp and shows the Image Preview (Resized version) for Cropping. 
+     */
+    function uploadImageAndCrop(old_avatar) {
+            var oBtn = document.getElementById("image_profile");
+            var upload_button = document.getElementById("upload_button");
+            var oRemind = document.getElementById("errorRemind");
+            new AjaxUpload(oBtn,{
+                action:"<?php echo $site_url?>user/uploadimage",
+                name:"image",
+                data: {},
+                onSubmit:function(file,ext){
+                    if(ext && /^(jpg|jpeg|png|gif)$/.test(ext)){
+                        oRemind.style.color = "orange";
+                        oRemind.innerHTML = "uploading...";
+                        oBtn.disabled = "disabled";
+                    }else{
+                        oRemind.style.color = "red";
+                        oRemind.innerHTML = "Sorry, Do not support this image type.";
+                        return false;
+                    }
+                },
+                onComplete:function(file,response){
+                    oBtn.disabled = "";
+                    var response = response.split("|");
+                    if ( response[0] == 'success') {
+                        oRemind.style.color =   "green";
+                        oRemind.innerHTML   =   "Now cropping image...";
+
+                        // Trigger Facebox PopUp call.
+                        // After successfull cropping, the thumbnailPreview() will be calledback.
+                        jQuery.facebox({ ajax: '<?php echo $site_url; ?>user/cropimage' });
+
+                    } else {
+                        oRemind.style.color = "red";
+                        oRemind.innerHTML = response[1];
+                    }
+                }
+            });
+        }       
+    /* New Upload Image & crop works Ends here. */    
+        
+        
+        
+        
+    });
+    
+/* New Upload Image & crop works STARTS here. */    
+/**
+ * Called from facebox popup page once the real IMAGE CROPPING is over.
+ * 1. It hide the IMAGE AREA containers (in some cases, it is not closing automatically)
+ * 2. Shows preview of new cropped image.
+ * 3. Store the cropped image name into avatar for datbase updation.
+ */                      
+function thumbnailPreview(thumb_image_name_with_ext)
+{ 
+   $(".imgareaselect-outer").hide(); 
+   $(".imgareaselect-selection").hide(); 
+   $(".imgareaselect-border1").hide(); 
+   $(".imgareaselect-border2").hide(); 
+   
+   var img_path = "<?php echo $site_url; ?>attached/users/profileimage/"+thumb_image_name_with_ext;
+   
+   $("#image_profile").attr( "src", img_path);
+   $("#errorRemind").html('Image has been saved.');
+   
+    var profile_pic = "profileimage/"+thumb_image_name_with_ext;
+    $('#avatar').val(profile_pic);
+}
+/* New Upload Image & crop works ENDS here. */  
+
 </script>
+
+<?php 
+/**
+ * Image Upload & Cropping: 
+ * See the documentaion in user/uploadimage
+ * 
+ * URL http://defunkt.io/facebox/ [Popup Implementation]
+ */
+?>
+<link href="<?php echo $theme_path?>cropimage/facebox.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="<?php echo $theme_path?>cropimage/facebox.js" type="text/javascript"></script>
 
 <!--Deletion Works. -->
 <link href="<?php echo $theme_path?>style/delete.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo $theme_path?>style/changepass.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<?php echo $theme_path?>js/deletecompany.js"></script>
+<script type="text/javascript" src="<?php echo $theme_path?>js/changepass.js"></script>
 <!--Deletion Works. Ends here. -->
 
 
 <!--Jobseeker registration page body-->
 <div class="reg-page w770 clearfix rel">
     <div class="reg-left abs box mb20">
-        <h2 class="reg-left-tit">NiHAO <span title="<?php echo $userinfo['first_name'];?>"><?php echo substr($userinfo['first_name'],0,8);?></span></h2>
+        <h2 class="reg-left-tit">Nihao <span title="<?php echo $userinfo['first_name'];?>"><?php echo substr($userinfo['first_name'],0,8);?></span></h2>
+               <ul class="reg-ul-top">
+            <li><a href="<?php echo $site_url?>jobseeker/viewprofile">View Profile</a></li>
+            <li><a href="<?php echo $site_url?>search/searchJob">Find a Job</a></li>
+        </ul>
         <ul class="reg-ul">
             <li class="curr"><a href="#reg1">Basic Information</a></li>
             <?php $step_arr = $step_arr;
@@ -84,8 +194,8 @@
     </div>
     <div class="reg-right-wrap">
         <div class="reg-right box mb20">
-            <p class="reg-right-text">
-                Please fill out the mandatory fields (*) to apply for jobs.<br>
+            <p class="reg-right-text">               
+                Please fill out the mandatory fields (*) to apply for jobs and/or appear in search results.<br>
 				To streamline your job search and highlight your profile to employers, please fill out all optional fields as well.<br>
 				Feel free to come back and fill out your preferences later, you can search through our current job listings <a href="<?php echo $site_url?>search/findjob">HERE</a></p>
 
@@ -153,7 +263,9 @@
                                    }
                             ?>
                             <img id="image_profile" height='100px' src="<?php echo $pic; ?>" class="reg-company-img" />
+                            <p><span>Select jpg, gif or png image with size less than 3MB.</span></p>
                         </div>
+                        
                         <span class="" id="errorRemind"></span>
                     </div>
                 </div>
@@ -170,18 +282,6 @@
                         <textarea class="reg-textarea" name="description" required><?php echo $userinfo['description']; ?></textarea>
                     </div>
                     Describe yourself in 300 words or less.
-                </div>
-                <div class="reg-row clearfix">
-                    <?php $is_private = $userinfo["is_private"];
-                    $check_sel = "";
-                    $if_private = 0;
-                    if($is_private) {
-                        $if_private = 1;
-                        $check_sel = "kyo-checkbox-sel";
-                    }
-                    ?>
-                    <input type="hidden" name="is_private" id="is_private" value="<?php echo $if_private; ?>" />
-                    <i style="font-size: 12px;" class="kyo-checkbox <?php echo $check_sel; ?>" data-val="1" data-id="private" onclick="isPrivate(this,'is_private');">Keep this private</i>
                 </div>
                 <div class="reg-area-bar">
                     <input type="button" class="reg-save" data-index="1" onclick="basicInfoSubmit()" />
@@ -373,132 +473,154 @@
 
             <div class="reg-area" id="reg4">
 
-                <?php $step_arr = $step_arr;
+                <?php
+                $step_arr = $step_arr;
                 $cla = '';
-                if(in_array('4', $step_arr)) {
+                if (in_array('4', $step_arr)) {
                     $cla = 'reg-area-tit-curr';
                 }
                 ?>
                 <div class="reg-area-tit <?php echo $cla; ?>">Education</div>
                 <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="educationForm">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
+					
+					
+			<!-- TABLE EDUCATION HISTORY --> 
+			
+		<div id="history_jobs_list">
+			<table class="table_edit_profile_list" id="table_edit_education_history">
+				<colgroup>
+					<col width="140" />
+					<col width="100" />
+					<col width="165" />
+					<col width="35" />
+					<col width="10" />
+					<col width="35" />
+					<col width="35" />
+					<col width="35" />
+				</colgroup>
+					<tr id="education_history_table_header"
+					<?php if (count($education_history) == 0) { ?> 
+                                    style="display:none;"
+                                    <?php } ?>
+					>
+					<th class="th_left_align">School/College</th>
+					<th>Degree</th>
+					<th>Major</th>
+					<th>From</th>
+					<th></th>
+					<th>Until</th>
+					<th>Edit</th>
+					<th>Delete</th>
+					</tr>
+				<?php foreach($education_history as $edu_h) { ?>
+				<tr id="education_history_tablerow_<?php echo $edu_h["id"]; ?>">
+					<td class="th_left_align"><?php echo $edu_h["school_name"]; ?></td>
+					<td><?php echo $edu_h["degree"]; ?></td>
+					<td><?php echo $edu_h["major"]; ?></td>
+					<td><?php echo date("Y", strtotime($edu_h["attend_date_from"])); ?></td>
+					<td> - </td>
+					<td><?php echo date("Y", strtotime($edu_h["attend_date_to"])); ?></td>
+					<td><a href="javascript:void(0);" class="edit_education_history_item" data_education_history="<?php echo $edu_h["id"]; ?>">Edit</a></td>
+					<td><a href="javascript:void(0);" class="delete_education_history_item" data_education_history="<?php echo $edu_h["id"];  ?>">Del</a></td>
+				</tr>	
+		<?php } ?>
+			</table>
+		</div>
+		
+		<!-- END TABLE EDUCATION HISTORY -->			
+					
                     <div id="every_school">
-                    <div class="reg-row"> <strong>School/College name<i class="star">*</i></strong>
-                        <div>
-                            <input type="text" class="reg-input" name="school_name[]" value="<?php if(count($education_info)) echo $education_info["school_name"]; ?>" required />
+                        <div class="reg-row"> <strong>School/College name<i class="star">*</i></strong>
+                            <div>
+                                <input type="text" class="reg-input" name="school_name" id="education_school_field" required />
+                            </div>
                         </div>
-                    </div>
-                    <div class="reg-row"> <strong>Dates Attended<i class="star">*</i></strong>
-                        <div class="clearfix">
-                            <select name="attended_from[]" required>
-                                <option value="">Year</option>
-                                <?php
-                                    $from_y = 0;
-
-                                    if(count($education_info)) {
-                                        $from_y_arr = explode('-',$education_info["attend_date_from"]);
-                                        $from_y = $from_y_arr[0];
-                                    }
-                                    foreach($yearArray as $v) {
-                                        $sel = '';
-
-                                        if($v == $from_y) {
-                                            $sel = ' selected="selected"';
-                                        }
-                                ?>
-                                <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
-                                <?php } ?>
-                            </select>
-                            <select name="attended_from_month[]" required>
-                                <option value="">Month</option>
-                                <?php
-                                $from_y = 0;
-                                if(count($education_info)) {
-                                    $from_y_arr = explode('-',$education_info["attend_date_from"]);
-                                    $from_y = $from_y_arr[1];
-                                }
-                                foreach($monthArray as $v) {
-                                    $sel = '';
-                                    if($v == $from_y) {
-                                        $sel = ' selected="selected"';
-                                    }
-                                    ?>
-                                    <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
+						
+						<div class="reg-row"> <b>Degree title</b>
+                            <div>
+                                <input type="text" class="reg-input" name="degree" id="education_degree_field" required />
+                            </div>
+                        </div>
+						
+                        <div class="reg-row"> <b>Major</b>
+                            <div>
+                                <input type="text" class="reg-input" name="major" id="education_major_field" required />
+                            </div>
+                        </div>
+						
+                        <div class="reg-row"> <strong>Dates Attended<i class="star">*</i></strong>
+                            <div class="clearfix">
+                                <select name="attended_from" id="education_year_from_field" required>
+                                    <option value="">Year</option>
+                                    <?php foreach ($yearArray as $v) { ?>
+                                        <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
                                     <?php } ?>
-                            </select>
-                        </div>
-                        <p class="p5">To</p>
-                        <div class="clearfix">
-                            <select name="attended_to[]" required>
-                                <option value="">Year</option>
-                                <?php
-                                $from_y = 0;
-
-                                if(count($education_info)) {
-                                    $from_y_arr = explode('-',$education_info["attend_date_to"]);
-                                    $from_y = $from_y_arr[0];
-                                }
-                                foreach($yearArray as $v) {
-                                    $sel = '';
-
-                                    if($v == $from_y) {
-                                        $sel = ' selected="selected"';
-                                    }
-                                ?>
-                                <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
-                                <?php } ?>
-                            </select>
-                            <select name="attended_to_month[]" required>
-                                <option value="">Month</option>
-                                <?php
-                                $from_y = 0;
-                                if(count($education_info)) {
-                                    $from_y_arr = explode('-',$education_info["attend_date_to"]);
-                                    $from_y = $from_y_arr[1];
-                                }
-                                foreach($monthArray as $v) {
-                                    $sel = '';
-
-                                    if($v == $from_y) {
-                                        $sel = ' selected="selected"';
-                                    }
-                                    ?>
-                                    <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
+                                </select>
+                                <select name="attended_from_month" id="education_month_from_field" required>
+                                    <option value="">Month</option>
+                                    <?php foreach ($monthArray as $v) { ?>
+                                        <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
                                     <?php } ?>
-                            </select>
-                        </div>
+                                </select>
+                            </div>
+                            <p class="p5">To</p>
+                            <div class="clearfix">
+                                <select name="attended_to" id="education_year_to_field" required>
+                                    <option value="">Year</option>
+                                    <?php foreach ($yearArray as $v) { ?>
+                                        <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                    <?php } ?>
+                                </select>
+                                <select name="attended_to_month" id="education_month_to_field" required>
+                                    <option value="">Month</option>
+                                    <?php foreach ($monthArray as $v) { ?>
+                                        <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
 
-                    </div>
-                    <div class="reg-row"> <b>Degree title</b>
-                        <div>
-                            <input type="text" class="reg-input" name="degree[]" value="<?php if(count($education_info)) echo $education_info["degree"]; ?>" />
                         </div>
-                    </div>
-                    <div class="reg-row"> <b>Major</b>
-                        <div>
-                            <input type="text" class="reg-input" name="major[]" value="<?php if(count($education_info)) echo $education_info["major"]; ?>" />
+						
+                        <div class="reg-row"> <b>Achievements</b>
+                            <div>
+                                <textarea class="reg-textarea" name="achievements" id="education_achievements_field"></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="reg-row"> <b>Achievements</b>
-                        <div>
-                            <textarea class="reg-textarea" name="achievements[]"><?php if(count($education_info)) echo $education_info["achievements"]; ?></textarea>
-                        </div>
-                    </div>
-                    </div>
-
-                    <div id="addSchoolBtn">
-                        <a class="reg-row-tip" id="addAnotherSchool" href="javascript:void(0);">+ Add Another School</a>
                     </div>
 
                     <div class="reg-area-bar">
                         <input type="hidden" name="register_step" value="4" />
+						<input type="hidden" name="hidden_education_history_id" id="hidden_education_history_id" value="0" />
+						
                         <input type="button" class="reg-save" onclick="educationSubmit();"  data-index="0"/>
+						<input type="button" value="Cancel" onclick="resetEducationForm();" data-index="0"/>
                     </div>
 
                 </form>
             </div>
+			
+			<!-- popup delete confirmation --> 
+            <div class="pop-mark"></div>
+            <div class="box pop-box pop-delete-education">   
+                <div class="rel">     
+                    <div class="pop-close"></div>  
+                    <div class="pop-nav pop-apply-nav">      
+                        <p>Are you sure you want to delete this item?</p>    
+                    </div>      
+                    <div class="pop-bar">  
+                        <input type="hidden" id="selected_education_id" />     
+                        <a href="javascript:void(0);" class="pop-bar-btn pop-delete-education-yes">Yes</a>    
+                        <a href="javascript:void(0);" class="pop-bar-btn pop-btn-no">No</a>     
+                    </div>
+                </div>
+            </div>
+
+
+            
 
             <!-- work history -->
+            
 
             <div class="reg-area" id="reg5">
 
@@ -512,179 +634,161 @@
                 <form action="<?php echo $site_url; ?>jobseeker/register" method="post" id="workhistoryForm" enctype="multipart/form-data">
                     <input type="hidden" name="uid" value="<?php echo $uid; ?>" />
 
-                    <input type="hidden" name="id[]" value="<?php if(count($work_history)) echo $work_history["id"]; ?>" />
+                    <input type="hidden" name="id" value="<?php if(count($work_history)) echo $work_history["id"]; ?>" />
+                    
+                    
+                    <div id="history_jobs_list">
+			<table class="table_edit_profile_list" id="table_edit_work_history">
+				<colgroup>
+					<col width="140" />
+					<col width="115" />
+					<col width="15" />
+					<col width="115" />
+					<col width="40" />
+					<col width="40" />
+				</colgroup>
+					<tr id="work_history_table_header"
+					<?php if (count($work_history) == 0) { ?> 
+                                    style="display:none;"
+                                    <?php } ?>
+					>
+					<th class="th_left_align">Company</th>
+					<th>From</th>
+					<th></th>
+					<th>Until</th>
+					<th>Edit</th>
+					<th>Delete</th>
+					</tr>
+				<?php foreach($work_history as $work_h) { ?>
+				<tr id="work_history_tablerow_<?php echo $work_h["id"]; ?>">
+					<td class="th_left_align"><?php echo $work_h["company_name"]; ?></td>
+					<td><?php echo date("F Y", strtotime($work_h["period_time_from"])); ?></td>
+					<td> - </td>
+					<td><?php
+					if ($work_h["period_time_to"] != "-") { 
+					    echo date("F Y", strtotime($work_h["period_time_to"])); 
+					} else {
+					    echo "present"; 
+					}
+					?></td>
+					<td><a href="javascript:void(0);" class="edit_work_history_item" data_work_history="<?php echo $work_h["id"]; ?>">Edit</a></td>
+					<td><a href="javascript:void(0);" class="delete_work_history_item" data_work_history="<?php echo $work_h["id"];  ?>">Del</a></td>
+				</tr>	
+		<?php } ?>
+			</table>
+		</div>
+
+                    
+                    
                     <div id="every_job_part1">
-                    <!-- hide Introduce for now
-                    <div class="reg-row"> <b>Introduce yourself</b>
-                        <div>
-                            <textarea class="reg-textarea" name="introduce[]"><?php if(count($work_history)) echo $work_history["introduce"]; ?></textarea>
-                        </div>
-                    </div>
-                     -->
+
+                     
                     <div class="reg-row"> <strong>Company name<i class="star">*</i></strong>
-                        <div>
-                            <input type="text" class="reg-input" name="company_name[]" value="<?php if(count($work_history)) echo $work_history["company_name"]; ?>" required />
+                            <div>
+                                <input type="text" class="reg-input" id="history_company_field" name="company_name" required />
+                            </div>
                         </div>
-                    </div>
-                    <div class="reg-row"> <strong>Time period<i class="star">*</i></strong>
-                        <div class="clearfix">
-                            <select name="period_time_from[]" required>
-                                <option value="">Year</option>
-                                <?php
-                                $from_y = 0;
-
-                                if(count($work_history)) {
-                                    $from_y_arr = explode('-',$work_history["period_time_from"]);
-                                    $from_y = $from_y_arr[0];
-                                }
-                                foreach($yearArray as $v) {
-                                    $sel = '';
-
-                                    if($v == $from_y) {
-                                        $sel = ' selected="selected"';
-                                    }
-                                ?>
-                                <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
-                                <?php } ?>
-                            </select>
-                            <select name="period_time_from_month[]" required>
-                                <option value="">Month</option>
-                                <?php
-                                $from_y = 0;
-                                if(count($work_history)) {
-                                    $from_y_arr = explode('-',$work_history["period_time_from"]);
-                                    $from_y = $from_y_arr[1];
-                                }
-                                foreach($monthArray as $v) {
-                                    $sel = '';
-
-                                    if($v == $from_y) {
-                                        $sel = ' selected="selected"';
-                                    }
-                                    ?>
-                                    <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
-                                    <?php } ?>
-                            </select>
-                        </div>
-                        <p class="p5">To</p>
-                        <div class="clearfix">
-                            <select name="period_time_to[]" required>
-                                <option value="">Year</option>
-                                <?php
-                                $from_y = 0;
-
-                                if(count($work_history)) {
-                                    $from_y_arr = explode('-',$work_history["period_time_to"]);
-                                    $from_y = $from_y_arr[0];
-                                }
-                                foreach($yearArray as $v) {
-                                    $sel = '';
-
-                                    if($v == $from_y) {
-                                        $sel = ' selected="selected"';
-                                    }
-                                ?>
-                                <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
-                                <?php } ?>
-                            </select>
-                            <select name="period_time_to_month[]" required>
-                                <option value="">Month</option>
-                                <?php
-                                $from_y = 0;
-                                if(count($work_history)) {
-                                    $from_y_arr = explode('-',$work_history["period_time_to"]);
-                                    $from_y = $from_y_arr[1];
-                                }
-                                foreach($monthArray as $v) {
-                                    $sel = '';
-
-                                    if($v == $from_y) {
-                                        $sel = ' selected="selected"';
-                                    }
-                                    ?>
-                                    <option value="<?php echo $v; ?>"<?php echo $sel; ?>><?php echo $v; ?></option>
-                                    <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    </div>
-                            <input type="hidden" name="is_stillhere[]" value="0" id="is_stillhere" />
-                            <?php
-                            $check_sel = "";
-                            $is_stillhere = 0;
-                            if(count($work_history)) {
-                                $is_stillhere = $work_history["is_stillhere"];
-                            }
-
-                            if($is_stillhere) {
-                                $check_sel = "kyo-checkbox-sel";
-                            }
-                            ?>
-                            <i data-val="1" data-id="stillwork" class="kyo-checkbox <?php echo $check_sel; ?>" onclick="isPrivate(this,'is_stillhere');">I still work here</i>
-
-                    <div id="every_job_part2">
+                        
                         <?php
                         //Load Model
                         $this->load->model('jobseeker_model');
 
-                        if (empty($work_history['id'])) {
-                            $userIndustry = array(array('industry'=>'none','position'=>'All Positions'));
-                        } else {
-                            $userIndustry = $this->jobseeker_model->getUserIndustry($this->session->userdata('uid'), $work_history['id']);
-                        }
+                        
+                        $userIndustry = array(array('industry'=>'none','position'=>'All Positions'));
+                       
 
                         $data['userIndustry'] = $userIndustry;
                         $data['industry'] = $industry;
                         $this->load->view($front_theme.'/industry_multi-select', $data);
                         ?>
+                        
+                        <div class="reg-row"> <strong>Time period<i class="star">*</i></strong>
+                            <div class="clearfix">
+                                <select name="period_time_from" id="history_year_from_field" required>
+                                    <option value="">Year</option>
+                                    <?php foreach ($yearArray as $v) { ?>
+                                        <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                    <?php } ?>
+                                </select>
+                                <select name="period_time_from_month" id="history_month_from_field" required>
+                                    <option value="">Month</option>
+                                    <?php foreach ($monthArray as $v) { ?>
+                                        <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <p class="p5">To</p>
+                            <div class="clearfix">
+                                <select name="period_time_to" class="still_working_here" id="history_year_to_field" required>
 
-                        <div class="reg-row" style="clear: both;">
-                            <div>
-                            <input type="hidden" name="grop_num[]" value="<?php echo count($userIndustry); ?>"/>
-                            <a class="reg-row-tip" href="javascript:void(0);" onclick="addIndustryBtnClick(this);">+ Add another Industry</a>
+                                    <option value="">Year</option>
+                                    <?php foreach ($yearArray as $v) { ?>
+                                        <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                    <?php } ?>
+                                </select>
+                                <select name="period_time_to_month" class="still_working_here" id="history_month_to_field" required>
+
+                                    <option value="">Month</option>
+                                    <?php foreach ($monthArray as $v) { ?>
+                                        <option value="<?php echo $v; ?>"><?php echo $v; ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
+                    </div>
+                            <input type="hidden" name="is_stillhere" value="0" id="is_stillhere" />
+                            <?php
+                            $check_sel = "";
+                            $is_stillhere = 0;
+                            
+                            if($is_stillhere) {
+                                $check_sel = "kyo-checkbox-sel";
+                            }
+                            ?>
+                            <i data-val="1" data-id="stillwork" class="kyo-checkbox <?php echo $check_sel; ?>" id="history_checkbox_still_here" onclick="isPrivate(this,'is_stillhere');">I still work here</i>
+
+                    <div id="every_job_part2">
+                        
 
                     <div class="reg-row clearfix"> <strong>Description</strong>
                         <div>
-                            <?php
-                            $v = '';
-                            if(count($work_history)) {
-                                $v = $work_history["description"];
-                            }
 
-                            $v = $v ? $v : "350 Characters";
-                            ?>
-                            <textarea class="reg-textarea input-tip" name="description[]" data-tipval="350 Characters" onkeypress="checkLength(this, 350);"><?php echo $v; ?></textarea>
+                            <textarea class="reg-textarea input-tip" name="description" id="history_description_field" data-tipval="350 Characters" onkeypress="checkLength(this, 350);">350 Characters</textarea>
                         </div>
                     </div>
                     </div>
 
-                    <div class="reg-row">
-                        <input type="hidden" name="work_example[]" id="work_example" value='<?php if(!empty($work_history["work_examples_url"])) echo $work_history["work_examples_url"]; ?>' />
-                        <div id="example_upload_button">
-                            <?php if(empty($work_history["work_examples_url"])): ?>
-                                <span id="image_example" class="reg-row-tip">Upload examples of work</span>
-                            <?php else: ?>
-                                <span id="image_example" class="reg-row-tip" style="display: none;">Upload examples of work</span>
-                                <span>Work Examples: <?php echo $work_history["work_examples_url"]; ?></span>
-                            <?php endif; ?>
-                        </div>
-                        <span class="" id="exampleerrorRemind"></span>
-                    </div>
+                    
 
-
-                    <div id="addJobBtn">
-                        <p><a class="reg-row-tip" href="javascript:void(0);" id="addAnotherJob">+ Add Another Job</a></p>
-                    </div>
                     <div class="reg-area-bar">
                         <input type="hidden" name="register_step" value="5" />
+                        <input type="hidden" name="hidden_work_history_id" id="hidden_work_history_id" value="0" />
                         <input type="button" class="reg-save" onclick="workhistorySubmit();" data-index="0"/>
+                        <input type="button" value="Cancel" onclick="resetWorkHistoryForm();" data-index="0"/>
                     </div>
                 </form>
             </div>
 
+
+	<!-- popup delete confirmation --> 
+            <div class="pop-mark"></div>
+            <div class="box pop-box pop-delete-work-history">   
+                <div class="rel">     
+                    <div class="pop-close"></div>   
+                    <div class="pop-nav pop-apply-nav">      
+                        <p>Are you sure you want to delete this item?</p>    
+                    </div>      
+                    <div class="pop-bar">  
+                        <input type="hidden" id="selected_work_id" />     
+                        <a href="javascript:void(0);" class="pop-bar-btn pop-delete-work-history-yes">Yes</a>    
+                        <a href="javascript:void(0);" class="pop-bar-btn pop-btn-no">No</a>     
+                    </div>
+                </div>
+            </div>
+
+
             <!-- languages -->
+
 
             <div class="reg-area reg-row" id="reg6">
 
@@ -845,9 +949,10 @@
     </div>
         <div class="reg-btns">
             <a href="javascript: void(0);" class="reg-btns-saveall png" onclick="saveAll();"></a>
-            <a href="<?php echo $site_url?>search/searchJob" class="reg-btns-job png"></a>
-            <a href="<?php echo $site_url?>jobseeker/profile" class="view_my_profile png"></a>
+            <p class="right reg-btns-down-page">
+            <a href="javascript:void(0);" class="pbn-change-password-btn">Change Password</a>
             <a href="javascript:void(0);" class="pbn-delete-company-btn">Delete Account</a>
+            <p>
         </div>
         <div class="backtop png" style="display: block; top: 564px; right:-80px"></div>
      </div>
@@ -908,6 +1013,53 @@
 </div>
 <!-- Delete Company Account - Success window. Ends here -->
 
+<!-- Edit Password - starts here -->
+<div class="pop-mark-change-password"></div>
+
+<!--First Pop Up window for Edit Password. -->
+<div class="pop-reg-change-password png">
+    <div class="pop-reg-change-password-wrap rel">
+        <form id="change_pass_form" method="post" action="">
+            <div class="pop-reg-change-password-close abs" title="close"></div>
+            
+            <div class="pop-reg-change-password-tit">
+                Change Password:
+            </div>
+
+            
+            <div class="pop-reg-change-password-agree">
+                1. Old password. <br>
+                <input type="password" id="old-pass" name="old-pass" class="kyo-input"/>
+                <p id="wrong-old" class="red"></p>
+            </div>
+            <div class="pop-reg-change-password-agree">
+                2. New password. <br>
+                <input type="password" id="new-pass" name="new-pass" class="kyo-input"/>  
+                <p id="wrong-new" class="red"></p>              
+            </div>
+            <div class="pop-reg-change-password-agree">
+                3. Confirm new password. <br>
+                <input type="password" id="conf-pass" name="conf-pass" class="kyo-input"/>
+                <p id="wrong-conf" class="red"></p>
+            </div>
+            
+            <div class="pop-reg-change-password-submit">
+                <input type="text" id="pop-reg-change-password-submit" class="pop-reg-change-password-submit-btn" />
+            </div>
+        </form>
+    </div>
+    <div class="pop-reg-change-password-footer"></div>
+</div>
+<!-- change-password - Ends here -->
+
+<!-- change-password - Success window. -->
+<div class="pop-message-change-password-message png">
+    <div class="pop-message-change-password-message-wrap rel">
+        <i class="pop-message-change-password-message-close abs" title="close"></i>
+        <b>Your password is changed.</b>
+    </div>
+</div>
+<!-- change-password - Success window. Ends here -->
 
 
 

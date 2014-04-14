@@ -19,7 +19,7 @@
 .pop-reg-company-delete-agree{adding-right:8px;margin-top: 6px;}.pop-reg-company-delete-agree i.kyo-checkbox{font-size:9px;}
 .pop-reg-company-delete-submit{text-align:center;}
 .margin_left15{margin-left:15px;}
-.pop-reg-company-delete-submit-btn{width:221px;height:28px;margin:auto;cursor:pointer;border:0;background:url(home/reg-submit.gif) no-repeat;}
+.pop-reg-company-delete-submit-btn{width:221px;height:28px;margin:auto;cursor:pointer;border:0;background:url(reg/delete_account.png) no-repeat;}
 .pop-login{display:none;z-index:111;width: 238px;min-height:149px;position:absolute;top:50%;left:50%;margin:-141px 0 0 -127px;}
 .pop-login .phd-login-pop {background: url(pub/login_body_bg2.png) no-repeat !important; display:block !important;top: 0px !important;left: 0px !important;}
 .pop-welcome{display:none;z-index:102;width:491px;height:232px;position:absolute;top:50%;left:50%;margin:-116px 0 0 -245.5px;background:url(home/pop-welcome.png);}.pop-welcome b,.pop-welcome .span2{text-align:center;font-size:22px;color:#cb6139;font-family:Arial;line-height:26px;font-weight:bolder;}

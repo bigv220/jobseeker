@@ -76,11 +76,15 @@
                 <img src="<?php echo $site_url;?>attached/users/<?php echo $int['profile_pic']?$int['profile_pic']:'no-image.png';?>" alt="" width="90px" height="90px" class="round_corner10_img"/>
             </div>
             <div class="span2">
-                <h2><?php echo $int['job_name']; ?></h2>
+                <h2><?php echo ucwords(strtolower($int['job_name'])); ?></h2>
                 <input type="hidden" id="interview_id" value="<?php echo $int['interview_id']; ?>" />
                 <h3 id="company_name"><?php echo $int['username']; ?></h3>
                 <p><?php echo $int['city']; ?>, <?php echo $int['country']; ?></p>
-                <a href="#" class="job-viewmore">View More</a> </div>
+                <div class="click-job-viewmore">                            
+                            <a href="javascript:void(0);" class="job-viewmore no-underline">View More</a>                                     
+                        </div>  
+                
+                </div>
             <div class="span3">
                 <div class="interview_sent_date">
                     <?php echo $int['insert_date']; ?></div>
